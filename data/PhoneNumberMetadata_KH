@@ -1,0 +1,27 @@
+<?php
+return array (
+  'mobile' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            (?:
+              1[0-35-9]|
+              6[6-9]|
+              7[06-89]
+            )[1-9]|
+            8(?:
+              0[89]|
+              5[2-689]|
+              8\\d{2}|
+              [13469]\\d|
+            )|
+            9(?:
+              [0-689][1-9]|
+              7[1-9]\\d?
+            )
+          )\\d{5}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '91234567',
+  ),
+);

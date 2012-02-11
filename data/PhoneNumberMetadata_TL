@@ -1,0 +1,9 @@
+<?php
+return array (
+  'mobile' => 
+  array (
+    'NationalNumberPattern' => '7[2-4]\\d{5}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '7212345',
+  ),
+);
