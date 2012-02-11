@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PHPUnit" default="build">
+ <property name="php" value="php"/>
+
+ <target name="build"
+   depends="prepare,lint,phpunit"/>
+
+ <target name="clean" description="Cleanup build artifacts">
+  <delete dir="${basedir}/build/api"/>
+  <delete dir="${basedir}/build/coverage"/>
+ </target>
+
+ <target name="prepare" depends="clean"
+         description="Prepare for build">
+  <mkdir dir="${basedir}/build/api"/>
+  <mkdir dir="${basedir}/build/coverage"/>
+ </target>
+
+ <target name="lint">
+  <apply executable="${php}" failonerror="true">
+   <arg value="-l" />
+
+   <fileset dir="${basedir}">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
+
+   <fileset dir="${basedir}/Tests">
+    <include name="**/*.php" />
+    <modified />
+   </fileset>
+  </apply>
+ </target>
+
+ <target name="phpunit" description="Run unit tests with PHPUnit">
+  <exec executable="${php}" failonerror="true">
+   <arg path="${basedir}/phpunit.php" />
+  </exec>
+ </target>
+</project>
