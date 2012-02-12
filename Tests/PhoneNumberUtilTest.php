@@ -87,7 +87,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		// La Mayotte and Reunion use 'leadingDigits' to differentiate them.
 		$reNumber = new PhoneNumber();
 		$reNumber->setCountryCode(262)->setNationalNumber(262123456);
-		/*
 		$this->assertTrue($this->phoneUtil->isValidNumber($reNumber));
 		$this->assertTrue($this->phoneUtil->isValidNumberForRegion($reNumber, RegionCode::RE));
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($reNumber, RegionCode::YT));
@@ -120,8 +119,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::UN001));
 		$invalidNumber->setCountryCode(0);
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::ZZ));
-		 * 
-		 */
 	}
 
 }

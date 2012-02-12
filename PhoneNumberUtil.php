@@ -151,7 +151,7 @@ class PhoneNumberUtil {
 	private function init($filePrefix) {
 		$this->currentFilePrefix = dirname(__FILE__) . '/data/' . $filePrefix;
 		foreach ($this->countryCallingCodeToRegionCodeMap as $regionCodes) {
-			$this->supportedRegions += $regionCodes;
+			$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
 		}
 		//nanpaRegions.addAll(countryCallingCodeToRegionCodeMap.get(NANPA_COUNTRY_CODE));
 	}
@@ -453,7 +453,8 @@ class PhoneNumberUtil {
 			// If leadingDigits is present, use this. Otherwise, do full validation.
 			$metadata = $this->getMetadataForRegion($regionCode);
 			if ($metadata->hasLeadingDigits()) {
-				if (preg_match('/' . $metadata->getLeadingDigits() . '/', $nationalNumber)) {
+				$nbMatches = preg_match('/' . $metadata->getLeadingDigits() . '/', $nationalNumber, $matches, PREG_OFFSET_CAPTURE);
+				if ($nbMatches > 0 && $matches[0][1] === 0) {
 					return $regionCode;
 				}
 			} else if ($this->getNumberTypeHelper($nationalNumber, $metadata) != PhoneNumberType::UNKNOWN) {
