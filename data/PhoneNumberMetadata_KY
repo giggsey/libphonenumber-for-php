@@ -1,5 +1,54 @@
 <?php
 return array (
+  'generalDesc' => 
+  array (
+    'NationalNumberPattern' => '[3589]\\d{9}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          900[2-9]\\d{6}|
+          345976\\d{4}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9002345678',
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '
+          345(?:
+            2(?:
+              22|
+              44
+            )|
+            444|
+            6(?:
+              23|
+              38|
+              40
+            )|
+            7(?:
+              6[6-9]|
+              77
+            )|
+            8(?:
+              00|
+              1[45]|
+              25|
+              4[89]|
+              88
+            )|
+            9(?:
+              14|
+              4[035-9]
+            )
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '3452221234',
+  ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
@@ -20,4 +69,5 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '3453231234',
   ),
+  'leadingDigits' => '345',
 );

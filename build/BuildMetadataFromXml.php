@@ -33,6 +33,7 @@ class BuildMetadataFromXml {
 	private static $liteBuild;
 
 	// String constants used to fetch the XML nodes and attributes.
+
 	const CARRIER_CODE_FORMATTING_RULE = "carrierCodeFormattingRule";
 	const COUNTRY_CODE = "countryCode";
 	const EMERGENCY = "emergency";
@@ -232,13 +233,12 @@ class BuildMetadataFromXml {
 		$generalDesc = new PhoneNumberDesc();
 		$generalDesc = self::processPhoneNumberDescElement($generalDesc, $element, self::GENERAL_DESC);
 		$metadata->setGeneralDesc($generalDesc);
-		/*
-		  metadata.setFixedLine(processPhoneNumberDescElement(generalDesc, element, FIXED_LINE));
-		 */
+		$metadata->setFixedLine(self::processPhoneNumberDescElement($generalDesc, $element, self::FIXED_LINE));
 		$metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE));
+		$metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
 		/*
+		 * @todo
 		  metadata.setTollFree(processPhoneNumberDescElement(generalDesc, element, TOLL_FREE));
-		  metadata.setPremiumRate(processPhoneNumberDescElement(generalDesc, element, PREMIUM_RATE));
 		  metadata.setSharedCost(processPhoneNumberDescElement(generalDesc, element, SHARED_COST));
 		  metadata.setVoip(processPhoneNumberDescElement(generalDesc, element, VOIP));
 		  metadata.setPersonalNumber(processPhoneNumberDescElement(generalDesc, element,
@@ -248,11 +248,11 @@ class BuildMetadataFromXml {
 		  metadata.setEmergency(processPhoneNumberDescElement(generalDesc, element, EMERGENCY));
 		  metadata.setNoInternationalDialling(processPhoneNumberDescElement(generalDesc, element,
 		  NO_INTERNATIONAL_DIALLING));
-		  metadata.setSameMobileAndFixedLinePattern(
-		  metadata.getMobile().getNationalNumberPattern().equals(
-		  metadata.getFixedLine().getNationalNumberPattern()));
 		 * 
 		 */
+		$metadata->setSameMobileAndFixedLinePattern(
+				$metadata->getMobile()->getNationalNumberPattern() === $metadata->getFixedLine()->getNationalNumberPattern()
+		);
 	}
 
 	/**
@@ -308,4 +308,5 @@ class BuildMetadataFromXml {
 	private static function isValidNumberType($numberType) {
 		return $numberType == self::FIXED_LINE || $numberType == self::MOBILE || $numberType == self::GENERAL_DESC;
 	}
+
 }

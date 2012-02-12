@@ -1,5 +1,35 @@
 <?php
 return array (
+  'generalDesc' => 
+  array (
+    'NationalNumberPattern' => '
+          [2-9]\\d{8}|
+          860\\d{9}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '90[016]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            2[12467]|
+            3[1-4]|
+            4[134]|
+            5[12568]|
+            6[12]|
+            [7-9]1
+          )\\d{7}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '212345678',
+  ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7[46-9]\\d{7}',

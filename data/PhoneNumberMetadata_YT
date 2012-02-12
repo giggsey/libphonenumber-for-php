@@ -1,9 +1,28 @@
 <?php
 return array (
+  'generalDesc' => 
+  array (
+    'NationalNumberPattern' => '[268]\\d{8}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '2696[0-4]\\d{4}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '269601234',
+  ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '639\\d{6}',
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '639123456',
   ),
+  'leadingDigits' => '269|63',
 );

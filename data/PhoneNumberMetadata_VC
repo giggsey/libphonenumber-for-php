@@ -1,5 +1,41 @@
 <?php
 return array (
+  'generalDesc' => 
+  array (
+    'NationalNumberPattern' => '[5789]\\d{9}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900[2-9]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9002345678',
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '
+          784(?:
+            266|
+            3(?:
+              6[6-9]|
+              7\\d|
+              8[0-24-6]
+            )|
+            4(?:
+              38|
+              5[0-36-8]|
+              8\\d|
+              9[01]
+            )|
+            555|
+            638|
+            784
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '7842661234',
+  ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
@@ -19,4 +55,5 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '7844301234',
   ),
+  'leadingDigits' => '784',
 );
