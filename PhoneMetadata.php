@@ -78,7 +78,7 @@ class PhoneMetadata {
 	}
 
 	public function setLeadingDigits($value) {
-		$leadingDigits = $value;
+		$this->leadingDigits = $value;
 		return $this;
 	}
 
@@ -214,12 +214,16 @@ class PhoneMetadata {
 		return isset($this->generalDesc);
 	}
 
+	/**
+	 *
+	 * @return PhoneNumberDesc 
+	 */
 	public function getGeneralDesc() {
 		return $this->generalDesc;
 	}
 
 	public function setGeneralDesc(PhoneNumberDesc $value) {
-		$this->generalDesc_ = $value;
+		$this->generalDesc = $value;
 		return $this;
 	}
 
@@ -246,20 +250,52 @@ class PhoneMetadata {
 		return $this;
 	}
 
+	private $premiumRate = null;
+
+	public function hasPremiumRate() {
+		return isset($this->premiumRate);
+	}
+
+	public function getPremiumRate() {
+		return $this->premiumRate;
+	}
+
+	public function setPremiumRate(PhoneNumberDesc $value) {
+		$this->premiumRate = $value;
+		return $this;
+	}
+
+	private $fixedLine = null;
+
+	public function hasFixedLine() {
+		return isset($this->fixedLine);
+	}
+
+	public function getFixedLine() {
+		return $this->fixedLine;
+	}
+
+	public function setFixedLine(PhoneNumberDesc $value) {
+		$this->fixedLine = $value;
+		return $this;
+	}
+
+	private $sameMobileAndFixedLinePattern = NULL;
+
+	public function hasSameMobileAndFixedLinePattern() {
+		return isset($this->sameMobileAndFixedLinePattern);
+	}
+
+	public function isSameMobileAndFixedLinePattern() {
+		return $this->sameMobileAndFixedLinePattern;
+	}
+
+	public function setSameMobileAndFixedLinePattern($value) {
+		$this->sameMobileAndFixedLinePattern = $value;
+		return $this;
+	}
+
 	/*
-	  // required PhoneNumberDesc fixed_line = 2;
-	  private boolean hasFixedLine;
-	  private PhoneNumberDesc fixedLine_ = null;
-	  public boolean hasFixedLine() { return hasFixedLine; }
-	  public PhoneNumberDesc getFixedLine() { return fixedLine_; }
-	  public PhoneMetadata setFixedLine(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasFixedLine = true;
-	  fixedLine_ = $value;
-	  return this;
-	  }
 
 	  // required PhoneNumberDesc toll_free = 4;
 	  private boolean hasTollFree;
@@ -275,19 +311,6 @@ class PhoneMetadata {
 	  return this;
 	  }
 
-	  // required PhoneNumberDesc premium_rate = 5;
-	  private boolean hasPremiumRate;
-	  private PhoneNumberDesc premiumRate_ = null;
-	  public boolean hasPremiumRate() { return hasPremiumRate; }
-	  public PhoneNumberDesc getPremiumRate() { return premiumRate_; }
-	  public PhoneMetadata setPremiumRate(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasPremiumRate = true;
-	  premiumRate_ = $value;
-	  return this;
-	  }
 
 	  // required PhoneNumberDesc shared_cost = 6;
 	  private boolean hasSharedCost;
@@ -401,17 +424,6 @@ class PhoneMetadata {
 	  return this;
 	  }
 
-	  // optional bool same_mobile_and_fixed_line_pattern = 18 [default = false];
-	  private boolean hasSameMobileAndFixedLinePattern;
-	  private boolean sameMobileAndFixedLinePattern_ = false;
-	  public boolean hasSameMobileAndFixedLinePattern() { return hasSameMobileAndFixedLinePattern; }
-	  public boolean isSameMobileAndFixedLinePattern() { return sameMobileAndFixedLinePattern_; }
-	  public PhoneMetadata setSameMobileAndFixedLinePattern(boolean value) {
-	  hasSameMobileAndFixedLinePattern = true;
-	  sameMobileAndFixedLinePattern_ = $value;
-	  return this;
-	  }
-
 	  // repeated NumberFormat number_format = 19;
 	  private java.util.List<NumberFormat> numberFormat_ = new java.util.ArrayList<NumberFormat>();
 	  public java.util.List<NumberFormat> numberFormats() {
@@ -454,10 +466,59 @@ class PhoneMetadata {
 	 */
 
 	public function toArray() {
-		return array(
-			'mobile' => $this->getMobile()->toArray(),
-		);
+		$output = array();
+
+		if ($this->hasGeneralDesc()) {
+			$output['generalDesc'] = $this->getGeneralDesc()->toArray();
+		}
+
+		if ($this->hasPremiumRate()) {
+			$output['premiumRate'] = $this->getPremiumRate()->toArray();
+		}
+
+		if ($this->hasFixedLine()) {
+			$output['fixedLine'] = $this->getFixedLine()->toArray();
+		}
+
+		if ($this->hasMobile()) {
+			$output['mobile'] = $this->getMobile()->toArray();
+		}
+
+		if ($this->hasLeadingDigits()) {
+			$output['leadingDigits'] = $this->getLeadingDigits();
+		}
+
+		return $output;
 	}
+
+	public function fromArray(array $input) {
+		if (isset($input['generalDesc'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setGeneralDesc($desc->fromArray($input['generalDesc']));
+		}
+
+		if (isset($input['premiumRate'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setPremiumRate($desc->fromArray($input['premiumRate']));
+		}
+
+		if (isset($input['fixedLine'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setFixedLine($desc->fromArray($input['fixedLine']));
+		}
+
+
+		if (isset($input['mobile'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setMobile($desc->fromArray($input['mobile']));
+		}
+
+		if (isset($input['leadingDigits'])) {
+			$this->setLeadingDigits($input['leadingDigits']);
+		}
+		return $this;
+	}
+
 }
 
 class PhoneNumberDesc {
@@ -533,4 +594,18 @@ class PhoneNumberDesc {
 			'ExampleNumber' => $this->getExampleNumber(),
 		);
 	}
+
+	public function fromArray(array $input) {
+		if (isset($input['NationalNumberPattern'])) {
+			$this->setNationalNumberPattern($input['NationalNumberPattern']);
+		}
+		if (isset($input['PossibleNumberPattern'])) {
+			$this->setPossibleNumberPattern($input['PossibleNumberPattern']);
+		}
+		if (isset($input['ExampleNumber'])) {
+			$this->setExampleNumber($input['ExampleNumber']);
+		}
+		return $this;
+	}
+
 }
