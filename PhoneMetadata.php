@@ -295,22 +295,22 @@ class PhoneMetadata {
 		return $this;
 	}
 
+	private $tollFree = NULL;
+
+	public function hasTollFree() {
+		return isset($this->tollFree);
+	}
+
+	public function getTollFree() {
+		return $this->tollFree;
+	}
+
+	public function setTollFree(PhoneNumberDesc $value) {
+		$this->tollFree = $value;
+		return $this;
+	}
+
 	/*
-
-	  // required PhoneNumberDesc toll_free = 4;
-	  private boolean hasTollFree;
-	  private PhoneNumberDesc tollFree_ = null;
-	  public boolean hasTollFree() { return hasTollFree; }
-	  public PhoneNumberDesc getTollFree() { return tollFree_; }
-	  public PhoneMetadata setTollFree(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasTollFree = true;
-	  tollFree_ = $value;
-	  return this;
-	  }
-
 
 	  // required PhoneNumberDesc shared_cost = 6;
 	  private boolean hasSharedCost;
@@ -472,10 +472,6 @@ class PhoneMetadata {
 			$output['generalDesc'] = $this->getGeneralDesc()->toArray();
 		}
 
-		if ($this->hasPremiumRate()) {
-			$output['premiumRate'] = $this->getPremiumRate()->toArray();
-		}
-
 		if ($this->hasFixedLine()) {
 			$output['fixedLine'] = $this->getFixedLine()->toArray();
 		}
@@ -484,22 +480,111 @@ class PhoneMetadata {
 			$output['mobile'] = $this->getMobile()->toArray();
 		}
 
+		if ($this->hasTollFree()) {
+			$output['tollFree'] = $this->getTollFree()->toArray();
+		}
+
+		if ($this->hasPremiumRate()) {
+			$output['premiumRate'] = $this->getPremiumRate()->toArray();
+		}
+
+		if ($this->hasPremiumRate()) {
+			$output['premiumRate'] = $this->getPremiumRate()->toArray();
+		}
+		/*
+		  objectOutput.writeBoolean(hasSharedCost);
+		  if (hasSharedCost) {
+		  sharedCost_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasPersonalNumber);
+		  if (hasPersonalNumber) {
+		  personalNumber_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasVoip);
+		  if (hasVoip) {
+		  voip_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasPager);
+		  if (hasPager) {
+		  pager_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasUan);
+		  if (hasUan) {
+		  uan_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasVoicemail);
+		  if (hasVoicemail) {
+		  voicemail_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasEmergency);
+		  if (hasEmergency) {
+		  emergency_.writeExternal(objectOutput);
+		  }
+		  objectOutput.writeBoolean(hasNoInternationalDialling);
+		  if (hasNoInternationalDialling) {
+		  noInternationalDialling_.writeExternal(objectOutput);
+		  }
+		 */
+
+		$output['id'] = $this->getId();
+		$output['countryCode'] = $this->getCountryCode();
+		$output['internationalPrefix'] = $this->getInternationalPrefix();
+
+		if ($this->hasPreferredInternationalPrefix()) {
+			$output['preferredInternationalPrefix'] = $this->getPreferredInternationalPrefix();
+		}
+
+		if ($this->hasNationalPrefix()) {
+			$output['nationalPrefix'] = $this->getNationalPrefix();
+		}
+
+		if ($this->hasPreferredExtnPrefix()) {
+			$output['preferredExtnPrefix'] = $this->getPreferredExtnPrefix();
+		}
+
+		if ($this->hasNationalPrefixForParsing()) {
+			$output['nationalPrefixForParsing'] = $this->getNationalPrefixForParsing();
+		}
+
+		if ($this->hasNationalPrefixTransformRule()) {
+			$output['nationalPrefixTransformRule'] = $this->getNationalPrefixTransformRule();
+		}
+
+		$output['sameMobileAndFixedLinePattern'] = $this->isSameMobileAndFixedLinePattern();
+
+		/*
+
+		  int numberFormatSize = numberFormatSize();
+		  objectOutput.writeInt(numberFormatSize);
+		  for (int i = 0; i < numberFormatSize; i++) {
+		  numberFormat_.get(i).writeExternal(objectOutput);
+		  }
+
+		  int intlNumberFormatSize = intlNumberFormatSize();
+		  objectOutput.writeInt(intlNumberFormatSize);
+		  for (int i = 0; i < intlNumberFormatSize; i++) {
+		  intlNumberFormat_.get(i).writeExternal(objectOutput);
+		  }
+		 */
+		$output['mainCountryForCode'] = $this->getMainCountryForCode();
+
 		if ($this->hasLeadingDigits()) {
 			$output['leadingDigits'] = $this->getLeadingDigits();
 		}
+
+		/* 		
+		  objectOutput.writeBoolean(leadingZeroPossible_);
+		 */
+
 
 		return $output;
 	}
 
 	public function fromArray(array $input) {
+
 		if (isset($input['generalDesc'])) {
 			$desc = new PhoneNumberDesc();
 			$this->setGeneralDesc($desc->fromArray($input['generalDesc']));
-		}
-
-		if (isset($input['premiumRate'])) {
-			$desc = new PhoneNumberDesc();
-			$this->setPremiumRate($desc->fromArray($input['premiumRate']));
 		}
 
 		if (isset($input['fixedLine'])) {
@@ -507,15 +592,128 @@ class PhoneMetadata {
 			$this->setFixedLine($desc->fromArray($input['fixedLine']));
 		}
 
-
 		if (isset($input['mobile'])) {
 			$desc = new PhoneNumberDesc();
 			$this->setMobile($desc->fromArray($input['mobile']));
 		}
 
+		if (isset($input['tollFree'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setTollFree($desc->fromArray($input['tollFree']));
+		}
+
+		if (isset($input['premiumRate'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setPremiumRate($desc->fromArray($input['premiumRate']));
+		}
+
+		/*
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setSharedCost(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setPersonalNumber(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setVoip(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setPager(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setUan(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setVoicemail(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setEmergency(desc);
+		  }
+		  hasDesc = objectInput.readBoolean();
+		  if (hasDesc) {
+		  PhoneNumberDesc desc = new PhoneNumberDesc();
+		  desc.readExternal(objectInput);
+		  setNoInternationalDialling(desc);
+		  }
+
+		  setId(objectInput.readUTF());
+		  setCountryCode(objectInput.readInt());
+		  setInternationalPrefix(objectInput.readUTF());
+
+		  boolean hasString = objectInput.readBoolean();
+		  if (hasString) {
+		  setPreferredInternationalPrefix(objectInput.readUTF());
+		  }
+
+		  hasString = objectInput.readBoolean();
+		  if (hasString) {
+		  setNationalPrefix(objectInput.readUTF());
+		  }
+
+		  hasString = objectInput.readBoolean();
+		  if (hasString) {
+		  setPreferredExtnPrefix(objectInput.readUTF());
+		  }
+
+		  hasString = objectInput.readBoolean();
+		  if (hasString) {
+		  setNationalPrefixForParsing(objectInput.readUTF());
+		  }
+
+		  hasString = objectInput.readBoolean();
+		  if (hasString) {
+		  setNationalPrefixTransformRule(objectInput.readUTF());
+		  }
+
+		  setSameMobileAndFixedLinePattern(objectInput.readBoolean());
+
+		  int nationalFormatSize = objectInput.readInt();
+		  for (int i = 0; i < nationalFormatSize; i++) {
+		  NumberFormat numFormat = new NumberFormat();
+		  numFormat.readExternal(objectInput);
+		  numberFormat_.add(numFormat);
+		  }
+
+		  int intlNumberFormatSize = objectInput.readInt();
+		  for (int i = 0; i < intlNumberFormatSize; i++) {
+		  NumberFormat numFormat = new NumberFormat();
+		  numFormat.readExternal(objectInput);
+		  intlNumberFormat_.add(numFormat);
+		  }
+
+		  setMainCountryForCode(objectInput.readBoolean());
+		 * 
+		 */
+		$this->setMainCountryForCode($input['mainCountryForCode']);
+		
 		if (isset($input['leadingDigits'])) {
 			$this->setLeadingDigits($input['leadingDigits']);
 		}
+
+		/*
+		  setLeadingZeroPossible(objectInput.readBoolean());
+		 */
 		return $this;
 	}
 

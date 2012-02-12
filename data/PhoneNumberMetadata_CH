@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '90[016]\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -36,4 +30,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '741234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '90[016]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'CH',
+  'countryCode' => 41,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

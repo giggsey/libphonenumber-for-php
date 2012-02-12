@@ -11,12 +11,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '80[3-689]1\\d{5}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '808123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -43,4 +37,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '551234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '80[3-689]1\\d{5}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '808123456',
+  ),
+  'id' => 'DZ',
+  'countryCode' => 213,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

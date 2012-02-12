@@ -6,17 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '
-          (?:
-            87|
-            9[014578]
-          )\\d{6}
-        ',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '90123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -71,4 +60,27 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '36001234',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '80123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            87|
+            9[014578]
+          )\\d{6}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '90123456',
+  ),
+  'id' => 'BH',
+  'countryCode' => 973,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

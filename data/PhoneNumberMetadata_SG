@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '1900\\d{7}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '19001234567',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '6[1-8]\\d{6}',
@@ -32,4 +26,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '81234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '1?800\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '18001234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '1900\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '19001234567',
+  ),
+  'id' => 'SG',
+  'countryCode' => 65,
+  'internationalPrefix' => '0[0-3][0-9]',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

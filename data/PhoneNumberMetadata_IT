@@ -12,22 +12,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '
-          0878\\d{5}|
-          1(?:
-            44|
-            6[346]
-          )\\d{6}|
-          89(?:
-            2\\d{3}|
-            9\\d{6}
-          )
-        ',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '899123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -54,4 +38,37 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '3123456789',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '
+          80(?:
+            0\\d{6}|
+            3\\d{3}
+          )
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          0878\\d{5}|
+          1(?:
+            44|
+            6[346]
+          )\\d{6}|
+          89(?:
+            2\\d{3}|
+            9\\d{6}
+          )
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '899123456',
+  ),
+  'id' => 'IT',
+  'countryCode' => 39,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

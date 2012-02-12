@@ -10,20 +10,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '
-          1(?:
-            212|
-            (?:
-              919|
-              200
-            )\\d{2}
-          )\\d{4}
-        ',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '1919123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -54,4 +40,35 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '501234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '
+          1(?:
+            80[019]\\d{3}|
+            255
+          )\\d{3}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '1800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          1(?:
+            212|
+            (?:
+              919|
+              200
+            )\\d{2}
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '1919123456',
+  ),
+  'id' => 'IL',
+  'countryCode' => 972,
+  'internationalPrefix' => '0(?:0|1[2-48])',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

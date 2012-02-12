@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[2-8]\\d{7,8}',
@@ -24,4 +18,23 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '912345678',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'TW',
+  'countryCode' => 886,
+  'internationalPrefix' => '0(?:0[25679]|19)',
+  'preferredInternationalPrefix' => '',
+  'preferredExtnPrefix' => '#',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

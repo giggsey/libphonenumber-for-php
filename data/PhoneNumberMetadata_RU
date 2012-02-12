@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '80[39]\\d{7}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '8091234567',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -51,4 +45,24 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '9123456789',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80[04]\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '8001234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '80[39]\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '8091234567',
+  ),
+  'id' => 'RU',
+  'countryCode' => 7,
+  'internationalPrefix' => '810',
+  'preferredInternationalPrefix' => '8~10',
+  'nationalPrefix' => '8',
+  'nationalPrefixForParsing' => '8',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => true,
 );

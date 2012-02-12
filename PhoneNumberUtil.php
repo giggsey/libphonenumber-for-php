@@ -500,30 +500,31 @@ class PhoneNumberUtil {
 		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPremiumRate())) {
 			return PhoneNumberType::PREMIUM_RATE;
 		}
-		/*
-		 * @todo Implement other phone desc
 		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getTollFree())) {
 			return PhoneNumberType::TOLL_FREE;
 		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getSharedCost())) {
-			return PhoneNumberType::SHARED_COST;
-		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getVoip())) {
-			return PhoneNumberType::VOIP;
-		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPersonalNumber())) {
-			return PhoneNumberType::PERSONAL_NUMBER;
-		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPager())) {
-			return PhoneNumberType::PAGER;
-		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getUan())) {
-			return PhoneNumberType::UAN;
-		}
-		if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getVoicemail())) {
-			return PhoneNumberType::VOICEMAIL;
-		}
-*/
+
+		/*
+		 * @todo Implement other phone desc
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getSharedCost())) {
+		  return PhoneNumberType::SHARED_COST;
+		  }
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getVoip())) {
+		  return PhoneNumberType::VOIP;
+		  }
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPersonalNumber())) {
+		  return PhoneNumberType::PERSONAL_NUMBER;
+		  }
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPager())) {
+		  return PhoneNumberType::PAGER;
+		  }
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getUan())) {
+		  return PhoneNumberType::UAN;
+		  }
+		  if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getVoicemail())) {
+		  return PhoneNumberType::VOICEMAIL;
+		  }
+		 */
 		$isFixedLine = $this->isNumberMatchingDesc($nationalNumber, $metadata->getFixedLine());
 		if ($isFixedLine) {
 			if ($metadata->isSameMobileAndFixedLinePattern()) {
@@ -543,9 +544,19 @@ class PhoneNumberUtil {
 	}
 
 	private function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
-		$possibleNumberPatternMatcher = preg_match('/' . str_replace(array(PHP_EOL,' '), '', $numberDesc->getPossibleNumberPattern()) . '/', $nationalNumber);
-		$nationalNumberPatternMatcher = preg_match('/' . str_replace(array(PHP_EOL,' '), '', $numberDesc->getNationalNumberPattern()) . '/', $nationalNumber);
+		$possibleNumberPatternMatcher = preg_match('/' . str_replace(array(PHP_EOL, ' '), '', $numberDesc->getPossibleNumberPattern()) . '/', $nationalNumber);
+		$nationalNumberPatternMatcher = preg_match('/' . str_replace(array(PHP_EOL, ' '), '', $numberDesc->getNationalNumberPattern()) . '/', $nationalNumber);
 		return $possibleNumberPatternMatcher && $nationalNumberPatternMatcher;
+	}
+
+	private function getMetadataForNonGeographicalRegion($countryCallingCode) {
+		if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
+			return null;
+		}
+		if (!isset($this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode])) {
+			$this->loadMetadataFromFile($this->currentFilePrefix, self::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode);
+		}
+		return $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode];
 	}
 
 }

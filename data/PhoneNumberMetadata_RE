@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '89[1-37-9]\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '891123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '262\\d{6}',
@@ -29,5 +23,23 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '692123456',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '801234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '89[1-37-9]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '891123456',
+  ),
+  'id' => 'RE',
+  'countryCode' => 262,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => true,
   'leadingDigits' => '262|6[49]|8',
 );

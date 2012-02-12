@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '9008\\d{3}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '9008123',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -44,4 +38,27 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '6091234',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            289|
+            862
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '2891234',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '9008\\d{3}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9008123',
+  ),
+  'id' => 'GY',
+  'countryCode' => 592,
+  'internationalPrefix' => '001',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

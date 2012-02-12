@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '7[178]\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '71123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -29,4 +23,24 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '66661212',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '7[178]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '71123456',
+  ),
+  'id' => 'SM',
+  'countryCode' => 378,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'nationalPrefixForParsing' => '(?:0549)?([89]\\d{5})',
+  'nationalPrefixTransformRule' => '0549$1',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

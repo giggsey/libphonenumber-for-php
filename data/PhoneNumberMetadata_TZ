@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '90\\d{7}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '2[2-8]\\d{7}',
@@ -29,4 +23,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '612345678',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80[08]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '90\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'TZ',
+  'countryCode' => 255,
+  'internationalPrefix' => '00[056]',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

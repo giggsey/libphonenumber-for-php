@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '98\\d{4}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '981234',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -51,4 +45,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '2510123',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '8000\\d{2}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800000',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '98\\d{4}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '981234',
+  ),
+  'id' => 'SC',
+  'countryCode' => 248,
+  'internationalPrefix' => '0[0-2]',
+  'preferredInternationalPrefix' => '00',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

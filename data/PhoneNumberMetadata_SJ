@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '82[09]\\d{5}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '82012345',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '79\\d{6}',
@@ -32,4 +26,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '41234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80[01]\\d{5}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '80012345',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '82[09]\\d{5}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '82012345',
+  ),
+  'id' => 'SJ',
+  'countryCode' => 47,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

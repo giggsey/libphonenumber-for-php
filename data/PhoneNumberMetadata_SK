@@ -6,17 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '
-          9(?:
-            [78]\\d{7}|
-            00\\d{6}
-          )
-        ',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[2-5]\\d{8}',
@@ -35,4 +24,27 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '912123456',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          9(?:
+            [78]\\d{7}|
+            00\\d{6}
+          )
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'SK',
+  'countryCode' => 421,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

@@ -6,20 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '
-          (?:
-            711|
-            9(?:
-              0[01]|
-              3[019]
-            )
-          )\\d{6,10}
-        ',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -91,4 +77,30 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '644123456',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '80[02]\\d{6,10}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            711|
+            9(?:
+              0[01]|
+              3[019]
+            )
+          )\\d{6,10}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'AT',
+  'countryCode' => 43,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

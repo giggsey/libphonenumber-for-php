@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -58,4 +52,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '8021234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{7,11}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '80017591759',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '',
+  ),
+  'id' => 'NG',
+  'countryCode' => 234,
+  'internationalPrefix' => '009',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

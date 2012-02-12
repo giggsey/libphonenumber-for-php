@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900200\\d{3}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900200123',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -80,4 +74,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '401234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '88\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '881234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900200\\d{3}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900200123',
+  ),
+  'id' => 'AZ',
+  'countryCode' => 994,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

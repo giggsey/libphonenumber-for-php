@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '90\\d{7,9}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '900123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -46,4 +40,25 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '211234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '
+          508\\d{6,7}|
+          80\\d{6,8}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '800123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '90\\d{7,9}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '900123456',
+  ),
+  'id' => 'NZ',
+  'countryCode' => 64,
+  'internationalPrefix' => '0(?:0|161)',
+  'preferredInternationalPrefix' => '00',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

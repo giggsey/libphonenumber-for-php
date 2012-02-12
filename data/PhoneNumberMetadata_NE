@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '09\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '09123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -42,4 +36,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '93123456',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '08\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '08123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '09\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '09123456',
+  ),
+  'id' => 'NE',
+  'countryCode' => 227,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

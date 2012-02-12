@@ -9,12 +9,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900\\d{7}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '9001234567',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -56,4 +50,22 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '5012345678',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '8001234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9001234567',
+  ),
+  'id' => 'TR',
+  'countryCode' => 90,
+  'internationalPrefix' => '00',
+  'preferredInternationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

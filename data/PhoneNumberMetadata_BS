@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900[2-9]\\d{6}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '9002123456',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -69,5 +63,34 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '2423591234',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '
+          242300\\d{4}|
+          8(?:
+            00|
+            55|
+            66|
+            77|
+            88
+          )[2-9]\\d{6}
+        ',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '8002123456',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900[2-9]\\d{6}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9002123456',
+  ),
+  'id' => 'BS',
+  'countryCode' => 1,
+  'internationalPrefix' => '011',
+  'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '1',
+  'nationalPrefixForParsing' => '1',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
   'leadingDigits' => '242',
 );

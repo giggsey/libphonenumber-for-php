@@ -6,12 +6,6 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900\\d{7}',
-    'PossibleNumberPattern' => '',
-    'ExampleNumber' => '9001234567',
-  ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
@@ -158,4 +152,25 @@ return array (
     'PossibleNumberPattern' => '',
     'ExampleNumber' => '12221234567',
   ),
+  'tollFree' => 
+  array (
+    'NationalNumberPattern' => '800\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '8001234567',
+  ),
+  'premiumRate' => 
+  array (
+    'NationalNumberPattern' => '900\\d{7}',
+    'PossibleNumberPattern' => '',
+    'ExampleNumber' => '9001234567',
+  ),
+  'id' => 'MX',
+  'countryCode' => 52,
+  'internationalPrefix' => '0[09]',
+  'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '01',
+  'nationalPrefixForParsing' => '0[12]|04[45](\\d{10})',
+  'nationalPrefixTransformRule' => '1$1',
+  'sameMobileAndFixedLinePattern' => false,
+  'mainCountryForCode' => NULL,
 );

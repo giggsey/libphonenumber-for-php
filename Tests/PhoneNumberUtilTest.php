@@ -13,6 +13,7 @@ require_once dirname(__FILE__) . '/../PhoneNumber.php';
 class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 	private static $bsNumber = NULL;
+	private static $internationalTollFree = NULL;
 
 	/**
 	 * @var PhoneNumberUtil
@@ -27,6 +28,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->phoneUtil = PhoneNumberUtil::getInstance();
 		self::$bsNumber = new PhoneNumber();
 		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
+		self::$internationalTollFree = new PhoneNumber();
+		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
 	}
 
 	/**
@@ -105,9 +108,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$reNumber->setNationalNumber(800123456);
 		$this->assertTrue($this->phoneUtil->isValidNumberForRegion($reNumber, RegionCode::YT));
 		$this->assertTrue($this->phoneUtil->isValidNumberForRegion($reNumber, RegionCode::RE));
-		$this->assertTrue($this->phoneUtil->isValidNumberForRegion(INTERNATIONAL_TOLL_FREE, RegionCode::UN001));
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(INTERNATIONAL_TOLL_FREE, RegionCode::US));
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(INTERNATIONAL_TOLL_FREE, RegionCode::ZZ));
+		$this->assertTrue($this->phoneUtil->isValidNumberForRegion(self::$internationalTollFree, RegionCode::UN001));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(self::$internationalTollFree, RegionCode::US));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(self::$internationalTollFree, RegionCode::ZZ));
 
 		$invalidNumber = new PhoneNumber();
 		// Invalid country calling codes.

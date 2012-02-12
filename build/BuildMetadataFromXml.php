@@ -236,18 +236,17 @@ class BuildMetadataFromXml {
 		$metadata->setFixedLine(self::processPhoneNumberDescElement($generalDesc, $element, self::FIXED_LINE));
 		$metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE));
 		$metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
+		$metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
+
 		/*
 		 * @todo
-		  metadata.setTollFree(processPhoneNumberDescElement(generalDesc, element, TOLL_FREE));
-		  metadata.setSharedCost(processPhoneNumberDescElement(generalDesc, element, SHARED_COST));
-		  metadata.setVoip(processPhoneNumberDescElement(generalDesc, element, VOIP));
-		  metadata.setPersonalNumber(processPhoneNumberDescElement(generalDesc, element,
-		  PERSONAL_NUMBER));
-		  metadata.setPager(processPhoneNumberDescElement(generalDesc, element, PAGER));
-		  metadata.setUan(processPhoneNumberDescElement(generalDesc, element, UAN));
-		  metadata.setEmergency(processPhoneNumberDescElement(generalDesc, element, EMERGENCY));
-		  metadata.setNoInternationalDialling(processPhoneNumberDescElement(generalDesc, element,
-		  NO_INTERNATIONAL_DIALLING));
+		  $metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
+		  $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
+		  $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
+		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
+		  $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
+		  $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
+		  $metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		 * 
 		 */
 		$metadata->setSameMobileAndFixedLinePattern(
