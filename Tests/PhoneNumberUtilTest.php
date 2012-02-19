@@ -40,6 +40,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		
 	}
 
+	public function testGetSupportedRegions() {
+		$this->assertGreaterThan(0, count($this->phoneUtil->getSupportedRegions()));
+	}
+
 	/**
 	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::isViablePhoneNumber
 	 * @todo Implement testIsViablePhoneNumber().

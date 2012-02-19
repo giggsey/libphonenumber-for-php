@@ -142,6 +142,20 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Used for testing purposes only to reset the PhoneNumberUtil singleton to null.
+	 */
+	public static function resetInstance() {
+		self::$instance = NULL;
+	}
+
+	/**
+	 * Convenience method to get a list of what regions the library has metadata for.
+	 */
+	public function getSupportedRegions() {
+		return $this->supportedRegions;
+	}
+
+	/**
 	 * This class implements a singleton, so the only constructor is private.
 	 */
 	private function __construct() {
