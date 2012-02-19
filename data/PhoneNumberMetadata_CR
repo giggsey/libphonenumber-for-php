@@ -43,5 +43,33 @@ return array (
   'preferredInternationalPrefix' => '',
   'nationalPrefixForParsing' => '(19(?:0[0-2]|19|77))',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '(\\d{4})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            [24-7]|
+            8[3-9]
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
+      'format' => '$1-$2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[89]0',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

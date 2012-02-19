@@ -59,5 +59,30 @@ return array (
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-5]',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(9[3-689])(\\d{4})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '9',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

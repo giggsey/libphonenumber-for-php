@@ -70,5 +70,33 @@ return array (
   'internationalPrefix' => '00[178]',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            1\\d[1-9]|
+            [2-9]
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(1[89]00)(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '1[89]0',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

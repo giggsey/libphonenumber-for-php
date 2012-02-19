@@ -41,5 +41,30 @@ return array (
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '([29]\\d)(\\d{7})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[29]',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(800)(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

@@ -44,5 +44,8 @@ return array (
   'internationalPrefix' => '00|99[049]',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

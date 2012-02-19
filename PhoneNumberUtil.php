@@ -155,6 +155,8 @@ class PhoneNumberUtil {
 		return $this->supportedRegions;
 	}
 
+	
+	
 	/**
 	 * This class implements a singleton, so the only constructor is private.
 	 */
@@ -441,7 +443,7 @@ class PhoneNumberUtil {
 		return self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode ? $this->getMetadataForNonGeographicalRegion($countryCallingCode) : $this->getMetadataForRegion($regionCode);
 	}
 
-	private function getMetadataForRegion($regionCode) {
+	public function getMetadataForRegion($regionCode) {
 		if (!$this->isValidRegionCode($regionCode)) {
 			return null;
 		}

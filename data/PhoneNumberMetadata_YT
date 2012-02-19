@@ -35,6 +35,9 @@ return array (
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
   'leadingDigits' => '269|63',
 );

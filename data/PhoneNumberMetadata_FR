@@ -44,5 +44,30 @@ return array (
   'internationalPrefix' => '[04579]0',
   'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '([1-79])(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4 $5',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-79]',
+      ),
+      'nationalPrefixFormattingRule' => '$NP$FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(8\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8',
+      ),
+      'nationalPrefixFormattingRule' => '$NP $FG',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

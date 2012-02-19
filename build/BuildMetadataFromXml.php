@@ -32,7 +32,7 @@ class BuildMetadataFromXml {
 	 */
 	private static $liteBuild;
 
-	// String constants used to fetch the XML nodes and attributes.
+// String constants used to fetch the XML nodes and attributes.
 
 	const CARRIER_CODE_FORMATTING_RULE = "carrierCodeFormattingRule";
 	const COUNTRY_CODE = "countryCode";
@@ -119,10 +119,18 @@ class BuildMetadataFromXml {
 	 */
 	private static function getNationalPrefixFormattingRuleFromElement(\DOMElement $element, $nationalPrefix) {
 		$nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
-		// Replace $NP with national prefix and $FG with the first group ($1).
+// Replace $NP with national prefix and $FG with the first group ($1).
 		$nationalPrefixFormattingRule = str_replace('\\$NP', $nationalPrefix, $nationalPrefixFormattingRule);
 		$nationalPrefixFormattingRule = str_replace('\\$FG', '\\$1', $nationalPrefixFormattingRule);
 		return $nationalPrefixFormattingRule;
+	}
+
+	private static function getDomesticCarrierCodeFormattingRuleFromElement(\DOMElement $element, $nationalPrefix) {
+		$carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
+// Replace $FG with the first group ($1) and $NP with the national prefix.
+		$carrierCodeFormattingRule = str_replace('\\$NP', $nationalPrefix, $carrierCodeFormattingRule);
+		$carrierCodeFormattingRule = str_replace('\\$FG', '\\$1', $carrierCodeFormattingRule);
+		return $carrierCodeFormattingRule;
 	}
 
 	/**
@@ -171,6 +179,26 @@ class BuildMetadataFromXml {
 	}
 
 	/**
+	 * Extracts the pattern for the national format.
+	 *
+	 * @throws  RuntimeException if multiple or no formats have been encountered.
+	 * @return  the national format string.
+	 */
+	private static function loadNationalFormat(PhoneMetadata $metadata, \DOMElement $numberFormatElement, NumberFormat $format) {
+		self::setLeadingDigitsPatterns($numberFormatElement, $format);
+		$format->setPattern($numberFormatElement->getAttribute(self::PATTERN));
+
+		$formatPattern = $numberFormatElement->getElementsByTagName(self::FORMAT);
+		if ($formatPattern->length != 1) {
+			throw new \RuntimeException("Invalid number of format patterns for country: " .
+					$metadata->getId());
+		}
+		$nationalFormat = $formatPattern->item(0)->firstChild->nodeValue;
+		$format->setFormat($nationalFormat);
+		return $nationalFormat;
+	}
+
+	/**
 	 * @todo Implement this method
 	 * Extracts the available formats from the provided DOM element. If it does not contain any
 	 * nationalPrefixFormattingRule, the one passed-in is retained.
@@ -182,51 +210,59 @@ class BuildMetadataFromXml {
 	 */
 	private static function loadAvailableFormats(PhoneMetadata $metadata, $regionCode, \DOMElement $element, $nationalPrefix, $nationalPrefixFormattingRule) {
 
-		/*
-		  String carrierCodeFormattingRule = "";
-		  if (element.hasAttribute(CARRIER_CODE_FORMATTING_RULE)) {
-		  carrierCodeFormattingRule = validateRE(
-		  getDomesticCarrierCodeFormattingRuleFromElement(element, nationalPrefix));
-		  }
-		  NodeList numberFormatElements = element.getElementsByTagName(NUMBER_FORMAT);
-		  boolean hasExplicitIntlFormatDefined = false;
+		$carrierCodeFormattingRule = "";
+		if ($element->hasAttribute(self::CARRIER_CODE_FORMATTING_RULE)) {
+			$carrierCodeFormattingRule = self::getDomesticCarrierCodeFormattingRuleFromElement($element, $nationalPrefix);
+		}
+		$numberFormatElements = $element->getElementsByTagName(self::NUMBER_FORMAT);
+		$hasExplicitIntlFormatDefined = false;
 
-		  int numOfFormatElements = numberFormatElements.getLength();
-		  if (numOfFormatElements > 0) {
-		  for (int i = 0; i < numOfFormatElements; i++) {
-		  Element numberFormatElement = (Element) numberFormatElements.item(i);
-		  NumberFormat.Builder format = NumberFormat.newBuilder();
+		$numOfFormatElements = $numberFormatElements->length;
+		if ($numOfFormatElements > 0) {
+			for ($i = 0; $i < $numOfFormatElements; $i++) {
+				$numberFormatElement = $numberFormatElements->item($i);
+				$format = new NumberFormat();
 
-		  if (numberFormatElement.hasAttribute(NATIONAL_PREFIX_FORMATTING_RULE)) {
-		  format.setNationalPrefixFormattingRule(
-		  getNationalPrefixFormattingRuleFromElement(numberFormatElement, nationalPrefix));
-		  } else {
-		  format.setNationalPrefixFormattingRule(nationalPrefixFormattingRule);
-		  }
-		  if (numberFormatElement.hasAttribute(CARRIER_CODE_FORMATTING_RULE)) {
-		  format.setDomesticCarrierCodeFormattingRule(validateRE(
-		  getDomesticCarrierCodeFormattingRuleFromElement(numberFormatElement,
-		  nationalPrefix)));
-		  } else {
-		  format.setDomesticCarrierCodeFormattingRule(carrierCodeFormattingRule);
-		  }
-		  String nationalFormat =
-		  loadNationalFormat(metadata, numberFormatElement, format);
-		  metadata.addNumberFormat(format);
+				if ($numberFormatElement->hasAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE)) {
+					$format->setNationalPrefixFormattingRule(
+							self::getNationalPrefixFormattingRuleFromElement($numberFormatElement, $nationalPrefix));
+				} else {
+					$format->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
+				}
+				if ($numberFormatElement->hasAttribute(self::CARRIER_CODE_FORMATTING_RULE)) {
+					$format->setDomesticCarrierCodeFormattingRule(
+							self::getDomesticCarrierCodeFormattingRuleFromElement($numberFormatElement, $nationalPrefix));
+				} else {
+					$format->setDomesticCarrierCodeFormattingRule($carrierCodeFormattingRule);
+				}
+				$nationalFormat = self::loadNationalFormat($metadata, $numberFormatElement, $format);
+				$metadata->addNumberFormat($format);
+				/*
+				  if (loadInternationalFormat(metadata, numberFormatElement, nationalFormat)) {
+				  hasExplicitIntlFormatDefined = true;
+				  }
+				  }
+				  // Only a small number of regions need to specify the intlFormats in the xml. For the majority
+				  // of countries the intlNumberFormat metadata is an exact copy of the national NumberFormat
+				  // metadata. To minimize the size of the metadata file, we only keep intlNumberFormats that
+				  // actually differ in some way to the national formats.
+				  if (!hasExplicitIntlFormatDefined) {
+				  metadata.clearIntlNumberFormat();
+				 */
+			}
+		}
+	}
 
-		  if (loadInternationalFormat(metadata, numberFormatElement, nationalFormat)) {
-		  hasExplicitIntlFormatDefined = true;
-		  }
-		  }
-		  // Only a small number of regions need to specify the intlFormats in the xml. For the majority
-		  // of countries the intlNumberFormat metadata is an exact copy of the national NumberFormat
-		  // metadata. To minimize the size of the metadata file, we only keep intlNumberFormats that
-		  // actually differ in some way to the national formats.
-		  if (!hasExplicitIntlFormatDefined) {
-		  metadata.clearIntlNumberFormat();
-		  }
-		  }
-		 */
+	public static function setLeadingDigitsPatterns(\DOMElement $numberFormatElement, NumberFormat $format) {
+		$leadingDigitsPatternNodes = $numberFormatElement->getElementsByTagName(self::LEADING_DIGITS);
+		$numOfLeadingDigitsPatterns = $leadingDigitsPatternNodes->length;
+		if ($numOfLeadingDigitsPatterns > 0) {
+			for ($i = 0; $i < $numOfLeadingDigitsPatterns; $i++) {
+				$elt = $leadingDigitsPatternNodes->item($i);
+				$format->addLeadingDigitsPattern(
+						$elt->firstChild->nodeValue, true);
+			}
+		}
 	}
 
 	private static function loadGeneralDesc(PhoneMetadata $metadata, \DOMElement $element) {

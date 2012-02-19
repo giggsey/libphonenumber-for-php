@@ -54,5 +54,8 @@ return array (
   'internationalPrefix' => '(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
   'preferredInternationalPrefix' => '0011',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

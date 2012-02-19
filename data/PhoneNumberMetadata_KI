@@ -48,5 +48,8 @@ return array (
   'preferredInternationalPrefix' => '',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

@@ -148,5 +148,8 @@ return array (
   'nationalPrefix' => '8',
   'nationalPrefixForParsing' => '8',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

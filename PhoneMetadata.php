@@ -295,6 +295,25 @@ class PhoneMetadata {
 		return $this;
 	}
 
+	private $numberFormat = array();
+
+	public function numberFormats() {
+		return $this->numberFormat;
+	}
+
+	public function numberFormatSize() {
+		return count($this->numberFormat);
+	}
+
+	public function getNumberFormat($index) {
+		return $this->numberFormat[$index];
+	}
+
+	public function addNumberFormat(NumberFormat $value) {
+		$this->numberFormat[] = $value;
+		return $this;
+	}
+
 	private $tollFree = NULL;
 
 	public function hasTollFree() {
@@ -424,23 +443,6 @@ class PhoneMetadata {
 	  return this;
 	  }
 
-	  // repeated NumberFormat number_format = 19;
-	  private java.util.List<NumberFormat> numberFormat_ = new java.util.ArrayList<NumberFormat>();
-	  public java.util.List<NumberFormat> numberFormats() {
-	  return numberFormat_;
-	  }
-	  public int numberFormatSize() { return numberFormat_.size(); }
-	  public NumberFormat getNumberFormat(int index) {
-	  return numberFormat_.get(index);
-	  }
-	  public PhoneMetadata addNumberFormat(NumberFormat value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  numberFormat_.add(value);
-	  return this;
-	  }
-
 	  // repeated NumberFormat intl_number_format = 20;
 	  private java.util.List<NumberFormat> intlNumberFormat_ =
 	  new java.util.ArrayList<NumberFormat>();
@@ -552,14 +554,14 @@ class PhoneMetadata {
 
 		$output['sameMobileAndFixedLinePattern'] = $this->isSameMobileAndFixedLinePattern();
 
+		$output['numberFormat'] = array();
+		;
+		foreach ($this->numberFormats() as $numberFormat) {
+			/* @var $numberFormat NumberFormat */
+			$output['numberFormat'][] = $numberFormat->toArray();
+		}
+
 		/*
-
-		  int numberFormatSize = numberFormatSize();
-		  objectOutput.writeInt(numberFormatSize);
-		  for (int i = 0; i < numberFormatSize; i++) {
-		  numberFormat_.get(i).writeExternal(objectOutput);
-		  }
-
 		  int intlNumberFormatSize = intlNumberFormatSize();
 		  objectOutput.writeInt(intlNumberFormatSize);
 		  for (int i = 0; i < intlNumberFormatSize; i++) {
@@ -656,21 +658,20 @@ class PhoneMetadata {
 		  desc.readExternal(objectInput);
 		  setNoInternationalDialling(desc);
 		  }
-
-		  setId(objectInput.readUTF());
-		  setCountryCode(objectInput.readInt());
-		  setInternationalPrefix(objectInput.readUTF());
-
+		 */
+		$this->setId($input['id']);
+		$this->setCountryCode($input['countryCode']);
+		$this->setInternationalPrefix($input['internationalPrefix']);
+		/*
 		  boolean hasString = objectInput.readBoolean();
 		  if (hasString) {
 		  setPreferredInternationalPrefix(objectInput.readUTF());
 		  }
-
-		  hasString = objectInput.readBoolean();
-		  if (hasString) {
-		  setNationalPrefix(objectInput.readUTF());
-		  }
-
+		 */
+		if (isset($input['nationalPrefix'])) {
+			$this->setNationalPrefix($input['nationalPrefix']);
+		}
+		/*
 		  hasString = objectInput.readBoolean();
 		  if (hasString) {
 		  setPreferredExtnPrefix(objectInput.readUTF());
@@ -687,14 +688,15 @@ class PhoneMetadata {
 		  }
 
 		  setSameMobileAndFixedLinePattern(objectInput.readBoolean());
+		 */
 
-		  int nationalFormatSize = objectInput.readInt();
-		  for (int i = 0; i < nationalFormatSize; i++) {
-		  NumberFormat numFormat = new NumberFormat();
-		  numFormat.readExternal(objectInput);
-		  numberFormat_.add(numFormat);
-		  }
+		foreach ($input['numberFormat'] as $numberFormatElt) {
+			$numberFormat = new NumberFormat();
+			$numberFormat->fromArray($numberFormatElt);
+			$this->addNumberFormat($numberFormat);
+		}
 
+		/*
 		  int intlNumberFormatSize = objectInput.readInt();
 		  for (int i = 0; i < intlNumberFormatSize; i++) {
 		  NumberFormat numFormat = new NumberFormat();
@@ -706,7 +708,7 @@ class PhoneMetadata {
 		 * 
 		 */
 		$this->setMainCountryForCode($input['mainCountryForCode']);
-		
+
 		if (isset($input['leadingDigits'])) {
 			$this->setLeadingDigits($input['leadingDigits']);
 		}
@@ -806,4 +808,170 @@ class PhoneNumberDesc {
 		return $this;
 	}
 
+}
+
+class NumberFormat {
+
+	private $pattern = NULL;
+
+	public function hasPattern() {
+		return isset($this->pattern);
+	}
+
+	public function getPattern() {
+		return $this->pattern;
+	}
+
+	public function setPattern($value) {
+		$this->pattern = $value;
+		return $this;
+	}
+
+	private $format = NULL;
+
+	public function hasFormat() {
+		return isset($this->format);
+	}
+
+	public function getFormat() {
+		return $this->format;
+	}
+
+	public function setFormat($value) {
+		$this->format = $value;
+		return $this;
+	}
+
+	private $leadingDigitsPattern = array();
+
+	public function leadingDigitPatterns() {
+		return $this->leadingDigitsPattern;
+	}
+
+	public function leadingDigitsPatternSize() {
+		return count($this->leadingDigitsPattern);
+	}
+
+	public function getLeadingDigitsPattern($index) {
+		return $this->leadingDigitsPattern[$index];
+	}
+
+	public function addLeadingDigitsPattern($value) {
+		$this->leadingDigitsPattern[] = $value;
+		return $this;
+	}
+
+	private $nationalPrefixFormattingRule = NULL;
+
+	public function hasNationalPrefixFormattingRule() {
+		return isset($this->nationalPrefixFormattingRule);
+	}
+
+	public function getNationalPrefixFormattingRule() {
+		return $this->nationalPrefixFormattingRule;
+	}
+
+	public function setNationalPrefixFormattingRule($value) {
+		$this->nationalPrefixFormattingRule = $value;
+		return $this;
+	}
+
+	public function clearNationalPrefixFormattingRule() {
+		$this->nationalPrefixFormattingRule = NULL;
+		return $this;
+	}
+
+	/*
+	  // optional bool national_prefix_optional_when_formatting = 6;
+	  private boolean hasNationalPrefixOptionalWhenFormatting;
+	  private boolean nationalPrefixOptionalWhenFormatting_ = false;
+	  public boolean hasNationalPrefixOptionalWhenFormatting() {
+	  return hasNationalPrefixOptionalWhenFormatting; }
+	  public boolean isNationalPrefixOptionalWhenFormatting() {
+	  return nationalPrefixOptionalWhenFormatting_; }
+	  public NumberFormat setNationalPrefixOptionalWhenFormatting(boolean value) {
+	  hasNationalPrefixOptionalWhenFormatting = true;
+	  nationalPrefixOptionalWhenFormatting_ = value;
+	  return this;
+	  }
+	 */
+
+	private $domesticCarrierCodeFormattingRule = NULL;
+
+	public function hasDomesticCarrierCodeFormattingRule() {
+		return isset($this->domesticCarrierCodeFormattingRule);
+	}
+
+	public function getDomesticCarrierCodeFormattingRule() {
+		return $this->domesticCarrierCodeFormattingRule;
+	}
+
+	public function setDomesticCarrierCodeFormattingRule($value) {
+		$this->domesticCarrierCodeFormattingRule = $value;
+		return $this;
+	}
+
+	/*
+	  public NumberFormat mergeFrom(NumberFormat other) {
+	  if (other.hasPattern()) {
+	  setPattern(other.getPattern());
+	  }
+	  if (other.hasFormat()) {
+	  setFormat(other.getFormat());
+	  }
+	  int leadingDigitsPatternSize = other.leadingDigitsPatternSize();
+	  for (int i = 0; i < leadingDigitsPatternSize; i++) {
+	  addLeadingDigitsPattern(other.getLeadingDigitsPattern(i));
+	  }
+	  if (other.hasNationalPrefixFormattingRule()) {
+	  setNationalPrefixFormattingRule(other.getNationalPrefixFormattingRule());
+	  }
+	  if (other.hasDomesticCarrierCodeFormattingRule()) {
+	  setDomesticCarrierCodeFormattingRule(other.getDomesticCarrierCodeFormattingRule());
+	  }
+	  setNationalPrefixOptionalWhenFormatting(other.isNationalPrefixOptionalWhenFormatting());
+	  return this;
+	  }
+	 */
+
+	public function toArray() {
+		$output = array();
+		$output['pattern'] = $this->getPattern();
+		$output['format'] = $this->getFormat();
+
+		$output['leadingDigitsPatterns'] = $this->leadingDigitPatterns();
+
+		if ($this->hasNationalPrefixFormattingRule()) {
+			$output['nationalPrefixFormattingRule'] = $this->getNationalPrefixFormattingRule();
+		}
+
+		if ($this->hasDomesticCarrierCodeFormattingRule()) {
+			$output['domesticCarrierCodeFormattingRule'] = $this->getDomesticCarrierCodeFormattingRule();
+		}
+
+		/*
+		  objectOutput.writeBoolean(nationalPrefixOptionalWhenFormatting_);
+		 */
+		return $output;
+	}
+
+	  public function fromArray(array $input) {
+		  $this->setPattern($input['pattern']);
+		  $this->setFormat($input['format']);
+		  foreach ($input['leadingDigitsPatterns'] as $leadingDigitsPattern) {
+			  $this->addLeadingDigitsPattern($leadingDigitsPattern);
+		  }
+		  
+		  if (isset($input['nationalPrefixFormattingRule'])) {
+			  $this->setNationalPrefixFormattingRule($input['nationalPrefixFormattingRule']);
+		  }
+		  if (isset($input['domesticCarrierCodeFormattingRule'])) {
+			  $this->setDomesticCarrierCodeFormattingRule($input['domesticCarrierCodeFormattingRule']);
+		  }
+		  	/*
+	  setNationalPrefixOptionalWhenFormatting(objectInput.readBoolean());
+	 *
+	 */
+		  
+	  }
 }

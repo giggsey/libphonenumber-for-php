@@ -44,6 +44,25 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertGreaterThan(0, count($this->phoneUtil->getSupportedRegions()));
 	}
 
+	public function testGetInstanceLoadUSMetadata() {
+		$metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::US);
+		$this->assertEquals("US", $metadata->getId());
+		$this->assertEquals(1, $metadata->getCountryCode());
+		$this->assertEquals("011", $metadata->getInternationalPrefix());
+		$this->assertTrue($metadata->hasNationalPrefix());
+		$this->assertEquals(2, $metadata->numberFormatSize());
+		$this->assertEquals("(\\d{3})(\\d{3})(\\d{4})", $metadata->getNumberFormat(1)->getPattern());
+		$this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(1)->getFormat());
+		$this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getGeneralDesc() . getNationalNumberPattern());
+		$this->assertEquals("\\d{7}(?:\\d{3})?", $metadata->getGeneralDesc() . getPossibleNumberPattern());
+		$this->assertTrue($metadata->getGeneralDesc()->exactlySameAs($metadata->getFixedLine()));
+		$this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
+		$this->assertEquals("900\\d{7}", $metadata->getPremiumRate()->getNationalNumberPattern());
+		// No shared-cost data is available, so it should be initialised to "NA".
+		$this->assertEquals("NA", $metadata->getSharedCost()->getNationalNumberPattern());
+		$this->assertEquals("NA", $metadata->getSharedCost()->getPossibleNumberPattern());
+	}
+
 	/**
 	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::isViablePhoneNumber
 	 * @todo Implement testIsViablePhoneNumber().

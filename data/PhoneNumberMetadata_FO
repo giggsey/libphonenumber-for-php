@@ -54,5 +54,18 @@ return array (
   'preferredInternationalPrefix' => '',
   'nationalPrefixForParsing' => '(10(?:01|[12]0|88))',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '(\\d{6})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );

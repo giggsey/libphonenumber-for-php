@@ -66,5 +66,8 @@ return array (
   'preferredInternationalPrefix' => '',
   'preferredExtnPrefix' => ' x',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

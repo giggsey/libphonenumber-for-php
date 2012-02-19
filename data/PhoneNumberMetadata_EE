@@ -70,5 +70,94 @@ return array (
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
+  'numberFormat' => 
+  array (
+    0 => 
+    array (
+      'pattern' => '([34-79]\\d{2})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            [369]|
+            4[3-8]|
+            5(?:
+              [0-2]|
+              5[0-478]|
+              6[45]
+            )|
+            7[1-9]
+          ',
+        1 => '
+            [369]|
+            4[3-8]|
+            5(?:
+              [02]|
+              1(?:
+                [0-8]|
+                95
+              )|
+              5[0-478]|
+              6(?:
+                4[0-4]|
+                5[1-589]
+              )
+            )|
+            7[1-9]
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(70)(\\d{2})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '70',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(8000)(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '800',
+        1 => '8000',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    3 => 
+    array (
+      'pattern' => '([458]\\d{3})(\\d{3,4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            40|
+            5|
+            8(?:
+              00|
+              [1-5]
+            )
+          ',
+        1 => '
+            40|
+            5|
+            8(?:
+              00[1-9]|
+              [1-5]
+            )
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+  ),
   'mainCountryForCode' => NULL,
 );
