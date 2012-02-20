@@ -443,30 +443,35 @@ class PhoneMetadata {
 	  noInternationalDialling_ = $value;
 	  return this;
 	  }
-
-	  // repeated NumberFormat intl_number_format = 20;
-	  private java.util.List<NumberFormat> intlNumberFormat_ =
-	  new java.util.ArrayList<NumberFormat>();
-	  public java.util.List<NumberFormat> intlNumberFormats() {
-	  return intlNumberFormat_;
-	  }
-	  public int intlNumberFormatSize() { return intlNumberFormat_.size(); }
-	  public NumberFormat getIntlNumberFormat(int index) {
-	  return intlNumberFormat_.get(index);
-	  }
-
-	  public PhoneMetadata addIntlNumberFormat(NumberFormat value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  intlNumberFormat_.add(value);
-	  return this;
-	  }
-	  public PhoneMetadata clearIntlNumberFormat() {
-	  intlNumberFormat_.clear();
-	  return this;
-	  }
 	 */
+
+	/**
+	 *
+	 * @var NumberFormat 
+	 */
+	private $intlNumberFormat = array();
+
+	public function intlNumberFormats() {
+		return $this->intlNumberFormat;
+	}
+
+	public function intlNumberFormatSize() {
+		return count($this->intlNumberFormat);
+	}
+
+	public function getIntlNumberFormat($index) {
+		return $this->intlNumberFormat[$index];
+	}
+
+	public function addIntlNumberFormat(NumberFormat $value) {
+		$this->intlNumberFormat[] = $value;
+		return $this;
+	}
+
+	public function clearIntlNumberFormat() {
+		$this->intlNumberFormat = array();
+		return $this;
+	}
 
 	public function toArray() {
 		$output = array();
@@ -557,19 +562,17 @@ class PhoneMetadata {
 		$output['sameMobileAndFixedLinePattern'] = $this->isSameMobileAndFixedLinePattern();
 
 		$output['numberFormat'] = array();
-		;
 		foreach ($this->numberFormats() as $numberFormat) {
 			/* @var $numberFormat NumberFormat */
 			$output['numberFormat'][] = $numberFormat->toArray();
 		}
 
-		/*
-		  int intlNumberFormatSize = intlNumberFormatSize();
-		  objectOutput.writeInt(intlNumberFormatSize);
-		  for (int i = 0; i < intlNumberFormatSize; i++) {
-		  intlNumberFormat_.get(i).writeExternal(objectOutput);
-		  }
-		 */
+		$output['intlNumberFormat'] = array();
+		foreach ($this->intlNumberFormats() as $intlNumberFormat) {
+			/* @var $numberFormat NumberFormat */
+			$output['intlNumberFormat'][] = $intlNumberFormat->toArray();
+		}
+
 		$output['mainCountryForCode'] = $this->getMainCountryForCode();
 
 		if ($this->hasLeadingDigits()) {
@@ -677,17 +680,17 @@ class PhoneMetadata {
 		  if (hasString) {
 		  setPreferredExtnPrefix(objectInput.readUTF());
 		  }
+		 */
 
-		  hasString = objectInput.readBoolean();
-		  if (hasString) {
-		  setNationalPrefixForParsing(objectInput.readUTF());
-		  }
+		if (isset($input['nationalPrefixForParsing'])) {
+			$this->setNationalPrefixForParsing($input['nationalPrefixForParsing']);
+		}
 
-		  hasString = objectInput.readBoolean();
-		  if (hasString) {
-		  setNationalPrefixTransformRule(objectInput.readUTF());
-		  }
+		if (isset($input['nationalPrefixTransformRule'])) {
+			$this->setNationalPrefixTransformRule($input['nationalPrefixTransformRule']);
+		}
 
+		/*
 		  setSameMobileAndFixedLinePattern(objectInput.readBoolean());
 		 */
 
@@ -697,14 +700,13 @@ class PhoneMetadata {
 			$this->addNumberFormat($numberFormat);
 		}
 
-		/*
-		  int intlNumberFormatSize = objectInput.readInt();
-		  for (int i = 0; i < intlNumberFormatSize; i++) {
-		  NumberFormat numFormat = new NumberFormat();
-		  numFormat.readExternal(objectInput);
-		  intlNumberFormat_.add(numFormat);
-		  }
+		foreach ($input['intlNumberFormat'] as $intlNumberFormatElt) {
+			$numberFormat = new NumberFormat();
+			$numberFormat->fromArray($intlNumberFormatElt);
+			$this->addIntlNumberFormat($numberFormat);
+		}
 
+		/*
 		  setMainCountryForCode(objectInput.readBoolean());
 		 * 
 		 */
