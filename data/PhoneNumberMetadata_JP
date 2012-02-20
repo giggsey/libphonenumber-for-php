@@ -10,7 +10,7 @@ return array (
             8\\d{7}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -57,7 +57,7 @@ return array (
             )
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '312345678',
   ),
   'mobile' => 
@@ -68,7 +68,7 @@ return array (
             80[1-9]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '7012345678',
   ),
   'tollFree' => 
@@ -85,14 +85,20 @@ return array (
             882[1245]\\d{4}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '120123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '990\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '990123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'JP',
   'countryCode' => 81,

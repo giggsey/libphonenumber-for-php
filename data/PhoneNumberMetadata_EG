@@ -8,7 +8,7 @@ return array (
           3\\d{7}|
           [89]\\d{8,9}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -42,7 +42,7 @@ return array (
           )\\d{6}|
           1[69]\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '234567890',
   ),
   'mobile' => 
@@ -58,20 +58,26 @@ return array (
             2[0278]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,10}',
     'ExampleNumber' => '1001234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9001234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'EG',
   'countryCode' => 20,

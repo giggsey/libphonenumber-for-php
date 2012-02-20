@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[23589]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -17,7 +17,7 @@ return array (
             5\\d{2}[7-9]
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '333091234',
   ),
   'mobile' => 
@@ -28,20 +28,26 @@ return array (
             551
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '222123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d[1-9]\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '90\\d[1-9]\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'GQ',
   'countryCode' => 240,

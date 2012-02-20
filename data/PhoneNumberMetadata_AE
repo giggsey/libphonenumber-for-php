@@ -6,7 +6,7 @@ return array (
           [2-79]\\d{7,8}|
           800\\d{2,9}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,12}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -17,13 +17,13 @@ return array (
             600[25]
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '22345678',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '5[056]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '501234567',
   ),
   'tollFree' => 
@@ -32,14 +32,20 @@ return array (
           400\\d{6}|
           800\\d{2,9}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,12}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900[02]\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '900234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '700[05]\\d{5}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '700012345',
   ),
   'id' => 'AE',
   'countryCode' => 971,

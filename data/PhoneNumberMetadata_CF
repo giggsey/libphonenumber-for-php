@@ -3,32 +3,38 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[278]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '2[12]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '21612345',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7[0257]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '70012345',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '8776\\d{4}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '87761234',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'CF',
   'countryCode' => 236,

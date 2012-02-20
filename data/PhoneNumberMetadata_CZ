@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[2-9]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -16,7 +16,7 @@ return array (
             5[13-9]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '212345678',
   ),
   'mobile' => 
@@ -30,13 +30,13 @@ return array (
             )
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '601123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
@@ -47,8 +47,14 @@ return array (
             76
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '8[134]\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '811234567',
   ),
   'id' => 'CZ',
   'countryCode' => 420,

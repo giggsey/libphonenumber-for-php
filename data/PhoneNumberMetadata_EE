@@ -6,7 +6,7 @@ return array (
           [3-9]\\d{6,7}|
           800\\d{6,7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -23,7 +23,7 @@ return array (
             88
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '3212345',
   ),
   'mobile' => 
@@ -44,7 +44,7 @@ return array (
             65[1-589]
           )\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '51234567',
   ),
   'tollFree' => 
@@ -56,14 +56,20 @@ return array (
             [2-9]
           )\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '80012345',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900\\d{4}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '9001234',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'EE',
   'countryCode' => 372,

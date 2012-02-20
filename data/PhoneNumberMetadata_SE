@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{6,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -94,19 +94,19 @@ return array (
             )\\d{5,6}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '8123456',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7[02-46]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '701234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '20\\d{4,7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '201234567',
   ),
   'premiumRate' => 
@@ -118,8 +118,14 @@ return array (
             44
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9001234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '77\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '771234567',
   ),
   'id' => 'SE',
   'countryCode' => 46,

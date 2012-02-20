@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[3-689]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -14,26 +14,32 @@ return array (
             49
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '30123456',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '6[1-356]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '61123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '8[08]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '9[0246]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '82\\d{6}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '82123456',
   ),
   'id' => 'BA',
   'countryCode' => 387,

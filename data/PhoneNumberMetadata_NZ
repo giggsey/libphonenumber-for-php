@@ -6,7 +6,7 @@ return array (
           6[235-9]\\d{6}|
           [2-57-9]\\d{7,10}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -20,7 +20,7 @@ return array (
           )\\d{6}|
           24099\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '32345678',
   ),
   'mobile' => 
@@ -37,7 +37,7 @@ return array (
             4[1-9]\\d{6}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '211234567',
   ),
   'tollFree' => 
@@ -46,14 +46,20 @@ return array (
           508\\d{6,7}|
           80\\d{6,8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '90\\d{7,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,11}',
     'ExampleNumber' => '900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'NZ',
   'countryCode' => 64,

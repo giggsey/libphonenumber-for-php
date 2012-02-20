@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[68]\\d{7,8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -98,7 +98,7 @@ return array (
             )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '612012345',
   ),
   'mobile' => 
@@ -109,20 +109,26 @@ return array (
             8[125]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '811234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '8701\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '870123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'NA',
   'countryCode' => 264,

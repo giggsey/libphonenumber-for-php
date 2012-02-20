@@ -8,32 +8,38 @@ return array (
             180
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[78]\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '712345',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '[346]\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '312345',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '180[02]\\d{4}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '18001234',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '9\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '912345',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'AD',
   'countryCode' => 376,

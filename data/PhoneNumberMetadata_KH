@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{7,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -16,7 +16,7 @@ return array (
             [567][2-5]
           )[2-46-9]\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '23456789',
   ),
   'mobile' => 
@@ -40,7 +40,7 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '91234567',
   ),
   'tollFree' => 
@@ -51,7 +51,7 @@ return array (
             2[019]
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -62,8 +62,14 @@ return array (
             2[09]
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'KH',
   'countryCode' => 855,

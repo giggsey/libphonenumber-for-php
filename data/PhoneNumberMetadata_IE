@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[124-9]\\d{6,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -43,7 +43,7 @@ return array (
             [3-9]\\d{5}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '2212345',
   ),
   'mobile' => 
@@ -54,13 +54,13 @@ return array (
             [35-9]\\d{7,8}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,10}',
     'ExampleNumber' => '850123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1800\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -73,8 +73,14 @@ return array (
             9[089]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1520123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '18[59]0\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '1850123456',
   ),
   'id' => 'IE',
   'countryCode' => 353,

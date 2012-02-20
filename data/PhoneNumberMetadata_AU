@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[1-578]\\d{5,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -22,7 +22,7 @@ return array (
             )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '212345678',
   ),
   'mobile' => 
@@ -43,7 +43,7 @@ return array (
             9[89]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '412345678',
   ),
   'tollFree' => 
@@ -54,7 +54,7 @@ return array (
             2
           )\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -66,8 +66,18 @@ return array (
             [679]\\d{5}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '
+          13(?:
+            00\\d{2}
+          )?\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{6,10}',
+    'ExampleNumber' => '1300123456',
   ),
   'id' => 'AU',
   'countryCode' => 61,

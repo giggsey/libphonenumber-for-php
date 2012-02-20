@@ -9,7 +9,7 @@ return array (
             [36]\\d{7,9}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -23,7 +23,7 @@ return array (
             )
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '0212345678',
   ),
   'mobile' => 
@@ -35,7 +35,7 @@ return array (
             3\\d{7,9}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,11}',
     'ExampleNumber' => '3123456789',
   ),
   'tollFree' => 
@@ -46,7 +46,7 @@ return array (
             3\\d{3}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
@@ -62,8 +62,14 @@ return array (
             9\\d{6}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '899123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '84[78]\\d{6,7}',
+    'PossibleNumberPattern' => '\\d{9,10}',
+    'ExampleNumber' => '8481234567',
   ),
   'id' => 'IT',
   'countryCode' => 39,

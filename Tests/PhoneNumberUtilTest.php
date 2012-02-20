@@ -5,6 +5,7 @@ namespace com\google\i18n\phonenumbers;
 require_once dirname(__FILE__) . '/../PhoneNumberUtil.php';
 require_once dirname(__FILE__) . '/../RegionCode.php';
 require_once dirname(__FILE__) . '/../PhoneNumber.php';
+require_once dirname(__FILE__) . '/../CountryCodeToRegionCodeMapForTesting.php';
 
 /**
  * Test class for PhoneNumberUtil.
@@ -14,22 +15,31 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 	private static $bsNumber = NULL;
 	private static $internationalTollFree = NULL;
-
+	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 	/**
 	 * @var PhoneNumberUtil
 	 */
 	protected $phoneUtil;
+
+	public function __construct() {
+		$this->phoneUtil = self::initializePhoneUtilForTesting();
+	}
+
+	private static function initializePhoneUtilForTesting() {
+		self::$bsNumber = new PhoneNumber();
+		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
+		self::$internationalTollFree = new PhoneNumber();
+		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
+		PhoneNumberUtil::resetInstance();
+		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
+	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
 	protected function setUp() {
-		$this->phoneUtil = PhoneNumberUtil::getInstance();
-		self::$bsNumber = new PhoneNumber();
-		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
-		self::$internationalTollFree = new PhoneNumber();
-		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
+		
 	}
 
 	/**

@@ -3,13 +3,13 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[2-689]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[2-5]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '212345678',
   ),
   'mobile' => 
@@ -21,13 +21,13 @@ return array (
             4[0489]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '912123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
@@ -38,8 +38,14 @@ return array (
             00\\d{6}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '900123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '8[5-9]\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '850123456',
   ),
   'id' => 'SK',
   'countryCode' => 421,

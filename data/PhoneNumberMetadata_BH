@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[136-9]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -30,7 +30,7 @@ return array (
             77\\d{2}
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '17001234',
   ),
   'mobile' => 
@@ -57,13 +57,13 @@ return array (
             77\\d{2}
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '36001234',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
   ),
   'premiumRate' => 
@@ -74,8 +74,14 @@ return array (
             9[014578]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '84\\d{6}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '84123456',
   ),
   'id' => 'BH',
   'countryCode' => 973,

@@ -7,7 +7,7 @@ return array (
           9\\d{8}|
           [67]\\d{5,8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -29,7 +29,7 @@ return array (
             9[145]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '123456789',
   ),
   'mobile' => 
@@ -42,20 +42,26 @@ return array (
             88
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '512345678',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '70\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '701234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '801\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '801234567',
   ),
   'id' => 'PL',
   'countryCode' => 48,

@@ -10,7 +10,7 @@ return array (
           )|
           8[06]\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -24,7 +24,7 @@ return array (
             5[1346-8]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '101234567',
   ),
   'mobile' => 
@@ -35,20 +35,26 @@ return array (
             8[1-5789]
           )\\d{3,7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '711234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '801234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '86[1-9]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '861234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '860\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '860123456',
   ),
   'id' => 'ZA',
   'countryCode' => 27,

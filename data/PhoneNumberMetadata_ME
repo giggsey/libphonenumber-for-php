@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[2-9]\\d{7,8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -28,7 +28,7 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '30234567',
   ),
   'mobile' => 
@@ -46,13 +46,13 @@ return array (
             )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '67622901',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800[28]\\d{4}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80080002',
   ),
   'premiumRate' => 
@@ -66,8 +66,14 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '94515151',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'ME',
   'countryCode' => 382,

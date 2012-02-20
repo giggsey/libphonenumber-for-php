@@ -3,13 +3,13 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[135789]\\d{6,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '1534\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1534456789',
   ),
   'mobile' => 
@@ -25,7 +25,7 @@ return array (
             937
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '7797123456',
   ),
   'tollFree' => 
@@ -39,7 +39,7 @@ return array (
             8901
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8007354567',
   ),
   'premiumRate' => 
@@ -57,8 +57,32 @@ return array (
             )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9018105678',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '
+          8(?:
+            4(?:
+              4(?:
+                4(?:
+                  05|
+                  42|
+                  69
+                )|
+                703
+              )|
+              5(?:
+                041|
+                800
+              )
+            )|
+            70002
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '8447034567',
   ),
   'id' => 'JE',
   'countryCode' => 44,

@@ -8,7 +8,7 @@ return array (
             80[09]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -114,7 +114,7 @@ return array (
             3622
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '7123456789',
   ),
   'mobile' => 
@@ -126,20 +126,26 @@ return array (
             7[1578]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '7710009998',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '809\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8091234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'KZ',
   'countryCode' => 7,

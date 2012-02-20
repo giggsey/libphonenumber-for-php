@@ -3,13 +3,13 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[24-9]\\d{7,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '2[24-7]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '22123456',
   ),
   'mobile' => 
@@ -22,20 +22,26 @@ return array (
           [67][01]\\d{6}|
           8[36-9]\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '83123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '90[059]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9001234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'CR',
   'countryCode' => 506,

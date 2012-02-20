@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[2568]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -15,7 +15,7 @@ return array (
             22[2457]
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '20012345',
   ),
   'mobile' => 
@@ -26,20 +26,26 @@ return array (
             60
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '57123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '8[1-689]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '88123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '87\\d{6}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '87123456',
   ),
   'id' => 'GI',
   'countryCode' => 350,

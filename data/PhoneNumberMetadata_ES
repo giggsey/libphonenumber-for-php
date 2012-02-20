@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[5-9]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -24,7 +24,7 @@ return array (
             )
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '810123456',
   ),
   'mobile' => 
@@ -35,20 +35,26 @@ return array (
             7[1-4]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '612345678',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '[89]00\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '80[367]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '803123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '90[12]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '901123456',
   ),
   'id' => 'ES',
   'countryCode' => 34,

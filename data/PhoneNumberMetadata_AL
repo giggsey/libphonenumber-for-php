@@ -8,7 +8,7 @@ return array (
           8\\d{5,7}|
           9\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -40,26 +40,32 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,8}',
     'ExampleNumber' => '22345678',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '6[6-9]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '661234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{4}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '8001234',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900\\d{3}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '900123',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '808\\d{3}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '808123',
   ),
   'id' => 'AL',
   'countryCode' => 355,

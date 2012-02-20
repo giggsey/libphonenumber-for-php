@@ -6,7 +6,7 @@ return array (
           [1-7]\\d{5,8}|
           [89]\\d{6,11}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,12}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -23,26 +23,32 @@ return array (
             5[1-3]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '12345678',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '9[1257-9]\\d{6,10}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,12}',
     'ExampleNumber' => '912345678',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80[01]\\d{4,7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '6[145]\\d{4,7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '611234',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'HR',
   'countryCode' => 385,

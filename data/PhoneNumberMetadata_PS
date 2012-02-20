@@ -9,7 +9,7 @@ return array (
             [49]\\d{2,3}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{4,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -22,19 +22,19 @@ return array (
             92[369]
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '22234567',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '5[69]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '599123456',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1800\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -45,8 +45,14 @@ return array (
             9\\d
            )\\d{2}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '19123',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '1700\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '1700123456',
   ),
   'id' => 'PS',
   'countryCode' => 970,

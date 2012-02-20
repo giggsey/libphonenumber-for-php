@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[2589]\\d{9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -25,7 +25,7 @@ return array (
             496[0-5]\\d{3}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
     'ExampleNumber' => '2842291234',
   ),
   'mobile' => 
@@ -47,7 +47,7 @@ return array (
             496[6-9]\\d{3}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '2843001234',
   ),
   'tollFree' => 
@@ -61,14 +61,20 @@ return array (
             88
           )[2-9]\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8002345678',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900[2-9]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9002345678',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'VG',
   'countryCode' => 1,

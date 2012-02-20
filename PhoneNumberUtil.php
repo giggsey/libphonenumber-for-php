@@ -132,15 +132,18 @@ class PhoneNumberUtil {
 	 *
 	 * @return PhoneNumberUtil instance
 	 */
-	public static function getInstance() {
+	public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = NULL) {
+		if ($countryCallingCodeToRegionCodeMap === NULL) {
+			$countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
+		}
 		if (self::$instance == null) {
 			self::$instance = new PhoneNumberUtil();
-			self::$instance->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
-			self::$instance->init(self::META_DATA_FILE_PREFIX);
+			self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
+			self::$instance->init($baseFileLocation);
 		}
 		return self::$instance;
 	}
-
+	
 	/**
 	 * Used for testing purposes only to reset the PhoneNumberUtil singleton to null.
 	 */

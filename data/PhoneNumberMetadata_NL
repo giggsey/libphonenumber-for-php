@@ -7,7 +7,7 @@ return array (
           [2-7]\\d{8}|
           [89]\\d{6,9}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -22,26 +22,32 @@ return array (
             8[478]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '101234567',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '6[1-58]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '612345678',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{4,7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '8001234',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '90[069]\\d{4,7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '9001234',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'NL',
   'countryCode' => 31,

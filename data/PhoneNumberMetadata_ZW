@@ -10,7 +10,7 @@ return array (
           [13-79]\\d{4,8}|
           86\\d{8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{3,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -73,25 +73,31 @@ return array (
             9[2-8]
           )\\d{4,7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{3,10}',
     'ExampleNumber' => '1312345',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7[137]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '711234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
   'id' => 'ZW',

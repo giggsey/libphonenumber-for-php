@@ -9,7 +9,7 @@ return array (
             123
           )\\d{7,8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -28,13 +28,13 @@ return array (
             7[1-35]
           )\\d{6,7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '21234567',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '9[6-9]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '961234567',
   ),
   'tollFree' => 
@@ -43,14 +43,20 @@ return array (
           800\\d{6}|
           1230\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,11}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '600\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{10,11}',
+    'ExampleNumber' => '6001234567',
   ),
   'id' => 'CL',
   'countryCode' => 56,

@@ -7,7 +7,7 @@ return array (
           [2-589]\\d{3}(?:\\d{3,6})?|
           6\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{4,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -18,7 +18,7 @@ return array (
             7[2-46-8]
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '21234567',
   ),
   'mobile' => 
@@ -37,7 +37,7 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '501234567',
   ),
   'tollFree' => 
@@ -48,7 +48,7 @@ return array (
             255
           )\\d{3}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -62,8 +62,14 @@ return array (
             )\\d{2}
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '1919123456',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '1700\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '1700123456',
   ),
   'id' => 'IL',
   'countryCode' => 972,

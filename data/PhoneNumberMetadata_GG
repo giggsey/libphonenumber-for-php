@@ -3,13 +3,13 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[135789]\\d{6,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '1481\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1481456789',
   ),
   'mobile' => 
@@ -21,7 +21,7 @@ return array (
             911
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '7781123456',
   ),
   'tollFree' => 
@@ -36,7 +36,7 @@ return array (
           )|
           500\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{7}(?:\\d{2,3})?',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
@@ -50,8 +50,22 @@ return array (
             )
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9012345678',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => '
+          8(?:
+            4(?:
+              5464\\d|
+              [2-5]\\d{7}
+            )|
+            70\\d{7}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
+    'ExampleNumber' => '8431234567',
   ),
   'id' => 'GG',
   'countryCode' => 44,

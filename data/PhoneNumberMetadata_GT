@@ -6,32 +6,38 @@ return array (
           [2-7]\\d{7}|
           1[89]\\d{9}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}(?:\\d{3})?',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[267][2-9]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '22456789',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '[345]\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '51234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '18[01]\\d{8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{11}',
     'ExampleNumber' => '18001112222',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '19\\d{9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{11}',
     'ExampleNumber' => '19001112222',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'GT',
   'countryCode' => 502,

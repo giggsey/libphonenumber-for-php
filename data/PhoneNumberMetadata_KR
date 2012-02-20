@@ -6,7 +6,7 @@ return array (
           [1-7]\\d{3,9}|
           8\\d{8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{4,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -22,26 +22,32 @@ return array (
             [2-9]\\d{6,7}
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{4,10}',
     'ExampleNumber' => '22123456',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '1[0-25-9]\\d{7,8}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,10}',
     'ExampleNumber' => '1023456789',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '801234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '60[2-9]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '602345678',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'KR',
   'countryCode' => 82,

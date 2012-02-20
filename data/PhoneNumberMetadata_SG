@@ -6,13 +6,13 @@ return array (
           [36]\\d{7}|
           [17-9]\\d{7,10}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '6[1-8]\\d{6}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '61234567',
   ),
   'mobile' => 
@@ -23,20 +23,26 @@ return array (
             9[0-8]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '81234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1?800\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10,11}',
     'ExampleNumber' => '18001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '1900\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{11}',
     'ExampleNumber' => '19001234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'SG',
   'countryCode' => 65,

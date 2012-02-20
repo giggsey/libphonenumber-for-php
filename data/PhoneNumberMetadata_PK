@@ -13,7 +13,7 @@ return array (
             )
           )
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,12}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -59,7 +59,7 @@ return array (
           )[2-9]\\d{5,6}|
           58[126]\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '2123456789',
   ),
   'mobile' => 
@@ -74,20 +74,26 @@ return array (
             64
           )\\d{7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '3012345678',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80012345',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '900\\d{5}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90012345',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'PK',
   'countryCode' => 92,

@@ -3,7 +3,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{6,10}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -71,13 +71,13 @@ return array (
             )
           )\\d{5,8}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '612345678',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '8[1-35-9]\\d{7,9}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{9,11}',
     'ExampleNumber' => '812345678',
   ),
   'tollFree' => 
@@ -86,14 +86,20 @@ return array (
           177\\d{6,8}|
           800\\d{5,7}
         ',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '8001234567',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '809\\d{7}',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8091234567',
+  ),
+  'sharedCost' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'id' => 'ID',
   'countryCode' => 62,
