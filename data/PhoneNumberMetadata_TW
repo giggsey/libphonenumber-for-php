@@ -40,7 +40,9 @@ return array (
   'countryCode' => 886,
   'internationalPrefix' => '0(?:0[25679]|19)',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
   'preferredExtnPrefix' => '#',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -72,6 +74,9 @@ return array (
       'nationalPrefixFormattingRule' => '$NP$FG',
       'domesticCarrierCodeFormattingRule' => '',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => NULL,
 );

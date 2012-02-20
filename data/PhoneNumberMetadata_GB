@@ -322,7 +322,9 @@ return array (
   'countryCode' => 44,
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' x',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -516,6 +518,9 @@ return array (
       'nationalPrefixFormattingRule' => '$NP$FG',
       'domesticCarrierCodeFormattingRule' => '',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => true,
 );

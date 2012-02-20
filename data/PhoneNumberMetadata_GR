@@ -149,5 +149,8 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
+  'intlNumberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

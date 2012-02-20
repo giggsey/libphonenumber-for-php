@@ -53,6 +53,7 @@ return array (
   'countryCode' => 82,
   'internationalPrefix' => '00(?:[124-68]|[37]\\d{2})',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0(8[1-46-8]|85\\d{2})?',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -238,6 +239,9 @@ return array (
       'nationalPrefixFormattingRule' => '$FG',
       'domesticCarrierCodeFormattingRule' => '$NP$CC-$FG',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => NULL,
 );

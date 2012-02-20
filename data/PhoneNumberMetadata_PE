@@ -49,7 +49,9 @@ return array (
   'countryCode' => 51,
   'internationalPrefix' => '19(?:1[124]|77|90)00',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' Anexo ',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -100,6 +102,9 @@ return array (
       'nationalPrefixFormattingRule' => '$FG',
       'domesticCarrierCodeFormattingRule' => '',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => NULL,
 );

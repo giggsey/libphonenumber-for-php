@@ -77,5 +77,8 @@ return array (
       'domesticCarrierCodeFormattingRule' => '$CC $FG',
     ),
   ),
+  'intlNumberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
 );

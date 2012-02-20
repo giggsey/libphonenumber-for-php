@@ -51,6 +51,8 @@ return array (
   'countryCode' => 66,
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -98,6 +100,9 @@ return array (
       'nationalPrefixFormattingRule' => '$FG',
       'domesticCarrierCodeFormattingRule' => '',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => NULL,
 );

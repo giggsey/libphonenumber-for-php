@@ -59,6 +59,7 @@ return array (
   'countryCode' => 591,
   'internationalPrefix' => '00(1\\d)?',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0(1\\d)?',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -85,6 +86,9 @@ return array (
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '$NP$CC $FG',
     ),
+  ),
+  'intlNumberFormat' => 
+  array (
   ),
   'mainCountryForCode' => NULL,
 );

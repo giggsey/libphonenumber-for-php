@@ -85,6 +85,9 @@ return array (
   'numberFormat' => 
   array (
   ),
+  'intlNumberFormat' => 
+  array (
+  ),
   'mainCountryForCode' => NULL,
   'leadingDigits' => '784',
 );

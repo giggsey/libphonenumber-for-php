@@ -54,8 +54,13 @@ return array (
   'countryCode' => 590,
   'internationalPrefix' => '00',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
+  array (
+  ),
+  'intlNumberFormat' => 
   array (
   ),
   'mainCountryForCode' => NULL,
