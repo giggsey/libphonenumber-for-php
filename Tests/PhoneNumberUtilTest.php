@@ -148,13 +148,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$invalidNumber = new PhoneNumber();
 		// Invalid country calling codes.
 		$invalidNumber->setCountryCode(3923)->setNationalNumber(2366);
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::ZZ));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
 		$invalidNumber->setCountryCode(3923)->setNationalNumber(2366);
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::UN001));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::UN001));
 		$invalidNumber->setCountryCode(0)->setNationalNumber(2366);
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::UN001));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::UN001));
 		$invalidNumber->setCountryCode(0);
-		$this->assertFalse($this->phoneUtil->isValidNumberForRegion(invalidNumber, RegionCode::ZZ));
+		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
 	}
 
 }

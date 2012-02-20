@@ -383,11 +383,11 @@ class PhoneNumberUtil {
 	 */
 	public function getRegionCodeForNumber(PhoneNumber $number) {
 		$countryCode = $number->getCountryCode();
-		if (!isset(CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$countryCode])) {
+		if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCode])) {
 			//$numberString = $this->getNationalSignificantNumber($number);
 			return NULL;
 		}
-		$regions = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$countryCode];
+		$regions = $this->countryCallingCodeToRegionCodeMap[$countryCode];
 		if (count($regions) == 1) {
 			return $regions[0];
 		} else {

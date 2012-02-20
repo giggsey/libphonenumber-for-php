@@ -5,8 +5,7 @@ namespace com\google\i18n\phonenumbers;
 class CountryCodeToRegionCodeMapForTesting {
 
 	public static $countryCodeToRegionCodeMap = array(
-		1 => array('US', 'AI', 'AS', 'BB', 'BM', 'BS', 'CA', 'DM', 'DO', 'GD', 'GU', 'JM', 'KN',
-			'KY', 'LC', 'MP', 'MS', 'PR', 'TC', 'TT', 'VC', 'VG', 'VI'),
+		1 => array('US', 'BS'),
 		7 => array('RU', 'KZ'),
 		20 => array('EG'),
 		27 => array('ZA'),
@@ -211,5 +210,6 @@ class CountryCodeToRegionCodeMapForTesting {
 		995 => array('GE'),
 		996 => array('KG'),
 		998 => array('UZ'),
+		800 => array('001'),
 	);
 }
