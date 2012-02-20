@@ -107,6 +107,16 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("$1 $2 $3 $4", $metadata->getIntlNumberFormat(3)->getFormat());
 	}
 
+	public function testGetInstanceLoadInternationalTollFreeMetadata() {
+		$metadata = $this->phoneUtil->getMetadataForNonGeographicalRegion(800);
+		$this->assertEquals("001", $metadata->getId());
+		$this->assertEquals(800, $metadata->getCountryCode());
+		$this->assertEquals("$1 $2", $metadata->getNumberFormat(0)->getFormat());
+		$this->assertEquals("(\\d{4})(\\d{4})", $metadata->getNumberFormat(0)->getPattern());
+		$this->assertEquals("12345678", $metadata->getGeneralDesc()->getExampleNumber());
+		$this->assertEquals("12345678", $metadata->getTollFree()->getExampleNumber());
+	}
+	
 	/**
 	 * 
 	 */

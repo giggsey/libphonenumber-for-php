@@ -573,7 +573,7 @@ class PhoneNumberUtil {
 		return $possibleNumberPatternMatcher && $nationalNumberPatternMatcher;
 	}
 
-	private function getMetadataForNonGeographicalRegion($countryCallingCode) {
+	public function getMetadataForNonGeographicalRegion($countryCallingCode) {
 		if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
 			return null;
 		}
