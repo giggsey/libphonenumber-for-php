@@ -329,21 +329,22 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	/*
+	private $sharedCost = null;
 
-	  // required PhoneNumberDesc shared_cost = 6;
-	  private boolean hasSharedCost;
-	  private PhoneNumberDesc sharedCost_ = null;
-	  public boolean hasSharedCost() { return hasSharedCost; }
-	  public PhoneNumberDesc getSharedCost() { return sharedCost_; }
-	  public PhoneMetadata setSharedCost(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasSharedCost = true;
-	  sharedCost_ = $value;
-	  return this;
-	  }
+	public function hasSharedCost() {
+		return isset($this->sharedCost);
+	}
+
+	public function getSharedCost() {
+		return $this->sharedCost;
+	}
+
+	public function setSharedCost(PhoneNumberDesc $value) {
+		$this->sharedCost = $value;
+		return $this;
+	}
+
+	/*
 
 	  // required PhoneNumberDesc personal_number = 7;
 	  private boolean hasPersonalNumber;
@@ -493,11 +494,12 @@ class PhoneMetadata {
 		if ($this->hasPremiumRate()) {
 			$output['premiumRate'] = $this->getPremiumRate()->toArray();
 		}
+
+		if ($this->hasSharedCost()) {
+			$output['sharedCost'] = $this->getSharedCost()->toArray();
+		}
+
 		/*
-		  objectOutput.writeBoolean(hasSharedCost);
-		  if (hasSharedCost) {
-		  sharedCost_.writeExternal(objectOutput);
-		  }
 		  objectOutput.writeBoolean(hasPersonalNumber);
 		  if (hasPersonalNumber) {
 		  personalNumber_.writeExternal(objectOutput);
@@ -609,13 +611,12 @@ class PhoneMetadata {
 			$this->setPremiumRate($desc->fromArray($input['premiumRate']));
 		}
 
+		if (isset($input['sharedCost'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setSharedCost($desc->fromArray($input['sharedCost']));
+		}
+
 		/*
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setSharedCost(desc);
-		  }
 		  hasDesc = objectInput.readBoolean();
 		  if (hasDesc) {
 		  PhoneNumberDesc desc = new PhoneNumberDesc();
@@ -753,7 +754,7 @@ class PhoneNumberDesc {
 
 	public function setPossibleNumberPattern($value) {
 		$this->hasPossibleNumberPattern = true;
-		$this->PossibleNumberPattern_ = $value;
+		$this->possibleNumberPattern_ = $value;
 		return $this;
 	}
 
@@ -785,6 +786,12 @@ class PhoneNumberDesc {
 			$this->setExampleNumber($other->getExampleNumber());
 		}
 		return $this;
+	}
+
+	public function exactlySameAs(PhoneNumberDesc $other) {
+		return $this->nationalNumberPattern_ === $other->nationalNumberPattern_ &&
+				$this->possibleNumberPattern_ === $other->possibleNumberPattern_ &&
+				$this->exampleNumber_ === $other->exampleNumber_;
 	}
 
 	public function toArray() {
@@ -955,23 +962,23 @@ class NumberFormat {
 		return $output;
 	}
 
-	  public function fromArray(array $input) {
-		  $this->setPattern($input['pattern']);
-		  $this->setFormat($input['format']);
-		  foreach ($input['leadingDigitsPatterns'] as $leadingDigitsPattern) {
-			  $this->addLeadingDigitsPattern($leadingDigitsPattern);
-		  }
-		  
-		  if (isset($input['nationalPrefixFormattingRule'])) {
-			  $this->setNationalPrefixFormattingRule($input['nationalPrefixFormattingRule']);
-		  }
-		  if (isset($input['domesticCarrierCodeFormattingRule'])) {
-			  $this->setDomesticCarrierCodeFormattingRule($input['domesticCarrierCodeFormattingRule']);
-		  }
-		  	/*
-	  setNationalPrefixOptionalWhenFormatting(objectInput.readBoolean());
-	 *
-	 */
-		  
-	  }
+	public function fromArray(array $input) {
+		$this->setPattern($input['pattern']);
+		$this->setFormat($input['format']);
+		foreach ($input['leadingDigitsPatterns'] as $leadingDigitsPattern) {
+			$this->addLeadingDigitsPattern($leadingDigitsPattern);
+		}
+
+		if (isset($input['nationalPrefixFormattingRule'])) {
+			$this->setNationalPrefixFormattingRule($input['nationalPrefixFormattingRule']);
+		}
+		if (isset($input['domesticCarrierCodeFormattingRule'])) {
+			$this->setDomesticCarrierCodeFormattingRule($input['domesticCarrierCodeFormattingRule']);
+		}
+		/*
+		  setNationalPrefixOptionalWhenFormatting(objectInput.readBoolean());
+		 *
+		 */
+	}
+
 }

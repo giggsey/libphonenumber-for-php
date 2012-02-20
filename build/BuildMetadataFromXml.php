@@ -273,10 +273,10 @@ class BuildMetadataFromXml {
 		$metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE));
 		$metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
 		$metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
+		$metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
 
 		/*
 		 * @todo
-		  $metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
 		  $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
 		  $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
 		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
