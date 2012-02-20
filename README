@@ -1,4 +1,4 @@
 TEST :
-php BuildMetadataPHPFromXml.php http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaDataForTesting.xml ../data/ false
+php BuildMetadataPHPFromXml.php http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaDataForTesting.xml ../data/ true
 PRODUCTION :
 php BuildMetadataPHPFromXml.php http://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaData.xml ../data/ false
