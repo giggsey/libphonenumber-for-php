@@ -40,6 +40,8 @@ return array (
   'countryCode' => 55,
   'internationalPrefix' => '0014',
   'preferredInternationalPrefix' => '',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (

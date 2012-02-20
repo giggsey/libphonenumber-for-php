@@ -15,7 +15,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 	private static $bsNumber = NULL;
 	private static $internationalTollFree = NULL;
+
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
+
 	/**
 	 * @var PhoneNumberUtil
 	 */
@@ -73,42 +75,26 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("NA", $metadata->getSharedCost()->getPossibleNumberPattern());
 	}
 
-	/**
-	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::isViablePhoneNumber
-	 * @todo Implement testIsViablePhoneNumber().
-	 */
-	public function testIsViablePhoneNumber() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
+	public function testGetInstanceLoadDEMetadata() {
+		$metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::DE);
+		$this->assertEquals("DE", $metadata->getId());
+		$this->assertEquals(49, $metadata->getCountryCode());
+		$this->assertEquals("00", $metadata->getInternationalPrefix());
+		$this->assertEquals("0", $metadata->getNationalPrefix());
+		$this->assertEquals(6, $metadata->numberFormatSize());
+		$this->assertEquals(1, $metadata->getNumberFormat(5)->leadingDigitsPatternSize());
+		$this->assertEquals("900", $metadata->getNumberFormat(5)->getLeadingDigitsPattern(0));
+		$this->assertEquals("(\\d{3})(\\d{3,4})(\\d{4})", $metadata->getNumberFormat(5)->getPattern());
+		$this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(5)->getFormat());
+		$this->assertEquals("(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:[1-9]\\d|0[2-9]))\\d{1,8}", $metadata->getFixedLine()->getNationalNumberPattern());
+		$this->assertEquals("\\d{2,14}", $metadata->getFixedLine()->getPossibleNumberPattern());
+		$this->assertEquals("30123456", $metadata->getFixedLine()->getExampleNumber());
+		$this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
+		$this->assertEquals("900([135]\\d{6}|9\\d{7})", $metadata->getPremiumRate()->getNationalNumberPattern());
 	}
 
 	/**
-	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::normalize
-	 * @todo Implement testNormalize().
-	 */
-	public function testNormalize() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::normalizeDigitsOnly
-	 * @todo Implement testNormalizeDigitsOnly().
-	 */
-	public function testNormalizeDigitsOnly() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-				'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @covers com\google\i18n\phonenumbers\PhoneNumberUtil::isValidNumberForRegion
-	 * @todo Implement testIsValidNumberForRegion().
+	 * 
 	 */
 	public function testIsValidNumberForRegion() {
 		// This number is valid for the Bahamas, but is not a valid US number.

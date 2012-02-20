@@ -160,7 +160,7 @@ class BuildMetadataFromXml {
 				$metadata->setNationalPrefixTransformRule($element->getAttribute(self::NATIONAL_PREFIX_TRANSFORM_RULE));
 			}
 		}
-		if (!empty($nationalPrefix)) {
+		if ($nationalPrefix != '') {
 			$metadata->setNationalPrefix($nationalPrefix);
 			if (!$metadata->hasNationalPrefixForParsing()) {
 				$metadata->setNationalPrefixForParsing($nationalPrefix);

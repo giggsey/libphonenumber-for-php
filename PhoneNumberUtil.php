@@ -446,6 +446,11 @@ class PhoneNumberUtil {
 		return self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode ? $this->getMetadataForNonGeographicalRegion($countryCallingCode) : $this->getMetadataForRegion($regionCode);
 	}
 
+	/**
+	 *
+	 * @param string $regionCode
+	 * @return PhoneMetadata 
+	 */
 	public function getMetadataForRegion($regionCode) {
 		if (!$this->isValidRegionCode($regionCode)) {
 			return null;

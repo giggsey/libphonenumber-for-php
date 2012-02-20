@@ -40,6 +40,8 @@ return array (
   'countryCode' => 61,
   'internationalPrefix' => '001[12]',
   'preferredInternationalPrefix' => '0011',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
