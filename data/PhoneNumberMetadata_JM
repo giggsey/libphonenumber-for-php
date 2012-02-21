@@ -112,4 +112,5 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingDigits' => '876',
+  'leadingZeroPossible' => NULL,
 );

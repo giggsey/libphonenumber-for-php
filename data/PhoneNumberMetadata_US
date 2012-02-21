@@ -262,4 +262,5 @@ return array (
     ),
   ),
   'mainCountryForCode' => true,
+  'leadingZeroPossible' => NULL,
 );
