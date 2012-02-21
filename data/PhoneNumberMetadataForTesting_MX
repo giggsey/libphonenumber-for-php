@@ -151,4 +151,5 @@ return array (
     ),
   ),
   'mainCountryForCode' => NULL,
+  'leadingZeroPossible' => NULL,
 );

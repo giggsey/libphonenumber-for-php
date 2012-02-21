@@ -116,7 +116,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("12345678", $metadata->getGeneralDesc()->getExampleNumber());
 		$this->assertEquals("12345678", $metadata->getTollFree()->getExampleNumber());
 	}
-	
+
+	public function testIsLeadingZeroPossible() {
+		$this->assertTrue($this->phoneUtil->isLeadingZeroPossible(39));  // Italy
+		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1));  // USA
+		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(800));  // International toll free numbers
+		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(888));  // Not in metadata file, just default to                                                   // false.
+	}
+
 	/**
 	 * 
 	 */

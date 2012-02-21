@@ -579,10 +579,7 @@ class PhoneMetadata {
 			$output['leadingDigits'] = $this->getLeadingDigits();
 		}
 
-		/* 		
-		  objectOutput.writeBoolean(leadingZeroPossible_);
-		 */
-
+		$output['leadingZeroPossible'] = $this->isLeadingZeroPossible();
 
 		return $output;
 	}
@@ -716,9 +713,8 @@ class PhoneMetadata {
 			$this->setLeadingDigits($input['leadingDigits']);
 		}
 
-		/*
-		  setLeadingZeroPossible(objectInput.readBoolean());
-		 */
+		$this->setLeadingZeroPossible($input['leadingZeroPossible']);
+
 		return $this;
 	}
 

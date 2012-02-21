@@ -122,6 +122,8 @@ class PhoneNumberUtil {
 	private $supportedRegions = array();
 	private $currentFilePrefix = self::META_DATA_FILE_PREFIX;
 
+	const UNKNOWN_REGION = "ZZ";
+
 	/**
 	 * Gets a {@link PhoneNumberUtil} instance to carry out international phone number formatting,
 	 * parsing, or validation. The instance is loaded with phone number metadata for a number of most
@@ -143,7 +145,7 @@ class PhoneNumberUtil {
 		}
 		return self::$instance;
 	}
-	
+
 	/**
 	 * Used for testing purposes only to reset the PhoneNumberUtil singleton to null.
 	 */
@@ -158,8 +160,6 @@ class PhoneNumberUtil {
 		return $this->supportedRegions;
 	}
 
-	
-	
 	/**
 	 * This class implements a singleton, so the only constructor is private.
 	 */
@@ -396,6 +396,20 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Checks whether the country calling code is from a region whose national significant number
+	 * could contain a leading zero. An example of such a region is Italy. Returns false if no
+	 * metadata for the country is found.
+	 */
+	public function isLeadingZeroPossible($countryCallingCode) {
+		$mainMetadataForCallingCode = $this->getMetadataForRegion(
+				$this->getRegionCodeForCountryCode($countryCallingCode));
+		if ($mainMetadataForCallingCode === NULL) {
+			return FALSE;
+		}
+		return (bool) $mainMetadataForCallingCode->isLeadingZeroPossible();
+	}
+
+	/**
 	 * Tests whether a phone number matches a valid pattern. Note this doesn't verify the number
 	 * is actually in use, which is impossible to tell by just looking at a number itself.
 	 *
@@ -405,6 +419,16 @@ class PhoneNumberUtil {
 	public function isValidNumber(PhoneNumber $number) {
 		$regionCode = $this->getRegionCodeForNumber($number);
 		return $this->isValidNumberForRegion($number, $regionCode);
+	}
+
+	/**
+	 * Returns the region code that matches the specific country calling code. In the case of no
+	 * region code being found, ZZ will be returned. In the case of multiple regions, the one
+	 * designated in the metadata as the "main" region for this calling code will be returned.
+	 */
+	public function getRegionCodeForCountryCode($countryCallingCode) {
+		$regionCodes = isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode]) ? $this->countryCallingCodeToRegionCodeMap[$countryCallingCode] : NULL;
+		return $regionCodes === NULL ? self::UNKNOWN_REGION : $regionCodes[0];
 	}
 
 	/**
@@ -461,7 +485,7 @@ class PhoneNumberUtil {
 			// what to pass in for the country calling code.
 			$this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
 		}
-		return $this->regionToMetadataMap[$regionCode];
+		return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : NULL;
 	}
 
 	/**
@@ -505,13 +529,15 @@ class PhoneNumberUtil {
 	private function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode) {
 		$isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
 		$source = $isNonGeoRegion ? $filePrefix . "_" . $countryCallingCode : $filePrefix . "_" . $regionCode;
-		$data = include $source;
-		$metadata = new PhoneMetadata();
-		$metadata->fromArray($data);
-		if ($isNonGeoRegion) {
-			$this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
-		} else {
-			$this->regionToMetadataMap[$regionCode] = $metadata;
+		if (is_readable($source)) {
+			$data = include $source;
+			$metadata = new PhoneMetadata();
+			$metadata->fromArray($data);
+			if ($isNonGeoRegion) {
+				$this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
+			} else {
+				$this->regionToMetadataMap[$regionCode] = $metadata;
+			}
 		}
 	}
 
