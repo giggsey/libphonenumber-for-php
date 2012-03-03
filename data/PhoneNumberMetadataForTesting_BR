@@ -36,6 +36,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'BR',
   'countryCode' => 55,
   'internationalPrefix' => '0014',

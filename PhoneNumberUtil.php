@@ -175,6 +175,7 @@ class PhoneNumberUtil {
 		foreach ($this->countryCallingCodeToRegionCodeMap as $regionCodes) {
 			$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
 		}
+		unset($this->supportedRegions[array_search(self::REGION_CODE_FOR_NON_GEO_ENTITY, $this->supportedRegions)]);
 		//nanpaRegions.addAll(countryCallingCodeToRegionCodeMap.get(NANPA_COUNTRY_CODE));
 	}
 
@@ -705,6 +706,27 @@ class PhoneNumberUtil {
 			$this->loadMetadataFromFile($this->currentFilePrefix, self::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode);
 		}
 		return $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode];
+	}
+
+	/**
+	 * Returns true if the number can be dialled from outside the region, or unknown. If the number
+	 * can only be dialled from within the region, returns false. Does not check the number is a valid
+	 * number.
+	 * TODO: Make this method public when we have enough metadata to make it worthwhile.
+	 *
+	 * @param number  the phone-number for which we want to know whether it is diallable from
+	 *     outside the region
+	 */
+	public function canBeInternationallyDialled(PhoneNumber $number) {
+		$regionCode = $this->getRegionCodeForNumber($number);
+		if (!$this->isValidRegionCode($regionCode)) {
+			// Note numbers belonging to non-geographical entities (e.g. +800 numbers) are always
+			// internationally diallable, and will be caught here.
+			return true;
+		}
+		$metadata = $this->getMetadataForRegion($regionCode);
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		return !$this->isNumberMatchingDesc($nationalSignificantNumber, $metadata->getNoInternationalDialling());
 	}
 
 }

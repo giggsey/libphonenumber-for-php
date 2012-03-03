@@ -36,6 +36,12 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'GB',
   'countryCode' => 44,
   'internationalPrefix' => '00',

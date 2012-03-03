@@ -315,9 +315,9 @@ class BuildMetadataFromXml {
 		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
 		  $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
 		  $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
-		  $metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		 * 
 		 */
+		$metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		$metadata->setSameMobileAndFixedLinePattern(
 				$metadata->getMobile()->getNationalNumberPattern() === $metadata->getFixedLine()->getNationalNumberPattern()
 		);

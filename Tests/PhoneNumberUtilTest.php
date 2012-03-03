@@ -15,6 +15,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 	private static $bsNumber = NULL;
 	private static $internationalTollFree = NULL;
+	private static $usTollfree = NULL;
+	private static $usNumber = NULL;
+	private static $usLocalNumber = NULL;
+	private static $nzNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -32,6 +36,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
 		self::$internationalTollFree = new PhoneNumber();
 		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
+		self::$usTollfree = new PhoneNumber();
+		self::$usTollfree->setCountryCode(1)->setNationalNumber(8002530000);
+		self::$usNumber = new PhoneNumber();
+		self::$usNumber->setCountryCode(1)->setNationalNumber(6502530000);
+		self::$usLocalNumber = new PhoneNumber();
+		self::$usLocalNumber->setCountryCode(1)->setNationalNumber(2530000);
+		self::$nzNumber = new PhoneNumber();
+		self::$nzNumber->setCountryCode(64)->setNationalNumber(33316005);
+
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
 	}
@@ -172,6 +185,21 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::UN001));
 		$invalidNumber->setCountryCode(0);
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
+	}
+
+	public function testCanBeInternationallyDialled() {
+		// We have no-international-dialling rules for the US in our test metadata that say that
+		// toll-free numbers cannot be dialled internationally.
+		$this->assertFalse($this->phoneUtil->canBeInternationallyDialled(self::$usTollfree));
+		// Normal US numbers can be internationally dialled.
+		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$usNumber));
+
+		// Invalid number.
+		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$usLocalNumber));
+
+		// We have no data for NZ - should return true.
+		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$nzNumber));
+		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$internationalTollFree));
 	}
 
 	public function testIsAlphaNumber() {

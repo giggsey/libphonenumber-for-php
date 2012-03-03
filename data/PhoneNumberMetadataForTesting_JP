@@ -36,6 +36,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '[23]\\d{3}',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '',
+  ),
   'id' => 'JP',
   'countryCode' => 81,
   'internationalPrefix' => '010',
