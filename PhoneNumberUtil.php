@@ -145,6 +145,9 @@ class PhoneNumberUtil {
 			self::initExtnPatterns();
 			self::initCapturingExtnDigits();
 			self::initExtnPattern();
+			self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
+			self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
+			self::$CAPTURING_DIGIT_PATTERN = "(" . self::DIGITS . ")";
 		}
 		return self::$instance;
 	}
@@ -210,6 +213,15 @@ class PhoneNumberUtil {
 	 */
 
 	const PLUS_CHARS = '+＋';
+
+	private static $PLUS_CHARS_PATTERN;
+	private static $SEPARATOR_PATTERN;
+	private static $CAPTURING_DIGIT_PATTERN;
+
+	// The PLUS_SIGN signifies the international prefix.
+
+	const PLUS_SIGN = '+';
+	const STAR_SIGN = '*';
 	const RFC3966_EXTN_PREFIX = ";ext=";
 
 	// We use this pattern to check if the phone number has at least three letters in it - if so, then
@@ -302,6 +314,17 @@ class PhoneNumberUtil {
 				"[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . self::$CAPTURING_EXTN_DIGITS . "#?|" .
 				"[- ]+(" . self::DIGITS . "{1,5})#");
 	}
+
+	const NON_DIGITS_PATTERN = "(\\D+)";
+
+	// The FIRST_GROUP_PATTERN was originally set to $1 but there are some countries for which the
+	// first group is not used in the national pattern (e.g. Argentina) so the $1 group does not match
+	// correctly.  Therefore, we use \d, so that the first group actually used in the pattern will be
+	// matched.
+	const FIRST_GROUP_PATTERN = "(\\$\\d)";
+	const NP_PATTERN = '\\$NP';
+	const FG_PATTERN = '\\$FG';
+	const CC_PATTERN = '\\$CC';
 
 	// Regular expression of viable phone numbers. This is location independent. Checks we have at
 	// least three leading digits, and only valid punctuation, alpha characters and
@@ -594,6 +617,60 @@ class PhoneNumberUtil {
 		return $regionCode != null && in_array($regionCode, $this->supportedRegions);
 	}
 
+	/**
+	 * Helper function to check the country calling code is valid.
+	 */
+	private function hasValidCountryCallingCode($countryCallingCode) {
+		return isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode]);
+	}
+
+	/**
+	 * Formats a phone number in the specified format using default rules. Note that this does not
+	 * promise to produce a phone number that the user can dial from where they are - although we do
+	 * format in either 'national' or 'international' format depending on what the client asks for, we
+	 * do not currently support a more abbreviated format, such as for users in the same "area" who
+	 * could potentially dial the number without area code. Note that if the phone number has a
+	 * country calling code of 0 or an otherwise invalid country calling code, we cannot work out
+	 * which formatting rules to apply so we return the national significant number with no formatting
+	 * applied.
+	 *
+	 * @param number         the phone number to be formatted
+	 * @param numberFormat   the format the phone number should be formatted into
+	 * @return  the formatted phone number
+	 */
+	public function format(PhoneNumber $number, $numberFormat) {
+		if ($number->getNationalNumber() == 0 && $number->hasRawInput()) {
+			$rawInput = $number->getRawInput();
+			if (strlen($rawInput) > 0) {
+				return $rawInput;
+			}
+		}
+		$formattedNumber = "";
+		$countryCallingCode = $number->getCountryCode();
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		if ($numberFormat == PhoneNumberFormat::E164) {
+			// Early exit for E164 case since no formatting of the national number needs to be applied.
+			// Extensions are not formatted.
+			$formattedNumber .= $nationalSignificantNumber;
+			$this->prefixNumberWithCountryCallingCode($countryCallingCode, $PhoneNumberFormat::E164, $formattedNumber);
+			return $formattedNumber;
+		}
+		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
+		// share a country calling code is contained by only one region for performance reasons. For
+		// example, for NANPA regions it will be contained in the metadata for US.
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			$formattedNumber .= $nationalSignificantNumber;
+			return $formattedNumber;
+		}
+
+		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+		$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+		$this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
+		$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+		return $formattedNumber;
+	}
+
 	private function getRegionCodeForNumberFromRegionList(PhoneNumber $number, array $regionCodes) {
 		$nationalNumber = $this->getNationalSignificantNumber($number);
 		foreach ($regionCodes as $regionCode) {
@@ -623,6 +700,115 @@ class PhoneNumberUtil {
 		$nationalNumber = $number->isItalianLeadingZero() ? "0" : "";
 		$nationalNumber .= $number->getNationalNumber();
 		return $nationalNumber;
+	}
+
+	/**
+	 * A helper function that is used by format and formatByPattern.
+	 */
+	private function prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, &$formattedNumber) {
+		switch ($numberFormat) {
+			case PhoneNumberFormat::E164:
+				$formattedNumber = self::PLUS_SIGN . $countryCallingCode . $formattedNumber;
+				return;
+			case PhoneNumberFormat::INTERNATIONAL:
+				$formattedNumber = self::PLUS_SIGN . $countryCallingCode . " " . $formattedNumber;
+				return;
+			case PhoneNumberFormat::RFC3966:
+				$formattedNumber = self::PLUS_SIGN . $countryCallingCode . "-" . $formattedNumber;
+				return;
+			case PhoneNumberFormat::NATIONAL:
+			default:
+				return;
+		}
+	}
+
+	// Note in some regions, the national number can be written in two completely different ways
+	// depending on whether it forms part of the NATIONAL format or INTERNATIONAL format. The
+	// numberFormat parameter here is used to specify which format to use for those cases. If a
+	// carrierCode is specified, this will be inserted into the formatted string to replace $CC.
+	private function formatNsn($number, PhoneMetadata $metadata, $numberFormat, $carrierCode = NULL) {
+		$intlNumberFormats = $metadata->intlNumberFormats();
+		// When the intlNumberFormats exists, we use that to format national number for the
+		// INTERNATIONAL format instead of using the numberDesc.numberFormats.
+		$availableFormats =
+				(count($intlNumberFormats) == 0 || $numberFormat == PhoneNumberFormat::NATIONAL) ? $metadata->numberFormats() : $metadata->intlNumberFormats();
+		$formattingPattern = $this->chooseFormattingPatternForNumber($availableFormats, $number);
+		return ($formattingPattern == null) ? $number : $this->formatNsnUsingPattern($number, $formattingPattern, $numberFormat, $carrierCode);
+	}
+
+	private function chooseFormattingPatternForNumber(array $availableFormats, $nationalNumber) {
+		foreach ($availableFormats as $numFormat) {
+			$size = $numFormat->leadingDigitsPatternSize();
+			// We always use the last leading_digits_pattern, as it is the most detailed.
+			if ($size == 0 || preg_match('/' . $numFormat->getLeadingDigitsPattern($size - 1) . '/', $nationalNumber) > 0) {
+				$matches = preg_match('/^' . $numFormat->getPattern() . '$/', $nationalNumber);
+
+				if ($matches > 0) {
+					return $numFormat;
+				}
+			}
+		}
+		return null;
+	}
+
+	// Note that carrierCode is optional - if NULL or an empty string, no carrier code replacement
+	// will take place.
+	private function formatNsnUsingPattern($nationalNumber, NumberFormat $formattingPattern, $numberFormat, $carrierCode = NULL) {
+		$numberFormatRule = $formattingPattern->getFormat();
+		$m = '/' . $formattingPattern->getPattern() . '/';
+		$formattedNationalNumber = "";
+		if ($numberFormat == PhoneNumberFormat::NATIONAL &&
+				$carrierCode != null && strlen($carrierCode) > 0 &&
+				strlen($formattingPattern->getDomesticCarrierCodeFormattingRule()) > 0) {
+			// Replace the $CC in the formatting rule with the desired carrier code.
+			$carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
+			$carrierCodeFormattingRule = preg_replace(self::CC_PATTERN, $carrierCode, $carrierCodeFormattingRule, 1);
+			// Now replace the $FG in the formatting rule with the first group and the carrier code
+			// combined in the appropriate way.
+			$numberFormatRule = preg_replace(self::FIRST_GROUP_PATTERN, $carrierCodeFormattingRule, $numberFormatRule, 1);
+
+			$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
+		} else {
+			// Use the national prefix formatting rule instead.
+			$nationalPrefixFormattingRule = $formattingPattern->getNationalPrefixFormattingRule();
+			if ($numberFormat == PhoneNumberFormat::NATIONAL &&
+					$nationalPrefixFormattingRule != null &&
+					strlen($nationalPrefixFormattingRule) > 0) {
+				$firstGroupMatcher = preg_replace(self::FIRST_GROUP_PATTERN, $nationalPrefixFormattingRule, $numberFormatRule, 1);
+				$formattedNationalNumber = preg_replace($m, $firstGroupMatcher, $nationalNumber);
+			} else {
+				$result = preg_match_all($m, $nationalNumber, $matches);
+				$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
+			}
+		}
+		if ($numberFormat == PhoneNumberFormat::RFC3966) {
+			// Strip any leading punctuation.
+			$matcher = preg_match('%' . self::$SEPARATOR_PATTERN . '%', $formattedNationalNumber);
+			if ($matcher == 0) {
+				$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "", $formattedNationalNumber, 1);
+			}
+			// Replace the rest with a dash between each number group.
+			$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "-", $formattedNationalNumber);
+		}
+		return $formattedNationalNumber;
+	}
+
+	/**
+	 * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
+	 * an extension specified.
+	 */
+	private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, &$formattedNumber) {
+		if ($number->hasExtension() && strlen($number->getExtension()) > 0) {
+			if ($numberFormat == PhoneNumberFormat::RFC3966) {
+				$formattedNumber .= self::RFC3966_EXTN_PREFIX . $number->getExtension();
+			} else {
+				if ($metadata->hasPreferredExtnPrefix()) {
+					$formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
+				} else {
+					$formattedNumber .= self::DEFAULT_EXTN_PREFIX . $number->getExtension();
+				}
+			}
+		}
 	}
 
 	private function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode) {

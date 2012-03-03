@@ -49,7 +49,27 @@ class PhoneNumber {
 		$this->nationalNumber = NULL;
 		return $this;
 	}
-	
+
+	private $extension = NULL;
+
+	public function hasExtension() {
+		return isset($this->extension);
+	}
+
+	public function getExtension() {
+		return $this->extension;
+	}
+
+	public function setExtension($value) {
+		$this->extension = $value;
+		return $this;
+	}
+
+	public function clearExtension() {
+		$this->extension = NULL;
+		return $this;
+	}
+
 	/**
 	 * @var boolean
 	 */
@@ -72,4 +92,25 @@ class PhoneNumber {
 		$this->italianLeadingZero = NULL;
 		return $this;
 	}
+
+	private $rawInput = NULL;
+
+	public function hasRawInput() {
+		return isset($this->rawInput);
+	}
+
+	public function getRawInput() {
+		return $this->rawInput;
+	}
+
+	public function setRawInput($value) {
+		$this->rawInput = $value;
+		return $this;
+	}
+
+	public function clearRawInput() {
+		$this->rawInput = NULL;
+		return $this;
+	}
+
 }

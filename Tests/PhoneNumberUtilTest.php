@@ -19,6 +19,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $usNumber = NULL;
 	private static $usLocalNumber = NULL;
 	private static $nzNumber = NULL;
+	private static $usPremium = NULL;
+	private static $usSpoof = NULL;
+	private static $usSpoofWithRawInput = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -44,6 +47,12 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$usLocalNumber->setCountryCode(1)->setNationalNumber(2530000);
 		self::$nzNumber = new PhoneNumber();
 		self::$nzNumber->setCountryCode(64)->setNationalNumber(33316005);
+		self::$usPremium = new PhoneNumber();
+		self::$usPremium->setCountryCode(1)->setNationalNumber(9002530000);
+		self::$usSpoof = new PhoneNumber();
+		self::$usSpoof->setCountryCode(1)->setNationalNumber(0);
+		self::$usSpoofWithRawInput = new PhoneNumber();
+		self::$usSpoofWithRawInput->setCountryCode(1)->setNationalNumber(0)->setRawInput("000-000-0000");
 
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
@@ -135,6 +144,22 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1));  // USA
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(800));  // International toll free numbers
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(888));  // Not in metadata file, just default to false.
+	}
+
+	public function testFormatUSNumber() {
+		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));
+
+		$this->assertEquals("800 253 0000", $this->phoneUtil->format(self::$usTollfree, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+1 800 253 0000", $this->phoneUtil->format(self::$usTollfree, PhoneNumberFormat::INTERNATIONAL));
+
+		$this->assertEquals("900 253 0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+1 900 253 0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::INTERNATIONAL));
+		$this->assertEquals("+1-900-253-0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::RFC3966));
+		// Numbers with all zeros in the national number part will be formatted by using the raw_input
+		// if that is available no matter which format is specified.
+		$this->assertEquals("000-000-0000", $this->phoneUtil->format(self::$usSpoofWithRawInput, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("0", $this->phoneUtil->format(self::$usSpoof, PhoneNumberFormat::NATIONAL));
 	}
 
 	/**
