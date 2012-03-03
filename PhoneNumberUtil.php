@@ -142,6 +142,9 @@ class PhoneNumberUtil {
 			self::$instance = new PhoneNumberUtil();
 			self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
 			self::$instance->init($baseFileLocation);
+			self::initExtnPatterns();
+			self::initCapturingExtnDigits();
+			self::initExtnPattern();
 		}
 		return self::$instance;
 	}
@@ -206,14 +209,27 @@ class PhoneNumberUtil {
 	 */
 
 	const PLUS_CHARS = '+＋';
+	const RFC3966_EXTN_PREFIX = ";ext=";
+
+	// We use this pattern to check if the phone number has at least three letters in it - if so, then
+	// we treat it as a number where some phone-number digits are represented by letters.
+	const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
+
 	// Regular expression of acceptable punctuation found in phone numbers. This excludes punctuation
 	// found as a leading character only.
 	// This consists of dash characters, white space characters, full stops, slashes,
 	// square brackets, parentheses and tildes. It also includes the letter 'x' as that is found as a
 	// placeholder for carrier information in some phone numbers. Full-width variants are also
 	// present.
-	const VALID_PUNCTUATION = "-x\x20\x10-\x20\x15\x22\x12\x30\xFC\xFF\x0D-\xFF\x0F \x00\xA0\x20\x0B\x20\x60\x30\x00()\xFF\x08\xFF\x09\xFF\x3B\xFF\x3D.\\[\\]/~\x20\x53\x22\x3C\xFF\x5E";
+	/* "-x‐-―−ー－-／  <U+200B><U+2060>　()（）［］.\\[\\]/~⁓∼" */
+	const VALID_PUNCTUATION = "-x\xE2\x80\x90-\xE2\x80\x95\xE2\x88\x92\xE3\x83\xBC\xEF\xBC\x8D-\xEF\xBC\x8F \xC2\xA0\xE2\x80\x8B\xE2\x81\xA0\xE3\x80\x80()\xEF\xBC\x88\xEF\xBC\x89\xEF\xBC\xBB\xEF\xBC\xBD.\\[\\]/~\xE2\x81\x93\xE2\x88\xBC";
 	const DIGITS = "\\p{Nd}";
+
+	private static $CAPTURING_EXTN_DIGITS;
+
+	private static function initCapturingExtnDigits() {
+		self::$CAPTURING_EXTN_DIGITS = "(" . self::DIGITS . "{1,7})";
+	}
 
 	private static $ALPHA_MAPPINGS = array(
 		'A' => '2',
@@ -246,17 +262,44 @@ class PhoneNumberUtil {
 
 	private static function getValidAlphaPattern() {
 		// We accept alpha characters in phone numbers, ASCII only, upper and lower case.
-		return preg_replace("[, \\[\\]]", "", implode(key($ALPHA_MAPPINGS))) . preg_replace("[, \\[\\]]", "", strtolower(implode(key($ALPHA_MAPPINGS))));
+		return preg_replace("[, \\[\\]]", "", implode(array_keys(self::$ALPHA_MAPPINGS))) . preg_replace("[, \\[\\]]", "", strtolower(implode(array_keys(self::$ALPHA_MAPPINGS))));
 	}
 
-	private static function getEXTNPatternsForParsing() {
-		return self::RFC3966_EXTN_PREFIX_ . self::CAPTURING_EXTN_DIGITS_ . '|' .
-				'[ \u00A0\\t,]*' .
-				'(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|\uFF45\uFF58\uFF54\uFF4E?|' .
-				'[,x\uFF58#\uFF03~\uFF5E]|int|anexo|\uFF49\uFF4E\uFF54)' .
-				'[:\\.\uFF0E]?[ \u00A0\\t,-]*' .
-				self::CAPTURING_EXTN_DIGITS_ . '#?|' .
-				'[- ]+([' . self::VALID_DIGITS_ + ']{1,5})#';
+	private static $EXTN_PATTERNS_FOR_PARSING;
+	private static $EXTN_PATTERNS_FOR_MATCHING;
+
+	private static function initExtnPatterns() {
+		// One-character symbols that can be used to indicate an extension.
+		$singleExtnSymbolsForMatching = "x\xEF\xBD\x98#\xEF\xBC\x83~\xEF\xBD\x9E";
+		// For parsing, we are slightly more lenient in our interpretation than for matching. Here we
+		// allow a "comma" as a possible extension indicator. When matching, this is hardly ever used to
+		// indicate this.
+		$singleExtnSymbolsForParsing = "," . $singleExtnSymbolsForMatching;
+
+		self::$EXTN_PATTERNS_FOR_PARSING = self::createExtnPattern($singleExtnSymbolsForParsing);
+		self::$EXTN_PATTERNS_FOR_MATCHING = self::createExtnPattern($singleExtnSymbolsForMatching);
+	}
+
+	/**
+	 * Helper initialiser method to create the regular-expression pattern to match extensions,
+	 * allowing the one-char extension symbols provided by {@code singleExtnSymbols}.
+	 */
+	private static function createExtnPattern($singleExtnSymbols) {
+		// There are three regular expressions here. The first covers RFC 3966 format, where the
+		// extension is added using ";ext=". The second more generic one starts with optional white
+		// space and ends with an optional full stop (.), followed by zero or more spaces/tabs and then
+		// the numbers themselves. The other one covers the special case of American numbers where the
+		// extension is written with a hash at the end, such as "- 503#".
+		// Note that the only capturing groups should be around the digits that you want to capture as
+		// part of the extension, or else parsing will fail!
+		// Canonical-equivalence doesn't seem to be an option with Android java, so we allow two options
+		// for representing the accented o - the character itself, and one in the unicode decomposed
+		// form with the combining acute accent.
+		return (self::RFC3966_EXTN_PREFIX . self::$CAPTURING_EXTN_DIGITS . "|" . "[ \xC2\xA0\\t,]*" .
+				"(?:e?xt(?:ensi(?:o\xCC\x81?|\xC3\xB3))?n?|(?:\xEF\xBD\x85)?\xEF\xBD\x98\xEF\xBD\x94(?:\xEF\xBD\x8E)?|" .
+				"[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
+				"[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . self::$CAPTURING_EXTN_DIGITS . "#?|" .
+				"[- ]+(" . self::DIGITS . "{1,5})#");
 	}
 
 	// Regular expression of viable phone numbers. This is location independent. Checks we have at
@@ -273,8 +316,8 @@ class PhoneNumberUtil {
 	 * have an extension prefix appended, followed by 1 or more digits.
 	 */
 	private static function getValidPhoneNumberPattern() {
-		return '/[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . ']*' . self::DIGITS . '){3,}[' .
-				self::VALID_PUNCTUATION . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::getEXTNPatternsForParsing() . ')?/' . self::REGEX_FLAGS;
+		return '%[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . ']*' . self::DIGITS . '){3,}[' .
+				self::VALID_PUNCTUATION . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
 	}
 
 	/**
@@ -407,6 +450,61 @@ class PhoneNumberUtil {
 			return FALSE;
 		}
 		return (bool) $mainMetadataForCallingCode->isLeadingZeroPossible();
+	}
+
+	/**
+	 * Checks if the number is a valid vanity (alpha) number such as 800 MICROSOFT. A valid vanity
+	 * number will start with at least 3 digits and will have three or more alpha characters. This
+	 * does not do region-specific checks - to work out if this number is actually valid for a region,
+	 * it should be parsed and methods such as {@link #isPossibleNumberWithReason} and
+	 * {@link #isValidNumber} should be used.
+	 *
+	 * @param number  the number that needs to be checked
+	 * @return  true if the number is a valid vanity number
+	 */
+	public function isAlphaNumber($number) {
+		if (!$this->isViablePhoneNumber($number)) {
+			// Number is too short, or doesn't match the basic phone number pattern.
+			return false;
+		}
+		$this->maybeStripExtension($number);
+		return (bool) preg_match('/' . self::VALID_ALPHA_PHONE_PATTERN . '/' . self::REGEX_FLAGS, $number);
+	}
+
+	// Regexp of all known extension prefixes used by different regions followed by 1 or more valid
+	// digits, for use when parsing.
+	private static $EXTN_PATTERN = NULL;
+
+	private static function initExtnPattern() {
+		self::$EXTN_PATTERN = "/(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")$/" . self::REGEX_FLAGS;
+	}
+
+	/**
+	 * Strips any extension (as in, the part of the number dialled after the call is connected,
+	 * usually indicated with extn, ext, x or similar) from the end of the number, and returns it.
+	 *
+	 * @param number  the non-normalized telephone number that we wish to strip the extension from
+	 * @return        the phone extension
+	 */
+	private function maybeStripExtension(&$number) {
+		$matches = array();
+		$find = preg_match(self::$EXTN_PATTERN, $number, $matches, PREG_OFFSET_CAPTURE);
+		// If we find a potential extension, and the number preceding this is a viable number, we assume
+		// it is an extension.
+		if ($find > 0 && $this->isViablePhoneNumber(substr($number, 0, $matches[0][1]))) {
+			// The numbers are captured into groups in the regular expression.
+
+			for ($i = 1, $length = count($matches); $i <= $length; $i++) {
+				if ($matches[$i][0] != "") {
+					// We go through the capturing groups until we find one that captured some digits. If none
+					// did, then we will return the empty string.
+					$extension = $matches[$i][0];
+					$number = substr($number, 0, $matches[0][1]);
+					return $extension;
+				}
+			}
+		}
+		return "";
 	}
 
 	/**

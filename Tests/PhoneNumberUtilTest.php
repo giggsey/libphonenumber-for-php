@@ -174,4 +174,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
 	}
 
+	public function testIsAlphaNumber() {
+		$this->assertTrue($this->phoneUtil->isAlphaNumber("1800 six-flags"));
+		$this->assertTrue($this->phoneUtil->isAlphaNumber("1800 six-flags ext. 1234"));
+		$this->assertTrue($this->phoneUtil->isAlphaNumber("+800 six-flags"));
+		$this->assertFalse($this->phoneUtil->isAlphaNumber("1800 123-1234"));
+		$this->assertFalse($this->phoneUtil->isAlphaNumber("1800 123-1234 extension: 1234"));
+		$this->assertFalse($this->phoneUtil->isAlphaNumber("+800 1234-1234"));
+	}
+
 }
