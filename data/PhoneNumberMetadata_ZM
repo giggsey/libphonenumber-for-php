@@ -42,6 +42,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'ZM',
   'countryCode' => 260,
   'internationalPrefix' => '00',

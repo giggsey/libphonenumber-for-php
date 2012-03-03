@@ -130,6 +130,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '810\\d{7}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '8101234567',
+  ),
   'id' => 'AR',
   'countryCode' => 54,
   'internationalPrefix' => '00',

@@ -46,6 +46,12 @@ return array (
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '840123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'TZ',
   'countryCode' => 255,
   'internationalPrefix' => '00[056]',

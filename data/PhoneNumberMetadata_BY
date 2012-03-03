@@ -91,6 +91,18 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          8(?:
+            [01]|
+            20
+          )\\d{8}|
+          902\\d{7}
+        ',
+    'PossibleNumberPattern' => '\\d{10,11}',
+    'ExampleNumber' => '82012345678',
+  ),
   'id' => 'BY',
   'countryCode' => 375,
   'internationalPrefix' => '810',

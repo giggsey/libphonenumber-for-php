@@ -55,6 +55,12 @@ return array (
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '801123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'DZ',
   'countryCode' => 213,
   'internationalPrefix' => '00',

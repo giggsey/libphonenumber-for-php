@@ -93,6 +93,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80112345',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'LU',
   'countryCode' => 352,
   'internationalPrefix' => '00',

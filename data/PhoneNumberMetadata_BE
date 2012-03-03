@@ -60,6 +60,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '87123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'BE',
   'countryCode' => 32,
   'internationalPrefix' => '00',

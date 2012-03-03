@@ -47,6 +47,12 @@ return array (
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '850123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'SK',
   'countryCode' => 421,
   'internationalPrefix' => '00',

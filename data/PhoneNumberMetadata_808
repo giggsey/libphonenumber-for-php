@@ -36,6 +36,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '12345678',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => '001',
   'countryCode' => 808,
   'internationalPrefix' => '',

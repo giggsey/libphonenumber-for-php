@@ -82,6 +82,12 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1850123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '18[59]0\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '1850123456',
+  ),
   'id' => 'IE',
   'countryCode' => 353,
   'internationalPrefix' => '00',

@@ -45,6 +45,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80112345',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'PE',
   'countryCode' => 51,
   'internationalPrefix' => '19(?:1[124]|77|90)00',

@@ -67,6 +67,12 @@ return array (
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '808123',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'AL',
   'countryCode' => 355,
   'internationalPrefix' => '00',

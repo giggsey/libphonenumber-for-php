@@ -79,6 +79,23 @@ return array (
     'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1300123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          1(?:
+            3(?:
+              \\d{4}|
+              00\\d{6}
+            )|
+            80(?:
+              0\\d{6}|
+              2\\d{3}
+            )
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{6,10}',
+    'ExampleNumber' => '1300123456',
+  ),
   'id' => 'AU',
   'countryCode' => 61,
   'internationalPrefix' => '(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',

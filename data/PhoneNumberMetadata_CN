@@ -142,6 +142,19 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '4001234567',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            4|
+            (?:
+              10
+            )?8
+          )00\\d{7}
+        ',
+    'PossibleNumberPattern' => '\\d{10,12}',
+    'ExampleNumber' => '4001234567',
+  ),
   'id' => 'CN',
   'countryCode' => 86,
   'internationalPrefix' => '00',

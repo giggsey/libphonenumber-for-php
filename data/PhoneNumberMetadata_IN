@@ -341,6 +341,26 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          1(?:
+            600\\d{6}|
+            8(?:
+              0(?:
+                0\\d{4,8}|
+                3\\d{9}
+              )|
+              6(?:
+                0\\d{7}|
+                [12]\\d{9}
+              )
+            )
+           )
+        ',
+    'PossibleNumberPattern' => '\\d{8,13}',
+    'ExampleNumber' => '1800123456',
+  ),
   'id' => 'IN',
   'countryCode' => 91,
   'internationalPrefix' => '00',

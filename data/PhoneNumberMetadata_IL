@@ -71,6 +71,15 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1700123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          1700\\d{6}|
+          [2-689]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{4,10}',
+    'ExampleNumber' => '1700123456',
+  ),
   'id' => 'IL',
   'countryCode' => 972,
   'internationalPrefix' => '0(?:0|1[2-48])',

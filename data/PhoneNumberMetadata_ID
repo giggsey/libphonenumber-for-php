@@ -101,6 +101,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'ID',
   'countryCode' => 62,
   'internationalPrefix' => '0(?:0[1789]|10(?:00|1[67]))',

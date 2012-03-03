@@ -60,6 +60,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '40041234',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '[34]00\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '40041234',
+  ),
   'id' => 'BR',
   'countryCode' => 55,
   'internationalPrefix' => '00(?:1[45]|2[135]|[34]1|43)',

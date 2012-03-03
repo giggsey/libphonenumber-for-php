@@ -102,6 +102,12 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8011234567',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'GR',
   'countryCode' => 30,
   'internationalPrefix' => '00',

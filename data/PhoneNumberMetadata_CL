@@ -58,6 +58,12 @@ return array (
     'PossibleNumberPattern' => '\\d{10,11}',
     'ExampleNumber' => '6001234567',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '600\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{10,11}',
+    'ExampleNumber' => '6001234567',
+  ),
   'id' => 'CL',
   'countryCode' => 56,
   'internationalPrefix' => '(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',

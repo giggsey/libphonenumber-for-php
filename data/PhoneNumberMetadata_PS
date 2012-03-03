@@ -54,6 +54,12 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1700123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'PS',
   'countryCode' => 970,
   'internationalPrefix' => '00',

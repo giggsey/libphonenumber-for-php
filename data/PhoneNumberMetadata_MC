@@ -44,6 +44,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '8\\d{7}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '',
+  ),
   'id' => 'MC',
   'countryCode' => 377,
   'internationalPrefix' => '00',
