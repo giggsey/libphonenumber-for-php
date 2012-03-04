@@ -28,6 +28,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $itMobile = NULL;
 	private static $itNumber = NULL;
 	private static $auNumber = NULL;
+	private static $arMobile = NULL;
+	private static $arNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -71,6 +73,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$itNumber->setCountryCode(39)->setNationalNumber(236618300)->setItalianLeadingZero(true);
 		self::$auNumber = new PhoneNumber();
 		self::$auNumber->setCountryCode(61)->setNationalNumber(236618300);
+		self::$arMobile = new PhoneNumber();
+		self::$arMobile->setCountryCode(54)->setNationalNumber(91187654321);
+		self::$arNumber = new PhoneNumber();
+		self::$arNumber->setCountryCode(54)->setNationalNumber(1187654321);
 
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
@@ -251,19 +257,17 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("+611800123456", $this->phoneUtil->format($auNumber, PhoneNumberFormat::E164));
 	}
 
+	public function testFormatARNumber() {
+		$this->assertEquals("011 8765-4321", $this->phoneUtil->format(self::$arNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+54 11 8765-4321", $this->phoneUtil->format(self::$arNumber, PhoneNumberFormat::INTERNATIONAL));
+		$this->assertEquals("+541187654321", $this->phoneUtil->format(self::$arNumber, PhoneNumberFormat::E164));
+
+		$this->assertEquals("011 15 8765-4321", $this->phoneUtil->format(self::$arMobile, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+54 9 11 8765 4321", $this->phoneUtil->format(self::$arMobile, PhoneNumberFormat::INTERNATIONAL));
+		$this->assertEquals("+5491187654321", $this->phoneUtil->format(self::$arMobile, PhoneNumberFormat::E164));
+	}
+
 	/*
-
-	  public function testFormatARNumber() {
-	  $this->assertEquals("011 8765-4321", $this->phoneUtil->format(AR_NUMBER, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+54 11 8765-4321", $this->phoneUtil->format(AR_NUMBER, PhoneNumberFormat::INTERNATIONAL));
-	  $this->assertEquals("+541187654321", $this->phoneUtil->format(AR_NUMBER, PhoneNumberFormat::E164));
-
-	  $this->assertEquals("011 15 8765-4321", $this->phoneUtil->format(AR_MOBILE, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+54 9 11 8765 4321", $this->phoneUtil->format(AR_MOBILE,
-	  PhoneNumberFormat::INTERNATIONAL));
-	  $this->assertEquals("+5491187654321", $this->phoneUtil->format(AR_MOBILE, PhoneNumberFormat::E164));
-	  }
-
 	  public function testFormatMXNumber() {
 	  $this->assertEquals("045 234 567 8900", $this->phoneUtil->format(MX_MOBILE1, PhoneNumberFormat::NATIONAL));
 	  $this->assertEquals("+52 1 234 567 8900", $this->phoneUtil->format(
