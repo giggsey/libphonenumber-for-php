@@ -740,7 +740,7 @@ class PhoneNumberUtil {
 		foreach ($availableFormats as $numFormat) {
 			$size = $numFormat->leadingDigitsPatternSize();
 			// We always use the last leading_digits_pattern, as it is the most detailed.
-			if ($size == 0 || preg_match('/^' . $numFormat->getLeadingDigitsPattern($size - 1) . '/', $nationalNumber) > 0) {
+			if ($size == 0 || preg_match('/^(' . $numFormat->getLeadingDigitsPattern($size - 1) . ')/', $nationalNumber) > 0) {
 				$matches = preg_match('/^' . $numFormat->getPattern() . '$/', $nationalNumber);
 
 				if ($matches > 0) {

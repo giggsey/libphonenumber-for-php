@@ -24,6 +24,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $usSpoofWithRawInput = NULL;
 	private static $gbMobile = NULL;
 	private static $gbNumber = NULL;
+	private static $deShortNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -59,6 +60,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$gbMobile->setCountryCode(44)->setNationalNumber(7912345678);
 		self::$gbNumber = new PhoneNumber();
 		self::$gbNumber->setCountryCode(44)->setNationalNumber(2070313000);
+		self::$deShortNumber = new PhoneNumber();
+		self::$deShortNumber->setCountryCode(49)->setNationalNumber(1234);
 
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
@@ -181,44 +184,43 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("+44 7912 345 678", $this->phoneUtil->format(self::$gbMobile, PhoneNumberFormat::INTERNATIONAL));
 	}
 
+	public function testFormatDENumber() {
+		$deNumber = new PhoneNumber();
+		$deNumber->setCountryCode(49)->setNationalNumber(301234);
+		$this->assertEquals("030/1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 30/1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
+		$this->assertEquals("+49-30-1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::RFC3966));
+
+		$deNumber->clear();
+		$deNumber->setCountryCode(49)->setNationalNumber(291123);
+		$this->assertEquals("0291 123", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 291 123", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
+
+		$deNumber->clear();
+		$deNumber->setCountryCode(49)->setNationalNumber(29112345678);
+		$this->assertEquals("0291 12345678", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 291 12345678", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
+
+		$deNumber->clear();
+		$deNumber->setCountryCode(49)->setNationalNumber(912312345);
+		$this->assertEquals("09123 12345", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 9123 12345", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
+		$deNumber->clear();
+		$deNumber->setCountryCode(49)->setNationalNumber(80212345);
+		$this->assertEquals("08021 2345", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 8021 2345", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
+		// Note this number is correctly formatted without national prefix. Most of the numbers that
+		// are treated as invalid numbers by the library are short numbers, and they are usually not
+		// dialed with national prefix.
+		$this->assertEquals("1234", $this->phoneUtil->format(self::$deShortNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+49 1234", $this->phoneUtil->format(self::$deShortNumber, PhoneNumberFormat::INTERNATIONAL));
+
+		$deNumber->clear();
+		$deNumber->setCountryCode(49)->setNationalNumber(41341234);
+		$this->assertEquals("04134 1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
+	}
+
 	/*
-
-	  public void testFormatDENumber() {
-	  PhoneNumber deNumber = new PhoneNumber();
-	  deNumber.setCountryCode(49).setNationalNumber(301234L);
-	  $this->assertEquals("030/1234", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 30/1234", $this->phoneUtil->format(deNumber, PhoneNumberFormat::INTERNATIONAL));
-	  $this->assertEquals("+49-30-1234", $this->phoneUtil->format(deNumber, PhoneNumberFormat::RFC3966));
-
-	  deNumber.clear();
-	  deNumber.setCountryCode(49).setNationalNumber(291123L);
-	  $this->assertEquals("0291 123", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 291 123", $this->phoneUtil->format(deNumber, PhoneNumberFormat::INTERNATIONAL));
-
-	  deNumber.clear();
-	  deNumber.setCountryCode(49).setNationalNumber(29112345678L);
-	  $this->assertEquals("0291 12345678", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 291 12345678", $this->phoneUtil->format(deNumber, PhoneNumberFormat::INTERNATIONAL));
-
-	  deNumber.clear();
-	  deNumber.setCountryCode(49).setNationalNumber(912312345L);
-	  $this->assertEquals("09123 12345", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 9123 12345", $this->phoneUtil->format(deNumber, PhoneNumberFormat::INTERNATIONAL));
-	  deNumber.clear();
-	  deNumber.setCountryCode(49).setNationalNumber(80212345L);
-	  $this->assertEquals("08021 2345", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 8021 2345", $this->phoneUtil->format(deNumber, PhoneNumberFormat::INTERNATIONAL));
-	  // Note this number is correctly formatted without national prefix. Most of the numbers that
-	  // are treated as invalid numbers by the library are short numbers, and they are usually not
-	  // dialed with national prefix.
-	  $this->assertEquals("1234", $this->phoneUtil->format(DE_SHORT_NUMBER, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+49 1234", $this->phoneUtil->format(DE_SHORT_NUMBER, PhoneNumberFormat::INTERNATIONAL));
-
-	  deNumber.clear();
-	  deNumber.setCountryCode(49).setNationalNumber(41341234);
-	  $this->assertEquals("04134 1234", $this->phoneUtil->format(deNumber, PhoneNumberFormat::NATIONAL));
-	  }
-
 	  public void testFormatITNumber() {
 	  $this->assertEquals("02 3661 8300", $this->phoneUtil->format(IT_NUMBER, PhoneNumberFormat::NATIONAL));
 	  $this->assertEquals("+39 02 3661 8300", $this->phoneUtil->format(IT_NUMBER, PhoneNumberFormat::INTERNATIONAL));

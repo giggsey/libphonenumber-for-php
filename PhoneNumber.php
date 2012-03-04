@@ -112,5 +112,15 @@ class PhoneNumber {
 		$this->rawInput = NULL;
 		return $this;
 	}
-
+	
+    public function clear() {
+      $this->clearCountryCode();
+      $this->clearNationalNumber();
+      $this->clearExtension();
+      $this->clearItalianLeadingZero();
+      $this->clearRawInput();
+/*      $this->clearCountryCodeSource();
+      $this->clearPreferredDomesticCarrierCode();
+ */     return $this;
+    }
 }
