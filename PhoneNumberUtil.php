@@ -652,7 +652,7 @@ class PhoneNumberUtil {
 			// Early exit for E164 case since no formatting of the national number needs to be applied.
 			// Extensions are not formatted.
 			$formattedNumber .= $nationalSignificantNumber;
-			$this->prefixNumberWithCountryCallingCode($countryCallingCode, $PhoneNumberFormat::E164, $formattedNumber);
+			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
 			return $formattedNumber;
 		}
 		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
