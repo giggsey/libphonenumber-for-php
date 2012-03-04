@@ -79,7 +79,7 @@ return array (
         0 => '[234]',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$NP$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
     1 => 
     array (
@@ -90,7 +90,7 @@ return array (
         0 => '[67]',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$NP$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
   ),
   'intlNumberFormat' => 

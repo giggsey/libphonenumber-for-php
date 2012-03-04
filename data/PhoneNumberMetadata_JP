@@ -139,7 +139,7 @@ return array (
             )0
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -150,7 +150,7 @@ return array (
       array (
         0 => '800',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -161,7 +161,7 @@ return array (
       array (
         0 => '077',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -172,7 +172,7 @@ return array (
       array (
         0 => '077',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
@@ -183,7 +183,7 @@ return array (
       array (
         0 => '088',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     5 => 
@@ -194,7 +194,7 @@ return array (
       array (
         0 => '037',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
@@ -208,7 +208,7 @@ return array (
             80[1-9]
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
@@ -338,7 +338,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     8 => 
@@ -812,7 +812,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     9 => 
@@ -934,7 +934,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     10 => 
@@ -954,7 +954,7 @@ return array (
             993
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     11 => 
@@ -972,7 +972,7 @@ return array (
             6[1-9]
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     12 => 
@@ -983,7 +983,7 @@ return array (
       array (
         0 => '[2479][1-9]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

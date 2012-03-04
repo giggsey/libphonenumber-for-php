@@ -73,7 +73,7 @@ return array (
       array (
         0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -84,7 +84,7 @@ return array (
       array (
         0 => '6[029]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -95,7 +95,7 @@ return array (
       array (
         0 => '[2-5]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -106,7 +106,7 @@ return array (
       array (
         0 => '9',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
@@ -117,7 +117,7 @@ return array (
       array (
         0 => '9',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     5 => 
@@ -128,7 +128,7 @@ return array (
       array (
         0 => '9',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
@@ -142,7 +142,7 @@ return array (
             7
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
@@ -156,7 +156,7 @@ return array (
             7
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     8 => 
@@ -167,7 +167,7 @@ return array (
       array (
         0 => '8',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     9 => 
@@ -178,7 +178,7 @@ return array (
       array (
         0 => '8',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

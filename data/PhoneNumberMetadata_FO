@@ -76,7 +76,7 @@ return array (
       array (
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
   ),
   'intlNumberFormat' => 

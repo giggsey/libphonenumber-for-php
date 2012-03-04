@@ -370,7 +370,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '8$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

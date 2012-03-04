@@ -97,7 +97,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -108,7 +108,7 @@ return array (
       array (
         0 => '[589]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 

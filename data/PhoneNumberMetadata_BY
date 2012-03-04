@@ -120,7 +120,7 @@ return array (
       array (
         0 => '[1-4]',
       ),
-      'nationalPrefixFormattingRule' => '$NP 0$FG',
+      'nationalPrefixFormattingRule' => '8 0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -134,7 +134,7 @@ return array (
             9
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -145,7 +145,7 @@ return array (
       array (
         0 => '82',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

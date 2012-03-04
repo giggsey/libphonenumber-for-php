@@ -83,7 +83,7 @@ return array (
       array (
         0 => '[348]',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -94,7 +94,7 @@ return array (
       array (
         0 => '5',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

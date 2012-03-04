@@ -84,8 +84,8 @@ return array (
       array (
         0 => '[1-9][1-9]',
       ),
-      'nationalPrefixFormattingRule' => '($FG)',
-      'domesticCarrierCodeFormattingRule' => '$NP $CC ($FG)',
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
     1 => 
     array (
@@ -106,7 +106,7 @@ return array (
       array (
         0 => '[3589]00',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
