@@ -60,7 +60,7 @@ return array (
       array (
         0 => '[89]00',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '01 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -71,7 +71,7 @@ return array (
       array (
         0 => '33|55|81',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '01 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -82,7 +82,7 @@ return array (
       array (
         0 => '[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '01 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -93,7 +93,7 @@ return array (
       array (
         0 => '1(?:33|55|81)',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
@@ -104,7 +104,7 @@ return array (
       array (
         0 => '1(?:[124579]|3[0-24-9]|5[0-46-9]|8[02-9])',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

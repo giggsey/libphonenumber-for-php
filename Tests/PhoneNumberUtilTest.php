@@ -22,6 +22,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $usPremium = NULL;
 	private static $usSpoof = NULL;
 	private static $usSpoofWithRawInput = NULL;
+	private static $gbMobile = NULL;
+	private static $gbNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -53,6 +55,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$usSpoof->setCountryCode(1)->setNationalNumber(0);
 		self::$usSpoofWithRawInput = new PhoneNumber();
 		self::$usSpoofWithRawInput->setCountryCode(1)->setNationalNumber(0)->setRawInput("000-000-0000");
+		self::$gbMobile = new PhoneNumber();
+		self::$gbMobile->setCountryCode(44)->setNationalNumber(7912345678);
+		self::$gbNumber = new PhoneNumber();
+		self::$gbNumber->setCountryCode(44)->setNationalNumber(2070313000);
 
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
@@ -167,14 +173,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("+1 242 365 1234", $this->phoneUtil->format(self::$bsNumber, PhoneNumberFormat::INTERNATIONAL));
 	}
 
-	/*
-	  public void testFormatGBNumber() {
-	  $this->assertEquals("(020) 7031 3000", $this->phoneUtil->format(GB_NUMBER, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+44 20 7031 3000", $this->phoneUtil->format(GB_NUMBER, PhoneNumberFormat::INTERNATIONAL));
+	public function testFormatGBNumber() {
+		$this->assertEquals("(020) 7031 3000", $this->phoneUtil->format(self::$gbNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+44 20 7031 3000", $this->phoneUtil->format(self::$gbNumber, PhoneNumberFormat::INTERNATIONAL));
 
-	  $this->assertEquals("(07912) 345 678", $this->phoneUtil->format(GB_MOBILE, PhoneNumberFormat::NATIONAL));
-	  $this->assertEquals("+44 7912 345 678", $this->phoneUtil->format(GB_MOBILE, PhoneNumberFormat::INTERNATIONAL));
-	  }
+		$this->assertEquals("(07912) 345 678", $this->phoneUtil->format(self::$gbMobile, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("+44 7912 345 678", $this->phoneUtil->format(self::$gbMobile, PhoneNumberFormat::INTERNATIONAL));
+	}
+
+	/*
 
 	  public void testFormatDENumber() {
 	  PhoneNumber deNumber = new PhoneNumber();

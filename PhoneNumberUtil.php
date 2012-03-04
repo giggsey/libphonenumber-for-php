@@ -740,7 +740,7 @@ class PhoneNumberUtil {
 		foreach ($availableFormats as $numFormat) {
 			$size = $numFormat->leadingDigitsPatternSize();
 			// We always use the last leading_digits_pattern, as it is the most detailed.
-			if ($size == 0 || preg_match('/' . $numFormat->getLeadingDigitsPattern($size - 1) . '/', $nationalNumber) > 0) {
+			if ($size == 0 || preg_match('/^' . $numFormat->getLeadingDigitsPattern($size - 1) . '/', $nationalNumber) > 0) {
 				$matches = preg_match('/^' . $numFormat->getPattern() . '$/', $nationalNumber);
 
 				if ($matches > 0) {
@@ -762,11 +762,10 @@ class PhoneNumberUtil {
 				strlen($formattingPattern->getDomesticCarrierCodeFormattingRule()) > 0) {
 			// Replace the $CC in the formatting rule with the desired carrier code.
 			$carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
-			$carrierCodeFormattingRule = preg_replace(self::CC_PATTERN, $carrierCode, $carrierCodeFormattingRule, 1);
+			$carrierCodeFormattingRule = preg_replace('/' . self::CC_PATTERN . '/', $carrierCode, $carrierCodeFormattingRule, 1);
 			// Now replace the $FG in the formatting rule with the first group and the carrier code
 			// combined in the appropriate way.
-			$numberFormatRule = preg_replace(self::FIRST_GROUP_PATTERN, $carrierCodeFormattingRule, $numberFormatRule, 1);
-
+			$numberFormatRule = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $carrierCodeFormattingRule, $numberFormatRule, 1);
 			$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
 		} else {
 			// Use the national prefix formatting rule instead.
@@ -774,10 +773,9 @@ class PhoneNumberUtil {
 			if ($numberFormat == PhoneNumberFormat::NATIONAL &&
 					$nationalPrefixFormattingRule != null &&
 					strlen($nationalPrefixFormattingRule) > 0) {
-				$firstGroupMatcher = preg_replace(self::FIRST_GROUP_PATTERN, $nationalPrefixFormattingRule, $numberFormatRule, 1);
+				$firstGroupMatcher = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $nationalPrefixFormattingRule, $numberFormatRule, 1);
 				$formattedNationalNumber = preg_replace($m, $firstGroupMatcher, $nationalNumber);
 			} else {
-				$result = preg_match_all($m, $nationalNumber, $matches);
 				$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
 			}
 		}
