@@ -71,6 +71,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '800[2-9]\\d{3}',
+    'PossibleNumberPattern' => '\\d{7}',
+    'ExampleNumber' => '8002123',
+  ),
   'id' => 'EE',
   'countryCode' => 372,
   'internationalPrefix' => '00',

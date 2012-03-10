@@ -95,6 +95,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'PK',
   'countryCode' => 92,
   'internationalPrefix' => '00',
@@ -144,7 +150,7 @@ return array (
             )111
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -196,7 +202,7 @@ return array (
             )\\d111
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -217,7 +223,7 @@ return array (
             )[2-9]
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -247,7 +253,7 @@ return array (
             )\\d[2-9]
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
@@ -258,7 +264,7 @@ return array (
       array (
         0 => '3',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     5 => 
@@ -272,7 +278,7 @@ return array (
             1
           ',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
@@ -283,7 +289,7 @@ return array (
       array (
         0 => '586',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
@@ -294,7 +300,7 @@ return array (
       array (
         0 => '[89]00',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

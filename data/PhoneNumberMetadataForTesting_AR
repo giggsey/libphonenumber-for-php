@@ -36,6 +36,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'AR',
   'countryCode' => 54,
   'internationalPrefix' => '00',
@@ -54,7 +60,7 @@ return array (
       array (
         0 => '11',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -65,7 +71,7 @@ return array (
       array (
         0 => '1[02-9]|[23]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -76,7 +82,7 @@ return array (
       array (
         0 => '911',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -87,8 +93,8 @@ return array (
       array (
         0 => '9(?:1[02-9]|[23])',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
-      'domesticCarrierCodeFormattingRule' => '$NP$FG $CC',
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '0$1 $CC',
     ),
     4 => 
     array (
@@ -98,7 +104,7 @@ return array (
       array (
         0 => '[68]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

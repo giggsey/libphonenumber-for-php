@@ -93,6 +93,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'PY',
   'countryCode' => 595,
   'internationalPrefix' => '00',
@@ -118,7 +124,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '($FG)',
+      'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -129,7 +135,7 @@ return array (
       array (
         0 => '[2-9]0',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -140,7 +146,7 @@ return array (
       array (
         0 => '9[1-9]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -162,7 +168,7 @@ return array (
       array (
         0 => '[2-8][1-9]',
       ),
-      'nationalPrefixFormattingRule' => '($FG)',
+      'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

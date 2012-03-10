@@ -52,6 +52,12 @@ return array (
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '810123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '3\\d{3}',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '3123',
+  ),
   'id' => 'FR',
   'countryCode' => 33,
   'internationalPrefix' => '[04579]0',
@@ -69,7 +75,7 @@ return array (
       array (
         0 => '[1-79]',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -80,7 +86,7 @@ return array (
       array (
         0 => '8',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '0 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

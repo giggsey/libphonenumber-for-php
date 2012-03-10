@@ -52,6 +52,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'CO',
   'countryCode' => 57,
   'internationalPrefix' => '00[579]|#555|#999',
@@ -87,8 +93,8 @@ return array (
             [24-8]
           ',
       ),
-      'nationalPrefixFormattingRule' => '($FG)',
-      'domesticCarrierCodeFormattingRule' => '$NP$CC $FG',
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
     1 => 
     array (
@@ -99,7 +105,7 @@ return array (
         0 => '3',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$NP$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
     2 => 
     array (
@@ -123,7 +129,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

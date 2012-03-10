@@ -120,16 +120,16 @@ class BuildMetadataFromXml {
 	private static function getNationalPrefixFormattingRuleFromElement(\DOMElement $element, $nationalPrefix) {
 		$nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
 // Replace $NP with national prefix and $FG with the first group ($1).
-		$nationalPrefixFormattingRule = str_replace('\\$NP', $nationalPrefix, $nationalPrefixFormattingRule);
-		$nationalPrefixFormattingRule = str_replace('\\$FG', '\\$1', $nationalPrefixFormattingRule);
+		$nationalPrefixFormattingRule = str_replace('$NP', $nationalPrefix, $nationalPrefixFormattingRule);
+		$nationalPrefixFormattingRule = str_replace('$FG', '$1', $nationalPrefixFormattingRule);
 		return $nationalPrefixFormattingRule;
 	}
 
 	private static function getDomesticCarrierCodeFormattingRuleFromElement(\DOMElement $element, $nationalPrefix) {
 		$carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
 // Replace $FG with the first group ($1) and $NP with the national prefix.
-		$carrierCodeFormattingRule = str_replace('\\$NP', $nationalPrefix, $carrierCodeFormattingRule);
-		$carrierCodeFormattingRule = str_replace('\\$FG', '\\$1', $carrierCodeFormattingRule);
+		$carrierCodeFormattingRule = str_replace('$NP', $nationalPrefix, $carrierCodeFormattingRule);
+		$carrierCodeFormattingRule = str_replace('$FG', '$1', $carrierCodeFormattingRule);
 		return $carrierCodeFormattingRule;
 	}
 
@@ -315,9 +315,9 @@ class BuildMetadataFromXml {
 		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
 		  $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
 		  $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
-		  $metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		 * 
 		 */
+		$metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		$metadata->setSameMobileAndFixedLinePattern(
 				$metadata->getMobile()->getNationalNumberPattern() === $metadata->getFixedLine()->getNationalNumberPattern()
 		);

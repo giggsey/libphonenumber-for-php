@@ -43,6 +43,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'CR',
   'countryCode' => 506,
   'internationalPrefix' => '00',
@@ -63,7 +69,7 @@ return array (
           ',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     1 => 
     array (
@@ -74,7 +80,7 @@ return array (
         0 => '[89]0',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
   ),
   'intlNumberFormat' => 

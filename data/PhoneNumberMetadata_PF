@@ -51,6 +51,17 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          (?:
+            36|
+            44
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '441234',
+  ),
   'id' => 'PF',
   'countryCode' => 689,
   'internationalPrefix' => '00',

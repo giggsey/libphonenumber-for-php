@@ -63,6 +63,12 @@ return array (
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '1011234',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'CW',
   'countryCode' => 599,
   'internationalPrefix' => '00',

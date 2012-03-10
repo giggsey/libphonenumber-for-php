@@ -429,21 +429,22 @@ class PhoneMetadata {
 	  emergency_ = $value;
 	  return this;
 	  }
-
-	  // required PhoneNumberDesc noInternationalDialling = 24;
-	  private boolean hasNoInternationalDialling;
-	  private PhoneNumberDesc noInternationalDialling_ = null;
-	  public boolean hasNoInternationalDialling() { return hasNoInternationalDialling; }
-	  public PhoneNumberDesc getNoInternationalDialling() { return noInternationalDialling_; }
-	  public PhoneMetadata setNoInternationalDialling(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasNoInternationalDialling = true;
-	  noInternationalDialling_ = $value;
-	  return this;
-	  }
 	 */
+
+	private $noInternationalDialling = null;
+
+	public function hasNoInternationalDialling() {
+		return isset($this->noInternationalDialling);
+	}
+
+	public function getNoInternationalDialling() {
+		return $this->noInternationalDialling;
+	}
+
+	public function setNoInternationalDialling(PhoneNumberDesc $value) {
+		$this->noInternationalDialling = $value;
+		return $this;
+	}
 
 	/**
 	 *
@@ -529,11 +530,10 @@ class PhoneMetadata {
 		  if (hasEmergency) {
 		  emergency_.writeExternal(objectOutput);
 		  }
-		  objectOutput.writeBoolean(hasNoInternationalDialling);
-		  if (hasNoInternationalDialling) {
-		  noInternationalDialling_.writeExternal(objectOutput);
-		  }
 		 */
+		if ($this->hasNoInternationalDialling()) {
+			$output['noInternationalDialling'] = $this->getNoInternationalDialling()->toArray();
+		}
 
 		$output['id'] = $this->getId();
 		$output['countryCode'] = $this->getCountryCode();
@@ -653,13 +653,13 @@ class PhoneMetadata {
 		  desc.readExternal(objectInput);
 		  setEmergency(desc);
 		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setNoInternationalDialling(desc);
-		  }
 		 */
+		
+		if (isset($input['noInternationalDialling'])) {
+			$desc = new PhoneNumberDesc();
+			$this->setNoInternationalDialling($desc->fromArray($input['noInternationalDialling']));
+		}
+
 		$this->setId($input['id']);
 		$this->setCountryCode($input['countryCode']);
 		$this->setInternationalPrefix($input['internationalPrefix']);

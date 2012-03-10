@@ -79,6 +79,23 @@ return array (
     'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1300123456',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          1(?:
+            3(?:
+              \\d{4}|
+              00\\d{6}
+            )|
+            80(?:
+              0\\d{6}|
+              2\\d{3}
+            )
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{6,10}',
+    'ExampleNumber' => '1300123456',
+  ),
   'id' => 'AU',
   'countryCode' => 61,
   'internationalPrefix' => '(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
@@ -96,7 +113,7 @@ return array (
       array (
         0 => '[2378]',
       ),
-      'nationalPrefixFormattingRule' => '($NP$FG)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -110,7 +127,7 @@ return array (
             14
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -121,7 +138,7 @@ return array (
       array (
         0 => '16',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
@@ -143,7 +160,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
@@ -155,7 +172,7 @@ return array (
         0 => '180',
         1 => '1802',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     5 => 
@@ -166,7 +183,7 @@ return array (
       array (
         0 => '19[13]',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
@@ -177,7 +194,7 @@ return array (
       array (
         0 => '19[67]',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
@@ -188,7 +205,7 @@ return array (
       array (
         0 => '13[1-9]',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

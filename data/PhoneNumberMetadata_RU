@@ -63,6 +63,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'RU',
   'countryCode' => 7,
   'internationalPrefix' => '810',
@@ -80,7 +86,7 @@ return array (
       array (
         0 => '[34689]',
       ),
-      'nationalPrefixFormattingRule' => '$NP ($FG)',
+      'nationalPrefixFormattingRule' => '8 ($1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -91,7 +97,7 @@ return array (
       array (
         0 => '7',
       ),
-      'nationalPrefixFormattingRule' => '$NP ($FG)',
+      'nationalPrefixFormattingRule' => '8 ($1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

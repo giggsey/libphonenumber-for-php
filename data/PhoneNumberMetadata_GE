@@ -60,6 +60,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'GE',
   'countryCode' => 995,
   'internationalPrefix' => '810',
@@ -77,7 +83,7 @@ return array (
       array (
         0 => '[348]',
       ),
-      'nationalPrefixFormattingRule' => '$NP $FG',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -88,7 +94,7 @@ return array (
       array (
         0 => '5',
       ),
-      'nationalPrefixFormattingRule' => '$FG',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

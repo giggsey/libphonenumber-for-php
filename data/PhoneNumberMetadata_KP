@@ -45,6 +45,20 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          2(?:
+            [0-24-9]\\d{2}|
+            3(?:
+              [0-79]\\d|
+              8[02-9]
+            )
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '23821234',
+  ),
   'id' => 'KP',
   'countryCode' => 850,
   'internationalPrefix' => '00|99',
@@ -62,7 +76,7 @@ return array (
       array (
         0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -73,7 +87,7 @@ return array (
       array (
         0 => '2',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -84,7 +98,7 @@ return array (
       array (
         0 => '8',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

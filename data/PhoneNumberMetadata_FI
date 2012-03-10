@@ -53,6 +53,30 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '
+          [13]00\\d{3,7}|
+          2(?:
+            0(?:
+              0\\d{3,7}|
+              2[023]\\d{1,6}|
+              9[89]\\d{1,6}
+            )
+          )|
+          60(?:
+            [12]\\d{5,6}|
+            6\\d{7}
+          )|
+          7(?:
+            1\\d{7}|
+            3\\d{8}|
+            5[03-9]\\d{2,7}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{5,10}',
+    'ExampleNumber' => '100123',
+  ),
   'id' => 'FI',
   'countryCode' => 358,
   'internationalPrefix' => '00|99[049]',
@@ -75,7 +99,7 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -91,7 +115,7 @@ return array (
             7[135]
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
@@ -105,7 +129,7 @@ return array (
             3
           ',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

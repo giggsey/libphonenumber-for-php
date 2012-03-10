@@ -52,6 +52,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'id' => 'VE',
   'countryCode' => 58,
   'internationalPrefix' => '00',
@@ -68,8 +74,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
-      'domesticCarrierCodeFormattingRule' => '$CC $FG',
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
   ),
   'intlNumberFormat' => 

@@ -93,4 +93,34 @@ class PhoneNumber {
 		return $this;
 	}
 
+	private $rawInput = NULL;
+
+	public function hasRawInput() {
+		return isset($this->rawInput);
+	}
+
+	public function getRawInput() {
+		return $this->rawInput;
+	}
+
+	public function setRawInput($value) {
+		$this->rawInput = $value;
+		return $this;
+	}
+
+	public function clearRawInput() {
+		$this->rawInput = NULL;
+		return $this;
+	}
+	
+    public function clear() {
+      $this->clearCountryCode();
+      $this->clearNationalNumber();
+      $this->clearExtension();
+      $this->clearItalianLeadingZero();
+      $this->clearRawInput();
+/*      $this->clearCountryCodeSource();
+      $this->clearPreferredDomesticCarrierCode();
+ */     return $this;
+    }
 }

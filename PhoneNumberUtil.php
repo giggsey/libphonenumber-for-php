@@ -126,11 +126,7 @@ class PhoneNumberUtil {
 
 	// The PLUS_SIGN signifies the international prefix.
 	const PLUS_SIGN = '+';
-	const NON_DIGITS_PATTERN = "(\\D+)";
-	const FIRST_GROUP_PATTERN = "(\\$\\d)";
-	const NP_PATTERN = '\\$NP';
-	const FG_PATTERN = '\\$FG';
-	const CC_PATTERN = '\\$CC';
+
 
 	/**
 	 * Gets a {@link PhoneNumberUtil} instance to carry out international phone number formatting,
@@ -150,6 +146,12 @@ class PhoneNumberUtil {
 			self::$instance = new PhoneNumberUtil();
 			self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
 			self::$instance->init($baseFileLocation);
+			self::initExtnPatterns();
+			self::initCapturingExtnDigits();
+			self::initExtnPattern();
+			self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
+			self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
+			self::$CAPTURING_DIGIT_PATTERN = "(" . self::DIGITS . ")";
 		}
 		return self::$instance;
 	}
@@ -215,14 +217,33 @@ class PhoneNumberUtil {
 	 */
 
 	const PLUS_CHARS = '+＋';
+
+	private static $PLUS_CHARS_PATTERN;
+	private static $SEPARATOR_PATTERN;
+	private static $CAPTURING_DIGIT_PATTERN;
+
+	const STAR_SIGN = '*';
+	const RFC3966_EXTN_PREFIX = ";ext=";
+
+	// We use this pattern to check if the phone number has at least three letters in it - if so, then
+	// we treat it as a number where some phone-number digits are represented by letters.
+	const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
+
 	// Regular expression of acceptable punctuation found in phone numbers. This excludes punctuation
 	// found as a leading character only.
 	// This consists of dash characters, white space characters, full stops, slashes,
 	// square brackets, parentheses and tildes. It also includes the letter 'x' as that is found as a
 	// placeholder for carrier information in some phone numbers. Full-width variants are also
 	// present.
-	const VALID_PUNCTUATION = "-x\x20\x10-\x20\x15\x22\x12\x30\xFC\xFF\x0D-\xFF\x0F \x00\xA0\x20\x0B\x20\x60\x30\x00()\xFF\x08\xFF\x09\xFF\x3B\xFF\x3D.\\[\\]/~\x20\x53\x22\x3C\xFF\x5E";
+	/* "-x‐-―−ー－-／  <U+200B><U+2060>　()（）［］.\\[\\]/~⁓∼" */
+	const VALID_PUNCTUATION = "-x\xE2\x80\x90-\xE2\x80\x95\xE2\x88\x92\xE3\x83\xBC\xEF\xBC\x8D-\xEF\xBC\x8F \xC2\xA0\xE2\x80\x8B\xE2\x81\xA0\xE3\x80\x80()\xEF\xBC\x88\xEF\xBC\x89\xEF\xBC\xBB\xEF\xBC\xBD.\\[\\]/~\xE2\x81\x93\xE2\x88\xBC";
 	const DIGITS = "\\p{Nd}";
+
+	private static $CAPTURING_EXTN_DIGITS;
+
+	private static function initCapturingExtnDigits() {
+		self::$CAPTURING_EXTN_DIGITS = "(" . self::DIGITS . "{1,7})";
+	}
 
 	private static $ALPHA_MAPPINGS = array(
 		'A' => '2',
@@ -255,18 +276,56 @@ class PhoneNumberUtil {
 
 	private static function getValidAlphaPattern() {
 		// We accept alpha characters in phone numbers, ASCII only, upper and lower case.
-		return preg_replace("[, \\[\\]]", "", implode(key($ALPHA_MAPPINGS))) . preg_replace("[, \\[\\]]", "", strtolower(implode(key($ALPHA_MAPPINGS))));
+		return preg_replace("[, \\[\\]]", "", implode(array_keys(self::$ALPHA_MAPPINGS))) . preg_replace("[, \\[\\]]", "", strtolower(implode(array_keys(self::$ALPHA_MAPPINGS))));
 	}
 
-	private static function getEXTNPatternsForParsing() {
-		return self::RFC3966_EXTN_PREFIX_ . self::CAPTURING_EXTN_DIGITS_ . '|' .
-				'[ \u00A0\\t,]*' .
-				'(?:ext(?:ensi(?:o\u0301?|\u00F3))?n?|\uFF45\uFF58\uFF54\uFF4E?|' .
-				'[,x\uFF58#\uFF03~\uFF5E]|int|anexo|\uFF49\uFF4E\uFF54)' .
-				'[:\\.\uFF0E]?[ \u00A0\\t,-]*' .
-				self::CAPTURING_EXTN_DIGITS_ . '#?|' .
-				'[- ]+([' . self::VALID_DIGITS_ + ']{1,5})#';
+	private static $EXTN_PATTERNS_FOR_PARSING;
+	private static $EXTN_PATTERNS_FOR_MATCHING;
+
+	private static function initExtnPatterns() {
+		// One-character symbols that can be used to indicate an extension.
+		$singleExtnSymbolsForMatching = "x\xEF\xBD\x98#\xEF\xBC\x83~\xEF\xBD\x9E";
+		// For parsing, we are slightly more lenient in our interpretation than for matching. Here we
+		// allow a "comma" as a possible extension indicator. When matching, this is hardly ever used to
+		// indicate this.
+		$singleExtnSymbolsForParsing = "," . $singleExtnSymbolsForMatching;
+
+		self::$EXTN_PATTERNS_FOR_PARSING = self::createExtnPattern($singleExtnSymbolsForParsing);
+		self::$EXTN_PATTERNS_FOR_MATCHING = self::createExtnPattern($singleExtnSymbolsForMatching);
 	}
+
+	/**
+	 * Helper initialiser method to create the regular-expression pattern to match extensions,
+	 * allowing the one-char extension symbols provided by {@code singleExtnSymbols}.
+	 */
+	private static function createExtnPattern($singleExtnSymbols) {
+		// There are three regular expressions here. The first covers RFC 3966 format, where the
+		// extension is added using ";ext=". The second more generic one starts with optional white
+		// space and ends with an optional full stop (.), followed by zero or more spaces/tabs and then
+		// the numbers themselves. The other one covers the special case of American numbers where the
+		// extension is written with a hash at the end, such as "- 503#".
+		// Note that the only capturing groups should be around the digits that you want to capture as
+		// part of the extension, or else parsing will fail!
+		// Canonical-equivalence doesn't seem to be an option with Android java, so we allow two options
+		// for representing the accented o - the character itself, and one in the unicode decomposed
+		// form with the combining acute accent.
+		return (self::RFC3966_EXTN_PREFIX . self::$CAPTURING_EXTN_DIGITS . "|" . "[ \xC2\xA0\\t,]*" .
+				"(?:e?xt(?:ensi(?:o\xCC\x81?|\xC3\xB3))?n?|(?:\xEF\xBD\x85)?\xEF\xBD\x98\xEF\xBD\x94(?:\xEF\xBD\x8E)?|" .
+				"[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
+				"[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . self::$CAPTURING_EXTN_DIGITS . "#?|" .
+				"[- ]+(" . self::DIGITS . "{1,5})#");
+	}
+
+	const NON_DIGITS_PATTERN = "(\\D+)";
+
+	// The FIRST_GROUP_PATTERN was originally set to $1 but there are some countries for which the
+	// first group is not used in the national pattern (e.g. Argentina) so the $1 group does not match
+	// correctly.  Therefore, we use \d, so that the first group actually used in the pattern will be
+	// matched.
+	const FIRST_GROUP_PATTERN = "(\\$\\d)";
+	const NP_PATTERN = '\\$NP';
+	const FG_PATTERN = '\\$FG';
+	const CC_PATTERN = '\\$CC';
 
 	// Regular expression of viable phone numbers. This is location independent. Checks we have at
 	// least three leading digits, and only valid punctuation, alpha characters and
@@ -282,8 +341,8 @@ class PhoneNumberUtil {
 	 * have an extension prefix appended, followed by 1 or more digits.
 	 */
 	private static function getValidPhoneNumberPattern() {
-		return '/[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . ']*' . self::DIGITS . '){3,}[' .
-				self::VALID_PUNCTUATION . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::getEXTNPatternsForParsing() . ')?/' . self::REGEX_FLAGS;
+		return '%[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . ']*' . self::DIGITS . '){3,}[' .
+				self::VALID_PUNCTUATION . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
 	}
 
 	/**
@@ -544,6 +603,61 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Checks if the number is a valid vanity (alpha) number such as 800 MICROSOFT. A valid vanity
+	 * number will start with at least 3 digits and will have three or more alpha characters. This
+	 * does not do region-specific checks - to work out if this number is actually valid for a region,
+	 * it should be parsed and methods such as {@link #isPossibleNumberWithReason} and
+	 * {@link #isValidNumber} should be used.
+	 *
+	 * @param number  the number that needs to be checked
+	 * @return  true if the number is a valid vanity number
+	 */
+	public function isAlphaNumber($number) {
+		if (!$this->isViablePhoneNumber($number)) {
+			// Number is too short, or doesn't match the basic phone number pattern.
+			return false;
+		}
+		$this->maybeStripExtension($number);
+		return (bool) preg_match('/' . self::VALID_ALPHA_PHONE_PATTERN . '/' . self::REGEX_FLAGS, $number);
+	}
+
+	// Regexp of all known extension prefixes used by different regions followed by 1 or more valid
+	// digits, for use when parsing.
+	private static $EXTN_PATTERN = NULL;
+
+	private static function initExtnPattern() {
+		self::$EXTN_PATTERN = "/(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")$/" . self::REGEX_FLAGS;
+	}
+
+	/**
+	 * Strips any extension (as in, the part of the number dialled after the call is connected,
+	 * usually indicated with extn, ext, x or similar) from the end of the number, and returns it.
+	 *
+	 * @param number  the non-normalized telephone number that we wish to strip the extension from
+	 * @return        the phone extension
+	 */
+	private function maybeStripExtension(&$number) {
+		$matches = array();
+		$find = preg_match(self::$EXTN_PATTERN, $number, $matches, PREG_OFFSET_CAPTURE);
+		// If we find a potential extension, and the number preceding this is a viable number, we assume
+		// it is an extension.
+		if ($find > 0 && $this->isViablePhoneNumber(substr($number, 0, $matches[0][1]))) {
+			// The numbers are captured into groups in the regular expression.
+
+			for ($i = 1, $length = count($matches); $i <= $length; $i++) {
+				if ($matches[$i][0] != "") {
+					// We go through the capturing groups until we find one that captured some digits. If none
+					// did, then we will return the empty string.
+					$extension = $matches[$i][0];
+					$number = substr($number, 0, $matches[0][1]);
+					return $extension;
+				}
+			}
+		}
+		return "";
+	}
+
+	/**
 	 * Tests whether a phone number matches a valid pattern. Note this doesn't verify the number
 	 * is actually in use, which is impossible to tell by just looking at a number itself.
 	 *
@@ -658,32 +772,29 @@ class PhoneNumberUtil {
 			}
 		}
 		$formattedNumber = "";
-
 		$countryCallingCode = $number->getCountryCode();
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 		if ($numberFormat == PhoneNumberFormat::E164) {
 			// Early exit for E164 case since no formatting of the national number needs to be applied.
 			// Extensions are not formatted.
 			$formattedNumber .= $nationalSignificantNumber;
-			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberForma::E164, $formattedNumber);
-			return;
+			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
+			return $formattedNumber;
 		}
 		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
 		// share a country calling code is contained by only one region for performance reasons. For
 		// example, for NANPA regions it will be contained in the metadata for US.
 		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
 		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
-			$formattedNumber->append($nationalSignificantNumber);
-			return;
+			$formattedNumber .= $nationalSignificantNumber;
+			return $formattedNumber;
 		}
 
-		$metadata =
-				$this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
 		$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
 		$this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
 		$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
-
-		return (string) $formattedNumber;
+		return $formattedNumber;
 	}
 
 	private function getRegionCodeForNumberFromRegionList(PhoneNumber $number, array $regionCodes) {
@@ -750,58 +861,58 @@ class PhoneNumberUtil {
 		$formattingPattern = $this->chooseFormattingPatternForNumber($availableFormats, $number);
 		return ($formattingPattern == null) ? $number : $this->formatNsnUsingPattern($number, $formattingPattern, $numberFormat, $carrierCode);
 	}
-
+	
 	private function chooseFormattingPatternForNumber(array $availableFormats, $nationalNumber) {
 		foreach ($availableFormats as $numFormat) {
 			$size = $numFormat->leadingDigitsPatternSize();
-			if ($size == 0 ||
-					// We always use the last leading_digits_pattern, as it is the most detailed.
-					preg_match('/^' . $numFormat->getLeadingDigitsPattern($size - 1) . '/', $nationalNumber) > 0) {
+			// We always use the last leading_digits_pattern, as it is the most detailed.
+			if ($size == 0 || preg_match('/^(' . $numFormat->getLeadingDigitsPattern($size - 1) . ')/', $nationalNumber) > 0) {
+				$matches = preg_match('/^' . $numFormat->getPattern() . '$/', $nationalNumber);
 
-				$matches = preg_match('/' . $numFormat->getPattern() . '/', $nationalNumber);
-				if ($matches) {
+				if ($matches > 0) {
 					return $numFormat;
 				}
 			}
 		}
-
 		return null;
 	}
-
+	
 	// Note that carrierCode is optional - if NULL or an empty string, no carrier code replacement
 	// will take place.
 	private function formatNsnUsingPattern($nationalNumber, NumberFormat $formattingPattern, $numberFormat, $carrierCode = NULL) {
 		$numberFormatRule = $formattingPattern->getFormat();
+		$m = '/' . $formattingPattern->getPattern() . '/';
 		$formattedNationalNumber = "";
 		if ($numberFormat == PhoneNumberFormat::NATIONAL &&
-				$carrierCode != null && $carrierCode->length() > 0 &&
-				$formattingPattern->getDomesticCarrierCodeFormattingRule()->length() > 0) {
+				$carrierCode != null && strlen($carrierCode) > 0 &&
+				strlen($formattingPattern->getDomesticCarrierCodeFormattingRule()) > 0) {
 			// Replace the $CC in the formatting rule with the desired carrier code.
 			$carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
-			$carrierCodeFormattingRule = preg_replace(self::CC_PATTERN, $carrierCode, $carrierCodeFormattingRule, 1);
+			$carrierCodeFormattingRule = preg_replace('/' . self::CC_PATTERN . '/', $carrierCode, $carrierCodeFormattingRule, 1);
 			// Now replace the $FG in the formatting rule with the first group and the carrier code
 			// combined in the appropriate way.
-			$numberFormatRule = preg_replace(self::FIRST_GROUP_PATTERN, $carrierCodeFormattingRule, $numberFormatRule, 1);
-			$formattedNationalNumber = preg_replace($formattingPattern->getPattern(), $numberFormatRule, $nationalNumber);
+			$numberFormatRule = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $carrierCodeFormattingRule, $numberFormatRule, 1);
+			$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
 		} else {
 			// Use the national prefix formatting rule instead.
 			$nationalPrefixFormattingRule = $formattingPattern->getNationalPrefixFormattingRule();
 			if ($numberFormat == PhoneNumberFormat::NATIONAL &&
 					$nationalPrefixFormattingRule != null &&
-					$nationalPrefixFormattingRule . length() > 0) {
-				$formattedNationalNumber = preg_replace(self::FIRST_GROUP_PATTERN, $nationalPrefixFormattingRule, $numberFormatRule, 1);
+					strlen($nationalPrefixFormattingRule) > 0) {
+				$firstGroupMatcher = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $nationalPrefixFormattingRule, $numberFormatRule, 1);
+				$formattedNationalNumber = preg_replace($m, $firstGroupMatcher, $nationalNumber);
 			} else {
-				$formattedNationalNumber = preg_replace('/' . $formattingPattern->getPattern() . '/', $numberFormatRule, $nationalNumber);
+				$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
 			}
 		}
 		if ($numberFormat == PhoneNumberFormat::RFC3966) {
 			// Strip any leading punctuation.
-			$nbMatches = preg_match(self::SEPARATOR_PATTERN, $formattedNationalNumber);
-			if ($nbMatches > 0 && $matches[0][1] === 0) {
-				$formattedNationalNumber = preg_replace(self::SEPARATOR_PATTERN, "", $formattedNationalNumber, 1);
+			$matcher = preg_match('%' . self::$SEPARATOR_PATTERN . '%', $formattedNationalNumber);
+			if ($matcher == 0) {
+				$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "", $formattedNationalNumber, 1);
 			}
 			// Replace the rest with a dash between each number group.
-			$formattedNationalNumber = preg_replace(self::SEPARATOR_PATTERN, "-", $formattedNationalNumber);
+			$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "-", $formattedNationalNumber);
 		}
 		return $formattedNationalNumber;
 	}
@@ -810,15 +921,15 @@ class PhoneNumberUtil {
 	 * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
 	 * an extension specified.
 	 */
-	private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, $formattedNumber) {
-		if ($number->hasExtension() && $number->getExtension()->length() > 0) {
+	private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, &$formattedNumber) {
+		if ($number->hasExtension() && strlen($number->getExtension()) > 0) {
 			if ($numberFormat == PhoneNumberFormat::RFC3966) {
-				$formattedNumber->append(RFC3966_EXTN_PREFIX)->append($number->getExtension());
+				$formattedNumber .= self::RFC3966_EXTN_PREFIX . $number->getExtension();
 			} else {
 				if ($metadata->hasPreferredExtnPrefix()) {
-					$formattedNumber->append($metadata->getPreferredExtnPrefix())->append($number->getExtension());
+					$formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
 				} else {
-					$formattedNumber->append(DEFAULT_EXTN_PREFIX)->append($number->getExtension());
+					$formattedNumber .= self::DEFAULT_EXTN_PREFIX . $number->getExtension();
 				}
 			}
 		}
@@ -928,6 +1039,27 @@ class PhoneNumberUtil {
 			$this->loadMetadataFromFile($this->currentFilePrefix, self::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode);
 		}
 		return $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode];
+	}
+
+	/**
+	 * Returns true if the number can be dialled from outside the region, or unknown. If the number
+	 * can only be dialled from within the region, returns false. Does not check the number is a valid
+	 * number.
+	 * TODO: Make this method public when we have enough metadata to make it worthwhile.
+	 *
+	 * @param number  the phone-number for which we want to know whether it is diallable from
+	 *     outside the region
+	 */
+	public function canBeInternationallyDialled(PhoneNumber $number) {
+		$regionCode = $this->getRegionCodeForNumber($number);
+		if (!$this->isValidRegionCode($regionCode)) {
+			// Note numbers belonging to non-geographical entities (e.g. +800 numbers) are always
+			// internationally diallable, and will be caught here.
+			return true;
+		}
+		$metadata = $this->getMetadataForRegion($regionCode);
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		return !$this->isNumberMatchingDesc($nationalSignificantNumber, $metadata->getNoInternationalDialling());
 	}
 
 }

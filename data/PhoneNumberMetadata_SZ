@@ -61,6 +61,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '0800\\d{4}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '08001234',
+  ),
   'id' => 'SZ',
   'countryCode' => 268,
   'internationalPrefix' => '00',

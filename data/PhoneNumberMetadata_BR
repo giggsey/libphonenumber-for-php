@@ -60,6 +60,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '40041234',
   ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => '[34]00\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '40041234',
+  ),
   'id' => 'BR',
   'countryCode' => 55,
   'internationalPrefix' => '00(?:1[45]|2[135]|[34]1|43)',
@@ -78,8 +84,8 @@ return array (
       array (
         0 => '[1-9][1-9]',
       ),
-      'nationalPrefixFormattingRule' => '($FG)',
-      'domesticCarrierCodeFormattingRule' => '$NP $CC ($FG)',
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
     1 => 
     array (
@@ -100,7 +106,7 @@ return array (
       array (
         0 => '[3589]00',
       ),
-      'nationalPrefixFormattingRule' => '$NP$FG',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
