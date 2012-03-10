@@ -49,7 +49,27 @@ class PhoneNumber {
 		$this->nationalNumber = NULL;
 		return $this;
 	}
-	
+
+	private $extension = NULL;
+
+	public function hasExtension() {
+		return isset($this->extension);
+	}
+
+	public function getExtension() {
+		return $this->extension;
+	}
+
+	public function setExtension($value) {
+		$this->extension = $value;
+		return $this;
+	}
+
+	public function clearExtension() {
+		$this->extension = NULL;
+		return $this;
+	}
+
 	/**
 	 * @var boolean
 	 */
@@ -72,4 +92,5 @@ class PhoneNumber {
 		$this->italianLeadingZero = NULL;
 		return $this;
 	}
+
 }

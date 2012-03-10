@@ -15,6 +15,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 	private static $bsNumber = NULL;
 	private static $internationalTollFree = NULL;
+	private static $usNumber = NULL;
+	private static $usTollFree = NULL;
+	private static $gbNumber = NULL;
+	private static $gbMobile = NULL;
+	private static $arNumber = NULL;
+	private static $auNumber = NULL;
+	private static $sgNumber = NULL;
+	private static $usShortByOneNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -32,6 +40,23 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
 		self::$internationalTollFree = new PhoneNumber();
 		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
+		self::$usNumber = new PhoneNumber();
+		self::$usNumber->setCountryCode(1)->setNationalNumber(6502530000);
+		self::$usTollFree = new PhoneNumber();
+		self::$usTollFree->setCountryCode(1)->setNationalNumber(8002530000);
+		self::$gbNumber = new PhoneNumber();
+		self::$gbNumber->setCountryCode(44)->setNationalNumber(2070313000);
+		self::$gbMobile = new PhoneNumber();
+		self::$gbMobile->setCountryCode(44)->setNationalNumber(7912345678);
+		self::$arNumber = new PhoneNumber();
+		self::$arNumber->setCountryCode(54)->setNationalNumber(1187654321);
+		self::$auNumber = new PhoneNumber();
+		self::$auNumber->setCountryCode(61)->setNationalNumber(236618300);
+		self::$sgNumber = new PhoneNumber();
+		self::$sgNumber->setCountryCode(65)->setNationalNumber(65218000);
+		self::$usShortByOneNumber = new PhoneNumber();
+		self::$usShortByOneNumber->setCountryCode(1)->setNationalNumber(650253000);
+
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
 	}
@@ -122,6 +147,35 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1));  // USA
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(800));  // International toll free numbers
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(888));  // Not in metadata file, just default to false.
+	}
+
+	public function testGetLengthOfGeographicalAreaCode() {
+		// Google MTV, which has area code "650".
+		$this->assertEquals(3, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$usNumber));
+
+		// A North America toll-free number, which has no area code.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$usTollFree));
+
+		// Google London, which has area code "20".
+		$this->assertEquals(2, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$gbNumber));
+
+		// A UK mobile phone, which has no area code.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$gbMobile));
+
+		// Google Buenos Aires, which has area code "11".
+		$this->assertEquals(2, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$arNumber));
+
+		// Google Sydney, which has area code "2".
+		$this->assertEquals(1, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$auNumber));
+
+		// Google Singapore. Singapore has no area code and no national prefix.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$sgNumber));
+
+		// An invalid US number (1 digit shorter), which has no area code.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$usShortByOneNumber));
+
+		// An international toll free number, which has no area code.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$internationalTollFree));
 	}
 
 	/**
