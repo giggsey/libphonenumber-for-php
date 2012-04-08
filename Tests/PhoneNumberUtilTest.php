@@ -36,6 +36,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $mxNumber1 = NULL;
 	private static $mxMobile2 = NULL;
 	private static $mxNumber2 = NULL;
+	private static $deNumber = NULL;
+	private static $jpStarNumber = NULL;
 
 	const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
 
@@ -96,6 +98,11 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$mxMobile2->setCountryCode(52)->setNationalNumber(15512345678);
 		self::$mxNumber2 = new PhoneNumber();
 		self::$mxNumber2->setCountryCode(52)->setNationalNumber(8211234567);
+		// Note that this is the same as the example number for DE in the metadata.
+		self::$deNumber = new PhoneNumber();
+		self::$deNumber->setCountryCode(49)->setNationalNumber(30123456);
+		self::$jpStarNumber = new PhoneNumber();
+		self::$jpStarNumber->setCountryCode(81)->setNationalNumber(2345);
 
 		PhoneNumberUtil::resetInstance();
 		return PhoneNumberUtil::getInstance(self::TEST_META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap);
@@ -396,6 +403,44 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		// We have no data for NZ - should return true.
 		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$nzNumber));
 		$this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$internationalTollFree));
+	}
+
+	public function  testParseNationalNumber() {
+		// National prefix attached.
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("033316005", RegionCode::NZ));
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("33316005", RegionCode::NZ));
+		// National prefix attached and some formatting present.
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("03-331 6005", RegionCode::NZ));
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("03 331 6005", RegionCode::NZ));
+
+		// Testing international prefixes.
+		// Should strip country calling code.
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("0064 3 331 6005", RegionCode::NZ));
+		// Try again, but this time we have an international number with Region Code US. It should
+		// recognise the country calling code and parse accordingly.
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("01164 3 331 6005", RegionCode::US));
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("+64 3 331 6005", RegionCode::US));
+		// We should ignore the leading plus here, since it is not followed by a valid country code but
+		// instead is followed by the IDD for the US.
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("+01164 3 331 6005", RegionCode::US));
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("+0064 3 331 6005", RegionCode::NZ));
+		$this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("+ 00 64 3 331 6005", RegionCode::NZ));
+
+		$nzNumber = new PhoneNumber();
+		$nzNumber->setCountryCode(64)->setNationalNumber(64123456);
+		$this->assertEquals($nzNumber, $this->phoneUtil->parse("64(0)64123456", RegionCode::NZ));
+		// Check that using a "/" is fine in a phone number.
+		$this->assertEquals(self::$deNumber, $this->phoneUtil->parse("301/23456", RegionCode::DE));
+
+		$usNumber = new PhoneNumber();
+		// Check it doesn't use the '1' as a country calling code when parsing if the phone number was
+		// already possible.
+		$usNumber->setCountryCode(1)->setNationalNumber(1234567890);
+		$this->assertEquals($usNumber, $this->phoneUtil->parse("123-456-7890", RegionCode::US));
+
+		// Test star numbers. Although this is not strictly valid, we would like to make sure we can
+		// parse the output we produce when formatting the number.
+		$this->assertEquals(self::$jpStarNumber, $this->phoneUtil->parse("+81 *2345", RegionCode::JP));
 	}
 
 	public function testIsAlphaNumber() {

@@ -112,15 +112,23 @@ class PhoneNumber {
 		$this->rawInput = NULL;
 		return $this;
 	}
-	
-    public function clear() {
-      $this->clearCountryCode();
-      $this->clearNationalNumber();
-      $this->clearExtension();
-      $this->clearItalianLeadingZero();
-      $this->clearRawInput();
-/*      $this->clearCountryCodeSource();
-      $this->clearPreferredDomesticCarrierCode();
- */     return $this;
-    }
+
+	public function clear() {
+		$this->clearCountryCode();
+		$this->clearNationalNumber();
+		$this->clearExtension();
+		$this->clearItalianLeadingZero();
+		$this->clearRawInput();
+		/*      $this->clearCountryCodeSource();
+			  $this->clearPreferredDomesticCarrierCode();
+		 */     return $this;
+	}
+}
+class CountryCodeSource {
+
+	const FROM_NUMBER_WITH_PLUS_SIGN = 0;
+	const FROM_NUMBER_WITH_IDD = 1;
+	const FROM_NUMBER_WITHOUT_PLUS_SIGN = 2;
+	const FROM_DEFAULT_COUNTRY = 3;
+
 }

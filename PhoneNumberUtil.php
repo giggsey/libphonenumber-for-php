@@ -4,6 +4,7 @@ namespace com\google\i18n\phonenumbers;
 
 require_once dirname(__FILE__) . '/CountryCodeToRegionCodeMap.php';
 require_once dirname(__FILE__) . '/PhoneMetadata.php';
+require_once dirname(__FILE__) . '/NumberParseException.php';
 
 /**
  * INTERNATIONAL and NATIONAL formats are consistent with the definition in ITU-T Recommendation
@@ -147,11 +148,15 @@ class PhoneNumberUtil {
 			self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
 			self::$instance->init($baseFileLocation);
 			self::initExtnPatterns();
+			self::initAsciiDigitMappings();
 			self::initCapturingExtnDigits();
 			self::initExtnPattern();
 			self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
 			self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
 			self::$CAPTURING_DIGIT_PATTERN = "(" . self::DIGITS . ")";
+			self::$VALID_START_CHAR_PATTERN = "[" . self::PLUS_CHARS . self::DIGITS . "]";
+
+			self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
 		}
 		return self::$instance;
 	}
@@ -222,6 +227,26 @@ class PhoneNumberUtil {
 	private static $SEPARATOR_PATTERN;
 	private static $CAPTURING_DIGIT_PATTERN;
 
+	// Regular expression of acceptable characters that may start a phone number for the purposes of
+	// parsing. This allows us to strip away meaningless prefixes to phone numbers that may be
+	// mistakenly given to us. This consists of digits, the plus symbol and arabic-indic digits. This
+	// does not contain alpha characters, although they may be used later in the number. It also does
+	// not include other punctuation, as this will be stripped later during parsing and is of no
+	// information value when parsing a number.
+	private static $VALID_START_CHAR_PATTERN = NULL;
+
+	// Regular expression of characters typically used to start a second phone number for the purposes
+	// of parsing. This allows us to strip off parts of the number that are actually the start of
+	// another number, such as for: (530) 583-6985 x302/x2303 -> the second extension here makes this
+	// actually two phone numbers, (530) 583-6985 x302 and (530) 583-6985 x2303. We remove the second
+	// extension so that the first number is parsed correctly.
+	private static $SECOND_NUMBER_START_PATTERN = "[\\\\/] *x";
+
+	// Regular expression of trailing characters that we want to remove. We remove all characters that
+	// are not alpha or numerical characters. The hash character is retained here, as it may signify
+	// the previous block was an extension.
+	private static $UNWANTED_END_CHAR_PATTERN = "[[\\P{N}&&\\P{L}]&&[^#]]+$";
+
 	const STAR_SIGN = '*';
 	const RFC3966_EXTN_PREFIX = ";ext=";
 
@@ -273,6 +298,27 @@ class PhoneNumberUtil {
 		'Y' => '9',
 		'Z' => '9',
 	);
+
+	private static $ALPHA_PHONE_MAPPINGS;
+
+	private static $asciiDigitMappings;
+
+	private static function initAsciiDigitMappings() {
+			// Simple ASCII digits map used to populate ALPHA_PHONE_MAPPINGS and
+			// ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
+			self::$asciiDigitMappings = array(
+					'0' => '0',
+					'1' => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+					'5' => '5',
+					'6' => '6',
+					'7' => '7',
+					'8' => '8',
+					'9' => '9',
+		);
+	}
 
 	private static function getValidAlphaPattern() {
 		// We accept alpha characters in phone numbers, ASCII only, upper and lower case.
@@ -380,12 +426,12 @@ class PhoneNumberUtil {
 	 * @param {string} number a string of characters representing a phone number.
 	 * @return {string} the normalized string version of the phone number.
 	 */
-	public static function normalize($number) {
+	public static function normalize(&$number) {
 		$m = preg_match(self::getValidPhoneNumberPattern(), $number);
 		if ($m > 0) {
-			return $this->normalizeHelper($number, self::ALPHA_PHONE_MAPPINGS, true);
+			return self::normalizeHelper($number, self::$ALPHA_PHONE_MAPPINGS, true);
 		} else {
-			return $this->normalizeDigitsOnly($number);
+			return self::normalizeDigitsOnly($number);
 		}
 	}
 
@@ -402,7 +448,7 @@ class PhoneNumberUtil {
 	 *                                   will be left unchanged in the number.
 	 * @return  the normalized string version of the phone number
 	 */
-	private function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches) {
+	private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches) {
 		$normalizedNumber = "";
 		$numberAsArray = str_split($number);
 		foreach ($numberAsArray as $character) {
@@ -423,18 +469,18 @@ class PhoneNumberUtil {
 	 * @param number  a string of characters representing a phone number
 	 * @return        the normalized string version of the phone number
 	 */
-	public function normalizeDigitsOnly($number) {
-		return $this->normalizeDigits($number, false /* strip non-digits */) . toString();
+	public static function normalizeDigitsOnly($number) {
+		return self::normalizeDigits($number, false /* strip non-digits */);
 	}
 
-	private function normalizeDigits($number, $keepNonDigits) {
+	private static function normalizeDigits($number, $keepNonDigits) {
 		$normalizedDigits = "";
 		$numberAsArray = str_split($number);
 		foreach ($numberAsArray as $character) {
 			if (is_int($character)) {
-				$normalizedNumber .= $character;
+				$normalizedDigits .= $character;
 			} else if ($keepNonDigits) {
-				$normalizedNumber .= $character;
+				$normalizedDigits .= $character;
 			}
 			// If neither of the above are true, we remove this character.
 		}
@@ -621,6 +667,259 @@ class PhoneNumberUtil {
 		return (bool) preg_match('/' . self::VALID_ALPHA_PHONE_PATTERN . '/' . self::REGEX_FLAGS, $number);
 	}
 
+  /**
+   * Helper method to check a number against a particular pattern and determine whether it matches,
+   * or is too short or too long. Currently, if a number pattern suggests that numbers of length 7
+   * and 10 are possible, and a number in between these possible lengths is entered, such as of
+   * length 8, this will return TOO_LONG.
+   */
+  private function testNumberLengthAgainstPattern($numberPattern, $number) {
+	+	$numberMatcher =  preg_match('/^' . $numberPattern . '$/', $number);
+    if ($numberMatcher > 0) {
+      return ValidationResult::IS_POSSIBLE;
+    }
+	$numberMatcher =  preg_match('/^' . $numberPattern . '/', $number);
+    if ($numberMatcher > 0) {
+      return ValidationResult::TOO_LONG;
+    } else {
+      return ValidationResult::TOO_SHORT;
+    }
+  }
+
+	// Extracts country calling code from fullNumber, returns it and places the remaining number in
+	// nationalNumber. It assumes that the leading plus sign or IDD has already been removed. Returns
+	// 0 if fullNumber doesn't start with a valid country calling code, and leaves nationalNumber
+	// unmodified.
+	private function extractCountryCode($fullNumber, &$nationalNumber) {
+	  if ((strlen($fullNumber) == 0) || ($fullNumber[0] == '0')) {
+	    // Country codes do not begin with a '0'.
+	    return 0;
+	  }
+	  $numberLength = strlen($fullNumber);
+	  for ($i = 1; $i <= self::MAX_LENGTH_COUNTRY_CODE && $i <= $numberLength; $i++) {
+			    $potentialCountryCode = (int)substr($fullNumber, 0, $i);
+	    if (isset($this->countryCallingCodeToRegionCodeMap[$potentialCountryCode])) {
+				      $nationalNumber .= substr($fullNumber, $i);
+	      return $potentialCountryCode;
+	    }
+	  }
+	  return 0;
+	}
+
+	/**
+	 * Tries to extract a country calling code from a number. This method will return zero if no
+	 * country calling code is considered to be present. Country calling codes are extracted in the
+	 * following ways:
+	 * <ul>
+	 *  <li> by stripping the international dialing prefix of the region the person is dialing from,
+	 *       if this is present in the number, and looking at the next digits
+	 *  <li> by stripping the '+' sign if present and then looking at the next digits
+	 *  <li> by comparing the start of the number and the country calling code of the default region.
+	 *       If the number is not considered possible for the numbering plan of the default region
+	 *       initially, but starts with the country calling code of this region, validation will be
+	 *       reattempted after stripping this country calling code. If this number is considered a
+	 *       possible number, then the first digits will be considered the country calling code and
+	 *       removed as such.
+	 * </ul>
+	 * It will throw a NumberParseException if the number starts with a '+' but the country calling
+	 * code supplied after this does not match that of any known region.
+	 *
+	 * @param number  non-normalized telephone number that we wish to extract a country calling
+	 *     code from - may begin with '+'
+	 * @param defaultRegionMetadata  metadata about the region this number may be from
+	 * @param nationalNumber  a string buffer to store the national significant number in, in the case
+	 *     that a country calling code was extracted. The number is appended to any existing contents.
+	 *     If no country calling code was extracted, this will be left unchanged.
+	 * @param keepRawInput  true if the country_code_source and preferred_carrier_code fields of
+	 *     phoneNumber should be populated.
+	 * @param phoneNumber  the PhoneNumber object where the country_code and country_code_source need
+	 *     to be populated. Note the country_code is always populated, whereas country_code_source is
+	 *     only populated when keepCountryCodeSource is true.
+	 * @return  the country calling code extracted or 0 if none could be extracted
+	 */
+	private function maybeExtractCountryCode($number, PhoneMetadata $defaultRegionMetadata,
+											 &$nationalNumber, $keepRawInput,
+											 PhoneNumber $phoneNumber) {
+		if (strlen($number) == 0) {
+			return 0;
+		}
+		$fullNumber = $number;
+		// Set the default prefix to be something that will never match.
+		$possibleCountryIddPrefix = "NonMatch";
+		if ($defaultRegionMetadata != null) {
+			$possibleCountryIddPrefix = $defaultRegionMetadata->getInternationalPrefix();
+		}
+		$countryCodeSource = $this->maybeStripInternationalPrefixAndNormalize($fullNumber, $possibleCountryIddPrefix);
+
+		if ($keepRawInput) {
+			$phoneNumber->setCountryCodeSource($countryCodeSource);
+		}
+		if ($countryCodeSource != CountryCodeSource::FROM_DEFAULT_COUNTRY) {
+			if (strlen($fullNumber) < self::MIN_LENGTH_FOR_NSN) {
+				throw new NumberParseException(NumberParseException::TOO_SHORT_AFTER_IDD,
+					"Phone number had an IDD, but after this was not "
+						. "long enough to be a viable phone number.");
+			}
+			$potentialCountryCode = $this->extractCountryCode($fullNumber, $nationalNumber);
+
+			if ($potentialCountryCode != 0) {
+				$phoneNumber->setCountryCode($potentialCountryCode);
+				return $potentialCountryCode;
+			}
+
+			// If this fails, they must be using a strange country calling code that we don't recognize,
+			// or that doesn't exist.
+			throw new NumberParseException(NumberParseException::INVALID_COUNTRY_CODE,
+				"Country calling code supplied was not recognised.");
+		} else if ($defaultRegionMetadata != null) {
+			// Check to see if the number starts with the country calling code for the default region. If
+			// so, we remove the country calling code, and do some checks on the validity of the number
+			// before and after.
+			$defaultCountryCode = $defaultRegionMetadata->getCountryCode();
+			$defaultCountryCodeString = (string)$defaultCountryCode;
+			$normalizedNumber = (string)$fullNumber;
+			if (strpos($normalizedNumber, $defaultCountryCodeString) === 0) {
+				$potentialNationalNumber = substr($normalizedNumber, strlen($defaultCountryCodeString));
+				$generalDesc = $defaultRegionMetadata->getGeneralDesc();
+				$validNumberPattern = $generalDesc->getNationalNumberPattern();
+				$this->maybeStripNationalPrefixAndCarrierCode(
+					$potentialNationalNumber, $defaultRegionMetadata, null /* Don't need the carrier code */);
+				$possibleNumberPattern = $generalDesc->getPossibleNumberPattern();
+				// If the number was not valid before but is valid now, or if it was too long before, we
+				// consider the number with the country calling code stripped to be a better result and
+				// keep that instead.
+				if ((preg_match('/' . $validNumberPattern . '/', $fullNumber) == 0 &&
+					preg_match('/' . $validNumberPattern . '/', $potentialNationalNumber) > 0) ||
+					$this->testNumberLengthAgainstPattern($possibleNumberPattern, (string)$fullNumber)
+						== ValidationResult::TOO_LONG) {
+					$nationalNumber .= $potentialNationalNumber;
+					if ($keepRawInput) {
+						$phoneNumber->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITHOUT_PLUS_SIGN);
+					}
+					$phoneNumber->setCountryCode($defaultCountryCode);
+					return $defaultCountryCode;
+				}
+			}
+		}
+		// No country calling code present.
+		$phoneNumber->setCountryCode(0);
+		return 0;
+	}
+
+	  /**
+	 * Strips the IDD from the start of the number if present. Helper function used by
+	 * maybeStripInternationalPrefixAndNormalize.
+	 */
+	private function parsePrefixAsIdd($iddPattern, &$number) {
+		$m = new Matcher($iddPattern, $number);
+		if ($m->lookingAt()) {
+			$matchEnd = $m->end();
+			// Only strip this if the first digit after the match is not a 0, since country calling codes
+			// cannot begin with 0.
+			$digitMatcher = new Matcher(self::$CAPTURING_DIGIT_PATTERN, substr($number, $matchEnd));
+			if ($digitMatcher->find()) {
+				$normalizedGroup = $this->normalizeDigitsOnly($digitMatcher->group(1));
+				if ($normalizedGroup == "0") {
+					return false;
+				}
+			}
+			$number = substr($number, $matchEnd);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Strips any national prefix (such as 0, 1) present in the number provided.
+	 *
+	 * @param number  the normalized telephone number that we wish to strip any national
+	 *     dialing prefix from
+	 * @param metadata  the metadata for the region that we think this number is from
+	 * @param carrierCode  a place to insert the carrier code if one is extracted
+	 * @return true if a national prefix or carrier code (or both) could be extracted.
+	 */
+	// @VisibleForTesting
+	private function maybeStripNationalPrefixAndCarrierCode(&$number, PhoneMetadata $metadata, $carrierCode) {
+			$numberLength = strlen($number);
+			$possibleNationalPrefix = $metadata->getNationalPrefixForParsing();
+		if ($numberLength == 0 || strlen($possibleNationalPrefix) == 0) {
+			// Early return for numbers of zero length.
+			return false;
+		}
+		// Attempt to parse the first digits as a national prefix.
+		$prefixMatcher = new Matcher($possibleNationalPrefix, $number);
+		if ($prefixMatcher->lookingAt()) {
+					$nationalNumberRule = $metadata->getGeneralDesc()->getNationalNumberPattern();
+					// Check if the original number is viable.
+					$nationalNumberRuleMatcher = new Matcher($nationalNumberRule, $number);
+					$isViableOriginalNumber = $nationalNumberRuleMatcher->matches();
+					// prefixMatcher.group(numOfGroups) == null implies nothing was captured by the capturing
+					// groups in possibleNationalPrefix; therefore, no transformation is necessary, and we just
+					// remove the national prefix.
+					$numOfGroups = $prefixMatcher->groupCount();
+		     		$transformRule = $metadata->getNationalPrefixTransformRule();
+			if ($transformRule == null || strlen($transformRule) == 0 ||
+								$prefixMatcher->group($numOfGroups) == null) {
+							// If the original number was viable, and the resultant number is not, we return.
+							$matcher = new Matcher($nationalNumberRule, substr($number, $prefixMatcher->end()));
+				if ($isViableOriginalNumber && !$matcher->matches()) {
+					return false;
+				}
+				if ($carrierCode != null && $numOfGroups > 0 && $prefixMatcher->group($numOfGroups) != null) {
+									$carrierCode->append($prefixMatcher->group(1));
+				}
+				$number = substr($number, $prefixMatcher->end());
+				return true;
+			} else {
+							// Check that the resultant number is still viable. If not, return. Check this by copying
+							// the string buffer and making the transformation on the copy first.
+							$transformedNumber = $number;
+							$transformedNumber->replace(0, $numberLength, $prefixMatcher->replaceFirst($transformRule));
+				if ($isViableOriginalNumber &&
+										!$nationalNumberRule->matcher($transformedNumber->toString())->matches()) {
+					return false;
+				}
+				if ($carrierCode != null && $numOfGroups > 1) {
+									$carrierCode->append($prefixMatcher->group(1));
+				}
+				$number->replace(0, strlen($number), $transformedNumber);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Strips any international prefix (such as +, 00, 011) present in the number provided, normalizes
+	 * the resulting number, and indicates if an international prefix was present.
+	 *
+	 * @param number  the non-normalized telephone number that we wish to strip any international
+	 *     dialing prefix from.
+	 * @param possibleIddPrefix  the international direct dialing prefix from the region we
+	 *     think this number may be dialed in
+	 * @return  the corresponding CountryCodeSource if an international dialing prefix could be
+	 *     removed from the number, otherwise CountryCodeSource.FROM_DEFAULT_COUNTRY if the number did
+	 *     not seem to be in international format.
+	 */
+	private function maybeStripInternationalPrefixAndNormalize(
+	&$number, $possibleIddPrefix) {
+		if (strlen($number) == 0) {
+			return CountryCodeSource::FROM_DEFAULT_COUNTRY;
+		}
+		$matches = array();
+		// Check to see if the number begins with one or more plus signs.
+		$match = preg_match('/^' . self::$PLUS_CHARS_PATTERN . '/', $number, $matches, PREG_OFFSET_CAPTURE);
+		if ($match > 0) {
+				$number = substr($number, $matches[0][1] + strlen($matches[0][0]));
+				// Can now normalize the rest of the number since we've consumed the "+" sign at the start.
+				$number = $this->normalize($number);
+			return CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN;
+		}
+		// Attempt to parse the first digits as an international prefix.
+		$iddPattern = $possibleIddPrefix;
+		$number = $this->normalize($number);
+		return $this->parsePrefixAsIdd($iddPattern, $number) ? CountryCodeSource::FROM_NUMBER_WITH_IDD : CountryCodeSource::FROM_DEFAULT_COUNTRY;
+	}
 	// Regexp of all known extension prefixes used by different regions followed by 1 or more valid
 	// digits, for use when parsing.
 	private static $EXTN_PATTERN = NULL;
@@ -656,6 +955,156 @@ class PhoneNumberUtil {
 		}
 		return "";
 	}
+
+	/**
+	 * Checks to see that the region code used is valid, or if it is not valid, that the number to
+	 * parse starts with a + symbol so that we can attempt to infer the region from the number.
+	 * Returns false if it cannot use the region provided and the region cannot be inferred.
+	 */
+	private function checkRegionForParsing($numberToParse, $defaultRegion) {
+	  if (!$this->isValidRegionCode($defaultRegion)) {
+	    // If the number is null or empty, we can't infer the region.
+	    if ($numberToParse == null || strlen($numberToParse) == 0 ||
+			  preg_match('/^'.self::$PLUS_CHARS_PATTERN . '/', $numberToParse) == 0
+		        ) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+
+	/**
+	 * Parses a string and returns it in proto buffer format. This method will throw a
+	 * {@link com.google.i18n.phonenumbers.NumberParseException} if the number is not considered to be
+	 * a possible number. Note that validation of whether the number is actually a valid number for a
+	 * particular region is not performed. This can be done separately with {@link #isValidNumber}.
+	 *
+	 * @param numberToParse     number that we are attempting to parse. This can contain formatting
+	 *                          such as +, ( and -, as well as a phone number extension.
+	 * @param defaultRegion     region that we are expecting the number to be from. This is only used
+	 *                          if the number being parsed is not written in international format.
+	 *                          The country_code for the number in this case would be stored as that
+	 *                          of the default region supplied. If the number is guaranteed to
+	 *                          start with a '+' followed by the country calling code, then
+	 *                          "ZZ" or null can be supplied.
+	 * @return                  a phone number proto buffer filled with the parsed number
+	 * @throws NumberParseException  if the string is not considered to be a viable phone number or if
+	 *                               no default region was supplied and the number is not in
+	 *                               international format (does not start with +)
+	 */
+	public function  parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = NULL) {
+		if ($phoneNumber === NULL) {
+			$phoneNumber = new PhoneNumber();
+		}
+		$this->parseHelper($numberToParse, $defaultRegion, false, true, $phoneNumber);
+		return $phoneNumber;
+	}
+
+	/**
+	 * Parses a string and fills up the phoneNumber. This method is the same as the public
+	 * parse() method, with the exception that it allows the default region to be null, for use by
+	 * isNumberMatch(). checkRegion should be set to false if it is permitted for the default region
+	 * to be null or unknown ("ZZ").
+	 */
+	private function parseHelper($numberToParse, $defaultRegion, $keepRawInput,
+								 $checkRegion, PhoneNumber $phoneNumber) {
+		if ($numberToParse == null) {
+			throw new NumberParseException(NumberParseException::NOT_A_NUMBER, "The phone number supplied was null.");
+		}
+		// Extract a possible number from the string passed in (this strips leading characters that
+		// could not be the start of a phone number.)
+		$number = $this->extractPossibleNumber($numberToParse);
+		if (!$this->isViablePhoneNumber($number)) {
+			throw new NumberParseException(NumberParseException.ErrorType.NOT_A_NUMBER, "The string supplied did not seem to be a phone number.");
+		}
+
+		// Check the region supplied is valid, or that the extracted number starts with some sort of +
+		// sign so the number's region can be determined.
+		if ($checkRegion && !$this->checkRegionForParsing($number, $defaultRegion)) {
+			throw new NumberParseException(NumberParseException::INVALID_COUNTRY_CODE, "Missing or invalid default region.");
+		}
+
+		if ($keepRawInput) {
+			$phoneNumber->setRawInput($numberToParse);
+		}
+		$nationalNumber = $number;
+		// Attempt to parse extension first, since it doesn't require region-specific data and we want
+		// to have the non-normalised number here.
+		$extension = $this->maybeStripExtension($nationalNumber);
+		if (strlen($extension) > 0) {
+			$phoneNumber->setExtension($extension);
+		}
+
+		$regionMetadata = $this->getMetadataForRegion($defaultRegion);
+		// Check to see if the number is given in international format so we know whether this number is
+		// from the default region or not.
+		$normalizedNationalNumber = "";
+		$countryCode = 0;
+		try {
+			// TODO: This method should really just take in the string buffer that has already
+			// been created, and just remove the prefix, rather than taking in a string and then
+			// outputting a string buffer.
+			$countryCode = $this->maybeExtractCountryCode($nationalNumber, $regionMetadata,
+				$normalizedNationalNumber, $keepRawInput, $phoneNumber);
+
+		} catch (NumberParseException $e) {
+			$matcher = new Matcher(self::$PLUS_CHARS_PATTERN, $nationalNumber);
+			if ($e->getErrorType() == NumberParseException::INVALID_COUNTRY_CODE && $matcher->lookingAt()) {
+				// Strip the plus-char, and try again.
+				$countryCode = $this->maybeExtractCountryCode(substr($nationalNumber, $matcher->end()),
+					$regionMetadata, $normalizedNationalNumber,
+					$keepRawInput, $phoneNumber);
+				if ($countryCode == 0) {
+					throw new NumberParseException(NumberParseException::INVALID_COUNTRY_CODE,
+						"Could not interpret numbers after plus-sign.");
+				}
+			} else {
+				throw new NumberParseException($e->getErrorType(), $e->getMessage());
+			}
+		}
+		if ($countryCode !== 0) {
+			$phoneNumberRegion = $this->getRegionCodeForCountryCode($countryCode);
+			if ($phoneNumberRegion != $defaultRegion) {
+				$regionMetadata = $this->getMetadataForRegionOrCallingCode($countryCode, $phoneNumberRegion);
+			}
+		} else {
+			// If no extracted country calling code, use the region supplied instead. The national number
+			// is just the normalized version of the number we were given to parse.
+			$normalizedNationalNumber .= $this->normalize($nationalNumber);
+			if ($defaultRegion != null) {
+				$countryCode = $regionMetadata->getCountryCode();
+				$phoneNumber->setCountryCode($countryCode);
+			} else if ($keepRawInput) {
+				$phoneNumber->clearCountryCodeSource();
+			}
+		}
+		if (strlen($normalizedNationalNumber) < self::MIN_LENGTH_FOR_NSN) {
+			throw new NumberParseException(NumberParseException::TOO_SHORT_NSN,
+				"The string supplied is too short to be a phone number.");
+		}
+		if ($regionMetadata != null) {
+			$carrierCode = "";
+			$this->maybeStripNationalPrefixAndCarrierCode($normalizedNationalNumber, $regionMetadata, $carrierCode);
+			if ($keepRawInput) {
+				$phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
+			}
+		}
+		$lengthOfNationalNumber = strlen($normalizedNationalNumber);
+		if ($lengthOfNationalNumber < self::MIN_LENGTH_FOR_NSN) {
+			throw new NumberParseException(NumberParseException::TOO_SHORT_NSN,
+				"The string supplied is too short to be a phone number.");
+		}
+		if ($lengthOfNationalNumber > self::MAX_LENGTH_FOR_NSN) {
+			throw new NumberParseException(NumberParseException::TOO_LONG,
+				"The string supplied is too long to be a phone number.");
+		}
+
+		if ($normalizedNationalNumber[0] == '0') {
+			$phoneNumber->setItalianLeadingZero(true);
+		}
+		$phoneNumber->setNationalNumber((int)$normalizedNationalNumber);
+	}
+
 
 	/**
 	 * Tests whether a phone number matches a valid pattern. Note this doesn't verify the number
@@ -973,6 +1422,43 @@ class PhoneNumberUtil {
 		}
 	}
 
+	  /**
+	 * Attempts to extract a possible number from the string passed in. This currently strips all
+	 * leading characters that cannot be used to start a phone number. Characters that can be used to
+	 * start a phone number are defined in the VALID_START_CHAR_PATTERN. If none of these characters
+	 * are found in the number passed in, an empty string is returned. This function also attempts to
+	 * strip off any alternative extensions or endings if two or more are present, such as in the case
+	 * of: (530) 583-6985 x302/x2303. The second extension here makes this actually two phone numbers,
+	 * (530) 583-6985 x302 and (530) 583-6985 x2303. We remove the second extension so that the first
+	 * number is parsed correctly.
+	 *
+	 * @param number  the string that might contain a phone number
+	 * @return        the number, stripped of any non-phone-number prefix (such as "Tel:") or an empty
+	 *                string if no character used to start phone numbers (such as + or any digit) is
+	 *                found in the number
+	 */
+	private static function extractPossibleNumber($number) {
+			$matches = array();
+			$match = preg_match('/'.self::$VALID_START_CHAR_PATTERN.'/', $number, $matches, PREG_OFFSET_CAPTURE);
+		if ($match > 0) {
+					$number = substr($number, $matches[0][1]);
+					// Remove trailing non-alpha non-numerical characters.
+					$match = preg_match('/'.self::$UNWANTED_END_CHAR_PATTERN.'/', $number, $matches, PREG_OFFSET_CAPTURE);
+			if ($match > 0) {
+							$number = substr($number, 0, $matches[0][1]);
+			}
+			// Check for extra numbers at the end.
+			$match = preg_match('%'.self::$SECOND_NUMBER_START_PATTERN.'%', $number, $matches, PREG_OFFSET_CAPTURE);
+			if ($match > 0) {
+							$number = substr($number, 0, $matches[0][1]);
+			}
+			return $number;
+		} else {
+			return "";
+		}
+	}
+
+
 	private function getNumberTypeHelper($nationalNumber, PhoneMetadata $metadata) {
 		$generalNumberDesc = $metadata->getGeneralDesc();
 		if (!$generalNumberDesc->hasNationalNumberPattern() ||
@@ -1062,4 +1548,80 @@ class PhoneNumberUtil {
 		return !$this->isNumberMatchingDesc($nationalSignificantNumber, $metadata->getNoInternationalDialling());
 	}
 
+}
+
+class Matcher {
+	/**
+		 * @var string
+		 */
+	private $pattern;
+
+	/**
+		 * @var string
+		 */
+	private $subject;
+
+	/**
+		 * @var array
+		 */
+	private $groups = array();
+
+	/**
+		 * @param $pattern string
+		 * @param $subject string
+		 */
+	public function __construct($pattern, $subject)
+	{
+		$this->pattern = $pattern;
+		$this->subject = $subject;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function matches() {
+		return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')$/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function lookingAt() {
+		return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function find() {
+		return preg_match('/(?:' . str_replace('/', '\/', $this->pattern) . ')/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function groupCount() {
+		return count($this->groups) - 1;
+	}
+
+	public function group($group = NULL) {
+		return $this->groups[$group][0];
+	}
+
+	/**
+	 * @return int
+	 */
+	public function end() {
+			$lastGroup = end($this->groups);
+		return $lastGroup[1] + strlen($lastGroup[0]);
+	}
+
+	public function replaceFirst($replacement) {
+		return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject, 1);
+	}
+
+	public function replaceAll($replacement) {
+		return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject);
+	}
 }
