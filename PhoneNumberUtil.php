@@ -849,7 +849,7 @@ class PhoneNumberUtil {
 		// Attempt to parse the first digits as a national prefix.
 		$prefixMatcher = new Matcher($possibleNationalPrefix, $number);
 		if ($prefixMatcher->lookingAt()) {
-					$nationalNumberRule = $metadata->getGeneralDesc()->getNationalNumberPattern();
+			$nationalNumberRule = $metadata->getGeneralDesc()->getNationalNumberPattern();
 					// Check if the original number is viable.
 					$nationalNumberRuleMatcher = new Matcher($nationalNumberRule, $number);
 					$isViableOriginalNumber = $nationalNumberRuleMatcher->matches();
@@ -871,10 +871,10 @@ class PhoneNumberUtil {
 				$number = substr($number, $prefixMatcher->end());
 				return true;
 			} else {
-							// Check that the resultant number is still viable. If not, return. Check this by copying
-							// the string buffer and making the transformation on the copy first.
-							$transformedNumber = $number;
-							$transformedNumber->replace(0, $numberLength, $prefixMatcher->replaceFirst($transformRule));
+				// Check that the resultant number is still viable. If not, return. Check this by copying
+				// the string buffer and making the transformation on the copy first.
+				$transformedNumber = $number;
+				$transformedNumber =  substr_replace($transformedNumber, $prefixMatcher->replaceFirst($transformRule), 0, $numberLength);
 				if ($isViableOriginalNumber &&
 										!$nationalNumberRule->matcher($transformedNumber->toString())->matches()) {
 					return false;
@@ -882,7 +882,7 @@ class PhoneNumberUtil {
 				if ($carrierCode != null && $numOfGroups > 1) {
 									$carrierCode->append($prefixMatcher->group(1));
 				}
-				$number->replace(0, strlen($number), $transformedNumber);
+				$number =  substr_replace($number, $transformedNumber, 0, strlen($number));
 				return true;
 			}
 		}
@@ -964,9 +964,8 @@ class PhoneNumberUtil {
 	private function checkRegionForParsing($numberToParse, $defaultRegion) {
 	  if (!$this->isValidRegionCode($defaultRegion)) {
 	    // If the number is null or empty, we can't infer the region.
-	    if ($numberToParse == null || strlen($numberToParse) == 0 ||
-			  preg_match('/^'.self::$PLUS_CHARS_PATTERN . '/', $numberToParse) == 0
-		        ) {
+		$plusCharsPatternMatcher = new Matcher(self::$PLUS_CHARS_PATTERN, $numberToParse);
+	    if ($numberToParse == null || strlen($numberToParse) == 0 || $plusCharsPatternMatcher->lookingAt()) {
 	      return false;
 	    }
 	  }
