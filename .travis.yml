@@ -5,4 +5,4 @@ php:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: phpunit Tests/ --coverage-text
+script: phpunit --coverage-text Tests/
