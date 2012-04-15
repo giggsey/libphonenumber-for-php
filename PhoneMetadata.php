@@ -216,7 +216,7 @@ class PhoneMetadata {
 
 	/**
 	 *
-	 * @return PhoneNumberDesc 
+	 * @return PhoneNumberDesc
 	 */
 	public function getGeneralDesc() {
 		return $this->generalDesc;
