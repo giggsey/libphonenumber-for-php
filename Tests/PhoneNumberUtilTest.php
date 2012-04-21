@@ -290,6 +290,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(null, $this->phoneUtil->getExampleNumber(RegionCode::UN001));
 	}
 
+	public function testGetExampleNumberForNonGeoEntity() {
+		$this->assertEquals(self::$internationalTollFree, $this->phoneUtil->getExampleNumberForNonGeoEntity(800));
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));

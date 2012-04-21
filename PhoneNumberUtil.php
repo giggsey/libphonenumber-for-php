@@ -757,7 +757,7 @@ class PhoneNumberUtil {
 	 * @return int the country calling code extracted or 0 if none could be extracted
 	 * @throws NumberParseException
 	 */
-	private function maybeExtractCountryCode($number, PhoneMetadata $defaultRegionMetadata,
+	private function maybeExtractCountryCode($number, PhoneMetadata $defaultRegionMetadata = null,
 											 &$nationalNumber, $keepRawInput,
 											 PhoneNumber $phoneNumber) {
 		if (strlen($number) == 0) {
@@ -990,7 +990,7 @@ class PhoneNumberUtil {
 	  if (!$this->isValidRegionCode($defaultRegion)) {
 	    // If the number is null or empty, we can't infer the region.
 		$plusCharsPatternMatcher = new Matcher(self::$PLUS_CHARS_PATTERN, $numberToParse);
-	    if ($numberToParse == null || strlen($numberToParse) == 0 || $plusCharsPatternMatcher->lookingAt()) {
+	    if ($numberToParse == null || strlen($numberToParse) == 0 || !$plusCharsPatternMatcher->lookingAt()) {
 	      return false;
 	    }
 	  }
@@ -1077,7 +1077,6 @@ class PhoneNumberUtil {
 			// outputting a string buffer.
 			$countryCode = $this->maybeExtractCountryCode($nationalNumber, $regionMetadata,
 				$normalizedNationalNumber, $keepRawInput, $phoneNumber);
-
 		} catch (NumberParseException $e) {
 			$matcher = new Matcher(self::$PLUS_CHARS_PATTERN, $nationalNumber);
 			if ($e->getErrorType() == NumberParseException::INVALID_COUNTRY_CODE && $matcher->lookingAt()) {
@@ -1442,6 +1441,28 @@ class PhoneNumberUtil {
 				return $this->parse($desc->getExampleNumber(), $regionCode);
 			}
 		} catch (NumberParseException $e) {
+		}
+		return null;
+	}
+
+	/**
+	 * Gets a valid number for the specified country calling code for a non-geographical entity.
+	 *
+	 * @param int $countryCallingCode  the country calling code for a non-geographical entity
+	 * @return PhoneNumber a valid number for the non-geographical entity. Returns null when the metadata
+	 *    does not contain such information, or the country calling code passed in does not belong
+	 *    to a non-geographical entity.
+	 */
+	public function getExampleNumberForNonGeoEntity($countryCallingCode) {
+		$metadata = $this->getMetadataForNonGeographicalRegion($countryCallingCode);
+		if ($metadata != null) {
+			$desc = $metadata->getGeneralDesc();
+			try {
+				if ($desc->hasExampleNumber()) {
+					return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), "ZZ");
+				}
+			} catch (NumberParseException $e) {
+			}
 		}
 		return null;
 	}
