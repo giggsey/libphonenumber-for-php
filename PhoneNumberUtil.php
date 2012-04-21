@@ -504,6 +504,16 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Converts all alpha characters in a number to their respective digits on a keypad, but retains
+	 * existing formatting.
+	 * @param string $number
+	 * @return string
+	 */
+	public static function convertAlphaCharactersInNumber($number) {
+		return self::normalizeHelper($number, self::$ALPHA_PHONE_MAPPINGS, false);
+	}
+
+	/**
 	 * Gets the length of the geographical area code in the {@code nationalNumber_} field of the
 	 * PhoneNumber object passed in, so that clients could use it to split a national significant
 	 * number into geographical area code and subscriber number. It works in such a way that the

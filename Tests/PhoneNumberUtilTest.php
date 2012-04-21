@@ -294,6 +294,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(self::$internationalTollFree, $this->phoneUtil->getExampleNumberForNonGeoEntity(800));
 	}
 
+	public function testConvertAlphaCharactersInNumber() {
+		$input = "1800-ABC-DEF";
+		// Alpha chars are converted to digits; everything else is left untouched.
+		$expectedOutput = "1800-222-333";
+		$this->assertEquals($expectedOutput, $this->phoneUtil->convertAlphaCharactersInNumber($input));
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));
