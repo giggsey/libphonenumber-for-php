@@ -225,6 +225,43 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$internationalTollFree));
 	}
 
+	public function testGetLengthOfNationalDestinationCode() {
+		// Google MTV, which has national destination code (NDC) "650".
+		$this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$usNumber));
+
+		// A North America toll-free number, which has NDC "800".
+		$this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$usTollFree));
+
+		// Google London, which has NDC "20".
+		$this->assertEquals(2, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$gbNumber));
+
+		// A UK mobile phone, which has NDC "7912".
+		$this->assertEquals(4, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$gbMobile));
+
+		// Google Buenos Aires, which has NDC "11".
+		$this->assertEquals(2, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$arNumber));
+
+		// An Argentinian mobile which has NDC "911".
+		$this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$arMobile));
+
+		// Google Sydney, which has NDC "2".
+		$this->assertEquals(1, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$auNumber));
+
+		// Google Singapore, which has NDC "6521".
+		$this->assertEquals(4, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$sgNumber));
+
+		// An invalid US number (1 digit shorter), which has no NDC.
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$usShortByOneNumber));
+
+		// A number containing an invalid country calling code, which shouldn't have any NDC.
+		$number = new PhoneNumber();
+		$number->setCountryCode(123)->setNationalNumber(6502530000);
+		$this->assertEquals(0, $this->phoneUtil->getLengthOfNationalDestinationCode($number));
+
+		// An international toll free number, which has NDC "1234".
+		$this->assertEquals(4, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$internationalTollFree));
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));
