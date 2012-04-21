@@ -262,6 +262,18 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(4, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$internationalTollFree));
 	}
 
+	public function testGetNationalSignificantNumber() {
+		$this->assertEquals("6502530000", $this->phoneUtil->getNationalSignificantNumber(self::$usNumber));
+
+		// An Italian mobile number.
+		$this->assertEquals("345678901", $this->phoneUtil->getNationalSignificantNumber(self::$itMobile));
+
+		// An Italian fixed line number.
+		$this->assertEquals("0236618300", $this->phoneUtil->getNationalSignificantNumber(self::$itNumber));
+
+		$this->assertEquals("12345678", $this->phoneUtil->getNationalSignificantNumber(self::$internationalTollFree));
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));
