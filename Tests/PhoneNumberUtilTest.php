@@ -307,6 +307,12 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($expectedOutput, $this->phoneUtil->normalize($inputNumber), "Conversion did not correctly remove punctuation");
 	}
 
+	public function testNormaliseReplaceAlphaCharacters() {
+		$inputNumber = "034-I-am-HUNGRY";
+		$expectedOutput = "034426486479";
+		$this->assertEquals($expectedOutput, $this->phoneUtil->normalize($inputNumber), "Conversion did not correctly replace alpha characters");
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));
