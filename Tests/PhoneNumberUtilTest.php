@@ -274,6 +274,22 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("12345678", $this->phoneUtil->getNationalSignificantNumber(self::$internationalTollFree));
 	}
 
+	public function testGetExampleNumber() {
+		$this->assertEquals(self::$deNumber, $this->phoneUtil->getExampleNumber(RegionCode::DE));
+
+		$this->assertEquals(self::$deNumber, $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::FIXED_LINE));
+		$this->assertEquals(null, $this->phoneUtil->getExampleNumberForType(RegionCode::DE,PhoneNumberType::MOBILE));
+		// For the US, the example number is placed under general description, and hence should be used
+		// for both fixed line and mobile, so neither of these should return null.
+		$this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::FIXED_LINE));
+		$this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::MOBILE));
+		// CS is an invalid region, so we have no data for it.
+		$this->assertNull($this->phoneUtil->getExampleNumberForType(RegionCode::CS, PhoneNumberType::MOBILE));
+		// RegionCode 001 is reserved for supporting non-geographical country calling code. We don't
+		// support getting an example number for it with this method.
+		$this->assertEquals(null, $this->phoneUtil->getExampleNumber(RegionCode::UN001));
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));

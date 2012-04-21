@@ -1003,7 +1003,7 @@ class PhoneNumberUtil {
 	 * a possible number. Note that validation of whether the number is actually a valid number for a
 	 * particular region is not performed. This can be done separately with {@link #isValidNumber}.
 	 *
-	 * @param $numberToParse     number that we are attempting to parse. This can contain formatting
+	 * @param string $numberToParse     number that we are attempting to parse. This can contain formatting
 	 *                          such as +, ( and -, as well as a phone number extension.
 	 * @param string $defaultRegion     region that we are expecting the number to be from. This is only used
 	 *                          if the number being parsed is not written in international format.
@@ -1410,6 +1410,43 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Gets a valid number for the specified region.
+	 *
+	 * @param string regionCode  the region for which an example number is needed
+	 * @return PhoneNumber a valid fixed-line number for the specified region. Returns null when the metadata
+	 *    does not contain such information, or the region 001 is passed in. For 001 (representing
+	 *    non-geographical numbers), call {@link #getExampleNumberForNonGeoEntity} instead.
+	 */
+	public function getExampleNumber($regionCode) {
+		return $this->getExampleNumberForType($regionCode, PhoneNumberType::FIXED_LINE);
+	}
+
+	/**
+	 * Gets a valid number for the specified region and number type.
+	 *
+	 * @param string $regionCode  the region for which an example number is needed
+	 * @param int $type  the type of number that is needed
+	 * @return PhoneNumber a valid number for the specified region and type. Returns null when the metadata
+	 *     does not contain such information or if an invalid region or region 001 was entered.
+	 *     For 001 (representing non-geographical numbers), call
+	 *     {@link #getExampleNumberForNonGeoEntity} instead.
+	 */
+	public function getExampleNumberForType($regionCode, $type) {
+		// Check the region code is valid.
+		if (!$this->isValidRegionCode($regionCode)) {
+			return null;
+		}
+		$desc = $this->getNumberDescByType($this->getMetadataForRegion($regionCode), $type);
+		try {
+			if ($desc->hasExampleNumber()) {
+				return $this->parse($desc->getExampleNumber(), $regionCode);
+			}
+		} catch (NumberParseException $e) {
+		}
+		return null;
+	}
+
+	/**
 	 * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
 	 * an extension specified.
 	 */
@@ -1424,6 +1461,39 @@ class PhoneNumberUtil {
 					$formattedNumber .= self::DEFAULT_EXTN_PREFIX . $number->getExtension();
 				}
 			}
+		}
+	}
+
+	/**
+	 * @param PhoneMetadata $metadata
+	 * @param int $type
+	 * @return PhoneNumberDesc
+	 */
+	private function getNumberDescByType(PhoneMetadata $metadata, $type) {
+		switch ($type) {
+			case PhoneNumberType::PREMIUM_RATE:
+				return $metadata->getPremiumRate();
+			case PhoneNumberType::TOLL_FREE:
+				return $metadata->getTollFree();
+			case PhoneNumberType::MOBILE:
+				return $metadata->getMobile();
+			case PhoneNumberType::FIXED_LINE:
+			case PhoneNumberType::FIXED_LINE_OR_MOBILE:
+				return $metadata->getFixedLine();
+			case PhoneNumberType::SHARED_COST:
+				return $metadata->getSharedCost();
+			case PhoneNumberType::VOIP:
+				return $metadata->getVoip();
+			case PhoneNumberType::PERSONAL_NUMBER:
+				return $metadata->getPersonalNumber();
+			case PhoneNumberType::PAGER:
+				return $metadata->getPager();
+			case PhoneNumberType::UAN:
+				return $metadata->getUan();
+			case PhoneNumberType::VOICEMAIL:
+				return $metadata->getVoicemail();
+			default:
+				return $metadata->getGeneralDesc();
 		}
 	}
 
