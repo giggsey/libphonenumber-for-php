@@ -491,9 +491,9 @@ class PhoneNumberUtil {
 	 */
 	private static function normalizeDigits($number, $keepNonDigits) {
 		$normalizedDigits = "";
-		$numberAsArray = str_split($number);
+		$numberAsArray = preg_split('/(?<!^)(?!$)/u', $number);
 		foreach ($numberAsArray as $character) {
-			if (is_int($character)) {
+			if (is_numeric($character)) {
 				$normalizedDigits .= $character;
 			} else if ($keepNonDigits) {
 				$normalizedDigits .= $character;
