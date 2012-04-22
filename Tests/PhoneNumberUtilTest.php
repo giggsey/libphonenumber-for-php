@@ -313,6 +313,17 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($expectedOutput, $this->phoneUtil->normalize($inputNumber), "Conversion did not correctly replace alpha characters");
 	}
 
+	public function testNormaliseOtherDigits() {
+		$this->markTestSkipped('PHP UTF-8 toUpper incompatible');
+		$inputNumber = "\xEF\xBC\x92" . "5\xD9\xA5" /* "２5٥" */;
+		$expectedOutput = "255";
+		$this->assertEquals($expectedOutput, $this->phoneUtil->normalize($inputNumber), "Conversion did not correctly replace non-latin digits");
+		// Eastern-Arabic digits.
+		$inputNumber = "\xDB\xB5" . "2\xDB\xB0" /* "۵2۰" */;
+		$expectedOutput = "520";
+		$this->assertEquals($expectedOutput, $this->phoneUtil->normalize($inputNumber), "Conversion did not correctly replace non-latin digits");
+	}
+
 	public function testFormatUSNumber() {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 650 253 0000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::INTERNATIONAL));

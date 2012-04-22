@@ -460,10 +460,10 @@ class PhoneNumberUtil {
 	 */
 	private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches) {
 		$normalizedNumber = "";
-		$numberAsArray = str_split($number);
+		$numberAsArray = preg_split('/(?<!^)(?!$)/u', $number);
 		foreach ($numberAsArray as $character) {
-			if (isset($normalizationReplacements[strtoupper($character)])) {
-				$normalizedNumber .= $normalizationReplacements[strtoupper($character)];
+			if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
+				$normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
 			} else if (!$removeNonMatches) {
 				$normalizedNumber .= $character;
 			}
