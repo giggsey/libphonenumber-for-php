@@ -97,7 +97,7 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	private $preferredInternationalPrefix = "";
+	private $preferredInternationalPrefix = NULL;
 
 	public function hasPreferredInternationalPrefix() {
 		return isset($this->preferredInternationalPrefix);
@@ -663,12 +663,13 @@ class PhoneMetadata {
 		$this->setId($input['id']);
 		$this->setCountryCode($input['countryCode']);
 		$this->setInternationalPrefix($input['internationalPrefix']);
-		/*
-		  boolean hasString = objectInput.readBoolean();
-		  if (hasString) {
-		  setPreferredInternationalPrefix(objectInput.readUTF());
-		  }
-		 */
+
+		if (isset($input['preferredInternationalPrefix'])) {
+			$this->setPreferredInternationalPrefix($input['preferredInternationalPrefix']);
+		}
+		if (isset($input['nationalPrefix'])) {
+			$this->setNationalPrefix($input['nationalPrefix']);
+		}
 		if (isset($input['nationalPrefix'])) {
 			$this->setNationalPrefix($input['nationalPrefix']);
 		}

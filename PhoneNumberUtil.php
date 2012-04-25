@@ -129,6 +129,12 @@ class PhoneNumberUtil {
 
 	const UNKNOWN_REGION = "ZZ";
 
+	// The set of regions that share country calling code 1.
+	// There are roughly 26 regions and we set the initial capacity of the HashSet to 35 to offer a
+	// load factor of roughly 0.75.
+	private $nanpaRegions = array();
+	const NANPA_COUNTRY_CODE = 1;
+
 	// The PLUS_SIGN signifies the international prefix.
 	const PLUS_SIGN = '+';
 
@@ -195,7 +201,7 @@ class PhoneNumberUtil {
 			$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
 		}
 		unset($this->supportedRegions[array_search(self::REGION_CODE_FOR_NON_GEO_ENTITY, $this->supportedRegions)]);
-		//nanpaRegions.addAll(countryCallingCodeToRegionCodeMap.get(NANPA_COUNTRY_CODE));
+		$this->nanpaRegions = $this->countryCallingCodeToRegionCodeMap[self::NANPA_COUNTRY_CODE];
 	}
 
 	/*
@@ -260,6 +266,12 @@ class PhoneNumberUtil {
 	// We use this pattern to check if the phone number has at least three letters in it - if so, then
 	// we treat it as a number where some phone-number digits are represented by letters.
 	const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
+
+	// Default extension prefix to use when formatting. This will be put in front of any extension
+	// component of the number, after the main national number is formatted. For example, if you wish
+	// the default extension formatting to be " extn: 3456", then you should specify " extn: " here
+	// as the default extension prefix. This can be overridden by region-specific preferences.
+	const DEFAULT_EXTN_PREFIX = " ext. ";
 
 	// Regular expression of acceptable punctuation found in phone numbers. This excludes punctuation
 	// found as a leading character only.
@@ -326,6 +338,14 @@ class PhoneNumberUtil {
 					'9' => '9',
 		);
 	}
+
+    // Pattern that makes it easy to distinguish whether a region has a unique international dialing
+    // prefix or not. If a region has a unique international prefix (e.g. 011 in USA), it will be
+    // represented as a string that contains a sequence of ASCII digits. If there are multiple
+    // available international prefixes in a region, they will be represented as a regex string that
+    // always contains character(s) other than ASCII digits.
+    // Note this regex also includes tilde, which signals waiting for the tone.
+	const UNIQUE_INTERNATIONAL_PREFIX = "[\\d]+(?:[~\xE2\x81\x93\xE2\x88\xBC\xEF\xBD\x9E][\\d]+)?";
 
 	private static function getValidAlphaPattern() {
 		// We accept alpha characters in phone numbers, ASCII only, upper and lower case.
@@ -1171,6 +1191,18 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Returns the country calling code for a specific region. For example, this would be 1 for the
+	 * United States, and 64 for New Zealand. Assumes the region is already valid.
+	 *
+	 * @param String $regionCode  the region that we want to get the country calling code for
+	 * @return int  the country calling code for the region denoted by regionCode
+	 */
+	private function getCountryCodeForValidRegion($regionCode) {
+		$metadata = $this->getMetadataForRegion($regionCode);
+		return $metadata->getCountryCode();
+	}
+
+	/**
 	 * Tests whether a phone number is valid for a certain region. Note this doesn't verify the number
 	 * is actually in use, which is impossible to tell by just looking at a number itself. If the
 	 * country calling code is not the same as the country calling code for the region, this
@@ -1207,6 +1239,84 @@ class PhoneNumberUtil {
 
 	private function getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode) {
 		return self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode ? $this->getMetadataForNonGeographicalRegion($countryCallingCode) : $this->getMetadataForRegion($regionCode);
+	}
+
+	/**
+	 * Formats a phone number for out-of-country dialing purposes. If no regionCallingFrom is
+	 * supplied, we format the number in its INTERNATIONAL format. If the country calling code is the
+	 * same as that of the region where the number is from, then NATIONAL formatting will be applied.
+	 *
+	 * <p>If the number itself has a country calling code of zero or an otherwise invalid country
+	 * calling code, then we return the number with no formatting applied.
+	 *
+	 * <p>Note this function takes care of the case for calling inside of NANPA and between Russia and
+	 * Kazakhstan (who share the same country calling code). In those cases, no international prefix
+	 * is used. For regions which have multiple international prefixes, the number in its
+	 * INTERNATIONAL format will be returned instead.
+	 *
+	 * @param PhoneNumber $number               the phone number to be formatted
+	 * @param string $regionCallingFrom    the region where the call is being placed
+	 * @return string  the formatted phone number
+	 */
+	public function formatOutOfCountryCallingNumber(PhoneNumber $number, $regionCallingFrom) {
+		if (!$this->isValidRegionCode($regionCallingFrom)) {
+			return $this->format($number, PhoneNumberFormat::INTERNATIONAL);
+		}
+		$countryCallingCode = $number->getCountryCode();
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			return $nationalSignificantNumber;
+		}
+		if ($countryCallingCode == self::NANPA_COUNTRY_CODE) {
+			if ($this->isNANPACountry($regionCallingFrom)) {
+				// For NANPA regions, return the national format for these regions but prefix it with the
+				// country calling code.
+				return $countryCallingCode . " " . $this->format($number, PhoneNumberFormat::NATIONAL);
+			}
+		} else if ($countryCallingCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
+			// For regions that share a country calling code, the country calling code need not be dialled.
+			// This also applies when dialling within a region, so this if clause covers both these cases.
+			// Technically this is the case for dialling from La Reunion to other overseas departments of
+			// France (French Guiana, Martinique, Guadeloupe), but not vice versa - so we don't cover this
+			// edge case for now and for those cases return the version including country calling code.
+			// Details here: http://www.petitfute.com/voyage/225-info-pratiques-reunion
+			return $this->format($number, PhoneNumberFormat::NATIONAL);
+		}
+		$metadataForRegionCallingFrom = $this->getMetadataForRegion($regionCallingFrom);
+
+		$internationalPrefix = $metadataForRegionCallingFrom->getInternationalPrefix();
+
+		// For regions that have multiple international prefixes, the international format of the
+		// number is returned, unless there is a preferred international prefix.
+		$internationalPrefixForFormatting = "";
+		$uniqueInternationalPrefixMatcher = new Matcher(self::UNIQUE_INTERNATIONAL_PREFIX, $internationalPrefix);
+
+		if ($uniqueInternationalPrefixMatcher->matches()) {
+			$internationalPrefixForFormatting = $internationalPrefix;
+		} else if ($metadataForRegionCallingFrom->hasPreferredInternationalPrefix()) {
+			$internationalPrefixForFormatting = $metadataForRegionCallingFrom->getPreferredInternationalPrefix();
+		}
+
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		$metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+		$formattedNationalNumber = $this->formatNsn($nationalSignificantNumber, $metadataForRegion, PhoneNumberFormat::INTERNATIONAL);
+		$formattedNumber = $formattedNationalNumber;
+		$this->maybeAppendFormattedExtension($number, $metadataForRegion, PhoneNumberFormat::INTERNATIONAL, $formattedNumber);
+		if (strlen($internationalPrefixForFormatting) > 0) {
+			$formattedNumber = $internationalPrefixForFormatting . " " . $countryCallingCode . " " . $formattedNumber;
+		} else {
+			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::INTERNATIONAL, $formattedNumber);
+		}
+		return $formattedNumber;
+	}
+
+	/**
+	 * Checks if this is a region under the North American Numbering Plan Administration (NANPA).
+	 * @param string $regionCode
+	 * @return boolean true if regionCode is one of the regions under NANPA
+	 */
+	public function isNANPACountry($regionCode) {
+		return in_array($regionCode, $this->nanpaRegions);
 	}
 
 	/**

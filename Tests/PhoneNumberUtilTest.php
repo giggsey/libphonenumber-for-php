@@ -445,6 +445,51 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	  $this->assertEquals("+528211234567", $this->phoneUtil->format(self::$mxNumber2, PhoneNumberFormat::E164));
 	  }
 
+
+	public function testFormatOutOfCountryCallingNumber() {
+		$this->assertEquals("00 1 900 253 0000",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usPremium, RegionCode::DE));
+		$this->assertEquals("1 650 253 0000",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usNumber, RegionCode::BS));
+
+		$this->assertEquals("00 1 650 253 0000",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usNumber, RegionCode::PL));
+
+		$this->assertEquals("011 44 7912 345 678",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$gbMobile, RegionCode::US));
+
+		$this->assertEquals("00 49 1234",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$deShortNumber, RegionCode::GB));
+		// Note this number is correctly formatted without national prefix. Most of the numbers that
+		// are treated as invalid numbers by the library are short numbers, and they are usually not
+		// dialed with national prefix.
+		$this->assertEquals("1234", $this->phoneUtil->formatOutOfCountryCallingNumber(self::$deShortNumber, RegionCode::DE));
+
+		$this->assertEquals("011 39 02 3661 8300",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::US));
+		$this->assertEquals("02 3661 8300",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::IT));
+		$this->assertEquals("+39 02 3661 8300",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::SG));
+
+		$this->assertEquals("6521 8000",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$sgNumber, RegionCode::SG));
+
+		$this->assertEquals("011 54 9 11 8765 4321",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$arMobile, RegionCode::US));
+		$this->assertEquals("011 800 1234 5678",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$internationalTollFree, RegionCode::US));
+
+		$arNumberWithExtn = new PhoneNumber();
+		$arNumberWithExtn->mergeFrom(self::$arMobile)->setExtension("1234");
+		$this->assertEquals("011 54 9 11 8765 4321 ext. 1234",
+			$this->phoneUtil->formatOutOfCountryCallingNumber($arNumberWithExtn, RegionCode::US));
+		$this->assertEquals("0011 54 9 11 8765 4321 ext. 1234",
+			$this->phoneUtil->formatOutOfCountryCallingNumber($arNumberWithExtn, RegionCode::AU));
+		$this->assertEquals("011 15 8765-4321 ext. 1234",
+			$this->phoneUtil->formatOutOfCountryCallingNumber($arNumberWithExtn, RegionCode::AR));
+	}
+
 	/**
 	 * 
 	 */

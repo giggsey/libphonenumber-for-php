@@ -113,15 +113,80 @@ class PhoneNumber {
 		return $this;
 	}
 
+	private $countryCodeSource = NULL;
+
+	public function hasCountryCodeSource() {
+		return isset($this->countryCodeSource);
+	}
+
+	public function getCountryCodeSource() {
+		return $this->countryCodeSource;
+	}
+
+	public function setCountryCodeSource($value) {
+		$this->countryCodeSource = $value;
+		return $this;
+	}
+
+	public function clearCountryCodeSource() {
+		$this->countryCodeSource = NULL;
+		return $this;
+	}
+
+	private $preferredDomesticCarrierCode = NULL;
+
+	public function hasPreferredDomesticCarrierCode() {
+		return isset($this->preferredDomesticCarrierCode);
+	}
+
+	public function getPreferredDomesticCarrierCode() {
+		return $this->preferredDomesticCarrierCode;
+	}
+
+	public function setPreferredDomesticCarrierCode($value) {
+		$this->preferredDomesticCarrierCode = $value;
+		return $this;
+	}
+
+	public function clearPreferredDomesticCarrierCode() {
+		$this->preferredDomesticCarrierCode = NULL;
+		return $this;
+	}
+
 	public function clear() {
 		$this->clearCountryCode();
 		$this->clearNationalNumber();
 		$this->clearExtension();
 		$this->clearItalianLeadingZero();
 		$this->clearRawInput();
-		/*      $this->clearCountryCodeSource();
-			  $this->clearPreferredDomesticCarrierCode();
-		 */     return $this;
+		$this->clearCountryCodeSource();
+	  	$this->clearPreferredDomesticCarrierCode();
+		return $this;
+	}
+
+	public function  mergeFrom(PhoneNumber $other) {
+		if ($other->hasCountryCode()) {
+			$this->setCountryCode($other->getCountryCode());
+		}
+		if ($other->hasNationalNumber()) {
+			$this->setNationalNumber($other->getNationalNumber());
+		}
+		if ($other->hasExtension()) {
+			$this->setExtension($other->getExtension());
+		}
+		if ($other->hasItalianLeadingZero()) {
+			$this->setItalianLeadingZero($other->isItalianLeadingZero());
+		}
+		if ($other->hasRawInput()) {
+			$this->setRawInput($other->getRawInput());
+		}
+		if ($other->hasCountryCodeSource()) {
+			$this->setCountryCodeSource($other->getCountryCodeSource());
+		}
+		if ($other->hasPreferredDomesticCarrierCode()) {
+			$this->setPreferredDomesticCarrierCode($other->getPreferredDomesticCarrierCode());
+		}
+		return $this;
 	}
 }
 class CountryCodeSource {
