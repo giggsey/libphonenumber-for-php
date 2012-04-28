@@ -500,6 +500,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usNumber, RegionCode::UN001));
 	}
 
+	public function testFormatOutOfCountryWithPreferredIntlPrefix() {
+		// This should use 0011, since that is the preferred international prefix (both 0011 and 0012
+		// are accepted as possible international prefixes in our test metadta.)
+		$this->assertEquals("0011 39 02 3661 8300",
+			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::AU));
+	}
+
 	/**
 	 * 
 	 */
