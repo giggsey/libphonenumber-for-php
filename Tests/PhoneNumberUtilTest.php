@@ -490,16 +490,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 			$this->phoneUtil->formatOutOfCountryCallingNumber($arNumberWithExtn, RegionCode::AR));
 	}
 
-	public function testFormatOutOfCountryWithInvalidRegion() {
-		// AQ/Antarctica isn't a valid region code for phone number formatting,
-		// so this falls back to intl formatting.
-		$this->assertEquals("+1 650 253 0000",
-			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usNumber, RegionCode::AQ));
-		// For region code 001, the out-of-country format always turns into the international format.
-		$this->assertEquals("+1 650 253 0000",
-			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$usNumber, RegionCode::UN001));
-	}
-
 	/**
 	 * 
 	 */
