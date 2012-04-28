@@ -586,6 +586,24 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AQ));
 	}
 
+	public function testFormatWithCarrierCode() {
+		// We only support this for AR in our test metadata, and only for mobile numbers starting with
+		// certain values.
+		$arMobile = new PhoneNumber();
+		$arMobile->setCountryCode(54)->setNationalNumber(92234654321);
+		$this->assertEquals("02234 65-4321", $this->phoneUtil->format($arMobile, PhoneNumberFormat::NATIONAL));
+		// Here we force 14 as the carrier code.
+		$this->assertEquals("02234 14 65-4321",
+			$this->phoneUtil->formatNationalNumberWithCarrierCode($arMobile, "14"));
+		// Here we force the number to be shown with no carrier code.
+		$this->assertEquals("02234 65-4321",
+			$this->phoneUtil->formatNationalNumberWithCarrierCode($arMobile, ""));
+		// Here the international rule is used, so no carrier code should be present.
+		$this->assertEquals("+5492234654321", $this->phoneUtil->format($arMobile, PhoneNumberFormat::E164));
+		// We don't support this for the US so there should be no change.
+		$this->assertEquals("650 253 0000", $this->phoneUtil->formatNationalNumberWithCarrierCode(self::$usNumber, "15"));
+	}
+
 	/**
 	 * 
 	 */

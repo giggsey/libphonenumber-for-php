@@ -1536,6 +1536,37 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Formats a phone number in national format for dialing using the carrier as specified in the
+	 * {@code carrierCode}. The {@code carrierCode} will always be used regardless of whether the
+	 * phone number already has a preferred domestic carrier code stored. If {@code carrierCode}
+	 * contains an empty string, returns the number in national format without any carrier code.
+	 *
+	 * @param PhoneNumber $number  the phone number to be formatted
+	 * @param String $carrierCode  the carrier selection code to be used
+	 * @return String the formatted phone number in national format for dialing using the carrier as
+	 *          specified in the {@code carrierCode}
+	 */
+	public function formatNationalNumberWithCarrierCode(PhoneNumber $number, $carrierCode) {
+		$countryCallingCode = $number->getCountryCode();
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
+		// share a country calling code is contained by only one region for performance reasons. For
+		// example, for NANPA regions it will be contained in the metadata for US.
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			return $nationalSignificantNumber;
+		}
+
+		$formattedNumber = "";
+		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+		$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata,
+			PhoneNumberFormat::NATIONAL, $carrierCode);
+		$this->maybeAppendFormattedExtension($number, $metadata, PhoneNumberFormat::NATIONAL, $formattedNumber);
+		$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::NATIONAL,
+			$formattedNumber);
+		return $formattedNumber;
+	}
+	/**
 	 * @param PhoneNumber $number
 	 * @param array $regionCodes
 	 * @return null|string
