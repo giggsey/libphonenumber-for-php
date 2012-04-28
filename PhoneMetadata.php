@@ -917,28 +917,30 @@ class NumberFormat {
 		return $this;
 	}
 
-	/*
-	  public NumberFormat mergeFrom(NumberFormat other) {
-	  if (other.hasPattern()) {
-	  setPattern(other.getPattern());
-	  }
-	  if (other.hasFormat()) {
-	  setFormat(other.getFormat());
-	  }
-	  int leadingDigitsPatternSize = other.leadingDigitsPatternSize();
-	  for (int i = 0; i < leadingDigitsPatternSize; i++) {
-	  addLeadingDigitsPattern(other.getLeadingDigitsPattern(i));
-	  }
-	  if (other.hasNationalPrefixFormattingRule()) {
-	  setNationalPrefixFormattingRule(other.getNationalPrefixFormattingRule());
-	  }
-	  if (other.hasDomesticCarrierCodeFormattingRule()) {
-	  setDomesticCarrierCodeFormattingRule(other.getDomesticCarrierCodeFormattingRule());
-	  }
-	  setNationalPrefixOptionalWhenFormatting(other.isNationalPrefixOptionalWhenFormatting());
-	  return this;
-	  }
+	/**
+	 * @param NumberFormat $other
+	 * @return NumberFormat
 	 */
+	public function mergeFrom(NumberFormat $other) {
+		if ($other->hasPattern()) {
+			$this->setPattern($other->getPattern());
+		}
+		if ($other->hasFormat()) {
+			$this->setFormat($other->getFormat());
+		}
+		$leadingDigitsPatternSize = $other->leadingDigitsPatternSize();
+		for ($i = 0; $i < $leadingDigitsPatternSize; $i++) {
+			$this->addLeadingDigitsPattern($other->getLeadingDigitsPattern($i));
+		}
+		if ($other->hasNationalPrefixFormattingRule()) {
+			$this->setNationalPrefixFormattingRule($other->getNationalPrefixFormattingRule());
+		}
+		if ($other->hasDomesticCarrierCodeFormattingRule()) {
+			$this->setDomesticCarrierCodeFormattingRule($other->getDomesticCarrierCodeFormattingRule());
+		}
+		//  $this->setNationalPrefixOptionalWhenFormatting($other->isNationalPrefixOptionalWhenFormatting());
+		return $this;
+	}
 
 	public function toArray() {
 		$output = array();

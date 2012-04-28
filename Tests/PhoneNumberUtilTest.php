@@ -507,6 +507,85 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 			$this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::AU));
 	}
 
+	public function testFormatOutOfCountryKeepingAlphaChars() {
+		$alphaNumericNumber = new PhoneNumber();
+		$alphaNumericNumber->setCountryCode(1)->setNationalNumber(8007493524)->setRawInput("1800 six-flag");
+		$this->assertEquals("0011 1 800 SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		$alphaNumericNumber->setRawInput("1-800-SIX-flag");
+		$this->assertEquals("0011 1 800-SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		$alphaNumericNumber->setRawInput("Call us from UK: 00 1 800 SIX-flag");
+		$this->assertEquals("0011 1 800 SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		$alphaNumericNumber->setRawInput("800 SIX-flag");
+		$this->assertEquals("0011 1 800 SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		// Formatting from within the NANPA region.
+		$this->assertEquals("1 800 SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::US));
+
+		$this->assertEquals("1 800 SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::BS));
+
+		// Testing that if the raw input doesn't exist, it is formatted using
+		// formatOutOfCountryCallingNumber.
+		$alphaNumericNumber->clearRawInput();
+		$this->assertEquals("00 1 800 749 3524",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::DE));
+
+		// Testing AU alpha number formatted from Australia.
+		$alphaNumericNumber->setCountryCode(61)->setNationalNumber(827493524)->setRawInput("+61 82749-FLAG");
+		// This number should have the national prefix fixed.
+		$this->assertEquals("082749-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		$alphaNumericNumber->setRawInput("082749-FLAG");
+		$this->assertEquals("082749-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		$alphaNumericNumber->setNationalNumber(18007493524)->setRawInput("1-800-SIX-flag");
+		// This number should not have the national prefix prefixed, in accordance with the override for
+		// this specific formatting rule.
+		$this->assertEquals("1-800-SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AU));
+
+		// The metadata should not be permanently changed, since we copied it before modifying patterns.
+		// Here we check this.
+		$alphaNumericNumber->setNationalNumber(1800749352);
+		$this->assertEquals("1800 749 352",
+			$this->phoneUtil->formatOutOfCountryCallingNumber($alphaNumericNumber, RegionCode::AU));
+
+		// Testing a region with multiple international prefixes.
+		$this->assertEquals("+61 1-800-SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::SG));
+		// Testing the case of calling from a non-supported region.
+		$this->assertEquals("+61 1-800-SIX-FLAG",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AQ));
+
+		// Testing the case with an invalid country calling code.
+		$alphaNumericNumber->setCountryCode(0)->setNationalNumber(18007493524)->setRawInput("1-800-SIX-flag");
+		// Uses the raw input only.
+		$this->assertEquals("1-800-SIX-flag",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::DE));
+
+		// Testing the case of an invalid alpha number.
+		$alphaNumericNumber->setCountryCode(1)->setNationalNumber(80749)->setRawInput("180-SIX");
+		// No country-code stripping can be done.
+		$this->assertEquals("00 1 180-SIX",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::DE));
+
+		// Testing the case of calling from a non-supported region.
+		$alphaNumericNumber->setCountryCode(1)->setNationalNumber(80749)->setRawInput("180-SIX");
+		// No country-code stripping can be done since the number is invalid.
+		$this->assertEquals("+1 180-SIX",
+			$this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::AQ));
+	}
+
 	/**
 	 * 
 	 */

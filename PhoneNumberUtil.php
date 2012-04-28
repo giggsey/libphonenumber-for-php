@@ -169,6 +169,29 @@ class PhoneNumberUtil {
 			self::$VALID_START_CHAR_PATTERN = "[" . self::PLUS_CHARS . self::DIGITS . "]";
 
 			self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS = array();
+			// Put (lower letter -> upper letter) and (upper letter -> upper letter) mappings.
+			foreach (self::$ALPHA_MAPPINGS as $c => $value) {
+				self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[strtolower($c)] = $c;
+				self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[$c] = $c;
+			}
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS += self::$asciiDigitMappings;
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["-"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8D"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x90"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x91"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x92"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x93"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x94"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x95"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x88\x92"] = '-';
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["/"] = "/";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8F"] = "/";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[" "] = " ";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE3\x80\x80"] = " ";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
+			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
 		}
 		return self::$instance;
 	}
@@ -319,6 +342,9 @@ class PhoneNumberUtil {
 	);
 
 	private static $ALPHA_PHONE_MAPPINGS;
+	// Separate map of all symbols that we wish to retain when formatting alpha numbers. This
+	// includes digits, ASCII letters and number grouping symbols such as "-" and " ".
+	private static $ALL_PLUS_NUMBER_GROUPING_SYMBOLS;
 
 	private static $asciiDigitMappings;
 
@@ -1306,6 +1332,113 @@ class PhoneNumberUtil {
 			$formattedNumber = $internationalPrefixForFormatting . " " . $countryCallingCode . " " . $formattedNumber;
 		} else {
 			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::INTERNATIONAL, $formattedNumber);
+		}
+		return $formattedNumber;
+	}
+
+	/**
+	 * Formats a phone number for out-of-country dialing purposes.
+	 *
+	 * Note that in this version, if the number was entered originally using alpha characters and
+	 * this version of the number is stored in raw_input, this representation of the number will be
+	 * used rather than the digit representation. Grouping information, as specified by characters
+	 * such as "-" and " ", will be retained.
+	 *
+	 * <p><b>Caveats:</b></p>
+	 * <ul>
+	 *  <li> This will not produce good results if the country calling code is both present in the raw
+	 *       input _and_ is the start of the national number. This is not a problem in the regions
+	 *       which typically use alpha numbers.
+	 *  <li> This will also not produce good results if the raw input has any grouping information
+	 *       within the first three digits of the national number, and if the function needs to strip
+	 *       preceding digits/words in the raw input before these digits. Normally people group the
+	 *       first three digits together so this is not a huge problem - and will be fixed if it
+	 *       proves to be so.
+	 * </ul>
+	 *
+	 * @param PhoneNumber $number  the phone number that needs to be formatted
+	 * @param String $regionCallingFrom  the region where the call is being placed
+	 * @return String the formatted phone number
+	 */
+	public function formatOutOfCountryKeepingAlphaChars(PhoneNumber $number, $regionCallingFrom) {
+		$rawInput = $number->getRawInput();
+		// If there is no raw input, then we can't keep alpha characters because there aren't any.
+		// In this case, we return formatOutOfCountryCallingNumber.
+		if (strlen($rawInput) == 0) {
+			return $this->formatOutOfCountryCallingNumber($number, $regionCallingFrom);
+		}
+		$countryCode = $number->getCountryCode();
+		if (!$this->hasValidCountryCallingCode($countryCode)) {
+			return $rawInput;
+		}
+		// Strip any prefix such as country calling code, IDD, that was present. We do this by comparing
+		// the number in raw_input with the parsed number.
+		// To do this, first we normalize punctuation. We retain number grouping symbols such as " "
+		// only.
+		$rawInput = $this->normalizeHelper($rawInput, self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS, true);
+		// Now we trim everything before the first three digits in the parsed number. We choose three
+		// because all valid alpha numbers have 3 digits at the start - if it does not, then we don't
+		// trim anything at all. Similarly, if the national number was less than three digits, we don't
+		// trim anything at all.
+		$nationalNumber = $this->getNationalSignificantNumber($number);
+		if (strlen($nationalNumber) > 3) {
+			$firstNationalNumberDigit = strpos($rawInput, substr($nationalNumber, 0,3));
+			if ($firstNationalNumberDigit !== false) {
+				$rawInput = substr($rawInput, $firstNationalNumberDigit);
+			}
+		}
+		$metadataForRegionCallingFrom = $this->getMetadataForRegion($regionCallingFrom);
+		if ($countryCode == self::NANPA_COUNTRY_CODE) {
+			if ($this->isNANPACountry($regionCallingFrom)) {
+				return $countryCode . " " . $rawInput;
+			}
+		} else if ($this->isValidRegionCode($regionCallingFrom) &&
+			$countryCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
+			$formattingPattern =
+				$this->chooseFormattingPatternForNumber($metadataForRegionCallingFrom->numberFormats(),
+					$nationalNumber);
+			if ($formattingPattern == null) {
+				// If no pattern above is matched, we format the original input.
+				return $rawInput;
+			}
+			$newFormat = new NumberFormat();
+			$newFormat->mergeFrom($formattingPattern);
+			// The first group is the first group of digits that the user wrote together.
+			$newFormat->setPattern("(\\d+)(.*)");
+			// Here we just concatenate them back together after the national prefix has been fixed.
+			$newFormat->setFormat("$1$2");
+			// Now we format using this pattern instead of the default pattern, but with the national
+			// prefix prefixed if necessary.
+			// This will not work in the cases where the pattern (and not the leading digits) decide
+			// whether a national prefix needs to be used, since we have overridden the pattern to match
+			// anything, but that is not the case in the metadata to date.
+			return $this->formatNsnUsingPattern($rawInput, $newFormat, PhoneNumberFormat::NATIONAL);
+		}
+		$internationalPrefixForFormatting = "";
+		// If an unsupported region-calling-from is entered, or a country with multiple international
+		// prefixes, the international format of the number is returned, unless there is a preferred
+		// international prefix.
+		if ($metadataForRegionCallingFrom != null) {
+			$internationalPrefix = $metadataForRegionCallingFrom->getInternationalPrefix();
+			$uniqueInternationalPrefixMatcher = new Matcher(self::UNIQUE_INTERNATIONAL_PREFIX, $internationalPrefix);
+			$internationalPrefixForFormatting =
+				$uniqueInternationalPrefixMatcher->matches()
+					? $internationalPrefix
+					: $metadataForRegionCallingFrom->getPreferredInternationalPrefix();
+		}
+		$formattedNumber = $rawInput;
+		$regionCode = $this->getRegionCodeForCountryCode($countryCode);
+		$metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
+		$this->maybeAppendFormattedExtension($number, $metadataForRegion,
+			PhoneNumberFormat::INTERNATIONAL, $formattedNumber);
+		if (strlen($internationalPrefixForFormatting) > 0) {
+			$formattedNumber = $internationalPrefixForFormatting . " " .$countryCode . " ". $formattedNumber;
+		} else {
+			// Invalid region entered as country-calling-from (so no metadata was found for it) or the
+			// region chosen has multiple international dialling prefixes.
+			$this->prefixNumberWithCountryCallingCode($countryCode,
+				PhoneNumberFormat::INTERNATIONAL,
+				$formattedNumber);
 		}
 		return $formattedNumber;
 	}
