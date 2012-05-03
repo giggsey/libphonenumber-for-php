@@ -654,6 +654,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
 	}
 
+	public function testGetRegionCodeForNumber() {
+		$this->assertEquals(RegionCode::BS, $this->phoneUtil->getRegionCodeForNumber(self::$bsNumber));
+		$this->assertEquals(RegionCode::US, $this->phoneUtil->getRegionCodeForNumber(self::$usNumber));
+		$this->assertEquals(RegionCode::GB, $this->phoneUtil->getRegionCodeForNumber(self::$gbMobile));
+		$this->assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$internationalTollFree));
+	}
+
 	public function testCanBeInternationallyDialled() {
 		// We have no-international-dialling rules for the US in our test metadata that say that
 		// toll-free numbers cannot be dialled internationally.
