@@ -1268,6 +1268,27 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Formats a phone number in national format for dialing using the carrier as specified in the
+	 * preferredDomesticCarrierCode field of the PhoneNumber object passed in. If that is missing,
+	 * use the {@code fallbackCarrierCode} passed in instead. If there is no
+	 * {@code preferredDomesticCarrierCode}, and the {@code fallbackCarrierCode} contains an empty
+	 * string, return the number in national format without any carrier code.
+	 *
+	 * <p>Use {@link #formatNationalNumberWithCarrierCode} instead if the carrier code passed in
+	 * should take precedence over the number's {@code preferredDomesticCarrierCode} when formatting.
+	 *
+	 * @param PhoneNumber $number  the phone number to be formatted
+	 * @param String $fallbackCarrierCode  the carrier selection code to be used, if none is found in the
+	 *     phone number itself
+	 * @return String the formatted phone number in national format for dialing using the number's
+	 *     {@code preferredDomesticCarrierCode}, or the {@code fallbackCarrierCode} passed in if
+	 *     none is found
+	 */
+	public function formatNationalNumberWithPreferredCarrierCode(PhoneNumber $number, $fallbackCarrierCode) {
+		return $this->formatNationalNumberWithCarrierCode($number, $number->hasPreferredDomesticCarrierCode() ? $number->getPreferredDomesticCarrierCode() : $fallbackCarrierCode);
+	}
+
+	/**
 	 * Formats a phone number for out-of-country dialing purposes. If no regionCallingFrom is
 	 * supplied, we format the number in its INTERNATIONAL format. If the country calling code is the
 	 * same as that of the region where the number is from, then NATIONAL formatting will be applied.

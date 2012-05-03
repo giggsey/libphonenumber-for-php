@@ -604,6 +604,35 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("650 253 0000", $this->phoneUtil->formatNationalNumberWithCarrierCode(self::$usNumber, "15"));
 	}
 
+	public function testFormatWithPreferredCarrierCode() {
+		// We only support this for AR in our test metadata.
+		$arNumber = new PhoneNumber();
+		$arNumber->setCountryCode(54)->setNationalNumber(91234125678);
+		// Test formatting with no preferred carrier code stored in the number itself.
+		$this->assertEquals("01234 15 12-5678",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "15"));
+		$this->assertEquals("01234 12-5678",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, ""));
+		// Test formatting with preferred carrier code present.
+		$arNumber->setPreferredDomesticCarrierCode("19");
+		$this->assertEquals("01234 12-5678", $this->phoneUtil->format($arNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("01234 19 12-5678",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "15"));
+		$this->assertEquals("01234 19 12-5678",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, ""));
+		// When the preferred_domestic_carrier_code is present (even when it contains an empty string),
+		// use it instead of the default carrier code passed in.
+		$arNumber->setPreferredDomesticCarrierCode("");
+		$this->assertEquals("01234 12-5678",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "15"));
+		// We don't support this for the US so there should be no change.
+		$usNumber = new PhoneNumber();
+		$usNumber->setCountryCode(1)->setNationalNumber(4241231234)->setPreferredDomesticCarrierCode("99");
+		$this->assertEquals("424 123 1234", $this->phoneUtil->format($usNumber, PhoneNumberFormat::NATIONAL));
+		$this->assertEquals("424 123 1234",
+			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($usNumber, "15"));
+	}
+
 	/**
 	 * 
 	 */
