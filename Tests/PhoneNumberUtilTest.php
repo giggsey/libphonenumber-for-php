@@ -20,6 +20,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $usTollFree = NULL;
 	private static $usNumber = NULL;
 	private static $usLocalNumber = NULL;
+	private static $usLongNumber = NULL;
 	private static $nzNumber = NULL;
 	private static $usPremium = NULL;
 	private static $usSpoof = NULL;
@@ -57,6 +58,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
 		self::$sgNumber = new PhoneNumber();
 		self::$sgNumber->setCountryCode(65)->setNationalNumber(65218000);
+		// A too-long and hence invalid US number.
+		self::$usLongNumber = new PhoneNumber();
+		self::$usLongNumber->setCountryCode(1)->setNationalNumber(65025300001);
 		self::$usShortByOneNumber = new PhoneNumber();
 		self::$usShortByOneNumber->setCountryCode(1)->setNationalNumber(650253000);
 		self::$usTollFree = new PhoneNumber();
@@ -631,6 +635,47 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("424 123 1234", $this->phoneUtil->format($usNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("424 123 1234",
 			$this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($usNumber, "15"));
+	}
+
+	public function testFormatNumberForMobileDialing() {
+		// US toll free numbers are marked as noInternationalDialling in the test metadata for testing
+		// purposes.
+		$this->assertEquals("800 253 0000",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usTollFree, RegionCode::US, true /*  keep formatting */));
+		$this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing(self::$usTollFree, RegionCode::CN, true));
+		$this->assertEquals("+1 650 253 0000",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::US, true));
+		$usNumberWithExtn = new PhoneNumber();
+		$usNumberWithExtn->mergeFrom(self::$usNumber)->setExtension("1234");
+		$this->assertEquals("+1 650 253 0000",
+			$this->phoneUtil->formatNumberForMobileDialing($usNumberWithExtn, RegionCode::US, true));
+
+		$this->assertEquals("8002530000",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usTollFree, RegionCode::US,
+				false /* remove formatting */));
+		$this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing(self::$usTollFree, RegionCode::CN, false));
+		$this->assertEquals("+16502530000",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::US, false));
+		$this->assertEquals("+16502530000",
+			$this->phoneUtil->formatNumberForMobileDialing($usNumberWithExtn, RegionCode::US, false));
+
+		// An invalid US number, which is one digit too long.
+		$this->assertEquals("+165025300001",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usLongNumber, RegionCode::US, false));
+		$this->assertEquals("+1 65025300001",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$usLongNumber, RegionCode::US, true));
+
+		// Star numbers. In real life they appear in Israel, but we have them in JP in our test
+		// metadata.
+		$this->assertEquals("*2345",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$jpStarNumber, RegionCode::JP, false));
+		$this->assertEquals("*2345",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$jpStarNumber, RegionCode::JP, true));
+
+		$this->assertEquals("+80012345678",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::JP, false));
+		$this->assertEquals("+800 1234 5678",
+			$this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::JP, true));
 	}
 
 	/**

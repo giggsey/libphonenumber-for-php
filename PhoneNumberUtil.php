@@ -135,6 +135,10 @@ class PhoneNumberUtil {
 	private $nanpaRegions = array();
 	const NANPA_COUNTRY_CODE = 1;
 
+	// The prefix that needs to be inserted in front of a Colombian landline number when dialed from
+	// a mobile phone in Colombia.
+	const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3";
+
 	// The PLUS_SIGN signifies the international prefix.
 	const PLUS_SIGN = '+';
 
@@ -169,6 +173,11 @@ class PhoneNumberUtil {
 			self::$VALID_START_CHAR_PATTERN = "[" . self::PLUS_CHARS . self::DIGITS . "]";
 
 			self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
+
+			self::$DIALLABLE_CHAR_MAPPINGS = self::$asciiDigitMappings;
+			self::$DIALLABLE_CHAR_MAPPINGS['+'] = '+';
+			self::$DIALLABLE_CHAR_MAPPINGS['*'] = '*';
+
 			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS = array();
 			// Put (lower letter -> upper letter) and (upper letter -> upper letter) mappings.
 			foreach (self::$ALPHA_MAPPINGS as $c => $value) {
@@ -285,6 +294,11 @@ class PhoneNumberUtil {
 
 	const STAR_SIGN = '*';
 	const RFC3966_EXTN_PREFIX = ";ext=";
+
+	// A map that contains characters that are essential when dialling. That means any of the
+	// characters in this map must not be removed from a number when dialing, otherwise the call will
+	// not reach the intended destination.
+	private static $DIALLABLE_CHAR_MAPPINGS = array();
 
 	// We use this pattern to check if the phone number has at least three letters in it - if so, then
 	// we treat it as a number where some phone-number digits are represented by letters.
@@ -1286,6 +1300,61 @@ class PhoneNumberUtil {
 	 */
 	public function formatNationalNumberWithPreferredCarrierCode(PhoneNumber $number, $fallbackCarrierCode) {
 		return $this->formatNationalNumberWithCarrierCode($number, $number->hasPreferredDomesticCarrierCode() ? $number->getPreferredDomesticCarrierCode() : $fallbackCarrierCode);
+	}
+
+	/**
+	 * Returns a number formatted in such a way that it can be dialed from a mobile phone in a
+	 * specific region. If the number cannot be reached from the region (e.g. some countries block
+	 * toll-free numbers from being called outside of the country), the method returns an empty
+	 * string.
+	 *
+	 * @param PhoneNumber $number  the phone number to be formatted
+	 * @param String $regionCallingFrom  the region where the call is being placed
+	 * @param boolean $withFormatting  whether the number should be returned with formatting symbols, such as
+	 *     spaces and dashes.
+	 * @return String the formatted phone number
+	 */
+	public function formatNumberForMobileDialing(PhoneNumber $number, $regionCallingFrom, $withFormatting) {
+		$countryCallingCode = $number->getCountryCode();
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			return $number->hasRawInput() ? $number->getRawInput() : "";
+		}
+
+		// Clear the extension, as that part cannot normally be dialed together with the main number.
+		$numberNoExt = new PhoneNumber();
+		$numberNoExt->mergeFrom($number)->clearExtension();
+		$numberType = $this->getNumberType($numberNoExt);
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		if ($regionCode == "CO" && $regionCallingFrom == "CO") {
+			if ($numberType == PhoneNumberType::FIXED_LINE) {
+				$formattedNumber = $this->formatNationalNumberWithCarrierCode($numberNoExt, self::COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX);
+			} else {
+				// E164 doesn't work at all when dialing within Colombia.
+				$formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+			}
+		} else if ($regionCode == "PE" && $regionCallingFrom == "PE") {
+			// In Peru, numbers cannot be dialled using E164 format from a mobile phone for Movistar.
+			// Instead they must be dialled in national format.
+			$formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+		} else if ($regionCode == "BR" && $regionCallingFrom == "BR" &&
+			(($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) ||
+				($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE))) {
+			$formattedNumber = $numberNoExt->hasPreferredDomesticCarrierCode()
+				? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, "")
+				// Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
+				// called within Brazil. Without that, most of the carriers won't connect the call.
+				// Because of that, we return an empty string here.
+				: "";
+		} else if ($this->canBeInternationallyDialled($numberNoExt)) {
+			return $withFormatting ? $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL)
+				: $this->format($numberNoExt, PhoneNumberFormat::E164);
+		} else {
+			$formattedNumber = ($regionCallingFrom == $regionCode)
+				? $this->format($numberNoExt, PhoneNumberFormat::NATIONAL) : "";
+		}
+		return $withFormatting ? $formattedNumber
+			: $this->normalizeHelper($formattedNumber, self::$DIALLABLE_CHAR_MAPPINGS,
+				true /* remove non matches */);
 	}
 
 	/**
