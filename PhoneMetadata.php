@@ -673,12 +673,10 @@ class PhoneMetadata {
 		if (isset($input['nationalPrefix'])) {
 			$this->setNationalPrefix($input['nationalPrefix']);
 		}
-		/*
-		  hasString = objectInput.readBoolean();
-		  if (hasString) {
-		  setPreferredExtnPrefix(objectInput.readUTF());
-		  }
-		 */
+
+		if (isset($input['preferredExtnPrefix'])) {
+			$this->setPreferredExtnPrefix($input['preferredExtnPrefix']);
+		}
 
 		if (isset($input['nationalPrefixForParsing'])) {
 			$this->setNationalPrefixForParsing($input['nationalPrefixForParsing']);

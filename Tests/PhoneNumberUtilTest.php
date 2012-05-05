@@ -745,6 +745,19 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("+80012345678", $this->phoneUtil->format(self::$internationalTollFree, PhoneNumberFormat::E164));
 	}
 
+	public function testFormatNumberWithExtension() {
+		$nzNumber = new PhoneNumber();
+		$nzNumber->mergeFrom(self::$nzNumber)->setExtension("1234");
+		// Uses default extension prefix:
+		$this->assertEquals("03-331 6005 ext. 1234", $this->phoneUtil->format($nzNumber, PhoneNumberFormat::NATIONAL));
+		// Uses RFC 3966 syntax.
+		$this->assertEquals("+64-3-331-6005;ext=1234", $this->phoneUtil->format($nzNumber, PhoneNumberFormat::RFC3966));
+		// Extension prefix overridden in the territory information for the US:
+		$usNumberWithExtension = new PhoneNumber();
+		$usNumberWithExtension->mergeFrom(self::$usNumber)->setExtension("4567");
+		$this->assertEquals("650 253 0000 extn. 4567", $this->phoneUtil->format($usNumberWithExtension, PhoneNumberFormat::NATIONAL));
+	}
+
 	/**
 	 * 
 	 */
