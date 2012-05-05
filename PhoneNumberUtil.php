@@ -1626,6 +1626,63 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Formats a phone number in the specified format using client-defined formatting rules. Note that
+	 * if the phone number has a country calling code of zero or an otherwise invalid country calling
+	 * code, we cannot work out things like whether there should be a national prefix applied, or how
+	 * to format extensions, so we return the national significant number with no formatting applied.
+	 *
+	 * @param PhoneNumber $number                        the phone number to be formatted
+	 * @param int $numberFormat                  the format the phone number should be formatted into
+	 * @param array $userDefinedFormats            formatting rules specified by clients
+	 * @return String the formatted phone number
+	 */
+	public function formatByPattern(PhoneNumber $number, $numberFormat, array $userDefinedFormats) {
+		$countryCallingCode = $number->getCountryCode();
+		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
+		// share a country calling code is contained by only one region for performance reasons. For
+		// example, for NANPA regions it will be contained in the metadata for US.
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			return $nationalSignificantNumber;
+		}
+		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+
+		$formattedNumber = "";
+
+		$formattingPattern = $this->chooseFormattingPatternForNumber($userDefinedFormats, $nationalSignificantNumber);
+		if ($formattingPattern == null) {
+			// If no pattern above is matched, we format the number as a whole.
+			$formattedNumber .= $nationalSignificantNumber;
+		} else {
+			$numFormatCopy = new NumberFormat();
+			// Before we do a replacement of the national prefix pattern $NP with the national prefix, we
+			// need to copy the rule so that subsequent replacements for different numbers have the
+			// appropriate national prefix.
+			$numFormatCopy->mergeFrom($formattingPattern);
+			$nationalPrefixFormattingRule = $formattingPattern->getNationalPrefixFormattingRule();
+			if (strlen($nationalPrefixFormattingRule) > 0) {
+				$nationalPrefix = $metadata->getNationalPrefix();
+				if (strlen($nationalPrefix) > 0) {
+					// Replace $NP with national prefix and $FG with the first group ($1).
+					$npPatternMatcher = new Matcher(self::NP_PATTERN, $nationalPrefixFormattingRule);
+					$nationalPrefixFormattingRule = $npPatternMatcher->replaceFirst($nationalPrefix);
+					$fgPatternMatcher = new Matcher(self::FG_PATTERN, $nationalPrefixFormattingRule);
+					$nationalPrefixFormattingRule = $fgPatternMatcher->replaceFirst("\\$1");
+					$numFormatCopy->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
+				} else {
+					// We don't want to have a rule for how to format the national prefix if there isn't one.
+					$numFormatCopy->clearNationalPrefixFormattingRule();
+				}
+			}
+			$formattedNumber .= $this->formatNsnUsingPattern($nationalSignificantNumber, $numFormatCopy, $numberFormat);
+		}
+		$this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
+		$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+		return $formattedNumber;
+	}
+
+	/**
 	 * Formats a phone number in national format for dialing using the carrier as specified in the
 	 * {@code carrierCode}. The {@code carrierCode} will always be used regardless of whether the
 	 * phone number already has a preferred domestic carrier code stored. If {@code carrierCode}
@@ -1746,38 +1803,43 @@ class PhoneNumberUtil {
 	// will take place.
 	private function formatNsnUsingPattern($nationalNumber, NumberFormat $formattingPattern, $numberFormat, $carrierCode = NULL) {
 		$numberFormatRule = $formattingPattern->getFormat();
-		$m = '/' . $formattingPattern->getPattern() . '/';
-		$formattedNationalNumber = "";
+		$m = new Matcher($formattingPattern->getPattern(), $nationalNumber);
 		if ($numberFormat == PhoneNumberFormat::NATIONAL &&
 				$carrierCode != null && strlen($carrierCode) > 0 &&
 				strlen($formattingPattern->getDomesticCarrierCodeFormattingRule()) > 0) {
 			// Replace the $CC in the formatting rule with the desired carrier code.
 			$carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
-			$carrierCodeFormattingRule = preg_replace('/' . self::CC_PATTERN . '/', $carrierCode, $carrierCodeFormattingRule, 1);
+			$ccPatternMatcher = new Matcher(self::CC_PATTERN, $carrierCodeFormattingRule);
+			$carrierCodeFormattingRule = $ccPatternMatcher->replaceFirst($carrierCode);
 			// Now replace the $FG in the formatting rule with the first group and the carrier code
 			// combined in the appropriate way.
-			$numberFormatRule = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $carrierCodeFormattingRule, $numberFormatRule, 1);
-			$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
+			$firstGroupMatcher = new Matcher(self::FIRST_GROUP_PATTERN, $numberFormatRule);
+			$numberFormatRule = $firstGroupMatcher->replaceFirst($carrierCodeFormattingRule);
+			$formattedNationalNumber = $m->replaceAll($numberFormatRule);;
 		} else {
 			// Use the national prefix formatting rule instead.
 			$nationalPrefixFormattingRule = $formattingPattern->getNationalPrefixFormattingRule();
 			if ($numberFormat == PhoneNumberFormat::NATIONAL &&
 					$nationalPrefixFormattingRule != null &&
 					strlen($nationalPrefixFormattingRule) > 0) {
-				$firstGroupMatcher = preg_replace('/' . self::FIRST_GROUP_PATTERN . '/', $nationalPrefixFormattingRule, $numberFormatRule, 1);
-				$formattedNationalNumber = preg_replace($m, $firstGroupMatcher, $nationalNumber);
+				$firstGroupMatcher = new Matcher(self::FIRST_GROUP_PATTERN, $numberFormatRule);
+				$formattedNationalNumber =  $m->replaceAll($firstGroupMatcher->replaceFirst($nationalPrefixFormattingRule));
 			} else {
-				$formattedNationalNumber = preg_replace($m, $numberFormatRule, $nationalNumber);
+				$formattedNationalNumber = $m->replaceAll($numberFormatRule);
 			}
 		}
 		if ($numberFormat == PhoneNumberFormat::RFC3966) {
 			// Strip any leading punctuation.
-			$matcher = preg_match('%' . self::$SEPARATOR_PATTERN . '%', $formattedNationalNumber);
-			if ($matcher == 0) {
-				$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "", $formattedNationalNumber, 1);
+			$matcher = new Matcher(self::$SEPARATOR_PATTERN, $formattedNationalNumber);
+			if ($matcher->lookingAt()) {
+				$formattedNationalNumber = $matcher->replaceFirst("");
+
+				//$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "", $formattedNationalNumber, 1);
 			}
 			// Replace the rest with a dash between each number group.
-			$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "-", $formattedNationalNumber);
+			$formattedNationalNumber = $matcher->reset($formattedNationalNumber)->replaceAll("-");
+
+			//$formattedNationalNumber = preg_replace('%' . self::$SEPARATOR_PATTERN . '%', "-", $formattedNationalNumber);
 		}
 		return $formattedNationalNumber;
 	}
@@ -2130,5 +2192,10 @@ class Matcher {
 
 	public function replaceAll($replacement) {
 		return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject);
+	}
+
+	public function reset($input = "") {
+		$this->subject = $input;
+		return $this;
 	}
 }

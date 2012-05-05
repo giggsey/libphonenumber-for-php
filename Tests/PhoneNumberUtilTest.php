@@ -678,6 +678,67 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 			$this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::JP, true));
 	}
 
+	public function testFormatByPattern() {
+		$newNumFormat = new NumberFormat();
+		$newNumFormat->setPattern("(\\d{3})(\\d{3})(\\d{4})");
+		$newNumFormat->setFormat("($1) $2-$3");
+		$newNumberFormats = array();
+		$newNumberFormats[] = $newNumFormat;
+
+		$this->assertEquals("(650) 253-0000", $this->phoneUtil->formatByPattern(self::$usNumber, PhoneNumberFormat::NATIONAL,
+			$newNumberFormats));
+		$this->assertEquals("+1 (650) 253-0000", $this->phoneUtil->formatByPattern(self::$usNumber,
+			PhoneNumberFormat::INTERNATIONAL,
+			$newNumberFormats));
+		$this->assertEquals("+1-650-253-0000", $this->phoneUtil->formatByPattern(self::$usNumber,
+			PhoneNumberFormat::RFC3966,
+			$newNumberFormats));
+
+		// $NP is set to '1' for the US. Here we check that for other NANPA countries the US rules are
+		// followed.
+		$newNumFormat->setNationalPrefixFormattingRule('$NP ($FG)');
+		$newNumFormat->setFormat("$1 $2-$3");
+		$this->assertEquals("1 (242) 365-1234",
+			$this->phoneUtil->formatByPattern(self::$bsNumber, PhoneNumberFormat::NATIONAL,
+				$newNumberFormats));
+		$this->assertEquals("+1 242 365-1234",
+			$this->phoneUtil->formatByPattern(self::$bsNumber, PhoneNumberFormat::INTERNATIONAL,
+				$newNumberFormats));
+
+		$newNumFormat->setPattern("(\\d{2})(\\d{5})(\\d{3})");
+		$newNumFormat->setFormat("$1-$2 $3");
+		$newNumberFormats[0] = $newNumFormat;
+
+		$this->assertEquals("02-36618 300",
+			$this->phoneUtil->formatByPattern(self::$itNumber, PhoneNumberFormat::NATIONAL,
+				$newNumberFormats));
+		$this->assertEquals("+39 02-36618 300",
+			$this->phoneUtil->formatByPattern(self::$itNumber, PhoneNumberFormat::INTERNATIONAL,
+				$newNumberFormats));
+
+		$newNumFormat->setNationalPrefixFormattingRule('$NP$FG');
+		$newNumFormat->setPattern("(\\d{2})(\\d{4})(\\d{4})");
+		$newNumFormat->setFormat("$1 $2 $3");
+		$newNumberFormats[0] = $newNumFormat;
+		$this->assertEquals("020 7031 3000",
+			$this->phoneUtil->formatByPattern(self::$gbNumber, PhoneNumberFormat::NATIONAL,
+				$newNumberFormats));
+
+		$newNumFormat->setNationalPrefixFormattingRule('($NP$FG)');
+		$this->assertEquals("(020) 7031 3000",
+			$this->phoneUtil->formatByPattern(self::$gbNumber, PhoneNumberFormat::NATIONAL,
+				$newNumberFormats));
+
+		$newNumFormat->setNationalPrefixFormattingRule("");
+		$this->assertEquals("20 7031 3000",
+			$this->phoneUtil->formatByPattern(self::$gbNumber, PhoneNumberFormat::NATIONAL,
+				$newNumberFormats));
+
+		$this->assertEquals("+44 20 7031 3000",
+			$this->phoneUtil->formatByPattern(self::$gbNumber, PhoneNumberFormat::INTERNATIONAL,
+				$newNumberFormats));
+	}
+
 	/**
 	 * 
 	 */
