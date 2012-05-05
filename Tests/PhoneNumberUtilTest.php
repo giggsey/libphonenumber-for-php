@@ -739,6 +739,12 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 				$newNumberFormats));
 	}
 
+	public function testFormatE164Number() {
+		$this->assertEquals("+16502530000", $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::E164));
+		$this->assertEquals("+4930123456", $this->phoneUtil->format(self::$deNumber, PhoneNumberFormat::E164));
+		$this->assertEquals("+80012345678", $this->phoneUtil->format(self::$internationalTollFree, PhoneNumberFormat::E164));
+	}
+
 	/**
 	 * 
 	 */
