@@ -35,6 +35,7 @@ class RegionCode {
   const CS = "CS";
   const DE = "DE";
   const GB = "GB";
+  const IN = "IN";
   const IT = "IT";
   const JP = "JP";
   const KR = "KR";

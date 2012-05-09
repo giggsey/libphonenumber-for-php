@@ -866,6 +866,11 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		// Test star numbers. Although this is not strictly valid, we would like to make sure we can
 		// parse the output we produce when formatting the number.
 		$this->assertEquals(self::$jpStarNumber, $this->phoneUtil->parse("+81 *2345", RegionCode::JP));
+
+		// Test national number bigger than max 32-bit signed integer
+		$inNumber = new PhoneNumber();
+		$inNumber->setCountryCode(91)->setNationalNumber(9876543210);
+		$this->assertEquals($inNumber, $this->phoneUtil->parse("9876543210", RegionCode::IN));
 	}
 
 	public function testIsAlphaNumber() {

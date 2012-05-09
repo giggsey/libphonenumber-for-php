@@ -18,6 +18,7 @@ class CountryCodeToRegionCodeMapForTesting {
 		65 => array('SG'),
 		81 => array('JP'),
 		82 => array('KR'),
+		91 => array('IN'),
 		244 => array('AO'),
 		262 => array('RE', 'YT'),
 		376 => array('AD'),
