@@ -758,6 +758,104 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("650 253 0000 extn. 4567", $this->phoneUtil->format($usNumberWithExtension, PhoneNumberFormat::NATIONAL));
 	}
 
+	public function testFormatInOriginalFormat() {
+		$number1 = $this->phoneUtil->parseAndKeepRawInput("+442087654321", RegionCode::GB);
+		$this->assertEquals("+44 20 8765 4321", $this->phoneUtil->formatInOriginalFormat($number1, RegionCode::GB));
+
+		$number2 = $this->phoneUtil->parseAndKeepRawInput("02087654321", RegionCode::GB);
+		$this->assertEquals("(020) 8765 4321", $this->phoneUtil->formatInOriginalFormat($number2, RegionCode::GB));
+
+		$number3 = $this->phoneUtil->parseAndKeepRawInput("011442087654321", RegionCode::US);
+		$this->assertEquals("011 44 20 8765 4321", $this->phoneUtil->formatInOriginalFormat($number3, RegionCode::US));
+
+		$number4 = $this->phoneUtil->parseAndKeepRawInput("442087654321", RegionCode::GB);
+		$this->assertEquals("44 20 8765 4321", $this->phoneUtil->formatInOriginalFormat($number4, RegionCode::GB));
+
+		$number5 = $this->phoneUtil->parse("+442087654321", RegionCode::GB);
+		$this->assertEquals("(020) 8765 4321", $this->phoneUtil->formatInOriginalFormat($number5, RegionCode::GB));
+
+		// Invalid numbers that we have a formatting pattern for should be formatted properly. Note area
+		// codes starting with 7 are intentionally excluded in the test metadata for testing purposes.
+		$number6 = $this->phoneUtil->parseAndKeepRawInput("7345678901", RegionCode::US);
+		$this->assertEquals("734 567 8901", $this->phoneUtil->formatInOriginalFormat($number6, RegionCode::US));
+
+		// US is not a leading zero country, and the presence of the leading zero leads us to format the
+		// number using raw_input.
+		$number7 = $this->phoneUtil->parseAndKeepRawInput("0734567 8901", RegionCode::US);
+		$this->assertEquals("0734567 8901", $this->phoneUtil->formatInOriginalFormat($number7, RegionCode::US));
+
+		// This number is valid, but we don't have a formatting pattern for it. Fall back to the raw
+		// input.
+		$number8 = $this->phoneUtil->parseAndKeepRawInput("02-4567-8900", RegionCode::KR);
+		$this->assertEquals("02-4567-8900", $this->phoneUtil->formatInOriginalFormat($number8, RegionCode::KR));
+
+		$number9 = $this->phoneUtil->parseAndKeepRawInput("01180012345678", RegionCode::US);
+		$this->assertEquals("011 800 1234 5678", $this->phoneUtil->formatInOriginalFormat($number9, RegionCode::US));
+
+		$number10 = $this->phoneUtil->parseAndKeepRawInput("+80012345678", RegionCode::KR);
+		$this->assertEquals("+800 1234 5678", $this->phoneUtil->formatInOriginalFormat($number10, RegionCode::KR));
+
+		// US local numbers are formatted correctly, as we have formatting patterns for them.
+		$localNumberUS = $this->phoneUtil->parseAndKeepRawInput("2530000", RegionCode::US);
+		$this->assertEquals("253 0000", $this->phoneUtil->formatInOriginalFormat($localNumberUS, RegionCode::US));
+
+		$numberWithNationalPrefixUS =
+			$this->phoneUtil->parseAndKeepRawInput("18003456789", RegionCode::US);
+		$this->assertEquals("1 800 345 6789", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixUS, RegionCode::US));
+
+		$numberWithoutNationalPrefixGB =
+			$this->phoneUtil->parseAndKeepRawInput("2087654321", RegionCode::GB);
+		$this->assertEquals("20 8765 4321", $this->phoneUtil->formatInOriginalFormat($numberWithoutNationalPrefixGB, RegionCode::GB));
+		// Make sure no metadata is modified as a result of the previous function call.
+		$this->assertEquals("(020) 8765 4321", $this->phoneUtil->formatInOriginalFormat($number5, RegionCode::GB));
+
+		$numberWithNationalPrefixMX =
+			$this->phoneUtil->parseAndKeepRawInput("013312345678", RegionCode::MX);
+		$this->assertEquals("01 33 1234 5678", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX, RegionCode::MX));
+
+		$numberWithoutNationalPrefixMX =
+			$this->phoneUtil->parseAndKeepRawInput("3312345678", RegionCode::MX);
+		$this->assertEquals("33 1234 5678", $this->phoneUtil->formatInOriginalFormat($numberWithoutNationalPrefixMX, RegionCode::MX));
+
+		$italianFixedLineNumber =
+			$this->phoneUtil->parseAndKeepRawInput("0212345678", RegionCode::IT);
+		$this->assertEquals("02 1234 5678", $this->phoneUtil->formatInOriginalFormat($italianFixedLineNumber, RegionCode::IT));
+
+		$numberWithNationalPrefixJP =
+			$this->phoneUtil->parseAndKeepRawInput("00777012", RegionCode::JP);
+		$this->assertEquals("0077-7012", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixJP, RegionCode::JP));
+
+		$numberWithoutNationalPrefixJP =
+			$this->phoneUtil->parseAndKeepRawInput("0777012", RegionCode::JP);
+		$this->assertEquals("0777012", $this->phoneUtil->formatInOriginalFormat($numberWithoutNationalPrefixJP, RegionCode::JP));
+
+		$numberWithCarrierCodeBR =
+			$this->phoneUtil->parseAndKeepRawInput("012 3121286979", RegionCode::BR);
+		$this->assertEquals("012 3121286979", $this->phoneUtil->formatInOriginalFormat($numberWithCarrierCodeBR, RegionCode::BR));
+
+		// The default national prefix used in this case is 045. When a number with national prefix 044
+		// is entered, we return the raw input as we don't want to change the number entered.
+		$numberWithNationalPrefixMX1 =
+			$this->phoneUtil->parseAndKeepRawInput("044(33)1234-5678", RegionCode::MX);
+		$this->assertEquals("044(33)1234-5678", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX1, RegionCode::MX));
+
+		$numberWithNationalPrefixMX2 =
+			$this->phoneUtil->parseAndKeepRawInput("045(33)1234-5678", RegionCode::MX);
+		$this->assertEquals("045 33 1234 5678", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX2, RegionCode::MX));
+
+		// The default international prefix used in this case is 0011. When a number with international
+		// prefix 0012 is entered, we return the raw input as we don't want to change the number
+		// entered.
+		$outOfCountryNumberFromAU1 =
+			$this->phoneUtil->parseAndKeepRawInput("0012 16502530000", RegionCode::AU);
+		$this->assertEquals("0012 16502530000", $this->phoneUtil->formatInOriginalFormat($outOfCountryNumberFromAU1, RegionCode::AU));
+
+		$outOfCountryNumberFromAU2 =
+			$this->phoneUtil->parseAndKeepRawInput("0011 16502530000", RegionCode::AU);
+		$this->assertEquals("0011 1 650 253 0000", $this->phoneUtil->formatInOriginalFormat($outOfCountryNumberFromAU2, RegionCode::AU));
+
+	}
+
 	/**
 	 * 
 	 */
