@@ -1226,7 +1226,7 @@ class PhoneNumberUtil {
 		if ($normalizedNationalNumber[0] == '0') {
 			$phoneNumber->setItalianLeadingZero(true);
 		}
-		$phoneNumber->setNationalNumber($normalizedNationalNumber);
+		$phoneNumber->setNationalNumber((float)$normalizedNationalNumber);
 	}
 
 
@@ -1781,7 +1781,7 @@ class PhoneNumberUtil {
 				$regionCode = $this->getRegionCodeForCountryCode($number->getCountryCode());
 				// We strip non-digits from the NDD here, and from the raw input later, so that we can
 				// compare them easily.
-				$nationalPrefix = $this->formatInOriginalFormat($regionCode, true /* strip non-digits */);
+				$nationalPrefix = $this->getNddPrefixForRegion($regionCode, true /* strip non-digits */);
 				$nationalFormat = $this->format($number, PhoneNumberFormat::NATIONAL);
 				if ($nationalPrefix === null || strlen($nationalPrefix) == 0) {
 					// If the region doesn't have a national prefix at all, we can safely return the national
