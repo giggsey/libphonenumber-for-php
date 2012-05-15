@@ -181,6 +181,7 @@ class CountryCodeToRegionCodeMap {
 		690 => array('TK'),
 		691 => array('FM'),
 		692 => array('MH'),
+		800 => array('001'),
 		850 => array('KP'),
 		852 => array('HK'),
 		853 => array('MO'),
