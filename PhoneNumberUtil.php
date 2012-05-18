@@ -759,11 +759,11 @@ class PhoneNumberUtil {
 	 * length 8, this will return TOO_LONG.
 	 */
 	private function testNumberLengthAgainstPattern($numberPattern, $number) {
-		$numberMatcher =  preg_match('/^' . $numberPattern . '$/', $number);
+		$numberMatcher =  preg_match('/^(' . $numberPattern . ')$/x', $number);
 		if ($numberMatcher > 0) {
 			return ValidationResult::IS_POSSIBLE;
 		}
-		$numberMatcher =  preg_match('/^' . $numberPattern . '/', $number);
+		$numberMatcher =  preg_match('/^(' . $numberPattern . ')/x', $number);
 		if ($numberMatcher > 0) {
 			return ValidationResult::TOO_LONG;
 		} else {
@@ -878,8 +878,8 @@ class PhoneNumberUtil {
 				// If the number was not valid before but is valid now, or if it was too long before, we
 				// consider the number with the country calling code stripped to be a better result and
 				// keep that instead.
-				if ((preg_match('/' . $validNumberPattern . '/', $fullNumber) == 0 &&
-					preg_match('/' . $validNumberPattern . '/', $potentialNationalNumber) > 0) ||
+				if ((preg_match('/^(' . $validNumberPattern . ')$/x', $fullNumber) == 0 &&
+					preg_match('/^(' . $validNumberPattern . ')$/x', $potentialNationalNumber) > 0) ||
 					$this->testNumberLengthAgainstPattern($possibleNumberPattern, (string)$fullNumber)
 						== ValidationResult::TOO_LONG) {
 					$nationalNumber .= $potentialNationalNumber;
@@ -2272,8 +2272,8 @@ class PhoneNumberUtil {
 	}
 
 	private function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
-		$possibleNumberPatternMatcher = preg_match('/^' . str_replace(array(PHP_EOL, ' '), '', $numberDesc->getPossibleNumberPattern()) . '$/', $nationalNumber);
-		$nationalNumberPatternMatcher = preg_match('/^' . str_replace(array(PHP_EOL, ' '), '', $numberDesc->getNationalNumberPattern()) . '$/', $nationalNumber);
+		$possibleNumberPatternMatcher = preg_match('/^(' . $numberDesc->getPossibleNumberPattern() . ')$/x', $nationalNumber);
+		$nationalNumberPatternMatcher = preg_match('/^' . $numberDesc->getNationalNumberPattern() . '$/x', $nationalNumber);
 		return $possibleNumberPatternMatcher && $nationalNumberPatternMatcher;
 	}
 
@@ -2340,14 +2340,14 @@ class Matcher {
 	 * @return bool
 	 */
 	public function matches() {
-		return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')$/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+		return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')$/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function lookingAt() {
-		$this->fullPatternMatchesNumber = preg_match_all('/^(?:' . str_replace('/', '\/', $this->pattern) . ')/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
+		$this->fullPatternMatchesNumber = preg_match_all('/^(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
 		return $this->fullPatternMatchesNumber > 0;
 	}
 
@@ -2355,7 +2355,7 @@ class Matcher {
 	 * @return bool
 	 */
 	public function find() {
-		return preg_match('/(?:' . str_replace('/', '\/', $this->pattern) . ')/', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+		return preg_match('/(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
 	}
 
 
