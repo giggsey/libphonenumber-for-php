@@ -45,7 +45,6 @@ return array (
   'id' => 'AO',
   'countryCode' => 244,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0~0',
   'nationalPrefixForParsing' => '0~0',
   'sameMobileAndFixedLinePattern' => false,

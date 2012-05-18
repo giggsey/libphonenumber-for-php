@@ -45,7 +45,6 @@ return array (
   'id' => 'IT',
   'countryCode' => 39,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -45,7 +45,6 @@ return array (
   'id' => 'JP',
   'countryCode' => 81,
   'internationalPrefix' => '010',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => true,

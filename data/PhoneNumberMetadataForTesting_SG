@@ -48,7 +48,6 @@ return array (
   'id' => 'SG',
   'countryCode' => 65,
   'internationalPrefix' => '0[0-3][0-9]',
-  'preferredInternationalPrefix' => '',
   'nationalPrefixForParsing' => '777777',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

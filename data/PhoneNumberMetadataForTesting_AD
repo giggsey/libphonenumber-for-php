@@ -45,7 +45,6 @@ return array (
   'id' => 'AD',
   'countryCode' => 376,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
