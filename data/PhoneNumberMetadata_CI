@@ -33,7 +33,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             0[1-9]|
-            4[04-9]|
+            4[0-24-9]|
             5[057-9]|
             6[05679]
           )\\d{6}
@@ -68,7 +68,6 @@ return array (
   'id' => 'CI',
   'countryCode' => 225,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -32,7 +32,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9[0134678]\\d{6}',
+    'NationalNumberPattern' => '9[0-46-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '93123456',
   ),
@@ -63,7 +63,6 @@ return array (
   'id' => 'NE',
   'countryCode' => 227,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

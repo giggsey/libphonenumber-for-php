@@ -111,7 +111,6 @@ return array (
   'id' => 'GR',
   'countryCode' => 30,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

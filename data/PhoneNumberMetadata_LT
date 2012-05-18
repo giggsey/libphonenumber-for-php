@@ -51,7 +51,6 @@ return array (
   'id' => 'LT',
   'countryCode' => 370,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '8',
   'nationalPrefixForParsing' => '8',
   'sameMobileAndFixedLinePattern' => false,

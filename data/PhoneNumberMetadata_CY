@@ -45,7 +45,6 @@ return array (
   'id' => 'CY',
   'countryCode' => 357,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

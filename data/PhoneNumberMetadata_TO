@@ -59,7 +59,6 @@ return array (
   'id' => 'TO',
   'countryCode' => 676,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

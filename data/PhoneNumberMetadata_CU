@@ -12,11 +12,13 @@ return array (
           2[1-4]\\d{5,6}|
           3(?:
             1\\d{6}|
-            [23]\\d{4,6})|
+            [23]\\d{4,6}
+          )|
           4(?:
             [125]\\d{5,6}|
             [36]\\d{6}|
-            [78]\\d{4,6})|
+            [78]\\d{4,6}
+          )|
           7\\d{6,7}
         ',
     'PossibleNumberPattern' => '\\d{4,8}',
@@ -55,7 +57,6 @@ return array (
   'id' => 'CU',
   'countryCode' => 53,
   'internationalPrefix' => '119',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -2,72 +2,36 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d{7,8}',
-    'PossibleNumberPattern' => '\\d{5,9}',
+    'NationalNumberPattern' => '[1-9]\\d{8}',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
           (?:
-            1(?:
-              (?:
-                [28]\\d|
-                9
-              )\\d|
-              02|
-              1[0-589]|
-              3[358]|
-              4[013-79]|
-              5[0-479]|
-              6[02346-9]|
-              7[0-24-8]
-            )|
+            1[28]\\d|
             2(?:
-              02\\d|
-              1(?:
-                2[0-8]|
-                42|
-                6
-              )|
-              2(?:
-                2[0-79]|
-                3[0-35]|
-                42|
-                [1-35-9]|
-              )|
-              3(?:
-                3[0-58]|
-                [0-24]
-              )|
-              4(?:
-                2[0124579]|
-                [1468]
-              )|
-              5(?:
-                2[0124579]|
-                5
-              )|
-              6(?:
-                2\\d|
-                3[0128]|
-                [56]
-              )|
-              79
+              02|
+              1[24]|
+              2[2-4]|
+              33|
+              [45]2|
+              6[23]
             )|
-            365?\\d|
-            44\\d{2}
-          )\\d{5}
+            365
+          )\\d{6}
         ',
-    'PossibleNumberPattern' => '\\d{5,9}',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '123123456',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
           (?:
-            [46]0|
+            4[04]|
             5[015]|
+            60|
             7[07]
           )\\d{7}
         ',
@@ -101,7 +65,6 @@ return array (
   'id' => 'AZ',
   'countryCode' => 994,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -129,45 +92,6 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '22',
-      ),
-      'nationalPrefixFormattingRule' => '(0$1)',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    2 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '36[0-46-9]',
-      ),
-      'nationalPrefixFormattingRule' => '(0$1)',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    3 => 
-    array (
-      'pattern' => '(\\d{3})(\\d)(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '
-            1[013-79]|
-            2(?:
-              [45][13-9]|
-              [7-9]
-            )
-          ',
-      ),
-      'nationalPrefixFormattingRule' => '(0$1)',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    4 => 
-    array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
@@ -177,7 +101,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    5 => 
+    2 => 
     array (
       'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',

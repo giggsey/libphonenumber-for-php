@@ -30,11 +30,14 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            60[0-3]|
+            6(?:
+              0[0-5]|
+              [68]0
+            )|
             7(?:
               [02-68]\\d|
               1[0-4689]|
-              7[0-6]|
+              7[0-69]|
               9[0-689]
             )
           )\\d{5}
@@ -69,7 +72,6 @@ return array (
   'id' => 'BF',
   'countryCode' => 226,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

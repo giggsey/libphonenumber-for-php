@@ -54,7 +54,6 @@ return array (
   'id' => 'GW',
   'countryCode' => 245,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

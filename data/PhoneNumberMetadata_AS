@@ -68,7 +68,6 @@ return array (
   'id' => 'AS',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

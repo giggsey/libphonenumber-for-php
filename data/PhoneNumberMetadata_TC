@@ -26,11 +26,11 @@ return array (
           649(?:
             2(?:
               3[12]|
-              4[1-5]
+              4[1-7]
             )|
             3(?:
               3[1-39]|
-              4[1-57]
+              4[1-7]
             )|
             4[34][12]
           )\\d{4}
@@ -73,7 +73,6 @@ return array (
   'id' => 'TC',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

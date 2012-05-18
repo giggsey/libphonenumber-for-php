@@ -62,7 +62,6 @@ return array (
   'id' => 'PG',
   'countryCode' => 675,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

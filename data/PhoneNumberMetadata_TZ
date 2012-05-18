@@ -55,7 +55,6 @@ return array (
   'id' => 'TZ',
   'countryCode' => 255,
   'internationalPrefix' => '00[056]',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

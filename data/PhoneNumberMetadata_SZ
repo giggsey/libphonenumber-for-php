@@ -70,7 +70,6 @@ return array (
   'id' => 'SZ',
   'countryCode' => 268,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -17,12 +17,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-          6(?:
-            [0-3]\\d|
-            [67][01]
-          )\\d{4}
-        ',
+    'NationalNumberPattern' => '6[0-367]\\d{5}',
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '6221234',
   ),
@@ -53,7 +48,6 @@ return array (
   'id' => 'BZ',
   'countryCode' => 501,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

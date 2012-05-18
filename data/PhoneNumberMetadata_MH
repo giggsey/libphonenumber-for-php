@@ -58,7 +58,6 @@ return array (
   'id' => 'MH',
   'countryCode' => 692,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

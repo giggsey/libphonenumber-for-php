@@ -50,7 +50,6 @@ return array (
   'id' => 'CM',
   'countryCode' => 237,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

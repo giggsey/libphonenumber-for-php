@@ -64,7 +64,6 @@ return array (
   'id' => 'DZ',
   'countryCode' => 213,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -51,7 +51,6 @@ return array (
   'id' => 'SV',
   'countryCode' => 503,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

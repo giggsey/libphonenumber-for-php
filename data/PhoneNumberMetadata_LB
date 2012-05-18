@@ -12,8 +12,9 @@ return array (
           (?:
             [14-6]\\d{2}|
             7(?:
-              [2-57-9]\\d|
-              62)|
+              [2-579]\\d|
+              62|
+              8[0-7])|
             [89][2-9]\\d
           )\\d{4}
         ',
@@ -27,7 +28,8 @@ return array (
             3\\d|
             7(?:
               [01]\\d|
-              6[01346-9]
+              6[013-9]|
+              88
             )
           )\\d{5}
         ',
@@ -61,7 +63,6 @@ return array (
   'id' => 'LB',
   'countryCode' => 961,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -76,8 +77,9 @@ return array (
         0 => '
             [13-6]|
             7(?:
-              [2-57-9]|
-              62)|
+              [2-579]|
+              62|
+              8[0-7])|
             [89][2-9]
             ',
       ),
@@ -94,7 +96,8 @@ return array (
             [89][01]|
             7(?:
               [01]|
-              6[01346-9])
+              6[013-9]|
+              88)
           ',
       ),
       'nationalPrefixFormattingRule' => '',

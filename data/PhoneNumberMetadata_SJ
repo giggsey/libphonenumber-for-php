@@ -20,6 +20,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             4[015-8]|
+            5[89]|
             9\\d
           )\\d{6}
         ',
@@ -58,7 +59,6 @@ return array (
   'id' => 'SJ',
   'countryCode' => 47,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

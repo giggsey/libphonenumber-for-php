@@ -62,7 +62,6 @@ return array (
   'id' => 'KP',
   'countryCode' => 850,
   'internationalPrefix' => '00|99',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

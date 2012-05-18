@@ -76,7 +76,6 @@ return array (
   'id' => 'AL',
   'countryCode' => 355,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

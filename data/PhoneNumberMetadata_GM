@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[3-9]\\d{6}',
+    'NationalNumberPattern' => '[2-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '',
   ),
@@ -37,7 +37,12 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[3679]\\d{6}',
+    'NationalNumberPattern' => '
+          (?:
+            2[0-2]|
+            [3679]\\d
+          )\\d{5}
+        ',
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '3012345',
   ),
@@ -68,7 +73,6 @@ return array (
   'id' => 'GM',
   'countryCode' => 220,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

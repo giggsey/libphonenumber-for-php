@@ -67,7 +67,6 @@ return array (
   'id' => 'PT',
   'countryCode' => 351,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

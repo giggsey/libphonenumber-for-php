@@ -64,7 +64,6 @@ return array (
   'id' => 'BO',
   'countryCode' => 591,
   'internationalPrefix' => '00(1\\d)?',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0(1\\d)?',
   'sameMobileAndFixedLinePattern' => false,

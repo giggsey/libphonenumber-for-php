@@ -45,7 +45,6 @@ return array (
   'id' => 'NU',
   'countryCode' => 683,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

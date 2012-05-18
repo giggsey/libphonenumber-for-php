@@ -80,7 +80,6 @@ return array (
   'id' => 'FI',
   'countryCode' => 358,
   'internationalPrefix' => '00|99[049]',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

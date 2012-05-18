@@ -79,7 +79,6 @@ return array (
   'id' => 'NG',
   'countryCode' => 234,
   'internationalPrefix' => '009',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

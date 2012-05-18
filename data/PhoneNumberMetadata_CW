@@ -72,7 +72,6 @@ return array (
   'id' => 'CW',
   'countryCode' => 599,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

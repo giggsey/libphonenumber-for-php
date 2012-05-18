@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-57]\\d{7,9}',
+    'NationalNumberPattern' => '[2-8]\\d{7,9}',
     'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '',
   ),
@@ -10,8 +10,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            [2-57]1|
-            54
+            2[13]|
+            [35-7][14]|
+            41|
+            8[1468]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{6,8}',
@@ -57,7 +59,6 @@ return array (
   'id' => 'LA',
   'countryCode' => 856,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -76,13 +77,13 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([2-57]\\d)(\\d{3})(\\d{3})',
+      'pattern' => '([2-8]\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            21|
-            [3-57]
+            2[13]|
+            [3-8]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

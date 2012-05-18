@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-46]\\d{3}',
+    'NationalNumberPattern' => '[2-467]\\d{3}',
     'PossibleNumberPattern' => '\\d{4}',
     'ExampleNumber' => '',
   ),
@@ -12,7 +12,8 @@ return array (
           (?:
             3[0-5]|
             4[4-6]|
-            [26]\\d
+            [26]\\d|
+            70
           )\\d{2}
         ',
     'PossibleNumberPattern' => '\\d{4}',
@@ -51,7 +52,6 @@ return array (
   'id' => 'AC',
   'countryCode' => 247,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

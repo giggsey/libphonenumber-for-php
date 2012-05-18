@@ -58,7 +58,6 @@ return array (
   'id' => 'BI',
   'countryCode' => 257,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

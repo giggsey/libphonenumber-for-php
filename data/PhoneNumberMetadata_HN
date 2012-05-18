@@ -16,7 +16,8 @@ return array (
               [23]\\d|
               4[056]|
               5[57]|
-              9[01]
+              8[0146-9]|
+              9[012]
             )|
             4(?:
               2|3-59]|
@@ -84,7 +85,6 @@ return array (
   'id' => 'HN',
   'countryCode' => 504,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

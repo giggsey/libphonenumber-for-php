@@ -93,7 +93,6 @@ return array (
   'id' => 'IS',
   'countryCode' => 354,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

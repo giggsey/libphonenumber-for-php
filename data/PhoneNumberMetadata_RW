@@ -48,7 +48,6 @@ return array (
   'id' => 'RW',
   'countryCode' => 250,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

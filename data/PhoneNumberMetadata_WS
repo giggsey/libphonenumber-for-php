@@ -56,7 +56,6 @@ return array (
   'id' => 'WS',
   'countryCode' => 685,
   'internationalPrefix' => '0',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

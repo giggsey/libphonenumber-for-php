@@ -5,20 +5,34 @@ return array (
     'NationalNumberPattern' => '
           [235-7]\\d{7}|
           8\\d{7,8}|
-          9\\d{7,10}
+          9\\d{4,10}
         ',
-    'PossibleNumberPattern' => '\\d{8,11}',
+    'PossibleNumberPattern' => '\\d{5,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[23]\\d{7}',
+    'NationalNumberPattern' => '
+          (?:
+            [23]\\d|
+            5[78]
+          )\\d{6}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '21234567',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[5-79]\\d{7}',
+    'NationalNumberPattern' => '
+          (?:
+            5[1-69]\\d|
+            6\\d{2}|
+            9(?:
+              0[1-9]|
+              [1-8]\\d
+            )
+          )\\d{5}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '51234567',
   ),
@@ -30,8 +44,13 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900\\d{8}',
-    'PossibleNumberPattern' => '\\d{11}',
+    'NationalNumberPattern' => '
+          900(?:
+            [0-24-9]\\d{7}|
+            3\\d{1,4}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{5,11}',
     'ExampleNumber' => '90012345678',
   ),
   'sharedCost' => 
@@ -49,7 +68,6 @@ return array (
   'id' => 'HK',
   'countryCode' => 852,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -85,6 +103,17 @@ return array (
     array (
       'pattern' => '(900)(\\d{2})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '900',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    3 => 
+    array (
+      'pattern' => '(900)(\\d{2,5})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '900',

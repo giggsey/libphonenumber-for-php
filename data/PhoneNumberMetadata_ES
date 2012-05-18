@@ -65,7 +65,6 @@ return array (
   'id' => 'ES',
   'countryCode' => 34,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

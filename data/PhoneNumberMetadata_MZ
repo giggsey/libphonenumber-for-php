@@ -52,7 +52,6 @@ return array (
   'id' => 'MZ',
   'countryCode' => 258,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

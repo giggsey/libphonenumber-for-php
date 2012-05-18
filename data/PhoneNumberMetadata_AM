@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-35-9]\\d{7}',
+    'NationalNumberPattern' => '[1-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{5,8}',
     'ExampleNumber' => '',
   ),
@@ -19,7 +19,8 @@ return array (
               6[1-9]|
               8[1-7]
             )|
-            3[12]2
+            3[12]2|
+            47\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{5,8}',
@@ -64,7 +65,6 @@ return array (
   'id' => 'AM',
   'countryCode' => 374,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -76,7 +76,10 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '
+            1|
+            47
+          ',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

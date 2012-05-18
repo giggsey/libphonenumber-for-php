@@ -67,7 +67,6 @@ return array (
   'id' => 'AW',
   'countryCode' => 297,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

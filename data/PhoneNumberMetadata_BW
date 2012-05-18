@@ -82,7 +82,6 @@ return array (
   'id' => 'BW',
   'countryCode' => 267,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

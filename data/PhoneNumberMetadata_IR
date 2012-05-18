@@ -5,7 +5,7 @@ return array (
     'NationalNumberPattern' => '
           [2-6]\\d{4,9}|
           9(?:
-            [134]\\d{8}|
+            [1-4]\\d{8}|
             9\\d{2,8}
           )|
           [178]\\d{9}
@@ -46,9 +46,10 @@ return array (
             )|
             2(?:
               2[189]|
-              [3689][12]|
+              [389][12]|
               42|
               5[256]|
+              6[1-59]|
               7[34]
             )|
             3(?:
@@ -100,9 +101,22 @@ return array (
   array (
     'NationalNumberPattern' => '
           9(?:
-            1\\d|
-            3[124-9]
-          )\\d{7}
+            1(?:
+              [039]\\d|
+              [16][1-35-9]|
+              2[1-8]|
+              4[013-9]|
+              [57][1-9]|
+              8[13-9]
+            )|
+            2[01]\\d|
+            3(?:
+              [035-9]\\d|
+              13|
+              2[1-579]|
+              47
+            )
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9123456789',
@@ -134,7 +148,6 @@ return array (
   'id' => 'IR',
   'countryCode' => 98,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -77,7 +77,6 @@ return array (
   'id' => 'TR',
   'countryCode' => 90,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

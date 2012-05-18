@@ -67,10 +67,10 @@ return array (
     'NationalNumberPattern' => '
           3(?:
             0\\d|
-            1[2-5]|
-            2[1-5]|
+            [12][1-5]|
             3[1-6]|
             4[1-7]|
+            55|
             64
           )\\d{7}
         ',
@@ -104,7 +104,6 @@ return array (
   'id' => 'PK',
   'countryCode' => 92,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

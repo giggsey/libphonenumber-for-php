@@ -12,10 +12,12 @@ return array (
           758(?:
             234|
             4(?:
+              30|
               5[0-9]|
               6[2-9]|
               8[0-2]
             )|
+            572|
             638|
             758
           )\\d{4}
@@ -40,7 +42,7 @@ return array (
             )|
             7(?:
               1[2-9]|
-              2[0-4]
+              2[0-6]
             )
           )\\d{4}
         ',
@@ -82,7 +84,6 @@ return array (
   'id' => 'LC',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

@@ -45,7 +45,6 @@ return array (
   'id' => 'TK',
   'countryCode' => 690,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

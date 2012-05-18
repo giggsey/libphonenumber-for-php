@@ -83,7 +83,6 @@ return array (
   'id' => 'IL',
   'countryCode' => 972,
   'internationalPrefix' => '0(?:0|1[2-48])',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

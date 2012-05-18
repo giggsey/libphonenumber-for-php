@@ -54,7 +54,6 @@ return array (
   'id' => 'TG',
   'countryCode' => 228,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

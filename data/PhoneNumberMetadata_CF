@@ -45,7 +45,6 @@ return array (
   'id' => 'CF',
   'countryCode' => 236,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

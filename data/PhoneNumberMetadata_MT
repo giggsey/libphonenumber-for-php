@@ -79,7 +79,6 @@ return array (
   'id' => 'MT',
   'countryCode' => 356,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

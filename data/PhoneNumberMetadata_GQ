@@ -58,7 +58,6 @@ return array (
   'id' => 'GQ',
   'countryCode' => 240,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -55,7 +55,6 @@ return array (
   'id' => 'NF',
   'countryCode' => 672,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

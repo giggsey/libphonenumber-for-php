@@ -45,7 +45,6 @@ return array (
   'id' => 'FK',
   'countryCode' => 500,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

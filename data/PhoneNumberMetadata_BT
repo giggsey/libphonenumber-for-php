@@ -54,7 +54,6 @@ return array (
   'id' => 'BT',
   'countryCode' => 975,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

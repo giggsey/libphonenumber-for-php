@@ -60,7 +60,6 @@ return array (
   'id' => 'CV',
   'countryCode' => 238,
   'internationalPrefix' => '0',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

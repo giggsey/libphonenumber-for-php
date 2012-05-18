@@ -108,7 +108,6 @@ return array (
   'id' => 'LI',
   'countryCode' => 423,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -45,7 +45,6 @@ return array (
   'id' => 'VA',
   'countryCode' => 379,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

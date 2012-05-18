@@ -61,7 +61,6 @@ return array (
   'id' => 'VE',
   'countryCode' => 58,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '(1\\d{2})|0',
   'sameMobileAndFixedLinePattern' => false,

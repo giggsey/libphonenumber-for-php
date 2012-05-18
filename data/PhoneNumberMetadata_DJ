@@ -2,29 +2,25 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-8]\\d{5,7}',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'NationalNumberPattern' => '[27]\\d{7}',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          (?:
-            1[05]|
-            [2-5]\\d
-          )\\d{4}|
           2(?:
             1[2-5]|
             7[45]|
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '21360003',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:77)?[6-8]\\d{5}',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'NationalNumberPattern' => '77[6-8]\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '77831001',
   ),
   'tollFree' => 
@@ -54,21 +50,10 @@ return array (
   'id' => 'DJ',
   'countryCode' => 253,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    1 => 
     array (
       'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',

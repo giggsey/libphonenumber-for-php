@@ -70,7 +70,6 @@ return array (
   'id' => 'GY',
   'countryCode' => 592,
   'internationalPrefix' => '001',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

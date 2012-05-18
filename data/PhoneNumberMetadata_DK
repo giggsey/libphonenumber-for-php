@@ -57,7 +57,6 @@ return array (
   'id' => 'DK',
   'countryCode' => 45,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (

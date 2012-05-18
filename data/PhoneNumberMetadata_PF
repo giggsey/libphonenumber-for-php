@@ -65,7 +65,6 @@ return array (
   'id' => 'PF',
   'countryCode' => 689,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

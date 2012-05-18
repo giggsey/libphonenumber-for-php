@@ -71,7 +71,6 @@ return array (
   'id' => 'ML',
   'countryCode' => 223,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

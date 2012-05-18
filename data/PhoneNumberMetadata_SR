@@ -58,7 +58,6 @@ return array (
   'id' => 'SR',
   'countryCode' => 597,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

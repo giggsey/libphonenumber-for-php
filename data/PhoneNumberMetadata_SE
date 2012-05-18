@@ -46,7 +46,7 @@ return array (
           4(?:
             [0246]\\d{5,7}|
             (?:
-              1[01-8]|
+              1[0-8]|
               3[0135]|
               5[14-79]|
               7[0-246-9]|
@@ -136,7 +136,6 @@ return array (
   'id' => 'SE',
   'countryCode' => 46,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

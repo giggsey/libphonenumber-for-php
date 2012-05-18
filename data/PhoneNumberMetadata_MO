@@ -50,7 +50,6 @@ return array (
   'id' => 'MO',
   'countryCode' => 853,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

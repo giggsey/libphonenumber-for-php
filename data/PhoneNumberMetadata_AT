@@ -13,7 +13,7 @@ return array (
           (?:
             2(?:
               1[467]|
-              2[134-8]|
+              2[13-8]|
               5[2357]|
               6[1-46-8]|
               7[1-8]|
@@ -117,7 +117,6 @@ return array (
   'id' => 'AT',
   'countryCode' => 43,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

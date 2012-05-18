@@ -45,7 +45,6 @@ return array (
   'id' => 'CG',
   'countryCode' => 242,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

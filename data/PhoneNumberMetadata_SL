@@ -20,9 +20,9 @@ return array (
             3[03]|
             44|
             5[056]|
-            7[6-8]|
+            7[6-9]|
             88
-          )[1-9]\\d{5}
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '25123456',
@@ -54,7 +54,6 @@ return array (
   'id' => 'SL',
   'countryCode' => 232,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -56,7 +56,6 @@ return array (
   'id' => 'HT',
   'countryCode' => 509,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

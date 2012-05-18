@@ -73,14 +73,13 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '848\\d{6,7}',
+    'PossibleNumberPattern' => '\\d{9,10}',
+    'ExampleNumber' => '8481234567',
   ),
   'id' => 'IT',
   'countryCode' => 39,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

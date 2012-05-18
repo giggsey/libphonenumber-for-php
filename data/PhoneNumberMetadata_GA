@@ -53,7 +53,7 @@ return array (
               2[89]|
               3[35-9]|
               4[01]|
-              5[0-347-9]|
+              5[0-47-9]|
               [67]\\d|
               8[457-9]|
               9[0146]
@@ -90,7 +90,6 @@ return array (
   'id' => 'GA',
   'countryCode' => 241,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

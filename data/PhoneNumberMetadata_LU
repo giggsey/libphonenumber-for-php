@@ -102,7 +102,6 @@ return array (
   'id' => 'LU',
   'countryCode' => 352,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefixForParsing' => '(15(?:0[06]|1[12]|35|4[04]|55|6[26]|77|88|99)\\d)',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -114,7 +113,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [23-5]|
+            [2-5]|
             7[1-9]|
             [89](?:
               [1-9]|
@@ -132,7 +131,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [23-5]|
+            [2-5]|
             7[1-9]|
             [89](?:
               [1-9]|

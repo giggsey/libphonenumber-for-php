@@ -54,7 +54,6 @@ return array (
   'id' => 'PE',
   'countryCode' => 51,
   'internationalPrefix' => '19(?:1[124]|77|90)00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' Anexo ',
   'nationalPrefixForParsing' => '0',

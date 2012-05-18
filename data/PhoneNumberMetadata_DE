@@ -93,7 +93,6 @@ return array (
   'id' => 'DE',
   'countryCode' => 49,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -282,6 +281,50 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
+    array (
+      'pattern' => '(1\\d{2})(\\d{5,11})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '181',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    7 => 
+    array (
+      'pattern' => '(18\\d{3})(\\d{6})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '18500',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    8 => 
+    array (
+      'pattern' => '(18\\d{2})(\\d{7})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '18[68]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    9 => 
+    array (
+      'pattern' => '(18\\d)(\\d{8})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '18[2-579]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    10 => 
     array (
       'pattern' => '(700)(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',

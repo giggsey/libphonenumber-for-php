@@ -45,7 +45,6 @@ return array (
   'id' => '001',
   'countryCode' => 979,
   'internationalPrefix' => '',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (

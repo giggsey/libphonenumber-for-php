@@ -23,14 +23,15 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
+          48\\d{3}|
           7(?:
             4\\d|
             5[025-8]|
-            6[01]
+            6[0-4]
           )\\d{4}|
           8[4-8]\\d{5}
         ',
-    'PossibleNumberPattern' => '\\d{7}',
+    'PossibleNumberPattern' => '\\d{5,7}',
     'ExampleNumber' => '7421234',
   ),
   'tollFree' => 
@@ -60,7 +61,6 @@ return array (
   'id' => 'SB',
   'countryCode' => 677,
   'internationalPrefix' => '0[01]',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

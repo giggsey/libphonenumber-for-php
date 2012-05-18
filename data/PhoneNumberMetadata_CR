@@ -52,8 +52,7 @@ return array (
   'id' => 'CR',
   'countryCode' => 506,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
-  'nationalPrefixForParsing' => '(19(?:0[0-2]|19|77))',
+  'nationalPrefixForParsing' => '(19(?:0[0-2468]|19|66|77))',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

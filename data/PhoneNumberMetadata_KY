@@ -21,6 +21,7 @@ return array (
               40
             )|
             7(?:
+              4[35-79]|
               6[6-9]|
               77
             )|
@@ -28,8 +29,7 @@ return array (
               00|
               1[45]|
               25|
-              4[89]|
-              88
+              [48]8
             )|
             9(?:
               14|
@@ -44,16 +44,17 @@ return array (
   array (
     'NationalNumberPattern' => '
           345(?:
-            32[3-79]|
+            32[1-9]|
             5(?:
-              1[467]|
+              1[67]|
               2[5-7]|
-              4[5-9]
+              4[6-8]|
+              76
             )|
             9(?:
-              1[679]|
-              2[4-9]|
-              3[89]
+              1[67]|
+              2[3-9]|
+              3[689]
             )
           )\\d{4}
         ',
@@ -98,7 +99,6 @@ return array (
   'id' => 'KY',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

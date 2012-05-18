@@ -68,7 +68,6 @@ return array (
   'id' => 'HU',
   'countryCode' => 36,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '06',
   'nationalPrefixForParsing' => '06',
   'sameMobileAndFixedLinePattern' => false,

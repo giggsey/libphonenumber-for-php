@@ -14,7 +14,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '664492\\d{4}',
+    'NationalNumberPattern' => '66449[2-6]\\d{4}',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '6644923456',
   ),
@@ -53,7 +53,6 @@ return array (
   'id' => 'MS',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

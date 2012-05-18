@@ -51,7 +51,6 @@ return array (
   'id' => 'TL',
   'countryCode' => 670,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

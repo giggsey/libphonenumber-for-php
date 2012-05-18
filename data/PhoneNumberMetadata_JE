@@ -93,7 +93,6 @@ return array (
   'id' => 'JE',
   'countryCode' => 44,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' x',
   'nationalPrefixForParsing' => '0',

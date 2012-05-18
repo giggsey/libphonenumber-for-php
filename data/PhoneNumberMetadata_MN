@@ -68,7 +68,6 @@ return array (
   'id' => 'MN',
   'countryCode' => 976,
   'internationalPrefix' => '001',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

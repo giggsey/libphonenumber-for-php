@@ -2,7 +2,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[235]\\d{6,8}',
+    'NationalNumberPattern' => '
+          [235]\\d{8}|
+          8\\d{7}
+        ',
     'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '',
   ),
@@ -20,12 +23,13 @@ return array (
               7\\d
             )|
             3(?:
-              2[0-37]|
+              2[0-3]|
               7\\d
             )|
             4(?:
-              [27]\\d|
-              30
+              2[013-9]|
+              3[01]|
+              7\\d
             )|
             5(?:
               2[0-7]|
@@ -49,7 +53,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             2[034678]|
-            5[47]
+            5[047]
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -57,9 +61,9 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '800\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '80012345',
   ),
   'premiumRate' => 
   array (
@@ -75,14 +79,13 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '800\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '80012345',
   ),
   'id' => 'GH',
   'countryCode' => 233,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -94,6 +97,18 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[235]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{5})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

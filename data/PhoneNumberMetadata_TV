@@ -45,7 +45,6 @@ return array (
   'id' => 'TV',
   'countryCode' => 688,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -55,7 +55,6 @@ return array (
   'id' => 'KM',
   'countryCode' => 269,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

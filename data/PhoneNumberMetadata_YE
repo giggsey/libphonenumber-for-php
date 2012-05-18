@@ -58,7 +58,6 @@ return array (
   'id' => 'YE',
   'countryCode' => 967,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

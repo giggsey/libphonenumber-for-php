@@ -92,7 +92,6 @@ return array (
   'id' => 'BH',
   'countryCode' => 973,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

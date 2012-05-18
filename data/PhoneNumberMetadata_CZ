@@ -65,7 +65,6 @@ return array (
   'id' => 'CZ',
   'countryCode' => 420,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

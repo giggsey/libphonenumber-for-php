@@ -2,13 +2,18 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2457-9]\\d{7}',
+    'NationalNumberPattern' => '[2-57-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '7\\d{7}',
+    'NationalNumberPattern' => '
+          (?:
+            3[012]|
+            7\\d
+          )\\d{6}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '71234567',
   ),
@@ -16,9 +21,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            [29]\\d|
-            4[01]|
-            5[01258]|
+            [259]\\d|
+            4[01]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -32,7 +36,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '8[028]\\d{6}',
+    'NationalNumberPattern' => '8[0128]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
   ),
@@ -51,7 +55,6 @@ return array (
   'id' => 'TN',
   'countryCode' => 216,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

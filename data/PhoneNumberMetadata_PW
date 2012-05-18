@@ -76,7 +76,6 @@ return array (
   'id' => 'PW',
   'countryCode' => 680,
   'internationalPrefix' => '01[12]',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

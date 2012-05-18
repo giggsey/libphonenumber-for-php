@@ -45,7 +45,6 @@ return array (
   'id' => 'LS',
   'countryCode' => 266,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -37,8 +37,7 @@ return array (
             )|
             7(?:
               01|
-              [12-79]\\d|
-              8[0139]
+              [1-9]\\d
             )
           )\\d{5}
         ',
@@ -72,7 +71,6 @@ return array (
   'id' => 'SN',
   'countryCode' => 221,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

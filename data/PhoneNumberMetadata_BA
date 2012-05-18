@@ -50,7 +50,6 @@ return array (
   'id' => 'BA',
   'countryCode' => 387,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

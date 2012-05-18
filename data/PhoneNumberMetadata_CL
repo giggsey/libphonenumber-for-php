@@ -67,7 +67,6 @@ return array (
   'id' => 'CL',
   'countryCode' => 56,
   'internationalPrefix' => '(?:0|1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))0',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0|(1(?:1[0-69]|2[0-57]|5[13-58]|69|7[0167]|8[018]))',
   'sameMobileAndFixedLinePattern' => false,

@@ -45,7 +45,6 @@ return array (
   'id' => 'TW',
   'countryCode' => 886,
   'internationalPrefix' => '0(?:0[25679]|19)',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'preferredExtnPrefix' => '#',
   'nationalPrefixForParsing' => '0',

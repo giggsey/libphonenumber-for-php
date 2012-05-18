@@ -49,7 +49,7 @@ return array (
             9\\d|
             1(?:
               2\\d|
-              6[3-9]|
+              6[2-9]|
               8[68]|
               99
             )
@@ -88,7 +88,6 @@ return array (
   'id' => 'VN',
   'countryCode' => 84,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

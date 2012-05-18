@@ -45,7 +45,6 @@ return array (
   'id' => 'QA',
   'countryCode' => 974,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

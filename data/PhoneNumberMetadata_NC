@@ -58,7 +58,6 @@ return array (
   'id' => 'NC',
   'countryCode' => 687,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

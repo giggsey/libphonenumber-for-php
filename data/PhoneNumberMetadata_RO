@@ -45,7 +45,6 @@ return array (
   'id' => 'RO',
   'countryCode' => 40,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' int ',
   'nationalPrefixForParsing' => '0',

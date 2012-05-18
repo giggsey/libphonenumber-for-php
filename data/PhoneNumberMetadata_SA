@@ -19,7 +19,7 @@ return array (
           (?:
             [12][24-8]|
             3[35-8]|
-            4[34-68]|
+            4[3-68]|
             6[2-5]|
             7[235-7]
           )\\d{6}
@@ -65,7 +65,6 @@ return array (
   'id' => 'SA',
   'countryCode' => 966,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

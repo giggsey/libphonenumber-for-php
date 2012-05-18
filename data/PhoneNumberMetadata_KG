@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[356-8]\\d{8,9}',
+    'NationalNumberPattern' => '[35-8]\\d{8,9}',
     'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '',
   ),
@@ -102,7 +102,6 @@ return array (
   'id' => 'KG',
   'countryCode' => 996,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

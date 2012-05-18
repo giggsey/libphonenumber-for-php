@@ -50,7 +50,6 @@ return array (
   'id' => 'NR',
   'countryCode' => 674,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

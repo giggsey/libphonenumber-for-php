@@ -26,7 +26,7 @@ return array (
             (?:
               1[0-35-9]|
               6[6-9]|
-              7[06-89]
+              7[06-9]
             )[1-9]|
             8(?:
               0[89]|
@@ -80,7 +80,6 @@ return array (
   'id' => 'KH',
   'countryCode' => 855,
   'internationalPrefix' => '00[178]',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

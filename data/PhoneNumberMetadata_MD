@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[256-9]\\d{7}',
+    'NationalNumberPattern' => '[25-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
@@ -36,7 +36,7 @@ return array (
             562|
             6(?:
               50|
-              7[1-4]|
+              7[1-5]|
               [089]\\d
             )|
             7(?:
@@ -75,7 +75,6 @@ return array (
   'id' => 'MD',
   'countryCode' => 373,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

@@ -56,7 +56,6 @@ return array (
   'id' => 'CK',
   'countryCode' => 682,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -45,7 +45,6 @@ return array (
   'id' => 'NI',
   'countryCode' => 505,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

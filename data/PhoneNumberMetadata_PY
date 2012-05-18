@@ -102,7 +102,6 @@ return array (
   'id' => 'PY',
   'countryCode' => 595,
   'internationalPrefix' => '00',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

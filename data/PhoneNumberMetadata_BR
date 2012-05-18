@@ -2,8 +2,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d{7,9}',
-    'PossibleNumberPattern' => '\\d{8,10}',
+    'NationalNumberPattern' => '
+          [1-46-9]\\d{7,10}|
+          5\\d{8,9}
+        ',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -18,7 +21,7 @@ return array (
             7[13-579]
           )[2-5]\\d{7}
         ',
-    'PossibleNumberPattern' => '\\d{8,10}',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '1123456789',
   ),
   'mobile' => 
@@ -26,8 +29,9 @@ return array (
     'NationalNumberPattern' => '
           1(?:
             1(?:
-              [6-9]\\d|
-              5[347]
+              5[347]|
+              [6-8]\\d|
+              9\\d{1,2}
             )|
             [2-9][6-9]\\d
           )\\d{6}|
@@ -39,19 +43,19 @@ return array (
             7[13-579]
           )[6-9]\\d{7}
         ',
-    'PossibleNumberPattern' => '\\d{10}',
+    'PossibleNumberPattern' => '\\d{10,11}',
     'ExampleNumber' => '1161234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{6,7}',
-    'PossibleNumberPattern' => '\\d{8,10}',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '[359]00\\d{6,7}',
-    'PossibleNumberPattern' => '\\d{8,10}',
+    'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '300123456',
   ),
   'sharedCost' => 
@@ -69,14 +73,24 @@ return array (
   'id' => 'BR',
   'countryCode' => 55,
   'internationalPrefix' => '00(?:1[45]|2[135]|[34]1|43)',
-  'preferredInternationalPrefix' => '',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0(?:(1[245]|2[135]|[34]1)(\\d{10}))?',
+  'nationalPrefixForParsing' => '0(?:(1[245]|2[135]|[34]1)(\\d{10,11}))?',
   'nationalPrefixTransformRule' => '$2',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'format' => '$1 $2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '119',
+      ),
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
+    ),
+    1 => 
     array (
       'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
@@ -87,7 +101,7 @@ return array (
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
-    1 => 
+    2 => 
     array (
       'pattern' => '([34]00\\d)(\\d{4})',
       'format' => '$1-$2',
@@ -98,7 +112,7 @@ return array (
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    2 => 
+    3 => 
     array (
       'pattern' => '([3589]00)(\\d{2,3})(\\d{4})',
       'format' => '$1 $2 $3',
