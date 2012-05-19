@@ -23,16 +23,16 @@ Let's say you have a string representing a phone number from Switzerland. This i
 
 At this point, swissNumberProto contains:
 
-	object(com\google\i18n\phonenumbers\PhoneNumber)#221 (5) {
-	  ["countryCode":"com\google\i18n\phonenumbers\PhoneNumber":private]=>
+	object(libphonenumber\PhoneNumber)#221 (5) {
+	  ["countryCode":"libphonenumber\PhoneNumber":private]=>
 	  int(41)
-	  ["nationalNumber":"com\google\i18n\phonenumbers\PhoneNumber":private]=>
+	  ["nationalNumber":"libphonenumber\PhoneNumber":private]=>
 	  int(446681800)
-	  ["extension":"com\google\i18n\phonenumbers\PhoneNumber":private]=>
+	  ["extension":"libphonenumber\PhoneNumber":private]=>
 	  NULL
-	  ["italianLeadingZero":"com\google\i18n\phonenumbers\PhoneNumber":private]=>
+	  ["italianLeadingZero":"libphonenumber\PhoneNumber":private]=>
 	  NULL
-	  ["rawInput":"com\google\i18n\phonenumbers\PhoneNumber":private]=>
+	  ["rawInput":"libphonenumber\PhoneNumber":private]=>
 	  NULL
 	}
 

@@ -1,11 +1,34 @@
 <?php
 
-namespace com\google\i18n\phonenumbers;
+namespace libphonenumber\Tests;
 
-require_once dirname(__FILE__) . '/../PhoneNumberUtil.php';
-require_once dirname(__FILE__) . '/../RegionCode.php';
+use libphonenumber\PhoneNumber;
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\CountryCodeToRegionCodeMapForTesting;
+use libphonenumber\RegionCode;
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+use libphonenumber\NumberFormat;
+use libphonenumber\PhoneNumberType;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\Matcher;
+use libphonenumber\CountryCodeSource;
+use libphonenumber\NumberParseException;
+use libphonenumber\ValidationResult;
+
 require_once dirname(__FILE__) . '/../PhoneNumber.php';
+require_once dirname(__FILE__) . '/../PhoneNumberUtil.php';
 require_once dirname(__FILE__) . '/../CountryCodeToRegionCodeMapForTesting.php';
+require_once dirname(__FILE__) . '/../RegionCode.php';
+require_once dirname(__FILE__) . '/../PhoneMetadata.php';
+require_once dirname(__FILE__) . '/../PhoneNumberDesc.php';
+require_once dirname(__FILE__) . '/../NumberFormat.php';
+require_once dirname(__FILE__) . '/../PhoneNumberType.php';
+require_once dirname(__FILE__) . '/../PhoneNumberFormat.php';
+require_once dirname(__FILE__) . '/../Matcher.php';
+require_once dirname(__FILE__) . '/../CountryCodeSource.php';
+require_once dirname(__FILE__) . '/../NumberParseException.php';
+require_once dirname(__FILE__) . '/../ValidationResult.php';
 
 /**
  * Test class for PhoneNumberUtil.

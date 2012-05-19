@@ -1,5 +1,5 @@
 <?php
-namespace com\google\i18n\phonenumbers;
+namespace libphonenumber\build;
 
 require_once 'BuildMetadataFromXml.php';
 

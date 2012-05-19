@@ -1,88 +1,6 @@
 <?php
 
-namespace com\google\i18n\phonenumbers;
-
-require_once dirname(__FILE__) . '/CountryCodeToRegionCodeMap.php';
-require_once dirname(__FILE__) . '/PhoneMetadata.php';
-require_once dirname(__FILE__) . '/NumberParseException.php';
-
-/**
- * INTERNATIONAL and NATIONAL formats are consistent with the definition in ITU-T Recommendation
- * E123. For example, the number of the Google Switzerland office will be written as
- * "+41 44 668 1800" in INTERNATIONAL format, and as "044 668 1800" in NATIONAL format.
- * E164 format is as per INTERNATIONAL format but with no formatting applied, e.g. +41446681800.
- * RFC3966 is as per INTERNATIONAL format, but with all spaces and other separating symbols
- * replaced with a hyphen, and with any phone number extension appended with ";ext=".
- *
- * Note: If you are considering storing the number in a neutral format, you are highly advised to
- * use the PhoneNumber class.
- */
-class PhoneNumberFormat {
-
-	const E164 = 0;
-	const INTERNATIONAL = 1;
-	const NATIONAL = 2;
-	const RFC3966 = 3;
-
-}
-
-/**
- * Type of phone numbers.
- */
-class PhoneNumberType {
-
-	const FIXED_LINE = 0;
-	const MOBILE = 1;
-	// In some regions (e.g. the USA), it is impossible to distinguish between fixed-line and
-	// mobile numbers by looking at the phone number itself.
-	const FIXED_LINE_OR_MOBILE = 2;
-	// Freephone lines
-	const TOLL_FREE = 3;
-	const PREMIUM_RATE = 4;
-	// The cost of this call is shared between the caller and the recipient, and is hence typically
-	// less than PREMIUM_RATE calls. See // http://en.wikipedia.org/wiki/Shared_Cost_Service for
-	// more information.
-	const SHARED_COST = 5;
-	// Voice over IP numbers. This includes TSoIP (Telephony Service over IP).
-	const VOIP = 6;
-	// A personal number is associated with a particular person, and may be routed to either a
-	// MOBILE or FIXED_LINE number. Some more information can be found here:
-	// http://en.wikipedia.org/wiki/Personal_Numbers
-	const PERSONAL_NUMBER = 7;
-	const PAGER = 8;
-	// Used for "Universal Access Numbers" or "Company Numbers". They may be further routed to
-	// specific offices, but allow one number to be used for a company.
-	const UAN = 9;
-	// A phone number is of type UNKNOWN when it does not fit any of the known patterns for a
-	// specific region.
-	const UNKNOWN = 10;
-
-}
-
-/**
- * Types of phone number matches. See detailed description beside the isNumberMatch() method.
- */
-class MatchType {
-
-	const NOT_A_NUMBER = 0;
-	const NO_MATCH = 1;
-	const SHORT_NSN_MATCH = 2;
-	const NSN_MATCH = 3;
-	const EXACT_MATCH = 4;
-
-}
-
-/**
- * Possible outcomes when testing if a PhoneNumber is possible.
- */
-class ValidationResult {
-
-	const IS_POSSIBLE = 0;
-	const INVALID_COUNTRY_CODE = 1;
-	const TOO_SHORT = 2;
-	const TOO_LONG = 3;
-
-}
+namespace libphonenumber;
 
 /**
  * Utility for international phone numbers. Functionality includes formatting, parsing and
@@ -609,7 +527,7 @@ class PhoneNumberUtil {
 	 *	entities
 	 *  <li> some geographical numbers have no area codes.
 	 * </ul>
-	 * @param \com\google\i18n\phonenumbers\PhoneNumber $number PhoneNumber object for which clients want to know the length of the area code.
+	 * @param \libphonenumber\PhoneNumber $number PhoneNumber object for which clients want to know the length of the area code.
 	 * @return int the length of area code of the PhoneNumber object passed in.
 	 */
 	public function getLengthOfGeographicalAreaCode(PhoneNumber $number) {
@@ -660,7 +578,7 @@ class PhoneNumberUtil {
 	 * Refer to the unittests to see the difference between this function and
 	 * {@link #getLengthOfGeographicalAreaCode}.
 	 *
-	 * @param \com\google\i18n\phonenumbers\PhoneNumber $number the PhoneNumber object for which clients want to know the length of the NDC.
+	 * @param \libphonenumber\PhoneNumber $number the PhoneNumber object for which clients want to know the length of the NDC.
 	 * @return int the length of NDC of the PhoneNumber object passed in.
 	 */
 	public function getLengthOfNationalDestinationCode(PhoneNumber $number) {
@@ -1931,7 +1849,7 @@ class PhoneNumberUtil {
 	 * Gets the national significant number of the a phone number. Note a national significant number
 	 * doesn't contain a national prefix or any formatting.
 	 *
-	 * @param \com\google\i18n\phonenumbers\PhoneNumber $number the phone number for which the national significant number is needed
+	 * @param \libphonenumber\PhoneNumber $number the phone number for which the national significant number is needed
 	 * @return string  the national significant number of the PhoneNumber object passed in
 	 */
 	public function getNationalSignificantNumber(PhoneNumber $number) {
@@ -2154,7 +2072,7 @@ class PhoneNumberUtil {
 	$metadata = $this->getMetadataForRegionOrCallingCode($number->getCountryCode(), $regionCode);
 	return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata);
 	}
-	 * @param \com\google\i18n\phonenumbers\PhoneNumber $number the number the phone number that we want to know the type
+	 * @param \libphonenumber\PhoneNumber $number the number the phone number that we want to know the type
 	 * @return PhoneNumberType the type of the phone number
 	 */
 	public function getNumberType(PhoneNumber $number) {
@@ -2308,86 +2226,4 @@ class PhoneNumberUtil {
 		return !$this->isNumberMatchingDesc($nationalSignificantNumber, $metadata->getNoInternationalDialling());
 	}
 
-}
-
-class Matcher {
-	/**
-		 * @var string
-		 */
-	private $pattern;
-
-	/**
-		 * @var string
-		 */
-	private $subject;
-
-	/**
-		 * @var array
-		 */
-	private $groups = array();
-
-	/**
-		 * @param $pattern string
-		 * @param $subject string
-		 */
-	public function __construct($pattern, $subject)
-	{
-		$this->pattern = $pattern;
-		$this->subject = $subject;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function matches() {
-		return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')$/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function lookingAt() {
-		$this->fullPatternMatchesNumber = preg_match_all('/^(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
-		return $this->fullPatternMatchesNumber > 0;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function find() {
-		return preg_match('/(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
-	}
-
-
-	/**
-	 * @return int
-	 */
-	public function groupCount() {
-		return count($this->groups);
-	}
-
-	public function group($group = NULL) {
-		return $this->groups[$group - 1][0];
-	}
-
-	/**
-	 * @return int
-	 */
-	public function end() {
-		$lastGroup = $this->groups[$this->fullPatternMatchesNumber - 1][0];
-		return $lastGroup[1] + strlen($lastGroup[0]);
-	}
-
-	public function replaceFirst($replacement) {
-		return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject, 1);
-	}
-
-	public function replaceAll($replacement) {
-		return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject);
-	}
-
-	public function reset($input = "") {
-		$this->subject = $input;
-		return $this;
-	}
 }

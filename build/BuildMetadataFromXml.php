@@ -1,8 +1,14 @@
 <?php
 
-namespace com\google\i18n\phonenumbers;
+namespace libphonenumber\build;
 
-require_once '../PhoneMetadata.php';
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+use libphonenumber\NumberFormat;
+
+require_once dirname(__FILE__) . '/../PhoneMetadata.php';
+require_once dirname(__FILE__) . '/../PhoneNumberDesc.php';
+require_once dirname(__FILE__) . '/../NumberFormat.php';
 
 /*
  * Copyright (C) 2009 The Libphonenumber Authors

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-namespace com\google\i18n\phonenumbers;
+namespace libphonenumber;
 
 /**
  * Class containing string constants of region codes for easier testing.
