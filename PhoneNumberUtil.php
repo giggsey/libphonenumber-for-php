@@ -1115,7 +1115,7 @@ class PhoneNumberUtil {
 		if ($phoneNumber === NULL) {
 			$phoneNumber = new PhoneNumber();
 		}
-		$this->parseHelper($numberToParse, $defaultRegion, false, true, $phoneNumber);
+		$this->parseHelper($numberToParse, $defaultRegion, true, true, $phoneNumber);
 		return $phoneNumber;
 	}
 
