@@ -3,10 +3,11 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
+          1\\d{3,4}|
           [3-9]\\d{6,7}|
           800\\d{6,7}
         ',
-    'PossibleNumberPattern' => '\\d{7,10}',
+    'PossibleNumberPattern' => '\\d{4,10}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -73,8 +74,11 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '800[2-9]\\d{3}',
-    'PossibleNumberPattern' => '\\d{7}',
+    'NationalNumberPattern' => '
+          1\\d{3,4}|
+          800[2-9]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{4,7}',
     'ExampleNumber' => '8002123',
   ),
   'id' => 'EE',
