@@ -1029,11 +1029,11 @@ class PhoneNumberUtil {
 	 *                               no default region was supplied and the number is not in
 	 *                               international format (does not start with +)
 	 */
-	public function  parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = NULL) {
+	public function  parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = NULL, $keepRawInput = false) {
 		if ($phoneNumber === NULL) {
 			$phoneNumber = new PhoneNumber();
 		}
-		$this->parseHelper($numberToParse, $defaultRegion, true, true, $phoneNumber);
+		$this->parseHelper($numberToParse, $defaultRegion, $keepRawInput, true, $phoneNumber);
 		return $phoneNumber;
 	}
 
