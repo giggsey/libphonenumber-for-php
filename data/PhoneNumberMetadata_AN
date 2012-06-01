@@ -10,7 +10,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           5(?:
-            4\\d|
+            4[2-8]|
             8[239]
           )\\d{4}
         ',
@@ -21,9 +21,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           5(?:
-            1[01]|
-            2[0-7]|
-            5\\d|
+            1[02]|
+            2\\d|
+            5[0-79]|
             8[016-8]
           )\\d{4}
         ',

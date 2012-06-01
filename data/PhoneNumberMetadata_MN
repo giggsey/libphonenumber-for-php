@@ -22,20 +22,17 @@ return array (
             4[2-68]\\d{1,2}|
             5[1-4689]\\d{1,2}
           )\\d{5}|
-          (?:
-            5[0568]|
-            70
-          )\\d{6}
+          5[0568]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{6,10}',
-    'ExampleNumber' => '70123456',
+    'ExampleNumber' => '50123456',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
           (?:
             8[89]|
-            9[15689]
+            9[013-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

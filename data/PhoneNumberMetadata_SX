@@ -11,7 +11,8 @@ return array (
     'NationalNumberPattern' => '
           7215(?:
             4[2-8]|
-            8[239]
+            8[239]|
+            9[056]
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
@@ -23,8 +24,8 @@ return array (
           7215(?:
             1[02]|
             2\\d|
-            5[03469]|
-            8[01678]
+            5[034679]|
+            8[014-8]
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',
