@@ -63,9 +63,9 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7,9}',
-    'PossibleNumberPattern' => '\\d{10,12}',
-    'ExampleNumber' => '8001234567',
+    'NationalNumberPattern' => '800\\d{7,10}',
+    'PossibleNumberPattern' => '\\d{10,13}',
+    'ExampleNumber' => '8001234567890',
   ),
   'premiumRate' => 
   array (
@@ -248,7 +248,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '([18]\\d{2})(\\d{7,9})',
+      'pattern' => '([18]\\d{2})(\\d{7,10})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (

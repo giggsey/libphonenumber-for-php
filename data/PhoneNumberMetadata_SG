@@ -11,7 +11,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '6[1-8]\\d{6}',
+    'NationalNumberPattern' => '6[1-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '61234567',
   ),
@@ -19,7 +19,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            8[1-6]|
+            8[1-7]|
             9[0-8]
           )\\d{6}
         ',
