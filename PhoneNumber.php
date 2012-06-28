@@ -188,4 +188,8 @@ class PhoneNumber {
 		}
 		return $this;
 	}
+
+	public function __toString() {
+		return '+' . $this->getCountryCode() . $this->getNationalNumber();
+	}
 }
