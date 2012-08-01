@@ -2,21 +2,21 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-7]\\d{6}',
-    'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '\\d{9}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '123456789',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{6}',
-    'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '1441234',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '123456789',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[2-7]\\d{6}',
-    'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '6031234',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '123456789',
   ),
   'tollFree' => 
   array (
@@ -26,9 +26,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '\\d{9}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '123456789',
   ),
   'sharedCost' => 
   array (
@@ -42,22 +42,20 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'GA',
-  'countryCode' => 241,
-  'internationalPrefix' => '00',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
-  'sameMobileAndFixedLinePattern' => false,
+  'id' => '001',
+  'countryCode' => 979,
+  'internationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
     0 => 
     array (
-      'pattern' => '(\\d)(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d)(\\d{4})(\\d{4})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
       ),
-      'nationalPrefixFormattingRule' => '0$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

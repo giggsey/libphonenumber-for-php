@@ -10,7 +10,6 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            36\\d|
             4(?:
               [02-9]\\d|
               1[02-9]
@@ -25,10 +24,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            [27]\\d{3}|
-            3[0-59]\\d{2}|
-            411[3-6]
-          )\\d{2}
+            [27]\\d{2}|
+            3[0-59]\\d|
+            411
+          )\\d{3}
         ',
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '212345',
@@ -53,12 +52,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            36|
-            44
-          )\\d{4}
-        ',
+    'NationalNumberPattern' => '44\\d{4}',
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '441234',
   ),

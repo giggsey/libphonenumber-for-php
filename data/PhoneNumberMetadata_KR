@@ -65,17 +65,6 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{3})',
-      'format' => '$1',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '11[29]',
-      ),
-      'nationalPrefixFormattingRule' => '$1',
-      'domesticCarrierCodeFormattingRule' => '0$CC-$1',
-    ),
-    1 => 
-    array (
       'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
@@ -106,7 +95,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    2 => 
+    1 => 
     array (
       'pattern' => '(\\d{2})(\\d{3,4})(\\d{4})',
       'format' => '$1-$2-$3',
@@ -137,7 +126,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    3 => 
+    2 => 
     array (
       'pattern' => '(\\d{3})(\\d)(\\d{4})',
       'format' => '$1-$2-$3',
@@ -149,7 +138,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    4 => 
+    3 => 
     array (
       'pattern' => '(\\d{3})(\\d{2})(\\d{4})',
       'format' => '$1-$2-$3',
@@ -161,7 +150,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    5 => 
+    4 => 
     array (
       'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3',
@@ -172,7 +161,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    6 => 
+    5 => 
     array (
       'pattern' => '(\\d{2})(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3-$4',
@@ -183,7 +172,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    7 => 
+    6 => 
     array (
       'pattern' => '(\\d)(\\d{3,4})(\\d{4})',
       'format' => '$1-$2-$3',
@@ -194,7 +183,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    8 => 
+    7 => 
     array (
       'pattern' => '(\\d)(\\d{3,4})',
       'format' => '$1-$2',
@@ -205,7 +194,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    9 => 
+    8 => 
     array (
       'pattern' => '(\\d{2})(\\d{3,4})',
       'format' => '$1-$2',
@@ -221,7 +210,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
     ),
-    10 => 
+    9 => 
     array (
       'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1-$2',

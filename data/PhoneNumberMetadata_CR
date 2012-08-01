@@ -20,7 +20,7 @@ return array (
             7[01]
           )\\d{5}|
           [67][01]\\d{6}|
-          8[35-9]\\d{6}
+          8[3-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '83123456',
