@@ -371,7 +371,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
       ),
-      'nationalPrefixFormattingRule' => '8$1',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

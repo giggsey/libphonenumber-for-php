@@ -33,7 +33,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9[6-9]\\d{7}',
+    'NationalNumberPattern' => '9[5-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '961234567',
   ),
@@ -100,7 +100,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(9)([6-9]\\d{3})(\\d{4})',
+      'pattern' => '(9)([5-9]\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

@@ -23,9 +23,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            7[3-9]|
+            [79]\\d|
             8[0-79]|
-            9\\d
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{6}',
@@ -39,9 +38,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '36\\d{4}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '366711',
   ),
   'sharedCost' => 
   array (

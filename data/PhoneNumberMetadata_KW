@@ -3,10 +3,9 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          [12569]\\d{6,7}|
-          65816\\d{6}
+          [12569]\\d{6,7}
         ',
-    'PossibleNumberPattern' => '\\d{7,8}|\\d{11}',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
@@ -16,7 +15,10 @@ return array (
             18\\d|
             2(?:
               [23]\\d{2}|
-              4[1-35-9]\\d|
+              4(?:
+                [1-35-9]\\d|
+                44
+              )|
               5(?:
                 0[034]|
                 [2-46]\\d|
@@ -35,17 +37,12 @@ return array (
           (?:
             5(?:
               0[0-2568]|
+              11|
               5\\d
             )|
             6(?:
               0[034679]|
-              5(?:
-                [015-79]|
-                8(?:
-                  [02-9]|
-                  1[0-57-9]
-                )
-              )|
+              5[015-9]|
               6\\d|
               7[067]|
               9[069]
@@ -104,22 +101,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(5[05]\\d)(\\d{5})',
+      'pattern' => '(5[015]\\d)(\\d{5})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '5',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    2 => 
-    array (
-      'pattern' => '(65816)(\\d{6})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '65816',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

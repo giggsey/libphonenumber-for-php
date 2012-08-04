@@ -12,29 +12,25 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            [2-489]|
-            7[2-46-8]
-          )\\d{7}
-        ',
-    'PossibleNumberPattern' => '\\d{7,9}',
+    'NationalNumberPattern' => '[2-489]\\d{7}',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '21234567',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
           5(?:
-            [02346-9]\\d{2}|
+            [02347-9]\\d{2}|
             5(?:
-              22|
-              33|
-              44|
-              5[58]|
-              66|
-              77|
-              88
-            )
+              2[23]|
+              3[34]|
+              4[45]|
+              5[5689]|
+              6[67]|
+              7[78]|
+              8[89]
+            )|
+            6[2-9]\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -57,7 +53,10 @@ return array (
           1(?:
             212|
             (?:
-              919|
+              9(?:
+                0[01]|
+                19
+              )|
               200
             )\\d{2}
           )\\d{4}
@@ -82,7 +81,7 @@ return array (
   ),
   'id' => 'IL',
   'countryCode' => 972,
-  'internationalPrefix' => '0(?:0|1[2-48])',
+  'internationalPrefix' => '0(?:0|1[2-9])',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

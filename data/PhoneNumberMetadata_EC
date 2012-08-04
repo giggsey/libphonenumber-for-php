@@ -16,7 +16,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            69|
+            [356]9|
             [89]\\d
           )\\d{6}
         ',
@@ -62,8 +62,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [2-57]|
-            6[2-7]
+            [247]|
+            [356][2-8]
           ',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
@@ -76,7 +76,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            69|
+            [356]9|
             [89]
           ',
       ),
@@ -104,8 +104,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [2-57]|
-            6[2-7]
+            [247]|
+            [356][2-8]
           ',
       ),
     ),
@@ -116,7 +116,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            69|
+            [356]9|
             [89]
           ',
       ),
