@@ -157,9 +157,10 @@ return array (
   ),
   'id' => 'CN',
   'countryCode' => 86,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '(1[1279]\\d{3})?00',
+  'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'nationalPrefixForParsing' => '(1[1279]\\d{3})|0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -172,7 +173,7 @@ return array (
         0 => '80[2678]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     1 => 
     array (
@@ -205,7 +206,7 @@ return array (
         0 => '21',
       ),
       'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     4 => 
     array (
@@ -233,7 +234,7 @@ return array (
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     5 => 
     array (
@@ -267,7 +268,7 @@ return array (
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     6 => 
     array (
@@ -332,7 +333,7 @@ return array (
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     7 => 
     array (
@@ -343,7 +344,7 @@ return array (
         0 => '1[3-58]',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     8 => 
     array (

@@ -28,14 +28,13 @@ return array (
           (?:
             (?:
               1\\d|
-              6[6-9]|
-              7[06-9]
+              [67][06-9]
             )[1-9]|
             8(?:
               0[89]|
+              [134679]\\d|
               5[2-689]|
-              8\\d{2}|
-              [13469]\\d|
+              8\\d{2}
             )|
             9(?:
               [0-689][1-9]|
@@ -82,7 +81,7 @@ return array (
   ),
   'id' => 'KH',
   'countryCode' => 855,
-  'internationalPrefix' => '00[178]',
+  'internationalPrefix' => '00[14-9]',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

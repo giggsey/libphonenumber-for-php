@@ -49,9 +49,20 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          (?:
+            8(?:
+              00|
+              [5-9]\\d
+            )|
+            9(?:
+              00|
+              [78]\\d
+            )
+          )\\d{6}
+        ',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '800123456',
   ),
   'id' => 'SK',
   'countryCode' => 421,

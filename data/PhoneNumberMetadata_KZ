@@ -4,6 +4,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
+            33\\d|
             7\\d{2}|
             80[09]
           )\\d{7}
@@ -14,6 +15,7 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
+          33622\\d{5}|
           7(?:
             1(?:
               0(?:
@@ -95,10 +97,9 @@ return array (
                 59
               )|
               7(?:
-                [23]\\d|
+                [237]\\d|
                 40|
-                5[279]|
-                7\\d
+                5[279]
               )|
               8(?:
                 [23]\\d|
@@ -110,8 +111,7 @@ return array (
                 3[124578]|
                 59
               )
-            )|
-            3622
+            )
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{10}',
@@ -123,7 +123,8 @@ return array (
           7(?:
             0[01257]|
             6[02-4]|
-            7[1578]
+            7[1578]|
+            85
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{10}',
