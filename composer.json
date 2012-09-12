@@ -1,0 +1,8 @@
+{
+    "name": "practo/libphonenumber-for-php",
+    "type": "library",
+    "description": "Clone of Phone number handling library by Davide Mendolia",
+    "keywords": ["phonenumber", "libphonenumber", "mobile", "validation"],
+    "homepage": "https://github.com/practo/libphonenumber-for-PHP",
+    "license": "Apache-2.0"
+}
