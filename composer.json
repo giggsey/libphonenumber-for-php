@@ -5,10 +5,8 @@
     "keywords": ["phonenumber", "libphonenumber", "mobile", "validation"],
     "homepage": "https://github.com/practo/libphonenumber-for-PHP",
     "license": "Apache-2.0",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/practo/libphonenumber-for-PHP"
-        }
-    ]
+    "autoload": {
+        "psr-0": { "libphonenumber": "" }
+    }
+    "target-dir": "libphonenumber"
 }
