@@ -7,6 +7,6 @@
     "license": "Apache-2.0",
     "autoload": {
         "psr-0": { "libphonenumber": "" }
-    }
+    },
     "target-dir": "libphonenumber"
 }
