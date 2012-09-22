@@ -2,21 +2,21 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[01]\\d{6,7}',
-    'PossibleNumberPattern' => '\\d{7,8}',
+    'NationalNumberPattern' => '[1-9]\\d{5}',
+    'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{6}',
-    'PossibleNumberPattern' => '\\d{7,8}',
-    'ExampleNumber' => '1441234',
+    'NationalNumberPattern' => '[1-9]\\d{5}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '112345',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '0[2-7]\\d{6}',
-    'PossibleNumberPattern' => '\\d{7,8}',
-    'ExampleNumber' => '06031234',
+    'NationalNumberPattern' => '[1-9]\\d{5}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
@@ -42,34 +42,45 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'GA',
-  'countryCode' => 241,
-  'internationalPrefix' => '00',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
-  'sameMobileAndFixedLinePattern' => false,
+  'id' => 'BY',
+  'countryCode' => 375,
+  'internationalPrefix' => '810',
+  'nationalPrefix' => '8',
+  'nationalPrefixForParsing' => '80?|99999',
+  'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
     0 => 
     array (
-      'pattern' => '(1)(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d{4})',
+      'format' => '$1',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '[1-8]',
       ),
-      'nationalPrefixFormattingRule' => '0$1',
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
-      'pattern' => '(0\\d)(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d{2})(\\d{3})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '0',
+        0 => '[1-8]',
       ),
-      'nationalPrefixFormattingRule' => '',
+      'nationalPrefixFormattingRule' => '8$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-8]',
+      ),
+      'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
