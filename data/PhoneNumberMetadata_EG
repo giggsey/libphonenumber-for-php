@@ -55,7 +55,7 @@ return array (
     'NationalNumberPattern' => '
           1(?:
             0[01269]|
-            1[124]|
+            1[1245]|
             2[0-278]
           )\\d{7}
         ',
@@ -112,10 +112,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-             1(?:
-               [012]|
-               5[0-2]
-             )|
+             1[012]|
              [89]00
            ',
       ),

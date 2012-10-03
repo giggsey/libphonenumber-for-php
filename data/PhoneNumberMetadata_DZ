@@ -30,9 +30,12 @@ return array (
     'NationalNumberPattern' => '
           (?:
             5[56]|
-            6[569]|
             7[7-9]
-          )\\d{7}
+          )\\d{7}|
+          6(?:
+            [569]\\d|
+            70
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '551234567',

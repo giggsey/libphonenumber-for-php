@@ -80,6 +80,17 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})',
+      'format' => '$1-$2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-79]',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
       'pattern' => '([3489]\\d{2})(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1 $2-$3-$4',
       'leadingDigitsPatterns' => 
@@ -89,7 +100,7 @@ return array (
       'nationalPrefixFormattingRule' => '8 ($1)',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    1 => 
+    2 => 
     array (
       'pattern' => '(7\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -103,6 +114,24 @@ return array (
   ),
   'intlNumberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '([3489]\\d{2})(\\d{3})(\\d{2})(\\d{2})',
+      'format' => '$1 $2-$3-$4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[34689]',
+      ),
+    ),
+    1 => 
+    array (
+      'pattern' => '(7\\d{2})(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '7',
+      ),
+    ),
   ),
   'mainCountryForCode' => true,
   'leadingZeroPossible' => NULL,

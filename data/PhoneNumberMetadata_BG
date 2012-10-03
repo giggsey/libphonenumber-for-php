@@ -3,8 +3,8 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-            [23567]\\d{5,7}|
-            [489]\\d{6,8}
+          [23567]\\d{5,7}|
+          [489]\\d{6,8}
         ',
     'PossibleNumberPattern' => '\\d{5,9}',
     'ExampleNumber' => '',
@@ -86,7 +86,7 @@ return array (
     0 => 
     array (
       'pattern' => '(2)(\\d{5})',
-      'format' => '$1/$2',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '29',
@@ -97,7 +97,7 @@ return array (
     1 => 
     array (
       'pattern' => '(2)(\\d{3})(\\d{3,4})',
-      'format' => '$1/$2 $3',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '2',
@@ -108,7 +108,7 @@ return array (
     2 => 
     array (
       'pattern' => '(\\d{3})(\\d{4})',
-      'format' => '$1/$2',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '
@@ -122,7 +122,7 @@ return array (
     3 => 
     array (
       'pattern' => '(\\d{3})(\\d{3})(\\d{2})',
-      'format' => '$1/$2 $3',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '
@@ -147,7 +147,7 @@ return array (
     5 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{2,3})',
-      'format' => '$1/$2 $3',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '

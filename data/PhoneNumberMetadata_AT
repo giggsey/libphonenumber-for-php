@@ -124,19 +124,49 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([15])(\\d{3,12})',
+      'pattern' => '(1)(\\d{3,12})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '
-            1|
-            5[079]
-          ',
+        0 => '1',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
+    array (
+      'pattern' => '(5\\d)(\\d{3,5})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '5[079]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(5\\d)(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '5[079]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    3 => 
+    array (
+      'pattern' => '(5\\d)(\\d{4})(\\d{4,7})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '5[079]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    4 => 
     array (
       'pattern' => '(\\d{3})(\\d{3,10})',
       'format' => '$1 $2',
@@ -162,7 +192,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    2 => 
+    5 => 
     array (
       'pattern' => '(\\d{4})(\\d{3,9})',
       'format' => '$1 $2',

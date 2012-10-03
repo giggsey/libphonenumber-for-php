@@ -23,10 +23,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           20(?:
-            2[238]|
-            5[4-68]|
-            7[78]|
-            9[7-9]
+            2[2389]|
+            5[4-689]|
+            7[6-8]|
+            9[57-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{10}',
