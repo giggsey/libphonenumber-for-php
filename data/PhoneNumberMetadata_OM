@@ -4,9 +4,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            2[3-6]|
+            2[2-6]|
             5|
-            9[2-9]
+            9[1-9]
           )\\d{6}|
           800\\d{5,6}
         ',
@@ -15,13 +15,13 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2[3-6]\\d{6}',
+    'NationalNumberPattern' => '2[2-6]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '23123456',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9[2-9]\\d{6}',
+    'NationalNumberPattern' => '9[1-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '92123456',
   ),

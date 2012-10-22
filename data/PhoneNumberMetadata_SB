@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-8]\\d{4,6}',
+    'NationalNumberPattern' => '[1-9]\\d{4,6}',
     'PossibleNumberPattern' => '\\d{5,7}',
     'ExampleNumber' => '',
   ),
@@ -25,11 +25,18 @@ return array (
     'NationalNumberPattern' => '
           48\\d{3}|
           7(?:
-            4\\d|
-            5[025-8]|
-            6[0-6]
+            [46-8]\\d|
+            5[025-9]|
+            90
           )\\d{4}|
-          8[4-8]\\d{5}
+          8[4-8]\\d{5}|
+          9(?:
+            [46]\\d|
+            5[0-46-9]|
+            7[0-689]|
+            8[0-79]|
+            9[0-8]
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{5,7}',
     'ExampleNumber' => '7421234',
@@ -70,7 +77,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[78]',
+        0 => '[7-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
