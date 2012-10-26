@@ -46,9 +46,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '86[1-9]\\d{6}',
+    'NationalNumberPattern' => '86[2-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '861234567',
+    'ExampleNumber' => '862345678',
   ),
   'sharedCost' => 
   array (
