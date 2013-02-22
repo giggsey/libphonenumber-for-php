@@ -39,14 +39,13 @@ return array (
   array (
     'NationalNumberPattern' => '
           5(?:
-            0[1-35-7]|
+            0[1-7]|
             22|
-            3\\d|
-            4[1-79]|
-            5[1-5]|
+            [34]\\d|
+            5[1-59]|
             9[246]
           )\\d{7}
-          ',
+        ',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '5012345678',
   ),

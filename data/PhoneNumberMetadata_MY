@@ -10,21 +10,24 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            3\\d{2}|
-            [4-79]\\d|
-            8[2-9]
+            3[2-9]\\d|
+            [4-9][2-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
-    'ExampleNumber' => '312345678',
+    'ExampleNumber' => '323456789',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
           1(?:
-            [02-46-9][2-9]|
-            1[12]\\d
-          )\\d{6}
+            1[1-3]\\d{2}|
+            [02-4679][2-9]\\d|
+            8(?:
+              1[23]|
+              [2-9]\\d
+            )
+          )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9,10}',
     'ExampleNumber' => '123456789',

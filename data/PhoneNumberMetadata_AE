@@ -11,13 +11,8 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            [2-4679][2-8]\\d|
-            600[25]
-          )\\d{5}
-        ',
-    'PossibleNumberPattern' => '\\d{7,9}',
+    'NationalNumberPattern' => '[2-4679][2-8]\\d{6}',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '22345678',
   ),
   'mobile' => 
@@ -85,22 +80,25 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([4679]00)(\\d)(\\d{5})',
+      'pattern' => '([479]00)(\\d)(\\d{5})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[4679]0',
+        0 => '[479]0',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
     array (
-      'pattern' => '(800)(\\d{2,9})',
+      'pattern' => '([68]00)(\\d{2,9})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '8',
+        0 => '
+            60|
+            8
+          ',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',

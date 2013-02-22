@@ -20,7 +20,7 @@ return array (
                 [3-689]\\d
               )
             )|
-            442\\d
+            44[239]\\d
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -30,16 +30,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            6(?:
-              [3569]\\d
-            )|
-            7(?:
-              [08][1-9]|
-              [3579][0-4]|
-              4[014-7]|
-              [16]\\d
-            )
-          )\\d{5}
+            6[3569]|
+            7\\d
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '65012345',

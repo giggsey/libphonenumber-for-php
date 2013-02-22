@@ -72,10 +72,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '
-            [23]1|
-            7
-          ',
+        0 => '[23]1',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -99,7 +96,7 @@ return array (
       array (
         0 => '
             [23][3-7]|
-            [89]
+            [7-9]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

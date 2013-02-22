@@ -16,20 +16,20 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            2|
-            32|
-            41
+            [23]2|
+            41|
+            58
           )\\d{7}|
           (?:
             3[3-5]|
             4[235]|
-            5[1-3578]|
+            5[1-357]|
             6[13-57]|
             7[1-35]
           )\\d{6,7}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
-    'ExampleNumber' => '21234567',
+    'ExampleNumber' => '221234567',
   ),
   'mobile' => 
   array (
@@ -74,7 +74,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(2)(\\d{3})(\\d{4})',
+      'pattern' => '(2)(\\d{3,4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
