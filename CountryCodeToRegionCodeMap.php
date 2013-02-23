@@ -6,7 +6,7 @@ class CountryCodeToRegionCodeMap {
 
 	public static $countryCodeToRegionCodeMap = array(
 		1 => array('US', 'AG', 'AI', 'AS', 'BB', 'BM', 'BS', 'CA', 'DM', 'DO', 'GD', 'GU', 'JM', 'KN',
-			'KY', 'LC', 'MP', 'MS', 'PR', 'TC', 'TT', 'VC', 'VG', 'VI'),
+			'KY', 'LC', 'MP', 'MS', 'PR', 'SX', 'TC', 'TT', 'VC', 'VG', 'VI'),
 		7 => array('RU', 'KZ'),
 		20 => array('EG'),
 		27 => array('ZA'),
@@ -52,7 +52,8 @@ class CountryCodeToRegionCodeMap {
 		94 => array('LK'),
 		95 => array('MM'),
 		98 => array('IR'),
-		212 => array('MA'),
+    211 => array('SS'),
+		212 => array('MA', 'EH'),
 		213 => array('DZ'),
 		216 => array('TN'),
 		218 => array('LY'),
@@ -159,7 +160,7 @@ class CountryCodeToRegionCodeMap {
 		596 => array('MQ'),
 		597 => array('SR'),
 		598 => array('UY'),
-		599 => array('AN'),
+		599 => array('CW', 'BQ'),
 		670 => array('TL'),
 		672 => array('NF'),
 		673 => array('BN'),
@@ -214,3 +215,4 @@ class CountryCodeToRegionCodeMap {
 		998 => array('UZ'),
 	);
 }
+
