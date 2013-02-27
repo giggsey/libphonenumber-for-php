@@ -81,9 +81,9 @@ class PhoneNumberUtil {
 			self::$instance = new PhoneNumberUtil();
 			self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
 			self::$instance->init($baseFileLocation);
+			self::initCapturingExtnDigits();
 			self::initExtnPatterns();
 			self::initAsciiDigitMappings();
-			self::initCapturingExtnDigits();
 			self::initExtnPattern();
 			self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
 			self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
@@ -150,7 +150,10 @@ class PhoneNumberUtil {
 		foreach ($this->countryCallingCodeToRegionCodeMap as $regionCodes) {
 			$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
 		}
-		unset($this->supportedRegions[array_search(self::REGION_CODE_FOR_NON_GEO_ENTITY, $this->supportedRegions)]);
+                $idx_region_code_non_geo_entity = array_search(self::REGION_CODE_FOR_NON_GEO_ENTITY, $this->supportedRegions);
+                if ($idx_region_code_non_geo_entity !== FALSE) {
+                        unset($this->supportedRegions[$idx_region_code_non_geo_entity]);
+                }
 		$this->nanpaRegions = $this->countryCallingCodeToRegionCodeMap[self::NANPA_COUNTRY_CODE];
 	}
 
