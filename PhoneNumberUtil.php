@@ -142,7 +142,7 @@ class PhoneNumberUtil {
 	 * This class implements a singleton, so the only constructor is private.
 	 */
 	private function __construct() {
-		
+
 	}
 
 	private function init($filePrefix) {
@@ -989,19 +989,19 @@ class PhoneNumberUtil {
 	}
 
 	/**
-	Parses a string and returns it in proto buffer format. This method differs from {@link #parse}
+	 * Parses a string and returns it in proto buffer format. This method differs from {@link #parse}
 	 * in that it always populates the raw_input field of the protocol buffer with numberToParse as
 	 * well as the country_code_source field.
 	 *
 	 * @param string $numberToParse     number that we are attempting to parse. This can contain formatting
-	such as +, ( and -, as well as a phone number extension.
+	 *                                  such as +, ( and -, as well as a phone number extension.
 	 * @param string $defaultRegion     region that we are expecting the number to be from. This is only used
-	 *                          if the number being parsed is not written in international format.
-	 *                          The country calling code for the number in this case would be stored
-	 *                          as that of the default region supplied.
-	 * @return PhoneNumber a phone number proto buffer filled with the parsed number
-	 * @throws NumberParseException  if the string is not considered to be a viable phone number or if
-	 *                               no default region was supplied
+	 *                                  if the number being parsed is not written in international format.
+	 *                                  The country calling code for the number in this case would be stored
+	 *                                  as that of the default region supplied.
+	 * @return PhoneNumber              a phone number proto buffer filled with the parsed number
+	 * @throws NumberParseException     if the string is not considered to be a viable phone number or if
+	 *                                  no default region was supplied
 	 */
 	public function parseAndKeepRawInput($numberToParse, $defaultRegion) {
 		$phoneNumber = new PhoneNumber();
@@ -1519,7 +1519,7 @@ class PhoneNumberUtil {
 	/**
 	 *
 	 * @param string $regionCode
-	 * @return PhoneMetadata 
+	 * @return PhoneMetadata
 	 */
 	public function getMetadataForRegion($regionCode) {
 		if (!$this->isValidRegionCode($regionCode)) {
@@ -1892,7 +1892,7 @@ class PhoneNumberUtil {
 		$formattingPattern = $this->chooseFormattingPatternForNumber($availableFormats, $number);
 		return ($formattingPattern == null) ? $number : $this->formatNsnUsingPattern($number, $formattingPattern, $numberFormat, $carrierCode);
 	}
-	
+
 	private function chooseFormattingPatternForNumber(array $availableFormats, $nationalNumber) {
 		foreach ($availableFormats as $numFormat) {
 			/** @var NumberFormat $numFormat  */
