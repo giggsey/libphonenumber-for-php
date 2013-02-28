@@ -1576,6 +1576,7 @@ class PhoneNumberUtil {
 				return $rawInput;
 			}
 		}
+		$metadata = NULL;
 		$formattedNumber = "";
 		$countryCallingCode = $number->getCountryCode();
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
@@ -1584,21 +1585,20 @@ class PhoneNumberUtil {
 			// Extensions are not formatted.
 			$formattedNumber .= $nationalSignificantNumber;
 			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
-			return $formattedNumber;
 		}
-		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
-		// share a country calling code is contained by only one region for performance reasons. For
-		// example, for NANPA regions it will be contained in the metadata for US.
-		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
-		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+		elseif (!$this->hasValidCountryCallingCode($countryCallingCode)) {
 			$formattedNumber .= $nationalSignificantNumber;
-			return $formattedNumber;
 		}
-
-		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
-		$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+		else {
+			// Note getRegionCodeForCountryCode() is used because formatting information for regions which
+			// share a country calling code is contained by only one region for performance reasons. For
+			// example, for NANPA regions it will be contained in the metadata for US.
+			$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+			$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+			$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+			$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+		}
 		$this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
-		$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
 		return $formattedNumber;
 	}
 
@@ -2019,12 +2019,12 @@ class PhoneNumberUtil {
 	 * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
 	 * an extension specified.
 	 */
-	private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, &$formattedNumber) {
+	private function maybeAppendFormattedExtension(PhoneNumber $number, $metadata, $numberFormat, &$formattedNumber) {
 		if ($number->hasExtension() && strlen($number->getExtension()) > 0) {
 			if ($numberFormat == PhoneNumberFormat::RFC3966) {
 				$formattedNumber .= self::RFC3966_EXTN_PREFIX . $number->getExtension();
 			} else {
-				if ($metadata->hasPreferredExtnPrefix()) {
+				if (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
 					$formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
 				} else {
 					$formattedNumber .= self::DEFAULT_EXTN_PREFIX . $number->getExtension();
