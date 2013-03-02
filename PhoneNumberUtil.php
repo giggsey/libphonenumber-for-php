@@ -1444,6 +1444,10 @@ class PhoneNumberUtil {
 			// In Peru, numbers cannot be dialled using E164 format from a mobile phone for Movistar.
 			// Instead they must be dialled in national format.
 			$formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+		} else if ($regionCode == "AE" && $regionCallingFrom == "AE" && $numberType == PhoneNumberType::UAN) {
+			// In the United Arab Emirates, numbers with the prefix 600 (UAN numbers) cannot be dialled
+			// using E164 format. Instead they must be dialled in national format.
+			$formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
 		} else if ($regionCode == "BR" && $regionCallingFrom == "BR" &&
 			(($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) ||
 				($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE))) {
