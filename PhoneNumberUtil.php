@@ -397,7 +397,14 @@ class PhoneNumberUtil {
 	// carrier codes, for example in Brazilian phone numbers. We also allow multiple "+" characters at
 	// the start.
 	// Corresponds to the following:
+	// [digits]{minLengthNsn}|
 	// plus_sign*(([punctuation]|[star])*[digits]){3,}([punctuation]|[star]|[digits]|[alpha])*
+	//
+	// The first reg-ex is to allow short numbers (two digits long) to be parsed if they are entered
+	// as "15" etc, but only if there is no punctuation in them. The second expression restricts the
+	// number of digits to three or more, but then allows them to be in international form, and to
+	// have alpha-characters and punctuation.
+	//
 	// Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
 	/**
 	 * We append optionally the extension pattern to the end here, as a valid phone number may
@@ -405,8 +412,12 @@ class PhoneNumberUtil {
 	 * @return string
 	 */
 	private static function getValidPhoneNumberPattern() {
-		return '%[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
-				self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
+		return '%' .
+			self::DIGITS . '{' . self::MIN_LENGTH_FOR_NSN . '}' . '|' .
+			'[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
+			self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . ']*' .
+			'(?:' . self::$EXTN_PATTERNS_FOR_PARSING . ')?' .
+			'%' . self::REGEX_FLAGS;
 	}
 
 	/**
