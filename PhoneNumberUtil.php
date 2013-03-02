@@ -390,6 +390,11 @@ class PhoneNumberUtil {
 	const FG_PATTERN = '\\$FG';
 	const CC_PATTERN = '\\$CC';
 
+	// A pattern that is used to determine if the national prefix formatting rule has the first group
+	// only, i.e., does not start with the national prefix. Note that the pattern explicitly allows
+	// for unbalanced parentheses.
+	const FIRST_GROUP_ONLY_PREFIX_PATTERN = '\\(?\\$1\\)?';
+
 	// Regular expression of viable phone numbers. This is location independent. Checks we have at
 	// least three leading digits, and only valid punctuation, alpha characters and
 	// digits in the phone number. Does not include extension data.
@@ -1644,6 +1649,15 @@ class PhoneNumberUtil {
 			$this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
 		}
 		return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : NULL;
+	}
+
+	/**
+	 * Helper function to check if the national prefix formatting rule has the first group only, i.e.,
+	 * does not start with the national prefix.
+	 */
+	public static function formattingRuleHasFirstGroupOnly($nationalPrefixFormattingRule) {
+	 	$m = preg_match(self::FIRST_GROUP_ONLY_PREFIX_PATTERN, $nationalPrefixFormattingRule);
+		return $m > 0;
 	}
 
 	/**
