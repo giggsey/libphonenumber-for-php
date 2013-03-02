@@ -2212,11 +2212,14 @@ class PhoneNumberUtil {
 		return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata);
 	}
 
-	private function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode) {
+	public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode) {
 		$isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
-		$source = $isNonGeoRegion ? $filePrefix . "_" . $countryCallingCode : $filePrefix . "_" . $regionCode;
-		if (is_readable($source)) {
-			$data = include $source;
+		$fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode);
+		if (!is_readable($fileName)) {
+			throw new Exception('missing metadata: ' + $fileName);
+		}
+		else {
+			$data = include $fileName;
 			$metadata = new PhoneMetadata();
 			$metadata->fromArray($data);
 			if ($isNonGeoRegion) {
