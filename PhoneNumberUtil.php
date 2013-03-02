@@ -23,6 +23,10 @@ class PhoneNumberUtil {
 	const MIN_LENGTH_FOR_NSN = 3;
 	const MAX_LENGTH_FOR_NSN = 15;
 
+	// We don't allow input strings for parsing to be longer than 250 chars. This prevents malicious
+	// input from overflowing the regular-expression engine.
+	const MAX_INPUT_STRING_LENGTH = 250;
+
 	// The maximum length of the country calling code.
 	const MAX_LENGTH_COUNTRY_CODE = 3;
 
@@ -398,7 +402,7 @@ class PhoneNumberUtil {
 	 * @return string
 	 */
 	private static function getValidPhoneNumberPattern() {
-		return '%[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
+		return '%[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
 				self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
 	}
 
@@ -1078,6 +1082,9 @@ class PhoneNumberUtil {
 								 $checkRegion, PhoneNumber $phoneNumber) {
 		if ($numberToParse === NULL) {
 			throw new NumberParseException(NumberParseException::NOT_A_NUMBER, "The phone number supplied was null.");
+		}
+		elseif (strlen($numberToParse) > self::MAX_INPUT_STRING_LENGTH) {
+			throw new NumberParseException(NumberParseException::TOO_LONG, "The string supplied was too long to parse.");
 		}
 		// Extract a possible number from the string passed in (this strips leading characters that
 		// could not be the start of a phone number.)
