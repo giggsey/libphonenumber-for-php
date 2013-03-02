@@ -42,6 +42,7 @@ class PhoneNumberUtil {
 	 */
 	private static $instance = NULL;
 	private $supportedRegions = array();
+	private $countryCodesForNonGeographicalRegion = array();
 	private $currentFilePrefix = self::META_DATA_FILE_PREFIX;
 	private $countryCallingCodeToRegionCodeMap = NULL;
 
@@ -139,6 +140,14 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Convenience method to get a list of what global network calling codes the library has metadata
+	 * for.
+	 */
+	public function getSupportedGlobalNetworkCallingCodes() {
+		return $this->countryCodesForNonGeographicalRegion;
+	}
+
+	/**
 	 * This class implements a singleton, so the only constructor is private.
 	 */
 	private function __construct() {
@@ -147,12 +156,24 @@ class PhoneNumberUtil {
 
 	private function init($filePrefix) {
 		$this->currentFilePrefix = dirname(__FILE__) . '/data/' . $filePrefix;
-		foreach ($this->countryCallingCodeToRegionCodeMap as $regionCodes) {
-			$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
+		foreach ($this->countryCallingCodeToRegionCodeMap as $countryCode => $regionCodes) {
+			// We can assume that if the country calling code maps to the non-geo entity region code then
+			// that's the only region code it maps to.
+			if (count($regionCodes)==1 && self::REGION_CODE_FOR_NON_GEO_ENTITY===$regionCodes[0]) {
+				// This is the subset of all country codes that map to the non-geo entity region code.
+				$this->countryCodesForNonGeographicalRegion[] = $countryCode;
+			}
+			else {
+				// The supported regions set does not include the "001" non-geo entity region code.
+				$this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
+			}
 		}
+		// If the non-geo entity still got added to the set of supported regions it must be because
+		// there are entries that list the non-geo entity alongside normal regions (which is wrong).
+		// If we discover this, remove the non-geo entity from the set of supported regions and log.
 		$idx_region_code_non_geo_entity = array_search(self::REGION_CODE_FOR_NON_GEO_ENTITY, $this->supportedRegions);
-                if ($idx_region_code_non_geo_entity !== FALSE)
-			unset($this->supportedRegions[$idx_region_code_non_geo_entity]);		
+		if ($idx_region_code_non_geo_entity !== FALSE)
+			unset($this->supportedRegions[$idx_region_code_non_geo_entity]);
 		$this->nanpaRegions = $this->countryCallingCodeToRegionCodeMap[self::NANPA_COUNTRY_CODE];
 	}
 
@@ -369,7 +390,7 @@ class PhoneNumberUtil {
 	// carrier codes, for example in Brazilian phone numbers. We also allow multiple "+" characters at
 	// the start.
 	// Corresponds to the following:
-	// plus_sign*([punctuation]*[digits]){3,}([punctuation]|[digits]|[alpha])*
+	// plus_sign*(([punctuation]|[star])*[digits]){3,}([punctuation]|[star]|[digits]|[alpha])*
 	// Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
 	/**
 	 * We append optionally the extension pattern to the end here, as a valid phone number may
@@ -377,8 +398,8 @@ class PhoneNumberUtil {
 	 * @return string
 	 */
 	private static function getValidPhoneNumberPattern() {
-		return '%[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . ']*' . self::DIGITS . '){3,}[' .
-				self::VALID_PUNCTUATION . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
+		return '%[' . self::PLUS_CHARS . ']*(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
+				self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . "]*(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ')?%' . self::REGEX_FLAGS;
 	}
 
 	/**
@@ -1174,6 +1195,20 @@ class PhoneNumberUtil {
 	public function getRegionCodeForCountryCode($countryCallingCode) {
 		$regionCodes = isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode]) ? $this->countryCallingCodeToRegionCodeMap[$countryCallingCode] : NULL;
 		return $regionCodes === NULL ? self::UNKNOWN_REGION : $regionCodes[0];
+	}
+
+	/**
+	 * Returns the country calling code for a specific region. For example, this would be 1 for the
+	 * United States, and 64 for New Zealand. Assumes the region is already valid.
+	 *
+	 * @param String $regionCode  the region that we want to get the country calling code for
+	 * @return int  the country calling code for the region denoted by regionCode
+	 */
+	public function getCountryCodeForRegion($regionCode) {
+		if (!$this->isValidRegionCode($regionCode)) {
+			return 0;
+		}
+		return $this->getCountryCodeForValidRegion($regionCode);
 	}
 
 	/**
