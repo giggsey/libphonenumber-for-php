@@ -37,6 +37,10 @@ class PhoneNumberUtil {
 	// Toll Free Service) and 808 (International Shared Cost Service).
 	private $countryCodeToNonGeographicalMetadataMap = array();
 
+	// The set of county calling codes that map to the non-geo entity region ("001"). This set
+	// currently contains < 12 elements so the default capacity of 16 (load factor=0.75) is fine.
+	private $countryCodesForNonGeographicalRegion = array();
+
 	const REGION_CODE_FOR_NON_GEO_ENTITY = "001";
 	const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
 	const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
@@ -46,7 +50,6 @@ class PhoneNumberUtil {
 	 */
 	private static $instance = NULL;
 	private $supportedRegions = array();
-	private $countryCodesForNonGeographicalRegion = array();
 	private $currentFilePrefix = self::META_DATA_FILE_PREFIX;
 	private $countryCallingCodeToRegionCodeMap = NULL;
 
@@ -244,8 +247,8 @@ class PhoneNumberUtil {
 	const RFC3966_ISDN_SUBADDRESS = ";isub=";
 
 	// A map that contains characters that are essential when dialling. That means any of the
-	// characters in this map must not be removed from a number when dialing, otherwise the call will
-	// not reach the intended destination.
+	// characters in this map must not be removed from a number when dialling, otherwise the call
+	// will not reach the intended destination.
 	private static $DIALLABLE_CHAR_MAPPINGS = array();
 
 	// We use this pattern to check if the phone number has at least three letters in it - if so, then
@@ -484,8 +487,8 @@ class PhoneNumberUtil {
 	 */
 	private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches) {
 		$normalizedNumber = "";
-		$numberAsArray = preg_split('/(?<!^)(?!$)/u', $number);
-		foreach ($numberAsArray as $character) {
+		for ($i=0; $i<mb_strlen($number, 'UTF-8'); $i++) {
+			$character = mb_substr($number, $i, 1, 'UTF-8');
 			if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
 				$normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
 			} else if (!$removeNonMatches) {
@@ -577,21 +580,17 @@ class PhoneNumberUtil {
 	 * @return int the length of area code of the PhoneNumber object passed in.
 	 */
 	public function getLengthOfGeographicalAreaCode(PhoneNumber $number) {
-		$regionCode = $this->getRegionCodeForNumber($number);
-
-		if (!$this->isValidRegionCode($regionCode)) {
+		$metadata = $this->getMetadataForRegion($this->getRegionCodeForNumber($number));
+		if ($metadata === NULL) {
 			return 0;
 		}
-		$metadata = $this->getMetadataForRegion($regionCode);
 		// If a country doesn't use a national prefix, and this number doesn't have an Italian leading
 		// zero, we assume it is a closed dialling plan with no area codes.
 		if (!$metadata->hasNationalPrefix() && !$metadata->isItalianLeadingZero()) {
 			return 0;
 		}
 
-		$type = $this->getNumberTypeHelper($this->getNationalSignificantNumber($number), $metadata);
-		// Most numbers other than the two types below have to be dialled in full.
-		if ($type != PhoneNumberType::FIXED_LINE && $type != PhoneNumberType::FIXED_LINE_OR_MOBILE) {
+		if (!$this->isNumberGeographical($number)) {
 			return 0;
 		}
 
@@ -691,8 +690,7 @@ class PhoneNumberUtil {
 	 * metadata for the country is found.
 	 */
 	public function isLeadingZeroPossible($countryCallingCode) {
-		$mainMetadataForCallingCode = $this->getMetadataForRegion(
-				$this->getRegionCodeForCountryCode($countryCallingCode));
+		$mainMetadataForCallingCode = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $this->getRegionCodeForCountryCode($countryCallingCode));
 		if ($mainMetadataForCallingCode === NULL) {
 			return FALSE;
 		}
@@ -1161,6 +1159,7 @@ class PhoneNumberUtil {
 		if ($countryCode !== 0) {
 			$phoneNumberRegion = $this->getRegionCodeForCountryCode($countryCode);
 			if ($phoneNumberRegion != $defaultRegion) {
+				// Metadata cannot be null because the country calling code is valid.
 				$regionMetadata = $this->getMetadataForRegionOrCallingCode($countryCode, $phoneNumberRegion);
 			}
 		} else {
@@ -1276,6 +1275,16 @@ class PhoneNumberUtil {
 	}
 
 	/**
+	 * Returns a list with the region codes that match the specific country calling code. For
+	 * non-geographical country calling codes, the region code 001 is returned. Also, in the case
+	 * of no region code being found, an empty list is returned.
+	 */
+	public function getRegionCodesForCountryCode($countryCallingCode) {
+		$regionCodes = isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode]) ? $this->countryCallingCodeToRegionCodeMap[$countryCallingCode] : NULL;
+		return $regionCodes === NULL ? array() : $regionCodes;
+	}
+
+	/**
 	 * Returns the country calling code for a specific region. For example, this would be 1 for the
 	 * United States, and 64 for New Zealand. Assumes the region is already valid.
 	 *
@@ -1295,9 +1304,13 @@ class PhoneNumberUtil {
 	 *
 	 * @param String $regionCode  the region that we want to get the country calling code for
 	 * @return int  the country calling code for the region denoted by regionCode
+	 * @throws Exception if the region is invalid
 	 */
 	private function getCountryCodeForValidRegion($regionCode) {
 		$metadata = $this->getMetadataForRegion($regionCode);
+		if ($metadata === NULL) {
+			throw new Exception("Invalid region code: " . $regionCode);
+    		}
 		return $metadata->getCountryCode();
 	}
 
@@ -1316,10 +1329,10 @@ class PhoneNumberUtil {
 	 * @return string the dialling prefix for the region denoted by regionCode
 	 */
 	public function getNddPrefixForRegion($regionCode, $stripNonDigits) {
-		if (!$this->isValidRegionCode($regionCode)) {
+		$metadata = $this->getMetadataForRegion($regionCode);
+		if ($metadata === NULL) {
 			return null;
 		}
-		$metadata = $this->getMetadataForRegion($regionCode);
 		$nationalPrefix = $metadata->getNationalPrefix();
 		// If no national prefix was found, we return null.
 		if (strlen($nationalPrefix) == 0) {
@@ -1340,6 +1353,10 @@ class PhoneNumberUtil {
 	 * immediately exits with false. After this, the specific number pattern rules for the region are
 	 * examined. This is useful for determining for example whether a particular number is valid for
 	 * Canada, rather than just a valid NANPA number.
+	 * Warning: In most cases, you want to use {@link #isValidNumber} instead. For example, this
+	 * method will mark numbers from British Crown dependencies such as the Isle of Man as invalid for
+	 * the region "GB" (United Kingdom), since it has its own region code, "IM", which may be
+	 * undesirable.
 	 *
 	 * @param PhoneNumber $number       the phone number that we want to validate
 	 * @param string $regionCode   the region that we want to validate the phone number for
@@ -1481,7 +1498,7 @@ class PhoneNumberUtil {
 				return $countryCallingCode . " " . $this->format($number, PhoneNumberFormat::NATIONAL);
 			}
 		} else if ($countryCallingCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
-			// For regions that share a country calling code, the country calling code need not be dialled.
+			// If regions share a country calling code, the country calling code need not be dialled.
 			// This also applies when dialling within a region, so this if clause covers both these cases.
 			// Technically this is the case for dialling from La Reunion to other overseas departments of
 			// France (French Guiana, Martinique, Guadeloupe), but not vice versa - so we don't cover this
@@ -1489,6 +1506,7 @@ class PhoneNumberUtil {
 			// Details here: http://www.petitfute.com/voyage/225-info-pratiques-reunion
 			return $this->format($number, PhoneNumberFormat::NATIONAL);
 		}
+		// Metadata cannot be null because we checked 'isValidRegionCode()' above.
 		$metadataForRegionCallingFrom = $this->getMetadataForRegion($regionCallingFrom);
 
 		$internationalPrefix = $metadataForRegionCallingFrom->getInternationalPrefix();
@@ -1505,6 +1523,7 @@ class PhoneNumberUtil {
 		}
 
 		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		// Metadata cannot be null because the country calling code is valid.
 		$metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
 		$formattedNationalNumber = $this->formatNsn($nationalSignificantNumber, $metadataForRegion, PhoneNumberFormat::INTERNATIONAL);
 		$formattedNumber = $formattedNationalNumber;
@@ -1573,7 +1592,7 @@ class PhoneNumberUtil {
 			if ($this->isNANPACountry($regionCallingFrom)) {
 				return $countryCode . " " . $rawInput;
 			}
-		} else if ($this->isValidRegionCode($regionCallingFrom) &&
+		} else if ($metadataForRegionCallingFrom !== NULL &&
 			$countryCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
 			$formattingPattern =
 				$this->chooseFormattingPatternForNumber($metadataForRegionCallingFrom->numberFormats(),
@@ -1609,6 +1628,7 @@ class PhoneNumberUtil {
 		}
 		$formattedNumber = $rawInput;
 		$regionCode = $this->getRegionCodeForCountryCode($countryCode);
+		// Metadata cannot be null because the country calling code is valid.
 		$metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
 		$this->maybeAppendFormattedExtension($number, $metadataForRegion,
 			PhoneNumberFormat::INTERNATIONAL, $formattedNumber);
@@ -1634,7 +1654,8 @@ class PhoneNumberUtil {
 	}
 
 	/**
-	 *
+	 * Returns the metadata for the given region code or {@code null} if the region code is invalid
+	 * or unknown.
 	 * @param string $regionCode
 	 * @return PhoneMetadata
 	 */
@@ -1649,6 +1670,18 @@ class PhoneNumberUtil {
 			$this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
 		}
 		return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : NULL;
+	}
+
+	/**
+	 * Tests whether a phone number has a geographical association. It checks if the number is
+	 * associated to a certain region in the country where it belongs to. Note that this doesn't
+	 * verify if the number is actually in use.
+	 */
+	public function isNumberGeographical($phoneNumber) {
+		$numberType = $this->getNumberType($phoneNumber);
+		// TODO: Include mobile phone numbers from countries like Indonesia, which has some
+		// mobile numbers that are geographical.
+		return $numberType == PhoneNumberType::FIXED_LINE || $numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE;
 	}
 
 	/**
@@ -1694,6 +1727,11 @@ class PhoneNumberUtil {
 	 */
 	public function format(PhoneNumber $number, $numberFormat) {
 		if ($number->getNationalNumber() == 0 && $number->hasRawInput()) {
+			// Unparseable numbers that kept their raw input just use that.
+			// This is the only case where a number can be formatted as E164 without a
+			// leading '+' symbol (but the original number wasn't parseable anyway).
+			// TODO: Consider removing the 'if' above so that unparseable
+			// strings without raw input format to the empty string instead of "+00"
 			$rawInput = $number->getRawInput();
 			if (strlen($rawInput) > 0) {
 				return $rawInput;
@@ -1704,8 +1742,8 @@ class PhoneNumberUtil {
 		$countryCallingCode = $number->getCountryCode();
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 		if ($numberFormat == PhoneNumberFormat::E164) {
-			// Early exit for E164 case since no formatting of the national number needs to be applied.
-			// Extensions are not formatted.
+			// Early exit for E164 case (even if the country calling code is invalid) since no formatting
+			// of the national number needs to be applied. Extensions are not formatted.
 			$formattedNumber .= $nationalSignificantNumber;
 			$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
 		}
@@ -1717,6 +1755,8 @@ class PhoneNumberUtil {
 			// share a country calling code is contained by only one region for performance reasons. For
 			// example, for NANPA regions it will be contained in the metadata for US.
 			$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+			// Metadata cannot be null because the country calling code is valid (which means that the
+			// region code cannot be ZZ and must be one of our supported region codes).
 			$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
 			$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
 			$this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
@@ -1739,13 +1779,14 @@ class PhoneNumberUtil {
 	public function formatByPattern(PhoneNumber $number, $numberFormat, array $userDefinedFormats) {
 		$countryCallingCode = $number->getCountryCode();
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+			return $nationalSignificantNumber;
+		}
 		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
 		// share a country calling code is contained by only one region for performance reasons. For
 		// example, for NANPA regions it will be contained in the metadata for US.
 		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
-		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
-			return $nationalSignificantNumber;
-		}
+		// Metadata cannot be null because the country calling code is valid
 		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
 
 		$formattedNumber = "";
@@ -1840,9 +1881,18 @@ class PhoneNumberUtil {
 					$formattedNumber = $nationalFormat;
 					break;
 				}
+				// Metadata cannot be null here because getNddPrefixForRegion() (above) returns null if
+				// there is no metadata for the region.
 				$metadata = $this->getMetadataForRegion($regionCode);
 				$nationalNumber = $this->getNationalSignificantNumber($number);
 				$formatRule = $this->chooseFormattingPatternForNumber($metadata->numberFormats(), $nationalNumber);
+				// The format rule could still be null here if the national number was 0 and there was no
+				// raw input (this should not be possible for numbers generated by the phonenumber library
+				// as they would also not have a country calling code and we would have exited earlier).
+				if ($formatRule === NULL) {
+					$formattedNumber = $nationalFormat;
+					break;			
+				}
 				// When the format we apply to this number doesn't contain national prefix, we can just
 				// return the national format.
 				// TODO: Refactor the code below with the code in isNationalPrefixPresentIfRequired.
@@ -1872,11 +1922,14 @@ class PhoneNumberUtil {
 		$rawInput = $number->getRawInput();
 		// If no digit is inserted/removed/modified as a result of our formatting, we return the
 		// formatted phone number; otherwise we return the raw input the user entered.
-		return ($formattedNumber !== NULL &&
-			$this->normalizeHelper($formattedNumber, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */) ==
-			$this->normalizeHelper($rawInput, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */))
-			? $formattedNumber
-			: $rawInput;
+		if ($formattedNumber !== NULL && strlen($rawInput) > 0) {
+			$normalizedFormattedNumber = $this->normalizeHelper($formattedNumber, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */);
+			$normalizedRawInput = $this->normalizeHelper($rawInput, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */);
+			if ($normalizedFormattedNumber != $normalizedRawInput) {
+				$formattedNumber = $rawInput;
+			}
+		}
+		return $formattedNumber;
 	}
 
 	// Check if rawInput, which is assumed to be in the national format, has a national prefix. The
@@ -1933,17 +1986,18 @@ class PhoneNumberUtil {
 	public function formatNationalNumberWithCarrierCode(PhoneNumber $number, $carrierCode) {
 		$countryCallingCode = $number->getCountryCode();
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
-		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
-		// share a country calling code is contained by only one region for performance reasons. For
-		// example, for NANPA regions it will be contained in the metadata for US.
-		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
 		if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
 			return $nationalSignificantNumber;
 		}
 
-		$formattedNumber = "";
+		// Note getRegionCodeForCountryCode() is used because formatting information for regions which
+		// share a country calling code is contained by only one region for performance reasons. For
+		// example, for NANPA regions it will be contained in the metadata for US.
+		$regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+		// Metadata cannot be null because the country calling code is valid.
 		$metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
-		$formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata,
+
+		$formattedNumber = $this->formatNsn($nationalSignificantNumber, $metadata,
 			PhoneNumberFormat::NATIONAL, $carrierCode);
 		$this->maybeAppendFormattedExtension($number, $metadata, PhoneNumberFormat::NATIONAL, $formattedNumber);
 		$this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::NATIONAL,
@@ -1959,6 +2013,7 @@ class PhoneNumberUtil {
 		$nationalNumber = $this->getNationalSignificantNumber($number);
 		foreach ($regionCodes as $regionCode) {
 			// If leadingDigits is present, use this. Otherwise, do full validation.
+			// Metadata cannot be null because the region codes come from the country calling code map.
 			$metadata = $this->getMetadataForRegion($regionCode);
 			if ($metadata->hasLeadingDigits()) {
 				$nbMatches = preg_match('/' . $metadata->getLeadingDigits() . '/', $nationalNumber, $matches, PREG_OFFSET_CAPTURE);
@@ -2038,7 +2093,7 @@ class PhoneNumberUtil {
 		return null;
 	}
 
-	// Note that carrierCode is optional - if NULL or an empty string, no carrier code replacement
+	// Note that carrierCode is optional - if null or an empty string, no carrier code replacement
 	// will take place.
 	public function formatNsnUsingPattern($nationalNumber, NumberFormat $formattingPattern, $numberFormat, $carrierCode = NULL) {
 		$numberFormatRule = $formattingPattern->getFormat();
@@ -2204,11 +2259,11 @@ class PhoneNumberUtil {
 	 */
 	public function getNumberType(PhoneNumber $number) {
 		$regionCode = $this->getRegionCodeForNumber($number);
-		if (!$this->isValidRegionCode($regionCode) && self::REGION_CODE_FOR_NON_GEO_ENTITY != $regionCode) {
+		$metadata = $this->getMetadataForRegionOrCallingCode($number->getCountryCode(), $regionCode);
+		if ($metadata === NULL) {
 			return PhoneNumberType::UNKNOWN;
 		}
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
-		$metadata = $this->getMetadataForRegionOrCallingCode($number->getCountryCode(), $regionCode);
 		return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata);
 	}
 
@@ -2216,7 +2271,7 @@ class PhoneNumberUtil {
 		$isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
 		$fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode);
 		if (!is_readable($fileName)) {
-			throw new Exception('missing metadata: ' + $fileName);
+			throw new Exception('missing metadata: ' . $fileName);
 		}
 		else {
 			$data = include $fileName;
@@ -2345,13 +2400,12 @@ class PhoneNumberUtil {
 	 * @return bool
 	 */
 	public function canBeInternationallyDialled(PhoneNumber $number) {
-		$regionCode = $this->getRegionCodeForNumber($number);
-		if (!$this->isValidRegionCode($regionCode)) {
+		$metadata = $this->getMetadataForRegion($this->getRegionCodeForNumber($number));
+		if ($metadata === NULL) {
 			// Note numbers belonging to non-geographical entities (e.g. +800 numbers) are always
 			// internationally diallable, and will be caught here.
 			return true;
 		}
-		$metadata = $this->getMetadataForRegion($regionCode);
 		$nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 		return !$this->isNumberMatchingDesc($nationalSignificantNumber, $metadata->getNoInternationalDialling());
 	}
