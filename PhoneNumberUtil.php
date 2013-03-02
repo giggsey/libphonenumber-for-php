@@ -20,7 +20,7 @@ class PhoneNumberUtil {
 
 	const REGEX_FLAGS = 'ui'; //Unicode and case insensitive
 	// The minimum and maximum length of the national significant number.
-	const MIN_LENGTH_FOR_NSN = 3;
+	const MIN_LENGTH_FOR_NSN = 2;
 	const MAX_LENGTH_FOR_NSN = 15;
 
 	// We don't allow input strings for parsing to be longer than 250 chars. This prevents malicious
@@ -98,7 +98,7 @@ class PhoneNumberUtil {
 			self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
 
 			self::$DIALLABLE_CHAR_MAPPINGS = self::$asciiDigitMappings;
-			self::$DIALLABLE_CHAR_MAPPINGS['+'] = '+';
+			self::$DIALLABLE_CHAR_MAPPINGS[self::PLUS_SIGN] = self::PLUS_SIGN;
 			self::$DIALLABLE_CHAR_MAPPINGS['*'] = '*';
 
 			self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS = array();
@@ -240,9 +240,8 @@ class PhoneNumberUtil {
 	const STAR_SIGN = '*';
 	const RFC3966_EXTN_PREFIX = ";ext=";
 	const RFC3966_PREFIX = "tel:";
-	// We include the "+" here since RFC3966 format specifies that the context must be specified in
-	// international format.
 	const RFC3966_PHONE_CONTEXT = ";phone-context=";
+	const RFC3966_ISDN_SUBADDRESS = ";isub=";
 
 	// A map that contains characters that are essential when dialling. That means any of the
 	// characters in this map must not be removed from a number when dialing, otherwise the call will
@@ -266,7 +265,7 @@ class PhoneNumberUtil {
 	// placeholder for carrier information in some phone numbers. Full-width variants are also
 	// present.
 	/* "-x‐-―−ー－-／  <U+200B><U+2060>　()（）［］.\\[\\]/~⁓∼" */
-	const VALID_PUNCTUATION = "-x\xE2\x80\x90-\xE2\x80\x95\xE2\x88\x92\xE3\x83\xBC\xEF\xBC\x8D-\xEF\xBC\x8F \xC2\xA0\xE2\x80\x8B\xE2\x81\xA0\xE3\x80\x80()\xEF\xBC\x88\xEF\xBC\x89\xEF\xBC\xBB\xEF\xBC\xBD.\\[\\]/~\xE2\x81\x93\xE2\x88\xBC";
+	const VALID_PUNCTUATION = "-x\xE2\x80\x90-\xE2\x80\x95\xE2\x88\x92\xE3\x83\xBC\xEF\xBC\x8D-\xEF\xBC\x8F \xC2\xA0\xC2\xAD\xE2\x80\x8B\xE2\x81\xA0\xE3\x80\x80()\xEF\xBC\x88\xEF\xBC\x89\xEF\xBC\xBB\xEF\xBC\xBD.\\[\\]/~\xE2\x81\x93\xE2\x88\xBC";
 	const DIGITS = "\\p{Nd}";
 
 	private static $CAPTURING_EXTN_DIGITS;
@@ -412,7 +411,7 @@ class PhoneNumberUtil {
 
 	/**
 	 * Checks to see if the string of characters could possibly be a phone number at all. At the
-	 * moment, checks to see that the string begins with at least 3 digits, ignoring any punctuation
+	 * moment, checks to see that the string begins with at least 2 digits, ignoring any punctuation
 	 * commonly found in phone numbers.
 	 * This method does not require the number to be normalized in advance - but does assume that
 	 * leading non-number symbols have been removed, such as by the method extractPossibleNumber.
@@ -796,7 +795,7 @@ class PhoneNumberUtil {
 			$phoneNumber->setCountryCodeSource($countryCodeSource);
 		}
 		if ($countryCodeSource != CountryCodeSource::FROM_DEFAULT_COUNTRY) {
-			if (strlen($fullNumber) < self::MIN_LENGTH_FOR_NSN) {
+			if (strlen($fullNumber) <= self::MIN_LENGTH_FOR_NSN) {
 				throw new NumberParseException(NumberParseException::TOO_SHORT_AFTER_IDD,
 					"Phone number had an IDD, but after this was not "
 						. "long enough to be a viable phone number.");
@@ -1029,7 +1028,8 @@ class PhoneNumberUtil {
 	 * well as the country_code_source field.
 	 *
 	 * @param string $numberToParse     number that we are attempting to parse. This can contain formatting
-	 *                                  such as +, ( and -, as well as a phone number extension.
+	 *                                  such as +, ( and -, as well as a phone number extension. It can also
+	 *                                  be provided in RFC3966 format.
 	 * @param string $defaultRegion     region that we are expecting the number to be from. This is only used
 	 *                                  if the number being parsed is not written in international format.
 	 *                                  The country calling code for the number in this case would be stored
@@ -1093,27 +1093,8 @@ class PhoneNumberUtil {
 			throw new NumberParseException(NumberParseException::TOO_LONG, "The string supplied was too long to parse.");
 		}
 
-		$indexOfPhoneContext = strpos($numberToParse, self::RFC3966_PHONE_CONTEXT);
-		if ($indexOfPhoneContext !== FALSE) {
-			// Prefix the number with the phone context. The offset here is because the context we are
-			// expecting to match should start with a "+" sign, and we want to include this at the start
-			// of the number.
-			$nationalNumber = substr($numberToParse, $indexOfPhoneContext + strlen(self::RFC3966_PHONE_CONTEXT) - 1);
- 			// Now append everything between the "tel:" prefix and the phone-context.
-			$prefixLoc = strpos($numberToParse, self::RFC3966_PREFIX);
-			if ($prefixLoc!==FALSE)
-				$prefixLoc += strlen(self::RFC3966_PREFIX);
-			else
-				$prefixLoc = 0;
-			$nationalNumber .= substr($numberToParse, $prefixLoc, $indexOfPhoneContext - $endOfPrefix);
-			// Note that phone-contexts that are URLs will not be parsed - isViablePhoneNumber will throw
-			// an exception below.
-		}
-		else {
-			// Extract a possible number from the string passed in (this strips leading characters that
-			// could not be the start of a phone number.)
-			$nationalNumber = $this->extractPossibleNumber($numberToParse);
-		}
+		$nationalNumber = '';
+		$this->buildNationalNumberForParsing($numberToParse, $nationalNumber);
 
 		if (!$this->isViablePhoneNumber($nationalNumber)) {
 			throw new NumberParseException(NumberParseException::NOT_A_NUMBER, "The string supplied did not seem to be a phone number.");
@@ -1204,6 +1185,55 @@ class PhoneNumberUtil {
 		$phoneNumber->setNationalNumber((float)$normalizedNationalNumber);
 	}
 
+	/**
+	 * Converts numberToParse to a form that we can parse and write it to nationalNumber if it is
+	 * written in RFC3966; otherwise extract a possible number out of it and write to nationalNumber.
+	 */
+	private function buildNationalNumberForParsing($numberToParse, &$nationalNumber) {
+		$indexOfPhoneContext = strpos($numberToParse, self::RFC3966_PHONE_CONTEXT);
+		if ($indexOfPhoneContext > 0) {
+			$phoneContextStart = $indexOfPhoneContext + strlen(self::RFC3966_PHONE_CONTEXT);
+			// If the phone context contains a phone number prefix, we need to capture it, whereas domains
+			// will be ignored.
+			if (substr($numberToParse, $phoneContextStart, 1) == self::PLUS_SIGN) {
+				// Additional parameters might follow the phone context. If so, we will remove them here
+				// because the parameters after phone context are not important for parsing the
+				// phone number.
+				$phoneContextEnd = strpos($numberToParse, ';', $phoneContextStart);
+				if ($phoneContextEnd > 0) {
+					$nationalNumber .= substr($numberToParse, $phoneContextStart, $phoneContextEnd - $phoneContextStart);
+				}
+				else {
+					$nationalNumber .= substr($numberToParse, $phoneContextStart);
+				}
+			}
+
+			// Now append everything between the "tel:" prefix and the phone-context. This should include
+			// the national number, an optional extension or isdn-subaddress component.
+			$prefixLoc = strpos($numberToParse, self::RFC3966_PREFIX);
+			if ($prefixLoc!==FALSE)
+				$prefixLoc += strlen(self::RFC3966_PREFIX);
+			else
+				$prefixLoc = 0;
+			$nationalNumber .= substr($numberToParse, $prefixLoc, $indexOfPhoneContext - $endOfPrefix);
+		}
+		else {
+			// Extract a possible number from the string passed in (this strips leading characters that
+			// could not be the start of a phone number.)
+			$nationalNumber .= $this->extractPossibleNumber($numberToParse);
+		}
+
+		// Delete the isdn-subaddress and everything after it if it is present. Note extension won't
+		// appear at the same time with isdn-subaddress according to paragraph 5.3 of the RFC3966 spec,
+		$indexOfIsdn = strpos($nationalNumber, self::RFC3966_ISDN_SUBADDRESS);
+		if ($indexOfIsdn > 0) {
+			$nationalNumber = substr($nationalNumber, 0, $indexOfIsdn);
+		}
+		// If both phone context and isdn-subaddress are absent but other parameters are present, the
+		// parameters are left in nationalNumber. This is because we are concerned about deleting
+		// content from a potential number string when there is no strong evidence that the number is
+		// actually written in RFC3966.
+	}
 
 	/**
 	 * Tests whether a phone number matches a valid pattern. Note this doesn't verify the number
@@ -1818,7 +1848,8 @@ class PhoneNumberUtil {
 		// If no digit is inserted/removed/modified as a result of our formatting, we return the
 		// formatted phone number; otherwise we return the raw input the user entered.
 		return ($formattedNumber !== NULL &&
-			$this->normalizeDigitsOnly($formattedNumber) == $this->normalizeDigitsOnly($rawInput))
+			$this->normalizeHelper($formattedNumber, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */) ==
+			$this->normalizeHelper($rawInput, self::$DIALLABLE_CHAR_MAPPINGS, TRUE /* remove non matches */))
 			? $formattedNumber
 			: $rawInput;
 	}
