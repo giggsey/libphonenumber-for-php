@@ -35,13 +35,20 @@ return array (
               3[3467]|
               5[2457-9]
             )|
-            2\\d{2,3}|
+            1[0-5]\\d|
+            2\\d{2}|
             [4-9]\\d{2}|
             3(?:
               [14]0|
               35
             )
-          )\\d{4}
+          )\\d{4}|
+          6(?:
+            [03]1|
+            2[128]|
+            5[57]|
+            6[2469]
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '60201234',
@@ -93,7 +100,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '62',
+        0 => '6[02356]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

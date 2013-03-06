@@ -29,7 +29,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             68|
-            7[1236]\\d
+            7[0-36]\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,8}',
@@ -78,11 +78,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(7[1-36]\\d)(\\d{2})(\\d{3})',
+      'pattern' => '(7\\d{2})(\\d{2})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '7[1-36]',
+        0 => '7',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

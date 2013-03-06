@@ -81,6 +81,38 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(\\d{4})(\\d{4})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            [2-9](?:
+              [1-9]|
+              0[1-9]
+            )
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{5})(\\d{4})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            9(?:
+              [1-9]|
+              0[1-9]
+            )
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
       'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
@@ -90,7 +122,7 @@ return array (
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
-    1 => 
+    3 => 
     array (
       'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
@@ -101,7 +133,7 @@ return array (
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
-    2 => 
+    4 => 
     array (
       'pattern' => '([34]00\\d)(\\d{4})',
       'format' => '$1-$2',
@@ -112,7 +144,7 @@ return array (
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    3 => 
+    5 => 
     array (
       'pattern' => '([3589]00)(\\d{2,3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -126,6 +158,42 @@ return array (
   ),
   'intlNumberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'format' => '$1 $2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '119',
+      ),
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
+      'format' => '$1 $2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-9][1-9]',
+      ),
+    ),
+    2 => 
+    array (
+      'pattern' => '([34]00\\d)(\\d{4})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[34]00',
+      ),
+    ),
+    3 => 
+    array (
+      'pattern' => '([3589]00)(\\d{2,3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[3589]00',
+      ),
+    ),
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,

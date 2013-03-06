@@ -15,11 +15,11 @@ return array (
             [49][23]|
             5\\d|
             6[013-57-9]|
-            7[18]
+            71
           )\\d{6}|
           8(?:
             0[1-9]|
-            [1-69]\\d
+            [1-79]\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -30,7 +30,7 @@ return array (
     'NationalNumberPattern' => '
           4(?:
             [679]\\d|
-            8[3-9]
+            8[03-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -55,9 +55,9 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '87\\d{6}',
-    'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '87123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
