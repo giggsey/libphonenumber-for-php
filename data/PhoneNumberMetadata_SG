@@ -52,7 +52,7 @@ return array (
   ),
   'id' => 'SG',
   'countryCode' => 65,
-  'internationalPrefix' => '0[0-3][0-9]',
+  'internationalPrefix' => '0[0-3]\\d',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

@@ -16,7 +16,7 @@ return array (
                 2[2-9]|
                 3[2-57]|
                 4[2-8]|
-                8[235-9]
+                8[235-7]
               )\\d|
               9(?:
                 0\\d|
@@ -46,8 +46,8 @@ return array (
           6(?:
             0[0-6]|
             [14-7]\\d|
-            2[236-9]|
-            3[03458]|
+            2[2-46-9]|
+            3[03-8]|
             8[01]|
             99
           )\\d{6}
@@ -176,6 +176,6 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => true,
   'leadingZeroPossible' => NULL,
 );

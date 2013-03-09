@@ -2,39 +2,42 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[289]\\d{8}',
+    'NationalNumberPattern' => '[5689]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '21[1-8]\\d{6}',
+    'NationalNumberPattern' => '528[89]\\d{5}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '211234567',
+    'ExampleNumber' => '528812345',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          9(?:
-            5[05]|
-            6\\d|
-            7[13-9]
+          6(?:
+            0[0-6]|
+            [14-7]\\d|
+            2[2-46-9]|
+            3[03-8]|
+            8[01]|
+            99
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '955123456',
+    'ExampleNumber' => '650123456',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{6}',
+    'NationalNumberPattern' => '80\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '800123456',
+    'ExampleNumber' => '801234567',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '89\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '891234567',
   ),
   'sharedCost' => 
   array (
@@ -48,40 +51,19 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'ZM',
-  'countryCode' => 260,
+  'id' => 'EH',
+  'countryCode' => 212,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
-    0 => 
-    array (
-      'pattern' => '([29]\\d)(\\d{7})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[29]',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    1 => 
-    array (
-      'pattern' => '(800)(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '8',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
   ),
   'intlNumberFormat' => 
   array (
   ),
   'mainCountryForCode' => NULL,
+  'leadingDigits' => '528[89]',
   'leadingZeroPossible' => NULL,
 );

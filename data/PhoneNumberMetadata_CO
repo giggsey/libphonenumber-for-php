@@ -22,7 +22,7 @@ return array (
     'NationalNumberPattern' => '
           3(?:
             0[0-24]|
-            1[0-8]|
+            1\\d|
             2[01]
           )\\d{7}
         ',

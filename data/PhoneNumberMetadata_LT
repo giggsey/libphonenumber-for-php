@@ -32,15 +32,20 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90[0239]\\d{5}',
+    'NationalNumberPattern' => '
+          9(?:
+            0[0239]|
+            10
+          )\\d{5}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90012345',
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '808\\d{5}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '80812345',
   ),
   'noInternationalDialling' => 
   array (
@@ -52,7 +57,7 @@ return array (
   'countryCode' => 370,
   'internationalPrefix' => '00',
   'nationalPrefix' => '8',
-  'nationalPrefixForParsing' => '8',
+  'nationalPrefixForParsing' => '[08]',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
