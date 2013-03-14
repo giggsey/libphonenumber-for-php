@@ -837,8 +837,10 @@ class PhoneNumberUtil {
 				$potentialNationalNumber = substr($normalizedNumber, strlen($defaultCountryCodeString));
 				$generalDesc = $defaultRegionMetadata->getGeneralDesc();
 				$validNumberPattern = $generalDesc->getNationalNumberPattern();
+        // Don't need the carrier code.
+        $carriercode = NULL;
 				$this->maybeStripNationalPrefixAndCarrierCode(
-					$potentialNationalNumber, $defaultRegionMetadata, null /* Don't need the carrier code */);
+					$potentialNationalNumber, $defaultRegionMetadata, $carriercode);
 				$possibleNumberPattern = $generalDesc->getPossibleNumberPattern();
 				// If the number was not valid before but is valid now, or if it was too long before, we
 				// consider the number with the country calling code stripped to be a better result and
