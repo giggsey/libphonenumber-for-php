@@ -49,6 +49,64 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'personalNumber' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'voip' => 
+  array (
+    'NationalNumberPattern' => '85\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '851234567',
+  ),
+  'pager' => 
+  array (
+    'NationalNumberPattern' => '66\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '662345678',
+  ),
+  'uan' => 
+  array (
+    'NationalNumberPattern' => '
+          140(?:
+            1(?:
+              [035]|
+              [16-8]\\d
+            )|
+            2(?:
+              [0346]|
+              [259]\\d
+            )|
+            3(?:
+              [03568]|
+              [124]\\d
+            )|
+            4(?:
+              [0356]|
+              [17-9]\\d
+            )|
+            5(?:
+              [0358]|
+              [124679]\\d
+            )|
+            7\\d|
+            8[458]
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{5,6}',
+    'ExampleNumber' => '14020',
+  ),
+  'emergency' => 
+  array (
+    'NationalNumberPattern' => '
+          112|
+          911
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '112',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '14\\d{3,4}',

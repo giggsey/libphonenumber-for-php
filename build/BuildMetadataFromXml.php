@@ -314,15 +314,14 @@ class BuildMetadataFromXml {
 		$metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
 		$metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
 
-		/*
-		 * @todo
+
 		  $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
 		  $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
 		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
 		  $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
 		  $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
-		 * 
-		 */
+
+
 		$metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
 		$metadata->setSameMobileAndFixedLinePattern(
 				$metadata->getMobile()->getNationalNumberPattern() === $metadata->getFixedLine()->getNationalNumberPattern()

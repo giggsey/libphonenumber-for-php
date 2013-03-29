@@ -90,6 +90,42 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'personalNumber' => 
+  array (
+    'NationalNumberPattern' => '
+          5(?:
+            00|
+            33|
+            44
+          )[2-9]\\d{6}
+        ',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '5002345678',
+  ),
+  'voip' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'pager' => 
+  array (
+    'NationalNumberPattern' => '345849\\d{4}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '3458491234',
+  ),
+  'uan' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'emergency' => 
+  array (
+    'NationalNumberPattern' => '911',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '911',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',

@@ -344,92 +344,95 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	/*
+    private $personalNumber;
 
-	  // required PhoneNumberDesc personal_number = 7;
-	  private boolean hasPersonalNumber;
-	  private PhoneNumberDesc personalNumber_ = null;
-	  public boolean hasPersonalNumber() { return hasPersonalNumber; }
-	  public PhoneNumberDesc getPersonalNumber() { return personalNumber_; }
-	  public PhoneMetadata setPersonalNumber(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasPersonalNumber = true;
-	  personalNumber_ = $value;
-	  return this;
-	  }
+    public function hasPersonalNumber() {
+        return isset($this->personalNumber);
+    }
 
-	  // required PhoneNumberDesc voip = 8;
-	  private boolean hasVoip;
-	  private PhoneNumberDesc voip_ = null;
-	  public boolean hasVoip() { return hasVoip; }
-	  public PhoneNumberDesc getVoip() { return voip_; }
-	  public PhoneMetadata setVoip(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasVoip = true;
-	  voip_ = $value;
-	  return this;
-	  }
+    public function getPersonalNumber() {
+        return $this->personalNumber;
+    }
 
-	  // required PhoneNumberDesc pager = 21;
-	  private boolean hasPager;
-	  private PhoneNumberDesc pager_ = null;
-	  public boolean hasPager() { return hasPager; }
-	  public PhoneNumberDesc getPager() { return pager_; }
-	  public PhoneMetadata setPager(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasPager = true;
-	  pager_ = $value;
-	  return this;
-	  }
+    public function setPersonalNumber(PhoneNumberDesc $value) {
+        $this->personalNumber = $value;
+        return $this;
+    }
 
-	  // required PhoneNumberDesc uan = 25;
-	  private boolean hasUan;
-	  private PhoneNumberDesc uan_ = null;
-	  public boolean hasUan() { return hasUan; }
-	  public PhoneNumberDesc getUan() { return uan_; }
-	  public PhoneMetadata setUan(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasUan = true;
-	  uan_ = $value;
-	  return this;
-	  }
+    private $voip;
 
-	  // required PhoneNumberDesc voicemail = 28;
-	  private boolean hasVoicemail;
-	  private PhoneNumberDesc voicemail_ = null;
-	  public boolean hasVoicemail() { return hasVoicemail; }
-	  public PhoneNumberDesc getVoicemail() { return voicemail_; }
-	  public PhoneMetadata setVoicemail(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasVoicemail = true;
-	  voicemail_ = $value;
-	  return this;
-	  }
+    public function hasVoip() {
+        return isset($this->voip);
+    }
 
-	  // required PhoneNumberDesc emergency = 27;
-	  private boolean hasEmergency;
-	  private PhoneNumberDesc emergency_ = null;
-	  public boolean hasEmergency() { return hasEmergency; }
-	  public PhoneNumberDesc getEmergency() { return emergency_; }
-	  public PhoneMetadata setEmergency(PhoneNumberDesc value) {
-	  if (value == null) {
-	  throw new NullPointerException();
-	  }
-	  hasEmergency = true;
-	  emergency_ = $value;
-	  return this;
-	  }
-	 */
+    public function getVoip() {
+        return $this->voip;
+    }
+
+    public function setVoip(PhoneNumberDesc $value) {
+        $this->voip = $value;
+        return $this;
+    }
+
+    private $pager;
+
+    public function hasPager() {
+        return isset($this->pager);
+    }
+
+    public function getPager() {
+        return $this->pager;
+    }
+
+    public function setPager(PhoneNumberDesc $value) {
+        $this->pager = $value;
+        return $this;
+    }
+
+    private $uan;
+
+    public function hasUan() {
+        return isset($this->uan);
+    }
+
+    public function getUan() {
+        return $this->uan;
+    }
+
+    public function setUan(PhoneNumberDesc $value) {
+        $this->uan = $value;
+        return $this;
+    }
+
+    private $voicemail;
+
+    public function hasVoicemail() {
+        return isset($this->voicemail);
+    }
+
+    public function getVoicemail() {
+        return $this->voicemail;
+    }
+
+    public function setVoicemail(PhoneNumberDesc $value) {
+        $this->voicemail = $value;
+        return $this;
+    }
+
+    private $emergency;
+
+    public function hasEmergency() {
+        return isset($this->emergency);
+    }
+
+    public function getEmergency() {
+        return $this->emergency;
+    }
+
+    public function setEmergency(PhoneNumberDesc $value) {
+        $this->emergency = $value;
+        return $this;
+    }
 
 	private $noInternationalDialling = null;
 
@@ -505,32 +508,30 @@ class PhoneMetadata {
 			$output['sharedCost'] = $this->getSharedCost()->toArray();
 		}
 
-		/*
-		  objectOutput.writeBoolean(hasPersonalNumber);
-		  if (hasPersonalNumber) {
-		  personalNumber_.writeExternal(objectOutput);
-		  }
-		  objectOutput.writeBoolean(hasVoip);
-		  if (hasVoip) {
-		  voip_.writeExternal(objectOutput);
-		  }
-		  objectOutput.writeBoolean(hasPager);
-		  if (hasPager) {
-		  pager_.writeExternal(objectOutput);
-		  }
-		  objectOutput.writeBoolean(hasUan);
-		  if (hasUan) {
-		  uan_.writeExternal(objectOutput);
-		  }
-		  objectOutput.writeBoolean(hasVoicemail);
-		  if (hasVoicemail) {
-		  voicemail_.writeExternal(objectOutput);
-		  }
-		  objectOutput.writeBoolean(hasEmergency);
-		  if (hasEmergency) {
-		  emergency_.writeExternal(objectOutput);
-		  }
-		 */
+        if ($this->hasPersonalNumber()) {
+            $output['personalNumber'] = $this->getPersonalNumber()->toArray();
+        }
+
+        if ($this->hasVoip()) {
+            $output['voip'] = $this->getVoip()->toArray();
+        }
+
+        if ($this->hasPager()) {
+            $output['pager'] = $this->getPager()->toArray();
+        }
+
+        if ($this->hasUan()) {
+            $output['uan'] = $this->getUan()->toArray();
+        }
+
+        if ($this->hasVoicemail()) {
+            $output['voicemail'] = $this->getVoicemail()->toArray();
+        }
+
+        if ($this->hasEmergency()) {
+            $output['emergency'] = $this->getEmergency()->toArray();
+        }
+
 		if ($this->hasNoInternationalDialling()) {
 			$output['noInternationalDialling'] = $this->getNoInternationalDialling()->toArray();
 		}
