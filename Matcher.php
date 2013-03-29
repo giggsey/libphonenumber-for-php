@@ -4,6 +4,10 @@ namespace libphonenumber;
 
 /**
  * Matcher for various regex matching
+ *
+ * Note that this is NOT the same as google's java PhoneNumberMatcher class.
+ * This class is a minimal port of java's built-in matcher class, whereas PhoneNumberMatcher
+ * is designed to recognize phone numbers embedded in any text.
  */
 class Matcher
 {
@@ -28,8 +32,26 @@ class Matcher
      */
     public function __construct($pattern, $subject)
     {
-        $this->pattern = $pattern;
+        $this->pattern = str_replace('/', '\/', $pattern);
         $this->subject = $subject;
+    }
+
+    private function do_match($type = 'find') {
+        $final_pattern = '(?:' . $this->pattern . ')';
+	switch ($type) {
+	    case 'matches':
+	        $final_pattern = '^' . $final_pattern . '$';
+                break;
+            case 'lookingAt':
+	        $final_pattern = '^' . $final_pattern;
+                break;
+            case 'find':
+	    default:
+                // no changes	    
+                break;
+        }
+	$final_pattern = '/' . $final_pattern .'/x';
+        return preg_match($final_pattern, $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
     }
 
     /**
@@ -37,7 +59,7 @@ class Matcher
      */
     public function matches()
     {
-        return preg_match('/^(?:' . str_replace('/', '\/', $this->pattern) . ')$/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+        return $this->do_match('matches');
     }
 
     /**
@@ -45,9 +67,7 @@ class Matcher
      */
     public function lookingAt()
     {
-        $this->fullPatternMatchesNumber = preg_match_all('/^(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
-
-        return $this->fullPatternMatchesNumber > 0;
+        return $this->do_match('lookingAt');
     }
 
     /**
@@ -55,16 +75,18 @@ class Matcher
      */
     public function find()
     {
-        return preg_match('/(?:' . str_replace('/', '\/', $this->pattern) . ')/x', $this->subject, $this->groups, PREG_OFFSET_CAPTURE) > 0;
+        return $this->do_match('find');
     }
-
 
     /**
      * @return int
      */
     public function groupCount()
     {
-        return count($this->groups);
+        if (empty($this->groups))
+            return NULL;
+	else
+            return count($this->groups) - 1;
     }
 
     /**
@@ -72,19 +94,23 @@ class Matcher
      * 
      * @return string 
      */
-    public function group($group = null)
+    public function group($group = NULL)
     {
-        return $this->groups[$group - 1][0];
+	if (!isset($group))
+            $group = 0;
+        return (isset($this->groups[$group][0])) ? $this->groups[$group][0] : NULL;
     }
 
     /**
      * @return int
      */
-    public function end()
+    public function end($group = NULL)
     {
-        $lastGroup = $this->groups[$this->fullPatternMatchesNumber - 1][0];
-
-        return $lastGroup[1] + strlen($lastGroup[0]);
+        if (!isset($group))
+	    $group = 0;
+	if (!isset($this->groups[$group]))
+	    return NULL;
+	return $this->groups[$group][1] + strlen($this->groups[$group][0]);
     }
 
     /**
@@ -94,7 +120,7 @@ class Matcher
      */
     public function replaceFirst($replacement)
     {
-        return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject, 1);
+        return preg_replace('/' . $this->pattern . '/', $replacement, $this->subject, 1);
     }
 
     /**
@@ -104,7 +130,7 @@ class Matcher
      */
     public function replaceAll($replacement)
     {
-        return preg_replace('/' . str_replace('/', '\/', $this->pattern) . '/', $replacement, $this->subject);
+        return preg_replace('/' . $this->pattern . '/', $replacement, $this->subject);
     }
 
     /**
