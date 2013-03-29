@@ -2,6 +2,8 @@
 
 namespace libphonenumber;
 
+use Exception;
+
 /**
  * Utility for international phone numbers. Functionality includes formatting, parsing and
  * validation.
