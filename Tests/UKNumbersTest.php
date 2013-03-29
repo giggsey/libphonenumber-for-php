@@ -12,6 +12,7 @@ namespace libphonenumber\Tests;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
+use libphonenumber\CountryCodeToRegionCodeMap;
 
 require_once dirname(__FILE__) . '/../PhoneNumber.php';
 require_once dirname(__FILE__) . '/../PhoneNumberUtil.php';
@@ -34,9 +35,12 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
      */
     protected $phoneUtil;
 
+    const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
+
     public function __construct()
     {
-        $this->phoneUtil = PhoneNumberUtil::getInstance();
+        PhoneNumberUtil::resetInstance();
+        $this->phoneUtil = PhoneNumberUtil::getInstance(self::META_DATA_FILE_PREFIX, CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap);;
     }
 
     public function testMobileNumber()
@@ -180,6 +184,28 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
 
         $formattedNational = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::NATIONAL);
         $this->assertEquals("0906 302 0288", $formattedNational, "Checking National format is correct");
+    }
+
+    public function testChildLine()
+    {
+        $number = '08001111';
+        $phoneObject = $this->phoneUtil->parse($number, 'GB');
+
+        $valid = $this->phoneUtil->isValidNumber($phoneObject);
+        $this->assertTrue($valid, "Checking phone number is valid");
+
+        $type = $this->phoneUtil->getNumberType($phoneObject);
+        $this->assertEquals(
+            PhoneNumberType::TOLL_FREE,
+            $type,
+            "Checking phone number is detected as TOLL FREE"
+        );
+
+        $formattedE164 = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::E164);
+        $this->assertEquals("+448001111", $formattedE164, "Checking E164 format is correct");
+
+        $formattedNational = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::NATIONAL);
+        $this->assertEquals("0800 1111", $formattedNational, "Checking National format is correct");
     }
 
     public function testInvalidNumber()
