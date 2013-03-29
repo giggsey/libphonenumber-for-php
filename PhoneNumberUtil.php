@@ -589,7 +589,7 @@ class PhoneNumberUtil {
 		}
 		// If a country doesn't use a national prefix, and this number doesn't have an Italian leading
 		// zero, we assume it is a closed dialling plan with no area codes.
-                if (!$metadata->hasNationalPrefix() && !$number->isItalianLeadingZero()) {
+		if (!$metadata->hasNationalPrefix() && !$number->isItalianLeadingZero()) {
 			return 0;
 		}
 

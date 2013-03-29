@@ -617,44 +617,35 @@ class PhoneMetadata {
 			$this->setSharedCost($desc->fromArray($input['sharedCost']));
 		}
 
-		/*
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setPersonalNumber(desc);
-		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setVoip(desc);
-		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setPager(desc);
-		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setUan(desc);
-		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setVoicemail(desc);
-		  }
-		  hasDesc = objectInput.readBoolean();
-		  if (hasDesc) {
-		  PhoneNumberDesc desc = new PhoneNumberDesc();
-		  desc.readExternal(objectInput);
-		  setEmergency(desc);
-		  }
-		 */
+        if (isset($input['personalNumber'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setPersonalNumber($desc->fromArray($input['personalNumber']));
+        }
+
+        if (isset($input['voip'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setVoip($desc->fromArray($input['voip']));
+        }
+
+        if (isset($input['pager'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setPager($desc->fromArray($input['pager']));
+        }
+
+        if (isset($input['uan'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setUan($desc->fromArray($input['uan']));
+        }
+
+        if (isset($input['voicemail'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setVoicemail($desc->fromArray($input['voicemail']));
+        }
+
+        if (isset($input['emergency'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setEmergency($desc->fromArray($input['emergency']));
+        }
 		
 		if (isset($input['noInternationalDialling'])) {
 			$desc = new PhoneNumberDesc();

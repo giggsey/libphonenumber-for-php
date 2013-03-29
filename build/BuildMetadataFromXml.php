@@ -315,11 +315,12 @@ class BuildMetadataFromXml {
 		$metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
 
 
-		  $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
-		  $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
-		  $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
-		  $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
-		  $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
+		$metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
+		$metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
+		$metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
+		$metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
+		$metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
+        $metadata->setVoicemail(self::processPhoneNumberDescElement($generalDesc, $element, self::VOICEMAIL));
 
 
 		$metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
