@@ -49,6 +49,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static $usSpoof = NULL;
 	private static $usSpoofWithRawInput = NULL;
 	private static $gbMobile = NULL;
+    private static $bsMobile = NULL;
 	private static $gbNumber = NULL;
 	private static $deShortNumber = NULL;
 	private static $itMobile = NULL;
@@ -77,6 +78,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	private static function initializePhoneUtilForTesting() {
 		self::$bsNumber = new PhoneNumber();
 		self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
+        self::$bsMobile = new PhoneNumber();
+        self::$bsMobile->setCountryCode(1)->setNationalNumber(2423591234);
 		self::$internationalTollFree = new PhoneNumber();
 		self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
 		self::$sgNumber = new PhoneNumber();
@@ -219,7 +222,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 	public function testIsLeadingZeroPossible() {
 		$this->assertTrue($this->phoneUtil->isLeadingZeroPossible(39));  // Italy
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1));  // USA
-		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(800));  // International toll free numbers
+		$this->assertTrue($this->phoneUtil->isLeadingZeroPossible(800));  // International toll free numbers
 		$this->assertFalse($this->phoneUtil->isLeadingZeroPossible(888));  // Not in metadata file, just default to false.
 	}
 
@@ -366,7 +369,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertEquals("900 253 0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+1 900 253 0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::INTERNATIONAL));
-		$this->assertEquals("+1-900-253-0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::RFC3966));
+		$this->assertEquals("tel:+1-900-253-0000", $this->phoneUtil->format(self::$usPremium, PhoneNumberFormat::RFC3966));
 		// Numbers with all zeros in the national number part will be formatted by using the raw_input
 		// if that is available no matter which format is specified.
 		$this->assertEquals("000-000-0000", $this->phoneUtil->format(self::$usSpoofWithRawInput, PhoneNumberFormat::NATIONAL));
@@ -391,7 +394,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$deNumber->setCountryCode(49)->setNationalNumber(301234);
 		$this->assertEquals("030/1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
 		$this->assertEquals("+49 30/1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::INTERNATIONAL));
-		$this->assertEquals("+49-30-1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::RFC3966));
+		$this->assertEquals("tel:+49-30-1234", $this->phoneUtil->format($deNumber, PhoneNumberFormat::RFC3966));
 
 		$deNumber->clear();
 		$deNumber->setCountryCode(49)->setNationalNumber(291123);
@@ -713,7 +716,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals("+1 (650) 253-0000", $this->phoneUtil->formatByPattern(self::$usNumber,
 			PhoneNumberFormat::INTERNATIONAL,
 			$newNumberFormats));
-		$this->assertEquals("+1-650-253-0000", $this->phoneUtil->formatByPattern(self::$usNumber,
+		$this->assertEquals("tel:+1-650-253-0000", $this->phoneUtil->formatByPattern(self::$usNumber,
 			PhoneNumberFormat::RFC3966,
 			$newNumberFormats));
 
@@ -774,7 +777,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 		// Uses default extension prefix:
 		$this->assertEquals("03-331 6005 ext. 1234", $this->phoneUtil->format($nzNumber, PhoneNumberFormat::NATIONAL));
 		// Uses RFC 3966 syntax.
-		$this->assertEquals("+64-3-331-6005;ext=1234", $this->phoneUtil->format($nzNumber, PhoneNumberFormat::RFC3966));
+		$this->assertEquals("tel:+64-3-331-6005;ext=1234", $this->phoneUtil->format($nzNumber, PhoneNumberFormat::RFC3966));
 		// Extension prefix overridden in the territory information for the US:
 		$usNumberWithExtension = new PhoneNumber();
 		$usNumberWithExtension->mergeFrom(self::$usNumber)->setExtension("4567");
@@ -834,7 +837,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase {
 
 		$numberWithNationalPrefixMX =
 			$this->phoneUtil->parseAndKeepRawInput("013312345678", RegionCode::MX);
-		$this->assertEquals("01 33 1234 5678", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX, RegionCode::MX));
+		$this->assertEquals("013312345678", $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX, RegionCode::MX));
 
 		$numberWithoutNationalPrefixMX =
 			$this->phoneUtil->parseAndKeepRawInput("3312345678", RegionCode::MX);
