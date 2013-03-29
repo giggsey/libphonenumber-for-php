@@ -123,6 +123,12 @@ return array (
     'PossibleNumberPattern' => '\\d{8,14}',
     'ExampleNumber' => '18500123456',
   ),
+  'voicemail' => 
+  array (
+    'NationalNumberPattern' => '17799\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{12,13}',
+    'ExampleNumber' => '177991234567',
+  ),
   'emergency' => 
   array (
     'NationalNumberPattern' => '11[02]',

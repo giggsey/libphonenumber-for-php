@@ -107,6 +107,28 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'voicemail' => 
+  array (
+    'NationalNumberPattern' => '
+          388\\d{6}|
+          (?:
+            6(?:
+              2[0-8]|
+              49|
+              8\\d
+            )|
+            8(?:
+              2[6-9]|
+              [38]\\d|
+              50|
+              7[014-9]
+            )|
+            95[48]
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{7,9}',
+    'ExampleNumber' => '388123456',
+  ),
   'emergency' => 
   array (
     'NationalNumberPattern' => '112',

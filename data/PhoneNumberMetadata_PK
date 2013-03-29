@@ -160,6 +160,12 @@ return array (
     'PossibleNumberPattern' => '\\d{11,12}',
     'ExampleNumber' => '21111825888',
   ),
+  'voicemail' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'emergency' => 
   array (
     'NationalNumberPattern' => '

@@ -97,6 +97,12 @@ return array (
     'PossibleNumberPattern' => '\\d{6,12}',
     'ExampleNumber' => '700123456',
   ),
+  'voicemail' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'emergency' => 
   array (
     'NationalNumberPattern' => '
