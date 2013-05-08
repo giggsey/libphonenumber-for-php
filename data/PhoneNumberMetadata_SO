@@ -29,11 +29,14 @@ return array (
             )|
             6[17-9]?\\d{2}|
             7\\d{2}|
-            9[01]\\d
+            9(?:
+              07|
+              1
+            )\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '90792024',
+    'ExampleNumber' => '907792024',
   ),
   'tollFree' => 
   array (

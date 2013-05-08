@@ -58,9 +58,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '89\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '891234567',
   ),
   'pager' => 
   array (
@@ -108,12 +108,12 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([3-69]\\d)(\\d{3})(\\d{4})',
+      'pattern' => '([3-689]\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            39|
+            [38]9|
             4(?:
               [45][0-5]|
               87
@@ -127,7 +127,7 @@ return array (
             9[1-9]
           ',
         1 => '
-            39|
+            [38]9|
             4(?:
               [45][0-5]|
               87
@@ -165,7 +165,7 @@ return array (
               [12][29]|
               5[24]
             )|
-            8|
+            8[0-8]|
             90
           ',
         1 => '
@@ -183,7 +183,7 @@ return array (
               [12][29]|
               5[24]
             )|
-            8|
+            8[0-8]|
             90
           ',
       ),

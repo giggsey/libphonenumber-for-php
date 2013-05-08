@@ -98,7 +98,7 @@ return array (
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '2015550123',
+    'ExampleNumber' => '2015555555',
   ),
   'mobile' => 
   array (
@@ -192,7 +192,7 @@ return array (
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '2015550123',
+    'ExampleNumber' => '2015555555',
   ),
   'tollFree' => 
   array (
