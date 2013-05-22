@@ -1,9 +1,9 @@
 {
-    "name": "practo/libphonenumber-for-php",
+    "name": "giggsey/libphonenumber-for-php",
     "type": "library",
     "description": "Clone of Phone number handling library by Davide Mendolia",
     "keywords": ["phonenumber", "libphonenumber", "mobile", "validation"],
-    "homepage": "https://github.com/practo/libphonenumber-for-php",
+    "homepage": "https://github.com/giggsey/libphonenumber-for-php",
     "license": "Apache-2.0",
     "autoload": {
         "psr-0": { "libphonenumber": "" }
