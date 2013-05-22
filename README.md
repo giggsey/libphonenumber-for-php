@@ -1,4 +1,6 @@
-# What is it?
+# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php)
+
+## What is it?
 PHP library for parsing, formatting, storing and validating international phone numbers.
 
 
@@ -9,7 +11,7 @@ PHP library for parsing, formatting, storing and validating international phone 
 * getExampleNumber/getExampleNumberByType - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
 * isValidNumber - full validation of a phone number for a region using length and prefix information.
 
-# Quick Examples
+## Quick Examples
 Let's say you have a string representing a phone number from Switzerland. This is how you parse/normalize it into a PhoneNumber object:
 
 	$swissNumberStr = "044 668 18 00";
