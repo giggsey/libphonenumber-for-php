@@ -66,6 +66,7 @@ return array (
               70[01]\\d{3}
             )|
             1[01]\\d{5}|
+            20[0-3]\\d{4}|
             400\\d{4}|
             70[0-2]\\d{4}
           )|
@@ -110,7 +111,7 @@ return array (
   'id' => 'CR',
   'countryCode' => 506,
   'internationalPrefix' => '00',
-  'nationalPrefixForParsing' => '(19(?:0[0-2468]|19|66|77))',
+  'nationalPrefixForParsing' => '(19(?:0[0-2468]|19|20|66|77))',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

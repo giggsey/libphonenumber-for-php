@@ -10,7 +10,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            10\\d|
+            1[01]\\d|
             2(?:
               2[2-46]|
               3[1-8]|
