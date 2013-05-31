@@ -23,6 +23,7 @@ return array (
           1(?:
             1[1-3]\\d{2}|
             [02-4679][2-9]\\d|
+            59\\d{2}|
             8(?:
               1[23]|
               [2-9]\\d
@@ -163,7 +164,7 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '(154)(\\d{3})(\\d{4})',
+      'pattern' => '(15[49])(\\d{3})(\\d{4})',
       'format' => '$1-$2 $3',
       'leadingDigitsPatterns' => 
       array (

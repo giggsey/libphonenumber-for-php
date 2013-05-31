@@ -29,7 +29,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            5[56]|
+            5[4-6]|
             7[7-9]
           )\\d{7}|
           6(?:
