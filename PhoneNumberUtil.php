@@ -2278,7 +2278,7 @@ class PhoneNumberUtil {
 
 	public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode) {
 		$isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
-		$fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode);
+		$fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
 		if (!is_readable($fileName)) {
 			throw new Exception('missing metadata: ' . $fileName);
 		}

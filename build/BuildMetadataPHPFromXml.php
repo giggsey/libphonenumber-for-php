@@ -72,7 +72,7 @@ EOT;
 			}
 
 			$data = '<?php' . PHP_EOL . 'return ' . var_export($metadata->toArray(), TRUE) . ';';
-			file_put_contents($filePrefix . "_" . $regionCode, $data);
+			file_put_contents($filePrefix . "_" . $regionCode . '.php', $data);
 		}
 		/*
 
