@@ -118,10 +118,25 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(2\\d)(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '2[12]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
       'pattern' => '([2-46-9]\\d{2})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
+        0 => '
+            2[3-9]|
+            [346-9]
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

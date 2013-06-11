@@ -26,8 +26,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           8(?:
-            [0-259]\\d{2}|
-            [48]
+            [0-2459]\\d{2}|
+            8
           )\\d{5}|
           9[7-9]\\d{7}
         ',
@@ -120,7 +120,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            8[0-259]|
+            8[0-2459]|
             9
           ',
       ),
@@ -133,7 +133,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '8[48]',
+        0 => '88',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

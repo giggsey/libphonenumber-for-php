@@ -22,15 +22,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           690(?:
-            10|
-            2[27]|
-            66|
-            77|
-            8[78]
+            0[0-7]|
+            [1-9]\\d
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '690221234',
+    'ExampleNumber' => '690301234',
   ),
   'tollFree' => 
   array (
