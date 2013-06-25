@@ -1,7 +1,7 @@
 # libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php)
 
 ## What is it?
-PHP library for parsing, formatting, storing and validating international phone numbers.
+A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP)
 
 
 # Highlights of functionality
@@ -14,14 +14,16 @@ PHP library for parsing, formatting, storing and validating international phone 
 ## Quick Examples
 Let's say you have a string representing a phone number from Switzerland. This is how you parse/normalize it into a PhoneNumber object:
 
-	$swissNumberStr = "044 668 18 00";
-	$phoneUtil = PhoneNumberUtil::getInstance();
-	try {
-		$swissNumberProto = $phoneUtil->parse($swissNumberStr, "CH");
-		var_dump($swissNumberProto);
-	} catch (NumberParseException $e) {
-		echo $e;
-	}
+```php
+$swissNumberStr = "044 668 18 00";
+$phoneUtil = PhoneNumberUtil::getInstance();
+try {
+    $swissNumberProto = $phoneUtil->parse($swissNumberStr, "CH");
+    var_dump($swissNumberProto);
+} catch (NumberParseException $e) {
+    echo $e;
+}
+```
 
 At this point, swissNumberProto contains:
 
@@ -40,10 +42,14 @@ At this point, swissNumberProto contains:
 
 Now let us validate whether the number is valid:
 
-	$isValid = $phoneUtil->isValidNumber($swissNumberProto);//return true
-	var_dump($isValid);
+```php
+$isValid = $phoneUtil->isValidNumber($swissNumberProto);//return true
+var_dump($isValid);
+```
 
 There are a few formats supported by the formatting method, as illustrated below:
 
-	// Produces "+41446681800"
-	echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164) . PHP_EOL;
+```php
+// Produces "+41446681800"
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164) . PHP_EOL;
+```
