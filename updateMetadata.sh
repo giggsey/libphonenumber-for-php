@@ -1,3 +1,3 @@
 #!/bin/bash
 
-php build/BuildMetadataPHPFromXml.php https://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetaData.xml data/ false false
+php build/BuildMetadataPHPFromXml.php https://libphonenumber.googlecode.com/svn/trunk/resources/PhoneNumberMetadata.xml data/ false false
