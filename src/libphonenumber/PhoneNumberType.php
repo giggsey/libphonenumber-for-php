@@ -32,4 +32,7 @@ class PhoneNumberType
     // A phone number is of type UNKNOWN when it does not fit any of the known patterns for a
     // specific region.
     const UNKNOWN = 10;
+
+    // Voicemail
+    const VOICEMAIL = 11;
 }

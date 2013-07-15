@@ -108,7 +108,7 @@ class NumberFormat
     }
 
     /**
-     * @return boolen
+     * @return boolean
      */
     public function hasNationalPrefixFormattingRule()
     {
