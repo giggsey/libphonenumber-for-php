@@ -140,7 +140,7 @@ return array (
             4[0356]|
             5[0358]|
             7|
-            8[458]
+            8[4578]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

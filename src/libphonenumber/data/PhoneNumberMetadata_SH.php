@@ -2,19 +2,23 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-9]\\d{3}',
-    'PossibleNumberPattern' => '\\d{4}',
+    'NationalNumberPattern' => '[2-79]\\d{3,4}',
+    'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
+          2(?:
+            [0-57-9]\\d|
+            6[4-9]
+          )\\d{2}|
           (?:
-            [2-468]\\d|
+            [2-46]\\d|
             7[01]
           )\\d{2}
         ',
-    'PossibleNumberPattern' => '\\d{4}',
+    'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '2158',
   ),
   'mobile' => 
@@ -37,7 +41,7 @@ return array (
             7[2-9]
           )\\d{2}
         ',
-    'PossibleNumberPattern' => '\\d{4}',
+    'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '5012',
   ),
   'sharedCost' => 
@@ -103,6 +107,6 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => true,
   'leadingZeroPossible' => NULL,
 );

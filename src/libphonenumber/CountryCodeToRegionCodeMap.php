@@ -106,7 +106,7 @@ class CountryCodeToRegionCodeMap {
 		267 => array('BW'),
 		268 => array('SZ'),
 		269 => array('KM'),
-		290 => array('SH'),
+		290 => array('SH','TA'),
 		291 => array('ER'),
 		297 => array('AW'),
 		298 => array('FO'),

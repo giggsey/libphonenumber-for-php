@@ -99,7 +99,7 @@ return array (
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8,9}',
-    'ExampleNumber' => '612012345',
+    'ExampleNumber' => '61221234',
   ),
   'mobile' => 
   array (

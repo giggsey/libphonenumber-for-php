@@ -107,15 +107,18 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '[2-689]\\d{3}',
-    'PossibleNumberPattern' => '\\d{4}',
-    'ExampleNumber' => '2250',
+    'NationalNumberPattern' => '
+          [2-689]\\d{3}|
+          1599\\d{6}
+        ',
+    'PossibleNumberPattern' => '\\d{4}(?:\\d{6})?',
+    'ExampleNumber' => '1599123456',
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => '1599\\d{6}',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '1599123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (

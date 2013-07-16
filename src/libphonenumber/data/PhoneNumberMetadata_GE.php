@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[3458]\\d{8}',
+    'NationalNumberPattern' => '[34578]\\d{8}',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '',
   ),
@@ -68,9 +68,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '706\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '706123456',
   ),
   'pager' => 
   array (
@@ -108,9 +108,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '706\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '706123456',
   ),
   'id' => 'GE',
   'countryCode' => 995,
@@ -133,6 +133,17 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '7',
+      ),
+      'nationalPrefixFormattingRule' => '8 $1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
     array (
       'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',

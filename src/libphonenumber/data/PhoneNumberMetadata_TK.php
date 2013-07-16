@@ -2,7 +2,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-5]\\d{3}',
+    'NationalNumberPattern' => '[2-9]\\d{3}',
     'PossibleNumberPattern' => '\\d{4}',
     'ExampleNumber' => '',
   ),
@@ -14,7 +14,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5\\d{3}',
+    'NationalNumberPattern' => '[5-9]\\d{3}',
     'PossibleNumberPattern' => '\\d{4}',
     'ExampleNumber' => '5190',
   ),

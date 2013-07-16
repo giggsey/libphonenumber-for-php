@@ -42,8 +42,11 @@ return array (
             7[13-579]
           )[6-9]\\d{7}|
           (?:
-            119\\d|
-            1[2-9]9[6-9]
+            1(?:
+              19\\d|
+              [2-9]9[6-9]
+            )|
+            2[12478]9[6-9]
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{10,11}',
@@ -163,7 +166,12 @@ return array (
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[1-9]9',
+        0 => '
+            (?:
+              1[1-9]|
+              2[12478]
+            )9
+          ',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
@@ -210,7 +218,12 @@ return array (
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[1-9]9',
+        0 => '
+            (?:
+              1[1-9]|
+              2[12478]
+            )9
+          ',
       ),
     ),
     1 => 

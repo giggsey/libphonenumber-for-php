@@ -2,42 +2,21 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[24-7]\\d{7}',
-    'PossibleNumberPattern' => '\\d{8}',
+    'NationalNumberPattern' => '8\\d{3}',
+    'PossibleNumberPattern' => '\\d{4}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            20(?:
-              49|
-              5[23]|
-              9[016-9]
-            )|
-            40(?:
-              4[56]|
-              5[4-6]|
-              7[0179]
-            )|
-            50[34]\\d
-          )\\d{4}
-        ',
-    'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '20491234',
+    'NationalNumberPattern' => '8\\d{3}',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '8999',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-          6(?:
-            [0-256]\\d|
-            8[0-5]|
-            4[0-4]
-          )\\d{5}|
-          7\\d{7}
-        ',
-    'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '70123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
@@ -89,9 +68,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1[78]',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '17',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
@@ -99,22 +78,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'BF',
-  'countryCode' => 226,
+  'id' => 'TA',
+  'countryCode' => 290,
   'internationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
-    0 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
   ),
   'intlNumberFormat' => 
   array (
