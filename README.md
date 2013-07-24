@@ -1,5 +1,8 @@
 # libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php)
 
+[![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+
 ## What is it?
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP)
 
@@ -16,29 +19,33 @@ Let's say you have a string representing a phone number from Switzerland. This i
 
 ```php
 $swissNumberStr = "044 668 18 00";
-$phoneUtil = PhoneNumberUtil::getInstance();
+$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 try {
     $swissNumberProto = $phoneUtil->parse($swissNumberStr, "CH");
     var_dump($swissNumberProto);
-} catch (NumberParseException $e) {
-    echo $e;
+} catch (\libphonenumber\NumberParseException $e) {
+    var_dump($e);
 }
 ```
 
 At this point, swissNumberProto contains:
 
-	object(libphonenumber\PhoneNumber)#221 (5) {
-	  ["countryCode":"libphonenumber\PhoneNumber":private]=>
-	  int(41)
-	  ["nationalNumber":"libphonenumber\PhoneNumber":private]=>
-	  int(446681800)
-	  ["extension":"libphonenumber\PhoneNumber":private]=>
-	  NULL
-	  ["italianLeadingZero":"libphonenumber\PhoneNumber":private]=>
-	  NULL
-	  ["rawInput":"libphonenumber\PhoneNumber":private]=>
-	  NULL
-	}
+    class libphonenumber\PhoneNumber#9 (7) {
+      private $countryCode =>
+      int(41)
+      private $nationalNumber =>
+      double(446681800)
+      private $extension =>
+      NULL
+      private $italianLeadingZero =>
+      NULL
+      private $rawInput =>
+      NULL
+      private $countryCodeSource =>
+      NULL
+      private $preferredDomesticCarrierCode =>
+      NULL
+    }
 
 Now let us validate whether the number is valid:
 
