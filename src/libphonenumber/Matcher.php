@@ -51,7 +51,7 @@ class Matcher
                 break;
         }
 	$final_pattern = '/' . $final_pattern .'/x';
-        return preg_match($final_pattern, $this->subject, $this->groups, PREG_OFFSET_CAPTURE);
+        return (preg_match($final_pattern, $this->subject, $this->groups, PREG_OFFSET_CAPTURE) == 1) ? true : false;
     }
 
     /**

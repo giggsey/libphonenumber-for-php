@@ -31,10 +31,8 @@ require __DIR__ . '/../vendor/autoload.php';
  */
 class BuildMetadataFromXml
 {
-
+    // String constants used to fetch the XML nodes and attributes.
     const CARRIER_CODE_FORMATTING_RULE = "carrierCodeFormattingRule";
-
-// String constants used to fetch the XML nodes and attributes.
     const COUNTRY_CODE = "countryCode";
     const EMERGENCY = "emergency";
     const EXAMPLE_NUMBER = "exampleNumber";
@@ -63,6 +61,8 @@ class BuildMetadataFromXml
     const PREFERRED_INTERNATIONAL_PREFIX = "preferredInternationalPrefix";
     const PREMIUM_RATE = "premiumRate";
     const SHARED_COST = "sharedCost";
+    const SHORT_CODE = "shortCode";
+    const STANDARD_RATE = "standardRate";
     const TOLL_FREE = "tollFree";
     const UAN = "uan";
     const VOICEMAIL = "voicemail";
@@ -76,7 +76,7 @@ class BuildMetadataFromXml
      *
      * @param string $inputXmlFile
      * @param boolean $liteBuild
-     * @return array
+     * @return PhoneMetadata[]
      */
     public static function buildPhoneMetadataCollection($inputXmlFile, $liteBuild)
     {
@@ -86,8 +86,12 @@ class BuildMetadataFromXml
         $territories = $document->getElementsByTagName("territory");
         $metadataCollection = array();
         foreach ($territories as $territory) {
-            $id = $territory->getAttribute("id");
-            $metadata = self::loadCountryMetadata($id, $territory);
+            if ($territory->hasAttribute("id")) {
+                $regionCode = $territory->getAttribute("id");
+            } else {
+                $regionCode = "";
+            }
+            $metadata = self::loadCountryMetadata($regionCode, $territory);
             $metadataCollection[] = $metadata;
         }
         return $metadataCollection;
@@ -349,7 +353,9 @@ class BuildMetadataFromXml
         $metadata->setGeneralDesc($generalDesc);
         $metadata->setFixedLine(self::processPhoneNumberDescElement($generalDesc, $element, self::FIXED_LINE));
         $metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE));
+        $metadata->setStandardRate(self::processPhoneNumberDescElement($generalDesc, $element, self::STANDARD_RATE));
         $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
+        $metadata->setShortCode(self::processPhoneNumberDescElement($generalDesc, $element, self::SHORT_CODE));
         $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
         $metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
 
@@ -429,6 +435,36 @@ class BuildMetadataFromXml
     private static function isValidNumberType($numberType)
     {
         return $numberType == self::FIXED_LINE || $numberType == self::MOBILE || $numberType == self::GENERAL_DESC;
+    }
+
+    /**
+     * @param $metadataCollection PhoneMetadata[]
+     * @return array
+     */
+    public static function buildCountryCodeToRegionCodeMap($metadataCollection)
+    {
+        $countryCodeToRegionCodeMap = array();
+
+        foreach ($metadataCollection as $metadata) {
+            $regionCode = $metadata->getId();
+            $countryCode = $metadata->getCountryCode();
+            if (array_key_exists($countryCode, $countryCodeToRegionCodeMap)) {
+                if ($metadata->getMainCountryForCode()) {
+                    array_unshift( $countryCodeToRegionCodeMap[$countryCode], $regionCode);
+                } else {
+                    $countryCodeToRegionCodeMap[$countryCode][] = $regionCode;
+                }
+            } else {
+                // For most countries, there will be only one region code for the country calling code.
+                $listWithRegionCode = array();
+                if ($regionCode != '') { // For alternate formats, there are no region codes at all.
+                    $listWithRegionCode[] = $regionCode;
+                }
+                $countryCodeToRegionCodeMap[$countryCode] = $listWithRegionCode;
+            }
+        }
+
+        return $countryCodeToRegionCodeMap;
     }
 
 }

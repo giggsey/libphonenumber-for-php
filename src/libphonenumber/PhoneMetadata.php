@@ -404,6 +404,24 @@ class PhoneMetadata {
         return $this;
     }
 
+    /**
+     * @var PhoneNumberDesc
+     */
+    private $emergency;
+
+    public function hasEmergency() {
+        return isset($this->emergency);
+    }
+
+    public function getEmergency() {
+        return $this->emergency;
+    }
+
+    public function setEmergency(PhoneNumberDesc $value) {
+        $this->emergency = $value;
+        return $this;
+    }
+
     private $voicemail;
 
     public function hasVoicemail() {
@@ -419,20 +437,37 @@ class PhoneMetadata {
         return $this;
     }
 
-    private $emergency;
+    private $short_code;
 
-    public function hasEmergency() {
-        return isset($this->emergency);
+    public function hasShortCode() {
+        return isset($this->short_code);
     }
 
-    public function getEmergency() {
-        return $this->emergency;
+    public function getShortCode() {
+        return $this->short_code;
     }
 
-    public function setEmergency(PhoneNumberDesc $value) {
-        $this->emergency = $value;
+    public function setShortCode(PhoneNumberDesc $value) {
+        $this->short_code = $value;
         return $this;
     }
+
+    private $standard_rate;
+
+    public function hasStandardRate() {
+        return isset($this->standard_rate);
+    }
+
+    public function getStandardRate() {
+        return $this->standard_rate;
+    }
+
+    public function setStandardRate(PhoneNumberDesc $value) {
+        $this->standard_rate = $value;
+        return $this;
+    }
+
+
 
 	private $noInternationalDialling = null;
 
@@ -524,12 +559,20 @@ class PhoneMetadata {
             $output['uan'] = $this->getUan()->toArray();
         }
 
+        if ($this->hasEmergency()) {
+            $output['emergency'] = $this->getEmergency()->toArray();
+        }
+
         if ($this->hasVoicemail()) {
             $output['voicemail'] = $this->getVoicemail()->toArray();
         }
 
-        if ($this->hasEmergency()) {
-            $output['emergency'] = $this->getEmergency()->toArray();
+        if ($this->hasShortCode()) {
+            $output['shortCode'] = $this->getShortCode()->toArray();
+        }
+
+        if ($this->hasStandardRate()) {
+            $output['standardRate'] = $this->getStandardRate()->toArray();
         }
 
 		if ($this->hasNoInternationalDialling()) {
@@ -637,14 +680,24 @@ class PhoneMetadata {
             $this->setUan($desc->fromArray($input['uan']));
         }
 
+        if (isset($input['emergency'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setEmergency($desc->fromArray($input['emergency']));
+        }
+
         if (isset($input['voicemail'])) {
             $desc = new PhoneNumberDesc();
             $this->setVoicemail($desc->fromArray($input['voicemail']));
         }
 
-        if (isset($input['emergency'])) {
+        if (isset($input['shortCode'])) {
             $desc = new PhoneNumberDesc();
-            $this->setEmergency($desc->fromArray($input['emergency']));
+            $this->setShortCode(($desc->fromArray($input['shortCode'])));
+        }
+
+        if (isset($input['standardRate'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setStandardRate($desc->fromArray($input['standardRate']));
         }
 		
 		if (isset($input['noInternationalDialling'])) {

@@ -33,6 +33,15 @@ class PhoneNumberType
     // specific region.
     const UNKNOWN = 10;
 
+    // Emergency
+    const EMERGENCY = 27;
+
     // Voicemail
-    const VOICEMAIL = 11;
+    const VOICEMAIL = 28;
+
+    // Short Code
+    const SHORT_CODE = 29;
+
+    // Standard Rate
+    const STANDARD_RATE = 30;
 }

@@ -20,33 +20,38 @@ namespace libphonenumber;
 /**
  * Class containing string constants of region codes for easier testing.
  */
-class RegionCode {
-  // Region code for global networks (e.g. +800 numbers).
-  const UN001 = "001";
-  const AD = "AD";
-  const AO = "AO";
-  const AQ = "AQ";
-  const AR = "AR";
-  const AU = "AU";
-  const BR = "BR";
-  const BS = "BS";
-  const CA = "CA";
-  const CN = "CN";
-  const CS = "CS";
-  const DE = "DE";
-  const GB = "GB";
-  const IN = "IN";
-  const IT = "IT";
-  const JP = "JP";
-  const KR = "KR";
-  const MX = "MX";
-  const NZ = "NZ";
-  const PL = "PL";
-  const RE = "RE";
-  const SG = "SG";
-  const US = "US";
-  const YT = "YT";
-  const ZW = "ZW";
-  // Official code for the unknown region.
-  const ZZ = "ZZ";
+class RegionCode
+{
+    // Region code for global networks (e.g. +800 numbers).
+    const UN001 = "001";
+    const AD = "AD";
+    const AE = "AE";
+    const AM = "AM";
+    const AO = "AO";
+    const AQ = "AQ";
+    const AR = "AR";
+    const AU = "AU";
+    const BR = "BR";
+    const BS = "BS";
+    const BY = "BY";
+    const CA = "CA";
+    const CH = "CH";
+    const CN = "CN";
+    const CS = "CS";
+    const DE = "DE";
+    const FR = "FR";
+    const GB = "GB";
+    const IT = "IT";
+    const JP = "JP";
+    const KR = "KR";
+    const MX = "MX";
+    const NZ = "NZ";
+    const PL = "PL";
+    const RE = "RE";
+    const SG = "SG";
+    const US = "US";
+    const YT = "YT";
+    const ZW = "ZW";
+    // Official code for the unknown region.
+    const ZZ = "ZZ";
 }

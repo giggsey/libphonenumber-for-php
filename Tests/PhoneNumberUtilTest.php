@@ -20,6 +20,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 {
 
+    const TEST_META_DATA_FILE_PREFIX = "../../../Tests/data/PhoneNumberMetadataForTesting";
     private static $bsNumber = null;
     private static $internationalTollFree = null;
     private static $sgNumber = null;
@@ -47,9 +48,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     private static $mxNumber2 = null;
     private static $deNumber = null;
     private static $jpStarNumber = null;
-
-    const TEST_META_DATA_FILE_PREFIX = "PhoneNumberMetadataForTesting";
-
     /**
      * @var PhoneNumberUtil
      */
@@ -123,26 +121,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
             self::TEST_META_DATA_FILE_PREFIX,
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMap
+            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
         );
-    }
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-
-    }
-
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-
     }
 
     public function testGetSupportedRegions()
@@ -386,7 +366,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function  testNormaliseStripAlphaCharacters()
+    public function testNormaliseStripAlphaCharacters()
     {
         $inputNumber = "034-56&+a#234";
         $expectedOutput = "03456234";
@@ -394,6 +374,17 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $expectedOutput,
             $this->phoneUtil->normalizeDigitsOnly($inputNumber),
             "Conversion did not correctly remove alpha character"
+        );
+    }
+
+    public function testNormaliseStripNonDiallableCharacters()
+    {
+        $inputNumber = "03*4-56&+a#234";
+        $expectedOutput = "03*456+234";
+        $this->assertEquals(
+            $expectedOutput,
+            $this->phoneUtil->normalizeDiallableCharsOnly($inputNumber),
+            "Conversion did not correctly remove non-diallable characters"
         );
     }
 
@@ -579,7 +570,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals("+528211234567", $this->phoneUtil->format(self::$mxNumber2, PhoneNumberFormat::E164));
     }
-
 
     public function testFormatOutOfCountryCallingNumber()
     {
@@ -1453,6 +1443,24 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isAlphaNumber("1800 123-1234"));
         $this->assertFalse($this->phoneUtil->isAlphaNumber("1800 123-1234 extension: 1234"));
         $this->assertFalse($this->phoneUtil->isAlphaNumber("+800 1234-1234"));
+    }
+
+    /**
+     * Sets up the fixture, for example, opens a network connection.
+     * This method is called before a test is executed.
+     */
+    protected function setUp()
+    {
+
+    }
+
+    /**
+     * Tears down the fixture, for example, closes a network connection.
+     * This method is called after a test is executed.
+     */
+    protected function tearDown()
+    {
+
     }
 
 }
