@@ -1712,9 +1712,8 @@ class PhoneNumberUtil
                     0,
                     $numberLength
                 );
-                if ($isViableOriginalNumber &&
-                    !$nationalNumberRule->matcher($transformedNumber->toString())->matches()
-                ) {
+                $transformedNumberRuleMatcher = new Matcher($nationalNumberRule, $transformedNumber);
+                if ($isViableOriginalNumber && !$transformedNumberRuleMatcher->matches()) {
                     return false;
                 }
                 if ($carrierCode !== null && $numOfGroups > 1) {
