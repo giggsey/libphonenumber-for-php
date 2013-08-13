@@ -7,19 +7,19 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
@@ -79,7 +79,13 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '
+          1\\d{2,3}|
+          9(?:
+            11|
+            99
+          )
+        ',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '1234',
   ),

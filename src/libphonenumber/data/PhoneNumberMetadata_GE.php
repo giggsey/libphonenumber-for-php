@@ -131,10 +131,9 @@ return array (
   ),
   'id' => 'GE',
   'countryCode' => 995,
-  'internationalPrefix' => '810',
-  'preferredInternationalPrefix' => '8~10',
-  'nationalPrefix' => '8',
-  'nationalPrefixForParsing' => '8',
+  'internationalPrefix' => '00',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -146,7 +145,7 @@ return array (
       array (
         0 => '[348]',
       ),
-      'nationalPrefixFormattingRule' => '8 $1',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
@@ -157,7 +156,7 @@ return array (
       array (
         0 => '7',
       ),
-      'nationalPrefixFormattingRule' => '8 $1',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 

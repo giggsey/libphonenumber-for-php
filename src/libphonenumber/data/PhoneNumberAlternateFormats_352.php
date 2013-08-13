@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '',
+    'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '',
+    'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '',
+    'PossibleNumberPattern' => '',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -79,23 +79,9 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '
-          0(?:
-           1[34]|
-           8[1-4]
-          )|
-          1(?:
-            0[1-3]|
-            [25]9
-          )|
-          2[289]|
-          30|
-          [45]4|
-          75|
-          913
-        ',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '22',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
@@ -109,12 +95,22 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'FJ',
-  'countryCode' => 0,
+  'id' => '',
+  'countryCode' => 352,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
   ),
   'intlNumberFormat' => 
   array (

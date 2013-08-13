@@ -83,7 +83,7 @@ return array (
           1(?:
             0[01]|
             1(?:
-              1|
+              [12]|
               [68]\\d{3}
             )|
             2[123]|
@@ -119,7 +119,10 @@ return array (
           )|
           650|
           789|
-          901
+          9(?:
+            01|
+            99
+          )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '150',

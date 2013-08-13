@@ -7,31 +7,40 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '116\\d{3}',
+    'NationalNumberPattern' => '
+          1(?:
+            16\\d{3}|
+            47
+          )
+        ',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '116000',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
+          1(?:
+            145|
+            8\\d{2}
+          )|
           543|
           83111
         ',
@@ -117,9 +126,17 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            4(?:
+              [035]|
+              1\\d
+            )|
+            6\\d{1,2}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3,4}',
+    'ExampleNumber' => '1600',
   ),
   'noInternationalDialling' => 
   array (

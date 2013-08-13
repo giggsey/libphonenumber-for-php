@@ -106,9 +106,14 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '20\\d{2,8}',
+    'NationalNumberPattern' => '
+          20(?:
+            1\\d{5}|
+            [2-689]\\d{1,7}
+          )
+        ',
     'PossibleNumberPattern' => '\\d{4,10}',
-    'ExampleNumber' => '2012345',
+    'ExampleNumber' => '20201234',
   ),
   'pager' => 
   array (

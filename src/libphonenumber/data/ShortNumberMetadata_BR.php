@@ -7,27 +7,32 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            00|
+            81
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '181',
   ),
   'premiumRate' => 
   array (
@@ -80,22 +85,23 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          0(?:
-           1[34]|
-           8[1-4]
-          )|
           1(?:
-            0[1-3]|
-            [25]9
+            0(?:
+              0|
+              [36]\\d{2}|
+              5\\d
+            )|
+            [15][26]|
+            2[38]|
+            68|
+            81|
+            9[0-4789]
           )|
-          2[289]|
-          30|
-          [45]4|
-          75|
-          913
+          40404|
+          911
         ',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '22',
+    'PossibleNumberPattern' => '\\d{3,5}',
+    'ExampleNumber' => '168',
   ),
   'standardRate' => 
   array (
@@ -109,7 +115,7 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
-  'id' => 'FJ',
+  'id' => 'BR',
   'countryCode' => 0,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,

@@ -7,7 +7,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[237-9]\\d{7}',
+    'NationalNumberPattern' => '[2357-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '',
   ),
@@ -24,7 +24,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[79]\\d{7}',
+    'NationalNumberPattern' => '[579]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '71234567',
   ),
@@ -108,12 +108,12 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([237-9]\\d)(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '([2357-9]\\d)(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [2379]|
+            [23579]|
             88
           ',
       ),
