@@ -4,7 +4,8 @@
 [![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
-A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP)
+A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
+A sister project also exists for [libphonenumber-geocoder](https://github.com/giggsey/libphonenumber-geocoder).
 
 
 # Highlights of functionality
@@ -13,6 +14,10 @@ A PHP library for parsing, formatting, storing and validating international phon
 * isNumberMatch - gets a confidence level on whether two numbers could be the same.
 * getExampleNumber/getExampleNumberByType - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
 * isValidNumber - full validation of a phone number for a region using length and prefix information.
+
+
+## Online Demo
+An [online demo](http://giggsey.com/libphonenumber/) is available for both [libphonenumber-for-php](https://github.com/giggsey/libphonenumber-for-php) and [libphonenumber-geocoder](https://github.com/giggsey/libphonenumber-geocoder).
 
 ## Quick Examples
 Let's say you have a string representing a phone number from Switzerland. This is how you parse/normalize it into a PhoneNumber object:

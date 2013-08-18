@@ -35,14 +35,13 @@ class ShortNumberUtil
 
     public function getSupportedRegions()
     {
-        // @todo
-        return;
+        return ShortNumbersRegionCodeSet::$shortNumbersRegionCodeSet;
     }
 
     /**
      * Gets a valid short number for the specified region.
      *
-     * @param $regionCode the region for which an example short number is needed
+     * @param $regionCode String the region for which an example short number is needed
      * @return string a valid short number for the specified region. Returns an empty string when the
      *      metadata does not contain such information.
      */

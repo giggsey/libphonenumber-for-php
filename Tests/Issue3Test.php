@@ -24,6 +24,7 @@ class Issue3Test extends \PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
+        PhoneNumberUtil::resetInstance();
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
     }
 

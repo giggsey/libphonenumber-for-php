@@ -19,8 +19,12 @@ class ShortNumberUtilTest extends \PHPUnit_Framework_TestCase
      */
     private $shortUtil;
 
+    private static $plusSymbol;
+
     public function setUp()
     {
+        self::$plusSymbol = pack('H*', 'efbc8b');
+
         PhoneNumberUtil::resetInstance();
         $this->shortUtil = new ShortNumberUtil(PhoneNumberUtil::getInstance(
             PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX,
@@ -80,9 +84,7 @@ class ShortNumberUtilTest extends \PHPUnit_Framework_TestCase
     public function testConnectsToEmergencyNumberWithPlusSign_US()
     {
         $this->assertFalse($this->shortUtil->connectsToEmergencyNumber("+911", RegionCode::US));
-        $this->assertFalse(
-            $this->shortUtil->connectsToEmergencyNumber("\uFF0B911", RegionCode::US)
-        ); // @todo Fix string
+        $this->assertFalse($this->shortUtil->connectsToEmergencyNumber(self::$plusSymbol . "911", RegionCode::US));
         $this->assertFalse($this->shortUtil->connectsToEmergencyNumber(" +911", RegionCode::US));
         $this->assertFalse($this->shortUtil->connectsToEmergencyNumber("+119", RegionCode::US));
         $this->assertFalse($this->shortUtil->connectsToEmergencyNumber("+999", RegionCode::US));
@@ -146,7 +148,7 @@ class ShortNumberUtilTest extends \PHPUnit_Framework_TestCase
     public function testIsEmergencyNumberWithPlusSign_US()
     {
         $this->assertFalse($this->shortUtil->isEmergencyNumber("+911", RegionCode::US));
-        $this->assertFalse($this->shortUtil->isEmergencyNumber("\uFF0B911", RegionCode::US)); // @todo Fix string
+        $this->assertFalse($this->shortUtil->isEmergencyNumber(self::$plusSymbol . "911", RegionCode::US));
         $this->assertFalse($this->shortUtil->isEmergencyNumber(" +911", RegionCode::US));
         $this->assertFalse($this->shortUtil->isEmergencyNumber("+119", RegionCode::US));
         $this->assertFalse($this->shortUtil->isEmergencyNumber("+999", RegionCode::US));
