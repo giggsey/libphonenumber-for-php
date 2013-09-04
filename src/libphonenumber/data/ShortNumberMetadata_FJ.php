@@ -67,9 +67,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '91[17]',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '911',
   ),
   'voicemail' => 
   array (
@@ -92,7 +92,7 @@ return array (
           30|
           [45]4|
           75|
-          913
+          91[137]
         ',
     'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '22',

@@ -86,9 +86,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '11[089]',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '110',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

@@ -24,11 +24,13 @@ return array (
     'NationalNumberPattern' => '
           (?:
             11?\\d|
-            2[24-8]|
-            3[35-8]|
-            4[3-68]|
-            6[2-5]|
-            7[235-7]
+            1?(?:
+              2[24-8]|
+              3[35-8]|
+              4[3-68]|
+              6[2-5]|
+              7[235-7]
+            )
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
@@ -89,15 +91,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          112|
-          9(?:
-            11|
-            9[7-9]
-          )
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '999',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

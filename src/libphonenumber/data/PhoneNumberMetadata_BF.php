@@ -38,7 +38,7 @@ return array (
             [0-256]\\d|
             8[0-5]|
             3[0-3]|
-            4[0-4]
+            4[0-7]
           )\\d{5}|
           7\\d{7}
         ',
@@ -89,9 +89,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1[78]',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '17',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

@@ -257,12 +257,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          112|
-          911
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '911',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

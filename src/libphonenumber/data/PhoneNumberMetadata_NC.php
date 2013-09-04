@@ -7,7 +7,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-47-9]\\d{5}',
+    'NationalNumberPattern' => '[2-57-9]\\d{5}',
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '',
   ),
@@ -28,6 +28,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
+            5[0-4]|
             [79]\\d|
             8[0-79]
           )\\d{4}
@@ -79,9 +80,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1[5-8]',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '15',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -119,6 +120,10 @@ return array (
       'format' => '$1.$2.$3',
       'leadingDigitsPatterns' => 
       array (
+        0 => '
+            [2-46-9]|
+            5[0-4]
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

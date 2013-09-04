@@ -114,6 +114,17 @@ return array (
     ),
     1 => 
     array (
+      'pattern' => '(\\d{2})(\\d{4})(\\d{2})(\\d{2})',
+      'format' => '$1-$2-$3-$4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '20',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
       'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -129,7 +140,7 @@ return array (
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    2 => 
+    3 => 
     array (
       'pattern' => '(\\d{3})(\\d{4})(\\d{3})',
       'format' => '$1 $2 $3',
@@ -140,7 +151,7 @@ return array (
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    3 => 
+    4 => 
     array (
       'pattern' => '(80\\d)(\\d{3,4})(\\d{3})',
       'format' => '$1 $2 $3',

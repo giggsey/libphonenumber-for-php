@@ -101,16 +101,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          1(?:
-            12|
-            28|
-            9[023]
-          )|
-          911
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '190',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

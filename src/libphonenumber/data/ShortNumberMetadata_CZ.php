@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{3,5}',
-    'PossibleNumberPattern' => '\\d{4,6}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{3,5}',
-    'PossibleNumberPattern' => '\\d{4,6}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{3,5}',
-    'PossibleNumberPattern' => '\\d{4,6}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -67,9 +67,14 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            12|
+            5[058]
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '112',
   ),
   'voicemail' => 
   array (
@@ -82,16 +87,18 @@ return array (
     'NationalNumberPattern' => '
           1(?:
             1(?:
+              2|
               6\\d{3}|
               8\\d
             )|
             2\\d{2,3}|
             3\\d{3,4}|
             4\\d{3}|
+            5[058]|
             99
           )
         ',
-    'PossibleNumberPattern' => '\\d{4,6}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '116123',
   ),
   'standardRate' => 

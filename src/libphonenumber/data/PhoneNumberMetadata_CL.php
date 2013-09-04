@@ -89,9 +89,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '13[123]',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '133',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -209,9 +209,90 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
+    7 => 
+    array (
+      'pattern' => '(\\d{4,5})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-9]',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
   ),
   'intlNumberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(2)(\\d{3,4})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '2',
+      ),
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{2,3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            [357]|
+            4[1-35]|
+            6[13-57]
+          ',
+      ),
+    ),
+    2 => 
+    array (
+      'pattern' => '(9)([5-9]\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '9',
+      ),
+    ),
+    3 => 
+    array (
+      'pattern' => '(44)(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '44',
+      ),
+    ),
+    4 => 
+    array (
+      'pattern' => '([68]00)(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            60|
+            8
+          ',
+      ),
+    ),
+    5 => 
+    array (
+      'pattern' => '(600)(\\d{3})(\\d{2})(\\d{3})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '60',
+      ),
+    ),
+    6 => 
+    array (
+      'pattern' => '(1230)(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '1',
+      ),
+    ),
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,

@@ -67,9 +67,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '10111',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '10111',
   ),
   'voicemail' => 
   array (
@@ -80,7 +80,10 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          1\\d{3}|
+          1(?:
+            0111|
+            \\d{3}
+          )|
           9(?:
             3111|
             \\d{2}

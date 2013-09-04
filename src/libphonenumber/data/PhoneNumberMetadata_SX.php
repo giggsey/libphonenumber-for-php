@@ -94,9 +94,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '919',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '919',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

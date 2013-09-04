@@ -46,7 +46,7 @@ return array (
   array (
     'NationalNumberPattern' => '90[069]\\d{4,7}',
     'PossibleNumberPattern' => '\\d{7,10}',
-    'ExampleNumber' => '9001234',
+    'ExampleNumber' => '9061234',
   ),
   'sharedCost' => 
   array (
@@ -105,12 +105,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          112|
-          911
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '112',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (

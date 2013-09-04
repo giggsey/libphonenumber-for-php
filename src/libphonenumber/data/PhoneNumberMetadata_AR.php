@@ -174,14 +174,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          1(?:
-            0[017]|
-            28
-          )
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '101',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -448,6 +443,31 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '[23]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    9 => 
+    array (
+      'pattern' => '(\\d{3})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            1[012]|
+            911
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    10 => 
+    array (
+      'pattern' => '(\\d{2})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '0',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

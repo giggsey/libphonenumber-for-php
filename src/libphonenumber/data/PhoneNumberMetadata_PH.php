@@ -8,50 +8,50 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-        2\\d{5,7}|
-        [3-9]\\d{7,9}|
-        1800\\d{7,9}
-      ',
+          2\\d{5,7}|
+          [3-9]\\d{7,9}|
+          1800\\d{7,9}
+        ',
     'PossibleNumberPattern' => '\\d{5,13}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-        2\\d{5}(?:\\d{2})?|
-        (?:
-          3[2-68]|
-          4[2-9]|
-          5[2-6]|
-          6[2-58]|
-          7[24578]|
-          8[2-8]
-        )\\d{7}|
-        88(?:
-          22\\d{6}|
-          42\\d{4}
-        )
-      ',
+          2\\d{5}(?:\\d{2})?|
+          (?:
+            3[2-68]|
+            4[2-9]|
+            5[2-6]|
+            6[2-58]|
+            7[24578]|
+            8[2-8]
+          )\\d{7}|
+          88(?:
+            22\\d{6}|
+            42\\d{4}
+          )
+        ',
     'PossibleNumberPattern' => '\\d{5,10}',
     'ExampleNumber' => '21234567',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-        (?:
-          81[37]|
-          9(?:
-            0[5-9]|
-            1[025-9]|
-            2[0-35-9]|
-            3[02-9]|
-            4[236-9]|
-            7[3479]|
-            89|
-            9[46-9]
-          )
-        )\\d{7}
-      ',
+          (?:
+            81[37]|
+            9(?:
+              0[5-9]|
+              1[025-9]|
+              2[0-35-9]|
+              3[02-9]|
+              4[236-9]|
+              7[3479]|
+              89|
+              9[46-9]
+            )
+          )\\d{7}
+        ',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9051234567',
   ),
@@ -99,12 +99,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-        11[27]|
-        911
-      ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '117',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -167,60 +164,60 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-          3(?:
-            23|
-            39|
-            46
-          )|
-          4(?:
-            2[3-6]|
-            [35]9|
-            4[26]|
-            76
-          )|
-          5(?:
-            22|
-            44
-          )|
-          642|
-          8(?:
-            62|
-            8[245]
-          )
-        ',
-        1 => '
-          3(?:
-            230|
-            397|
-            461
-          )|
-          4(?:
-            2(?:
-              35|
-              [46]4|
-              51
+            3(?:
+              23|
+              39|
+              46
             )|
-            396|
             4(?:
-              22|
-              63
+              2[3-6]|
+              [35]9|
+              4[26]|
+              76
             )|
-            59[347]|
-            76[15]
-          )|
-          5(?:
-            221|
-            446
-          )|
-          642[23]|
-          8(?:
-            622|
+            5(?:
+              22|
+              44
+            )|
+            642|
             8(?:
-              [24]2|
-              5[13]
+              62|
+              8[245]
             )
-          )
-        ',
+          ',
+        1 => '
+            3(?:
+              230|
+              397|
+              461
+            )|
+            4(?:
+              2(?:
+                35|
+                [46]4|
+                51
+              )|
+              396|
+              4(?:
+                22|
+                63
+              )|
+              59[347]|
+              76[15]
+            )|
+            5(?:
+              221|
+              446
+            )|
+            642[23]|
+            8(?:
+              622|
+              8(?:
+                [24]2|
+                5[13]
+              )
+            )
+          ',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
@@ -232,24 +229,24 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-          346|
-          4(?:
-            27|
-            9[35]
-          )|
-          883
-        ',
+            346|
+            4(?:
+              27|
+              9[35]
+            )|
+            883
+          ',
         1 => '
-          3469|
-          4(?:
-            279|
-            9(?:
-              30|
-              56
-            )
-          )|
-          8834
-        ',
+            3469|
+            4(?:
+              279|
+              9(?:
+                30|
+                56
+              )
+            )|
+            8834
+          ',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
@@ -272,9 +269,9 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-          81|
-          9
-        ',
+            81|
+            9
+          ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
