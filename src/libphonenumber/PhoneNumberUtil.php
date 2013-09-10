@@ -1159,7 +1159,7 @@ class PhoneNumberUtil
                         "Could not interpret numbers after plus-sign.");
                 }
             } else {
-                throw new NumberParseException($e->getErrorType(), $e->getMessage());
+                throw new NumberParseException($e->getErrorType(), $e->getMessage(), $e);
             }
         }
         if ($countryCode !== 0) {

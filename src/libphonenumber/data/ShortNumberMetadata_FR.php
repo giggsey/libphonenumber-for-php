@@ -143,6 +143,12 @@ return array (
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '118777',
   ),
+  'carrierSpecific' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',

@@ -186,7 +186,7 @@ class ShortNumberInfo
             return false;
         }
 
-        $metadata = $this->phoneUtil->getMetadataForRegion($regionCode);
+        $metadata = $this->getMetadataForRegion($regionCode);
         if ($metadata === null || !$metadata->hasEmergency()) {
             return false;
         }

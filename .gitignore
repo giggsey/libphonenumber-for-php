@@ -22,4 +22,4 @@ $RECYCLE.BIN/
 Session.vim
 .netrwhist
 composer.phar
-
+composer.lock
