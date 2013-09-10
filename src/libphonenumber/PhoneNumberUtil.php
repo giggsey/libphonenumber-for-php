@@ -46,6 +46,10 @@ class PhoneNumberUtil
     const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
     const UNKNOWN_REGION = "ZZ";
     const NANPA_COUNTRY_CODE = 1;
+    /*
+     * The prefix that needs to be inserted in front of a Colombian landline number when dialed from
+     * a mobile number in Colombia.
+     */
     const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3";
     const PLUS_SIGN = '+';
     const PLUS_CHARS = '+＋';
@@ -59,8 +63,6 @@ class PhoneNumberUtil
     const RFC3966_PHONE_CONTEXT = ";phone-context=";
     const RFC3966_ISDN_SUBADDRESS = ";isub=";
 
-    // The prefix that needs to be inserted in front of a Colombian landline number when dialed from
-    // a mobile phone in Colombia.
     const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
 
     // The PLUS_SIGN signifies the international prefix.
@@ -72,35 +74,6 @@ class PhoneNumberUtil
     const FIRST_GROUP_PATTERN = "(\\$\\d)";
     const NP_PATTERN = '\\$NP';
 
-    /*
-      private void loadMetadataForRegionFromFile(String filePrefix, String regionCode) {
-      InputStream source =
-      PhoneNumberUtil.class.getResourceAsStream(filePrefix + "_" + regionCode);
-      ObjectInputStream in = null;
-      try {
-      in = new ObjectInputStream(source);
-      PhoneMetadataCollection metadataCollection = new PhoneMetadataCollection();
-      metadataCollection.readExternal(in);
-      for (PhoneMetadata metadata : metadataCollection.getMetadataList()) {
-      regionToMetadataMap.put(regionCode, metadata);
-      }
-      } catch (IOException e) {
-      LOGGER.log(Level.WARNING, e.toString());
-      } finally {
-      close(in);
-      }
-      }
-
-      private static void close(InputStream in) {
-      if (in != null) {
-      try {
-      in.close();
-      } catch (IOException e) {
-      LOGGER.log(Level.WARNING, e.toString());
-      }
-      }
-      }
-     */
     const FG_PATTERN = '\\$FG';
     const CC_PATTERN = '\\$CC';
     const FIRST_GROUP_ONLY_PREFIX_PATTERN = '\\(?\\$1\\)?';
@@ -666,22 +639,17 @@ class PhoneNumberUtil
         return PhoneNumberType::UNKNOWN;
     }
 
-    private function isNumberPossibleForDesc($nationalNumber, PhoneNumberDesc $numberDesc)
+    public function isNumberPossibleForDesc($nationalNumber, PhoneNumberDesc $numberDesc)
     {
-        $possibleNumberPatternMatcher = preg_match(
-            '/^(' . $numberDesc->getPossibleNumberPattern() . ')$/x',
-            $nationalNumber
-        );
+        $possibleNumberPatternMatcher = new Matcher($numberDesc->getPossibleNumberPattern(), $nationalNumber);
 
-        return ($possibleNumberPatternMatcher);
+        return $possibleNumberPatternMatcher->matches();
     }
 
-        private function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
-        $nationalNumberPatternMatcher = preg_match(
-            '/^' . $numberDesc->getNationalNumberPattern() . '$/x',
-            $nationalNumber
-        );
-        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher;
+    public function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
+        $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
+
+        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher->matches();
     }
 
     /**
@@ -727,6 +695,10 @@ class PhoneNumberUtil
         ) : $this->getMetadataForRegion($regionCode);
     }
 
+    /**
+     * @param $countryCallingCode
+     * @return PhoneMetadata
+     */
     public function getMetadataForNonGeographicalRegion($countryCallingCode)
     {
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
@@ -999,6 +971,11 @@ class PhoneNumberUtil
     /**
      * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
      * an extension specified.
+     *
+     * @param PhoneNumber $number
+     * @param PhoneMetadata|null $metadata
+     * @param $numberFormat
+     * @param $formattedNumber
      */
     private function maybeAppendFormattedExtension(PhoneNumber $number, $metadata, $numberFormat, &$formattedNumber)
     {
@@ -1186,7 +1163,7 @@ class PhoneNumberUtil
                         "Could not interpret numbers after plus-sign.");
                 }
             } else {
-                throw new NumberParseException($e->getErrorType(), $e->getMessage());
+                throw new NumberParseException($e->getErrorType(), $e->getMessage(), $e);
             }
         }
         if ($countryCode !== 0) {
@@ -1930,7 +1907,7 @@ class PhoneNumberUtil
      * Normalizes a string of characters representing a phone number. This strips all characters which
      * are not diallable on a mobile phone keypad (including all non-ASCII digits).
      *
-     * @param $number a string of characters representing a phone number
+     * @param string $number a string of characters representing a phone number
      * @return string the normalized string version of the phone number
      */
     public static function normalizeDiallableCharsOnly($number)

@@ -1391,7 +1391,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$internationalTollFree));
     }
 
-    public function  testParseNationalNumber()
+    public function testParseNationalNumber()
     {
         // National prefix attached.
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("033316005", RegionCode::NZ));
@@ -1429,10 +1429,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // parse the output we produce when formatting the number.
         $this->assertEquals(self::$jpStarNumber, $this->phoneUtil->parse("+81 *2345", RegionCode::JP));
 
-        // Test national number bigger than max 32-bit signed integer
-        $inNumber = new PhoneNumber();
-        $inNumber->setCountryCode(55)->setNationalNumber(9876543210);
-        $this->assertEquals($inNumber, $this->phoneUtil->parse("9876543210", RegionCode::BR));
+        $shortNumber = new PhoneNumber();
+        $shortNumber->setCountryCode(64)->setNationalNumber(12);
+        $this->assertEquals($shortNumber, $this->phoneUtil->parse("12", RegionCode::NZ));
+
     }
 
     public function testIsAlphaNumber()

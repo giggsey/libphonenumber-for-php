@@ -26,8 +26,8 @@ class NumberParseException extends \Exception {
 	private $errorType;
 	protected $message;
 
-	public function __construct($errorType, $message) {
-		parent::__construct($message, $errorType);
+	public function __construct($errorType, $message, $previous = null) {
+		parent::__construct($message, $errorType, $previous);
 		$this->message = $message;
 		$this->errorType = $errorType;
 	}

@@ -15,6 +15,18 @@ A sister project also exists for [libphonenumber-geocoder](https://github.com/gi
 * getExampleNumber/getExampleNumberByType - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
 * isValidNumber - full validation of a phone number for a region using length and prefix information.
 
+## Installation
+
+The library can be installed via [composer](http://getcomposer.org/). You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
+
+```json
+{
+    "require": {
+        "giggsey/libphonenumber-for-php": "~5.8"
+    }
+}
+```
+
 
 ## Online Demo
 An [online demo](http://giggsey.com/libphonenumber/) is available for both [libphonenumber-for-php](https://github.com/giggsey/libphonenumber-for-php) and [libphonenumber-geocoder](https://github.com/giggsey/libphonenumber-geocoder).

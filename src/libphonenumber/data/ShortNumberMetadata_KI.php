@@ -7,19 +7,19 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,3}',
+    'NationalNumberPattern' => '[19]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
@@ -67,9 +67,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '99[2349]',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '999',
   ),
   'voicemail' => 
   array (
@@ -83,12 +83,19 @@ return array (
           10(?:
             [0-8]|
             5[01259]
-          )
+          )|
+          99[2349]
         ',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '100',
   ),
   'standardRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',

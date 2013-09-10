@@ -83,9 +83,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '171',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '171',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -105,6 +105,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'carrierSpecific' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
@@ -115,7 +121,7 @@ return array (
   'countryCode' => 58,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '(1\\d{2})|0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

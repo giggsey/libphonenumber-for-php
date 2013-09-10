@@ -67,12 +67,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          19[023]|
-          911
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '190',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -92,6 +89,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'carrierSpecific' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
@@ -100,9 +103,7 @@ return array (
   ),
   'id' => 'BR',
   'countryCode' => 55,
-  'internationalPrefix' => '0014',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (

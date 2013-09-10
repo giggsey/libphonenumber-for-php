@@ -18,6 +18,10 @@ class CountryCodeToRegionCodeMapForTesting {
     0 => 'US',
     1 => 'BS',
   ),
+  33 => 
+  array (
+    0 => 'FR',
+  ),
   39 => 
   array (
     0 => 'IT',
@@ -25,6 +29,7 @@ class CountryCodeToRegionCodeMapForTesting {
   44 => 
   array (
     0 => 'GB',
+    1 => 'GG',
   ),
   48 => 
   array (

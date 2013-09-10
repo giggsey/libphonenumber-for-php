@@ -467,6 +467,21 @@ class PhoneMetadata {
         return $this;
     }
 
+    private $carrierSpecific;
+
+    public function hasCarrierSpecific() {
+        return isset($this->carrierSpecific);
+    }
+
+    public function getCarrierSpecific() {
+        return $this->carrierSpecific;
+    }
+
+    public function setCarrierSpecific(PhoneNumberDesc $value) {
+        $this->carrierSpecific = $value;
+        return $this;
+    }
+
 
 
 	private $noInternationalDialling = null;
@@ -573,6 +588,10 @@ class PhoneMetadata {
 
         if ($this->hasStandardRate()) {
             $output['standardRate'] = $this->getStandardRate()->toArray();
+        }
+
+        if ($this->hasCarrierSpecific()) {
+            $output['carrierSpecific'] = $this->getCarrierSpecific()->toArray();
         }
 
 		if ($this->hasNoInternationalDialling()) {
@@ -698,6 +717,11 @@ class PhoneMetadata {
         if (isset($input['standardRate'])) {
             $desc = new PhoneNumberDesc();
             $this->setStandardRate($desc->fromArray($input['standardRate']));
+        }
+
+        if (isset($input['carrierSpecific'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setCarrierSpecific($desc->fromArray($input['carrierSpecific']));
         }
 		
 		if (isset($input['noInternationalDialling'])) {

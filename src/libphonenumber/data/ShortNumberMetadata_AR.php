@@ -7,27 +7,33 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[019]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[019]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[019]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          [09]\\d{1,2}|
+          1(?:
+            [02-9]\\d?|
+            1[0-24-9]?
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{2,3}',
+    'ExampleNumber' => '111',
   ),
   'premiumRate' => 
   array (
@@ -67,9 +73,12 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          10[017]|
+          911
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '101',
   ),
   'voicemail' => 
   array (
@@ -80,16 +89,25 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
+          00|
           1(?:
-            0[2356]|
+            0[0-35-7]|
             1[02-5]|
-            21
-          )
+            2[15]|
+            9
+          )|
+          911
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '121',
   ),
   'standardRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
