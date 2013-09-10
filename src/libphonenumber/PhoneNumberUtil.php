@@ -641,20 +641,15 @@ class PhoneNumberUtil
 
     public function isNumberPossibleForDesc($nationalNumber, PhoneNumberDesc $numberDesc)
     {
-        $possibleNumberPatternMatcher = preg_match(
-            '/^(' . $numberDesc->getPossibleNumberPattern() . ')$/x',
-            $nationalNumber
-        );
+        $possibleNumberPatternMatcher = new Matcher($numberDesc->getPossibleNumberPattern(), $nationalNumber);
 
-        return ($possibleNumberPatternMatcher == 1) ? true : false;
+        return $possibleNumberPatternMatcher->matches();
     }
 
     public function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
-        $nationalNumberPatternMatcher = preg_match(
-            '/^' . $numberDesc->getNationalNumberPattern() . '$/x',
-            $nationalNumber
-        );
-        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher;
+        $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
+
+        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher->matches();
     }
 
     /**
@@ -700,6 +695,10 @@ class PhoneNumberUtil
         ) : $this->getMetadataForRegion($regionCode);
     }
 
+    /**
+     * @param $countryCallingCode
+     * @return PhoneMetadata
+     */
     public function getMetadataForNonGeographicalRegion($countryCallingCode)
     {
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
@@ -973,7 +972,7 @@ class PhoneNumberUtil
      * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
      * an extension specified.
      */
-    private function maybeAppendFormattedExtension(PhoneNumber $number, $metadata, $numberFormat, &$formattedNumber)
+    private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, &$formattedNumber)
     {
         if ($number->hasExtension() && strlen($number->getExtension()) > 0) {
             if ($numberFormat == PhoneNumberFormat::RFC3966) {
@@ -1903,7 +1902,7 @@ class PhoneNumberUtil
      * Normalizes a string of characters representing a phone number. This strips all characters which
      * are not diallable on a mobile phone keypad (including all non-ASCII digits).
      *
-     * @param $number a string of characters representing a phone number
+     * @param string $number a string of characters representing a phone number
      * @return string the normalized string version of the phone number
      */
     public static function normalizeDiallableCharsOnly($number)
