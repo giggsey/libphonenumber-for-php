@@ -971,8 +971,13 @@ class PhoneNumberUtil
     /**
      * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
      * an extension specified.
+     *
+     * @param PhoneNumber $number
+     * @param PhoneMetadata|null $metadata
+     * @param $numberFormat
+     * @param $formattedNumber
      */
-    private function maybeAppendFormattedExtension(PhoneNumber $number, PhoneMetadata $metadata, $numberFormat, &$formattedNumber)
+    private function maybeAppendFormattedExtension(PhoneNumber $number, $metadata, $numberFormat, &$formattedNumber)
     {
         if ($number->hasExtension() && strlen($number->getExtension()) > 0) {
             if ($numberFormat == PhoneNumberFormat::RFC3966) {
