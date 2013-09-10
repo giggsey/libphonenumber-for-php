@@ -105,9 +105,14 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            [578]|
+            12
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{2,3}',
+    'ExampleNumber' => '112',
   ),
   'voicemail' => 
   array (
@@ -137,6 +142,12 @@ return array (
     'NationalNumberPattern' => '118777',
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '118777',
+  ),
+  'carrierSpecific' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (

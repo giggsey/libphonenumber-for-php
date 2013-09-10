@@ -89,6 +89,12 @@ return array (
     'PossibleNumberPattern' => 'NA',
     'ExampleNumber' => '',
   ),
+  'carrierSpecific' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
@@ -152,6 +158,32 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '5[079]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    5 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2,3})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            316|
+            46|
+            51|
+            732|
+            6(?:
+              44|
+              5[0-3579]|
+              [6-9]
+            )|
+            7(?:
+              1|
+              [28]0
+            )|
+            [89]
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

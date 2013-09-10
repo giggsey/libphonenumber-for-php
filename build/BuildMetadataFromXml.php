@@ -54,6 +54,7 @@ class BuildMetadataFromXml
     const NO_INTERNATIONAL_DIALLING = "noInternationalDialling";
     const NUMBER_FORMAT = "numberFormat";
     const PAGER = "pager";
+    const CARRIER_SPECIFIC = 'carrierSpecific';
     const PATTERN = "pattern";
     const PERSONAL_NUMBER = "personalNumber";
     const POSSIBLE_NUMBER_PATTERN = "possibleNumberPattern";
@@ -368,6 +369,7 @@ class BuildMetadataFromXml
         $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
         $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
         $metadata->setVoicemail(self::processPhoneNumberDescElement($generalDesc, $element, self::VOICEMAIL));
+        $metadata->setCarrierSpecific(self::processPhoneNumberDescElement($generalDesc, $element, self::CARRIER_SPECIFIC));
 
 
         $metadata->setNoInternationalDialling(

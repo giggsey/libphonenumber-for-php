@@ -21,7 +21,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.x-dev"
+            "dev-master": "5.x-dev",
+			"dev-google_v5.8": "5.8-dev"
         }
     }
 }

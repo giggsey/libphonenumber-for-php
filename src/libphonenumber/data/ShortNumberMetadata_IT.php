@@ -80,9 +80,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '11[2358]',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '112',
   ),
   'voicemail' => 
   array (
@@ -145,6 +145,12 @@ return array (
     'ExampleNumber' => '114',
   ),
   'standardRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',

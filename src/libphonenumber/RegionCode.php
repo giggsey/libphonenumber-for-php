@@ -36,6 +36,7 @@ class RegionCode
     const BY = "BY";
     const CA = "CA";
     const CH = "CH";
+    const CL = "CL";
     const CN = "CN";
     const CS = "CS";
     const DE = "DE";
@@ -46,6 +47,7 @@ class RegionCode
     const KR = "KR";
     const MX = "MX";
     const NZ = "NZ";
+    const PG = "PG";
     const PL = "PL";
     const RE = "RE";
     const SG = "SG";

@@ -201,12 +201,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          06[568]|
-          911
-        ',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '066',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
@@ -221,6 +218,12 @@ return array (
     'ExampleNumber' => '',
   ),
   'standardRate' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'ExampleNumber' => '',
+  ),
+  'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
@@ -374,6 +377,6 @@ return array (
     ),
   ),
   'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
+  'leadingZeroPossible' => true,
 );
 /* EOF */
