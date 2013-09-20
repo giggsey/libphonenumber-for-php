@@ -62,7 +62,6 @@ class PhoneNumberUtil
     // load factor of roughly 0.75.
     const RFC3966_PHONE_CONTEXT = ";phone-context=";
     const RFC3966_ISDN_SUBADDRESS = ";isub=";
-
     const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
 
     // The PLUS_SIGN signifies the international prefix.
@@ -73,14 +72,10 @@ class PhoneNumberUtil
     const NON_DIGITS_PATTERN = "(\\D+)";
     const FIRST_GROUP_PATTERN = "(\\$\\d)";
     const NP_PATTERN = '\\$NP';
-
     const FG_PATTERN = '\\$FG';
     const CC_PATTERN = '\\$CC';
     const FIRST_GROUP_ONLY_PREFIX_PATTERN = '\\(?\\$1\\)?';
-    /**
-     * @var PhoneNumberUtil
-     */
-    private static $instance = null;
+    public static $PLUS_CHARS_PATTERN;
 
     // Regular expression of acceptable characters that may start a phone number for the purposes of
     // parsing. This allows us to strip away meaningless prefixes to phone numbers that may be
@@ -88,7 +83,10 @@ class PhoneNumberUtil
     // does not contain alpha characters, although they may be used later in the number. It also does
     // not include other punctuation, as this will be stripped later during parsing and is of no
     // information value when parsing a number.
-    public static $PLUS_CHARS_PATTERN;
+    /**
+     * @var PhoneNumberUtil
+     */
+    private static $instance = null;
 
     // Regular expression of characters typically used to start a second phone number for the purposes
     // of parsing. This allows us to strip off parts of the number that are actually the start of
@@ -138,6 +136,12 @@ class PhoneNumberUtil
         'Y' => '9',
         'Z' => '9',
     );
+    /**
+     * Map of country calling codes that use a mobile token before the area code. One example of when
+     * this is relevant is when determining the length of the national destination code, which should
+     * be the length of the area code plus the length of the mobile token.
+     */
+    private static $MOBILE_TOKEN_MAPPINGS;
 
     // We use this pattern to check if the phone number has at least three letters in it - if so, then
     // we treat it as a number where some phone-number digits are represented by letters.
@@ -246,6 +250,10 @@ class PhoneNumberUtil
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
+
+            self::$MOBILE_TOKEN_MAPPINGS = array();
+            self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
+            self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
         }
         return self::$instance;
     }
@@ -384,6 +392,34 @@ class PhoneNumberUtil
     // have alpha-characters and punctuation.
     //
     // Note VALID_PUNCTUATION starts with a -, so must be the first in the range.
+
+    /**
+     * Normalizes a string of characters representing a phone number by replacing all characters found
+     * in the accompanying map with the values therein, and stripping all other characters if
+     * removeNonMatches is true.
+     *
+     * @param string $number                     a string of characters representing a phone number
+     * @param array $normalizationReplacements  a mapping of characters to what they should be replaced by in
+     *                                   the normalized version of the phone number
+     * @param bool $removeNonMatches           indicates whether characters that are not able to be replaced
+     *                                   should be stripped from the number. If this is false, they
+     *                                   will be left unchanged in the number.
+     * @return string the normalized string version of the phone number
+     */
+    private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches)
+    {
+        $normalizedNumber = "";
+        for ($i = 0; $i < mb_strlen($number, 'UTF-8'); $i++) {
+            $character = mb_substr($number, $i, 1, 'UTF-8');
+            if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
+                $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
+            } else if (!$removeNonMatches) {
+                $normalizedNumber .= $character;
+            }
+            // If neither of the above are true, we remove this character.
+        }
+        return $normalizedNumber;
+    }
 
     /**
      * Helper function to check if the national prefix formatting rule has the first group only, i.e.,
@@ -639,17 +675,17 @@ class PhoneNumberUtil
         return PhoneNumberType::UNKNOWN;
     }
 
+    public function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
+        $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
+
+        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher->matches();
+    }
+
     public function isNumberPossibleForDesc($nationalNumber, PhoneNumberDesc $numberDesc)
     {
         $possibleNumberPatternMatcher = new Matcher($numberDesc->getPossibleNumberPattern(), $nationalNumber);
 
         return $possibleNumberPatternMatcher->matches();
-    }
-
-    public function isNumberMatchingDesc($nationalNumber, PhoneNumberDesc $numberDesc) {
-        $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
-
-        return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher->matches();
     }
 
     /**
@@ -768,15 +804,17 @@ class PhoneNumberUtil
             return 0;
         }
 
-        if ($this->getRegionCodeForCountryCode($number->getCountryCode()) === "AR" &&
-            $this->getNumberType($number) == PhoneNumberType::MOBILE
-        ) {
-            // Argentinian mobile numbers, when formatted in the international format, are in the form of
-            // +54 9 NDC XXXX.... As a result, we take the length of the third group (NDC) and add 1 for
-            // the digit 9, which also forms part of the national significant number.
-            // TODO: Investigate the possibility of better modeling the metadata to make it
-            // easier to obtain the NDC.
-            return strlen($numberGroups[3]) + 1;
+        if ($this->getNumberType($number) == PhoneNumberType::MOBILE) {
+            // For example Argentinian mobile numbers, when formatted in the international format, are in
+            // the form of +54 9 NDC XXXX.... As a result, we take the length of the third group (NDC) and
+            // add the length of the second group (which is the mobile token), which also forms part of
+            // the national significant number. This assumes that the mobile token is always formatted
+            // separately from the rest of the phone number.
+
+            $mobileToken = self::getCountryMobileToken($number->getCountryCode());
+            if ($mobileToken !== "") {
+                return strlen($numberGroups[2]) + strlen($numberGroups[3]);
+            }
         }
         return strlen($numberGroups[2]);
     }
@@ -993,6 +1031,21 @@ class PhoneNumberUtil
     }
 
     /**
+     * Returns the mobile token for the provided country calling code if it has one, otherwise
+     * returns an empty string. A mobile token is a number inserted before the area code when dialing
+     * a mobile number from that country from abroad.
+     *
+     * @param int $countryCallingCode the country calling code for which we want the mobile token
+     * @return string the mobile token, as a string, for the given country calling code
+     */
+    public static function getCountryMobileToken($countryCallingCode){
+        if (array_key_exists($countryCallingCode, self::$MOBILE_TOKEN_MAPPINGS)) {
+            return self::$MOBILE_TOKEN_MAPPINGS[$countryCallingCode];
+        }
+        return "";
+    }
+
+    /**
      * Checks if the number is a valid vanity (alpha) number such as 800 MICROSOFT. A valid vanity
      * number will start with at least 3 digits and will have three or more alpha characters. This
      * does not do region-specific checks - to work out if this number is actually valid for a region,
@@ -1029,6 +1082,31 @@ class PhoneNumberUtil
         }
         $m = preg_match(self::getValidPhoneNumberPattern(), $number);
         return $m > 0;
+    }
+
+    /**
+     * We append optionally the extension pattern to the end here, as a valid phone number may
+     * have an extension prefix appended, followed by 1 or more digits.
+     * @return string
+     */
+    private static function getValidPhoneNumberPattern()
+    {
+        return '%' .
+        self::DIGITS . '{' . self::MIN_LENGTH_FOR_NSN . '}' . '|' .
+        '[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
+        self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . ']*' .
+        '(?:' . self::$EXTN_PATTERNS_FOR_PARSING . ')?' .
+        '%' . self::REGEX_FLAGS;
+    }
+
+    private static function getValidAlphaPattern()
+    {
+        // We accept alpha characters in phone numbers, ASCII only, upper and lower case.
+        return preg_replace("[, \\[\\]]", "", implode('', array_keys(self::$ALPHA_MAPPINGS))) . preg_replace(
+            "[, \\[\\]]",
+            "",
+            strtolower(implode('', array_keys(self::$ALPHA_MAPPINGS)))
+        );
     }
 
     /**
@@ -1496,59 +1574,6 @@ class PhoneNumberUtil
     }
 
     /**
-     * We append optionally the extension pattern to the end here, as a valid phone number may
-     * have an extension prefix appended, followed by 1 or more digits.
-     * @return string
-     */
-    private static function getValidPhoneNumberPattern()
-    {
-        return '%' .
-        self::DIGITS . '{' . self::MIN_LENGTH_FOR_NSN . '}' . '|' .
-        '[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
-        self::VALID_PUNCTUATION . self::STAR_SIGN . self::getValidAlphaPattern() . self::DIGITS . ']*' .
-        '(?:' . self::$EXTN_PATTERNS_FOR_PARSING . ')?' .
-        '%' . self::REGEX_FLAGS;
-    }
-
-    private static function getValidAlphaPattern()
-    {
-        // We accept alpha characters in phone numbers, ASCII only, upper and lower case.
-        return preg_replace("[, \\[\\]]", "", implode('', array_keys(self::$ALPHA_MAPPINGS))) . preg_replace(
-            "[, \\[\\]]",
-            "",
-            strtolower(implode('', array_keys(self::$ALPHA_MAPPINGS)))
-        );
-    }
-
-    /**
-     * Normalizes a string of characters representing a phone number by replacing all characters found
-     * in the accompanying map with the values therein, and stripping all other characters if
-     * removeNonMatches is true.
-     *
-     * @param string $number                     a string of characters representing a phone number
-     * @param array $normalizationReplacements  a mapping of characters to what they should be replaced by in
-     *                                   the normalized version of the phone number
-     * @param bool $removeNonMatches           indicates whether characters that are not able to be replaced
-     *                                   should be stripped from the number. If this is false, they
-     *                                   will be left unchanged in the number.
-     * @return string the normalized string version of the phone number
-     */
-    private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches)
-    {
-        $normalizedNumber = "";
-        for ($i = 0; $i < mb_strlen($number, 'UTF-8'); $i++) {
-            $character = mb_substr($number, $i, 1, 'UTF-8');
-            if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
-                $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
-            } else if (!$removeNonMatches) {
-                $normalizedNumber .= $character;
-            }
-            // If neither of the above are true, we remove this character.
-        }
-        return $normalizedNumber;
-    }
-
-    /**
      * Normalizes a string of characters representing a phone number. This converts wide-ascii and
      * arabic-indic numerals to European numerals, and strips punctuation and alpha characters.
      *
@@ -1751,6 +1776,26 @@ class PhoneNumberUtil
     }
 
     /**
+     * Returns the country calling code for a specific region. For example, this would be 1 for the
+     * United States, and 64 for New Zealand. Assumes the region is already valid.
+     *
+     * @param String $regionCode  the region that we want to get the country calling code for
+     * @return int  the country calling code for the region denoted by regionCode
+     * @throws Exception if the region is invalid
+     */
+    private function getCountryCodeForValidRegion($regionCode)
+    {
+        $metadata = $this->getMetadataForRegion($regionCode);
+        if ($metadata === null) {
+            throw new Exception("Invalid region code: " . $regionCode);
+        }
+        return $metadata->getCountryCode();
+    }
+
+    // Check if rawInput, which is assumed to be in the national format, has a national prefix. The
+    // national prefix is assumed to be in digits-only form.
+
+    /**
      * Returns a number formatted in such a way that it can be dialed from a mobile phone in a
      * specific region. If the number cannot be reached from the region (e.g. some countries block
      * toll-free numbers from being called outside of the country), the method returns an empty
@@ -1811,9 +1856,6 @@ class PhoneNumberUtil
         }
         return $withFormatting ? $formattedNumber : $this->normalizeDiallableCharsOnly($formattedNumber);
     }
-
-    // Check if rawInput, which is assumed to be in the national format, has a national prefix. The
-    // national prefix is assumed to be in digits-only form.
 
     /**
      * Formats a phone number in national format for dialing using the carrier as specified in the
@@ -2118,6 +2160,11 @@ class PhoneNumberUtil
         return $formattedNumber;
     }
 
+    // Note in some regions, the national number can be written in two completely different ways
+    // depending on whether it forms part of the NATIONAL format or INTERNATIONAL format. The
+    // numberFormat parameter here is used to specify which format to use for those cases. If a
+    // carrierCode is specified, this will be inserted into the formatted string to replace $CC.
+
     /**
      * Checks if this is a region under the North American Numbering Plan Administration (NANPA).
      * @param string $regionCode
@@ -2127,11 +2174,6 @@ class PhoneNumberUtil
     {
         return in_array($regionCode, $this->nanpaRegions);
     }
-
-    // Note in some regions, the national number can be written in two completely different ways
-    // depending on whether it forms part of the NATIONAL format or INTERNATIONAL format. The
-    // numberFormat parameter here is used to specify which format to use for those cases. If a
-    // carrierCode is specified, this will be inserted into the formatted string to replace $CC.
 
     /**
      * Formats a phone number using the original phone number format that the number is parsed from.
@@ -2248,6 +2290,9 @@ class PhoneNumberUtil
         return $formattedNumber;
     }
 
+    // Note that carrierCode is optional - if null or an empty string, no carrier code replacement
+    // will take place.
+
     /**
      * Returns true if a number is from a region whose national significant number couldn't contain a
      * leading zero, but has the italian_leading_zero field set to true.
@@ -2256,9 +2301,6 @@ class PhoneNumberUtil
     {
         return $number->isItalianLeadingZero() && !$this->isLeadingZeroPossible($number->getCountryCode());
     }
-
-    // Note that carrierCode is optional - if null or an empty string, no carrier code replacement
-    // will take place.
 
     /**
      * Checks whether the country calling code is from a region whose national significant number
@@ -2394,23 +2436,6 @@ class PhoneNumberUtil
             return $numberLength > self::MIN_LENGTH_FOR_NSN && $numberLength <= self::MAX_LENGTH_FOR_NSN;
         }
         return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata) != PhoneNumberType::UNKNOWN;
-    }
-
-    /**
-     * Returns the country calling code for a specific region. For example, this would be 1 for the
-     * United States, and 64 for New Zealand. Assumes the region is already valid.
-     *
-     * @param String $regionCode  the region that we want to get the country calling code for
-     * @return int  the country calling code for the region denoted by regionCode
-     * @throws Exception if the region is invalid
-     */
-    private function getCountryCodeForValidRegion($regionCode)
-    {
-        $metadata = $this->getMetadataForRegion($regionCode);
-        if ($metadata === null) {
-            throw new Exception("Invalid region code: " . $regionCode);
-        }
-        return $metadata->getCountryCode();
     }
 
     /**

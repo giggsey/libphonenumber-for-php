@@ -276,6 +276,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$internationalTollFree));
     }
 
+    public function testGetCountryMobileToken()
+    {
+        $this->assertEquals("1", $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX)));
+
+        // Country calling code for Sweden, which has no mobile token.
+        $this->assertEquals("", $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::SE)));
+    }
+
     public function testGetNationalSignificantNumber()
     {
         $this->assertEquals("6502530000", $this->phoneUtil->getNationalSignificantNumber(self::$usNumber));
