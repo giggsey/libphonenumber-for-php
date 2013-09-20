@@ -30,8 +30,9 @@ return array (
     'NationalNumberPattern' => '
           [246]\\d{5,13}|
           3(?:
-            [03-9]\\d{4,13}|
-            2\\d{9}
+            0\\d{3,13}|
+            2\\d{9}|
+            [3-9]\\d{4,13}
           )|
           5(?:
             0[2-8]|
@@ -197,7 +198,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4,11})',
+      'pattern' => '(\\d{2})(\\d{3,11})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
@@ -450,5 +451,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */

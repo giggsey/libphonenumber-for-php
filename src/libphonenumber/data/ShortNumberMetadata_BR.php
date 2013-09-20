@@ -7,19 +7,19 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'NationalNumberPattern' => '[1249]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'NationalNumberPattern' => '[1249]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[149]\\d{2,4}',
+    'NationalNumberPattern' => '[1249]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
@@ -102,8 +102,9 @@ return array (
             2[38]|
             68|
             81|
-            9[0-4789]
+            9[0-5789]
           )|
+          27878|
           40404|
           911
         ',
@@ -118,9 +119,12 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          27878|
+          40404
+        ',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '27878',
   ),
   'noInternationalDialling' => 
   array (
@@ -140,5 +144,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

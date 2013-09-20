@@ -37,6 +37,7 @@ return array (
             6(?:
               26|
               4[23]|
+              77|
               9[023]
             )|
             7(?:
@@ -76,6 +77,7 @@ return array (
             6(?:
               26|
               4[23]|
+              77|
               9[023]
             )|
             7(?:
@@ -196,5 +198,6 @@ return array (
   'mainCountryForCode' => NULL,
   'leadingDigits' => '340',
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

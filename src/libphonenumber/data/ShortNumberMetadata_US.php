@@ -72,7 +72,7 @@ return array (
           911
         ',
     'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '911',
+    'ExampleNumber' => '112',
   ),
   'voicemail' => 
   array (
@@ -119,5 +119,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

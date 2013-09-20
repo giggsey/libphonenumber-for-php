@@ -21,7 +21,7 @@ return array (
             2[12467]|
             3[1-4]|
             4[134]|
-            5[12568]|
+            5[256]|
             6[12]|
             [7-9]1
           )\\d{7}
@@ -31,9 +31,9 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7[4-9]\\d{7}',
+    'NationalNumberPattern' => '7[5-9]\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '741234567',
+    'ExampleNumber' => '781234567',
   ),
   'tollFree' => 
   array (
@@ -67,15 +67,15 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '74[0248]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '740123456',
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '5[18]\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '581234567',
   ),
   'emergency' => 
   array (
@@ -166,5 +166,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */

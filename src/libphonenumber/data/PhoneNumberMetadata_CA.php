@@ -33,10 +33,10 @@ return array (
               03|
               1[68]|
               3[178]|
-              5[06]
+              50
             )|
             5(?:
-              0[06]|
+              06|
               1[49]|
               79|
               8[17]
@@ -48,9 +48,9 @@ return array (
               47
             )|
             7(?:
-              0[059]|
-              80|
-              78
+              0[59]|
+              78|
+              80
             )|
             8(?:
               [06]7|
@@ -83,10 +83,10 @@ return array (
               03|
               1[68]|
               3[178]|
-              5[06]
+              50
             )|
             5(?:
-              0[06]|
+              06|
               1[49]|
               79|
               8[17]
@@ -98,9 +98,9 @@ return array (
               47
             )|
             7(?:
-              0[059]|
-              80|
-              78
+              0[59]|
+              78|
+              80
             )|
             8(?:
               [06]7|
@@ -118,7 +118,6 @@ return array (
     'NationalNumberPattern' => '
           8(?:
             00|
-            55|
             66|
             77|
             88
@@ -220,5 +219,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */
