@@ -7,33 +7,36 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[1-37-9]\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[1-37-9]\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[1-37-9]\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '116\\d{3}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '116000',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          11811[89]|
+          72\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{5,6}',
+    'ExampleNumber' => '118118',
   ),
   'sharedCost' => 
   array (
@@ -83,11 +86,52 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          112|
-          90000
+          11(?:
+            [25]|
+            313|
+            4\\d{2}|
+            6(?:
+              00[06]|
+              11[17]|
+              123
+            )|
+            7[0-8]|
+            8(?:
+              1(?:
+                [02-9]\\d|
+                1[013-9]
+              )|
+              [02-46-9]\\d{2}
+            )
+          )|
+          2(?:
+            2[02358]|
+            33|
+            4[01]|
+            50|
+            6[1-4]
+          )|
+          32[13]|
+          7\\d{4}|
+          8(?:
+            22|
+            88
+          )|
+          9(?:
+            0(?:
+              000|
+              1(?:
+                [02-9]\\d|
+                1[013-9]
+              )|
+              [2-4]\\d{2}|
+              510
+            )|
+            12
+          )
         ',
-    'PossibleNumberPattern' => '\\d{3,5}',
-    'ExampleNumber' => '112',
+    'PossibleNumberPattern' => '\\d{3,6}',
+    'ExampleNumber' => '11313',
   ),
   'standardRate' => 
   array (
@@ -97,9 +141,23 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          2(?:
+            2[02358]|
+            33|
+            4[01]|
+            50|
+            6[1-4]
+          )|
+          32[13]|
+          8(?:
+            22|
+            88
+          )|
+          912
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '222',
   ),
   'noInternationalDialling' => 
   array (
@@ -119,5 +177,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

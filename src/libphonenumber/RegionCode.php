@@ -50,6 +50,7 @@ class RegionCode
     const PG = "PG";
     const PL = "PL";
     const RE = "RE";
+    const SE = "SE";
     const SG = "SG";
     const US = "US";
     const YT = "YT";

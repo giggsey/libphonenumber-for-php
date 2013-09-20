@@ -22,15 +22,13 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          (?:
-            11?\\d|
-            1?(?:
-              2[24-8]|
-              3[35-8]|
-              4[3-68]|
-              6[2-5]|
-              7[235-7]
-            )
+          11\\d{7}|
+          1?(?:
+            2[24-8]|
+            3[35-8]|
+            4[3-68]|
+            6[2-5]|
+            7[235-7]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
@@ -172,7 +170,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '9',
+        0 => '92',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -205,5 +203,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */

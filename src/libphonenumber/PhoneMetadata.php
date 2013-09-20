@@ -208,6 +208,21 @@ class PhoneMetadata {
 		return $this;
 	}
 
+    private $mobileNumberPortableRegion = null;
+
+    public function hasMobileNumberPortableRegion() {
+        return isset($this->mobileNumberPortableRegion);
+    }
+
+    public function isMobileNumberPortableRegion() {
+        return $this->mobileNumberPortableRegion;
+    }
+
+    public function setMobileNumberPortableRegion($value) {
+        $this->mobileNumberPortableRegion = $value;
+        return $this;
+    }
+
 	private $generalDesc = null;
 
 	public function hasGeneralDesc() {
@@ -644,6 +659,8 @@ class PhoneMetadata {
 
 		$output['leadingZeroPossible'] = $this->isLeadingZeroPossible();
 
+        $output['mobileNumberPortableRegion'] = $this->isMobileNumberPortableRegion();
+
 		return $output;
 	}
 
@@ -782,6 +799,8 @@ class PhoneMetadata {
 		}
 
 		$this->setLeadingZeroPossible($input['leadingZeroPossible']);
+
+        $this->setMobileNumberPortableRegion($input['mobileNumberPortableRegion']);
 
 		return $this;
 	}

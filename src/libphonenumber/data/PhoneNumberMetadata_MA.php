@@ -53,7 +53,7 @@ return array (
             [124-7]\\d|
             3[013-8]|
             8[01]|
-            99
+            9[89]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -236,5 +236,6 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */

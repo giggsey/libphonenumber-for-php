@@ -43,6 +43,7 @@ class BuildMetadataFromXml
     const INTL_FORMAT = "intlFormat";
     const LEADING_DIGITS = "leadingDigits";
     const LEADING_ZERO_POSSIBLE = "leadingZeroPossible";
+    const MOBILE_NUMBER_PORTABLE_REGION = "mobileNumberPortableRegion";
     const MAIN_COUNTRY_FOR_CODE = "mainCountryForCode";
     const MOBILE = "mobile";
     const NATIONAL_NUMBER_PATTERN = "nationalNumberPattern";
@@ -190,6 +191,9 @@ class BuildMetadataFromXml
         }
         if ($element->hasAttribute(self::LEADING_ZERO_POSSIBLE)) {
             $metadata->setLeadingZeroPossible(true);
+        }
+        if ($element->hasAttribute(self::MOBILE_NUMBER_PORTABLE_REGION)) {
+            $metadata->setMobileNumberPortableRegion(true);
         }
         return $metadata;
     }
@@ -369,7 +373,9 @@ class BuildMetadataFromXml
         $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
         $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
         $metadata->setVoicemail(self::processPhoneNumberDescElement($generalDesc, $element, self::VOICEMAIL));
-        $metadata->setCarrierSpecific(self::processPhoneNumberDescElement($generalDesc, $element, self::CARRIER_SPECIFIC));
+        $metadata->setCarrierSpecific(
+            self::processPhoneNumberDescElement($generalDesc, $element, self::CARRIER_SPECIFIC)
+        );
 
 
         $metadata->setNoInternationalDialling(
@@ -452,7 +458,7 @@ class BuildMetadataFromXml
             $countryCode = $metadata->getCountryCode();
             if (array_key_exists($countryCode, $countryCodeToRegionCodeMap)) {
                 if ($metadata->getMainCountryForCode()) {
-                    array_unshift( $countryCodeToRegionCodeMap[$countryCode], $regionCode);
+                    array_unshift($countryCodeToRegionCodeMap[$countryCode], $regionCode);
                 } else {
                     $countryCodeToRegionCodeMap[$countryCode][] = $regionCode;
                 }

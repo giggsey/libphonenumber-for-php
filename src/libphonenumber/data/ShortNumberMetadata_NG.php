@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -79,8 +79,11 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '199',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          199|
+          40700
+        ',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '199',
   ),
   'standardRate' => 
@@ -91,9 +94,9 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '40700',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '40700',
   ),
   'noInternationalDialling' => 
   array (
@@ -113,5 +116,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

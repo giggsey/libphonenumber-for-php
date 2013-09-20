@@ -63,14 +63,8 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '
-          19(?:
-            0[0126]\\d{6}|
-            [13-5]\\d{3}|
-            [679]\\d{5}
-          )
-        ',
-    'PossibleNumberPattern' => '\\d{6,10}',
+    'NationalNumberPattern' => '190[0126]\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1900123456',
   ),
   'sharedCost' => 
@@ -272,5 +266,6 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */
