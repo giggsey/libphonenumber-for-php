@@ -21,13 +21,12 @@ return array (
               6[1-69]
             )|
             4(?:
-              [013-68]\\d|
-              2[4-7]|
-              71
+              [013568]\\d|
+              2[4-7]
             )|
             5(
               44\\d|
-              471|
+              471
             )|
             6\\d{2}|
             8(?:
@@ -42,7 +41,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          5?(?:
+          5(?:
             2[59]\\d|
             4(?:
               2[1-389]|
@@ -58,7 +57,7 @@ return array (
             9[0-8]\\d
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '52512345',
   ),
   'tollFree' => 

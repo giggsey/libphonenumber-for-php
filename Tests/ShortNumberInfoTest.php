@@ -126,11 +126,11 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE)
         );
         $this->assertEquals(
-            "118777",
+            "1023",
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::STANDARD_RATE)
         );
         $this->assertEquals(
-            "3200",
+            "42000",
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::PREMIUM_RATE)
         );
         $this->assertEquals(

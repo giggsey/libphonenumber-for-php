@@ -7,27 +7,27 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[12467]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[12467]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[12467]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '7373',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '7373',
   ),
   'premiumRate' => 
   array (
@@ -67,7 +67,12 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '118',
+    'NationalNumberPattern' => '
+          1(?:
+            1[58]|
+            2[08]
+          )
+        ',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '118',
   ),
@@ -79,8 +84,25 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '118',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          1(?:
+            1[58]|
+            2(?:
+              [158]|
+              00?
+            )|
+            900
+          )|
+          2100|
+          4878|
+          6100|
+          7(?:
+            010|
+            100|
+            373
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '118',
   ),
   'standardRate' => 

@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[09]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[069]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[09]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[069]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[09]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[069]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -88,9 +88,10 @@ return array (
           (?:
             01|
             99
-          )9
+          )9|
+          60400
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '999',
   ),
   'standardRate' => 
@@ -101,9 +102,9 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '60400',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '60400',
   ),
   'noInternationalDialling' => 
   array (

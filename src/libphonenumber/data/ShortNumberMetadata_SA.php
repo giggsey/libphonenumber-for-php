@@ -25,9 +25,13 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          116111|
+          937|
+          998
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
+    'ExampleNumber' => '116111',
   ),
   'premiumRate' => 
   array (
@@ -71,7 +75,7 @@ return array (
           112|
           9(?:
             11|
-            9[7-9]
+            9[79]
           )
         ',
     'PossibleNumberPattern' => '\\d{3}',
@@ -87,7 +91,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           1(?:
-            16111|
+            1(?:
+              00|
+              2|
+              6111
+            )|
+            410|
             9(?:
               00|
               1[89]|
@@ -99,9 +108,13 @@ return array (
             )
           )|
           9(
-            37|
-            8[6-8]|
-            9[2-6]
+            0[24-79]|
+            11|
+            3[379]|
+            40|
+            66|
+            8[5-9]|
+            9[02-9]
           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
@@ -109,15 +122,21 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '1410',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '1410',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            100|
+            410
+          )|
+          90[24679]
+        ',
+    'PossibleNumberPattern' => '\\d{3,4}',
+    'ExampleNumber' => '902',
   ),
   'noInternationalDialling' => 
   array (

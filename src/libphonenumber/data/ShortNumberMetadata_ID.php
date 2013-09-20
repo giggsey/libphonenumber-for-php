@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[17]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[17]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[17]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -79,8 +79,11 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11[02389]',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          11[02389]|
+          71400
+        ',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 
@@ -91,9 +94,9 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '71400',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '71400',
   ),
   'noInternationalDialling' => 
   array (
