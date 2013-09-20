@@ -168,5 +168,6 @@ return array (
   'mainCountryForCode' => NULL,
   'leadingDigits' => '868',
   'leadingZeroPossible' => NULL,
+  'mobileNumberPortableRegion' => NULL,
 );
 /* EOF */

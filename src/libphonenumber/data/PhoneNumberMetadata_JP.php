@@ -1106,5 +1106,6 @@ return array (
   ),
   'mainCountryForCode' => NULL,
   'leadingZeroPossible' => true,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */
