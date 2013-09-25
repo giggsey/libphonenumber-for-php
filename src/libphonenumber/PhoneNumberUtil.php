@@ -2681,7 +2681,8 @@ class PhoneNumberUtil
                 // If the second number is a string or doesn't have a valid country
                 // calling code, we parse the first number without country calling code.
                 try {
-                    $firstNumber = $this->parseHelper(firstNumberIn, null, false, false);
+                    $firstNumber = new PhoneNumber();
+                    $this->parseHelper($firstNumberIn, null, false, false, $firstNumber);
                 } catch (Exception $exc2) {
                     return MatchType::NOT_A_NUMBER;
                 }
