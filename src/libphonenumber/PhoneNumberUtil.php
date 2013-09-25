@@ -2621,5 +2621,145 @@ class PhoneNumberUtil
         }
         return null;
     }
+    
+    /**
+     * Takes two phone numbers and compares them for equality.
+     *
+     * <p>Returns EXACT_MATCH if the country_code, NSN, presence of a leading zero
+     * for Italian numbers and any extension present are the same. Returns NSN_MATCH
+     * if either or both has no region specified, and the NSNs and extensions are
+     * the same. Returns SHORT_NSN_MATCH if either or both has no region specified,
+     * or the region specified is the same, and one NSN could be a shorter version
+     * of the other number. This includes the case where one has an extension
+     * specified, and the other does not. Returns NO_MATCH otherwise. For example,
+     * the numbers +1 345 657 1234 and 657 1234 are a SHORT_NSN_MATCH. The numbers
+     * +1 345 657 1234 and 345 657 are a NO_MATCH.
+     *
+     * @param {PhoneNumber|string} firstNumberIn first number to
+     *     compare. If it is a string it can contain formatting, and can have
+     *     country calling code specified with + at the start.
+     * @param {PhoneNumber|string} secondNumberIn second number to
+     *     compare. If it is a string it can contain formatting, and can have
+     *     country calling code specified with + at the start.
+     * @return {MatchType} NOT_A_NUMBER, NO_MATCH,
+     *     SHORT_NSN_MATCH, NSN_MATCH or EXACT_MATCH depending on the level of
+     *     equality of the two numbers, described in the method definition.
+     */
+    public function isNumberMatch($firstNumberIn, $secondNumberIn)
+    {
+        $firstNumber = null;
+        $secondNumber = null;
+        
+        if (is_string($firstNumberIn)) {
+            // First see if the first number has an implicit country calling code, by
+            // attempting to parse it.
+            try {
+                $firstNumber = $this->parse($firstNumberIn, PhoneNumberUtil::UNKNOWN_REGION);
+            } catch (Exception $exc) {
+                if ($exc->getCode() != NumberParseException::INVALID_COUNTRY_CODE)
+                    return MatchType::NOT_A_NUMBER;
+                // The first number has no country calling code. EXACT_MATCH is no longer
+                // possible. We parse it as if the region was the same as that for the
+                // second number, and if EXACT_MATCH is returned, we replace this with
+                // NSN_MATCH.
+                if (!is_string($secondNumberIn)) {
+                    if (!($secondNumberIn instanceof PhoneNumber))
+                        throw new InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
+                    $secondNumberRegion = $this->getRegionCodeForCountryCode($secondNumberIn->getCountryCode() ? : 0);
+                    if ($secondNumberRegion) {
+                        try {
+                            $firstNumber = $this->parse($firstNumberIn, $secondNumberRegion);
+                        } catch (Exception $exc2) {
+                            return MatchType::NOT_A_NUMBER;
+                        }
+                        $match = $this->isNumberMatch($firstNumber, $secondNumberIn);
+                        if ($match === MatchType::EXACT_MATCH)
+                            return MatchType::NSN_MATCH;
+                        return $match;
+                    }
+                }
+                // If the second number is a string or doesn't have a valid country
+                // calling code, we parse the first number without country calling code.
+                try {
+                    $firstNumber = $this->parseHelper(firstNumberIn, null, false, false);
+                } catch (Exception $exc2) {
+                    return MatchType::NOT_A_NUMBER;
+                }
+            }
+        } else {
+            if (!($firstNumberIn instanceof PhoneNumber))
+                throw new InvalidArgumentException('First argument not a string nor a PhoneNumber object');
+            $firstNumber = $firstNumberIn;
+        }
+        if (is_string($secondNumberIn)) {
+            try {
+                $secondNumber = $this->parse($secondNumberIn, PhoneNumberUtil::UNKNOWN_REGION);
+                return $this->isNumberMatch($firstNumberIn, $secondNumber);
+            } catch (Exception $exc) {
+                if ($exc->getCode() != NumberParseException::INVALID_COUNTRY_CODE)
+                    return MatchType::NOT_A_NUMBER;
+                return $this->isNumberMatch($secondNumberIn, $firstNumber);
+            }
+        } else {
+            if (!($secondNumberIn instanceof PhoneNumber))
+                throw new InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
+            $secondNumber = $secondNumberIn;
+        }
+        // First clear raw_input, country_code_source and
+        // preferred_domestic_carrier_code fields and any empty-string extensions so
+        // that we can use the proto-buffer equality method.
+        $firstNumber->clearRawInput();
+        $firstNumber->clearCountryCodeSource();
+        $firstNumber->clearPreferredDomesticCarrierCode();
+        $secondNumber->clearRawInput();
+        $secondNumber->clearCountryCodeSource();
+        $secondNumber->clearPreferredDomesticCarrierCode();
+        
+        if ($firstNumber->hasExtension() && !strlen($firstNumber->getExtension()))
+            $firstNumber->clearExtension();
+        
+        if ($secondNumber->hasExtension() && !strlen($secondNumber->getExtension()))
+            $secondNumber->clearExtension();
+        
+        // Early exit if both had extensions and these are different.
+        if ($firstNumber->hasExtension() && $secondNumber->hasExtension() && $firstNumber->getExtension() != $secondNumber->getExtension())
+            return MatchType::NO_MATCH;
+        
+        $firstNumberCountryCode = $firstNumber->getCountryCode() ? : 0;
+        $secondNumberCountryCode = $secondNumber->getCountryCode() ? : 0;
+        // Both had country_code specified.
+        if ($firstNumberCountryCode != 0 && $secondNumberCountryCode != 0) {
+            if ($firstNumber->equals($secondNumber))
+                return MatchType::EXACT_MATCH;
+            elseif ($firstNumberCountryCode == $secondNumberCountryCode && $this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber)) {
+                // A SHORT_NSN_MATCH occurs if there is a difference because of the
+                // presence or absence of an 'Italian leading zero', the presence or
+                // absence of an extension, or one NSN being a shorter variant of the
+                // other.
+                return MatchType::SHORT_NSN_MATCH;
+            }
+            return MatchType::NO_MATCH;
+        }
+        $firstNumber->setCountryCode(0);
+        $secondNumber->setCountryCode(0);
+        if ($firstNumber->equals($secondNumber))
+            return MatchType::NSN_MATCH;
+        if ($this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber))
+            return MatchType::SHORT_NSN_MATCH;
+        return MatchType::NO_MATCH;
+    }
+    
+    private function isNationalNumberSuffixOfTheOther(PhoneNumber $firstNumber, PhoneNumber $secondNumber) {
+        $firstNumberNationalNumber = trim((string)$firstNumber->getNationalNumber());
+        $secondNumberNationalNumber = trim((string)$secondNumber->getNationalNumber());
+        return $this->stringEndsWithString($firstNumberNationalNumber, $secondNumberNationalNumber) || 
+                $this->stringEndsWithString($secondNumberNationalNumber, $firstNumberNationalNumber);
+    }
+    
+    private function stringEndsWithString($hayStack, $needle) {
+        $revNeedle = strrev($needle);
+        $revHayStack = strrev($hayStack);
+        return strpos($revHayStack, $revNeedle) === 0;
+    }
 
 }
