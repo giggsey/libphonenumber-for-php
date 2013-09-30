@@ -2621,7 +2621,7 @@ class PhoneNumberUtil
         }
         return null;
     }
-    
+
     /**
      * Takes two phone numbers and compares them for equality.
      *
@@ -2635,15 +2635,14 @@ class PhoneNumberUtil
      * the numbers +1 345 657 1234 and 657 1234 are a SHORT_NSN_MATCH. The numbers
      * +1 345 657 1234 and 345 657 are a NO_MATCH.
      *
-     * @param {PhoneNumber|string} firstNumberIn first number to
-     *     compare. If it is a string it can contain formatting, and can have
-     *     country calling code specified with + at the start.
-     * @param {PhoneNumber|string} secondNumberIn second number to
-     *     compare. If it is a string it can contain formatting, and can have
-     *     country calling code specified with + at the start.
-     * @return {MatchType} NOT_A_NUMBER, NO_MATCH,
-     *     SHORT_NSN_MATCH, NSN_MATCH or EXACT_MATCH depending on the level of
-     *     equality of the two numbers, described in the method definition.
+     * @param $firstNumberIn PhoneNumber|string First number to compare. If it is a
+     * string it can contain formatting, and can have country calling code specified
+     * with + at the start.
+     * @param $secondNumberIn PhoneNumber|string Second number to compare. If it is a
+     * string it can contain formatting, and can have country calling code specified
+     * with + at the start.
+     * @throws \InvalidArgumentException
+     * @return int {MatchType} NOT_A_NUMBER, NO_MATCH,
      */
     public function isNumberMatch($firstNumberIn, $secondNumberIn)
     {
@@ -2664,7 +2663,7 @@ class PhoneNumberUtil
                 // NSN_MATCH.
                 if (!is_string($secondNumberIn)) {
                     if (!($secondNumberIn instanceof PhoneNumber))
-                        throw new InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
+                        throw new \InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
                     $secondNumberRegion = $this->getRegionCodeForCountryCode($secondNumberIn->getCountryCode() ? : 0);
                     if ($secondNumberRegion) {
                         try {
@@ -2689,7 +2688,7 @@ class PhoneNumberUtil
             }
         } else {
             if (!($firstNumberIn instanceof PhoneNumber))
-                throw new InvalidArgumentException('First argument not a string nor a PhoneNumber object');
+                throw new \InvalidArgumentException('First argument not a string nor a PhoneNumber object');
             $firstNumber = $firstNumberIn;
         }
         if (is_string($secondNumberIn)) {
@@ -2703,7 +2702,7 @@ class PhoneNumberUtil
             }
         } else {
             if (!($secondNumberIn instanceof PhoneNumber))
-                throw new InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
+                throw new \InvalidArgumentException('Second argument not a string nor a PhoneNumber object');
             $secondNumber = $secondNumberIn;
         }
         // First clear raw_input, country_code_source and
@@ -2764,3 +2763,4 @@ class PhoneNumberUtil
     }
 
 }
+/* EOF */
