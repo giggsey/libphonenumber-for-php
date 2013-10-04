@@ -1,0 +1,23 @@
+<?php
+return array (
+  99550 => 'MagtiCom',
+  99551 => 'MagtiCom',
+  99554 => 'MagtiCom',
+  99555 => 'Geocell',
+  99557 => 'Geocell',
+  99558 => 'Geocell',
+  99562 => 'Geocell',
+  99570 => 'Silknet',
+  99571 => 'Beeline',
+  99577 => 'Geocell',
+  99579 => 'Beeline',
+  99590 => 'MagtiCom',
+  99591 => 'MagtiCom',
+  99592 => 'Beeline',
+  99593 => 'Geocell',
+  99595 => 'MagtiCom',
+  99596 => 'MagtiCom',
+  99597 => 'Beeline',
+  99598 => 'MagtiCom',
+  99599 => 'MagtiCom',
+);
