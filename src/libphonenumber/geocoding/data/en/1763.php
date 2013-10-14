@@ -1,0 +1,23 @@
+<?php
+return array (
+  1763 => 'Minnesota',
+  1763241 => 'Elk River, MN',
+  1763261 => 'Becker, MN',
+  1763263 => 'Big Lake, MN',
+  1763271 => 'Monticello, MN',
+  1763295 => 'Monticello, MN',
+  1763389 => 'Princeton, MN',
+  1763441 => 'Elk River, MN',
+  1763444 => 'Isanti, MN',
+  1763525 => 'Minneapolis, MN',
+  1763552 => 'Cambridge, MN',
+  1763581 => 'Maple Grove, MN',
+  1763631 => 'Princeton, MN',
+  1763675 => 'Montrose, MN',
+  1763682 => 'Buffalo, MN',
+  1763684 => 'Buffalo, MN',
+  1763689 => 'Cambridge, MN',
+  1763856 => 'Zimmerman, MN',
+  1763898 => 'Maple Grove, MN',
+  1763972 => 'Delano, MN',
+);

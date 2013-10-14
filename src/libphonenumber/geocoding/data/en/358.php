@@ -1,0 +1,23 @@
+<?php
+return array (
+  35813 => 'North Karelia',
+  35814 => 'Central Finland',
+  35815 => 'Mikkeli',
+  35816 => 'Lapland',
+  35817 => 'Kuopio',
+  35818 => 'Åland Islands',
+  35819 => 'Nylandia',
+  3582 => 'Turku/Pori',
+  3583 => 'Tavastia',
+  35851 => 'Kymi',
+  35852 => 'Kymi',
+  35853 => 'Kymi',
+  35854 => 'Kymi',
+  35855 => 'Kymi',
+  35856 => 'Kymi',
+  35857 => 'Kymi',
+  35858 => 'Kymi',
+  3586 => 'Vaasa',
+  3588 => 'Oulu',
+  3589 => 'Helsinki',
+);
