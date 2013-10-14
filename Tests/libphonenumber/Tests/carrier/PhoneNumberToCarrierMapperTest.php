@@ -13,11 +13,9 @@ use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
 
-require __DIR__ . '/../../vendor/autoload.php';
-
 class PhoneNumberToCarrierMapperTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = "/../../Tests/carrier/data/";
+    const TEST_META_DATA_FILE_PREFIX = "/../../Tests/libphonenumber/Tests/carrier/data/";
     private static $AO_MOBILE1;
     private static $AO_MOBILE2;
     private static $AO_FIXED1;

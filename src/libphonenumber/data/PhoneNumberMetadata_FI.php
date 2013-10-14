@@ -185,8 +185,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            2[09]|
             [14]|
+            2[09]|
             50|
             7[135]
           ',

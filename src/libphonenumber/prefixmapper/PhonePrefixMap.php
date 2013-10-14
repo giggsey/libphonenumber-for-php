@@ -45,18 +45,22 @@ class PhonePrefixMap
      */
     public function lookup(PhoneNumber $number)
     {
+        $phonePrefix = $number->getCountryCode() . $this->phoneUtil->getNationalSignificantNumber($number);
+
+        return $this->lookupKey($phonePrefix);
+    }
+
+    public function lookupKey($key) {
         if (count($this->phonePrefixMapStorage) == 0) {
             return null;
         }
 
-        $phonePrefix = $number->getCountryCode() . $this->phoneUtil->getNationalSignificantNumber($number);
-
-        while (strlen($phonePrefix) > 0) {
-            if (array_key_exists($phonePrefix, $this->phonePrefixMapStorage)) {
-                return $this->phonePrefixMapStorage[$phonePrefix];
+        while (strlen($key) > 0) {
+            if (array_key_exists($key, $this->phonePrefixMapStorage)) {
+                return $this->phonePrefixMapStorage[$key];
             }
 
-            $phonePrefix = substr($phonePrefix, 0, -1);
+            $key = substr($key, 0, -1);
         }
 
         return null;

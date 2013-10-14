@@ -7,27 +7,37 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[18]\\d{2,5}',
+    'NationalNumberPattern' => '[158]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[18]\\d{2,5}',
+    'NationalNumberPattern' => '[158]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[18]\\d{2,5}',
+    'NationalNumberPattern' => '[158]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            00|
+            16\\d{3}|
+            23|
+            47\\d|
+            5[15]|
+            9[2-4]
+          )|
+          555
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
+    'ExampleNumber' => '100',
   ),
   'premiumRate' => 
   array (
@@ -91,7 +101,10 @@ return array (
               2|
               6(?:
                 00[06]|
-                11[17]
+                1(?:
+                  1[17]|
+                  23
+                )
               )|
               8\\d{2}
             )|
@@ -101,12 +114,13 @@ return array (
               7[014]
             )|
             5[015]|
-            9[0349]
+            9[02349]
           )|
+          555|
           8(?:
-            00|
+            008?|
             4[0-2]|
-            8\\d
+            88
           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
@@ -114,15 +128,27 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '150',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '150',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            18\\d{2}|
+            23|
+            51|
+            9[2-4]
+          )|
+          555|
+          8(?:
+            00|
+            88
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3,5}',
+    'ExampleNumber' => '123',
   ),
   'noInternationalDialling' => 
   array (

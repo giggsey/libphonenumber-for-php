@@ -16,8 +16,14 @@ return array (
     'NationalNumberPattern' => '
           2(?:
             00\\d|
-            16[0-7]|
-            22[2457]
+            1(?:
+              6[24-7]|
+              9\\d
+            )|
+            2(?:
+              00|
+              2[2457]
+            )
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -27,8 +33,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            5[4-8]|
-            60
+            5[46-8]|
+            62
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -118,6 +124,17 @@ return array (
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{5})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '2',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
   ),
   'intlNumberFormat' => 
   array (

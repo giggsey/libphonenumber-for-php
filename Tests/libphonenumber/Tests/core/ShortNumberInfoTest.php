@@ -7,7 +7,7 @@
  * @project libphonenumber-for-php
  */
 
-namespace libphonenumber\Tests;
+namespace libphonenumber\Tests\core;
 
 use libphonenumber\CountryCodeToRegionCodeMapForTesting;
 use libphonenumber\PhoneNumber;
@@ -15,9 +15,6 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
-
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/PhoneNumberUtilTest.php';
 
 class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
 {

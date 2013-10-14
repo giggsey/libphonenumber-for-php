@@ -1,40 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="PHPUnit" default="build">
- <property name="php" value="php"/>
+<project name="libphonenumber-for-php" default="test">
 
- <target name="build"
-   depends="prepare,lint,phpunit"/>
+    <property name="build.script" value="build/build.php"/>
+    <property name="resources.url" value="https://libphonenumber.googlecode.com/svn/trunk/resources/"/>
 
- <target name="clean" description="Cleanup build artifacts">
-  <delete dir="${basedir}/build/api"/>
-  <delete dir="${basedir}/build/coverage"/>
- </target>
+    <property name="svn.url" value="http://libphonenumber.googlecode.com/svn/trunk/"/>
+    <property name="svn.path" value="libphonenumber-data-dir"/>
 
- <target name="prepare" depends="clean"
-         description="Prepare for build">
-  <mkdir dir="${basedir}/build/api"/>
-  <mkdir dir="${basedir}/build/coverage"/>
- </target>
+    <target name="test" description="Run unit tests" depends="compile-test-data">
+        <exec passthru="true" command="vendor/bin/phpunit"/>
+    </target>
 
- <target name="lint">
-  <apply executable="${php}" failonerror="true">
-   <arg value="-l" />
+    <target name="compile-test-data" description="Build Test Data"
+            depends="build-test-metadata,build-geo-test-data,build-carrier-test-data,build-timezones-test-data">
+    </target>
 
-   <fileset dir="${basedir}">
-    <include name="**/*.php" />
-    <modified />
-   </fileset>
+    <target name="compile" description="Build all Data"
+            depends="compile-test-data,build-phone-metadata,build-short-metadata,build-alternate-metadata,build-carrier-data,build-timezones-data,build-geo-data">
+    </target>
 
-   <fileset dir="${basedir}/Tests">
-    <include name="**/*.php" />
-    <modified />
-   </fileset>
-  </apply>
- </target>
+    <target name="svn-checkout">
+        <exec executable="svn" passthru="true">
+            <arg value="checkout"/>
+            <arg value="${svn.url}"/>
+            <arg value="${svn.path}"/>
+        </exec>
+    </target>
 
- <target name="phpunit" description="Run unit tests with PHPUnit">
-  <exec executable="${php}" failonerror="true">
-   <arg path="${basedir}/phpunit.php" />
-  </exec>
- </target>
+    <target name="build-test-metadata" description="Build test Phone Metadata">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="BuildMetadataPHPFromXML"/>
+            <arg value="${resources.url}PhoneNumberMetadataForTesting.xml"/>
+            <arg value="Tests/libphonenumber/Tests/core/data/"/>
+            <arg value="PhoneNumberMetadataForTesting"/>
+            <arg value="CountryCodeToRegionCodeMapForTesting"/>
+            <arg value="src/libphonenumber/"/>
+            <arg value="false"/>
+        </exec>
+    </target>
+
+    <target name="build-geo-test-data" depends="svn-checkout">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GeneratePhonePrefixData"/>
+            <arg value="${svn.path}/resources/test/geocoding/"/>
+            <arg value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
+        </exec>
+    </target>
+
+    <target name="build-carrier-test-data" depends="svn-checkout">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GeneratePhonePrefixData"/>
+            <arg value="${svn.path}/resources/test/carrier/"/>
+            <arg value="Tests/libphonenumber/Tests/carrier/data/"/>
+        </exec>
+    </target>
+
+
+
+    <target name="build-phone-metadata">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="BuildMetadataPHPFromXML"/>
+            <arg value="${resources.url}PhoneNumberMetadata.xml"/>
+            <arg value="src/libphonenumber/data/"/>
+            <arg value="PhoneNumberMetadata"/>
+            <arg value="CountryCodeToRegionCodeMap"/>
+            <arg value="src/libphonenumber/"/>
+            <arg value="false"/>
+        </exec>
+    </target>
+
+    <target name="build-short-metadata">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="BuildMetadataPHPFromXML"/>
+            <arg value="${resources.url}ShortNumberMetadata.xml"/>
+            <arg value="src/libphonenumber/data/"/>
+            <arg value="ShortNumberMetadata"/>
+            <arg value="ShortNumbersRegionCodeSet"/>
+            <arg value="src/libphonenumber/"/>
+            <arg value="false"/>
+        </exec>
+    </target>
+
+    <target name="build-alternate-metadata">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="BuildMetadataPHPFromXML"/>
+            <arg value="${resources.url}PhoneNumberAlternateFormats.xml"/>
+            <arg value="src/libphonenumber/data/"/>
+            <arg value="PhoneNumberAlternateFormats"/>
+            <arg value="AlternateFormatsCountryCodeSet"/>
+            <arg value="src/libphonenumber/"/>
+            <arg value="false"/>
+        </exec>
+    </target>
+
+    <target name="build-carrier-data">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GeneratePhonePrefixData"/>
+            <arg value="${svn.path}/resources/carrier/"/>
+            <arg value="src/libphonenumber/carrier/data/"/>
+        </exec>
+    </target>
+
+    <target name="build-geo-data">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GeneratePhonePrefixData"/>
+            <arg value="${svn.path}/resources/geocoding/"/>
+            <arg value="src/libphonenumber/geocoding/data/"/>
+        </exec>
+    </target>
+
+    <target name="build-timezones-data">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GenerateTimeZonesMapData"/>
+            <arg value="${svn.path}/resources/timezones/map_data.txt"/>
+            <arg value="src/libphonenumber/timezone/data/"/>
+        </exec>
+    </target>
+
+    <target name="build-timezones-test-data">
+        <exec executable="${build.script}" passthru="true">
+            <arg value="GenerateTimeZonesMapData"/>
+            <arg value="${svn.path}/resources/test/timezones/map_data.txt"/>
+            <arg value="Tests/libphonenumber/Tests/timezone/data/"/>
+        </exec>
+    </target>
+
 </project>

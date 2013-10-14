@@ -1,29 +1,26 @@
 <?php
 /**
- * 
+ *
  *
  * @author joshuag
  * @created: 20/09/13 12:08
  * @project libphonenumber-geocoder
  */
 
-namespace libphonenumber\prefixmapper\Tests;
+namespace libphonenumber\Tests\prefixmapper;
 
-use libphonenumber\prefixmapper\PrefixFileReader;
 use libphonenumber\PhoneNumber;
+use libphonenumber\prefixmapper\PrefixFileReader;
 
-require __DIR__ . '/../../vendor/autoload.php';
 
-
-class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase {
+class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase
+{
     const TEST_META_DATA_FILE_PREFIX = "/data/";
-
     private static $KO_NUMBER;
     private static $US_NUMBER1;
     private static $US_NUMBER2;
     private static $US_NUMBER3;
     private static $SE_NUMBER;
-
     /**
      * @var PrefixFileReader
      */
@@ -56,26 +53,33 @@ class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase {
     {
         $this->assertEquals("Kalifornien", $this->reader->getDescriptionForNumber(self::$US_NUMBER1, "de", "", "CH"));
         $this->assertEquals("CA", $this->reader->getDescriptionForNumber(self::$US_NUMBER1, "en", "", "AU"));
-        $this->assertEquals(pack('H*', 'ec849c') . pack('H*', 'ec9ab8'), $this->reader->getDescriptionForNumber(self::$KO_NUMBER, "ko", "", ""));
+        $this->assertEquals(
+            pack('H*', 'ec849c') . pack('H*', 'ec9ab8'),
+            $this->reader->getDescriptionForNumber(self::$KO_NUMBER, "ko", "", "")
+        );
         $this->assertEquals("Seoul", $this->reader->getDescriptionForNumber(self::$KO_NUMBER, "en", "", ""));
     }
 
-    public function testGetDescriptionForNumberWithMissingMapping() {
+    public function testGetDescriptionForNumberWithMissingMapping()
+    {
         $this->assertEquals("", $this->reader->getDescriptionForNumber(self::$US_NUMBER3, "en", "", ""));
     }
 
-    public function testGetDescriptionUsingFallbackLanguage() {
+    public function testGetDescriptionUsingFallbackLanguage()
+    {
         // Mapping file exists but the number isn't present, causing it to fallback.
         $this->assertEquals("New York, NY", $this->reader->getDescriptionForNumber(self::$US_NUMBER2, "de", "", "CH"));
         // No mapping file exists, causing it to fallback.
         $this->assertEquals("New York, NY", $this->reader->getDescriptionForNumber(self::$US_NUMBER2, "sv", "", ""));
     }
 
-    public function testGetDescriptionForNonFallbackLanguage() {
+    public function testGetDescriptionForNonFallbackLanguage()
+    {
         $this->assertEquals("", $this->reader->getDescriptionForNumber(self::$US_NUMBER2, "ko", "", ""));
     }
 
-    public function testGetDescriptionForNumberWithoutMappingFile() {
+    public function testGetDescriptionForNumberWithoutMappingFile()
+    {
         $this->assertEquals("", $this->reader->getDescriptionForNumber(self::$SE_NUMBER, "sv", "", ""));
         $this->assertEquals("", $this->reader->getDescriptionForNumber(self::$SE_NUMBER, "en", "", ""));
     }

@@ -7,14 +7,12 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace libphonenumber\Tests;
+namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 
 class UKNumbersTest extends \PHPUnit_Framework_TestCase
