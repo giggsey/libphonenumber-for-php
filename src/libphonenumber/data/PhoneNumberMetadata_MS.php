@@ -127,9 +127,9 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => false,
   'leadingDigits' => '664',
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

@@ -143,7 +143,7 @@ return array (
     ),
   ),
   'mainCountryForCode' => true,
-  'leadingZeroPossible' => NULL,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
 /* EOF */

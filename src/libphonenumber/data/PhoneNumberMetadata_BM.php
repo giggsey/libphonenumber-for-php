@@ -148,9 +148,9 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => false,
   'leadingDigits' => '441',
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

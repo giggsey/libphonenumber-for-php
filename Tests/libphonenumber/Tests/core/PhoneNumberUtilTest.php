@@ -1447,6 +1447,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isAlphaNumber("+800 1234-1234"));
     }
 
+    public function testIsMobileNumberPortableRegion()
+    {
+        $this->assertTrue($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::US));
+        $this->assertTrue($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::GB));
+        $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::AE));
+        $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::BS));
+    }
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.

@@ -2762,5 +2762,22 @@ class PhoneNumberUtil
         return strpos($revHayStack, $revNeedle) === 0;
     }
 
+    /**
+     * Returns true if the supplied region supports mobile number portability. Returns false for
+     * invalid, unknown or regions that don't support mobile number portability.
+     *
+     * @param $regionCode string the region for which we want to know whether it supports mobile number
+     *                    portability or not.
+     * @return bool
+     */
+    public function isMobileNumberPortableRegion($regionCode) {
+        $metadata = $this->getMetadataForRegion($regionCode);
+        if ($metadata === null) {
+            return false;
+        }
+
+        return $metadata->isMobileNumberPortableRegion();
+    }
+
 }
 /* EOF */
