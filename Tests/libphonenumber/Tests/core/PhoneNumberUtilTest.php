@@ -2,13 +2,18 @@
 
 namespace libphonenumber\Tests\core;
 
+use libphonenumber\CountryCodeSource;
 use libphonenumber\CountryCodeToRegionCodeMapForTesting;
 use libphonenumber\NumberFormat;
+use libphonenumber\NumberParseException;
+use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumber;
+use libphonenumber\PhoneNumberDesc;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
+use libphonenumber\ValidationResult;
 
 
 class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
@@ -42,6 +47,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     private static $mxNumber2 = null;
     private static $deNumber = null;
     private static $jpStarNumber = null;
+    private static $internationalTollFreeTooLong;
     /**
      * @var PhoneNumberUtil
      */
@@ -60,6 +66,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         self::$bsMobile->setCountryCode(1)->setNationalNumber(2423591234);
         self::$internationalTollFree = new PhoneNumber();
         self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
+        self::$internationalTollFreeTooLong = new PhoneNumber();
+        self::$internationalTollFreeTooLong->setCountryCode(800)->setNationalNumber(123456789);
         self::$sgNumber = new PhoneNumber();
         self::$sgNumber->setCountryCode(65)->setNationalNumber(65218000);
         // A too-long and hence invalid US number.
@@ -1455,22 +1463,374 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::BS));
     }
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
+    public function testIsPossibleNumber() {
+        $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$usNumber));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$usLocalNumber));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$gbNumber));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$internationalTollFree));
+
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("+1 650 253 0000", RegionCode::US));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("+1 650 GOO OGLE", RegionCode::US));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("(650) 253-0000", RegionCode::US));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("253-0000", RegionCode::US));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("+1 650 253 0000", RegionCode::GB));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("+44 20 7031 3000", RegionCode::GB));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("(020) 7031 3000", RegionCode::GB));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("7031 3000", RegionCode::GB));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("3331 6005", RegionCode::NZ));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("+800 1234 5678", RegionCode::UN001));
+    }
+
+    public function testIsPossibleNumberWithReason() {
+        // National numbers for country calling code +1 that are within 7 to 10 digits are possible.
+        $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason(self::$usNumber));
+
+        $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason(self::$usLocalNumber));
+
+        $this->assertEquals(ValidationResult::TOO_LONG, $this->phoneUtil->isPossibleNumberWithReason(self::$usLongNumber));
+
+        $number = new PhoneNumber();
+        $number->setCountryCode(0)->setNationalNumber(2530000);
+        $this->assertEquals(ValidationResult::INVALID_COUNTRY_CODE, $this->phoneUtil->isPossibleNumberWithReason($number));
+
+        $number->clear();
+        $number->setCountryCode(65)->setNationalNumber(1234567890);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason($number));
+
+        $this->assertEquals(ValidationResult::TOO_LONG, $this->phoneUtil->isPossibleNumberWithReason(self::$internationalTollFreeTooLong));
+
+        // Try with number that we don't have metadata for.
+        $adNumber = new PhoneNumber();
+        $adNumber->setCountryCode(376)->setNationalNumber(12345);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
+        $adNumber->setCountryCode(376)->setNationalNumber(1);
+        $this->assertEquals(ValidationResult::TOO_SHORT, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
+        $adNumber->setCountryCode(376)->setNationalNumber(12345678901234567);
+        $this->assertEquals(ValidationResult::TOO_LONG, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
+    }
+
+    public function testIsNotPossibleNumber() {
+        $this->assertFalse($this->phoneUtil->isPossibleNumber(self::$usLongNumber));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber(self::$internationalTollFreeTooLong));
+
+        $number = new PhoneNumber();
+        $number->setCountryCode(1)->setNationalNumber(253000);
+        $this->assertFalse($this->phoneUtil->isPossibleNumber($number));
+
+        $number->clear();
+        $number->setCountryCode(44)->setNationalNumber(300);
+        $this->assertFalse($this->phoneUtil->isPossibleNumber($number));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("+1 650 253 00000", RegionCode::US));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("(650) 253-00000", RegionCode::US));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("I want a Pizza", RegionCode::US));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("253-000", RegionCode::US));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("1 3000", RegionCode::GB));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("+44 300", RegionCode::GB));
+        $this->assertFalse($this->phoneUtil->isPossibleNumber("+800 1234 5678 9", RegionCode::UN001));
 
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
+    public function testTruncateTooLongNumber() {
+        // GB number 080 1234 5678, but entered with 4 extra digits at the end.
+        $tooLongNumber = new PhoneNumber();
+        $tooLongNumber->setCountryCode(44)->setNationalNumber(80123456780123);
+        $validNumber = new PhoneNumber();
+        $validNumber->setCountryCode(44)->setNationalNumber(8012345678);
+        $this->assertTrue($this->phoneUtil->truncateTooLongNumber($tooLongNumber));
+        $this->assertEquals($validNumber, $tooLongNumber);
 
+        // IT number 022 3456 7890, but entered with 3 extra digits at the end.
+        $tooLongNumber->clear();
+        $tooLongNumber->setCountryCode(39)->setNationalNumber(2234567890123)->setItalianLeadingZero(true);
+        $validNumber->clear();
+        $validNumber->setCountryCode(39)->setNationalNumber(2234567890)->setItalianLeadingZero(true);
+        $this->assertTrue($this->phoneUtil->truncateTooLongNumber($tooLongNumber));
+        $this->assertEquals($validNumber, $tooLongNumber);
+
+        // US number 650-253-0000, but entered with one additional digit at the end.
+        $tooLongNumber->clear();
+        $tooLongNumber->mergeFrom(self::$usLongNumber);
+        $this->assertTrue($this->phoneUtil->truncateTooLongNumber($tooLongNumber));
+        $this->assertEquals(self::$usNumber, $tooLongNumber);
+
+        $tooLongNumber->clear();
+        $tooLongNumber->mergeFrom(self::$internationalTollFreeTooLong);
+        $this->assertTrue($this->phoneUtil->truncateTooLongNumber($tooLongNumber));
+        $this->assertEquals(self::$internationalTollFreeTooLong, $tooLongNumber);
+
+        // Tests what happens when a valid number is passed in.
+        $validNumberCopy = new PhoneNumber();
+        $validNumberCopy->mergeFrom($validNumber);
+        $this->assertTrue($this->phoneUtil->truncateTooLongNumber($validNumber));
+
+        // Tests the number is not modified.
+        $this->assertEquals($validNumberCopy, $validNumber);
+
+        // Tests what happens when a number with invalid prefix is passed in.
+        $numberWithInvalidPrefix = new PhoneNumber();
+        // The test metadata says US numbers cannot have prefix 240.
+        $numberWithInvalidPrefix->setCountryCode(1)->setNationalNumber(2401234567);
+        $invalidNumberCopy = new PhoneNumber();
+        $invalidNumberCopy->mergeFrom($numberWithInvalidPrefix);
+        $this->assertFalse($this->phoneUtil->truncateTooLongNumber($numberWithInvalidPrefix));
+        // Tests the number is not modified.
+        $this->assertEquals($invalidNumberCopy, $numberWithInvalidPrefix);
+
+        // Tests what happens when a too short number is passed in.
+        $tooShortNumber = new PhoneNumber();
+        $tooShortNumber->setCountryCode(1)->setNationalNumber(1234);
+        $tooShortNumberCopy = new PhoneNumber();
+        $tooShortNumberCopy->mergeFrom($tooShortNumber);
+        $this->assertFalse($this->phoneUtil->truncateTooLongNumber($tooShortNumber));
+        // Tests the number is not modified.
+        $this->assertEquals($tooShortNumberCopy, $tooLongNumber);
+      }
+
+    public function testIsViablePhoneNumber() {
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1"));
+        // Only one or two digits before strange non-possible punctuation.
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1+1+1"));
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("80+0"));
+        // Two digits is viable.
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("00"));
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("111"));
+        // Alpha numbers.
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("0800-4-pizza"));
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("0800-4-PIZZA"));
+
+        // We need at least three digits before any alpha characters.
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("08-PIZZA"));
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("8-PIZZA"));
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("12. March"));
     }
 
+    public function testIsViablePhoneNumberNonAscii() {
+        // Only one or two digits before possible punctuation followed by more digits.
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("1" . pack('H*', '3000') . "34"));
+        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1" . pack('H*', '3000') . "3+4"));
+        // Unicode variants of possible starting character and other allowed punctuation/digits.
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber(pack('H*', 'ff08') . "1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
+        // Testing a leading + is okay.
+        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("+1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
+    }
+
+
+    public function testExtractPossibleNumber()
+    {
+        // Removes preceding funky punctuation and letters but leaves the rest untouched.
+        $this->assertEquals("0800-345-600", PhoneNumberUtil::extractPossibleNumber("Tel:0800-345-600"));
+        $this->assertEquals("0800 FOR PIZZA", PhoneNumberUtil::extractPossibleNumber("Tel:0800 FOR PIZZA"));
+        // Should not remove plus sign
+        $this->assertEquals("+800-345-600", PhoneNumberUtil::extractPossibleNumber("Tel:+800-345-600"));
+        // Should recognise wide digits as possible start values.
+        $this->assertEquals(pack("H*", 'ff10').pack("H*", 'ff12').pack("H*", 'ff13'), PhoneNumberUtil::extractPossibleNumber(pack("H*", 'ff10').pack("H*", 'ff12').pack("H*", 'ff13')));
+        // Dashes are not possible start values and should be removed.
+        $this->assertEquals(pack("H*", 'ff11').pack("H*", 'ff12').pack("H*", 'ff13'), PhoneNumberUtil::extractPossibleNumber("Num-" . pack("H*", 'ff11').pack("H*", 'ff12').pack("H*", 'ff13')));
+        // If not possible number present, return empty string.
+        $this->assertEquals("", PhoneNumberUtil::extractPossibleNumber("Num-...."));
+        // Leading brackets are stripped - these are not used when parsing.
+        $this->assertEquals("650) 253-0000", PhoneNumberUtil::extractPossibleNumber("(650) 253-0000"));
+
+        // Trailing non-alpha-numeric characters should be removed.
+        $this->assertEquals("650) 253-0000", PhoneNumberUtil::extractPossibleNumber("(650) 253-0000..- .."));
+        $this->assertEquals("650) 253-0000", PhoneNumberUtil::extractPossibleNumber("(650) 253-0000."));
+        // This case has a trailing RTL char.
+        $this->assertEquals("650) 253-0000", PhoneNumberUtil::extractPossibleNumber("(650) 253-0000" . pack("H*", '200F')));
+    }
+
+    public function testMaybeStripNationalPrefix() {
+        $metadata = new PhoneMetadata();
+        $metadata->setNationalPrefixForParsing("34");
+        $phoneNumberDesc = new PhoneNumberDesc();
+        $phoneNumberDesc->setNationalNumberPattern("\\d{4,8}");
+        $metadata->setGeneralDesc($phoneNumberDesc);
+
+        $numberToStrip = "34356778";
+        $strippedNumber = "356778";
+
+        $carrierCode = null;
+
+        $this->assertTrue($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals($strippedNumber, $numberToStrip, "Should have had national prefix stripped.");
+        // Retry stripping - now the number should not start with the national prefix, so no more
+        // stripping should occur.
+        $carrierCode = null;
+        $this->assertFalse($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals($strippedNumber, $numberToStrip, "Should have had no change - no national prefix present.");
+
+        // Some countries have no national prefix. Repeat test with none specified.
+        $metadata->setNationalPrefixForParsing("");
+        $carrierCode = null;
+        $this->assertFalse($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals($strippedNumber, $numberToStrip, "Should not strip anything with empty national prefix.");
+
+        // If the resultant number doesn't match the national rule, it shouldn't be stripped.
+        $metadata->setNationalPrefixForParsing("3");
+        $numberToStrip = "3123";
+        $strippedNumber = "3123";
+        $carrierCode = null;
+        $this->assertFalse($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals($strippedNumber, $numberToStrip, "Should have had no change - after stripping, it wouldn't have matched the national rule.");
+
+        // Test extracting carrier selection code.
+        $metadata->setNationalPrefixForParsing("0(81)?");
+        $numberToStrip = "08122123456";
+        $strippedNumber = "22123456";
+        $carrierCode = "";
+        $this->assertTrue($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals("81", $carrierCode);
+        $this->assertEquals($strippedNumber, $numberToStrip, "Should have had national prefix and carrier code stripped.");
+
+        // If there was a transform rule, check it was applied.
+        $metadata->setNationalPrefixTransformRule("5$15");
+        // Note that a capturing group is present here.
+        $metadata->setNationalPrefixForParsing("0(\\d{2})");
+        $numberToStrip = "031123";
+        $transformedNumber = "5315123";
+        $carrierCode = null;
+        $this->assertTrue($this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode));
+        $this->assertEquals($transformedNumber, $numberToStrip, "Should transform the 031 to a 5315.");
+    }
+
+    public function testMaybeStripInternationalPrefix()
+    {
+        $internationalPrefix = "00[39]";
+        $numberToStrip = "0034567700-3898003";
+        // Note the dash is removed as part of the normalization.
+        $strippedNumber = "45677003898003";
+        $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_IDD, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+        $this->assertEquals($strippedNumber, $numberToStrip, "The number supplied was not stripped of its international prefix.");
+
+        // Now the number no longer starts with an IDD prefix, so it should now report
+        // FROM_DEFAULT_COUNTRY.
+        $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+
+        $numberToStrip = "00945677003898003";
+        $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_IDD, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+        $this->assertEquals($strippedNumber, $numberToStrip, "The number supplied was not stripped of its international prefix.");
+
+        // Test it works when the international prefix is broken up by spaces.
+        $numberToStrip = "00 9 45677003898003";
+        $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_IDD, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+        $this->assertEquals($strippedNumber, $numberToStrip, "The number supplied was not stripped of its international prefix.");
+
+        // Now the number no longer starts with an IDD prefix, so it should now report
+        // FROM_DEFAULT_COUNTRY.
+        $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+
+        // Test the + symbol is also recognised and stripped.
+        $numberToStrip = "+45677003898003";
+        $strippedNumber = "45677003898003";
+        $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+        $this->assertEquals($strippedNumber, $numberToStrip, "The number supplied was not stripped of the plus symbol.");
+
+        // If the number afterwards is a zero, we should not strip this - no country calling code begins
+        // with 0.
+        $numberToStrip = "0090112-3123";
+        $strippedNumber = "00901123123";
+        $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+        $this->assertEquals($strippedNumber, $numberToStrip, "The number supplied had a 0 after the match so shouldn't be stripped.");
+
+        // Here the 0 is separated by a space from the IDD.
+        $numberToStrip = "009 0-112-3123";
+        $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $this->phoneUtil->maybeStripInternationalPrefixAndNormalize($numberToStrip, $internationalPrefix));
+    }
+
+    public function testMaybeExtractCountryCode()
+    {
+        $number = new PhoneNumber();
+        $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::US);
+        // Note that for the US, the IDD is 011.
+        try {
+            $phoneNumber = "011112-3456789";
+            $strippedNumber = "123456789";
+            $countryCallingCode = 1;
+            $numberToFill = "";
+            $this->assertEquals($countryCallingCode, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Did not extract country calling code " . $countryCallingCode . " correctly.");
+            $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_IDD, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+            // Should strip and normalize national significant number.
+            $this->assertEquals($strippedNumber, $numberToFill, "Did not strip off the country calling code correctly.");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "+6423456789";
+            $countryCallingCode = 64;
+            $numberToFill = "";
+            $this->assertEquals($countryCallingCode, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Did not extract country calling code ". $countryCallingCode . " correctly.");
+            $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "+80012345678";
+            $countryCallingCode = 800;
+            $numberToFill = "";
+            $this->assertEquals($countryCallingCode, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Did not extract country calling code ". $countryCallingCode . " correctly.");
+            $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "2345-6789";
+            $numberToFill = "";
+            $this->assertEquals(0, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Should not have extracted a country calling code - no international prefix present.");
+            $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "0119991123456789";
+            $numberToFill = "";
+            $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number);
+            $this->fail("Should have thrown an exception, no valid country calling code present.");
+        } catch (NumberParseException $e) {
+            // Expected.
+            $this->assertEquals(NumberParseException::INVALID_COUNTRY_CODE, $e->getErrorType(), "Wrong error type stored in exception.");
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "(1 610) 619 4466";
+            $countryCallingCode = 1;
+            $numberToFill = "";
+            $this->assertEquals($countryCallingCode, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Should have extracted the country calling code of the region passed in");
+            $this->assertEquals(CountryCodeSource::FROM_NUMBER_WITHOUT_PLUS_SIGN, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "(1 610) 619 4466";
+            $countryCallingCode = 1;
+            $numberToFill = "";
+            $this->assertEquals($countryCallingCode, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number), "Should have extracted the country calling code of the region passed in");
+            $this->assertFalse($number->hasCountryCodeSource(), "Should not contain CountryCodeSource");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "(1 610) 619 446";
+            $numberToFill = "";
+            $this->assertEquals(0, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number),
+                "Should not have extracted a country calling code - invalid number after extraction of uncertain country calling code.");
+            $this->assertFalse($number->hasCountryCodeSource(), "Should not contain CountryCodeSource");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+        $number->clear();
+        try {
+            $phoneNumber = "(1 610) 619";
+            $numberToFill = "";
+            $this->assertEquals(0, $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number),
+                "Should not have extracted a country calling code - too short number both before and after extraction of uncertain country calling code.");
+            $this->assertEquals(CountryCodeSource::FROM_DEFAULT_COUNTRY, $number->getCountryCodeSource(), "Did not figure out CountryCodeSource correctly");
+        } catch (NumberParseException $e) {
+            $this->fail("Should not have thrown an exception: " . $e->getMessage());
+        }
+    }
 }

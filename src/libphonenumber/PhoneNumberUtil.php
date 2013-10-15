@@ -1434,7 +1434,7 @@ class PhoneNumberUtil
      * @return int the country calling code extracted or 0 if none could be extracted
      * @throws NumberParseException
      */
-    private function maybeExtractCountryCode(
+    public function maybeExtractCountryCode(
         $number,
         PhoneMetadata $defaultRegionMetadata = null,
         &$nationalNumber,
@@ -1525,10 +1525,8 @@ class PhoneNumberUtil
      *     removed from the number, otherwise CountryCodeSource.FROM_DEFAULT_COUNTRY if the number did
      *     not seem to be in international format.
      */
-    private function maybeStripInternationalPrefixAndNormalize(
-        &$number,
-        $possibleIddPrefix
-    ) {
+    public function maybeStripInternationalPrefixAndNormalize(&$number, $possibleIddPrefix)
+    {
         if (strlen($number) == 0) {
             return CountryCodeSource::FROM_DEFAULT_COUNTRY;
         }
@@ -1671,7 +1669,7 @@ class PhoneNumberUtil
      * @param string $carrierCode  a place to insert the carrier code if one is extracted
      * @return bool true if a national prefix or carrier code (or both) could be extracted.
      */
-    private function maybeStripNationalPrefixAndCarrierCode(&$number, PhoneMetadata $metadata, &$carrierCode)
+    public function maybeStripNationalPrefixAndCarrierCode(&$number, PhoneMetadata $metadata, &$carrierCode)
     {
         $numberLength = strlen($number);
         $possibleNationalPrefix = $metadata->getNationalPrefixForParsing();
@@ -2784,14 +2782,37 @@ class PhoneNumberUtil
     }
 
     /**
-     * Convenience wrapper around {@link #isPossibleNumberWithReason}. Instead of returning the reason
-     * for failure, this method returns a boolean value.
-     * @param $number PhoneNumber the number that needs to be checked
+     * Check whether a phone number is a possible number given a number in the form of a string, and
+     * the region where the number could be dialed from. It provides a more lenient check than
+     * {@link #isValidNumber}. See {@link #isPossibleNumber(PhoneNumber)} for details.
+     *
+     * <p>This method first parses the number, then invokes {@link #isPossibleNumber(PhoneNumber)}
+     * with the resultant PhoneNumber object.
+     *
+     * @param $number PhoneNumber|String the number that needs to be checked, in the form of a string
+     * @param $regionDialingFrom String the region that we are expecting the number to be dialed from.
+     *     Note this is different from the region where the number belongs.  For example, the number
+     *     +1 650 253 0000 is a number that belongs to US. When written in this form, it can be
+     *     dialed from any region. When it is written as 00 1 650 253 0000, it can be dialed from any
+     *     region which uses an international dialling prefix of 00. When it is written as
+     *     650 253 0000, it can only be dialed from within the US, and when written as 253 0000, it
+     *     can only be dialed from within a smaller area in the US (Mountain View, CA, to be more
+     *     specific).
      * @return boolean true if the number is possible
      */
-    public function isPossibleNumber(PhoneNumber $number)
+    public function isPossibleNumber($number, $regionDialingFrom = null)
     {
-        return $this->isPossibleNumberWithReason($number) === ValidationResult::IS_POSSIBLE;
+        if ($regionDialingFrom !== null && is_string($number)) {
+            try {
+                return $this->isPossibleNumberWithReason(
+                    $this->parse($number, $regionDialingFrom)
+                ) === ValidationResult::IS_POSSIBLE;
+            } catch (NumberParseException $e) {
+                return false;
+            }
+        } else {
+            return $this->isPossibleNumberWithReason($number) === ValidationResult::IS_POSSIBLE;
+        }
     }
 
 
@@ -2845,8 +2866,32 @@ class PhoneNumberUtil
         }
 
         $possibleNumberPattern = $generalNumDesc->getPossibleNumberPattern();
-        return $this->testNumberLengthAgainstPattern($possibleNumberPattern, $number);
+        return $this->testNumberLengthAgainstPattern($possibleNumberPattern, $nationalNumber);
+    }
 
+    /**
+     * Attempts to extract a valid number from a phone number that is too long to be valid, and resets
+     * the PhoneNumber object passed in to that valid version. If no valid number could be extracted,
+     * the PhoneNumber object passed in will not be modified.
+     * @param $number Phonenumber a PhoneNumber object which contains a number that is too long to be valid.
+     * @return boolean true if a valid phone number can be successfully extracted.
+     */
+    public function truncateTooLongNumber(PhoneNumber $number) {
+        if ($this->isValidNumber($number)) {
+            return true;
+        }
+        $numberCopy = new PhoneNumber();
+        $numberCopy->mergeFrom($number);
+        $nationalNumber = $number->getNationalNumber();
+        do {
+            $nationalNumber /= 10;
+            $numberCopy->setNationalNumber($nationalNumber);
+            if ($this->isPossibleNumberWithReason($numberCopy) == ValidationResult::TOO_SHORT || $nationalNumber == 0) {
+                return false;
+            }
+        } while (!$this->isValidNumber($numberCopy));
+        $number->setNationalNumber($nationalNumber);
+        return true;
     }
 }
 /* EOF */
