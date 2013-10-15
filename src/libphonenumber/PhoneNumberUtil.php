@@ -2791,7 +2791,7 @@ class PhoneNumberUtil
      */
     public function isPossibleNumber(PhoneNumber $number)
     {
-        return $this->isPossibleNumberWithRegion($number) === ValidationResult::IS_POSSIBLE;
+        return $this->isPossibleNumberWithReason($number) === ValidationResult::IS_POSSIBLE;
     }
 
 
