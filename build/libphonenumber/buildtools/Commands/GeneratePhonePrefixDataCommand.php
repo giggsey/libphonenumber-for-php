@@ -32,8 +32,9 @@ class GeneratePhonePrefixDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $progress = $this->getHelperSet()->get('progress');
         $generatePhonePrefixData = new GeneratePhonePrefixData();
-        $generatePhonePrefixData->start($input->getArgument('InputDirectory'), $input->getArgument('OutputDirectory'));
+        $generatePhonePrefixData->start($input->getArgument('InputDirectory'), $input->getArgument('OutputDirectory'), $output, $progress);
     }
 }
 

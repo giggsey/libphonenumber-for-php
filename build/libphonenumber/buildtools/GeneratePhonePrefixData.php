@@ -2,6 +2,9 @@
 
 namespace libphonenumber\buildtools;
 
+use Symfony\Component\Console\Helper\ProgressHelper;
+use Symfony\Component\Console\Output\OutputInterface;
+
 class GeneratePhonePrefixData
 {
     const NANPA_COUNTRY_CODE = 1;
@@ -10,34 +13,39 @@ class GeneratePhonePrefixData
     private $filesToIgnore = array('.', '..', '.svn', '.git');
     private $outputDir;
     private $englishMaps = array();
+    /**
+     * @var OutputInterface
+     */
+    private static $consoleOutput;
 
-    public function start($inputDir, $outputDir)
+    public function start($inputDir, $outputDir, OutputInterface $consoleOutput, ProgressHelper $progress)
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
+        self::$consoleOutput = $consoleOutput;
 
         $inputOutputMappings = $this->createInputOutputMappings();
         $availableDataFiles = array();
 
+        $progress->start($consoleOutput, count($inputOutputMappings));
         foreach ($inputOutputMappings as $textFile => $outputFiles) {
-            self::output("Processing {$textFile}");
             $mappings = $this->readMappingsFromFile($textFile);
 
             $language = $this->getLanguageFromTextFile($textFile);
 
             $this->removeEmptyEnglishMappings($mappings, $language);
             $this->makeDataFallbackToEnglish($textFile, $mappings);
-            self::output("Splitting up the mappings");
             $mappingForFiles = $this->splitMap($mappings, $outputFiles);
 
             foreach ($mappingForFiles as $outputFile => $value) {
                 $this->writeMappingFile($language, $outputFile, $value);
                 $this->addConfigurationMapping($availableDataFiles, $language, $outputFile);
             }
+            $progress->advance();
         }
 
         $this->writeConfigMap($availableDataFiles);
-
+        $progress->finish();
     }
 
     private function createInputOutputMappings()
@@ -178,11 +186,6 @@ class GeneratePhonePrefixData
         return str_replace(self::DATA_FILE_EXTENSION, '', $countryCodeFileName);
     }
 
-    public static function output($msg)
-    {
-        echo date('r') . ' - ' . $msg . PHP_EOL;
-    }
-
     private function readMappingsFromFile($inputFile)
     {
         $areaCodeMap = array();
@@ -291,7 +294,6 @@ class GeneratePhonePrefixData
         $mappingForFiles = array();
 
         foreach ($mappings as $prefix => $location) {
-            self::output("Attempting to split up {$prefix}: {$location}");
             $targetFile = null;
 
             foreach ($outputFiles as $k => $outputFile) {
