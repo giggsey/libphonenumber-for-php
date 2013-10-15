@@ -27,7 +27,7 @@
     },
     "replace": {
         "giggsey/libphonenumber-geocoder": "*"
-    }
+    },
     "require": {
         "ext-intl": "*"
     },
