@@ -2783,5 +2783,70 @@ class PhoneNumberUtil
         return $metadata->isMobileNumberPortableRegion();
     }
 
+    /**
+     * Convenience wrapper around {@link #isPossibleNumberWithReason}. Instead of returning the reason
+     * for failure, this method returns a boolean value.
+     * @param $number PhoneNumber the number that needs to be checked
+     * @return boolean true if the number is possible
+     */
+    public function isPossibleNumber(PhoneNumber $number)
+    {
+        return $this->isPossibleNumberWithRegion($number) === ValidationResult::IS_POSSIBLE;
+    }
+
+
+    /**
+     * Check whether a phone number is a possible number. It provides a more lenient check than
+     * {@link #isValidNumber} in the following sense:
+     *<ol>
+     * <li> It only checks the length of phone numbers. In particular, it doesn't check starting
+     *      digits of the number.
+     * <li> It doesn't attempt to figure out the type of the number, but uses general rules which
+     *      applies to all types of phone numbers in a region. Therefore, it is much faster than
+     *      isValidNumber.
+     * <li> For fixed line numbers, many regions have the concept of area code, which together with
+     *      subscriber number constitute the national significant number. It is sometimes okay to dial
+     *      the subscriber number only when dialing in the same area. This function will return
+     *      true if the subscriber-number-only version is passed in. On the other hand, because
+     *      isValidNumber validates using information on both starting digits (for fixed line
+     *      numbers, that would most likely be area codes) and length (obviously includes the
+     *      length of area codes for fixed line numbers), it will return false for the
+     *      subscriber-number-only version.
+     * </ol>
+     * @param $number PhoneNumber the number that needs to be checked
+     * @return int a ValidationResult object which indicates whether the number is possible
+     */
+    public function isPossibleNumberWithReason(PhoneNumber $number)
+    {
+        $nationalNumber = $this->getNationalSignificantNumber($number);
+        $countryCode = $number->getCountryCode();
+        // Note: For Russian Fed and NANPA numbers, we just use the rules from the default region (US or
+        // Russia) since the getRegionCodeForNumber will not work if the number is possible but not
+        // valid. This would need to be revisited if the possible number pattern ever differed between
+        // various regions within those plans.
+        if (!$this->hasValidCountryCallingCode($countryCode)) {
+            return ValidationResult::INVALID_COUNTRY_CODE;
+        }
+
+        $regionCode = $this->getRegionCodeForCountryCode($countryCode);
+        // Metadata cannot be null because the country calling code is valid.
+        $metadata = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
+        $generalNumDesc = $metadata->getGeneralDesc();
+        // Handling case of numbers with no metadata.
+        if (!$generalNumDesc->hasNationalNumberPattern()) {
+            $numberLength = strlen($nationalNumber);
+            if ($numberLength < self::MIN_LENGTH_FOR_NSN) {
+                return ValidationResult::TOO_SHORT;
+            } elseif ($numberLength > self::MAX_LENGTH_FOR_NSN) {
+                return ValidationResult::TOO_LONG;
+            } else {
+                return ValidationResult::IS_POSSIBLE;
+            }
+        }
+
+        $possibleNumberPattern = $generalNumDesc->getPossibleNumberPattern();
+        return $this->testNumberLengthAgainstPattern($possibleNumberPattern, $number);
+
+    }
 }
 /* EOF */
