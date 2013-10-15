@@ -2873,7 +2873,7 @@ class PhoneNumberUtil
      * Attempts to extract a valid number from a phone number that is too long to be valid, and resets
      * the PhoneNumber object passed in to that valid version. If no valid number could be extracted,
      * the PhoneNumber object passed in will not be modified.
-     * @param $number Phonenumber a PhoneNumber object which contains a number that is too long to be valid.
+     * @param $number PhoneNumber a PhoneNumber object which contains a number that is too long to be valid.
      * @return boolean true if a valid phone number can be successfully extracted.
      */
     public function truncateTooLongNumber(PhoneNumber $number) {
