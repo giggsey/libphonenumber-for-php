@@ -1556,7 +1556,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $tooLongNumber->clear();
         $tooLongNumber->mergeFrom(self::$internationalTollFreeTooLong);
         $this->assertTrue($this->phoneUtil->truncateTooLongNumber($tooLongNumber));
-        $this->assertEquals(self::$internationalTollFreeTooLong, $tooLongNumber);
+        $this->assertEquals(self::$internationalTollFree, $tooLongNumber);
 
         // Tests what happens when a valid number is passed in.
         $validNumberCopy = new PhoneNumber();
@@ -1583,35 +1583,35 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $tooShortNumberCopy->mergeFrom($tooShortNumber);
         $this->assertFalse($this->phoneUtil->truncateTooLongNumber($tooShortNumber));
         // Tests the number is not modified.
-        $this->assertEquals($tooShortNumberCopy, $tooLongNumber);
+        $this->assertEquals($tooShortNumberCopy, $tooShortNumber);
       }
 
     public function testIsViablePhoneNumber() {
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1"));
         // Only one or two digits before strange non-possible punctuation.
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1+1+1"));
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("80+0"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1+1+1"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("80+0"));
         // Two digits is viable.
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("00"));
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("111"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("00"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("111"));
         // Alpha numbers.
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("0800-4-pizza"));
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("0800-4-PIZZA"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("0800-4-pizza"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("0800-4-PIZZA"));
 
         // We need at least three digits before any alpha characters.
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("08-PIZZA"));
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("8-PIZZA"));
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("12. March"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("08-PIZZA"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("8-PIZZA"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("12. March"));
     }
 
     public function testIsViablePhoneNumberNonAscii() {
         // Only one or two digits before possible punctuation followed by more digits.
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("1" . pack('H*', '3000') . "34"));
-        $this->assertFalse($this->phoneUtil->isViablePhoneNumber("1" . pack('H*', '3000') . "3+4"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', '3000') . "34"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', '3000') . "3+4"));
         // Unicode variants of possible starting character and other allowed punctuation/digits.
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber(pack('H*', 'ff08') . "1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber(pack('H*', 'ff08') . "1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
         // Testing a leading + is okay.
-        $this->assertTrue($this->phoneUtil->isViablePhoneNumber("+1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("+1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"));
     }
 
 

@@ -1084,7 +1084,10 @@ class PhoneNumberUtil
         if (strlen($number) < self::MIN_LENGTH_FOR_NSN) {
             return false;
         }
-        $m = preg_match(self::getValidPhoneNumberPattern(), $number);
+
+        $validPhoneNumberPattern = self::getValidPhoneNumberPattern();
+
+        $m = preg_match($validPhoneNumberPattern, $number);
         return $m > 0;
     }
 
@@ -1739,12 +1742,11 @@ class PhoneNumberUtil
      */
     private function testNumberLengthAgainstPattern($numberPattern, $number)
     {
-        $numberMatcher = preg_match('/^(' . $numberPattern . ')$/x', $number);
-        if ($numberMatcher > 0) {
+        $numberMatcher = new Matcher($numberPattern, $number);
+        if ($numberMatcher->matches()) {
             return ValidationResult::IS_POSSIBLE;
         }
-        $numberMatcher = preg_match('/^(' . $numberPattern . ')/x', $number);
-        if ($numberMatcher > 0) {
+        if ($numberMatcher->lookingAt()) {
             return ValidationResult::TOO_LONG;
         } else {
             return ValidationResult::TOO_SHORT;
@@ -2884,7 +2886,7 @@ class PhoneNumberUtil
         $numberCopy->mergeFrom($number);
         $nationalNumber = $number->getNationalNumber();
         do {
-            $nationalNumber /= 10;
+            $nationalNumber = floor($nationalNumber / 10);
             $numberCopy->setNationalNumber($nationalNumber);
             if ($this->isPossibleNumberWithReason($numberCopy) == ValidationResult::TOO_SHORT || $nationalNumber == 0) {
                 return false;

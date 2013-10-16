@@ -9,97 +9,81 @@ return array (
   array (
     'NationalNumberPattern' => '[1-578]\\d{4,14}',
     'PossibleNumberPattern' => '\\d{5,15}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[2378]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '4\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1800\\d{6}',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '190[0126]\\d{6}',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'AU',
   'countryCode' => 61,

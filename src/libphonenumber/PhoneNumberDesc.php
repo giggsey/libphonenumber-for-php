@@ -7,11 +7,11 @@ namespace libphonenumber;
  */
 class PhoneNumberDesc
 {
-    private $hasNationalNumberPattern;
+    private $hasNationalNumberPattern = false;
     private $nationalNumberPattern = "";
-    private $hasPossibleNumberPattern;
+    private $hasPossibleNumberPattern = false;
     private $possibleNumberPattern = "";
-    private $hasExampleNumber;
+    private $hasExampleNumber = false;
     private $exampleNumber = "";
 
     /**
@@ -138,11 +138,18 @@ class PhoneNumberDesc
      */
     public function toArray()
     {
-        return array(
-            'NationalNumberPattern' => $this->getNationalNumberPattern(),
-            'PossibleNumberPattern' => $this->getPossibleNumberPattern(),
-            'ExampleNumber' => $this->getExampleNumber(),
-        );
+        $data = array();
+        if ($this->hasNationalNumberPattern()) {
+            $data['NationalNumberPattern'] = $this->getNationalNumberPattern();
+        }
+        if ($this->hasPossibleNumberPattern()) {
+            $data['PossibleNumberPattern'] = $this->getPossibleNumberPattern();
+        }
+        if ($this->hasExampleNumber()) {
+            $data['ExampleNumber'] = $this->getExampleNumber();
+        }
+
+        return $data;
     }
 
     /**
@@ -152,13 +159,13 @@ class PhoneNumberDesc
      */
     public function fromArray(array $input)
     {
-        if (isset($input['NationalNumberPattern'])) {
+        if (isset($input['NationalNumberPattern']) && $input['NationalNumberPattern'] != '') {
             $this->setNationalNumberPattern($input['NationalNumberPattern']);
         }
-        if (isset($input['PossibleNumberPattern'])) {
+        if (isset($input['PossibleNumberPattern']) && $input['NationalNumberPattern'] != '') {
             $this->setPossibleNumberPattern($input['PossibleNumberPattern']);
         }
-        if (isset($input['ExampleNumber'])) {
+        if (isset($input['ExampleNumber']) && $input['NationalNumberPattern'] != '') {
             $this->setExampleNumber($input['ExampleNumber']);
         }
 

@@ -9,97 +9,81 @@ return array (
   array (
     'NationalNumberPattern' => '[1-9]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '(?:5[01]|6[069]|7[289]|88)\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '800\\d{6}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '70\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'PL',
   'countryCode' => 48,

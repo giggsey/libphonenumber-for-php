@@ -12,97 +12,81 @@ return array (
           \\d{8}|
           \\d{10,11}
         ',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[36]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '[89]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1?800\\d{7}',
     'PossibleNumberPattern' => '\\d{10,11}',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '1900\\d{7}',
     'PossibleNumberPattern' => '\\d{11}',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'SG',
   'countryCode' => 65,
