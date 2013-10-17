@@ -47,8 +47,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     private static $mxNumber2 = null;
     private static $deNumber = null;
     private static $jpStarNumber = null;
-    private static $internationalTollFreeTooLong;
-    private static $universalPremiumRate;
+    private static $internationalTollFreeTooLong = null;
+    private static $universalPremiumRate = null;
+    private static $alphaNumericNumber = null;
+    private static $aeUAN = null;
     /**
      * @var PhoneNumberUtil
      */
@@ -122,6 +124,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         self::$deNumber->setCountryCode(49)->setNationalNumber(30123456);
         self::$jpStarNumber = new PhoneNumber();
         self::$jpStarNumber->setCountryCode(81)->setNationalNumber(2345);
+        self::$alphaNumericNumber = new PhoneNumber();
+        self::$alphaNumericNumber->setCountryCode(1)->setNationalNumber(80074935247);
+        self::$aeUAN = new PhoneNumber();
+        self::$aeUAN->setCountryCode(971)->setNationalNumber(600123456);
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
@@ -912,8 +918,19 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testFormatNumberForMobileDialing()
     {
+        // Numbers are normally dialed in national format in-country, and international format from
+        // outside the country.
+        $this->assertEquals("030123456", $this->phoneUtil->formatNumberForMobileDialing(self::$deNumber, RegionCode::DE, false));
+        $this->assertEquals("+4930123456", $this->phoneUtil->formatNumberForMobileDialing(self::$deNumber, RegionCode::CH, false));
+        $this->assertEquals("+4930123456", $this->phoneUtil->formatNumberForMobileDialing(self::$deNumber, RegionCode::CH, false));
+        $deNumberWithExtn = new PhoneNumber();
+        $deNumberWithExtn->mergeFrom(self::$deNumber)->setExtension("1234");
+        $this->assertEquals("030123456", $this->phoneUtil->formatNumberForMobileDialing($deNumberWithExtn, RegionCode::DE, false));
+        $this->assertEquals("+4930123456", $this->phoneUtil->formatNumberForMobileDialing($deNumberWithExtn, RegionCode::CH, false));
+
         // US toll free numbers are marked as noInternationalDialling in the test metadata for testing
-        // purposes.
+        // purposes. For such numbers, we expect nothing to be returned when the region code is not the
+        // same one.
         $this->assertEquals(
             "800 253 0000",
             $this->phoneUtil->formatNumberForMobileDialing(
@@ -987,6 +1004,17 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             "+800 1234 5678",
             $this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::JP, true)
         );
+
+        // UAE numbers beginning with 600 (classified as UAN) need to be dialled without +971 locally.
+        $this->assertEquals("+971600123456", $this->phoneUtil->formatNumberForMobileDialing(self::$aeUAN, RegionCode::JP, false));
+        $this->assertEquals("600123456", $this->phoneUtil->formatNumberForMobileDialing(self::$aeUAN, RegionCode::AE, false));
+
+        $this->assertEquals("+523312345678", $this->phoneUtil->formatNumberForMobileDialing(self::$mxNumber1, RegionCode::MX, false));
+        $this->assertEquals("+523312345678", $this->phoneUtil->formatNumberForMobileDialing(self::$mxNumber1, RegionCode::US, false));
+
+        // Non-geographical numbers should always be dialed in international format.
+        $this->assertEquals("+80012345678", $this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::US, false));
+        $this->assertEquals("+80012345678", $this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::UN001, false));
     }
 
     public function testFormatByPattern()
@@ -2704,7 +2732,67 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testParseExtensions()
     {
-        $this->markTestIncomplete("Test still needs to be ported"); // @todo
+        $nzNumber = new PhoneNumber();
+        $nzNumber->setCountryCode(64)->setNationalNumber(33316005)->setExtension("3456");
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 331 6005 ext 3456", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03-3316005x3456", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03-3316005 int.3456", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 #3456", RegionCode::NZ));
+        // Test the following do not extract extensions:
+        $this->assertEquals(self::$alphaNumericNumber, $this->phoneUtil->parse("1800 six-flags", RegionCode::US));
+        $this->assertEquals(self::$alphaNumericNumber, $this->phoneUtil->parse("1800 SIX FLAGS", RegionCode::US));
+        $this->assertEquals(self::$alphaNumericNumber, $this->phoneUtil->parse("0~0 1800 7493 5247", RegionCode::PL));
+        $this->assertEquals(self::$alphaNumericNumber, $this->phoneUtil->parse("(1800) 7493.5247", RegionCode::US));
+        // Check that the last instance of an extension token is matched.
+        $extnNumber = new PhoneNumber();
+        $extnNumber->mergeFrom(self::$alphaNumericNumber)->setExtension("1234");
+        $this->assertEquals($extnNumber, $this->phoneUtil->parse("0~0 1800 7493 5247 ~1234", RegionCode::PL));
+        // Verifying bug-fix where the last digit of a number was previously omitted if it was a 0 when
+        // extracting the extension. Also verifying a few different cases of extensions.
+        $ukNumber = new PhoneNumber();
+        $ukNumber->setCountryCode(44)->setNationalNumber(2034567890)->setExtension("456");
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890x456", RegionCode::NZ));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890x456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890 x456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890 X456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890 X 456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890 X  456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44 2034567890 x 456  ", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+44-2034567890;ext=456", RegionCode::GB));
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("tel:2034567890;ext=456;phone-context=+44", RegionCode::ZZ));
+
+        // Full-width extension, "extn" only.
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+442034567890ｅｘｔｎ456", RegionCode::GB));
+        // "xtn" only.
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+442034567890ｘｔｎ456", RegionCode::GB));
+        // "xt" only.
+        $this->assertEquals($ukNumber, $this->phoneUtil->parse("+442034567890ｘｔ456", RegionCode::GB));
+
+        $usWithExtension = new PhoneNumber();
+        $usWithExtension->setCountryCode(1)->setNationalNumber(8009013355)->setExtension("7246433");
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 x 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 , ext 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ,extension 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ,extensión 7246433", RegionCode::US));
+        // Repeat with the small letter o with acute accent created by combining characters.
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ,extensioón 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 , 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ext: 7246433", RegionCode::US));
+
+        // Test that if a number has two extensions specified, we ignore the second.
+        $usWithTwoExtensionsNumber = new PhoneNumber();
+        $usWithTwoExtensionsNumber->setCountryCode(1)->setNationalNumber(2121231234)->setExtension("508");
+        $this->assertEquals($usWithTwoExtensionsNumber, $this->phoneUtil->parse("(212)123-1234 x508/x1234", RegionCode::US));
+        $this->assertEquals($usWithTwoExtensionsNumber, $this->phoneUtil->parse("(212)123-1234 x508/ x1234", RegionCode::US));
+        $this->assertEquals($usWithTwoExtensionsNumber, $this->phoneUtil->parse("(212)123-1234 x508\\x1234", RegionCode::US));
+
+        // Test parsing numbers in the form (645) 123-1234-910# works, where the last 3 digits before
+        // the # are an extension.
+        $usWithExtension->clear();
+        $usWithExtension->setCountryCode(1)->setNationalNumber(6451231234)->setExtension("910");
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("+1 (645) 123 1234-910#", RegionCode::US));
+        // Retry with the same number in a slightly different format.
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("+1 (645) 123 1234 ext. 910#", RegionCode::US));
     }
 
     public function testParseAndKeepRaw()
