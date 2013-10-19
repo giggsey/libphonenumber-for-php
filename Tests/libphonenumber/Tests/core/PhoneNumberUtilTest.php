@@ -4,6 +4,7 @@ namespace libphonenumber\Tests\core;
 
 use libphonenumber\CountryCodeSource;
 use libphonenumber\CountryCodeToRegionCodeMapForTesting;
+use libphonenumber\MatchType;
 use libphonenumber\NumberFormat;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneMetadata;
@@ -2943,22 +2944,187 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testIsNumberMatchMatches()
     {
-        $this->markTestIncomplete("Test still needs to be ported"); // @todo
+        // Test simple matches where formatting is different, or leading zeroes, or country calling code
+        // has been specified.
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331 6005", "+64 03 331 6005")
+        );
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch("+800 1234 5678", "+80012345678"));
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 03 331-6005", "+64 03331 6005")
+        );
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch("+643 331-6005", "+64033316005"));
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch("+643 331-6005", "+6433316005"));
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch("+64 3 331-6005", "+6433316005"));
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "tel:+64-3-331-6005;isub=123")
+        );
+        // Test alpha numbers.
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+1800 siX-Flags", "+1 800 7493 5247")
+        );
+        // Test numbers with extensions.
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005 extn 1234", "+6433316005#1234")
+        );
+        // Test proto buffers.
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch(self::$nzNumber, "+6403 331 6005"));
+
+        $nzNumber = new PhoneNumber();
+        $nzNumber->mergeFrom(self::$nzNumber)->setExtension("3456");
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch($nzNumber, "+643 331 6005 ext 3456")
+        );
+
+        // Check empty extensions are ignored.
+        $nzNumber->setExtension("");
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch($nzNumber, "+6403 331 6005"));
+        // Check variant with two proto buffers.
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch($nzNumber, self::$nzNumber),
+            "Number " . (string)$nzNumber . " did not match " . (string)self::$nzNumber
+        );
+
+        // Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
+        $brNumberOne = new PhoneNumber();
+        $brNumberTwo = new PhoneNumber();
+        $brNumberOne->setCountryCode(55)->setNationalNumber(3121286979)
+            ->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN)
+            ->setPreferredDomesticCarrierCode("12")->setRawInput("012 3121286979");
+        $brNumberTwo->setCountryCode(55)->setNationalNumber(3121286979)
+            ->setCountryCodeSource(CountryCodeSource::FROM_DEFAULT_COUNTRY)
+            ->setPreferredDomesticCarrierCode("14")->setRawInput("143121286979");
+
+        $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch($brNumberOne, $brNumberTwo));
     }
 
     public function testIsNumberMatchNonMatches()
     {
-        $this->markTestIncomplete("Test still needs to be ported"); // @todo
+        // Non-matches.
+        $this->assertEquals(MatchType::NO_MATCH, $this->phoneUtil->isNumberMatch("03 331 6005", "03 331 6006"));
+        $this->assertEquals(MatchType::NO_MATCH, $this->phoneUtil->isNumberMatch("+800 1234 5678", "+1 800 1234 5678"));
+        // Different country calling code, partial number match.
+        $this->assertEquals(MatchType::NO_MATCH, $this->phoneUtil->isNumberMatch("+64 3 331-6005", "+16433316005"));
+        // Different country calling code, same number.
+        $this->assertEquals(MatchType::NO_MATCH, $this->phoneUtil->isNumberMatch("+64 3 331-6005", "+6133316005"));
+        // Extension different, all else the same.
+        $this->assertEquals(
+            MatchType::NO_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005 extn 1234", "0116433316005#1235")
+        );
+        $this->assertEquals(
+            MatchType::NO_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005 extn 1234", "tel:+64-3-331-6005;ext=1235")
+        );
+        // NSN matches, but extension is different - not the same number.
+        $this->assertEquals(
+            MatchType::NO_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005 ext.1235", "3 331 6005#1234")
+        );
+
+        // Invalid numbers that can't be parsed.
+        $this->assertEquals(MatchType::NOT_A_NUMBER, $this->phoneUtil->isNumberMatch("4", "3 331 6043"));
+        $this->assertEquals(MatchType::NOT_A_NUMBER, $this->phoneUtil->isNumberMatch("+43", "+64 3 331 6005"));
+        $this->assertEquals(MatchType::NOT_A_NUMBER, $this->phoneUtil->isNumberMatch("+43", "64 3 331 6005"));
+        $this->assertEquals(MatchType::NOT_A_NUMBER, $this->phoneUtil->isNumberMatch("Dog", "64 3 331 6005"));
     }
 
     public function testIsNumberMatchNsnMatches()
     {
-        $this->markTestIncomplete("Test still needs to be ported"); // @todo
+        // NSN matches.
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch("+64 3 331-6005", "03 331 6005"));
+        $this->assertEquals(
+            MatchType::NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "tel:03-331-6005;isub=1234;phone-context=abc.nz")
+        );
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch(self::$nzNumber, "03 331 6005"));
+        // Here the second number possibly starts with the country calling code for New Zealand,
+        // although we are unsure.
+        $unchangedNzNumber = new PhoneNumber();
+        $unchangedNzNumber->mergeFrom(self::$nzNumber);
+        $this->assertEquals(
+            MatchType::NSN_MATCH,
+            $this->phoneUtil->isNumberMatch($unchangedNzNumber, "(64-3) 331 6005")
+        );
+        // Check the phone number proto was not edited during the method call.
+        $this->assertEquals(self::$nzNumber, $unchangedNzNumber);
+
+        // Here, the 1 might be a national prefix, if we compare it to the US number, so the resultant
+        // match is an NSN match.
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch(self::$usNumber, "1-650-253-0000"));
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch(self::$usNumber, "6502530000"));
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch("+1 650-253 0000", "1 650 253 0000"));
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch("1 650-253 0000", "1 650 253 0000"));
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch("1 650-253 0000", "+1 650 253 0000"));
+        // For this case, the match will be a short NSN match, because we cannot assume that the 1 might
+        // be a national prefix, so don't remove it when parsing.
+        $randomNumber = new PhoneNumber();
+        $randomNumber->setCountryCode(41)->setNationalNumber(6502530000);
+        $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch($randomNumber, "1-650-253-0000"));
     }
 
     public function testIsNumberMatchShortNsnMatches()
     {
-        $this->markTestIncomplete("Test still needs to be ported"); // @todo
+        // Short NSN matches with the country not specified for either one or both numbers.
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("+64 3 331-6005", "331 6005"));
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "tel:331-6005;phone-context=abc.nz")
+        );
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "tel:331-6005;isub=1234;phone-context=abc.nz")
+        );
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "tel:331-6005;isub=1234;phone-context=abc.nz;a=%A1")
+        );
+
+        // We did not know that the "0" was a national prefix since neither number has a country code,
+        // so this is considered a SHORT_NSN_MATCH.
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("3 331-6005", "03 331 6005"));
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("3 331-6005", "331 6005"));
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("3 331-6005", "tel:331-6005;phone-context=abc.nz")
+        );
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("3 331-6005", "+64 331 6005"));
+
+        // Short NSN match with the country specified.
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("03 331-6005", "331 6005"));
+        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch("1 234 345 6789", "345 6789"));
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+1 (234) 345 6789", "345 6789")
+        );
+        // NSN matches, country calling code omitted for one number, extension missing for one.
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005", "3 331 6005#1234")
+        );
+        // One has Italian leading zero, one does not.
+        $italianNumberOne = new PhoneNumber();
+        $italianNumberOne->setCountryCode(39)->setNationalNumber(1234)->setItalianLeadingZero(true);
+        $italianNumberTwo = new PhoneNumber();
+        $italianNumberTwo->setCountryCode(39)->setNationalNumber(1234);
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch($italianNumberOne, $italianNumberTwo)
+        );
+        // One has an extension, the other has an extension of "".
+        $italianNumberOne->setExtension("1234")->clearItalianLeadingZero();
+        $italianNumberTwo->setExtension("");
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch($italianNumberOne, $italianNumberTwo)
+        );
     }
 
     public function testCanBeInternationallyDialled()
