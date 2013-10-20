@@ -25,7 +25,8 @@ class PhoneNumberUtil
     const REGEX_FLAGS = 'ui'; //Unicode and case insensitive
     // The minimum and maximum length of the national significant number.
     const MIN_LENGTH_FOR_NSN = 2;
-    const MAX_LENGTH_FOR_NSN = 15;
+    // The ITU says the maximum length should be 15, but we have found longer numbers in Germany.
+    const MAX_LENGTH_FOR_NSN = 16;
 
     // We don't allow input strings for parsing to be longer than 250 chars. This prevents malicious
     // input from overflowing the regular-expression engine.
