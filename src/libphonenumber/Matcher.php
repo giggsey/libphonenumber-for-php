@@ -104,13 +104,27 @@ class Matcher
     /**
      * @return int
      */
-    public function end($group = NULL)
+    public function end($group = null)
     {
-        if (!isset($group))
-	    $group = 0;
-	if (!isset($this->groups[$group]))
-	    return NULL;
-	return $this->groups[$group][1] + strlen($this->groups[$group][0]);
+        if (!isset($group) || $group === null) {
+            $group = 0;
+        }
+        if (!isset($this->groups[$group])) {
+            return null;
+        }
+        return $this->groups[$group][1] + strlen($this->groups[$group][0]);
+    }
+
+    public function start($group = NULL)
+    {
+        if (isset($group) || $group === null) {
+            $group = 0;
+        }
+        if (!isset($this->groups[$group])) {
+            return null;
+        }
+
+        return $this->groups[$group][1];
     }
 
     /**

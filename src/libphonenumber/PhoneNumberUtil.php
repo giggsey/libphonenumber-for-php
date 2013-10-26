@@ -64,6 +64,7 @@ class PhoneNumberUtil
     const RFC3966_PHONE_CONTEXT = ";phone-context=";
     const RFC3966_ISDN_SUBADDRESS = ";isub=";
     const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
+    const VALID_ALPHA = "A-Za-z";
 
     // The PLUS_SIGN signifies the international prefix.
     const DEFAULT_EXTN_PREFIX = " ext. ";
@@ -165,6 +166,9 @@ class PhoneNumberUtil
     private static $EXTN_PATTERNS_FOR_PARSING;
     private static $EXTN_PATTERNS_FOR_MATCHING;
     private static $EXTN_PATTERN = null;
+    private static $VALID_PHONE_NUMBER_PATTERN;
+    private static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
+    private static $VALID_PHONE_NUMBER;
     private $regionToMetadataMap = array();
     private $countryCodeToNonGeographicalMetadataMap = array();
     // Separate map of all symbols that we wish to retain when formatting alpha numbers. This
@@ -251,6 +255,13 @@ class PhoneNumberUtil
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
             self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
+
+
+            self::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . self::DIGITS . "]{" . self::MIN_LENGTH_FOR_NSN . "}";
+            self::$VALID_PHONE_NUMBER = "[" . self::PLUS_CHARS . "]*(?:[" . self::VALID_PUNCTUATION . self::STAR_SIGN . "]*[" . self::DIGITS . "]){3,}[" . self::VALID_PUNCTUATION . self::STAR_SIGN . self::VALID_ALPHA . self::DIGITS . "]*";
+            self::$VALID_PHONE_NUMBER_PATTERN = "%" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
+
+            self::$UNWANTED_END_CHAR_PATTERN = "[^" . self::DIGITS . self::VALID_ALPHA . "#]+$";
 
             self::$MOBILE_TOKEN_MAPPINGS = array();
             self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
@@ -1099,6 +1110,8 @@ class PhoneNumberUtil
      */
     private static function getValidPhoneNumberPattern()
     {
+        return self::$VALID_PHONE_NUMBER_PATTERN;
+
         return '%' .
         self::DIGITS . '{' . self::MIN_LENGTH_FOR_NSN . '}' . '|' .
         '[' . self::PLUS_CHARS . ']*+(?:[' . self::VALID_PUNCTUATION . self::STAR_SIGN . ']*' . self::DIGITS . '){3,}[' .
@@ -1373,15 +1386,28 @@ class PhoneNumberUtil
         if ($match > 0) {
             $number = substr($number, $matches[0][1]);
             // Remove trailing non-alpha non-numerical characters.
-            $match = preg_match('/' . self::$UNWANTED_END_CHAR_PATTERN . '/', $number, $matches, PREG_OFFSET_CAPTURE);
+            /*$match = preg_match('/' . self::$UNWANTED_END_CHAR_PATTERN . '/', $number, $matches, PREG_OFFSET_CAPTURE);
             if ($match > 0) {
                 $number = substr($number, 0, $matches[0][1]);
             }
+                 Matcher trailingCharsMatcher = UNWANTED_END_CHAR_PATTERN.matcher(number);
+      if (trailingCharsMatcher.find()) {
+          number = number.substring(0, trailingCharsMatcher.start());
+          logger.log(Level.FINER, "Stripped trailing characters: " + number);
+      }
+            */
+
+            $trailingCharsMatcher = new Matcher(self::$UNWANTED_END_CHAR_PATTERN, $number);
+            if ($trailingCharsMatcher->find() && $trailingCharsMatcher->start() > 0) {
+                $number = substr($number, 0, $trailingCharsMatcher->start());
+            }
+
             // Check for extra numbers at the end.
             $match = preg_match('%' . self::$SECOND_NUMBER_START_PATTERN . '%', $number, $matches, PREG_OFFSET_CAPTURE);
             if ($match > 0) {
                 $number = substr($number, 0, $matches[0][1]);
             }
+
             return $number;
         } else {
             return "";
@@ -1573,8 +1599,8 @@ class PhoneNumberUtil
      */
     public static function normalize(&$number)
     {
-        $m = preg_match(self::getValidPhoneNumberPattern(), $number);
-        if ($m > 0) {
+        $m = new Matcher(self::VALID_ALPHA_PHONE_PATTERN, $number);
+        if ($m->matches()) {
             return self::normalizeHelper($number, self::$ALPHA_PHONE_MAPPINGS, true);
         } else {
             return self::normalizeDigitsOnly($number);

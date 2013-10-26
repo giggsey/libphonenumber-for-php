@@ -1790,17 +1790,17 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     public function testIsViablePhoneNumberNonAscii()
     {
         // Only one or two digits before possible punctuation followed by more digits.
-        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', '3000') . "34"));
-        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', '3000') . "3+4"));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', 'e38080') . "34"));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber("1" . pack('H*', 'e38080') . "3+4"));
         // Unicode variants of possible starting character and other allowed punctuation/digits.
         $this->assertTrue(
             PhoneNumberUtil::isViablePhoneNumber(
-                pack('H*', 'ff08') . "1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789"
+                pack('H*', 'efbc88') . "1" . pack("H*", 'efbc89') . pack('H*', 'e38080') . "3456789"
             )
         );
         // Testing a leading + is okay.
         $this->assertTrue(
-            PhoneNumberUtil::isViablePhoneNumber("+1" . pack("H*", 'ff09') . pack('H*', '3000') . "3456789")
+            PhoneNumberUtil::isViablePhoneNumber("+1" . pack("H*", 'efbc89') . pack('H*', 'e38080') . "3456789")
         );
     }
 
@@ -1813,14 +1813,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("+800-345-600", PhoneNumberUtil::extractPossibleNumber("Tel:+800-345-600"));
         // Should recognise wide digits as possible start values.
         $this->assertEquals(
-            pack("H*", 'ff10') . pack("H*", 'ff12') . pack("H*", 'ff13'),
-            PhoneNumberUtil::extractPossibleNumber(pack("H*", 'ff10') . pack("H*", 'ff12') . pack("H*", 'ff13'))
+            pack("H*", 'efbc90') . pack("H*", 'efbc92') . pack("H*", 'efbc93'),
+            PhoneNumberUtil::extractPossibleNumber(pack("H*", 'efbc90') . pack("H*", 'efbc92') . pack("H*", 'efbc93'))
         );
         // Dashes are not possible start values and should be removed.
         $this->assertEquals(
-            pack("H*", 'ff11') . pack("H*", 'ff12') . pack("H*", 'ff13'),
+            pack("H*", 'efbc91') . pack("H*", 'efbc92') . pack("H*", 'efbc93'),
             PhoneNumberUtil::extractPossibleNumber(
-                "Num-" . pack("H*", 'ff11') . pack("H*", 'ff12') . pack("H*", 'ff13')
+                "Num-" . pack("H*", 'efbc91') . pack("H*", 'efbc92') . pack("H*", 'efbc93')
             )
         );
         // If not possible number present, return empty string.
@@ -1834,7 +1834,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // This case has a trailing RTL char.
         $this->assertEquals(
             "650) 253-0000",
-            PhoneNumberUtil::extractPossibleNumber("(650) 253-0000" . pack("H*", '200F'))
+            PhoneNumberUtil::extractPossibleNumber("(650) 253-0000" . pack("H*", 'e2808f'))
         );
     }
 
@@ -1901,7 +1901,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
 
         // If there was a transform rule, check it was applied.
-        $metadata->setNationalPrefixTransformRule("5$15");
+        $metadata->setNationalPrefixTransformRule("5\${1}5");
         // Note that a capturing group is present here.
         $metadata->setNationalPrefixForParsing("0(\\d{2})");
         $numberToStrip = "031123";
@@ -2122,7 +2122,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $numberToFill = "";
             $this->assertEquals(
                 $countryCallingCode,
-                $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number),
+                $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, false, $number),
                 "Should have extracted the country calling code of the region passed in"
             );
             $this->assertFalse($number->hasCountryCodeSource(), "Should not contain CountryCodeSource");
@@ -2135,7 +2135,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $numberToFill = "";
             $this->assertEquals(
                 0,
-                $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, true, $number),
+                $this->phoneUtil->maybeExtractCountryCode($phoneNumber, $metadata, $numberToFill, false, $number),
                 "Should not have extracted a country calling code - invalid number after extraction of uncertain country calling code."
             );
             $this->assertFalse($number->hasCountryCodeSource(), "Should not contain CountryCodeSource");
@@ -2331,9 +2331,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->parse("1 (650) 253" . pack("H*", 'c2ad') . "-0000", RegionCode::US)
         );
         // The whole number, including punctuation, is here represented in full-width form.
-        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse("＋１　（６５０）　２５３－００００", RegionCode::SG));
+        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse(pack("H*",'efbc8b') . pack("H*",'efbc91') . pack("H*",'e38080') .
+                pack("H*",'efbc88') . pack("H*",'efbc96') . pack("H*",'efbc95') . pack("H*", 'efbc90') . pack("H*", 'efbc89') .
+                pack("H*",'e38080') . pack("H*",'efbc92') .  pack("H*",'efbc92') .  pack("H*",'efbc95') .  pack("H*",'efbc93') . pack("H*", 'efbc8d') .
+                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'), RegionCode::SG));
         // Using U+30FC dash instead.
-        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse("＋１　（６５０）　２５３ー００００", RegionCode::SG));
+        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse(pack("H*",'efbc8b') . pack("H*",'efbc91') . pack("H*",'e38080') .
+                pack("H*",'efbc88') . pack("H*",'efbc96') . pack("H*",'efbc95') . pack("H*", 'efbc90') . pack("H*", 'efbc89') .
+                pack("H*",'e38080') . pack("H*",'efbc92') .  pack("H*",'efbc92') .  pack("H*",'efbc95') .  pack("H*",'efbc93') . pack("H*", 'e383bc') .
+                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'), RegionCode::SG));
         // Using a very strange decimal digit range (Mongolian digits).
         $this->assertEquals(
             self::$usNumber,
