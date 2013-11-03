@@ -2825,7 +2825,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             $usWithExtension,
-            $this->phoneUtil->parse("(800) 901-3355 ,extensi" . pack("H*", 'c3b3') . "1n 7246433", RegionCode::US)
+            $this->phoneUtil->parse("(800) 901-3355 ,extensi" . pack("H*", 'c3b3') . "n 7246433", RegionCode::US)
         );
         // Repeat with the small letter o with acute accent created by combining characters.
         $this->assertEquals(
