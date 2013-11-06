@@ -1263,7 +1263,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $numberWithNationalPrefixMX =
             $this->phoneUtil->parseAndKeepRawInput("013312345678", RegionCode::MX);
         $this->assertEquals(
-            "013312345678",
+            "01 33 1234 5678",
             $this->phoneUtil->formatInOriginalFormat($numberWithNationalPrefixMX, RegionCode::MX)
         );
 
@@ -2412,7 +2412,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     {
         // Test parsing fixed-line numbers of Mexico.
         $mxNumber = new PhoneNumber();
-        $mxNumber->setCountryCode(54)->setNationalNumber(4499780001);
+        $mxNumber->setCountryCode(52)->setNationalNumber(4499780001);
         $this->assertEquals($mxNumber, $this->phoneUtil->parse("+52 (449)978-0001", RegionCode::MX));
         $this->assertEquals($mxNumber, $this->phoneUtil->parse("01 (449)978-0001", RegionCode::MX));
         $this->assertEquals($mxNumber, $this->phoneUtil->parse("(449)978-0001", RegionCode::MX));

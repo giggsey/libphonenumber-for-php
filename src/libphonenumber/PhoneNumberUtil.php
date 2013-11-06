@@ -1763,7 +1763,7 @@ class PhoneNumberUtil
             $transformRule = $metadata->getNationalPrefixTransformRule();
             if ($transformRule === null
                 || mb_strlen($transformRule) == 0
-                || $prefixMatcher->group($numOfGroups) === null
+                || $prefixMatcher->group($numOfGroups - 1) === null
             ) {
                 // If the original number was viable, and the resultant number is not, we return.
                 $matcher = new Matcher($nationalNumberRule, substr($number, $prefixMatcher->end()));
