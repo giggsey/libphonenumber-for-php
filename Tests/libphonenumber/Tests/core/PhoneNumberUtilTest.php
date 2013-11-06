@@ -414,7 +414,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testNormaliseOtherDigits()
     {
-        $this->markTestSkipped('PHP UTF-8 toUpper incompatible');
         $inputNumber = "\xEF\xBC\x92" . "5\xD9\xA5" /* "２5٥" */
         ;
         $expectedOutput = "255";
@@ -2341,7 +2340,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
                 pack("H*",'e38080').  pack("H*",'efbc92') .  pack("H*",'efbc95') .  pack("H*",'efbc93') . pack("H*", 'e383bc') .
                 pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'), RegionCode::SG));
         // Using a very strange decimal digit range (Mongolian digits).
-        $this->markTestSkipped("Mongolian digits...");
         $this->assertEquals(
             self::$usNumber,
             $this->phoneUtil->parse(
@@ -2572,8 +2570,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
         try {
             $someNumber = "123 456 7890";
-            $this->phoneUtil->parse($someNumber, RegionCode::NZ);
-            $this->fail("This should not parse without throwing an exception " . $someNumber);
+            $this->phoneUtil->parse($someNumber, RegionCode::ZZ);
+            $this->fail("'Unknown' region code not allowed: should fail.");
         } catch (NumberParseException $e) {
             // Expected this exception.
             $this->assertEquals(

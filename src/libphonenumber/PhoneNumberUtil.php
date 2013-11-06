@@ -260,7 +260,7 @@ class PhoneNumberUtil
 
             self::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . self::DIGITS . "]{" . self::MIN_LENGTH_FOR_NSN . "}";
             self::$VALID_PHONE_NUMBER = "[" . self::PLUS_CHARS . "]*(?:[" . self::VALID_PUNCTUATION . self::STAR_SIGN . "]*[" . self::DIGITS . "]){3,}[" . self::VALID_PUNCTUATION . self::STAR_SIGN . self::VALID_ALPHA . self::DIGITS . "]*";
-            self::$VALID_PHONE_NUMBER_PATTERN = "%" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
+            self::$VALID_PHONE_NUMBER_PATTERN = "%^" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
 
             self::$UNWANTED_END_CHAR_PATTERN = "[^" . self::DIGITS . self::VALID_ALPHA . "#]+$";
 
@@ -268,40 +268,56 @@ class PhoneNumberUtil
             self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
             self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
 
-            self::$numeric_characters[pack("H*", 'efbc90')] = 0;
-            self::$numeric_characters[pack("H*", 'efbc91')] = 1;
-            self::$numeric_characters[pack("H*", 'efbc92')] = 2;
-            self::$numeric_characters[pack("H*", 'efbc93')] = 3;
-            self::$numeric_characters[pack("H*", 'efbc94')] = 4;
-            self::$numeric_characters[pack("H*", 'efbc95')] = 5;
-            self::$numeric_characters[pack("H*", 'efbc96')] = 6;
-            self::$numeric_characters[pack("H*", 'efbc97')] = 7;
-            self::$numeric_characters[pack("H*", 'efbc98')] = 8;
-            self::$numeric_characters[pack("H*", 'efbc99')] = 9;
-
-            self::$numeric_characters[pack("H*", 'd9a0')] = 0;
-            self::$numeric_characters[pack("H*", 'd9a1')] = 1;
-            self::$numeric_characters[pack("H*", 'd9a2')] = 2;
-            self::$numeric_characters[pack("H*", 'd9a3')] = 3;
-            self::$numeric_characters[pack("H*", 'd9a4')] = 4;
-            self::$numeric_characters[pack("H*", 'd9a5')] = 5;
-            self::$numeric_characters[pack("H*", 'd9a6')] = 6;
-            self::$numeric_characters[pack("H*", 'd9a7')] = 7;
-            self::$numeric_characters[pack("H*", 'd9a8')] = 8;
-            self::$numeric_characters[pack("H*", 'd9a9')] = 9;
-
-            self::$numeric_characters[pack("H*", 'dbb0')] = 0;
-            self::$numeric_characters[pack("H*", 'dbb1')] = 1;
-            self::$numeric_characters[pack("H*", 'dbb2')] = 2;
-            self::$numeric_characters[pack("H*", 'dbb3')] = 3;
-            self::$numeric_characters[pack("H*", 'dbb4')] = 4;
-            self::$numeric_characters[pack("H*", 'dbb5')] = 5;
-            self::$numeric_characters[pack("H*", 'dbb6')] = 6;
-            self::$numeric_characters[pack("H*", 'dbb7')] = 7;
-            self::$numeric_characters[pack("H*", 'dbb8')] = 8;
-            self::$numeric_characters[pack("H*", 'dbb9')] = 9;
+            self::loadNumericCharacters();
         }
         return self::$instance;
+    }
+
+    private static function loadNumericCharacters()
+    {
+        self::$numeric_characters[pack("H*", 'efbc90')] = 0;
+        self::$numeric_characters[pack("H*", 'efbc91')] = 1;
+        self::$numeric_characters[pack("H*", 'efbc92')] = 2;
+        self::$numeric_characters[pack("H*", 'efbc93')] = 3;
+        self::$numeric_characters[pack("H*", 'efbc94')] = 4;
+        self::$numeric_characters[pack("H*", 'efbc95')] = 5;
+        self::$numeric_characters[pack("H*", 'efbc96')] = 6;
+        self::$numeric_characters[pack("H*", 'efbc97')] = 7;
+        self::$numeric_characters[pack("H*", 'efbc98')] = 8;
+        self::$numeric_characters[pack("H*", 'efbc99')] = 9;
+
+        self::$numeric_characters[pack("H*", 'd9a0')] = 0;
+        self::$numeric_characters[pack("H*", 'd9a1')] = 1;
+        self::$numeric_characters[pack("H*", 'd9a2')] = 2;
+        self::$numeric_characters[pack("H*", 'd9a3')] = 3;
+        self::$numeric_characters[pack("H*", 'd9a4')] = 4;
+        self::$numeric_characters[pack("H*", 'd9a5')] = 5;
+        self::$numeric_characters[pack("H*", 'd9a6')] = 6;
+        self::$numeric_characters[pack("H*", 'd9a7')] = 7;
+        self::$numeric_characters[pack("H*", 'd9a8')] = 8;
+        self::$numeric_characters[pack("H*", 'd9a9')] = 9;
+
+        self::$numeric_characters[pack("H*", 'dbb0')] = 0;
+        self::$numeric_characters[pack("H*", 'dbb1')] = 1;
+        self::$numeric_characters[pack("H*", 'dbb2')] = 2;
+        self::$numeric_characters[pack("H*", 'dbb3')] = 3;
+        self::$numeric_characters[pack("H*", 'dbb4')] = 4;
+        self::$numeric_characters[pack("H*", 'dbb5')] = 5;
+        self::$numeric_characters[pack("H*", 'dbb6')] = 6;
+        self::$numeric_characters[pack("H*", 'dbb7')] = 7;
+        self::$numeric_characters[pack("H*", 'dbb8')] = 8;
+        self::$numeric_characters[pack("H*", 'dbb9')] = 9;
+
+        self::$numeric_characters[pack("H*", 'e1a090')] = 0;
+        self::$numeric_characters[pack("H*", 'e1a091')] = 1;
+        self::$numeric_characters[pack("H*", 'e1a092')] = 2;
+        self::$numeric_characters[pack("H*", 'e1a093')] = 3;
+        self::$numeric_characters[pack("H*", 'e1a094')] = 4;
+        self::$numeric_characters[pack("H*", 'e1a095')] = 5;
+        self::$numeric_characters[pack("H*", 'e1a096')] = 6;
+        self::$numeric_characters[pack("H*", 'e1a097')] = 7;
+        self::$numeric_characters[pack("H*", 'e1a098')] = 8;
+        self::$numeric_characters[pack("H*", 'e1a099')] = 9;
     }
 
     private function init($filePrefix)
@@ -1416,7 +1432,7 @@ class PhoneNumberUtil
     public static function extractPossibleNumber($number)
     {
         $matches = array();
-        $match = preg_match('/' . self::$VALID_START_CHAR_PATTERN . '/', $number, $matches, PREG_OFFSET_CAPTURE);
+        $match = preg_match('/' . self::$VALID_START_CHAR_PATTERN . '/ui', $number, $matches, PREG_OFFSET_CAPTURE);
         if ($match > 0) {
             $number = substr($number, $matches[0][1]);
             // Remove trailing non-alpha non-numerical characters.
@@ -2451,7 +2467,7 @@ class PhoneNumberUtil
         return $nationalPrefix;
     }
 
-    private function  rawInputContainsNationalPrefix($rawInput, $nationalPrefix, $regionCode)
+    private function rawInputContainsNationalPrefix($rawInput, $nationalPrefix, $regionCode)
     {
         $normalizedNationalNumber = $this->normalizeDigitsOnly($rawInput);
         if (strpos($normalizedNationalNumber, $nationalPrefix) === 0) {
@@ -2530,15 +2546,16 @@ class PhoneNumberUtil
      * a possible number. Note that validation of whether the number is actually a valid number for a
      * particular region is not performed. This can be done separately with {@link #isValidNumber}.
      *
-     * @param string $numberToParse     number that we are attempting to parse. This can contain formatting
+     * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                          such as +, ( and -, as well as a phone number extension.
-     * @param string $defaultRegion     region that we are expecting the number to be from. This is only used
+     * @param string $defaultRegion region that we are expecting the number to be from. This is only used
      *                          if the number being parsed is not written in international format.
      *                          The country_code for the number in this case would be stored as that
      *                          of the default region supplied. If the number is guaranteed to
      *                          start with a '+' followed by the country calling code, then
      *                          "ZZ" or null can be supplied.
      * @param PhoneNumber|null $phoneNumber
+     * @param bool $keepRawInput
      * @return PhoneNumber                 a phone number proto buffer filled with the parsed number
      * @throws NumberParseException  if the string is not considered to be a viable phone number or if
      *                               no default region was supplied and the number is not in
@@ -2849,14 +2866,14 @@ class PhoneNumberUtil
         }
         return MatchType::NOT_A_NUMBER;
     }
-    
+
     private function isNationalNumberSuffixOfTheOther(PhoneNumber $firstNumber, PhoneNumber $secondNumber) {
         $firstNumberNationalNumber = trim((string)$firstNumber->getNationalNumber());
         $secondNumberNationalNumber = trim((string)$secondNumber->getNationalNumber());
-        return $this->stringEndsWithString($firstNumberNationalNumber, $secondNumberNationalNumber) || 
+        return $this->stringEndsWithString($firstNumberNationalNumber, $secondNumberNationalNumber) ||
                 $this->stringEndsWithString($secondNumberNationalNumber, $firstNumberNationalNumber);
     }
-    
+
     private function stringEndsWithString($hayStack, $needle) {
         $revNeedle = strrev($needle);
         $revHayStack = strrev($hayStack);
