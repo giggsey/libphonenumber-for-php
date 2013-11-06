@@ -7,20 +7,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '',
-    'PossibleNumberPattern' => '',
+    'NationalNumberPattern' => '0\\d{2}',
+    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '',
-    'PossibleNumberPattern' => '',
+    'NationalNumberPattern' => '0\\d{2}',
+    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '',
-    'PossibleNumberPattern' => '',
+    'NationalNumberPattern' => '0\\d{2}',
+    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
@@ -68,7 +68,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '000',
-    'PossibleNumberPattern' => '',
+    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '000',
   ),
   'voicemail' => 
@@ -79,9 +79,9 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '000',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '000',
   ),
   'standardRate' => 
   array (
@@ -111,8 +111,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

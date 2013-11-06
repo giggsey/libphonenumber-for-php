@@ -376,7 +376,7 @@ return array (
       ),
     ),
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => false,
   'leadingZeroPossible' => true,
   'mobileNumberPortableRegion' => true,
 );

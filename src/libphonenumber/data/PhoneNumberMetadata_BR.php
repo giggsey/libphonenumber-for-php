@@ -35,7 +35,7 @@ return array (
           1(?:
             1(?:
               5[347]|
-              [6-9]\\d|
+              [6-9]\\d
             )|
             [2-9][6-9]\\d
           )\\d{6}|
@@ -281,8 +281,8 @@ return array (
       ),
     ),
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
 /* EOF */

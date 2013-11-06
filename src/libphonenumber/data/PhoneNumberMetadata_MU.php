@@ -51,7 +51,7 @@ return array (
             )|
             7\\d{2}|
             8(?:
-              [26]\\d|
+              [256]\\d|
               7[15-8]
             )|
             9[0-8]\\d
@@ -176,8 +176,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

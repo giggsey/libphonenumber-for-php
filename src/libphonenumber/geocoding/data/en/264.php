@@ -1,0 +1,23 @@
+<?php
+return array (
+  26461 => 'Windhoek',
+  264621 => 'Okahandja',
+  264626 => 'Windhoek International Airport',
+  264627 => 'Rehoboth',
+  264629 => 'Uis',
+  264631 => 'Keetmanshoop',
+  2646331 => 'Lüderitz',
+  2646332 => 'Oranjemund',
+  2646342 => 'Karasburg',
+  26464 => 'Swakopmund, Walvis Bay',
+  264651 => 'Otjiwarongo',
+  2646542 => 'Outjo',
+  264661 => 'Mariental',
+  264671 => 'Tsumeb',
+  264672 => 'Kombat',
+  2646731 => 'Grootfontein',
+  2646752 => 'Oshakati',
+  2646762 => 'Ondangwa',
+  264681 => 'Gobabis',
+  264683 => 'Witvlei',
+);

@@ -119,7 +119,7 @@ return array (
   ),
   'id' => 'CO',
   'countryCode' => 57,
-  'internationalPrefix' => '00[579]|#555|#999',
+  'internationalPrefix' => '00(?:4(?:[14]4|56)|[579])',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0([3579]|4(?:44|56))?',
   'sameMobileAndFixedLinePattern' => false,
@@ -253,8 +253,8 @@ return array (
       ),
     ),
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
 /* EOF */

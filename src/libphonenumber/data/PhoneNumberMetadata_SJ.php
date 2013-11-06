@@ -134,8 +134,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
+  'mainCountryForCode' => false,
   'leadingZeroPossible' => true,
-  'mobileNumberPortableRegion' => NULL,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

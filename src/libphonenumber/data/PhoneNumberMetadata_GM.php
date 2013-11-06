@@ -44,7 +44,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            2[0-2]|
+            2[0-6]|
             [3679]\\d
           )\\d{5}
         ',
@@ -149,8 +149,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

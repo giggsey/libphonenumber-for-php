@@ -36,8 +36,8 @@ return array (
     'NationalNumberPattern' => '
           6(?:
             [0-24-6]\\d|
-            8[0-5]|
-            3[0-3]|
+            8[0-8]|
+            3[0-3]
           )\\d{5}|
           7\\d{7}
         ',
@@ -142,8 +142,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

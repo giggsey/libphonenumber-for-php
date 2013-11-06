@@ -7,33 +7,65 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          1\\d{2,5}|
+          [2-9]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          1\\d{2,5}|
+          [2-9]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          1\\d{2,5}|
+          [2-9]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            0[25-8]|
+            1(?:
+              0|
+              6\\d{3}
+            )|
+            7(?:
+              12|
+              77
+            )
+          )|
+          8\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
+    'ExampleNumber' => '116000',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          1(?:
+            212|
+            3(?:
+              0[47]|
+              13
+            )|
+            4[01]4
+          )|
+          [2-79]\\d{3}
+        ',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '7212',
   ),
   'sharedCost' => 
   array (
@@ -86,11 +118,40 @@ return array (
   array (
     'NationalNumberPattern' => '
           1(?:
-            0[01]|
-            12
-          )
+            0[0-8]|
+            1(?:
+              [027]|
+              6000
+            )|
+            2(?:
+              0[47]|
+              12|
+              3[0-24]|
+              99
+            )|
+            3(?:
+              0[47]|
+              13|
+              99
+            )|
+            4(?:
+              0[47]|
+              14|
+              50|
+              99
+            )|
+            7(?:
+              00|
+              1[27]|
+              33|
+              65|
+              77
+            )|
+            819
+          )|
+          [2-9]\\d{3}
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 
@@ -121,8 +182,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

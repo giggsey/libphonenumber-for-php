@@ -94,7 +94,7 @@ return array (
                 3|
                 4\\d
               )
-            )|
+            )
           )\\d{3}|
           4(?:
             0(?:
@@ -486,8 +486,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

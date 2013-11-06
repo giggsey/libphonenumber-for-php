@@ -395,7 +395,7 @@ return array (
     ),
     13 => 
     array (
-      'pattern' => '(\\d{4})(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{4})(\\d{3})(\\d{1,4})',
       'format' => '$1/$2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -1054,8 +1054,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

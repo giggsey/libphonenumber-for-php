@@ -1,0 +1,23 @@
+<?php
+return array (
+  35813 => 'Norra Karelen',
+  35814 => 'Mellersta Finland',
+  35815 => 'St Michel',
+  35816 => 'Lappland',
+  35817 => 'Kuopio',
+  35818 => 'Åland',
+  35819 => 'Nyland',
+  3582 => 'Åbo/Björneborg',
+  3583 => 'Tavastland',
+  35851 => 'Kymmene',
+  35852 => 'Kymmene',
+  35853 => 'Kymmene',
+  35854 => 'Kymmene',
+  35855 => 'Kymmene',
+  35856 => 'Kymmene',
+  35857 => 'Kymmene',
+  35858 => 'Kymmene',
+  3586 => 'Vasa',
+  3588 => 'Uleåborg',
+  3589 => 'Helsingfors',
+);

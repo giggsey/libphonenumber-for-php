@@ -172,7 +172,7 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	private $mainCountryForCode = NULL;
+	private $mainCountryForCode = false;
 
 	public function hasMainCountryForCode() {
 		return isset($this->mainCountryForCode);
@@ -193,7 +193,7 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	private $leadingZeroPossible = NULL;
+	private $leadingZeroPossible = false;
 
 	public function hasLeadingZeroPossible() {
 		return isset($this->leadingZeroPossible);
@@ -208,7 +208,7 @@ class PhoneMetadata {
 		return $this;
 	}
 
-    private $mobileNumberPortableRegion = null;
+    private $mobileNumberPortableRegion = false;
 
     public function hasMobileNumberPortableRegion() {
         return isset($this->mobileNumberPortableRegion);
@@ -295,7 +295,7 @@ class PhoneMetadata {
 		return $this;
 	}
 
-	private $sameMobileAndFixedLinePattern = NULL;
+	private $sameMobileAndFixedLinePattern = false;
 
 	public function hasSameMobileAndFixedLinePattern() {
 		return isset($this->sameMobileAndFixedLinePattern);

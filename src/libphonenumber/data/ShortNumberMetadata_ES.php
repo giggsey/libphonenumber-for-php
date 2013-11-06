@@ -138,9 +138,7 @@ return array (
             [357]\\d{3}|
             80\\d{2}
           )|
-          3(?:
-            [357]\\d{3}|
-          )|
+          3[357]\\d{3}|
           [79]9[57]\\d{3}
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
@@ -188,8 +186,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

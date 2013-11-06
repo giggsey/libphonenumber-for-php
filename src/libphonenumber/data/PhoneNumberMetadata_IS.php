@@ -45,7 +45,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          38[59]\\d{6}|
+          38[589]\\d{6}|
           (?:
             6(?:
               1[0-8]|
@@ -121,7 +121,6 @@ return array (
   'voicemail' => 
   array (
     'NationalNumberPattern' => '
-          388\\d{6}|
           (?:
             6(?:
               2[0-8]|
@@ -137,8 +136,8 @@ return array (
             95[48]
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '388123456',
+    'PossibleNumberPattern' => '\\d{7}',
+    'ExampleNumber' => '6201234',
   ),
   'shortCode' => 
   array (
@@ -196,8 +195,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
 /* EOF */

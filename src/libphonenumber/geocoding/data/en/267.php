@@ -1,0 +1,21 @@
+<?php
+return array (
+  26724 => 'Francistown',
+  26726 => 'Selebi-Phikwe',
+  26729 => 'Letlhakane/Orapa',
+  26731 => 'Gaborone (outer)',
+  26739 => 'Gaborone',
+  267463 => 'Serowe',
+  26747 => 'Mahalapye',
+  26749 => 'Palapye',
+  26753 => 'Lobatse',
+  267539 => 'Ramotswa',
+  26754 => 'Barolong/Ngwaketse',
+  26757 => 'Mochudi',
+  267588 => 'Jwaneng',
+  26759 => 'Molepolole/Kweneng',
+  267625 => 'Kasane',
+  26765 => 'Kgalagadi',
+  267659 => 'Gantsi',
+  26768 => 'Maun',
+);

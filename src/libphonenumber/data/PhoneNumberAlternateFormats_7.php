@@ -120,8 +120,41 @@ return array (
     ),
     1 => 
     array (
+      'pattern' => '(\\d{5})(\\d{5})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[346-9]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
       'pattern' => '(\\d{4})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2-$3-$4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[346-9]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    3 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{3})',
+      'format' => '$1 $2-$3-$4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[346-9]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    4 => 
+    array (
+      'pattern' => '(\\d{3})(\\d)(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1-$2 $3-$4-$5',
       'leadingDigitsPatterns' => 
       array (
         0 => '[346-9]',
@@ -133,8 +166,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

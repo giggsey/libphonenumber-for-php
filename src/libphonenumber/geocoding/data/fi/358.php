@@ -1,0 +1,23 @@
+<?php
+return array (
+  35813 => 'Pohjois-Karjala',
+  35814 => 'Keski-Suomi',
+  35815 => 'Mikkeli',
+  35816 => 'Lappi',
+  35817 => 'Kuopio',
+  35818 => 'Ahvenanmaa',
+  35819 => 'Uusimaa',
+  3582 => 'Turku/Pori',
+  3583 => 'Häme',
+  35851 => 'Kymi',
+  35852 => 'Kymi',
+  35853 => 'Kymi',
+  35854 => 'Kymi',
+  35855 => 'Kymi',
+  35856 => 'Kymi',
+  35857 => 'Kymi',
+  35858 => 'Kymi',
+  3586 => 'Vaasa',
+  3588 => 'Oulu',
+  3589 => 'Helsinki',
+);

@@ -26,7 +26,7 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '
-          [09]\\d{1,2}|
+          [09]\\d{2}|
           1(?:
             [02-9]\\d?|
             1[0-24-9]?
@@ -89,7 +89,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          00|
+          000|
           1(?:
             0[0-35-7]|
             1[02-5]|
@@ -129,8 +129,8 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
-  'mobileNumberPortableRegion' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
+  'mobileNumberPortableRegion' => false,
 );
 /* EOF */

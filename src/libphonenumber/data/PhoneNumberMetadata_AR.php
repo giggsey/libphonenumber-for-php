@@ -467,17 +467,6 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    10 => 
-    array (
-      'pattern' => '(\\d{2})',
-      'format' => '$1',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '0',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
   ),
   'intlNumberFormat' => 
   array (
@@ -700,8 +689,8 @@ return array (
       ),
     ),
   ),
-  'mainCountryForCode' => NULL,
-  'leadingZeroPossible' => NULL,
+  'mainCountryForCode' => false,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
 /* EOF */
