@@ -1,4 +1,4 @@
-# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php)
+# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php) [![Coverage Status](https://coveralls.io/repos/giggsey/libphonenumber-for-php/badge.png)](https://coveralls.io/r/giggsey/libphonenumber-for-php)
 
 [![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 [![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
