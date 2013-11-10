@@ -88,7 +88,7 @@ class ShortNumberInfo
      * @param $regionCode
      * @return PhoneMetadata|null
      */
-    private function getMetadataForRegion($regionCode)
+    public function getMetadataForRegion($regionCode)
     {
         if (!in_array($regionCode, ShortNumbersRegionCodeSet::$shortNumbersRegionCodeSet)) {
             return null;
