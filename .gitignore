@@ -24,3 +24,4 @@ Session.vim
 composer.phar
 composer.lock
 libphonenumber-data-dir/
+build/logs/

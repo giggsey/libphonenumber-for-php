@@ -1,15 +1,20 @@
 language: php
+
 php:
   - 5.3
   - 5.4
   - 5.5
 
 before_script:
- - composer install
+ - wget http://getcomposer.org/composer.phar
+ - php composer.phar install --dev --no-interaction
+ - mkdir -p build/logs
 
-# omitting "script:" will default to phpunit
-# use the $DB env variable to determine the phpunit.xml to use
-script: ./vendor/bin/phpunit --coverage-text
+script:
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+after_script:
+  - php vendor/bin/coveralls -v --exclude-no-stmt
 
 notifications:
   irc: "irc.appliedirc.com#applied"

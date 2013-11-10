@@ -11,6 +11,17 @@
     <filter>
         <whitelist>
             <directory suffix=".php">./src/</directory>
+            <exclude>
+                <!-- Exclude data directories, and files -->
+                <directory suffix=".php">./src/libphonenumber/data/</directory>
+                <directory suffix=".php">./src/libphonenumber/carrier/data/</directory>
+                <directory suffix=".php">./src/libphonenumber/geocoding/data/</directory>
+                <directory suffix=".php">./src/libphonenumber/timezone/data/</directory>
+                <file>./src/libphonenumber/AlternateFormatsCountryCodeSet.php</file>
+                <file>./src/libphonenumber/CountryCodeToRegionCodeMap.php</file>
+                <file>./src/libphonenumber/CountryCodeToRegionCodeMapForTesting.php</file>
+                <file>./src/libphonenumber/RegionCode.php</file>
+            </exclude>
         </whitelist>
     </filter>
 
