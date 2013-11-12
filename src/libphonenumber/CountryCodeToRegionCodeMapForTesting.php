@@ -22,6 +22,10 @@ class CountryCodeToRegionCodeMapForTesting {
   array (
     0 => 'FR',
   ),
+  36 => 
+  array (
+    0 => 'HU',
+  ),
   39 => 
   array (
     0 => 'IT',
@@ -54,6 +58,8 @@ class CountryCodeToRegionCodeMapForTesting {
   61 => 
   array (
     0 => 'AU',
+    1 => 'CC',
+    2 => 'CX',
   ),
   64 => 
   array (

@@ -31,6 +31,7 @@ class RegionCode
     const AQ = "AQ";
     const AR = "AR";
     const AU = "AU";
+    const BB = "BB";
     const BR = "BR";
     const BS = "BS";
     const BY = "BY";
@@ -39,9 +40,11 @@ class RegionCode
     const CL = "CL";
     const CN = "CN";
     const CS = "CS";
+    const CX = "CX";
     const DE = "DE";
     const FR = "FR";
     const GB = "GB";
+    const HU = "HU";
     const IT = "IT";
     const JP = "JP";
     const KR = "KR";

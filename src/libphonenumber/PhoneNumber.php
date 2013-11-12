@@ -153,11 +153,34 @@ class PhoneNumber {
 		return $this;
 	}
 
+    private $hasNumberOfLeadingZeros = false;
+    private $numberOfLeadingZeros = 1;
+    public function hasNumberOfLeadingZeros() {
+        return $this->hasNumberOfLeadingZeros;
+    }
+    public function getNumberOfLeadingZeros() {
+        return $this->numberOfLeadingZeros;
+    }
+
+    public function setNumberOfLeadingZeros($value) {
+        $this->hasNumberOfLeadingZeros = true;
+        $this->numberOfLeadingZeros = $value;
+        return $this;
+    }
+
+    public function clearNumberOfLeadingZeros()
+    {
+        $this->hasNumberOfLeadingZeros = false;
+        $this->numberOfLeadingZeros = 1;
+        return $this;
+    }
+
 	public function clear() {
 		$this->clearCountryCode();
 		$this->clearNationalNumber();
 		$this->clearExtension();
 		$this->clearItalianLeadingZero();
+        $this->clearNumberOfLeadingZeros();
 		$this->clearRawInput();
 		$this->clearCountryCodeSource();
 	  	$this->clearPreferredDomesticCarrierCode();
@@ -177,6 +200,9 @@ class PhoneNumber {
 		if ($other->hasItalianLeadingZero()) {
 			$this->setItalianLeadingZero($other->isItalianLeadingZero());
 		}
+        if ($other->hasNumberOfLeadingZeros()) {
+            $this->setNumberOfLeadingZeros($other->getNumberOfLeadingZeros());
+        }
 		if ($other->hasRawInput()) {
 			$this->setRawInput($other->getRawInput());
 		}
@@ -199,13 +225,14 @@ class PhoneNumber {
                 (!$this->hasExtension() || $this->hasExtension() == $other->hasExtension());
         $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() && 
                 (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
+        $sameZeros = $this->getNumberOfLeadingZeros() == $other->getNumberOfLeadingZeros();
         $sameRaw = $this->hasRawInput() == $other->hasRawInput() && 
                 (!$this->hasRawInput() || $this->getRawInput() == $other->getRawInput());
         $sameCountrySource = $this->hasCountryCodeSource() == $other->hasCountryCodeSource() && 
                 (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
         $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() && 
                 (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode() == $other->getPreferredDomesticCarrierCode());
-        return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameRaw && $sameCountrySource && $samePrefCar;
+        return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
     }
 
 	public function __toString() {

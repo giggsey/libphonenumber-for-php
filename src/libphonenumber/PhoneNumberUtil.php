@@ -678,8 +678,12 @@ class PhoneNumberUtil
      */
     public function getNationalSignificantNumber(PhoneNumber $number)
     {
-        // If a leading zero has been set, we prefix this now. Note this is not a national prefix.
-        $nationalNumber = $number->isItalianLeadingZero() ? "0" : "";
+        // If leading zero(s) have been set, we prefix this now. Note this is not a national prefix.
+        $nationalNumber = '';
+        if ($number->isItalianLeadingZero()) {
+            $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
+            $nationalNumber .= $zeros;
+        }
         $nationalNumber .= $number->getNationalNumber();
         return $nationalNumber;
     }
@@ -741,6 +745,21 @@ class PhoneNumberUtil
         $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
 
         return $this->isNumberPossibleForDesc($nationalNumber, $numberDesc) && $nationalNumberPatternMatcher->matches();
+    }
+
+    /**
+     *
+     * Helper method to check whether a number is too short to be a regular length phone number in a
+     * region.
+     *
+     * @param PhoneMetadata $regionMetadata
+     * @param $number
+     * @return bool
+     */
+    private function isShorterThanPossibleNormalNumber(PhoneMetadata $regionMetadata, $number)
+    {
+        $possibleNumberPattern = $regionMetadata->getGeneralDesc()->getPossibleNumberPattern();
+        return ($this->testNumberLengthAgainstPattern($possibleNumberPattern, $number) === ValidationResult::TOO_SHORT);
     }
 
     public function isNumberPossibleForDesc($nationalNumber, PhoneNumberDesc $numberDesc)
@@ -1233,6 +1252,27 @@ class PhoneNumberUtil
     }
 
     /**
+     * A helper function to set the values related to leading zeros in a PhoneNumber.
+     * @param $nationalNumber
+     * @param PhoneNumber $phoneNumber
+     */
+    public static function setItalianLeadingZerosForPhoneNumber($nationalNumber, PhoneNumber $phoneNumber) {
+        if (strlen($nationalNumber) > 1 && substr($nationalNumber, 0, 1) == '0') {
+            $phoneNumber->setItalianLeadingZero(true);
+            $numberOfLeadingZeros = 1;
+            // Note that if the national number is all "0"s, the last "0" is not counted as a leading
+            // zero.
+            while ($numberOfLeadingZeros < (strlen($nationalNumber) - 1) && substr($nationalNumber, $numberOfLeadingZeros, 1) == '0') {
+                $numberOfLeadingZeros++;
+            }
+
+            if ($numberOfLeadingZeros != 1) {
+                $phoneNumber->setNumberOfLeadingZeros($numberOfLeadingZeros);
+            }
+        }
+    }
+
+    /**
      * Parses a string and fills up the phoneNumber. This method is the same as the public
      * parse() method, with the exception that it allows the default region to be null, for use by
      * isNumberMatch(). checkRegion should be set to false if it is permitted for the default region
@@ -1341,9 +1381,16 @@ class PhoneNumberUtil
         }
         if ($regionMetadata !== null) {
             $carrierCode = "";
-            $this->maybeStripNationalPrefixAndCarrierCode($normalizedNationalNumber, $regionMetadata, $carrierCode);
-            if ($keepRawInput) {
-                $phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
+            $potentialNationalNumber = $normalizedNationalNumber;
+            $this->maybeStripNationalPrefixAndCarrierCode($potentialNationalNumber, $regionMetadata, $carrierCode);
+            // We require that the NSN remaining after stripping the national prefix and carrier code be
+            // of a possible length for the region. Otherwise, we don't do the stripping, since the
+            // original number could be a valid short number.
+            if (!$this->isShorterThanPossibleNormalNumber($regionMetadata, $potentialNationalNumber)) {
+                $normalizedNationalNumber = $potentialNationalNumber;
+                if ($keepRawInput) {
+                    $phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
+                }
             }
         }
         $lengthOfNationalNumber = mb_strlen($normalizedNationalNumber);
@@ -1355,9 +1402,7 @@ class PhoneNumberUtil
             throw new NumberParseException(NumberParseException::TOO_LONG,
                 "The string supplied is too long to be a phone number.");
         }
-        if ($normalizedNationalNumber[0] == '0') {
-            $phoneNumber->setItalianLeadingZero(true);
-        }
+        $this->setItalianLeadingZerosForPhoneNumber($normalizedNationalNumber, $phoneNumber);
         $phoneNumber->setNationalNumber((float)$normalizedNationalNumber);
     }
 
@@ -1436,17 +1481,6 @@ class PhoneNumberUtil
         if ($match > 0) {
             $number = substr($number, $matches[0][1]);
             // Remove trailing non-alpha non-numerical characters.
-            /*$match = preg_match('/' . self::$UNWANTED_END_CHAR_PATTERN . '/', $number, $matches, PREG_OFFSET_CAPTURE);
-            if ($match > 0) {
-                $number = substr($number, 0, $matches[0][1]);
-            }
-                 Matcher trailingCharsMatcher = UNWANTED_END_CHAR_PATTERN.matcher(number);
-      if (trailingCharsMatcher.find()) {
-          number = number.substring(0, trailingCharsMatcher.start());
-          logger.log(Level.FINER, "Stripped trailing characters: " + number);
-      }
-            */
-
             $trailingCharsMatcher = new Matcher(self::$UNWANTED_END_CHAR_PATTERN, $number);
             if ($trailingCharsMatcher->find() && $trailingCharsMatcher->start() > 0) {
                 $number = substr($number, 0, $trailingCharsMatcher->start());
@@ -1905,8 +1939,9 @@ class PhoneNumberUtil
         $numberNoExt = new PhoneNumber();
         $numberNoExt->mergeFrom($number)->clearExtension();
         $regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+        $numberType = $this->getNumberType($numberNoExt);
+        $isValidNumber = ($numberType !== PhoneNumberType::UNKNOWN);
         if ($regionCallingFrom == $regionCode) {
-            $numberType = $this->getNumberType($numberNoExt);
             $isFixedLineOrMobile = ($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) || ($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE);
             // Carrier codes may be needed in some countries. We handle this here.
             if ($regionCode == "CO" && $numberType == PhoneNumberType::FIXED_LINE) {
@@ -1920,19 +1955,30 @@ class PhoneNumberUtil
                 // Because of that, we return an empty string here.
                 $formattedNumber = $numberNoExt->hasPreferredDomesticCarrierCode(
                 ) ? $this->formatNationalNumberWithCarrierCode($numberNoExt, "") : "";
-            } elseif ($regionCode == "HU") {
+            } elseif ($isValidNumber && $regionCode == "HU") {
                 // The national format for HU numbers doesn't contain the national prefix, because that is
                 // how numbers are normally written down. However, the national prefix is obligatory when
-                // dialing from a mobile phone. As a result, we add it back here.
+                // dialing from a mobile phone, except for short numbers. As a result, we add it back here
+                // if it is a valid regular length phone number.
                 $formattedNumber = $this->getNddPrefixForRegion(
                         $regionCode,
                         true /* strip non-digits */
-                    ) . " " . $this->format($numberNoExt, PhoneNumberType::NATIONAL);
+                    ) . " " . $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+            } elseif ($countryCallingCode === self::NANPA_COUNTRY_CODE) {
+                // For NANPA countries, we output international format for numbers that can be dialed
+                // internationally, since that always works, except for numbers which might potentially be
+                // short numbers, which are always dialled in national format.
+                $regionMetadata = $this->getMetadataForRegion($regionCallingFrom);
+                if ($this->canBeInternationallyDialled($numberNoExt) && !$this->isShorterThanPossibleNormalNumber($regionMetadata, $this->getNationalSignificantNumber($numberNoExt))) {
+                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
+                } else {
+                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+                }
             } else {
-                // For NANPA countries, non-geographical countries, Mexican and Chilean fixed line and
-                // mobile numbers, we output international format for numbers that can be dialed
-                // internationally as that always works.
-                if (($countryCallingCode == self::NANPA_COUNTRY_CODE || $regionCode == self::REGION_CODE_FOR_NON_GEO_ENTITY ||
+                // For non-geographical countries, Mexican and Chilean fixed line and mobile numbers, we
+                // output international format for numbers that can be dialed internationally as that always
+                // works.
+                if (($regionCode == self::REGION_CODE_FOR_NON_GEO_ENTITY ||
                         // MX fixed line and mobile numbers should always be formatted in international format,
                         // even when dialed within MX. For national format to work, a carrier code needs to be
                         // used, and the correct carrier code depends on if the caller and callee are from the
@@ -1950,7 +1996,10 @@ class PhoneNumberUtil
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
             }
-        } elseif ($this->canBeInternationallyDialled($numberNoExt)) {
+        } elseif ($isValidNumber && $this->canBeInternationallyDialled($numberNoExt)) {
+            // We assume that short numbers are not diallable from outside their region, so if a number
+            // is not a valid regular length phone number, we treat it as if it cannot be internationally
+            // dialled.
             return $withFormatting ? $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL) : $this->format(
                 $numberNoExt,
                 PhoneNumberFormat::E164

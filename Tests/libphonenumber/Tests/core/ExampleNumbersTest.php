@@ -185,38 +185,6 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         return $returnList;
     }
 
-    /**
-     * @dataProvider shortNumberRegionList
-     */
-    public function testEmergency($regionCode)
-    {
-        if ($regionCode == RegionCode::PG) {
-            // The only short number for Papua New Guinea is 000, which fails the test, since the
-            // national prefix is 0. This needs to be fixed.
-            return;
-        }
-
-        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)->getEmergency();
-        if ($desc->hasExampleNumber()) {
-            $exampleNumber = $desc->getExampleNumber();
-            $possibleNumberPattern = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
-            if (!$possibleNumberPattern->matches() || !$this->shortNumberInfo->isEmergencyNumber(
-                    $exampleNumber,
-                    $regionCode
-                )
-            ) {
-                $this->fail("Emergency example number test failed for " . $regionCode);
-            } else {
-                $emergencyNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
-                if ($this->shortNumberInfo->getExpectedCost($emergencyNumber) !== ShortNumberCost::TOLL_FREE) {
-                    // TODO: Reenable this when a method is available to get the expected cost for a
-                    // particular region.
-                    // $this->fail("Emergency example number not toll free for " . $regionCode);
-                }
-            }
-        }
-    }
-
     public function supportedGlobalNetworkCallingCodes()
     {
         $returnList = array();
@@ -256,20 +224,14 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
      */
     public function testShortNumbersValidAndCorrectCost($regionCode)
     {
-        if ($regionCode == RegionCode::PG) {
-            // The only short number for Papua New Guinea is 000, which fails the test, since the
-            // national prefix is 0. This needs to be fixed.
-            return;
-        }
-
         $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumber($regionCode);
-        if (!$this->shortNumberInfo->isValidShortNumber($exampleShortNumber, $regionCode)) {
+        if (!$this->shortNumberInfo->isValidShortNumberForRegion($exampleShortNumber, $regionCode)) {
             $this->fail(
                 "Failed validation for string region_code: {$regionCode}, national_number: {$exampleShortNumber}"
             );
         }
         $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
-        if (!$this->shortNumberInfo->isValidShortNumberFromNumber($phoneNumber)) {
+        if (!$this->shortNumberInfo->isValidShortNumber($phoneNumber)) {
             $this->fail("Failed validation for " . (string)$phoneNumber);
         }
 
@@ -289,6 +251,44 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
                     $this->shortNumberInfo->getExpectedCost($phoneNumber),
                     "Wrong cost for " . (string)$phoneNumber
                 );
+            }
+        }
+    }
+
+    /**
+     * @dataProvider shortNumberRegionList
+     */
+    public function testEmergency($regionCode)
+    {
+        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)->getEmergency();
+        if ($desc->hasExampleNumber()) {
+            $exampleNumber = $desc->getExampleNumber();
+            $possibleNumberPattern = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
+            if (!$possibleNumberPattern->matches() || !$this->shortNumberInfo->isEmergencyNumber(
+                    $exampleNumber,
+                    $regionCode
+                )
+            ) {
+                $this->fail("Emergency example number test failed for " . $regionCode);
+            } elseif ($this->shortNumberInfo->getExpectedCostForRegion($exampleNumber, $regionCode) !== ShortNumberCost::TOLL_FREE) {
+                $this->fail("Emergency example number not toll free for " . $regionCode);
+            }
+        }
+    }
+
+    /**
+     * @dataProvider shortNumberRegionList
+     */
+    public function testCarrierSpecificShortNumbers($regionCode)
+    {
+        // Test the carrier-specific tag.
+        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)->getCarrierSpecific();
+        if ($desc->hasExampleNumber()) {
+            $exampleNumber = $desc->getExampleNumber();
+            $carrierSpecificNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
+            $exampleNumberMatcher = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
+            if ($exampleNumberMatcher->matches() || !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)) {
+                $this->fail("Carrier-specific test failed for " . $regionCode);
             }
         }
     }

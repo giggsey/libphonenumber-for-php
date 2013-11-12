@@ -42,70 +42,166 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $possibleNumber = new PhoneNumber();
         $possibleNumber->setCountryCode(33)->setNationalNumber(123456);
 
-        $this->assertTrue($this->shortInfo->isPossibleShortNumberFromNumber($possibleNumber));
-        $this->assertTrue($this->shortInfo->isPossibleShortNumber(123456, RegionCode::FR));
+        $this->assertTrue($this->shortInfo->isPossibleShortNumber($possibleNumber));
+        $this->assertTrue($this->shortInfo->isPossibleShortNumberForRegion(123456, RegionCode::FR));
 
         $impossibleNumber = new PhoneNumber();
         $impossibleNumber->setCountryCode(33)->setNationalNumber(9);
-        $this->assertFalse($this->shortInfo->isPossibleShortNumberFromNumber($impossibleNumber));
-        $this->assertFalse($this->shortInfo->isPossibleShortNumber(9, RegionCode::FR));
+        $this->assertFalse($this->shortInfo->isPossibleShortNumber($impossibleNumber));
+        $this->assertFalse($this->shortInfo->isPossibleShortNumberForRegion(9, RegionCode::FR));
+
+        // Note that GB and GG share the country calling code 44, and that this number is possible but
+        // not valid.
+        $gbNumber = new PhoneNumber();
+        $gbNumber->setCountryCode(44)->setNationalNumber(11001);
+        $this->assertTrue($this->shortInfo->isPossibleShortNumber($gbNumber));
     }
 
     public function testIsValidShortNumber()
     {
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(33)->setNationalNumber(1010);
-        $this->assertTrue($this->shortInfo->isValidShortNumberFromNumber($phoneNumberObj));
-        $this->assertTrue($this->shortInfo->isValidShortNumber(1010, RegionCode::FR));
+        $this->assertTrue($this->shortInfo->isValidShortNumber($phoneNumberObj));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion(1010, RegionCode::FR));
 
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(33)->setNationalNumber(123456);
-        $this->assertFalse($this->shortInfo->isValidShortNumberFromNumber($phoneNumberObj));
-        $this->assertFalse($this->shortInfo->isValidShortNumber(123456, RegionCode::FR));
+        $this->assertFalse($this->shortInfo->isValidShortNumber($phoneNumberObj));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion(123456, RegionCode::FR));
 
         // Note that GB and GG share the country calling code 44
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(44)->setNationalNumber(18001);
-        $this->assertTrue($this->shortInfo->isValidShortNumberFromNumber($phoneNumberObj));
+        $this->assertTrue($this->shortInfo->isValidShortNumber($phoneNumberObj));
     }
 
     public function testGetExpectedCost()
     {
-        $premiumRateNumber = new PhoneNumber();
-        $premiumRateNumber->setCountryCode(33)->setNationalNumber(
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::PREMIUM_RATE)
+        $premiumRateExample = $this->shortInfo->getExampleShortNumberForCost(
+            RegionCode::FR,
+            ShortNumberCost::PREMIUM_RATE
         );
+        $this->assertEquals(
+            ShortNumberCost::PREMIUM_RATE,
+            $this->shortInfo->getExpectedCostForRegion($premiumRateExample, RegionCode::FR)
+        );
+
+        $premiumRateNumber = new PhoneNumber();
+        $premiumRateNumber->setCountryCode(33)->setNationalNumber($premiumRateExample);
         $this->assertEquals(ShortNumberCost::PREMIUM_RATE, $this->shortInfo->getExpectedCost($premiumRateNumber));
 
-        $standardRateNumber = new PhoneNumber();
-        $standardRateNumber->setCountryCode(33)->setNationalNumber(
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::STANDARD_RATE)
+        $standardRateExample = $this->shortInfo->getExampleShortNumberForCost(
+            RegionCode::FR,
+            ShortNumberCost::STANDARD_RATE
         );
         $this->assertEquals(
             ShortNumberCost::STANDARD_RATE,
-            $this->shortInfo->getExpectedCost($standardRateNumber)
+            $this->shortInfo->getExpectedCostForRegion($standardRateExample, RegionCode::FR)
         );
 
-        $tollFreeNumber = new PhoneNumber();
-        $tollFreeNumber->setCountryCode(33)->setNationalNumber(
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE)
+        $standardRateNumber = new PhoneNumber();
+        $standardRateNumber->setCountryCode(33)->setNationalNumber($standardRateExample);
+        $this->assertEquals(ShortNumberCost::STANDARD_RATE, $this->shortInfo->getExpectedCost($standardRateNumber));
+
+        $tollFreeExample = $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE);
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion($tollFreeExample, RegionCode::FR)
         );
+        $tollFreeNumber = new PhoneNumber();
+        $tollFreeNumber->setCountryCode(33)->setNationalNumber($tollFreeExample);
         $this->assertEquals(ShortNumberCost::TOLL_FREE, $this->shortInfo->getExpectedCost($tollFreeNumber));
 
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion("12345", RegionCode::FR)
+        );
         $unknownCostNumber = new PhoneNumber();
         $unknownCostNumber->setCountryCode(33)->setNationalNumber(12345);
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($unknownCostNumber));
 
         // Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion("116123", RegionCode::FR));
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion("116123", RegionCode::FR)
+        );
         $invalidNumber = new PhoneNumber();
         $invalidNumber->setCountryCode(33)->setNationalNumber(116123);
-        $this->assertFalse($this->shortInfo->isValidShortNumberFromNumber($invalidNumber));
+        $this->assertFalse($this->shortInfo->isValidShortNumber($invalidNumber));
         $this->assertEquals(ShortNumberCost::TOLL_FREE, $this->shortInfo->getExpectedCost($invalidNumber));
 
-        // Test a non-existent country code.
+        // Test a nonexistent country code.
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion("911", RegionCode::ZZ)
+        );
         $unknownCostNumber->clear();
         $unknownCostNumber->setCountryCode(123)->setNationalNumber(911);
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($unknownCostNumber));
+    }
+
+    public function testGetExpectedCostForSharedCountryCallingCode()
+    {
+        // Test some numbers which have different costs in countries sharing the same country calling
+        // code. In Australia, 1234 is premium-rate, 1194 is standard-rate, and 733 is toll-free. These
+        // are not known to be valid numbers in the Christmas Islands.
+        $ambiguousPremiumRateString = "1234";
+        $ambiguousPremiumRateNumber = new PhoneNumber();
+        $ambiguousPremiumRateNumber->setCountryCode(61)->setNationalNumber(1234);
+        $ambiguousStandardRateString = "1194";
+        $ambiguousStandardRateNumber = new PhoneNumber();
+        $ambiguousStandardRateNumber->setCountryCode(61)->setNationalNumber(1194);
+        $ambiguousTollFreeString = "733";
+        $ambiguousTollFreeNumber = new PhoneNumber();
+        $ambiguousTollFreeNumber->setCountryCode(61)->setNationalNumber(733);
+
+        $this->assertTrue($this->shortInfo->isValidShortNumber($ambiguousPremiumRateNumber));
+        $this->assertTrue($this->shortInfo->isValidShortNumber($ambiguousStandardRateNumber));
+        $this->assertTrue($this->shortInfo->isValidShortNumber($ambiguousTollFreeNumber));
+
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousPremiumRateString, RegionCode::AU));
+        $this->assertEquals(
+            ShortNumberCost::PREMIUM_RATE,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousPremiumRateString, RegionCode::AU)
+        );
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousPremiumRateString, RegionCode::CX));
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousPremiumRateString, RegionCode::CX)
+        );
+        // PREMIUM_RATE takes precedence over UNKNOWN_COST.
+        $this->assertEquals(
+            ShortNumberCost::PREMIUM_RATE,
+            $this->shortInfo->getExpectedCost($ambiguousPremiumRateNumber)
+        );
+
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousStandardRateString, RegionCode::AU));
+        $this->assertEquals(
+            ShortNumberCost::STANDARD_RATE,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousStandardRateString, RegionCode::AU)
+        );
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousStandardRateString, RegionCode::CX));
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousStandardRateString, RegionCode::CX)
+        );
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCost($ambiguousStandardRateNumber)
+        );
+
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousTollFreeString, RegionCode::AU));
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousTollFreeString, RegionCode::AU)
+        );
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousTollFreeString, RegionCode::CX));
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion($ambiguousTollFreeString, RegionCode::CX)
+        );
+        $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($ambiguousTollFreeNumber));
     }
 
     public function testGetExampleShortNumber()
@@ -273,6 +369,49 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->shortInfo->isEmergencyNumber("911", RegionCode::ZW));
         $this->assertFalse($this->shortInfo->isEmergencyNumber("01312345", RegionCode::ZW));
         $this->assertFalse($this->shortInfo->isEmergencyNumber("0711234567", RegionCode::ZW));
+    }
+
+
+    public function testEmergencyNumberForSharedCountryCallingCode()
+    {
+        // Test the emergency number 112, which is valid in both Australia and the Christmas Islands.
+        $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion("112", RegionCode::AU));
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion("112", RegionCode::AU)
+        );
+        $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::CX));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion("112", RegionCode::CX));
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion("112", RegionCode::CX)
+        );
+        $sharedEmergencyNumber = new PhoneNumber();
+        $sharedEmergencyNumber->setCountryCode(61)->setNationalNumber(112);
+        $this->assertTrue($this->shortInfo->isValidShortNumber($sharedEmergencyNumber));
+        $this->assertEquals(ShortNumberCost::TOLL_FREE, $this->shortInfo->getExpectedCost($sharedEmergencyNumber));
+    }
+
+    public function testOverlappingNANPANumber()
+    {
+        // 211 is an emergency number in Barbados, while it is a toll-free information line in Canada
+        // and the USA.
+        $this->assertTrue($this->shortInfo->isEmergencyNumber("211", RegionCode::BB));
+        $this->assertEquals(
+            ShortNumberCost::TOLL_FREE,
+            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::BB)
+        );
+        $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::US));
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::US)
+        );
+        $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::CA));
+        $this->assertEquals(
+            ShortNumberCost::UNKNOWN_COST,
+            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::CA)
+        );
     }
 }
 

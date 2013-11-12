@@ -1059,6 +1059,43 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             "+80012345678",
             $this->phoneUtil->formatNumberForMobileDialing(self::$internationalTollFree, RegionCode::UN001, false)
         );
+
+        // Test that a short number is formatted correctly for mobile dialing within the region,
+        // and is not diallable from outside the region.
+        $deShortNumber = new PhoneNumber();
+        $deShortNumber->setCountryCode(49)->setNationalNumber(123);
+        $this->assertEquals("123", $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::DE, false));
+        $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::IT, false));
+
+        // Test the special logic for Hungary, where the national prefix must be added before dialing
+        // from a mobile phone for regular length numbers, but not for short numbers.
+        $huRegularNumber = new PhoneNumber();
+        $huRegularNumber->setCountryCode(36)->setNationalNumber(301234567);
+        $this->assertEquals("06301234567", $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber,RegionCode::HU, false));
+        $this->assertEquals("+36301234567", $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::JP, false));
+        $huShortNumber = new PhoneNumber();
+        $huShortNumber->setCountryCode(36)->setNationalNumber(104);
+        $this->assertEquals("104", $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::HU,false));
+        $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::JP, false));
+
+        // Test the special logic for NANPA countries, for which regular length phone numbers are always
+        // output in international format, but short numbers are in national format.
+        $usRegularNumber = new PhoneNumber();
+        $usRegularNumber->setCountryCode(1)->setNationalNumber(6502530000);;
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::US, false));
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::CA, false));
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::BR, false));
+        $usShortNumber = new PhoneNumber();
+        $usShortNumber->setCountryCode(1)->setNationalNumber(911);
+        $this->assertEquals("911", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::US, false));
+        $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::CA, false));
+        $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::BR, false));
+
+        // Test that the Australian emergency number 000 is formatted correctly.
+        $auNumber = new PhoneNumber();
+        $auNumber->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(2);
+        $this->assertEquals("000", $this->phoneUtil->formatNumberForMobileDialing($auNumber, RegionCode::AU, false));
+        $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($auNumber, RegionCode::NZ, false));
     }
 
     public function testFormatByPattern()
@@ -2790,6 +2827,27 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($nzNumberWithRawInput, $this->phoneUtil->parseAndKeepRawInput("+64 3 331 6005", null));
     }
 
+    public function testParseNumberTooShortIfNationalPrefixStripped()
+    {
+        // Test that a number whose first digits happen to coincide with the national prefix does not
+        // get them stripped if doing so would result in a number too short to be a possible (regular
+        // length) phone number for that region.
+        $byNumber = new PhoneNumber();
+        $byNumber->setCountryCode(375)->setNationalNumber(8123);
+        $this->assertEquals($byNumber, $this->phoneUtil->parse("8123", RegionCode::BY));
+        $byNumber->setNationalNumber(81234);
+        $this->assertEquals($byNumber, $this->phoneUtil->parse("81234", RegionCode::BY));
+
+        // The prefix doesn't get stripped, since the input is a viable 6-digit number, whereas the
+        // result of stripping is only 5 digits.
+        $byNumber->setNationalNumber(812345);
+        $this->assertEquals($byNumber, $this->phoneUtil->parse("812345", RegionCode::BY));
+
+        // The prefix gets stripped, since only 6-digit numbers are possible.
+        $byNumber->setNationalNumber(123456);
+        $this->assertEquals($byNumber, $this->phoneUtil->parse("8123456", RegionCode::BY));
+    }
+
     public function testParseExtensions()
     {
         $nzNumber = new PhoneNumber();
@@ -2935,6 +2993,29 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($koreanNumber, $this->phoneUtil->parseAndKeepRawInput("08122123456", RegionCode::KR));
     }
 
+    public function testParseItalianLeadingZeros()
+    {
+        // Test the number "011".
+        $oneZero = new PhoneNumber();
+        $oneZero->setCountryCode(61)->setNationalNumber(11)->setItalianLeadingZero(true);
+        $this->assertEquals($oneZero, $this->phoneUtil->parse("011", RegionCode::AU));
+
+        // Test the number "001".
+        $twoZeros = new PhoneNumber();
+        $twoZeros->setCountryCode(61)->setNationalNumber(1)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(2);
+        $this->assertEquals($twoZeros, $this->phoneUtil->parse("001", RegionCode::AU));
+
+        // Test the number "000". This number has 2 leading zeros.
+        $stillTwoZeros = new PhoneNumber();
+        $stillTwoZeros->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(2);
+        $this->assertEquals($stillTwoZeros, $this->phoneUtil->parse("000", RegionCode::AU));
+
+        // Test the number "0000". This number has 3 leading zeros.
+        $threeZeros = new PhoneNumber();
+        $threeZeros->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(3);
+        $this->assertEquals($threeZeros, $this->phoneUtil->parse("0000", RegionCode::AU));
+    }
+
     public function testCountryWithNoNumberDesc()
     {
         // Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
@@ -2968,7 +3049,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testIsNumberMatchMatches()
     {
-        // Test simple matches where formatting is different, or leading zeroes, or country calling code
+        // Test simple matches where formatting is different, or leading zeros, or country calling code
         // has been specified.
         $this->assertEquals(
             MatchType::EXACT_MATCH,
