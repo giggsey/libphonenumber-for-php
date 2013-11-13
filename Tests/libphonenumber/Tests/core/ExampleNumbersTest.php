@@ -13,7 +13,6 @@ use libphonenumber\Matcher;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
-use libphonenumber\RegionCode;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
 
@@ -33,9 +32,14 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
      */
     private $shortNumberInfo;
 
-    public function setUp()
+    public static function setUpBeforeClass()
     {
         PhoneNumberUtil::resetInstance();
+        PhoneNumberUtil::getInstance();
+    }
+
+    public function setUp()
+    {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
         $this->shortNumberInfo = ShortNumberInfo::getInstance($this->phoneNumberUtil);
     }
@@ -245,10 +249,9 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         foreach ($costArray as $cost) {
             $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumberForCost($regionCode, $cost);
             if ($exampleShortNumber != '') {
-                $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
                 $this->assertEquals(
                     $cost,
-                    $this->shortNumberInfo->getExpectedCost($phoneNumber),
+                    $this->shortNumberInfo->getExpectedCostForRegion($exampleShortNumber, $regionCode),
                     "Wrong cost for " . (string)$phoneNumber
                 );
             }
@@ -270,7 +273,11 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
                 )
             ) {
                 $this->fail("Emergency example number test failed for " . $regionCode);
-            } elseif ($this->shortNumberInfo->getExpectedCostForRegion($exampleNumber, $regionCode) !== ShortNumberCost::TOLL_FREE) {
+            } elseif ($this->shortNumberInfo->getExpectedCostForRegion(
+                    $exampleNumber,
+                    $regionCode
+                ) !== ShortNumberCost::TOLL_FREE
+            ) {
                 $this->fail("Emergency example number not toll free for " . $regionCode);
             }
         }
@@ -287,7 +294,9 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             $exampleNumber = $desc->getExampleNumber();
             $carrierSpecificNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
             $exampleNumberMatcher = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
-            if ($exampleNumberMatcher->matches() || !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)) {
+            if (!$exampleNumberMatcher->matches() ||
+                !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)
+            ) {
                 $this->fail("Carrier-specific test failed for " . $regionCode);
             }
         }

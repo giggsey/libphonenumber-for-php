@@ -174,7 +174,7 @@ class PhoneNumberOfflineGeocoder
                 $nationalNumber = substr($nationalNumber, strlen($mobileToken));
                 $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
                 try {
-                    $copiedNumber = $this->phoneUtil->parse($number, $region);
+                    $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
                 } catch (NumberParseException $e) {
                     // If this happens, just reuse what we had.
                     $copiedNumber = $number;

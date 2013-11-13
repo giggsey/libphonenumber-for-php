@@ -9,7 +9,6 @@ return array (
   array (
     'NationalNumberPattern' => '[169]\\d{6,7}',
     'PossibleNumberPattern' => '\\d{7,8}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
@@ -18,10 +17,11 @@ return array (
             [48]\\d{2}|
             50\\d|
             7(?:
-              2[0-2]|
+              2[0-24]|
               [34]\\d|
               6[35-7]|
-              77
+              77|
+              8[7-9]
             )
           )\\d{4}
         ',
@@ -37,7 +37,7 @@ return array (
               3[01]
             )|
             6(?:
-              [1679]\\d|
+              [16-9]\\d|
               3[01]
             )
           )\\d{4}
@@ -49,13 +49,11 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
@@ -72,13 +70,11 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
@@ -90,43 +86,36 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'CW',
   'countryCode' => 599,

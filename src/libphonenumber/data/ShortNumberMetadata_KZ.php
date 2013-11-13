@@ -7,63 +7,53 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[13]\\d{2,4}',
+    'NationalNumberPattern' => '[134]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[13]\\d{2,4}',
+    'NationalNumberPattern' => '[134]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[13]\\d{2,4}',
+    'NationalNumberPattern' => '[134]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -80,7 +70,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -89,7 +78,8 @@ return array (
             0[123]|
             12
           )|
-          30400
+          30400|
+          4040
         ',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '112',
@@ -98,19 +88,20 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '30400',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '
+          30400|
+          4040
+        ',
+    'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '30400',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'KZ',
   'countryCode' => 0,

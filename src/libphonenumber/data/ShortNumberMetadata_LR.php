@@ -7,63 +7,53 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[389]\\d{2,3}',
+    'NationalNumberPattern' => '[3489]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[389]\\d{2,3}',
+    'NationalNumberPattern' => '[3489]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[389]\\d{2,3}',
+    'NationalNumberPattern' => '[3489]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -78,13 +68,16 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
           355|
-          8400|
+          4040|
+          8(?:
+            400|
+            933
+          )|
           911
         ',
     'PossibleNumberPattern' => '\\d{3,4}',
@@ -94,11 +87,16 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '8400',
+    'NationalNumberPattern' => '
+          4040|
+          8(?:
+            400|
+            933
+          )
+        ',
     'PossibleNumberPattern' => '\\d{4}',
     'ExampleNumber' => '8400',
   ),
@@ -106,7 +104,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'LR',
   'countryCode' => 0,

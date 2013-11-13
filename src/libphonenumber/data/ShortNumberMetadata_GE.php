@@ -7,63 +7,53 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[01]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[041]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[01]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[041]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[01]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[041]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -85,7 +75,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -98,28 +87,26 @@ return array (
           1(?:
             1[123]|
             22
-          )
+          )|
+          40404
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '40404',
+    'PossibleNumberPattern' => '\\d{5}',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'GE',
   'countryCode' => 0,

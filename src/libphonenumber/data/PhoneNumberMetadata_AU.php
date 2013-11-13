@@ -9,7 +9,6 @@ return array (
   array (
     'NationalNumberPattern' => '[1-578]\\d{5,9}',
     'PossibleNumberPattern' => '\\d{6,10}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
@@ -41,10 +40,11 @@ return array (
             [0-2]\\d|
             3[0-57-9]|
             4[47-9]|
-            5[0-35-9]|
+            5[0-25-9]|
             6[6-9]|
-            [79][07-9]|
-            8[17-9]
+            7[0457-9]|
+            8[17-9]|
+            9[07-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -99,37 +99,31 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (

@@ -7,67 +7,58 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
+    'NationalNumberPattern' => '[16-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
+    'NationalNumberPattern' => '[16-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
+    'NationalNumberPattern' => '[16-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '611',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '611',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '11[78]',
+    'NationalNumberPattern' => '11[237]',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '117',
   ),
@@ -75,11 +66,23 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11[78]',
+    'NationalNumberPattern' => '
+          1(?:
+            1\\d|
+            5[3-6]|
+            6[01]
+          )|
+          611|
+          7(?:
+            10|
+            77
+          )|
+          8[28]8|
+          900
+        ',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '117',
   ),
@@ -87,19 +90,25 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          611|
+          7(?:
+            10|
+            77
+          )|
+          888|
+          900
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '611',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'BI',
   'countryCode' => 0,

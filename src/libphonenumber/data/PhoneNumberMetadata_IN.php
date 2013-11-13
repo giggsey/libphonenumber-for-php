@@ -12,7 +12,6 @@ return array (
           [2-9]\\d{9,10}
         ',
     'PossibleNumberPattern' => '\\d{6,13}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
@@ -215,21 +214,20 @@ return array (
                 8[389]
               )|
               5(?:
-                0\\d|
-                [47]9|
-                [25]0|
-                6[6-9]|
-                [89][7-9]
+                [034678]\\d|
+                2[03-9]|
+                5[017-9]|
+                9[7-9]
               )|
               6(?:
                 0[027]|
-                12|
-                20|
+                1[0-257-9]|
+                2[0-4]|
                 3[19]|
-                5[45]|
-                6[5-9]|
-                7[679]|
-                9[1-46-9]
+                5[4589]|
+                [67]\\d|
+                8[0-489]|
+                9[0-46-9]
               )|
               7(?:
                 0[2-9]|
@@ -303,25 +301,21 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
@@ -333,31 +327,26 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
@@ -398,9 +387,8 @@ return array (
                2[0579]|
                3[057-9]|
                4[0-389]|
-               5[024-9]|
                6[0-35-9]|
-               7|
+               [57]|
                8[0-79]
              )|
              8(?:
@@ -409,7 +397,7 @@ return array (
                2[2356-9]|
                3[0-57-9]|
                [45]|
-               6[0245789]|
+               6[02457-9]|
                7[1-69]|
                8[0124-9]|
                9[02-9]
@@ -438,21 +426,20 @@ return array (
                  8[389]
                )|
                5(?:
-                 0|
-                 [47]9|
-                 [25]0|
-                 6[6-9]|
-                 [89][7-9]
+                 [034678]|
+                 2[03-9]|
+                 5[017-9]|
+                 9[7-9]
                )|
                6(?:
                  0[027]|
-                 12|
-                 20|
+                 1[0-257-9]|
+                 2[0-4]|
                  3[19]|
-                 5[45]|
-                 6[5-9]|
-                 7[679]|
-                 9[1-46-9]
+                 5[4589]|
+                 [67]|
+                 8[0-489]|
+                 9[0-46-9]
                )|
                7(?:
                  0[2-9]|

@@ -7,63 +7,53 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[17]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[17]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d',
-    'PossibleNumberPattern' => '\\d{2}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[17]\\d{1,2}',
+    'PossibleNumberPattern' => '\\d{2,3}',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -75,31 +65,30 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1[47]',
-    'PossibleNumberPattern' => '\\d{2}',
+    'NationalNumberPattern' => '
+          1[47]|
+          730
+        ',
+    'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '17',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '730',
+    'PossibleNumberPattern' => '\\d{3}',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'DZ',
   'countryCode' => 0,

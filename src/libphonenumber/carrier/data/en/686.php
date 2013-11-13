@@ -1,5 +1,6 @@
 <?php
 return array (
-  6866 => 'Kiribati - Frigate Net',
-  6869 => 'Kiribati - Frigate Net',
+  6866 => 'TSKL',
+  6867 => 'TSKL',
+  6869 => 'TSKL',
 );

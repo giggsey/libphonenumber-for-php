@@ -14,7 +14,6 @@ return array (
           [4-68]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
@@ -25,7 +24,6 @@ return array (
           [4-68]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
@@ -36,7 +34,6 @@ return array (
           [4-68]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
@@ -83,31 +80,26 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -124,7 +116,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -184,7 +175,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'FR',
   'countryCode' => 0,
