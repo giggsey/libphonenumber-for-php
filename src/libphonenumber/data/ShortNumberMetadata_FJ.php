@@ -7,63 +7,53 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0-579]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0-579]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[0-579]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0-579]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -75,7 +65,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -90,30 +79,31 @@ return array (
           )|
           2[289]|
           30|
-          [45]4|
+          4(?:
+            0404|
+            4
+          )|
+          54|
           75|
           91[137]
         ',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{2,5}',
     'ExampleNumber' => '22',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'FJ',
   'countryCode' => 0,

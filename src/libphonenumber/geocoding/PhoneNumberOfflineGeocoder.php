@@ -3,6 +3,7 @@
 namespace libphonenumber\geocoding;
 
 
+use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
@@ -171,11 +172,12 @@ class PhoneNumberOfflineGeocoder
                 // In some countries, eg. Argentina, mobile numbers have a mobile token before the national
                 // destination code, this should be removed before geocoding.
                 $nationalNumber = substr($nationalNumber, strlen($mobileToken));
-                $copiedNumber = new PhoneNumber();
-                $copiedNumber->setCountryCode($number->getCountryCode());
-                $copiedNumber->setNationalNumber($nationalNumber);
-                if (substr($nationalNumber, 0, 1) == "0") {
-                    $copiedNumber->setItalianLeadingZero(true);
+                $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
+                try {
+                    $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
+                } catch (NumberParseException $e) {
+                    // If this happens, just reuse what we had.
+                    $copiedNumber = $number;
                 }
                 $areaDescription = $this->prefixFileReader->getDescriptionForNumber($copiedNumber, $languageStr, $scriptStr, $regionStr);
             } else {

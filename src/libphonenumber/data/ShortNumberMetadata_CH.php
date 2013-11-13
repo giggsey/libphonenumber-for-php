@@ -9,19 +9,16 @@ return array (
   array (
     'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '',
   ),
   'tollFree' => 
   array (
@@ -29,7 +26,8 @@ return array (
           1(?:
             16\\d{3}|
             47
-          )
+          )|
+          5200
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '116000',
@@ -51,31 +49,26 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -92,7 +85,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -145,15 +137,19 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '
+          5(?:
+            200|
+            35
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3,4}',
+    'ExampleNumber' => '535',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'CH',
   'countryCode' => 0,

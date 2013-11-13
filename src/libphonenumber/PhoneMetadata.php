@@ -452,6 +452,9 @@ class PhoneMetadata {
         return $this;
     }
 
+    /**
+     * @var PhoneNumberDesc
+     */
     private $short_code;
 
     public function hasShortCode() {
@@ -481,7 +484,9 @@ class PhoneMetadata {
         $this->standard_rate = $value;
         return $this;
     }
-
+    /**
+     * @var PhoneNumberDesc
+     */
     private $carrierSpecific;
 
     public function hasCarrierSpecific() {

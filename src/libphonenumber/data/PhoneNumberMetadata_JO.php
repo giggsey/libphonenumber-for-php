@@ -9,7 +9,6 @@ return array (
   array (
     'NationalNumberPattern' => '[235-9]\\d{7,8}',
     'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '',
   ),
   'fixedLine' => 
   array (
@@ -21,7 +20,8 @@ return array (
                 3[0-57-8]|
                 4[24-7]|
                 5[0-24-8]|
-                [6-9][02]
+                [6-8][02]|
+                9[0-2]
               )|
               7(?:
                 0[1-79]|
@@ -37,11 +37,13 @@ return array (
               1[1-35-7]|
               2[024-7]|
               3\\d|
-              [457][02]|
+              4[0-2]|
+              [57][02]|
               60
             )|
             53(?:
-              [013][02]|
+              0[0-2]|
+              [13][02]|
               2[0-59]|
               49|
               5[0-35-9]|
@@ -91,8 +93,8 @@ return array (
           7(?:
             55|
             7[25-9]|
-            8[5-9]|
-            9[05-9]
+            8[05-9]|
+            9[015-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -126,7 +128,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
@@ -154,37 +155,31 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'JO',
   'countryCode' => 962,

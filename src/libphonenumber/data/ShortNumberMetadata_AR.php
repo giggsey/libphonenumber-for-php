@@ -7,21 +7,18 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[019]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[019]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[019]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'tollFree' => 
   array (
@@ -39,37 +36,31 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'emergency' => 
   array (
@@ -84,7 +75,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'shortCode' => 
   array (
@@ -96,28 +86,26 @@ return array (
             2[15]|
             9
           )|
+          89338|
           911
         ',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{2,5}',
     'ExampleNumber' => '121',
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
+    'NationalNumberPattern' => '89338',
+    'PossibleNumberPattern' => '\\d{5}',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '',
   ),
   'id' => 'AR',
   'countryCode' => 0,

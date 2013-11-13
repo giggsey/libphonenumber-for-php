@@ -47,8 +47,8 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '76\\d{8}',
+    'PossibleNumberPattern' => '\\d{10}',
   ),
   'uan' => 
   array (
