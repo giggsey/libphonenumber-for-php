@@ -7,7 +7,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1258]\\d{7}',
+    'NationalNumberPattern' => '[12578]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
   ),
   'fixedLine' => 
@@ -19,7 +19,11 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          5500\\d{4}|
+          5(?:
+            500\\d{4}|
+            7\\d{6}
+          )|
+          78\\d{6}|
           8\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{8}',

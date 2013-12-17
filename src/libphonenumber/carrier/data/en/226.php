@@ -10,6 +10,7 @@ return array (
   22664 => 'Airtel',
   22665 => 'Airtel',
   22666 => 'Airtel',
+  226670 => 'Airtel',
   226680 => 'Telecel Faso',
   226681 => 'Telecel Faso',
   226682 => 'Telecel Faso',

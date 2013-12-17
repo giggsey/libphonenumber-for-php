@@ -226,6 +226,7 @@ return array (
   2348885 => 'Starcomms',
   2348886 => 'Starcomms',
   2348887 => 'Starcomms',
+  2349091 => 'Etisalat',
   234980 => 'Starcomms',
   234987 => 'Starcomms',
 );

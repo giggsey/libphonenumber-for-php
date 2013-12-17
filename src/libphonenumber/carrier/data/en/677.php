@@ -1,0 +1,20 @@
+<?php
+return array (
+  67774 => 'Solomon Telekom',
+  67775 => 'Solomon Telekom',
+  67776 => 'Solomon Telekom',
+  67777 => 'Solomon Telekom',
+  67778 => 'Solomon Telekom',
+  677790 => 'Solomon Telekom',
+  67784 => 'BMobile',
+  67785 => 'BMobile',
+  67786 => 'BMobile',
+  67787 => 'BMobile',
+  67788 => 'BMobile',
+  67794 => 'Smile',
+  67795 => 'Smile',
+  67796 => 'Smile',
+  67797 => 'Smile',
+  67798 => 'Smile',
+  67799 => 'Smile',
+);

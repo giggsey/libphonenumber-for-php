@@ -7,7 +7,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[37]\\d{8}',
+    'NationalNumberPattern' => '[378]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
   ),
   'fixedLine' => 
@@ -15,13 +15,15 @@ return array (
     'NationalNumberPattern' => '
           3(?:
             0(?:
-              1[01]|
+              1[0-2]|
               80
             )|
+            211|
             3(?:
               8[1-9]|
               9[2-9]
-            )
+            )|
+            90[1-5]
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -31,48 +33,33 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
-            0(?:
-              [01279]0|
-              3[03]|
-              4[05]|
-              5[06]|
-              6[03-5]|
-              8[029]
-            )|
-            6(?:
-              1[23]|
-              2[89]|
-              3[3489]|
-              4[6-9]|
-              5\\d|
-              6[3-9]|
-              7[45]|
-              8[3-8]
-            )|
-            7\\d{2}|
-            8(?:
-              01|
-              1[01]
-            )
-          )\\d{5}
+            [07]\\d|
+            21|
+            6[1-9]|
+            8[0-26]|
+            90
+          )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '701012345',
+    'ExampleNumber' => '701234567',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '800\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '800123456',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '88[4689]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '884123456',
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '81[02468]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '810123456',
   ),
   'personalNumber' => 
   array (
@@ -81,9 +68,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '33301\\d{4}',
+    'NationalNumberPattern' => '391\\d{6}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '333011234',
+    'ExampleNumber' => '391011234',
   ),
   'pager' => 
   array (
@@ -137,6 +124,18 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[37]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

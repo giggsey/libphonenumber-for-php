@@ -8,7 +8,8 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          [1-69]\\d{5,8}|
+          [1-6]\\d{5,8}|
+          9\\d{5,9}|
           [78]\\d{5,13}
         ',
     'PossibleNumberPattern' => '\\d{5,14}',
@@ -17,7 +18,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           [12]\\d{6,7}|
-          9\\d{7}|
+          9(?:
+            0[3-9]|
+            [1-9]\\d
+          )\\d{5}|
           (?:
             3\\d|
             4[023568]|
@@ -123,7 +127,8 @@ return array (
             8(?:
               0[2-9]|
               1\\d
-            )\\d
+            )\\d|
+            9091
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8,10}',
@@ -217,7 +222,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([3-8]\\d)(\\d{3})(\\d{2,3})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{2,3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -235,13 +240,14 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([78]\\d{2})(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '
             70|
-            8[01]
+            8[01]|
+            909
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

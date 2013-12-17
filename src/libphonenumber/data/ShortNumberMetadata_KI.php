@@ -7,17 +7,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,3}',
+    'NationalNumberPattern' => '[179]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,3}',
+    'NationalNumberPattern' => '[179]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2,3}',
+    'NationalNumberPattern' => '[179]\\d{2,3}',
     'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'tollFree' => 
@@ -73,6 +73,7 @@ return array (
             [0-8]|
             5[01259]
           )|
+          777|
           99[2349]
         ',
     'PossibleNumberPattern' => '\\d{3,4}',

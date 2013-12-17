@@ -28,9 +28,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            7[1-57]|
-            8[1-9]
-          )\\d{5}
+            7(?:
+              [1-357]\\d|
+              4[0-5]
+            )|
+            8[1-9]\\d
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '7412345',
