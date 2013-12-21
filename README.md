@@ -25,7 +25,7 @@ The PECL [intl](http://php.net/intl) extension is required for this library to b
 ```json
 {
     "require": {
-        "giggsey/libphonenumber-for-php": "~5.8"
+        "giggsey/libphonenumber-for-php": "~5.9"
     }
 }
 ```
@@ -79,6 +79,20 @@ There are a few formats supported by the formatting method, as illustrated below
 ```php
 // Produces "+41446681800"
 echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164) . PHP_EOL;
+// Produces "044 668 18 00"
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::NATIONAL) . PHP_EOL;
+// Produces "+41 44 668 18 00"
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::INTERNATIONAL) . PHP_EOL;
+```
+
+You could also choose to format the number in the way it is dialled from another country:
+
+```php
+// Produces "011 41 44 668 1800", the number when it is dialled in the United States.
+echo $phoneUtil->formatOutOfCountryCallingNumber($swissNumberProto, "US");
+
+// Produces "00 41 44 668 18 00", the number when it is dialled in Great Britain.
+echo $phoneUtil->formatOutOfCountryCallingNumber($swissNumberProto, "GB");
 ```
 
 ### Geocoder
@@ -113,6 +127,29 @@ echo $geocoder->getDescriptionForNumber($gbNumberProto, "en_GB") . PHP_EOL;
 echo $geocoder->getDescriptionForNumber($gbNumberProto, "ko-KR") . PHP_EOL;
 ```
 
+### ShortNumberInfo
+
+```php
+$shortNumberInfo = \libphonenumber\ShortNumberInfo::getInstance();
+
+// true
+var_dump($shortNumberInfo->isEmergencyNumber("999", "GB"));
+// true
+var_dump($shortNumberInfo->connectsToEmergencyNumber("999", "GB"));
+// false
+var_dump($shortNumberInfo->connectsToEmergencyNumber("911", "GB"));
+
+// true
+var_dump($shortNumberInfo->isEmergencyNumber("911", "US"));
+// true
+var_dump($shortNumberInfo->connectsToEmergencyNumber("911", "US"));
+
+// false
+var_dump($shortNumberInfo->isEmergencyNumber("911123", "US"));
+// true
+var_dump($shortNumberInfo->connectsToEmergencyNumber("911123", "US"));
+```
+
 ### Mapping Phone Numbers to carrier
 
 ```php
@@ -123,6 +160,19 @@ $swissNumberProto = $phoneUtil->parse("798765432", "CH");
 $carrierMapper = \libphonenumber\PhoneNumberToCarrierMapper::getInstance();
 // Outputs "Swisscom"
 echo $carrierMapper->getDescriptionForNumber($swissNumberProto, "en");
+```
+
+### Mapping Phone Numbers to TimeZones
+
+```php
+
+$phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
+$swissNumberProto = $phoneUtil->parse("798765432", "CH");
+
+$timeZoneMapper = \libphonenumber\PhoneNumberToTimeZonesMapper::getInstance();
+// returns array("Europe/Zurich")
+$timeZones = $timeZoneMapper->getTimeZonesForNumber($swissNumberProto);
+
 ```
 
 ## Generating data

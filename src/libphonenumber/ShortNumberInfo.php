@@ -113,7 +113,7 @@ class ShortNumberInfo
         $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
         if (!is_readable($fileName)) {
-            throw new Exception('missing metadata: ' . $fileName);
+            throw new \Exception('missing metadata: ' . $fileName);
         } else {
             $data = include $fileName;
             $metadata = new PhoneMetadata();
