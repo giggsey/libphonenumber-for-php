@@ -65,6 +65,7 @@ return array (
     'NationalNumberPattern' => '
           8(?:
             00|
+            44|
             55|
             66|
             77|

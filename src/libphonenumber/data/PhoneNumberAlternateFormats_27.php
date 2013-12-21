@@ -7,62 +7,22 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[4589]\\d{9}',
-    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          441(?:
-            2(?:
-              02|
-              23|
-              61|
-              [3479]\\d
-            )|
-            [46]\\d{2}|
-            5(?:
-              4\\d|
-              60|
-              89
-            )|
-            824
-          )\\d{4}
-        ',
-    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '4412345678',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-          441(?:
-            [37]\\d|
-            5[0-39]
-          )\\d{5}
-        ',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '4413701234',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '
-          8(?:
-            00|
-            44|
-            55|
-            66|
-            77|
-            88
-          )[2-9]\\d{6}
-        ',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '8002123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900[2-9]\\d{6}',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '9002123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'sharedCost' => 
   array (
@@ -71,15 +31,8 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '
-          5(?:
-            00|
-            33|
-            44
-          )[2-9]\\d{6}
-        ',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '5002345678',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'voip' => 
   array (
@@ -126,20 +79,28 @@ return array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
   ),
-  'id' => 'BM',
-  'countryCode' => 1,
-  'internationalPrefix' => '011',
-  'nationalPrefix' => '1',
-  'nationalPrefixForParsing' => '1',
-  'sameMobileAndFixedLinePattern' => false,
+  'id' => '',
+  'countryCode' => 27,
+  'internationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(86\\d)(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '86[1-9]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
   ),
   'intlNumberFormat' => 
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingDigits' => '441',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );
