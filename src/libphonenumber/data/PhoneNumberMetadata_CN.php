@@ -8,16 +8,9 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          1(?:
-            00\\d{2}|
-            \\d{6,11}
-          )|
-          [2-7]\\d{6,11}|
+          [1-7]\\d{6,11}|
           8[0-357-9]\\d{6,9}|
-          9(?:
-            5\\d{3,4}|
-            \\d{9}
-          )
+          9\\d{9}
         ',
     'PossibleNumberPattern' => '\\d{4,12}',
   ),
@@ -140,9 +133,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           1(?:
-            3\\d|
+            [38]\\d|
             4[57]|
-            [58][0-35-9]
+            5[0-35-9]
           )\\d{8}
         ',
     'PossibleNumberPattern' => '\\d{11}',
@@ -166,11 +159,8 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '
-          400\\d{7}|
-          95\\d{3,4}
-        ',
-    'PossibleNumberPattern' => '\\d{5,10}',
+    'NationalNumberPattern' => '400\\d{7}',
+    'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '4001234567',
   ),
   'personalNumber' => 
@@ -190,9 +180,8 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '100\\d{2}',
-    'PossibleNumberPattern' => '\\d{5}',
-    'ExampleNumber' => '10000',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'emergency' => 
   array (
@@ -222,16 +211,14 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '
-          100\\d{2}|
           (?:
             4|
             (?:
               10
             )?8
-          )00\\d{7}|
-          95\\d{3,4}
+          )00\\d{7}
         ',
-    'PossibleNumberPattern' => '\\d{5,12}',
+    'PossibleNumberPattern' => '\\d{10,12}',
     'ExampleNumber' => '4001234567',
   ),
   'id' => 'CN',

@@ -39,7 +39,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1[38]00\\d{6}',
+    'NationalNumberPattern' => '1[378]00\\d{6}',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '1300123456',
   ),
@@ -56,9 +56,8 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '1700\\d{6}',
-    'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '1700123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'voip' => 
   array (
