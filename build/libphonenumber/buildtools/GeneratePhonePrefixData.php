@@ -104,7 +104,10 @@ class GeneratePhonePrefixData
             $this->parseTextFile(
                 $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
                 function ($prefix, $location) use (&$phonePrefixes) {
-                    $phonePrefixes[] = substr($prefix, 0, 4);
+                    $shortPrefix = substr($prefix, 0, 4);
+                    if (!in_array($shortPrefix, $phonePrefixes)) {
+                        $phonePrefixes[] = $shortPrefix;
+                    }
                 }
             );
 
