@@ -1,6 +1,9 @@
 <?php
 return array (
+  22961 => 'MTN',
   22964 => 'Moov',
+  22966 => 'MTN',
+  22967 => 'MTN',
   22968 => 'Glo',
   22990 => 'Libercom',
   22993 => 'BLK',

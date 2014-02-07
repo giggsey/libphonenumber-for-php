@@ -7,6 +7,7 @@ return array (
   48532 => 'T-Mobile',
   48533 => 'Play',
   48535 => 'Play',
+  4857 => 'Play',
   48600 => 'T-Mobile',
   48601 => 'Plus',
   48602 => 'T-Mobile',

@@ -31,4 +31,5 @@ return array (
   267767 => 'Mascom',
   267769 => 'Orange',
   267776 => 'Mascom',
+  267777 => 'Mascom',
 );

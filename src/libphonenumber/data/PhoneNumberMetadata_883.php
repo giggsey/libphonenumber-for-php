@@ -48,7 +48,7 @@ return array (
     'NationalNumberPattern' => '
           51(?:
             00\\d{5}(?:\\d{3})?|
-            10\\d{8}
+            [13]0\\d{8}
           )
         ',
     'PossibleNumberPattern' => '\\d{9}(?:\\d{3})?',
@@ -106,6 +106,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
+        0 => '510',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -116,6 +117,18 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
+        0 => '510',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(\\d{4})(\\d{4})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '51[13]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

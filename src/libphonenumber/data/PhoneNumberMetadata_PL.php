@@ -40,7 +40,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            5[013]|
+            5[0137]|
             6[069]|
             7[2389]|
             88
@@ -170,7 +170,7 @@ return array (
       array (
         0 => '
             39|
-            5[013]|
+            5[0137]|
             6[0469]|
             7[02389]|
             8[08]

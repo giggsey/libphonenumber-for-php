@@ -9,6 +9,7 @@ return array (
   92306 => 'Mobilink',
   92307 => 'Mobilink',
   92308 => 'Mobilink',
+  92310 => 'Zong',
   92311 => 'Ufone',
   92312 => 'Ufone',
   92313 => 'Ufone',

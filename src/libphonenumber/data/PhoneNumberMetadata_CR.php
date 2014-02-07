@@ -21,13 +21,13 @@ return array (
     'NationalNumberPattern' => '
           5(?:
             0[0-4]|
-            7[01]
+            7[0-3]
           )\\d{5}|
           6(?:
             [0-2]\\d|
             30
           )\\d{5}|
-          7[0-2]\\d{6}|
+          7[0-3]\\d{6}|
           8[3-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

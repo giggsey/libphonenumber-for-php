@@ -128,7 +128,7 @@ return array (
               0[2-9]|
               1\\d
             )\\d|
-            9091
+            90[39]\\d
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8,10}',
@@ -247,7 +247,7 @@ return array (
         0 => '
             70|
             8[01]|
-            909
+            90[39]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

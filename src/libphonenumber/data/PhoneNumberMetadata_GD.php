@@ -52,7 +52,10 @@ return array (
               20|
               58
             )|
-            53[3-8]
+            5(?:
+              2[01]|
+              3[3-8]
+            )
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',
