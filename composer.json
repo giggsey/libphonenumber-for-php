@@ -24,7 +24,7 @@
     },
     "archive": {
         "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist"]
-    }
+    },
     "require": {
         "ext-intl": "*"
     },
