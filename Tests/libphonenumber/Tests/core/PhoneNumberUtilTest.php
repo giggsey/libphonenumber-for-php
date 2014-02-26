@@ -1080,11 +1080,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
         // Test the special logic for NANPA countries, for which regular length phone numbers are always
         // output in international format, but short numbers are in national format.
-        $usRegularNumber = new PhoneNumber();
-        $usRegularNumber->setCountryCode(1)->setNationalNumber(6502530000);;
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::US, false));
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::CA, false));
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing($usRegularNumber,RegionCode::BR, false));
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::US, false));
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::CA, false));
+        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::BR, false));
         $usShortNumber = new PhoneNumber();
         $usShortNumber->setCountryCode(1)->setNationalNumber(911);
         $this->assertEquals("911", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::US, false));
@@ -1739,7 +1737,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
         $adNumber->setCountryCode(376)->setNationalNumber(1);
         $this->assertEquals(ValidationResult::TOO_SHORT, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
-        $adNumber->setCountryCode(376)->setNationalNumber(12345678901234567);
+        $adNumber->setCountryCode(376)->setNationalNumber(123456789012345678);
         $this->assertEquals(ValidationResult::TOO_LONG, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
     }
 

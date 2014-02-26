@@ -31,7 +31,10 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          1[1-9]9\\d{8}|
+          1[1-9](?:
+            7|
+            9\\d
+          )\\d{7}|
           2[12478]9?[6-9]\\d{7}|
           (?:
             3[1-578]|

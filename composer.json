@@ -24,21 +24,18 @@
     },
     "archive": {
         "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist"]
-    },
-    "replace": {
-        "giggsey/libphonenumber-geocoder": "*"
-    },
+    }
     "require": {
         "ext-intl": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~3.7",
-        "symfony/console": "~2.3.5",
+        "phpunit/phpunit": "3.7.*",
+        "symfony/console": "~2.4",
         "satooshi/php-coveralls":  "~0.6"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "5.x-dev"
+            "dev-master": "6.x-dev"
         }
     }
 }

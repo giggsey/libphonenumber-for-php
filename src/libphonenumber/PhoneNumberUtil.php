@@ -26,7 +26,7 @@ class PhoneNumberUtil
     // The minimum and maximum length of the national significant number.
     const MIN_LENGTH_FOR_NSN = 2;
     // The ITU says the maximum length should be 15, but we have found longer numbers in Germany.
-    const MAX_LENGTH_FOR_NSN = 16;
+    const MAX_LENGTH_FOR_NSN = 17;
 
     // We don't allow input strings for parsing to be longer than 250 chars. This prevents malicious
     // input from overflowing the regular-expression engine.

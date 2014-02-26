@@ -30,8 +30,11 @@ return array (
   array (
     'NationalNumberPattern' => '
           684(?:
-            733|
-            25[2468]
+            25[2468]|
+            7(?:
+              3[13]|
+              70
+            )
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',
