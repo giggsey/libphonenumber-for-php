@@ -25,7 +25,7 @@ The PECL [intl](http://php.net/intl) extension is required for this library to b
 ```json
 {
     "require": {
-        "giggsey/libphonenumber-for-php": "~5.9"
+        "giggsey/libphonenumber-for-php": "~6.0"
     }
 }
 ```
