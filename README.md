@@ -178,3 +178,12 @@ $timeZones = $timeZoneMapper->getTimeZonesForNumber($swissNumberProto);
 ## Generating data
 
 Data can be generated using phing, running the 'compile' target.
+
+## Integration with frameworks
+
+Other packages exist that integrate libphonenumber-for-php into frameworks.
+
+These packages are supplied by third parties, and their quality can not be guaranteed.
+
+ - Symfony: [PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)
+ - Laravel: [Laravel Phone Validator](https://github.com/Propaganistas/laravel-phone)
