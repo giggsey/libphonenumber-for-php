@@ -684,7 +684,7 @@ class PhoneNumberUtil
             $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
             $nationalNumber .= $zeros;
         }
-        $nationalNumber .= $number->getNationalNumber();
+        $nationalNumber .= sprintf('%.0f', $number->getNationalNumber());
         return $nationalNumber;
     }
 
