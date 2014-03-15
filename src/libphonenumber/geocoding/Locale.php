@@ -70,6 +70,7 @@ class Locale extends \Locale
             'en-GB',
             'en-IE',
             'en-IN',
+            'en-IM',
             'en-JM',
             'en-MY',
             'en-NZ',
