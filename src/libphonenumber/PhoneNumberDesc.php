@@ -32,8 +32,7 @@ class PhoneNumberDesc
 
     /**
      * @param string $value
-     * 
-     * @return PhoneNumberDesc 
+     * @return PhoneNumberDesc
      */
     public function setNationalNumberPattern($value)
     {
@@ -61,8 +60,7 @@ class PhoneNumberDesc
 
     /**
      * @param string $value
-     * 
-     * @return PhoneNumberDesc 
+     * @return PhoneNumberDesc
      */
     public function setPossibleNumberPattern($value)
     {
@@ -90,8 +88,7 @@ class PhoneNumberDesc
 
     /**
      * @param string $value
-     * 
-     * @return PhoneNumberDesc 
+     * @return PhoneNumberDesc
      */
     public function setExampleNumber($value)
     {
@@ -103,8 +100,7 @@ class PhoneNumberDesc
 
     /**
      * @param PhoneNumberDesc $other
-     * 
-     * @return PhoneNumberDesc 
+     * @return PhoneNumberDesc
      */
     public function mergeFrom(PhoneNumberDesc $other)
     {
@@ -123,14 +119,13 @@ class PhoneNumberDesc
 
     /**
      * @param PhoneNumberDesc $other
-     * 
-     * @return boolean 
+     * @return boolean
      */
     public function exactlySameAs(PhoneNumberDesc $other)
     {
         return $this->nationalNumberPattern === $other->nationalNumberPattern &&
-                $this->possibleNumberPattern === $other->possibleNumberPattern &&
-                $this->exampleNumber === $other->exampleNumber;
+        $this->possibleNumberPattern === $other->possibleNumberPattern &&
+        $this->exampleNumber === $other->exampleNumber;
     }
 
     /**
@@ -154,8 +149,7 @@ class PhoneNumberDesc
 
     /**
      * @param array $input
-     * 
-     * @return PhoneNumberDesc 
+     * @return PhoneNumberDesc
      */
     public function fromArray(array $input)
     {
@@ -172,3 +166,5 @@ class PhoneNumberDesc
         return $this;
     }
 }
+
+/* EOF */

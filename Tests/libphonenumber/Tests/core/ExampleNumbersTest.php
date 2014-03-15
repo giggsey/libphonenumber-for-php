@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author giggsey
- * @created: 10/11/13 18:58
- * @project libphonenumber-for-php
- */
 
 namespace libphonenumber\Tests\core;
 

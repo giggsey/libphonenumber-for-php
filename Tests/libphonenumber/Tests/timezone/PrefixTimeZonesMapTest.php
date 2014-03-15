@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 14/10/13
- * Time: 18:47
- */
 
 namespace libphonenumber\Tests\timezone;
 
 
 use libphonenumber\PhoneNumber;
-use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\prefixmapper\PrefixTimeZonesMap;
 
 class PrefixTimeZonesMapTest extends \PHPUnit_Framework_TestCase
@@ -75,7 +68,8 @@ class PrefixTimeZonesMapTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testLookupTimeZonesForNumber_ValidNumber_Chicago() {
+    public function testLookupTimeZonesForNumber_ValidNumber_Chicago()
+    {
         $number = new PhoneNumber();
         $number->setCountryCode(1)->setNationalNumber(2051235458);
 
@@ -90,21 +84,24 @@ class PrefixTimeZonesMapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(self::LOS_ANGELES_TZ), self::$prefixTimeZonesMapForUS->lookupTimeZonesForNumber($number));
     }
 
-    public function testLookupTimeZonesForNumber_NY() {
+    public function testLookupTimeZonesForNumber_NY()
+    {
         $number = new PhoneNumber();
         $number->setCountryCode(1)->setNationalNumber(2016641234);
 
         $this->assertEquals(array(self::NEW_YORK_TZ), self::$prefixTimeZonesMapForUS->lookupTimeZonesForNumber($number));
     }
 
-    public function testLookupTimeZonesForNumber_CH() {
+    public function testLookupTimeZonesForNumber_CH()
+    {
         $number = new PhoneNumber();
         $number->setCountryCode(41)->setNationalNumber(446681300);
 
         $this->assertEquals(array(), self::$prefixTimeZonesMapForUS->lookupTimeZonesForNumber($number));
     }
 
-    public function testLookupTimeZonesForNumber_RU() {
+    public function testLookupTimeZonesForNumber_RU()
+    {
         $number = new PhoneNumber();
         $number->setCountryCode(7)->setNationalNumber(87945154);
 

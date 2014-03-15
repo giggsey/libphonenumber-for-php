@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: giggsey
- * Date: 29/03/13
- * Time: 10:57
- * To change this template use File | Settings | File Templates.
- */
 
 namespace libphonenumber\Tests\Issues;
 
@@ -117,11 +110,7 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($valid, "Checking phone number is valid");
 
         $type = $this->phoneUtil->getNumberType($phoneObject);
-        $this->assertEquals(
-            PhoneNumberType::UAN,
-            $type,
-            "Checking phone number is detected as UAN"
-        );
+        $this->assertEquals(PhoneNumberType::UAN, $type, "Checking phone number is detected as UAN");
 
         $formattedE164 = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::E164);
         $this->assertEquals("+443335555555", $formattedE164, "Checking E164 format is correct");
@@ -139,11 +128,7 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($valid, "Checking phone number is valid");
 
         $type = $this->phoneUtil->getNumberType($phoneObject);
-        $this->assertEquals(
-            PhoneNumberType::TOLL_FREE,
-            $type,
-            "Checking phone number is detected as TOLL FREE"
-        );
+        $this->assertEquals(PhoneNumberType::TOLL_FREE, $type, "Checking phone number is detected as TOLL FREE");
 
         $formattedE164 = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::E164);
         $this->assertEquals("+44800800150", $formattedE164, "Checking E164 format is correct");
@@ -161,11 +146,7 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($valid, "Checking phone number is valid");
 
         $type = $this->phoneUtil->getNumberType($phoneObject);
-        $this->assertEquals(
-            PhoneNumberType::PREMIUM_RATE,
-            $type,
-            "Checking phone number is detected as PREMIUM RATE"
-        );
+        $this->assertEquals(PhoneNumberType::PREMIUM_RATE, $type, "Checking phone number is detected as PREMIUM RATE");
 
         $formattedE164 = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::E164);
         $this->assertEquals("+449063020288", $formattedE164, "Checking E164 format is correct");
@@ -205,3 +186,5 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($valid, "Checking phone number is invalid");
     }
 }
+
+/* EOF */

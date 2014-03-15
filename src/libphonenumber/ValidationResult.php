@@ -12,3 +12,5 @@ class ValidationResult
     const TOO_SHORT = 2;
     const TOO_LONG = 3;
 }
+
+/* EOF */

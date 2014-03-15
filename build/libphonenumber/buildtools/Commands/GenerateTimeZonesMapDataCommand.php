@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 14/10/13
- * Time: 19:49
- */
 
 namespace libphonenumber\buildtools\Commands;
 
@@ -33,4 +27,6 @@ class GenerateTimeZonesMapDataCommand extends Command
     {
         new GenerateTimeZonesMapData($input->getArgument('InputFile'), $input->getArgument('OutputDirectory'));
     }
-} 
+}
+
+/* EOF */

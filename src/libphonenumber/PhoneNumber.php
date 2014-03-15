@@ -2,167 +2,201 @@
 
 namespace libphonenumber;
 
-class PhoneNumber {
+class PhoneNumber
+{
 
-	/**
-	 * @var int
-	 */
-	private $countryCode = NULL;
+    /**
+     * @var int
+     */
+    private $countryCode = null;
 
-	public function hasCountryCode() {
-		return isset($this->countryCode);
-	}
+    public function hasCountryCode()
+    {
+        return isset($this->countryCode);
+    }
 
-	public function getCountryCode() {
-		return $this->countryCode;
-	}
+    public function getCountryCode()
+    {
+        return $this->countryCode;
+    }
 
-	public function setCountryCode($value) {
-		$this->countryCode = $value;
-		return $this;
-	}
+    public function setCountryCode($value)
+    {
+        $this->countryCode = $value;
+        return $this;
+    }
 
-	public function clearCountryCode() {
-		$this->countryCode = NULL;
-		return $this;
-	}
+    public function clearCountryCode()
+    {
+        $this->countryCode = null;
+        return $this;
+    }
 
-	/**
-	 * @var int
-	 */
-	private $nationalNumber = NULL;
+    /**
+     * @var int
+     */
+    private $nationalNumber = null;
 
-	public function hasNationalNumber() {
-		return isset($this->nationalNumber);
-	}
+    public function hasNationalNumber()
+    {
+        return isset($this->nationalNumber);
+    }
 
-	public function getNationalNumber() {
-		return $this->nationalNumber;
-	}
+    public function getNationalNumber()
+    {
+        return $this->nationalNumber;
+    }
 
-	public function setNationalNumber($value) {
-		$this->nationalNumber = $value;
-		return $this;
-	}
+    public function setNationalNumber($value)
+    {
+        $this->nationalNumber = $value;
+        return $this;
+    }
 
-	public function clearNationalNumber() {
-		$this->nationalNumber = NULL;
-		return $this;
-	}
+    public function clearNationalNumber()
+    {
+        $this->nationalNumber = null;
+        return $this;
+    }
 
-	private $extension = NULL;
+    private $extension = null;
 
-	public function hasExtension() {
-		return isset($this->extension);
-	}
+    public function hasExtension()
+    {
+        return isset($this->extension);
+    }
 
-	public function getExtension() {
-		return $this->extension;
-	}
+    public function getExtension()
+    {
+        return $this->extension;
+    }
 
-	public function setExtension($value) {
-		$this->extension = $value;
-		return $this;
-	}
+    public function setExtension($value)
+    {
+        $this->extension = $value;
+        return $this;
+    }
 
-	public function clearExtension() {
-		$this->extension = NULL;
-		return $this;
-	}
+    public function clearExtension()
+    {
+        $this->extension = null;
+        return $this;
+    }
 
-	/**
-	 * @var boolean
-	 */
-	private $italianLeadingZero = NULL;
+    /**
+     * @var boolean
+     */
+    private $italianLeadingZero = null;
 
-	public function hasItalianLeadingZero() {
-		return isset($this->italianLeadingZero);
-	}
+    public function hasItalianLeadingZero()
+    {
+        return isset($this->italianLeadingZero);
+    }
 
-	public function isItalianLeadingZero() {
-		return $this->italianLeadingZero;
-	}
+    public function isItalianLeadingZero()
+    {
+        return $this->italianLeadingZero;
+    }
 
-	public function setItalianLeadingZero($value) {
-		$this->italianLeadingZero = $value;
-		return $this;
-	}
+    public function setItalianLeadingZero($value)
+    {
+        $this->italianLeadingZero = $value;
+        return $this;
+    }
 
-	public function clearItalianLeadingZero() {
-		$this->italianLeadingZero = NULL;
-		return $this;
-	}
+    public function clearItalianLeadingZero()
+    {
+        $this->italianLeadingZero = null;
+        return $this;
+    }
 
-	private $rawInput = NULL;
+    private $rawInput = null;
 
-	public function hasRawInput() {
-		return isset($this->rawInput);
-	}
+    public function hasRawInput()
+    {
+        return isset($this->rawInput);
+    }
 
-	public function getRawInput() {
-		return $this->rawInput;
-	}
+    public function getRawInput()
+    {
+        return $this->rawInput;
+    }
 
-	public function setRawInput($value) {
-		$this->rawInput = $value;
-		return $this;
-	}
+    public function setRawInput($value)
+    {
+        $this->rawInput = $value;
+        return $this;
+    }
 
-	public function clearRawInput() {
-		$this->rawInput = NULL;
-		return $this;
-	}
+    public function clearRawInput()
+    {
+        $this->rawInput = null;
+        return $this;
+    }
 
-	private $countryCodeSource = NULL;
+    private $countryCodeSource = null;
 
-	public function hasCountryCodeSource() {
-		return isset($this->countryCodeSource);
-	}
+    public function hasCountryCodeSource()
+    {
+        return isset($this->countryCodeSource);
+    }
 
-	public function getCountryCodeSource() {
-		return $this->countryCodeSource;
-	}
+    public function getCountryCodeSource()
+    {
+        return $this->countryCodeSource;
+    }
 
-	public function setCountryCodeSource($value) {
-		$this->countryCodeSource = $value;
-		return $this;
-	}
+    public function setCountryCodeSource($value)
+    {
+        $this->countryCodeSource = $value;
+        return $this;
+    }
 
-	public function clearCountryCodeSource() {
-		$this->countryCodeSource = NULL;
-		return $this;
-	}
+    public function clearCountryCodeSource()
+    {
+        $this->countryCodeSource = null;
+        return $this;
+    }
 
-	private $preferredDomesticCarrierCode = NULL;
+    private $preferredDomesticCarrierCode = null;
 
-	public function hasPreferredDomesticCarrierCode() {
-		return isset($this->preferredDomesticCarrierCode);
-	}
+    public function hasPreferredDomesticCarrierCode()
+    {
+        return isset($this->preferredDomesticCarrierCode);
+    }
 
-	public function getPreferredDomesticCarrierCode() {
-		return $this->preferredDomesticCarrierCode;
-	}
+    public function getPreferredDomesticCarrierCode()
+    {
+        return $this->preferredDomesticCarrierCode;
+    }
 
-	public function setPreferredDomesticCarrierCode($value) {
-		$this->preferredDomesticCarrierCode = $value;
-		return $this;
-	}
+    public function setPreferredDomesticCarrierCode($value)
+    {
+        $this->preferredDomesticCarrierCode = $value;
+        return $this;
+    }
 
-	public function clearPreferredDomesticCarrierCode() {
-		$this->preferredDomesticCarrierCode = NULL;
-		return $this;
-	}
+    public function clearPreferredDomesticCarrierCode()
+    {
+        $this->preferredDomesticCarrierCode = null;
+        return $this;
+    }
 
     private $hasNumberOfLeadingZeros = false;
     private $numberOfLeadingZeros = 1;
-    public function hasNumberOfLeadingZeros() {
+
+    public function hasNumberOfLeadingZeros()
+    {
         return $this->hasNumberOfLeadingZeros;
     }
-    public function getNumberOfLeadingZeros() {
+
+    public function getNumberOfLeadingZeros()
+    {
         return $this->numberOfLeadingZeros;
     }
 
-    public function setNumberOfLeadingZeros($value) {
+    public function setNumberOfLeadingZeros($value)
+    {
         $this->hasNumberOfLeadingZeros = true;
         $this->numberOfLeadingZeros = $value;
         return $this;
@@ -175,67 +209,74 @@ class PhoneNumber {
         return $this;
     }
 
-	public function clear() {
-		$this->clearCountryCode();
-		$this->clearNationalNumber();
-		$this->clearExtension();
-		$this->clearItalianLeadingZero();
+    public function clear()
+    {
+        $this->clearCountryCode();
+        $this->clearNationalNumber();
+        $this->clearExtension();
+        $this->clearItalianLeadingZero();
         $this->clearNumberOfLeadingZeros();
-		$this->clearRawInput();
-		$this->clearCountryCodeSource();
-	  	$this->clearPreferredDomesticCarrierCode();
-		return $this;
-	}
+        $this->clearRawInput();
+        $this->clearCountryCodeSource();
+        $this->clearPreferredDomesticCarrierCode();
+        return $this;
+    }
 
-	public function  mergeFrom(PhoneNumber $other) {
-		if ($other->hasCountryCode()) {
-			$this->setCountryCode($other->getCountryCode());
-		}
-		if ($other->hasNationalNumber()) {
-			$this->setNationalNumber($other->getNationalNumber());
-		}
-		if ($other->hasExtension()) {
-			$this->setExtension($other->getExtension());
-		}
-		if ($other->hasItalianLeadingZero()) {
-			$this->setItalianLeadingZero($other->isItalianLeadingZero());
-		}
+    public function  mergeFrom(PhoneNumber $other)
+    {
+        if ($other->hasCountryCode()) {
+            $this->setCountryCode($other->getCountryCode());
+        }
+        if ($other->hasNationalNumber()) {
+            $this->setNationalNumber($other->getNationalNumber());
+        }
+        if ($other->hasExtension()) {
+            $this->setExtension($other->getExtension());
+        }
+        if ($other->hasItalianLeadingZero()) {
+            $this->setItalianLeadingZero($other->isItalianLeadingZero());
+        }
         if ($other->hasNumberOfLeadingZeros()) {
             $this->setNumberOfLeadingZeros($other->getNumberOfLeadingZeros());
         }
-		if ($other->hasRawInput()) {
-			$this->setRawInput($other->getRawInput());
-		}
-		if ($other->hasCountryCodeSource()) {
-			$this->setCountryCodeSource($other->getCountryCodeSource());
-		}
-		if ($other->hasPreferredDomesticCarrierCode()) {
-			$this->setPreferredDomesticCarrierCode($other->getPreferredDomesticCarrierCode());
-		}
-		return $this;
-	}
-	
-	public function equals(PhoneNumber $other) {
+        if ($other->hasRawInput()) {
+            $this->setRawInput($other->getRawInput());
+        }
+        if ($other->hasCountryCodeSource()) {
+            $this->setCountryCodeSource($other->getCountryCodeSource());
+        }
+        if ($other->hasPreferredDomesticCarrierCode()) {
+            $this->setPreferredDomesticCarrierCode($other->getPreferredDomesticCarrierCode());
+        }
+        return $this;
+    }
+
+    public function equals(PhoneNumber $other)
+    {
         $sameType = get_class($other) == get_class($this);
-        $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() && 
-                (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
-        $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() && 
-                (!$this->hasNationalNumber() ||$this->getNationalNumber() == $other->getNationalNumber());
-        $sameExt = $this->hasExtension() == $other->hasExtension() && 
-                (!$this->hasExtension() || $this->hasExtension() == $other->hasExtension());
-        $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() && 
-                (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
+        $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() &&
+            (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
+        $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() &&
+            (!$this->hasNationalNumber() || $this->getNationalNumber() == $other->getNationalNumber());
+        $sameExt = $this->hasExtension() == $other->hasExtension() &&
+            (!$this->hasExtension() || $this->hasExtension() == $other->hasExtension());
+        $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() &&
+            (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
         $sameZeros = $this->getNumberOfLeadingZeros() == $other->getNumberOfLeadingZeros();
-        $sameRaw = $this->hasRawInput() == $other->hasRawInput() && 
-                (!$this->hasRawInput() || $this->getRawInput() == $other->getRawInput());
-        $sameCountrySource = $this->hasCountryCodeSource() == $other->hasCountryCodeSource() && 
-                (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
-        $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() && 
-                (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode() == $other->getPreferredDomesticCarrierCode());
+        $sameRaw = $this->hasRawInput() == $other->hasRawInput() &&
+            (!$this->hasRawInput() || $this->getRawInput() == $other->getRawInput());
+        $sameCountrySource = $this->hasCountryCodeSource() == $other->hasCountryCodeSource() &&
+            (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
+        $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() &&
+            (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode(
+                ) == $other->getPreferredDomesticCarrierCode());
         return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
     }
 
-	public function __toString() {
-		return '+' . $this->getCountryCode() . $this->getNationalNumber();
-	}
+    public function __toString()
+    {
+        return '+' . $this->getCountryCode() . $this->getNationalNumber();
+    }
 }
+
+/* EOF */

@@ -1,12 +1,4 @@
 <?php
-/**
- *
- *
- * @author joshuag
- * @created: 13/03/14 09:12
- * @project libphonenumber-for-php
- */
-
 namespace libphonenumber\Tests\Issues;
 
 

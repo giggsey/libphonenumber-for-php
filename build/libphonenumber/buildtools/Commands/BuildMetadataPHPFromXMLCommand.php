@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author giggsey
- * @created: 30/09/13 15:30
- * @project libphonenumber-buildtools
- */
 
 namespace libphonenumber\buildtools\Commands;
 
@@ -48,4 +41,4 @@ class BuildMetadataPHPFromXMLCommand extends Command
     }
 }
 
-/* EOF */ 
+/* EOF */

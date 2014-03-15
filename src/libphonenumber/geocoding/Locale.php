@@ -1,29 +1,24 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 7/28/13
- * Time: 5:22 PM
- */
 
 namespace libphonenumber\geocoding;
 
 
-class Locale extends \Locale {
+class Locale extends \Locale
+{
     /**
-    /* Returns a locale from a country code that is provided.
-    /*
+     * Returns a locale from a country code that is provided.
      * @link http://stackoverflow.com/a/10375234/403165
-    /* @param $country_code  ISO 3166-2-alpha 2 country code
-    /* @param $language_code ISO 639-1-alpha 2 language code
-    /* @returns  a locale, formatted like en_US, or null if not found
-    /**/
+     * @param string $country_code ISO 3166-2-alpha 2 country code
+     * @param string $language_code ISO 639-1-alpha 2 language code
+     * @returns string a locale, formatted like en_US, or null if not found
+     */
     public static function country_code_to_locale($country_code, $language_code = '')
     {
         // Locale list taken from:
         // http://stackoverflow.com/questions/3191664/
         // list-of-all-locales-and-their-short-codes
-        $locales = array('af-ZA',
+        $locales = array(
+            'af-ZA',
             'am-ET',
             'ar-AE',
             'ar-BH',
@@ -239,23 +234,20 @@ class Locale extends \Locale {
             'zh-MO',
             'zh-SG',
             'zh-TW',
-            'zu-ZA',);
+            'zu-ZA',
+        );
 
-        foreach ($locales as $locale)
-        {
+        foreach ($locales as $locale) {
             $locale_region = locale_get_region($locale);
             $locale_language = locale_get_primary_language($locale);
-            $locale_array = array('language' => $locale_language,
-                'region' => $locale_region);
+            $locale_array = array(
+                'language' => $locale_language,
+                'region' => $locale_region
+            );
 
-            if (strtoupper($country_code) == $locale_region &&
-                $language_code == '')
-            {
+            if (strtoupper($country_code) == $locale_region && $language_code == '') {
                 return locale_compose($locale_array);
-            }
-            elseif (strtoupper($country_code) == $locale_region &&
-                strtolower($language_code) == $locale_language)
-            {
+            } elseif (strtoupper($country_code) == $locale_region && strtolower($language_code) == $locale_language) {
                 return locale_compose($locale_array);
             }
         }
@@ -263,4 +255,6 @@ class Locale extends \Locale {
         return null;
     }
 
-} 
+}
+
+/* EOF */

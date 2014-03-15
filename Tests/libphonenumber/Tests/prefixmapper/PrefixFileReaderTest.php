@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author joshuag
- * @created: 20/09/13 12:08
- * @project libphonenumber-geocoder
- */
 
 namespace libphonenumber\Tests\prefixmapper;
 
@@ -85,4 +78,4 @@ class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-/* EOF */ 
+/* EOF */

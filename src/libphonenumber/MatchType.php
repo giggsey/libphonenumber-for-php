@@ -14,3 +14,5 @@ class MatchType
     const NSN_MATCH = 3;
     const EXACT_MATCH = 4;
 }
+
+/* EOF */

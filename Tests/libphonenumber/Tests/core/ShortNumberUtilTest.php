@@ -20,10 +20,12 @@ class ShortNumberUtilTest extends \PHPUnit_Framework_TestCase
         self::$plusSymbol = pack('H*', 'efbc8b');
 
         PhoneNumberUtil::resetInstance();
-        $this->shortUtil = new ShortNumberUtil(PhoneNumberUtil::getInstance(
-            PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX,
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
-        ));
+        $this->shortUtil = new ShortNumberUtil(
+            PhoneNumberUtil::getInstance(
+                PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX,
+                CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
+            )
+        );
     }
 
     public function testConnectsToEmergencyNumber_US()

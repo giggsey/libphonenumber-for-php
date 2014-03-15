@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author joshuag
- * @created: 04/09/13 09:32
- * @project libphonenumber-for-php
- */
 
 namespace libphonenumber\Tests\core;
 
@@ -415,4 +408,4 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-/* EOF */ 
+/* EOF */

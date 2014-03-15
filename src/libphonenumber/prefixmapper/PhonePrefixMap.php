@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 7/27/13
- * Time: 11:53 PM
- */
 
 namespace libphonenumber\prefixmapper;
 
@@ -50,7 +44,8 @@ class PhonePrefixMap
         return $this->lookupKey($phonePrefix);
     }
 
-    public function lookupKey($key) {
+    public function lookupKey($key)
+    {
         if (count($this->phonePrefixMapStorage) == 0) {
             return null;
         }
@@ -66,4 +61,6 @@ class PhonePrefixMap
         return null;
     }
 
-} 
+}
+
+/* EOF */

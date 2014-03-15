@@ -12,3 +12,5 @@ class CountryCodeSource
     const FROM_NUMBER_WITHOUT_PLUS_SIGN = 2;
     const FROM_DEFAULT_COUNTRY = 3;
 }
+
+/* EOF */

@@ -2,7 +2,10 @@
 
 namespace libphonenumber;
 
-
+/**
+ * Cost categories of short numbers
+ * @package libphonenumber
+ */
 class ShortNumberCost
 {
     const TOLL_FREE = 3;

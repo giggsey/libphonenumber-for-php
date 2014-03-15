@@ -6,22 +6,6 @@ use libphonenumber\NumberFormat;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
 
-/*
- * Copyright (C) 2009 The Libphonenumber Authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 /**
  * Library to build phone number metadata from the XML format.
  *
@@ -98,8 +82,8 @@ class BuildMetadataFromXml
     }
 
     /**
-     * @param string regionCode
-     * @param DOMElement $element
+     * @param string $regionCode
+     * @param \DOMElement $element
      * @return PhoneMetadata
      */
     public static function loadCountryMetadata($regionCode, \DOMElement $element)
@@ -120,6 +104,7 @@ class BuildMetadataFromXml
 
     /**
      * Returns the national prefix of the provided country element.
+     * @param \DOMElement $element
      * @return string
      */
     private static function getNationalPrefix(\DOMElement $element)
@@ -129,7 +114,7 @@ class BuildMetadataFromXml
 
     /**
      *
-     * @param DOMElement $element
+     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @return string
      */
@@ -145,7 +130,7 @@ class BuildMetadataFromXml
     /**
      *
      * @param string $regionCode
-     * @param DOMElement $element
+     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @param string $nationalPrefixFormattingRule
      * @return PhoneMetadata
@@ -197,14 +182,13 @@ class BuildMetadataFromXml
     }
 
     /**
-     * @todo Implement this method
      * Extracts the available formats from the provided DOM element. If it does not contain any
      * nationalPrefixFormattingRule, the one passed-in is retained.
      * @param PhoneMetadata $metadata
-     * @param type $regionCode
-     * @param DOMElement $element
-     * @param type $nationalPrefix
-     * @param type $nationalPrefixFormattingRule
+     * @param string $regionCode
+     * @param \DOMElement $element
+     * @param string $nationalPrefix
+     * @param string $nationalPrefixFormattingRule
      */
     private static function loadAvailableFormats(
         PhoneMetadata $metadata,
@@ -264,7 +248,7 @@ class BuildMetadataFromXml
     private static function getDomesticCarrierCodeFormattingRuleFromElement(\DOMElement $element, $nationalPrefix)
     {
         $carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
-// Replace $FG with the first group ($1) and $NP with the national prefix.
+        // Replace $FG with the first group ($1) and $NP with the national prefix.
         $carrierCodeFormattingRule = str_replace('$NP', $nationalPrefix, $carrierCodeFormattingRule);
         $carrierCodeFormattingRule = str_replace('$FG', '$1', $carrierCodeFormattingRule);
         return $carrierCodeFormattingRule;
@@ -273,8 +257,11 @@ class BuildMetadataFromXml
     /**
      * Extracts the pattern for the national format.
      *
-     * @throws  RuntimeException if multiple or no formats have been encountered.
-     * @return  the national format string.
+     * @param PhoneMetadata $metadata
+     * @param \DOMElement $numberFormatElement
+     * @param NumberFormat $format
+     * @throws \RuntimeException if multiple or no formats have been encountered.
+     * @return string the national format string.
      */
     private static function loadNationalFormat(
         PhoneMetadata $metadata,
@@ -286,8 +273,7 @@ class BuildMetadataFromXml
 
         $formatPattern = $numberFormatElement->getElementsByTagName(self::FORMAT);
         if ($formatPattern->length != 1) {
-            throw new \RuntimeException("Invalid number of format patterns for country: " .
-            $metadata->getId());
+            throw new \RuntimeException("Invalid number of format patterns for country: " . $metadata->getId());
         }
         $nationalFormat = $formatPattern->item(0)->firstChild->nodeValue;
         $format->setFormat($nationalFormat);
@@ -313,8 +299,11 @@ class BuildMetadataFromXml
      * Extracts the pattern for international format. If there is no intlFormat, default to using the
      * national format. If the intlFormat is set to "NA" the intlFormat should be ignored.
      *
-     * @throws  RuntimeException if multiple intlFormats have been encountered.
-     * @return  whether an international number format is defined.
+     * @param PhoneMetadata $metadata
+     * @param \DOMElement $numberFormatElement
+     * @param string $nationalFormat
+     * @throws \RuntimeException if multiple intlFormats have been encountered.
+     * @return bool whether an international number format is defined.
      */
     private static function loadInternationalFormat(
         PhoneMetadata $metadata,
@@ -328,8 +317,7 @@ class BuildMetadataFromXml
         $hasExplicitIntlFormatDefined = false;
 
         if ($intlFormatPattern->length > 1) {
-            throw new \RuntimeException("Invalid number of intlFormat patterns for country: " .
-            $metadata->getId());
+            throw new \RuntimeException("Invalid number of intlFormat patterns for country: " . $metadata->getId());
         } else {
             if ($intlFormatPattern->length == 0) {
                 // Default to use the same as the national pattern if none is defined.
@@ -393,12 +381,12 @@ class BuildMetadataFromXml
      * we assume there are no toll free numbers for that locale, and return a phone number description
      * with "NA" for both the national and possible number patterns.
      *
-     * @param generalDesc  a generic phone number description that will be used to fill in missing
-     *                     parts of the description
-     * @param countryElement  the XML element representing all the country information
-     * @param numberType  the name of the number type, corresponding to the appropriate tag in the XML
-     *                    file with information about that type
-     * @return  complete description of that phone number type
+     * @param PhoneNumberDesc $generalDesc generic phone number description that will be used to fill in missing
+     * parts of the description
+     * @param \DOMElement $countryElement XML element representing all the country information
+     * @param string $numberType name of the number type, corresponding to the appropriate tag in the XML
+     * file with information about that type
+     * @return PhoneNumberDesc complete description of that phone number type
      */
     private static function processPhoneNumberDescElement(
         PhoneNumberDesc $generalDesc,
@@ -437,6 +425,7 @@ class BuildMetadataFromXml
 
     /**
      * @param string $numberType
+     * @return bool
      */
     private static function isValidNumberType($numberType)
     {
@@ -474,3 +463,5 @@ class BuildMetadataFromXml
     }
 
 }
+
+/* EOF */

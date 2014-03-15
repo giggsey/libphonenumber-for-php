@@ -3,7 +3,6 @@
 namespace libphonenumber\prefixmapper;
 
 use libphonenumber\PhoneNumber;
-use libphonenumber\PhoneNumberType;
 
 /**
  * A helper class doing file handling and lookup of phone number prefix mappings.
@@ -91,15 +90,16 @@ class PrefixFileReader
     /**
      * Returns a text description in the given language for the given phone number.
      *
-     * @param PhoneNumber $number  the phone number for which we want to get a text description
-     * @param string $language  two-letter lowercase ISO language codes as defined by ISO 639-1
-     * @param string $script  four-letter titlecase (the first letter is uppercase and the rest of the letters
+     * @param PhoneNumber $number the phone number for which we want to get a text description
+     * @param string $language two-letter lowercase ISO language codes as defined by ISO 639-1
+     * @param string $script four-letter titlecase (the first letter is uppercase and the rest of the letters
      *     are lowercase) ISO script codes as defined in ISO 15924
-     * @param string $region  two-letter uppercase ISO country codes as defined by ISO 3166-1
+     * @param string $region two-letter uppercase ISO country codes as defined by ISO 3166-1
      * @return string a text description in the given language for the given phone number, or an empty
      *     string if a description is not available
      */
-    public function getDescriptionForNumber(PhoneNumber $number, $language, $script, $region) {
+    public function getDescriptionForNumber(PhoneNumber $number, $language, $script, $region)
+    {
         $countryCallingCode = $number->getCountryCode();
         // As the NANPA data is split into multiple files covering 3-digit areas, use a phone number
         // prefix of 4 digits for NANPA instead, e.g. 1650.
@@ -123,4 +123,4 @@ class PrefixFileReader
 
 }
 
-/* EOF */ 
+/* EOF */

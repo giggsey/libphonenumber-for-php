@@ -36,21 +36,22 @@ class Matcher
         $this->subject = $subject;
     }
 
-    private function do_match($type = 'find') {
+    private function do_match($type = 'find')
+    {
         $final_pattern = '(?:' . $this->pattern . ')';
-	switch ($type) {
-	    case 'matches':
-	        $final_pattern = '^' . $final_pattern . '$';
+        switch ($type) {
+            case 'matches':
+                $final_pattern = '^' . $final_pattern . '$';
                 break;
             case 'lookingAt':
-	        $final_pattern = '^' . $final_pattern;
+                $final_pattern = '^' . $final_pattern;
                 break;
             case 'find':
-	    default:
+            default:
                 // no changes	    
                 break;
         }
-	$final_pattern = '/' . $final_pattern .'/x';
+        $final_pattern = '/' . $final_pattern . '/x';
         return (preg_match($final_pattern, $this->subject, $this->groups, PREG_OFFSET_CAPTURE) == 1) ? true : false;
     }
 
@@ -83,25 +84,27 @@ class Matcher
      */
     public function groupCount()
     {
-        if (empty($this->groups))
-            return NULL;
-	else
+        if (empty($this->groups)) {
+            return null;
+        } else {
             return count($this->groups) - 1;
+        }
     }
 
     /**
      * @param int $group
-     * 
-     * @return string 
+     * @return string
      */
-    public function group($group = NULL)
+    public function group($group = null)
     {
-	if (!isset($group))
+        if (!isset($group)) {
             $group = 0;
-        return (isset($this->groups[$group][0])) ? $this->groups[$group][0] : NULL;
+        }
+        return (isset($this->groups[$group][0])) ? $this->groups[$group][0] : null;
     }
 
     /**
+     * @param int|null $group
      * @return int
      */
     public function end($group = null)
@@ -115,7 +118,7 @@ class Matcher
         return $this->groups[$group][1] + strlen($this->groups[$group][0]);
     }
 
-    public function start($group = NULL)
+    public function start($group = null)
     {
         if (isset($group) || $group === null) {
             $group = 0;
@@ -129,8 +132,7 @@ class Matcher
 
     /**
      * @param string $replacement
-     * 
-     * @return string 
+     * @return string
      */
     public function replaceFirst($replacement)
     {
@@ -139,8 +141,7 @@ class Matcher
 
     /**
      * @param string $replacement
-     * 
-     * @return string 
+     * @return string
      */
     public function replaceAll($replacement)
     {
@@ -149,8 +150,7 @@ class Matcher
 
     /**
      * @param string $input
-     * 
-     * @return Matcher 
+     * @return Matcher
      */
     public function reset($input = "")
     {
@@ -159,3 +159,5 @@ class Matcher
         return $this;
     }
 }
+
+/* EOF */

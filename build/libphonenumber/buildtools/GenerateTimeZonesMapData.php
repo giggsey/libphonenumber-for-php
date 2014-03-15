@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 14/10/13
- * Time: 19:40
- */
 
 namespace libphonenumber\buildtools;
 
@@ -31,7 +25,8 @@ class GenerateTimeZonesMapData
      * Reads phone prefix data from the provided input stream and returns a SortedMap with the
      * prefix to time zones mappings.
      */
-    private function parseTextFile(){
+    private function parseTextFile()
+    {
         $data = file($this->inputTextFile);
 
         $timeZoneMap = array();
@@ -69,3 +64,5 @@ class GenerateTimeZonesMapData
         file_put_contents($outputPath, $phpSource);
     }
 }
+
+/* EOF */

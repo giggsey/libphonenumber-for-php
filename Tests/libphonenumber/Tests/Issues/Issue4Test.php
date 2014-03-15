@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author joshuag
- * @created: 31/07/13 17:09
- * @project libphonenumber-for-php
- */
 
 namespace libphonenumber\Tests\Issues;
 
@@ -36,4 +29,4 @@ class Issue4Test extends \PHPUnit_Framework_TestCase
     }
 }
 
-/* EOF */ 
+/* EOF */

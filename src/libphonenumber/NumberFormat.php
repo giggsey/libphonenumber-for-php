@@ -14,7 +14,7 @@ class NumberFormat
     private $domesticCarrierCodeFormattingRule = null;
 
     /**
-     * @return boolean 
+     * @return boolean
      */
     public function hasPattern()
     {
@@ -22,7 +22,7 @@ class NumberFormat
     }
 
     /**
-     * @return string 
+     * @return string
      */
     public function getPattern()
     {
@@ -31,8 +31,7 @@ class NumberFormat
 
     /**
      * @param string $value
-     *
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function setPattern($value)
     {
@@ -59,8 +58,7 @@ class NumberFormat
 
     /**
      * @param string $value
-     * 
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function setFormat($value)
     {
@@ -87,8 +85,7 @@ class NumberFormat
 
     /**
      * @param int $index
-     * 
-     * @return string 
+     * @return string
      */
     public function getLeadingDigitsPattern($index)
     {
@@ -97,8 +94,7 @@ class NumberFormat
 
     /**
      * @param string $value
-     * 
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function addLeadingDigitsPattern($value)
     {
@@ -125,8 +121,7 @@ class NumberFormat
 
     /**
      * @param string $value
-     * 
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function setNationalPrefixFormattingRule($value)
     {
@@ -136,7 +131,7 @@ class NumberFormat
     }
 
     /**
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function clearNationalPrefixFormattingRule()
     {
@@ -144,21 +139,6 @@ class NumberFormat
 
         return $this;
     }
-
-    /*
-      // optional bool national_prefix_optional_when_formatting = 6;
-      private boolean hasNationalPrefixOptionalWhenFormatting;
-      private boolean nationalPrefixOptionalWhenFormatting_ = false;
-      public boolean hasNationalPrefixOptionalWhenFormatting() {
-      return hasNationalPrefixOptionalWhenFormatting; }
-      public boolean isNationalPrefixOptionalWhenFormatting() {
-      return nationalPrefixOptionalWhenFormatting_; }
-      public NumberFormat setNationalPrefixOptionalWhenFormatting(boolean value) {
-      hasNationalPrefixOptionalWhenFormatting = true;
-      nationalPrefixOptionalWhenFormatting_ = value;
-      return this;
-      }
-     */
 
     /**
      * @return boolean
@@ -178,8 +158,7 @@ class NumberFormat
 
     /**
      * @param string $value
-     * 
-     * @return NumberFormat 
+     * @return NumberFormat
      */
     public function setDomesticCarrierCodeFormattingRule($value)
     {
@@ -190,7 +169,6 @@ class NumberFormat
 
     /**
      * @param NumberFormat $other
-     * 
      * @return NumberFormat
      */
     public function mergeFrom(NumberFormat $other)
@@ -211,13 +189,11 @@ class NumberFormat
         if ($other->hasDomesticCarrierCodeFormattingRule()) {
             $this->setDomesticCarrierCodeFormattingRule($other->getDomesticCarrierCodeFormattingRule());
         }
-        //  $this->setNationalPrefixOptionalWhenFormatting($other->isNationalPrefixOptionalWhenFormatting());
-
         return $this;
     }
 
     /**
-     * @return array 
+     * @return array
      */
     public function toArray()
     {
@@ -234,13 +210,11 @@ class NumberFormat
         if ($this->hasDomesticCarrierCodeFormattingRule()) {
             $output['domesticCarrierCodeFormattingRule'] = $this->getDomesticCarrierCodeFormattingRule();
         }
-        //objectOutput.writeBoolean(nationalPrefixOptionalWhenFormatting_);
-
         return $output;
     }
 
     /**
-     * @param array $input 
+     * @param array $input
      */
     public function fromArray(array $input)
     {
@@ -256,6 +230,7 @@ class NumberFormat
         if (isset($input['domesticCarrierCodeFormattingRule'])) {
             $this->setDomesticCarrierCodeFormattingRule($input['domesticCarrierCodeFormattingRule']);
         }
-        //setNationalPrefixOptionalWhenFormatting(objectInput.readBoolean());
     }
 }
+
+/* EOF */

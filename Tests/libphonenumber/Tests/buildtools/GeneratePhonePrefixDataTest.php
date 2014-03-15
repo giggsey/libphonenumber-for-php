@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author joshuag
- * @created: 30/09/13 16:00
- * @project libphonenumber-buildtools
- */
 
 namespace libphonenumber\Tests\buildtools;
 

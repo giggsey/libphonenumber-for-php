@@ -1,11 +1,4 @@
 <?php
-/**
- *
- *
- * @author giggsey
- * @created: 30/09/13 14:54
- * @project libphonenumber-buildtools
- */
 
 namespace libphonenumber\buildtools;
 
@@ -33,4 +26,4 @@ class BuildApplication extends Application
     }
 }
 
-/* EOF */ 
+/* EOF */

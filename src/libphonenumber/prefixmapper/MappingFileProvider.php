@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 7/27/13
- * Time: 11:28 PM
- */
 
 namespace libphonenumber\prefixmapper;
 
@@ -45,4 +39,6 @@ class MappingFileProvider
         return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language]));
     }
 
-} 
+}
+
+/* EOF */

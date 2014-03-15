@@ -882,7 +882,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
 
         // Invalid country code should just get the NSN.
-        $this->assertEquals("12345", $this->phoneUtil->formatNationalNumberWithCarrierCode(self::$unknownCountryCodeNoRawInput, "89"));
+        $this->assertEquals(
+            "12345",
+            $this->phoneUtil->formatNationalNumberWithCarrierCode(self::$unknownCountryCodeNoRawInput, "89")
+        );
     }
 
     public function testFormatWithPreferredCarrierCode()
@@ -1064,28 +1067,52 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // and is not diallable from outside the region.
         $deShortNumber = new PhoneNumber();
         $deShortNumber->setCountryCode(49)->setNationalNumber(123);
-        $this->assertEquals("123", $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::DE, false));
+        $this->assertEquals(
+            "123",
+            $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::DE, false)
+        );
         $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::IT, false));
 
         // Test the special logic for Hungary, where the national prefix must be added before dialing
         // from a mobile phone for regular length numbers, but not for short numbers.
         $huRegularNumber = new PhoneNumber();
         $huRegularNumber->setCountryCode(36)->setNationalNumber(301234567);
-        $this->assertEquals("06301234567", $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber,RegionCode::HU, false));
-        $this->assertEquals("+36301234567", $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::JP, false));
+        $this->assertEquals(
+            "06301234567",
+            $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::HU, false)
+        );
+        $this->assertEquals(
+            "+36301234567",
+            $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::JP, false)
+        );
         $huShortNumber = new PhoneNumber();
         $huShortNumber->setCountryCode(36)->setNationalNumber(104);
-        $this->assertEquals("104", $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::HU,false));
+        $this->assertEquals(
+            "104",
+            $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::HU, false)
+        );
         $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::JP, false));
 
         // Test the special logic for NANPA countries, for which regular length phone numbers are always
         // output in international format, but short numbers are in national format.
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::US, false));
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::CA, false));
-        $this->assertEquals("+16502530000", $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::BR, false));
+        $this->assertEquals(
+            "+16502530000",
+            $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::US, false)
+        );
+        $this->assertEquals(
+            "+16502530000",
+            $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::CA, false)
+        );
+        $this->assertEquals(
+            "+16502530000",
+            $this->phoneUtil->formatNumberForMobileDialing(self::$usNumber, RegionCode::BR, false)
+        );
         $usShortNumber = new PhoneNumber();
         $usShortNumber->setCountryCode(1)->setNationalNumber(911);
-        $this->assertEquals("911", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::US, false));
+        $this->assertEquals(
+            "911",
+            $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::US, false)
+        );
         $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::CA, false));
         $this->assertEquals("", $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::BR, false));
 
@@ -1384,7 +1411,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("1234", $this->phoneUtil->formatInOriginalFormat($numberWithoutStar, RegionCode::JP));
 
         // Test an invalid national number without raw input is just formatted as the national number.
-        $this->assertEquals("650253000", $this->phoneUtil->formatInOriginalFormat(self::$usShortByOneNumber, RegionCode::US));
+        $this->assertEquals(
+            "650253000",
+            $this->phoneUtil->formatInOriginalFormat(self::$usShortByOneNumber, RegionCode::US)
+        );
     }
 
     public function testIsPremiumRate()
@@ -2383,15 +2413,39 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->parse("1 (650) 253" . pack("H*", 'c2ad') . "-0000", RegionCode::US)
         );
         // The whole number, including punctuation, is here represented in full-width form.
-        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse(pack("H*",'efbc8b') . pack("H*",'efbc91') . pack("H*",'e38080') .
-                pack("H*",'efbc88') . pack("H*",'efbc96') . pack("H*",'efbc95') . pack("H*", 'efbc90') . pack("H*", 'efbc89') .
-                pack("H*",'e38080') .  pack("H*",'efbc92') .  pack("H*",'efbc95') .  pack("H*",'efbc93') . pack("H*", 'efbc8d') .
-                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'), RegionCode::SG));
+        $this->assertEquals(
+            self::$usNumber,
+            $this->phoneUtil->parse(
+                pack("H*", 'efbc8b') . pack("H*", 'efbc91') . pack("H*", 'e38080') .
+                pack("H*", 'efbc88') . pack("H*", 'efbc96') . pack("H*", 'efbc95') . pack("H*", 'efbc90') . pack(
+                    "H*",
+                    'efbc89'
+                ) .
+                pack("H*", 'e38080') . pack("H*", 'efbc92') . pack("H*", 'efbc95') . pack("H*", 'efbc93') . pack(
+                    "H*",
+                    'efbc8d'
+                ) .
+                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'),
+                RegionCode::SG
+            )
+        );
         // Using U+30FC dash instead.
-        $this->assertEquals(self::$usNumber, $this->phoneUtil->parse(pack("H*",'efbc8b') . pack("H*",'efbc91') . pack("H*",'e38080') .
-                pack("H*",'efbc88') . pack("H*",'efbc96') . pack("H*",'efbc95') . pack("H*", 'efbc90') . pack("H*", 'efbc89') .
-                pack("H*",'e38080').  pack("H*",'efbc92') .  pack("H*",'efbc95') .  pack("H*",'efbc93') . pack("H*", 'e383bc') .
-                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'), RegionCode::SG));
+        $this->assertEquals(
+            self::$usNumber,
+            $this->phoneUtil->parse(
+                pack("H*", 'efbc8b') . pack("H*", 'efbc91') . pack("H*", 'e38080') .
+                pack("H*", 'efbc88') . pack("H*", 'efbc96') . pack("H*", 'efbc95') . pack("H*", 'efbc90') . pack(
+                    "H*",
+                    'efbc89'
+                ) .
+                pack("H*", 'e38080') . pack("H*", 'efbc92') . pack("H*", 'efbc95') . pack("H*", 'efbc93') . pack(
+                    "H*",
+                    'e383bc'
+                ) .
+                pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90') . pack("H*", 'efbc90'),
+                RegionCode::SG
+            )
+        );
         // Using a very strange decimal digit range (Mongolian digits).
         $this->assertEquals(
             self::$usNumber,
@@ -2903,7 +2957,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // Repeat with the small letter o with acute accent created by combining characters.
         $this->assertEquals(
             $usWithExtension,
-            $this->phoneUtil->parse("(800) 901-3355 ,extensio" . pack('H*','cc81') . "n 7246433", RegionCode::US)
+            $this->phoneUtil->parse("(800) 901-3355 ,extensio" . pack('H*', 'cc81') . "n 7246433", RegionCode::US)
         );
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 , 7246433", RegionCode::US));
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ext: 7246433", RegionCode::US));
@@ -3005,7 +3059,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
         // Test the number "000". This number has 2 leading zeros.
         $stillTwoZeros = new PhoneNumber();
-        $stillTwoZeros->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(2);
+        $stillTwoZeros->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(
+            2
+        );
         $this->assertEquals($stillTwoZeros, $this->phoneUtil->parse("000", RegionCode::AU));
 
         // Test the number "0000". This number has 3 leading zeros.
@@ -3170,7 +3226,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // be a national prefix, so don't remove it when parsing.
         $randomNumber = new PhoneNumber();
         $randomNumber->setCountryCode(41)->setNationalNumber(6502530000);
-        $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch($randomNumber, "1-650-253-0000"));
+        $this->assertEquals(
+            MatchType::SHORT_NSN_MATCH,
+            $this->phoneUtil->isNumberMatch($randomNumber, "1-650-253-0000")
+        );
     }
 
     public function testIsNumberMatchShortNsnMatches()

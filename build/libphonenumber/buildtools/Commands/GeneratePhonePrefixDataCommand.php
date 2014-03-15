@@ -1,17 +1,11 @@
 <?php
-/**
- * 
- *
- * @author joshuag
- * @created: 30/09/13 15:00
- * @project libphonenumber-buildtools
- */
 
 namespace libphonenumber\buildtools\Commands;
 
 
 use libphonenumber\buildtools\GeneratePhonePrefixData;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,10 +26,16 @@ class GeneratePhonePrefixDataCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var ProgressHelper $progress */
         $progress = $this->getHelperSet()->get('progress');
         $generatePhonePrefixData = new GeneratePhonePrefixData();
-        $generatePhonePrefixData->start($input->getArgument('InputDirectory'), $input->getArgument('OutputDirectory'), $output, $progress);
+        $generatePhonePrefixData->start(
+            $input->getArgument('InputDirectory'),
+            $input->getArgument('OutputDirectory'),
+            $output,
+            $progress
+        );
     }
 }
 
-/* EOF */ 
+/* EOF */

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: giggsey
- * Date: 14/10/13
- * Time: 17:50
- */
 
 namespace libphonenumber\prefixmapper;
 

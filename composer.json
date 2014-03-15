@@ -22,6 +22,12 @@
             "libphonenumber": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-0": {
+            "libphonenumber\\buildtools": "build/",
+            "libphonenumber\\Tests": "Tests/"
+        }
+    },
     "archive": {
         "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist"]
     },

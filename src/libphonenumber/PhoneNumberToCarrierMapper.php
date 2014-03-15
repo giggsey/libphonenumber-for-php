@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  *
  * @author giggsey
  * @created: 02/10/13 16:52
@@ -30,7 +30,8 @@ class PhoneNumberToCarrierMapper
      */
     private $prefixFileReader;
 
-    private function __construct($phonePrefixDataDirectory) {
+    private function __construct($phonePrefixDataDirectory)
+    {
         $this->prefixFileReader = new PrefixFileReader(dirname(__FILE__) . $phonePrefixDataDirectory);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
@@ -44,7 +45,8 @@ class PhoneNumberToCarrierMapper
      * @param string $mappingDir
      * @return PhoneNumberToCarrierMapper
      */
-    public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY) {
+    public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
+    {
         if (self::$instance === null) {
             self::$instance = new self($mappingDir);
         }
@@ -66,7 +68,8 @@ class PhoneNumberToCarrierMapper
      * @param string $languageCode the language code in which the name should be written
      * @return string a carrier name for the given phone number
      */
-    public function getNameForValidNumber(PhoneNumber $number, $languageCode) {
+    public function getNameForValidNumber(PhoneNumber $number, $languageCode)
+    {
         $languageStr = \Locale::getPrimaryLanguage($languageCode);
         $scriptStr = "";
         $regionStr = \Locale::getRegion($languageCode);
@@ -85,13 +88,15 @@ class PhoneNumberToCarrierMapper
      * @return string a carrier name for the given phone number, or empty string if the number passed in is
      *     invalid
      */
-    public function getNameForNumber(PhoneNumber $number, $languageCode) {
+    public function getNameForNumber(PhoneNumber $number, $languageCode)
+    {
         $numberType = $this->phoneUtil->getNumberType($number);
         if ($this->isMobile($numberType)) {
             return $this->getNameForValidNumber($number, $languageCode);
         }
         return "";
     }
+
     /**
      * Gets the name of the carrier for the given phone number only when it is 'safe' to display to
      * users. A carrier name is considered safe if the number is valid and for a region that doesn't
@@ -102,7 +107,8 @@ class PhoneNumberToCarrierMapper
      * @param $languageCode String the language code in which the name should be written
      * @return string a carrier name that is safe to display to users, or the empty string
      */
-    public function getSafeDisplayName(PhoneNumber $number, $languageCode) {
+    public function getSafeDisplayName(PhoneNumber $number, $languageCode)
+    {
         if ($this->phoneUtil->isMobileNumberPortableRegion($this->phoneUtil->getRegionCodeForNumber($number))) {
             return "";
         }
@@ -115,7 +121,8 @@ class PhoneNumberToCarrierMapper
      * @param int $numberType A PhoneNumberType int
      * @return bool
      */
-    private function isMobile($numberType) {
+    private function isMobile($numberType)
+    {
         return ($numberType === PhoneNumberType::MOBILE ||
             $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE ||
             $numberType === PhoneNumberType::PAGER
