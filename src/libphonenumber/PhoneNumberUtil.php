@@ -731,7 +731,7 @@ class PhoneNumberUtil
             $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
             $nationalNumber .= $zeros;
         }
-        $nationalNumber .= sprintf('%.0f', $number->getNationalNumber());
+        $nationalNumber .= $number->getNationalNumber();
         return $nationalNumber;
     }
 
@@ -1484,7 +1484,26 @@ class PhoneNumberUtil
             );
         }
         $this->setItalianLeadingZerosForPhoneNumber($normalizedNationalNumber, $phoneNumber);
-        $phoneNumber->setNationalNumber((float)$normalizedNationalNumber);
+
+
+        /*
+         * We have to store the National Number as a string instead of a "long" as Google do
+         *
+         * Since PHP doesn't always support 64 bit INTs, this was a float, but that had issues
+         * with long numbers.
+         *
+         * We have to remove the leading zeroes ourself though
+         */
+
+        $normalizedNationalNumberCopy = $normalizedNationalNumber;
+
+        if ((float)$normalizedNationalNumberCopy == 0) {
+            $normalizedNationalNumber = "0";
+        } else {
+            $normalizedNationalNumber = ltrim($normalizedNationalNumber, '0');
+        }
+
+        $phoneNumber->setNationalNumber($normalizedNationalNumber);
     }
 
     /**
