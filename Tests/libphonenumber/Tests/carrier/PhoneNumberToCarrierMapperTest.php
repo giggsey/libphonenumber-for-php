@@ -30,6 +30,8 @@ class PhoneNumberToCarrierMapperTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
+        PhoneNumberUtil::resetInstance();
+
         self::$AO_MOBILE1 = new PhoneNumber();
         self::$AO_MOBILE1->setCountryCode(244)->setNationalNumber(917654321);
 
@@ -75,7 +77,6 @@ class PhoneNumberToCarrierMapperTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        PhoneNumberUtil::resetInstance();
         $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(self::TEST_META_DATA_FILE_PREFIX);
     }
 

@@ -7,16 +7,73 @@
     <property name="svn.url" value="http://libphonenumber.googlecode.com/svn/trunk/"/>
     <property name="svn.path" value="libphonenumber-data-dir"/>
 
+    <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
+    <property name="data.testPrefixMapperData" value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
+    <property name="data.testCarrierData" value="Tests/libphonenumber/Tests/carrier/data/"/>
+    <property name="data.testTimezoneData" value="Tests/libphonenumber/Tests/timezone/data/"/>
+
+    <property name="data.coreData" value="src/libphonenumber/data/"/>
+    <property name="data.carrierData" value="src/libphonenumber/carrier/data/"/>
+    <property name="data.geocodingData" value="src/libphonenumber/geocoding/data/"/>
+    <property name="data.timezoneData" value="src/libphonenumber/timezone/data/"/>
+
+
     <target name="test" description="Run unit tests" depends="compile-test-data">
         <exec passthru="true" command="vendor/bin/phpunit"/>
     </target>
 
     <target name="compile-test-data" description="Build Test Data"
-            depends="build-test-metadata,build-geo-test-data,build-carrier-test-data,build-timezones-test-data">
+            depends="cleanup-test-data,build-test-metadata,build-geo-test-data,build-carrier-test-data,build-timezones-test-data">
     </target>
 
     <target name="compile" description="Build all Data"
-            depends="compile-test-data,build-phone-metadata,build-short-metadata,build-alternate-metadata,build-carrier-data,build-timezones-data,build-geo-data">
+            depends="cleanup-data,compile-test-data,build-phone-metadata,build-short-metadata,build-alternate-metadata,build-carrier-data,build-timezones-data,build-geo-data">
+    </target>
+
+    <target name="cleanup-test-data" description="Cleanup old built test data"
+            depends="delete-test-carrierdata,delete-test-prefixmapper,delete-test-coredata,delete-test-timezone"/>
+
+    <target name="cleanup-data" description="Cleanup built data"
+            depends="cleanup-test-data,delete-coredata,delete-carrierdata,delete-geocoding,delete-timezone"/>
+
+    <target name="delete-test-coredata">
+        <delete dir="${data.testCoreData}"/>
+        <mkdir dir="${data.testCoreData}"/>
+    </target>
+
+    <target name="delete-test-carrierdata">
+        <delete dir="${data.testCarrierData}"/>
+        <mkdir dir="${data.testCarrierData}"/>
+    </target>
+
+    <target name="delete-test-prefixmapper">
+        <delete dir="${data.testPrefixMapperData}"/>
+        <mkdir dir="${data.testPrefixMapperData}"/>
+    </target>
+
+    <target name="delete-test-timezone">
+        <delete dir="${data.testTimezoneData}"/>
+        <mkdir dir="${data.testTimezoneData}"/>
+    </target>
+
+    <target name="delete-coredata">
+        <delete dir="${data.coreData}"/>
+        <mkdir dir="${data.coreData}"/>
+    </target>
+
+    <target name="delete-carrierdata">
+        <delete dir="${data.carrierData}"/>
+        <mkdir dir="${data.carrierData}"/>
+    </target>
+
+    <target name="delete-geocoding">
+        <delete dir="${data.geocodingData}"/>
+        <mkdir dir="${data.geocodingData}"/>
+    </target>
+
+    <target name="delete-timezone">
+        <delete dir="${data.timezoneData}"/>
+        <mkdir dir="${data.timezoneData}"/>
     </target>
 
     <target name="svn-checkout">
@@ -31,7 +88,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${resources.url}PhoneNumberMetadataForTesting.xml"/>
-            <arg value="Tests/libphonenumber/Tests/core/data/"/>
+            <arg value="${data.testCoreData}"/>
             <arg value="PhoneNumberMetadataForTesting"/>
             <arg value="CountryCodeToRegionCodeMapForTesting"/>
             <arg value="src/libphonenumber/"/>
@@ -43,7 +100,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${svn.path}/resources/test/geocoding/"/>
-            <arg value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
+            <arg value="${data.testPrefixMapperData}"/>
         </exec>
     </target>
 
@@ -51,17 +108,16 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${svn.path}/resources/test/carrier/"/>
-            <arg value="Tests/libphonenumber/Tests/carrier/data/"/>
+            <arg value="${data.testCarrierData}"/>
         </exec>
     </target>
-
 
 
     <target name="build-phone-metadata">
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${resources.url}PhoneNumberMetadata.xml"/>
-            <arg value="src/libphonenumber/data/"/>
+            <arg value="${data.coreData}"/>
             <arg value="PhoneNumberMetadata"/>
             <arg value="CountryCodeToRegionCodeMap"/>
             <arg value="src/libphonenumber/"/>
@@ -73,7 +129,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${resources.url}ShortNumberMetadata.xml"/>
-            <arg value="src/libphonenumber/data/"/>
+            <arg value="${data.coreData}"/>
             <arg value="ShortNumberMetadata"/>
             <arg value="ShortNumbersRegionCodeSet"/>
             <arg value="src/libphonenumber/"/>
@@ -85,7 +141,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${resources.url}PhoneNumberAlternateFormats.xml"/>
-            <arg value="src/libphonenumber/data/"/>
+            <arg value="${data.coreData}"/>
             <arg value="PhoneNumberAlternateFormats"/>
             <arg value="AlternateFormatsCountryCodeSet"/>
             <arg value="src/libphonenumber/"/>
@@ -97,7 +153,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${svn.path}/resources/carrier/"/>
-            <arg value="src/libphonenumber/carrier/data/"/>
+            <arg value="${data.carrierData}"/>
         </exec>
     </target>
 
@@ -105,7 +161,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${svn.path}/resources/geocoding/"/>
-            <arg value="src/libphonenumber/geocoding/data/"/>
+            <arg value="${data.geocodingData}"/>
         </exec>
     </target>
 
@@ -113,7 +169,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GenerateTimeZonesMapData"/>
             <arg value="${svn.path}/resources/timezones/map_data.txt"/>
-            <arg value="src/libphonenumber/timezone/data/"/>
+            <arg value="${data.timezoneData}"/>
         </exec>
     </target>
 
@@ -121,7 +177,7 @@
         <exec executable="${build.script}" passthru="true">
             <arg value="GenerateTimeZonesMapData"/>
             <arg value="${svn.path}/resources/test/timezones/map_data.txt"/>
-            <arg value="Tests/libphonenumber/Tests/timezone/data/"/>
+            <arg value="${data.testTimezoneData}"/>
         </exec>
     </target>
 
