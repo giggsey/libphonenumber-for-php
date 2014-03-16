@@ -1494,10 +1494,7 @@ class PhoneNumberUtil
          *
          * We have to remove the leading zeroes ourself though
          */
-
-        $normalizedNationalNumberCopy = $normalizedNationalNumber;
-
-        if ((float)$normalizedNationalNumberCopy == 0) {
+        if ((int)$normalizedNationalNumber == 0) {
             $normalizedNationalNumber = "0";
         } else {
             $normalizedNationalNumber = ltrim($normalizedNationalNumber, '0');
