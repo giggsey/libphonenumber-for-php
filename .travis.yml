@@ -3,6 +3,7 @@ language: php
 matrix:
   allow_failures:
     - 5.6
+    - hhvm
 
 php:
   - 5.3
