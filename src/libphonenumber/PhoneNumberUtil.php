@@ -1748,7 +1748,7 @@ class PhoneNumberUtil
         // Check to see if the number begins with one or more plus signs.
         $match = preg_match('/^' . self::$PLUS_CHARS_PATTERN . '/' . self::REGEX_FLAGS, $number, $matches, PREG_OFFSET_CAPTURE);
         if ($match > 0) {
-            $number = substr($number, $matches[0][1] + mb_strlen($matches[0][0]));
+            $number = mb_substr($number, $matches[0][1] + mb_strlen($matches[0][0]));
             // Can now normalize the rest of the number since we've consumed the "+" sign at the start.
             $number = $this->normalize($number);
             return CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN;
