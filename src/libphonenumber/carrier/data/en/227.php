@@ -10,6 +10,7 @@ return array (
   22791 => 'Orange',
   22792 => 'Orange',
   22794 => 'Moov',
+  22795 => 'Moov',
   22796 => 'Airtel',
   22797 => 'Airtel',
   22798 => 'Airtel',

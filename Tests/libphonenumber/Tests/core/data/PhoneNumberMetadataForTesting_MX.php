@@ -161,6 +161,8 @@ return array (
       array (
         0 => '[89]00',
       ),
+      'nationalPrefixFormattingRule' => '01 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -170,6 +172,8 @@ return array (
       array (
         0 => '33|55|81',
       ),
+      'nationalPrefixFormattingRule' => '01 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
     array (
@@ -179,6 +183,8 @@ return array (
       array (
         0 => '[2467]|3[0-24-9]|5[0-46-9]|8[2-9]|9[1-9]',
       ),
+      'nationalPrefixFormattingRule' => '01 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
     array (

@@ -15,20 +15,18 @@ return array (
   array (
     'NationalNumberPattern' => '
           758(?:
-            234|
             4(?:
               30|
               5[0-9]|
               6[2-9]|
               8[0-2]
             )|
-            572|
-            638|
-            758
+            57[0-2]|
+            638
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '7582345678',
+    'ExampleNumber' => '7584305678',
   ),
   'mobile' => 
   array (
@@ -47,7 +45,7 @@ return array (
             )|
             7(?:
               1[2-9]|
-              2[0-6]
+              2[0-8]
             )
           )\\d{4}
         ',

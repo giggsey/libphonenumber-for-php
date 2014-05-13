@@ -316,6 +316,8 @@ return array (
             81
           ',
       ),
+      'nationalPrefixFormattingRule' => '01 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -331,6 +333,8 @@ return array (
             9[0-35-9]
           ',
       ),
+      'nationalPrefixFormattingRule' => '01 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
     array (

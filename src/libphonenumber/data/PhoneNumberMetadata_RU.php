@@ -170,6 +170,8 @@ return array (
       array (
         0 => '[34689]',
       ),
+      'nationalPrefixFormattingRule' => '8 ($1)',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -179,6 +181,8 @@ return array (
       array (
         0 => '7',
       ),
+      'nationalPrefixFormattingRule' => '8 ($1)',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => true,

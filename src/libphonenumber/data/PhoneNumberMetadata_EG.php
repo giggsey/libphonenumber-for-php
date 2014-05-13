@@ -20,7 +20,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            1(
+            1(?:
               3[23]\\d|
               5(?:
                 [23]|

@@ -8,8 +8,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-9]\\d{7,8}',
-    'PossibleNumberPattern' => '\\d{8,9}',
+    'NationalNumberPattern' => '
+          [2-689]\\d{7,8}|
+          7\\d{7,9}
+        ',
+    'PossibleNumberPattern' => '\\d{8,10}',
   ),
   'fixedLine' => 
   array (
@@ -47,8 +50,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '70\\d{8}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '7012345678',
   ),
   'pager' => 
   array (
@@ -106,8 +110,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [2-7]|
-            8[1-9]
+            [2-6]|
+            [78][1-9]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
@@ -123,6 +127,17 @@ return array (
             80|
             9
           ',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(70)(\\d{4})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '70',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

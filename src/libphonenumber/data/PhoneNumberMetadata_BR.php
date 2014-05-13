@@ -118,9 +118,9 @@ return array (
   ),
   'id' => 'BR',
   'countryCode' => 55,
-  'internationalPrefix' => '00(?:1[45]|2[135]|[34]1|43)',
+  'internationalPrefix' => '00(?:1[45]|2[135]|31|4[13])',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0(?:(1[245]|2[135]|[34]1)(\\d{10,11}))?',
+  'nationalPrefixForParsing' => '0(?:(1[245]|2[135]|31|4[13])(\\d{10,11}))?',
   'nationalPrefixTransformRule' => '$2',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -233,6 +233,8 @@ return array (
             )9
           ',
       ),
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
     1 => 
     array (
@@ -242,6 +244,8 @@ return array (
       array (
         0 => '[1-9][1-9]',
       ),
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
     ),
     2 => 
     array (
@@ -251,6 +255,8 @@ return array (
       array (
         0 => '[34]00',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
     array (
@@ -260,6 +266,8 @@ return array (
       array (
         0 => '[3589]00',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

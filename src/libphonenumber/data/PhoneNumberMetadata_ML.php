@@ -149,6 +149,8 @@ return array (
       array (
         0 => '[246-9]',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

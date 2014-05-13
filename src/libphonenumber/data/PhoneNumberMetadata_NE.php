@@ -40,7 +40,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             89|
-            9[0-46-9]
+            9\\d
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

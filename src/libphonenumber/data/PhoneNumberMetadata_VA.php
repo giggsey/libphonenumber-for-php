@@ -19,8 +19,8 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => 'N/A',
-    'PossibleNumberPattern' => 'N/A',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'tollFree' => 
   array (

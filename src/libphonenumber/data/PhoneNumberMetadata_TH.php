@@ -18,7 +18,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            2[1-9]|
+            2\\d|
             3[2-9]|
             4[2-5]|
             5[2-6]|
@@ -58,7 +58,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '60\\d{7}',
+    'NationalNumberPattern' => '6[08]\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '601234567',
   ),

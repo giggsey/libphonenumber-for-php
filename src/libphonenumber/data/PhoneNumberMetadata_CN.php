@@ -136,7 +136,8 @@ return array (
           1(?:
             [38]\\d|
             4[57]|
-            5[0-35-9]
+            5[0-35-9]|
+            7[06-8]
           )\\d{8}
         ',
     'PossibleNumberPattern' => '\\d{11}',
@@ -475,11 +476,11 @@ return array (
     ),
     10 => 
     array (
-      'pattern' => '(1[3-58]\\d)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[3-58]',
+        0 => '1[3-578]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '$CC $1',
@@ -508,6 +509,8 @@ return array (
       array (
         0 => '80[2678]',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     1 => 
     array (
@@ -517,6 +520,8 @@ return array (
       array (
         0 => '[48]00',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
     array (
@@ -549,6 +554,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     3 => 
     array (
@@ -565,6 +572,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     4 => 
     array (
@@ -574,6 +583,8 @@ return array (
       array (
         0 => '21',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     5 => 
     array (
@@ -600,6 +611,8 @@ return array (
             2[02-9]
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     6 => 
     array (
@@ -636,6 +649,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     7 => 
     array (
@@ -700,15 +715,19 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     8 => 
     array (
-      'pattern' => '(1[3-58]\\d)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[3-58]',
+        0 => '1[3-578]',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
     ),
     9 => 
     array (
@@ -720,6 +739,8 @@ return array (
         1 => '1080',
         2 => '10800',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

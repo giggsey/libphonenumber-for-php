@@ -154,6 +154,8 @@ return array (
       array (
         0 => '[1-79]',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -163,6 +165,8 @@ return array (
       array (
         0 => '8',
       ),
+      'nationalPrefixFormattingRule' => '0 $1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

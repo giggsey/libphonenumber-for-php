@@ -12,6 +12,7 @@ return array (
   23327 => 'tiGO',
   23328 => 'Expresso',
   23354 => 'MTN',
+  233554 => 'MTN',
   23357 => 'tiGO',
 );
 /* EOF */

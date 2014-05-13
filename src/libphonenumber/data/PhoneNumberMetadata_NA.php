@@ -140,7 +140,7 @@ return array (
   'voip' => 
   array (
     'NationalNumberPattern' => '
-          8(
+          8(?:
             3\\d{2}|
             86
           )\\d{5}

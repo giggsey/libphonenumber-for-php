@@ -16,12 +16,16 @@ return array (
     'NationalNumberPattern' => '
           (?:
             2[13]|
-            [35-7][14]|
+            3(?:
+              0\\d|
+              [14]
+            )|
+            [5-7][14]|
             41|
             8[1468]
           )\\d{6}
         ',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '21212862',
   ),
   'mobile' => 
@@ -129,8 +133,20 @@ return array (
       array (
         0 => '
             2[13]|
-            [3-8]
+            3[14]|
+            [4-8]
           ',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
+      'pattern' => '(30)(\\d{2})(\\d{2})(\\d{3})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '30',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

@@ -82,6 +82,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
+          137[7-9]\\d{6}|
           900(?:
             [135]\\d{6}|
             9\\d{7}
@@ -92,8 +93,16 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '180\\d{5,11}',
-    'PossibleNumberPattern' => '\\d{8,14}',
+    'NationalNumberPattern' => '
+          1(?:
+            3(?:
+              7[1-6]\\d{6}|
+              8\\d{4}
+            )|
+            80\\d{5,11}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{7,14}',
     'ExampleNumber' => '18012345',
   ),
   'personalNumber' => 
@@ -372,10 +381,14 @@ return array (
             (?:
               18|
               90
-            )0
+            )0|
+            137
           ',
         1 => '
-            180|
+            1(?:
+              37|
+              80
+            )|
             900[1359]
           ',
       ),
@@ -435,6 +448,17 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '700',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    14 => 
+    array (
+      'pattern' => '(138)(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '138',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
