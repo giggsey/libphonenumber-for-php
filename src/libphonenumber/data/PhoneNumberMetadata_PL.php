@@ -9,9 +9,9 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          [1-58]\\d{6,8}|
-          9\\d{8}|
-          [67]\\d{5,8}
+          [12]\\d{6,8}|
+          [3-57-9]\\d{8}|
+          6\\d{5,8}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
   ),
@@ -25,14 +25,11 @@ return array (
             4[1-468]|
             5[24-689]|
             6[1-3578]|
-            7[14-6]|
-            8[1-7]
-          )\\d{5,7}|
-          77\\d{4,7}|
-          (?:
-            89|
+            7[14-7]|
+            8[1-79]|
             9[145]
-          )\\d{7}
+          )\\d{7}|
+          [12]2\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '123456789',
@@ -81,9 +78,9 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '642\\d{3,6}',
+    'NationalNumberPattern' => '64\\d{4,7}',
     'PossibleNumberPattern' => '\\d{6,9}',
-    'ExampleNumber' => '642123456',
+    'ExampleNumber' => '641234567',
   ),
   'uan' => 
   array (
@@ -147,18 +144,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4,6})',
-      'format' => '$1 $2',
+      'pattern' => '(\\d{2})(\\d{1})(\\d{4})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '
-            [124]|
-            3[2-4]|
-            5[24-689]|
-            6[1-3578]|
-            7[14-7]|
-            8[1-7]
-          ',
+        0 => '[12]2',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

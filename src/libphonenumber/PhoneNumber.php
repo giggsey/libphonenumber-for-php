@@ -222,7 +222,7 @@ class PhoneNumber
         return $this;
     }
 
-    public function  mergeFrom(PhoneNumber $other)
+    public function mergeFrom(PhoneNumber $other)
     {
         if ($other->hasCountryCode()) {
             $this->setCountryCode($other->getCountryCode());

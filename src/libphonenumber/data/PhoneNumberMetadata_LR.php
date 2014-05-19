@@ -9,12 +9,9 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          (?:
-            [29]\\d|
-            [4-6]|
-            7\\d{1,2}|
-            [38]\\d{2}
-          )\\d{6}
+          2\\d{7}|
+          [37-9]\\d{8}|
+          [45]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
   ),
@@ -28,15 +25,16 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
+            330\\d|
             4[67]|
             5\\d|
-            6[4-8]|
-            77?\\d{2}|
-            88\\d{2}
+            77\\d{2}|
+            88\\d{2}|
+            994\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '4612345',
+    'ExampleNumber' => '770123456',
   ),
   'tollFree' => 
   array (
@@ -45,9 +43,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90\\d{6}',
-    'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '90123456',
+    'NationalNumberPattern' => '90[03]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '900123456',
   ),
   'sharedCost' => 
   array (
@@ -61,7 +59,12 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '33200\\d{4}',
+    'NationalNumberPattern' => '
+          332(?:
+            0[02]|
+            5\\d
+          )\\d{4}
+        ',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '332001234',
   ),
@@ -115,22 +118,22 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([279]\\d)(\\d{3})(\\d{3})',
+      'pattern' => '(2\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[279]',
+        0 => '2',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
-      'pattern' => '(7\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '([79]\\d{2})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '7',
+        0 => '[79]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

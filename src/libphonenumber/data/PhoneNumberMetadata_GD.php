@@ -37,6 +37,7 @@ return array (
               58|
               84
             )|
+            800|
             938
           )\\d{4}
         ',
@@ -48,7 +49,7 @@ return array (
     'NationalNumberPattern' => '
           473(?:
             4(?:
-              0[3-79]|
+              0[2-79]|
               1[04-9]|
               20|
               58
@@ -56,7 +57,8 @@ return array (
             5(?:
               2[01]|
               3[3-8]
-            )
+            )|
+            901
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',

@@ -78,6 +78,10 @@ class CountryCodeToRegionCodeMapForTesting {
   array (
     0 => 'KR',
   ),
+  86 => 
+  array (
+    0 => 'CN',
+  ),
   244 => 
   array (
     0 => 'AO',

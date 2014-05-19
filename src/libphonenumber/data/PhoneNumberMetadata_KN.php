@@ -21,7 +21,7 @@ return array (
             )|
             302|
             4(?:
-              6[5-9]|
+              6[015-9]|
               70
             )
           )\\d{4}
@@ -42,7 +42,7 @@ return array (
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '8695561234',
+    'ExampleNumber' => '8697652917',
   ),
   'tollFree' => 
   array (

@@ -1111,6 +1111,8 @@ return array (
             )0
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -1120,6 +1122,8 @@ return array (
       array (
         0 => '800',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
     array (
@@ -1132,6 +1136,8 @@ return array (
             80[1-9]
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
     array (
@@ -1260,6 +1266,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     4 => 
     array (
@@ -1732,6 +1740,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     5 => 
     array (
@@ -1852,6 +1862,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
     array (
@@ -1870,6 +1882,8 @@ return array (
             993
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
     array (
@@ -1886,6 +1900,8 @@ return array (
             6[1-9]
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     8 => 
     array (
@@ -1895,6 +1911,8 @@ return array (
       array (
         0 => '[2479][1-9]',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

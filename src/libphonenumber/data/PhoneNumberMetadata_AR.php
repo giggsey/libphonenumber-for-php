@@ -271,8 +271,9 @@ return array (
                 6[01346]|
                 80|
                 9(?:
-                  [17-9]|
-                  4[13479]
+                  [179]|
+                  4[13479]|
+                  8[0-24-9]
                 )
               )|
               3(?:
@@ -469,6 +470,8 @@ return array (
       array (
         0 => '[68]',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
@@ -520,8 +523,9 @@ return array (
                 6[01346]|
                 80|
                 9(?:
-                  [17-9]|
-                  4[13479]
+                  [179]|
+                  4[13479]|
+                  8[0-24-9]
                 )
               )|
               3(?:
@@ -590,6 +594,8 @@ return array (
       array (
         0 => '1',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     6 => 
     array (
@@ -646,6 +652,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     7 => 
     array (
@@ -669,6 +677,8 @@ return array (
             )
           ',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     8 => 
     array (
@@ -678,6 +688,8 @@ return array (
       array (
         0 => '[23]',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

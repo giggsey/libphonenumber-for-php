@@ -131,6 +131,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => true,

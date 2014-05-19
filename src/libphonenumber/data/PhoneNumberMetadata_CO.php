@@ -208,6 +208,8 @@ return array (
             [24-8]
           ',
       ),
+      'nationalPrefixFormattingRule' => '($1)',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
     1 => 
     array (
@@ -217,6 +219,8 @@ return array (
       array (
         0 => '3',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
     ),
     2 => 
     array (

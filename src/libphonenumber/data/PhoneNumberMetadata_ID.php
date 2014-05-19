@@ -16,7 +16,9 @@ return array (
     'NationalNumberPattern' => '
           2(?:
             1(?:
+              14\\d{3}|
               [0-8]\\d{6,7}|
+              500\\d{3}|
               9\\d{6}
             )|
             [24]\\d{7,8}
@@ -204,8 +206,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '8071\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '8071123456',
   ),
   'emergency' => 
   array (
@@ -234,8 +237,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '8071\\d{6}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '8071123456',
   ),
   'id' => 'ID',
   'countryCode' => 62,
@@ -247,7 +251,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{2})(\\d{7,8})',
+      'pattern' => '(\\d{2})(\\d{5,8})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
@@ -309,11 +313,11 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '(809)(\\d)(\\d{3})(\\d{3})',
+      'pattern' => '(80\\d)(\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '809',
+        0 => '80[79]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

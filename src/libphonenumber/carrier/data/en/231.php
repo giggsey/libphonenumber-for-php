@@ -5,8 +5,10 @@
  */
 
 return array (
-  2315 => 'Comium',
-  2317 => 'Cellcom',
+  231330 => 'West Africa Telecom',
+  231555 => 'Novafone',
+  23177 => 'Cellcom',
   23188 => 'Lonestar Cell',
+  231994 => 'Atlantic Wireless',
 );
 /* EOF */

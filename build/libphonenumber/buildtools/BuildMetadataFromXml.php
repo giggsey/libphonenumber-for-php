@@ -228,10 +228,10 @@ class BuildMetadataFromXml
                 } else {
                     $format->setDomesticCarrierCodeFormattingRule($carrierCodeFormattingRule);
                 }
-                $nationalFormat = self::loadNationalFormat($metadata, $numberFormatElement, $format);
+                self::loadNationalFormat($metadata, $numberFormatElement, $format);
                 $metadata->addNumberFormat($format);
 
-                if (self::loadInternationalFormat($metadata, $numberFormatElement, $nationalFormat)) {
+                if (self::loadInternationalFormat($metadata, $numberFormatElement, $format)) {
                     $hasExplicitIntlFormatDefined = true;
                 }
             }
@@ -261,7 +261,6 @@ class BuildMetadataFromXml
      * @param \DOMElement $numberFormatElement
      * @param NumberFormat $format
      * @throws \RuntimeException if multiple or no formats have been encountered.
-     * @return string the national format string.
      */
     private static function loadNationalFormat(
         PhoneMetadata $metadata,
@@ -277,7 +276,6 @@ class BuildMetadataFromXml
         }
         $nationalFormat = $formatPattern->item(0)->firstChild->nodeValue;
         $format->setFormat($nationalFormat);
-        return $nationalFormat;
     }
 
     public static function setLeadingDigitsPatterns(\DOMElement $numberFormatElement, NumberFormat $format)
@@ -301,34 +299,32 @@ class BuildMetadataFromXml
      *
      * @param PhoneMetadata $metadata
      * @param \DOMElement $numberFormatElement
-     * @param string $nationalFormat
+     * @param NumberFormat $nationalFormat
      * @throws \RuntimeException if multiple intlFormats have been encountered.
      * @return bool whether an international number format is defined.
      */
     private static function loadInternationalFormat(
         PhoneMetadata $metadata,
         \DOMElement $numberFormatElement,
-        $nationalFormat
+        NumberFormat $nationalFormat
     ) {
         $intlFormat = new NumberFormat();
-        self::setLeadingDigitsPatterns($numberFormatElement, $intlFormat);
-        $intlFormat->setPattern($numberFormatElement->getAttribute(self::PATTERN));
         $intlFormatPattern = $numberFormatElement->getElementsByTagName(self::INTL_FORMAT);
         $hasExplicitIntlFormatDefined = false;
 
         if ($intlFormatPattern->length > 1) {
             throw new \RuntimeException("Invalid number of intlFormat patterns for country: " . $metadata->getId());
+        } elseif ($intlFormatPattern->length == 0) {
+            // Default to use the same as the national pattern if none is defined.
+            $intlFormat->mergeFrom($nationalFormat);
         } else {
-            if ($intlFormatPattern->length == 0) {
-                // Default to use the same as the national pattern if none is defined.
-                $intlFormat->setFormat($nationalFormat);
-            } else {
-                $intlFormatPatternValue = $intlFormatPattern->item(0)->firstChild->nodeValue;
-                if ($intlFormatPatternValue !== "NA") {
-                    $intlFormat->setFormat($intlFormatPatternValue);
-                }
-                $hasExplicitIntlFormatDefined = true;
+            $intlFormat->setPattern($numberFormatElement->getAttribute(self::PATTERN));
+            self::setLeadingDigitsPatterns($numberFormatElement, $intlFormat);
+            $intlFormatPatternValue = $intlFormatPattern->item(0)->firstChild->nodeValue;
+            if ($intlFormatPatternValue !== "NA") {
+                $intlFormat->setFormat($intlFormatPatternValue);
             }
+            $hasExplicitIntlFormatDefined = true;
         }
 
         if ($intlFormat->hasFormat()) {

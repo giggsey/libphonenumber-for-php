@@ -168,6 +168,8 @@ return array (
       array (
         0 => '9',
       ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
     array (
@@ -177,6 +179,8 @@ return array (
       array (
         0 => '1',
       ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'mainCountryForCode' => false,

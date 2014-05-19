@@ -16,6 +16,7 @@ namespace libphonenumber;
  *
  * @author Shaopeng Jia
  * @author Lara Rennie
+ * @see https://code.google.com/p/libphonenumber/
  */
 class PhoneNumberUtil
 {
@@ -206,6 +207,13 @@ class PhoneNumberUtil
      */
     private static $VALID_PHONE_NUMBER;
     private static $numericCharacters = array();
+
+    /**
+     * The metadata loader used to inject alternative metadata sources.
+     * @var MetadataLoader
+     */
+    private $metadataLoader;
+
     /**
      * A mapping from a region code to the PhoneMetadata for that region.
      * @var array
@@ -251,9 +259,62 @@ class PhoneNumberUtil
     /**
      * This class implements a singleton, so the only constructor is private.
      */
-    private function __construct()
+    private function __construct($filePrefix, MetadataLoader $metadataLoader, $countryCallingCodeToRegionCodeMap)
     {
+        $this->metadataLoader = $metadataLoader;
+        $this->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
+        $this->init($filePrefix);
+        self::initCapturingExtnDigits();
+        self::initExtnPatterns();
+        self::initAsciiDigitMappings();
+        self::initExtnPattern();
+        self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
+        self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
+        self::$CAPTURING_DIGIT_PATTERN = "(" . self::DIGITS . ")";
+        self::$VALID_START_CHAR_PATTERN = "[" . self::PLUS_CHARS . self::DIGITS . "]";
 
+        self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
+
+        self::$DIALLABLE_CHAR_MAPPINGS = self::$asciiDigitMappings;
+        self::$DIALLABLE_CHAR_MAPPINGS[self::PLUS_SIGN] = self::PLUS_SIGN;
+        self::$DIALLABLE_CHAR_MAPPINGS['*'] = '*';
+
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS = array();
+        // Put (lower letter -> upper letter) and (upper letter -> upper letter) mappings.
+        foreach (self::$ALPHA_MAPPINGS as $c => $value) {
+            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[strtolower($c)] = $c;
+            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[$c] = $c;
+        }
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS += self::$asciiDigitMappings;
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["-"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8D"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x90"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x91"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x92"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x93"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x94"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x95"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x88\x92"] = '-';
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["/"] = "/";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8F"] = "/";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[" "] = " ";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE3\x80\x80"] = " ";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
+        self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
+
+
+        self::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . self::DIGITS . "]{" . self::MIN_LENGTH_FOR_NSN . "}";
+        self::$VALID_PHONE_NUMBER = "[" . self::PLUS_CHARS . "]*(?:[" . self::VALID_PUNCTUATION . self::STAR_SIGN . "]*[" . self::DIGITS . "]){3,}[" . self::VALID_PUNCTUATION . self::STAR_SIGN . self::VALID_ALPHA . self::DIGITS . "]*";
+        self::$VALID_PHONE_NUMBER_PATTERN = "%^" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
+
+        self::$UNWANTED_END_CHAR_PATTERN = "[^" . self::DIGITS . self::VALID_ALPHA . "#]+$";
+
+        self::$MOBILE_TOKEN_MAPPINGS = array();
+        self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
+        self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
+
+        self::loadNumericCharacters();
     }
 
     /**
@@ -266,68 +327,21 @@ class PhoneNumberUtil
      *
      * @param string $baseFileLocation
      * @param array|null $countryCallingCodeToRegionCodeMap
+     * @param MetadataLoader $metadataLoader
      * @return PhoneNumberUtil instance
      */
-    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null)
+    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoader $metadataLoader = null)
     {
-        if ($countryCallingCodeToRegionCodeMap === null) {
-            $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
-        }
         if (self::$instance === null) {
-            self::$instance = new PhoneNumberUtil();
-            self::$instance->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
-            self::$instance->init($baseFileLocation);
-            self::initCapturingExtnDigits();
-            self::initExtnPatterns();
-            self::initAsciiDigitMappings();
-            self::initExtnPattern();
-            self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
-            self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
-            self::$CAPTURING_DIGIT_PATTERN = "(" . self::DIGITS . ")";
-            self::$VALID_START_CHAR_PATTERN = "[" . self::PLUS_CHARS . self::DIGITS . "]";
-
-            self::$ALPHA_PHONE_MAPPINGS = self::$ALPHA_MAPPINGS + self::$asciiDigitMappings;
-
-            self::$DIALLABLE_CHAR_MAPPINGS = self::$asciiDigitMappings;
-            self::$DIALLABLE_CHAR_MAPPINGS[self::PLUS_SIGN] = self::PLUS_SIGN;
-            self::$DIALLABLE_CHAR_MAPPINGS['*'] = '*';
-
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS = array();
-            // Put (lower letter -> upper letter) and (upper letter -> upper letter) mappings.
-            foreach (self::$ALPHA_MAPPINGS as $c => $value) {
-                self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[strtolower($c)] = $c;
-                self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[$c] = $c;
+            if ($countryCallingCodeToRegionCodeMap === null) {
+                $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
             }
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS += self::$asciiDigitMappings;
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["-"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8D"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x90"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x91"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x92"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x93"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x94"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x95"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x88\x92"] = '-';
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["/"] = "/";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8F"] = "/";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[" "] = " ";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE3\x80\x80"] = " ";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
-            self::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
 
+            if ($metadataLoader === null) {
+                $metadataLoader = new DefaultMetadataLoader();
+            }
 
-            self::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . self::DIGITS . "]{" . self::MIN_LENGTH_FOR_NSN . "}";
-            self::$VALID_PHONE_NUMBER = "[" . self::PLUS_CHARS . "]*(?:[" . self::VALID_PUNCTUATION . self::STAR_SIGN . "]*[" . self::DIGITS . "]){3,}[" . self::VALID_PUNCTUATION . self::STAR_SIGN . self::VALID_ALPHA . self::DIGITS . "]*";
-            self::$VALID_PHONE_NUMBER_PATTERN = "%^" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
-
-            self::$UNWANTED_END_CHAR_PATTERN = "[^" . self::DIGITS . self::VALID_ALPHA . "#]+$";
-
-            self::$MOBILE_TOKEN_MAPPINGS = array();
-            self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
-            self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
-
-            self::loadNumericCharacters();
+            self::$instance = new PhoneNumberUtil($baseFileLocation, $metadataLoader, $countryCallingCodeToRegionCodeMap);
         }
         return self::$instance;
     }
@@ -625,7 +639,7 @@ class PhoneNumberUtil
         if (!isset($this->regionToMetadataMap[$regionCode])) {
             // The regionCode here will be valid and won't be '001', so we don't need to worry about
             // what to pass in for the country calling code.
-            $this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
+            $this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0, $this->metadataLoader);
         }
         return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : null;
     }
@@ -644,16 +658,17 @@ class PhoneNumberUtil
      * @param string $filePrefix
      * @param string $regionCode
      * @param int $countryCallingCode
+     * @param MetadataLoader $metadataLoader
      * @throws \RuntimeException
      */
-    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode)
+    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode, MetadataLoader $metadataLoader)
     {
         $isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
         if (!is_readable($fileName)) {
             throw new \RuntimeException('missing metadata: ' . $fileName);
         } else {
-            $data = include $fileName;
+            $data = $metadataLoader->loadMetadata($fileName);
             $metadata = new PhoneMetadata();
             $metadata->fromArray($data);
             if ($isNonGeoRegion) {
@@ -836,10 +851,10 @@ class PhoneNumberUtil
      * Tests whether a phone number has a geographical association. It checks if the number is
      * associated to a certain region in the country where it belongs to. Note that this doesn't
      * verify if the number is actually in use.
-     * @param string $phoneNumber
+     * @param PhoneNumber $phoneNumber
      * @return bool
      */
-    public function isNumberGeographical($phoneNumber)
+    public function isNumberGeographical(PhoneNumber $phoneNumber)
     {
         $numberType = $this->getNumberType($phoneNumber);
         // TODO: Include mobile phone numbers from countries like Indonesia, which has some
@@ -887,7 +902,8 @@ class PhoneNumberUtil
             $this->loadMetadataFromFile(
                 $this->currentFilePrefix,
                 self::REGION_CODE_FOR_NON_GEO_ENTITY,
-                $countryCallingCode
+                $countryCallingCode,
+                $this->metadataLoader
             );
         }
         return $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode];
@@ -1399,7 +1415,6 @@ class PhoneNumberUtil
         // Check to see if the number is given in international format so we know whether this number is
         // from the default region or not.
         $normalizedNationalNumber = "";
-        $countryCode = 0;
         try {
             // TODO: This method should really just take in the string buffer that has already
             // been created, and just remove the prefix, rather than taking in a string and then

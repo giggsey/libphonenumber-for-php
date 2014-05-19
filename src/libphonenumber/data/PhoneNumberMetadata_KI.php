@@ -9,7 +9,8 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          [2-58]\\d{4}|
+          [2458]\\d{4}|
+          3\\d{4,7}|
           7\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{5,8}',
@@ -46,8 +47,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '3001\\d{4}',
+    'PossibleNumberPattern' => '\\d{5,8}',
+    'ExampleNumber' => '30010000',
   ),
   'sharedCost' => 
   array (

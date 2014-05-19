@@ -25,7 +25,10 @@ return array (
             5\\d|
             6\\d?
           )\\d{5}|
-          238\\d{6}
+          23(?:
+            4[234]|
+            8\\d{2}
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '23756789',

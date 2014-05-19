@@ -147,6 +147,8 @@ return array (
       array (
         0 => '[5-7]',
       ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
