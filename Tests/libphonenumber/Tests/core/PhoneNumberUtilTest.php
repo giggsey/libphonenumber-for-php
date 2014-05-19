@@ -4,6 +4,7 @@ namespace libphonenumber\Tests\core;
 
 use libphonenumber\CountryCodeSource;
 use libphonenumber\CountryCodeToRegionCodeMapForTesting;
+use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MatchType;
 use libphonenumber\NumberFormat;
 use libphonenumber\NumberParseException;
@@ -158,7 +159,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // do is make sure the exception has the file name in it.
 
         try {
-            $this->phoneUtil->loadMetadataFromFile("no/such/file", "XX", -1);
+            $this->phoneUtil->loadMetadataFromFile("no/such/file", "XX", -1, new DefaultMetadataLoader());
             $this->fail("Expected Exception");
         } catch (\RuntimeException $e) {
             $this->assertContains('no/such/file_XX', $e->getMessage(), "Unexpected error: " . $e->getMessage());
@@ -168,7 +169,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->loadMetadataFromFile(
                 "no/such/file",
                 PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY,
-                123
+                123,
+                new DefaultMetadataLoader()
             );
             $this->fail("Expected Exception");
         } catch (\RuntimeException $e) {
