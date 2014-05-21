@@ -1544,13 +1544,13 @@ class PhoneNumberUtil
             }
 
             // Now append everything between the "tel:" prefix and the phone-context. This should include
-            // the national number, an optional extension or isdn-subaddress component.
-            $prefixLoc = strpos($numberToParse, self::RFC3966_PREFIX);
-            if ($prefixLoc !== false)
-                $prefixLoc += mb_strlen(self::RFC3966_PREFIX);
-            else
-                $prefixLoc = 0;
-            $nationalNumber .= substr($numberToParse, $prefixLoc, ($indexOfPhoneContext - $prefixLoc));
+            // the national number, an optional extension or isdn-subaddress component. Note we also
+            // handle the case when "tel:" is missing, as we have seen in some of the phone number inputs.
+            // In that case, we append everything from the beginning.
+
+            $indexOfRfc3966Prefix = strpos($numberToParse, self::RFC3966_PREFIX);
+            $indexOfNationalNumber = ($indexOfRfc3966Prefix !== false) ? $indexOfRfc3966Prefix + strlen(self::RFC3966_PREFIX) : 0;
+            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber, ($indexOfPhoneContext - $indexOfNationalNumber));
         } else {
             // Extract a possible number from the string passed in (this strips leading characters that
             // could not be the start of a phone number.)

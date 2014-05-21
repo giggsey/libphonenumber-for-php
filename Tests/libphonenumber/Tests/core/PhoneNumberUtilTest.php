@@ -2265,7 +2265,11 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             self::$nzNumber,
-            $this->phoneUtil->parse("tel:331-6005;phone-context=+64-3", RegionCode::NZ)
+            $this->phoneUtil->parse("tel:331-6005;phone-context=+64-3", RegionCode::US)
+        );
+        $this->assertEquals(
+            self::$nzNumber,
+            $this->phoneUtil->parse("My number is tel:03-331-6005;phone-context=+64", RegionCode::NZ)
         );
         // Test parsing RFC3966 format with optional user-defined parameters. The parameters will appear
         // after the context if present.
@@ -2279,6 +2283,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->parse("tel:03-331-6005;isub=12345;phone-context=+64", RegionCode::NZ)
         );
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:+64-3-331-6005;isub=12345", RegionCode::NZ));
+
+        // Test parsing RFC3966 with "tel:" missing
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("03-331-6005;phone-context=+64", RegionCode::NZ));
 
         // Testing international prefixes.
         // Should strip country calling code.
