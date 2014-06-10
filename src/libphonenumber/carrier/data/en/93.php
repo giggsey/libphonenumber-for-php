@@ -6,6 +6,7 @@
 
 return array (
   9370 => 'AWCC',
+  93729 => 'Roshan',
   93772 => 'MTN',
   93773 => 'MTN',
   93774 => 'MTN',

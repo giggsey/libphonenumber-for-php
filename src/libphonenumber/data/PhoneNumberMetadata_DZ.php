@@ -39,7 +39,7 @@ return array (
           )\\d{7}|
           6(?:
             [569]\\d|
-            7[0-2]
+            7[0-3]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',

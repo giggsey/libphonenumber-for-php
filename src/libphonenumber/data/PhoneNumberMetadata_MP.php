@@ -107,7 +107,9 @@ return array (
           5(?:
             00|
             33|
-            44
+            44|
+            66|
+            77
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{10}',

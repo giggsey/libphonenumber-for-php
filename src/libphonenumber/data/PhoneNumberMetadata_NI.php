@@ -24,7 +24,7 @@ return array (
             500\\d{4}|
             7\\d{6}
           )|
-          78\\d{6}|
+          7[5-8]\\d{6}|
           8\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{8}',

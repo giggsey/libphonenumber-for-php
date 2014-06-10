@@ -12,6 +12,7 @@ return array (
   63909 => 'Smart',
   63910 => 'Smart',
   63912 => 'Smart',
+  63914 => 'Globe',
   63915 => 'Globe',
   63916 => 'Globe',
   63917 => 'Globe',
@@ -39,6 +40,9 @@ return array (
   63947 => 'Smart',
   63948 => 'Smart',
   63949 => 'Smart',
+  63975 => 'Globe',
+  63976 => 'Globe',
+  63995 => 'Globe',
   63999 => 'Smart',
 );
 /* EOF */
