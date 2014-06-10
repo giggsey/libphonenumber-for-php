@@ -2,6 +2,7 @@
 
 [![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 [![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![License](https://poser.pugx.org/giggsey/libphonenumber-for-php/license.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
@@ -177,7 +178,13 @@ $timeZones = $timeZoneMapper->getTimeZonesForNumber($swissNumberProto);
 
 ## Generating data
 
-Data can be generated using phing, running the 'compile' target.
+Phing is used to 'compile' the metadata.
+
+Ensure you have all the dev composer dependencies installed, then run
+
+```bash
+vendor/bin/phing compile
+```
 
 ## Integration with frameworks
 
