@@ -160,7 +160,7 @@ $swissNumberProto = $phoneUtil->parse("798765432", "CH");
 
 $carrierMapper = \libphonenumber\PhoneNumberToCarrierMapper::getInstance();
 // Outputs "Swisscom"
-echo $carrierMapper->getDescriptionForNumber($swissNumberProto, "en");
+echo $carrierMapper->getNameForNumber($swissNumberProto, "en");
 ```
 
 ### Mapping Phone Numbers to TimeZones
