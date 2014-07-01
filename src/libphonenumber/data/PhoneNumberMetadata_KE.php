@@ -12,38 +12,36 @@ return array (
           20\\d{6,7}|
           [4-9]\\d{6,9}
         ',
-    'PossibleNumberPattern' => '\\d{5,10}',
+    'PossibleNumberPattern' => '\\d{7,10}',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
           20\\d{6,7}|
           4(?:
-            [013]\\d{7}|
-            [24-6]\\d{5,7}
+            [0136]\\d{7}|
+            [245]\\d{5,7}
           )|
           5(?:
-            [0-36-8]\\d{5,7}|
-            [459]\\d{5}
+            [08]\\d{7}|
+            [1-79]\\d{5,7}
           )|
           6(?:
-            [08]\\d{5}|
-            [14-79]\\d{5,7}|
-            2\\d{7}
+            [01457-9]\\d{5,7}|
+            [26]\\d{7}
           )
         ',
-    'PossibleNumberPattern' => '\\d{5,9}',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '202012345',
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '
           7(?:
-            0[0-8]|
-            [123]\\d|
+            [0-3]\\d|
             5[0-6]|
             7[0-5]|
-            8[5-9]
+            8[0-25-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -57,7 +55,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900[02-578]\\d{5}',
+    'NationalNumberPattern' => '900[02-9]\\d{5}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '900223456',
   ),
@@ -126,7 +124,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4,7})',
+      'pattern' => '(\\d{2})(\\d{5,7})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (

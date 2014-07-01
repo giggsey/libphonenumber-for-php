@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[378]\\d{8}',
+    'NationalNumberPattern' => '[3789]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
   ),
   'fixedLine' => 
@@ -19,10 +19,13 @@ return array (
               1[0-2]|
               80
             )|
-            211|
+            2(?:
+              11|
+              82
+            )|
             3(?:
               8[1-9]|
-              9[2-9]
+              9[3-9]
             )|
             90[1-5]
           )\\d{5}
@@ -34,9 +37,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
-            [07]\\d|
-            21|
-            6[1-9]|
+            [067]\\d|
             8[0-26]|
             90
           )\\d{6}
@@ -69,9 +70,12 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '391\\d{6}',
+    'NationalNumberPattern' => '
+          3392\\d{5}|
+          93330\\d{4}
+        ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '391011234',
+    'ExampleNumber' => '933301234',
   ),
   'pager' => 
   array (
@@ -125,7 +129,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[37]',
+        0 => '[379]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

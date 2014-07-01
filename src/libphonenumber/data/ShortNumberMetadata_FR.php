@@ -10,9 +10,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           1\\d{1,5}|
-          [27]\\d{2,4}|
+          [267]\\d{2,4}|
           3\\d{3,4}|
-          [4-68]\\d{4}
+          [458]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
   ),
@@ -20,9 +20,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           1\\d{1,5}|
-          [27]\\d{2,4}|
+          [267]\\d{2,4}|
           3\\d{3,4}|
-          [4-68]\\d{4}
+          [458]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
   ),
@@ -30,9 +30,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           1\\d{1,5}|
-          [27]\\d{2,4}|
+          [267]\\d{2,4}|
           3\\d{3,4}|
-          [4-68]\\d{4}
+          [458]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
   ),
@@ -131,17 +131,25 @@ return array (
             [578]
           )|
           2(?:
-            0000|
+            0(?:
+              000|
+              20
+            )|
             24
           )|
           3\\d{3,4}|
+          6(?:
+            1[14]|
+            34|
+            \\d{4}
+          )|
           7(?:
             0[06]|
             22|
             40|
             \\d{4}
           )|
-          [4-68]\\d{4}
+          [458]\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{2,6}',
     'ExampleNumber' => '1010',
@@ -149,10 +157,21 @@ return array (
   'standardRate' => 
   array (
     'NationalNumberPattern' => '
-          1023|
+          10(?:
+             14|
+             2[23]|
+             34|
+             6[14]|
+             99
+          )|
+          2020|
           3(?:
             646|
-            900
+            9[07]0
+          )|
+          6(?:
+            1[14]|
+            34
           )|
           70[06]
         ',
@@ -164,8 +183,15 @@ return array (
     'NationalNumberPattern' => '
           118777|
           2(?:
-            0000|
+            0(?:
+              000|
+              20
+            )|
             24
+          )|
+          6(?:
+            1[14]|
+            34
           )|
           7\\d{2}
         ',

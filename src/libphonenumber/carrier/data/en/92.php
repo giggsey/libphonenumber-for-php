@@ -28,6 +28,7 @@ return array (
   92335 => 'Ufone',
   92336 => 'Ufone',
   92337 => 'Ufone',
+  92340 => 'Telenor',
   92341 => 'Telenor',
   92342 => 'Telenor',
   92343 => 'Telenor',

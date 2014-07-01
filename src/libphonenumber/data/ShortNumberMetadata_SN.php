@@ -8,39 +8,28 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[5689]\\d{8}',
-    'PossibleNumberPattern' => '\\d{9}',
+    'NationalNumberPattern' => '1\\d',
+    'PossibleNumberPattern' => '\\d{2}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '528[89]\\d{5}',
-    'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '528812345',
+    'NationalNumberPattern' => '1\\d',
+    'PossibleNumberPattern' => '\\d{2}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-          6(?:
-            0[0-8]|
-            [12-7]\\d|
-            8[01]|
-            9[2457-9]
-          )\\d{6}
-        ',
-    'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '650123456',
+    'NationalNumberPattern' => '1\\d',
+    'PossibleNumberPattern' => '\\d{2}',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80\\d{7}',
-    'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '801234567',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '89\\d{7}',
-    'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '891234567',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'sharedCost' => 
   array (
@@ -69,8 +58,9 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1[78]',
+    'PossibleNumberPattern' => '\\d{2}',
+    'ExampleNumber' => '17',
   ),
   'voicemail' => 
   array (
@@ -79,8 +69,9 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1\\d',
+    'PossibleNumberPattern' => '\\d{2}',
+    'ExampleNumber' => '17',
   ),
   'standardRate' => 
   array (
@@ -97,12 +88,10 @@ return array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
   ),
-  'id' => 'EH',
-  'countryCode' => 212,
-  'internationalPrefix' => '00',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
-  'sameMobileAndFixedLinePattern' => false,
+  'id' => 'SN',
+  'countryCode' => 0,
+  'internationalPrefix' => '',
+  'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
   ),
@@ -110,7 +99,6 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingDigits' => '528[89]',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

@@ -16,7 +16,8 @@ return array (
             [58]|
             3\\d|
             4\\d{1,2}|
-            [679]\\d?
+            6\\d?|
+            [79]\\d{0,2}
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{5,10}',
@@ -118,10 +119,14 @@ return array (
             )|
             5[0-6]|
             61?\\d|
-            73\\d|
+            7(?:
+              3\\d|
+              9\\d{2}
+            )|
             8\\d|
             9(?:
               1\\d|
+              7\\d{2}|
               [089]
             )
           )\\d{5}
@@ -269,7 +274,7 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '(9)(\\d{3})(\\d{4,5})',
+      'pattern' => '(9)(\\d{3})(\\d{4,6})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

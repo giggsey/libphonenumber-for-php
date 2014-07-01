@@ -5,9 +5,13 @@
  */
 
 return array (
-  996312 => 'Beeline',
-  99650 => 'Beeline',
-  99655 => 'MegaCom',
-  99677 => 'Beeline',
+  99620 => 'Aktel',
+  99651 => 'Katel',
+  99654 => 'Aktel',
+  99655 => 'ALFA Telecom',
+  99656 => 'Winline',
+  99657 => 'Sotel',
+  99670 => 'Nur Telecom',
+  99677 => 'Sky mobile',
 );
 /* EOF */

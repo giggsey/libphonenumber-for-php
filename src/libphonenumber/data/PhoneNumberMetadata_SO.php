@@ -15,13 +15,15 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            [134]\\d|
+            1\\d|
             2[0-79]|
-            5[57-9]
+            3[0-46-8]|
+            4[0-7]|
+            59
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '5522010',
+    'ExampleNumber' => '4012345',
   ),
   'mobile' => 
   array (
@@ -33,15 +35,11 @@ return array (
               8
             )|
             6[137-9]?\\d{2}|
-            7\\d{2}|
-            9(?:
-              07|
-              [13-9]
-            )\\d
+            7[1-9]\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '907792024',
+    'ExampleNumber' => '71123456',
   ),
   'tollFree' => 
   array (
@@ -153,8 +151,7 @@ return array (
         0 => '
             15|
             28|
-            6[1378]|
-            9
+            6[1378]
           ',
       ),
       'nationalPrefixFormattingRule' => '',

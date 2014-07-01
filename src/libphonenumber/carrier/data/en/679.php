@@ -6,7 +6,8 @@
 
 return array (
   6797 => 'Digicel',
-  6798 => 'Vodafone',
+  67984 => 'Vodafone',
+  67989 => 'Vodafone',
   6799 => 'Vodafone',
 );
 /* EOF */

@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[35-8]\\d{8,9}',
+    'NationalNumberPattern' => '[235-8]\\d{8,9}',
     'PossibleNumberPattern' => '\\d{5,10}',
   ),
   'fixedLine' => 
@@ -17,11 +17,9 @@ return array (
           (?:
             3(?:
               1(?:
-                2\\d|
+                [256]\\d|
                 3[1-9]|
-                47|
-                5[02]|
-                6[1-8]
+                47
               )|
               2(?:
                 22|
@@ -31,31 +29,30 @@ return array (
               4(?:
                 22|
                 5[6-9]|
-                6[0-4]
+                6\\d
               )|
               5(?:
                 22|
                 3[4-7]|
                 59|
-                6[0-5]
+                6\\d
               )|
               6(?:
                 22|
                 5[35-7]|
-                6[0-3]
+                6\\d
               )|
               7(?:
                 22|
                 3[468]|
                 4[1-9]|
                 59|
-                6\\d|
-                7[5-7]
+                [67]\\d
               )|
               9(?:
                 22|
                 4[1-8]|
-                6[0-8]
+                6\\d
               )
             )|
             6(?:
@@ -71,10 +68,10 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          5[124-7]\\d{7}|
-          7(?:
-            0[0-357-9]|
-            7\\d
+          (?:
+            20[0-35]|
+            5[124-7]\\d|
+            7[07]\\d
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -161,8 +158,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            31[25]|
-            [5-7]
+            [25-7]|
+            31[25]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
