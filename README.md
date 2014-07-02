@@ -1,7 +1,7 @@
-# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.png?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php) [![Coverage Status](https://coveralls.io/repos/giggsey/libphonenumber-for-php/badge.png)](https://coveralls.io/r/giggsey/libphonenumber-for-php)
+# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.svg?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php) [![Coverage Status](https://img.shields.io/coveralls/giggsey/libphonenumber-for-php.svg)](https://coveralls.io/r/giggsey/libphonenumber-for-php?branch=master)
 
-[![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
-[![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.png)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 [![License](https://poser.pugx.org/giggsey/libphonenumber-for-php/license.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
@@ -10,10 +10,10 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 # Highlights of functionality
 * Parsing/formatting/validating phone numbers for all countries/regions of the world.
-* getNumberType - gets the type of the number based on the number itself; able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared Cost, VoIP and Personal Numbers (whenever feasible).
-* isNumberMatch - gets a confidence level on whether two numbers could be the same.
-* getExampleNumber/getExampleNumberByType - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
-* isValidNumber - full validation of a phone number for a region using length and prefix information.
+* `getNumberType` - gets the type of the number based on the number itself; able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared Cost, VoIP and Personal Numbers (whenever feasible).
+* `isNumberMatch` - gets a confidence level on whether two numbers could be the same.
+* `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
+* `isValidNumber` - full validation of a phone number for a region using length and prefix information.
 * PhoneNumberOfflineGeocoder - provides geographical information related to a phone number.
 * PhoneNumberToCarrierMapper - provides carrier information related to a phone number.
 
@@ -52,19 +52,19 @@ try {
 At this point, swissNumberProto contains:
 
     class libphonenumber\PhoneNumber#9 (7) {
-      private $countryCode =>
+     private $countryCode =>
       int(41)
-      private $nationalNumber =>
+     private $nationalNumber =>
       double(446681800)
-      private $extension =>
+     private $extension =>
       NULL
-      private $italianLeadingZero =>
+     private $italianLeadingZero =>
       NULL
-      private $rawInput =>
+     private $rawInput =>
       NULL
-      private $countryCodeSource =>
+     private $countryCodeSource =>
       NULL
-      private $preferredDomesticCarrierCode =>
+     private $preferredDomesticCarrierCode =>
       NULL
     }
 
