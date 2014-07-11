@@ -120,12 +120,14 @@ class PhoneNumberOfflineGeocoder
      */
     private function getRegionDisplayName($regionCode, $locale)
     {
-        $loc = Locale::getDisplayRegion(
+        if ($regionCode === null || $regionCode == 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) {
+            return "";
+        }
+
+        return Locale::getDisplayRegion(
             Locale::country_code_to_locale($regionCode),
             $locale
         );
-
-        return ($regionCode === null || $regionCode == 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) ? "" : $loc;
     }
 
     /**
