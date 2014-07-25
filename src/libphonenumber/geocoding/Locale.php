@@ -76,6 +76,7 @@ class Locale extends \Locale
             'en-NZ',
             'en-PH',
             'en-SG',
+            'en-TK',
             'en-TT',
             'en-US',
             'en-ZA',

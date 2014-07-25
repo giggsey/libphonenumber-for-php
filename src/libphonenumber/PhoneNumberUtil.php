@@ -522,7 +522,8 @@ class PhoneNumberUtil
     private static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches)
     {
         $normalizedNumber = "";
-        for ($i = 0; $i < mb_strlen($number, 'UTF-8'); $i++) {
+        $strLength = mb_strlen($number, 'UTF-8');
+        for ($i = 0; $i < $strLength; $i++) {
             $character = mb_substr($number, $i, 1, 'UTF-8');
             if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
                 $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
@@ -691,7 +692,6 @@ class PhoneNumberUtil
     {
         $countryCode = $number->getCountryCode();
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCode])) {
-            //$numberString = $this->getNationalSignificantNumber($number);
             return null;
         }
         $regions = $this->countryCallingCodeToRegionCodeMap[$countryCode];
