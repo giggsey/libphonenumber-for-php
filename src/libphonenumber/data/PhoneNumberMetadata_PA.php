@@ -100,7 +100,7 @@ return array (
           6(?:
             [024-9]\\d|
             1[0-5]|
-            3[04-9]
+            3[0-24-9]
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,8}',

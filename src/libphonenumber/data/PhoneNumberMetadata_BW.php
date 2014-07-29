@@ -53,10 +53,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
-            [1-35]\\d{6}|
-            [46][0-7]\\d{5}|
-            7[01467]\\d{5}
-          )
+            [1-356]\\d|
+            4[0-7]|
+            7[014-7]
+          )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '71123456',

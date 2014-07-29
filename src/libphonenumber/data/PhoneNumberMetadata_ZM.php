@@ -23,7 +23,7 @@ return array (
           9(?:
             5[05]|
             6\\d|
-            7[13-9]
+            7[1-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
