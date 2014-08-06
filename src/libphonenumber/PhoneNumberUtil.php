@@ -2695,8 +2695,8 @@ class PhoneNumberUtil
         $countryCode = $number->getCountryCode();
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
         if (($metadata === null) ||
-            (!self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode &&
-                $countryCode != $this->getCountryCodeForValidRegion($regionCode))
+            (self::REGION_CODE_FOR_NON_GEO_ENTITY !== $regionCode &&
+                $countryCode !== $this->getCountryCodeForValidRegion($regionCode))
         ) {
             // Either the region code was invalid, or the country calling code for this number does not
             // match that of the region code.
