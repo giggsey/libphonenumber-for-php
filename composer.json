@@ -1,5 +1,5 @@
 {
-    "name": "giggsey/libphonenumber-for-php",
+    "name": "danidomi/libphonenumber-for-php",
     "type": "library",
     "description": "Unofficial PHP Port of Google's libphonenumber",
     "keywords": ["phonenumber", "libphonenumber", "mobile", "validation", "geocoding", "geolocation"],
@@ -12,7 +12,7 @@
     },
     "authors": [
         {
-            "name": "Joshua Gigg",
+            "name": "Daniel",
             "email": "giggsey@gmail.com",
             "homepage": "http://giggsey.com/"
         }
