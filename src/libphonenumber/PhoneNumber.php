@@ -278,45 +278,34 @@ class PhoneNumber implements \Serializable
         return '+' . $this->getCountryCode() . $this->getNationalNumber();
     }
 
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * String representation of object
-     * @link http://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
-     */
     public function serialize()
     {
-        return serialize(array(
-            $this->nationalNumber,
-            $this->countryCode,
-            $this->countryCodeSource,
-            $this->extension,
-        ));
+        return serialize(
+            array(
+                $this->getCountryCode(),
+                $this->getNationalNumber(),
+                $this->getExtension(),
+                $this->isItalianLeadingZero(),
+                $this->getNumberOfLeadingZeros(),
+                $this->getRawInput(),
+                $this->getCountryCodeSource(),
+                $this->getPreferredDomesticCarrierCode(),
+            )
+        );
     }
 
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Constructs the object
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
-     * @return void
-     */
     public function unserialize($serialized)
     {
         $data = unserialize($serialized);
-        // add a few extra elements in the array to ensure that we have enough keys when unserializing
-        // older data which does not include all properties.
-        //$data = array_merge($data, array_fill(0, 2, null));
 
-        list(
-            $this->nationalNumber,
-            $this->countryCode,
-            $this->countryCodeSource,
-            $this->extension,
-        ) = $data;
-
+        $this->setCountryCode($data[0]);
+        $this->setNationalNumber($data[1]);
+        $this->setExtension($data[2]);
+        $this->setItalianLeadingZero($data[3]);
+        $this->setNumberOfLeadingZeros($data[4]);
+        $this->setRawInput($data[5]);
+        $this->setCountryCodeSource($data[6]);
+        $this->setPreferredDomesticCarrierCode($data[7]);
     }
 }
 
