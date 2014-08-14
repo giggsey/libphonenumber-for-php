@@ -71,6 +71,7 @@ class Locale extends \Locale
             'en-IE',
             'en-IN',
             'en-IM',
+            'en-JE',
             'en-JM',
             'en-MY',
             'en-NZ',
