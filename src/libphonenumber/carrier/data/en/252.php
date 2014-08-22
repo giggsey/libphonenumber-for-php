@@ -12,5 +12,6 @@ return array (
   25268 => 'Nationlink',
   25269 => 'Nationlink',
   25279 => 'Somtel',
+  252907 => 'Golis Telecom',
 );
 /* EOF */

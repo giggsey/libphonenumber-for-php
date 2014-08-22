@@ -15,7 +15,7 @@ return array (
             123
           )\\d{7,8}
         ',
-    'PossibleNumberPattern' => '\\d{6,11}',
+    'PossibleNumberPattern' => '\\d{7,11}',
   ),
   'fixedLine' => 
   array (
@@ -28,11 +28,10 @@ return array (
             3[2-5]|
             [47][1-35]|
             5[1-3578]|
-            6[1347]
-          )\\d{7}|
-          65\\d{6,7}
+            6[13-57]
+          )\\d{7}
         ',
-    'PossibleNumberPattern' => '\\d{6,9}',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '221234567',
   ),
   'mobile' => 
@@ -149,17 +148,6 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '65',
-      ),
-      'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '$CC ($1)',
-    ),
-    3 => 
-    array (
       'pattern' => '(9)([5-9]\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -169,7 +157,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    4 => 
+    3 => 
     array (
       'pattern' => '(44)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -180,7 +168,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    5 => 
+    4 => 
     array (
       'pattern' => '([68]00)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
@@ -194,7 +182,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    6 => 
+    5 => 
     array (
       'pattern' => '(600)(\\d{3})(\\d{2})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -205,7 +193,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    7 => 
+    6 => 
     array (
       'pattern' => '(1230)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -216,7 +204,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    8 => 
+    7 => 
     array (
       'pattern' => '(\\d{5})(\\d{4})',
       'format' => '$1 $2',
@@ -227,7 +215,7 @@ return array (
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '$CC ($1)',
     ),
-    9 => 
+    8 => 
     array (
       'pattern' => '(\\d{4,5})',
       'format' => '$1',
@@ -269,17 +257,6 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '65',
-      ),
-      'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '$CC ($1)',
-    ),
-    3 => 
-    array (
       'pattern' => '(9)([5-9]\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -289,7 +266,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    4 => 
+    3 => 
     array (
       'pattern' => '(44)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -300,7 +277,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    5 => 
+    4 => 
     array (
       'pattern' => '([68]00)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
@@ -314,7 +291,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    6 => 
+    5 => 
     array (
       'pattern' => '(600)(\\d{3})(\\d{2})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -325,7 +302,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    7 => 
+    6 => 
     array (
       'pattern' => '(1230)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -336,7 +313,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    8 => 
+    7 => 
     array (
       'pattern' => '(\\d{5})(\\d{4})',
       'format' => '$1 $2',

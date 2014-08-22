@@ -28,7 +28,8 @@ return array (
           3(?:
             0[0-5]|
             1\\d|
-            [25][01]
+            2[0-2]|
+            5[01]
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{10}',
