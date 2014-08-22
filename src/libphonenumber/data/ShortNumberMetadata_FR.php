@@ -63,7 +63,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
-          118(
+          118(?:
             [0-68]\\d{2}|
             7(?:
               0\\d|

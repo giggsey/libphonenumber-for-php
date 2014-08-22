@@ -17,7 +17,7 @@ return array (
           (?:
             [2-7]\\d|
             8[126-9]|
-            9[126-9]
+            9[1-36-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -29,7 +29,7 @@ return array (
           (?:
             [2-7]\\d|
             8[126-9]|
-            9[126-9]
+            9[1-36-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

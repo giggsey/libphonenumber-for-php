@@ -35,7 +35,8 @@ return array (
               8
             )|
             6[137-9]?\\d{2}|
-            7[1-9]\\d
+            7[1-9]\\d|
+            907\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
@@ -164,6 +165,17 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '69',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    4 => 
+    array (
+      'pattern' => '(90\\d)(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '90',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

@@ -210,7 +210,7 @@ return array (
           33669|
           611
         ',
-    'PossibleNumberPattern' => '\\d{5}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '33669',
   ),
   'noInternationalDialling' => 
