@@ -99,7 +99,7 @@ class PhoneNumberOfflineGeocoder
 
     /**
      * Returns the customary display name in the given language for the given territory the phone
-     * number is from.
+     * number is from. If it could be from many territories, nothing is returned.
      *
      * @param PhoneNumber $number
      * @param $locale
@@ -107,8 +107,25 @@ class PhoneNumberOfflineGeocoder
      */
     private function getCountryNameForNumber(PhoneNumber $number, $locale)
     {
-        $regionCode = $this->phoneUtil->getRegionCodeForNumber($number);
-        return $this->getRegionDisplayName($regionCode, $locale);
+        $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
+
+        if (count($regionCodes) === 1) {
+            return $this->getRegionDisplayName($regionCodes[0], $locale);
+        } else {
+            $regionWhereNumberIsValid = 'ZZ';
+            foreach ($regionCodes as $regionCode) {
+                if ($this->phoneUtil->isValidNumberForRegion($number, $regionCode)) {
+                    if ($regionWhereNumberIsValid !== 'ZZ') {
+                        // If we can't assign the phone number as definitely belonging to only one territory,
+                        // then we return nothing.
+                        return "";
+                    }
+                    $regionWhereNumberIsValid = $regionCode;
+                }
+            }
+
+            return $this->getRegionDisplayName($regionWhereNumberIsValid, $locale);
+        }
     }
 
     /**

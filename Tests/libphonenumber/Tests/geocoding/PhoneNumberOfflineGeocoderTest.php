@@ -18,6 +18,7 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
     private static $US_Number3;
     private static $US_Number4;
     private static $US_InvalidNumber;
+    private static $NANPA_TollFree;
     private static $BS_Number1;
     private static $AU_Number;
     private static $AR_MobileNumber;
@@ -56,6 +57,9 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 
         self::$US_InvalidNumber = new PhoneNumber();
         self::$US_InvalidNumber->setCountryCode(1)->setNationalNumber(123456789);
+
+        self::$NANPA_TollFree = new PhoneNumber();
+        self::$NANPA_TollFree->setCountryCode(1)->setNationalNumber(8002431234);
 
         self::$BS_Number1 = new PhoneNumber();
         self::$BS_Number1->setCountryCode(1)->setNationalNumber(2423651234);
@@ -101,6 +105,13 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
         // covered by the geocoding data file.
 
         $this->assertEquals("United States", $this->geocoder->getDescriptionForNumber(self::$US_Number4, "en_US"));
+    }
+
+    public function testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty()
+    {
+        // Test that nothing is returned when the number passed in is valid but not
+        // covered by the geocoding data file and belongs to multiple countries
+        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$NANPA_TollFree, 'en_US'));
     }
 
     public function testGetDescriptionForNumber_en_US()
