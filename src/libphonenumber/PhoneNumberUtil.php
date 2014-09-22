@@ -757,10 +757,7 @@ class PhoneNumberUtil
      */
     private function getNumberTypeHelper($nationalNumber, PhoneMetadata $metadata)
     {
-        $generalNumberDesc = $metadata->getGeneralDesc();
-        if (!$generalNumberDesc->hasNationalNumberPattern() ||
-            !$this->isNumberMatchingDesc($nationalNumber, $generalNumberDesc)
-        ) {
+        if (!$this->isNumberMatchingDesc($nationalNumber, $metadata->getGeneralDesc())) {
             return PhoneNumberType::UNKNOWN;
         }
         if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getPremiumRate())) {
@@ -2702,16 +2699,8 @@ class PhoneNumberUtil
             // match that of the region code.
             return false;
         }
-        $generalNumDesc = $metadata->getGeneralDesc();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 
-        // For regions where we don't have metadata for PhoneNumberDesc, we treat any number passed in
-        // as a valid number if its national significant number is between the minimum and maximum
-        // lengths defined by ITU for a national significant number.
-        if (!$generalNumDesc->hasNationalNumberPattern()) {
-            $numberLength = mb_strlen($nationalSignificantNumber);
-            return $numberLength > self::MIN_LENGTH_FOR_NSN && $numberLength <= self::MAX_LENGTH_FOR_NSN;
-        }
         return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata) != PhoneNumberType::UNKNOWN;
     }
 
@@ -3157,17 +3146,6 @@ class PhoneNumberUtil
         // Metadata cannot be null because the country calling code is valid.
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
         $generalNumDesc = $metadata->getGeneralDesc();
-        // Handling case of numbers with no metadata.
-        if (!$generalNumDesc->hasNationalNumberPattern()) {
-            $numberLength = mb_strlen($nationalNumber);
-            if ($numberLength < self::MIN_LENGTH_FOR_NSN) {
-                return ValidationResult::TOO_SHORT;
-            } elseif ($numberLength > self::MAX_LENGTH_FOR_NSN) {
-                return ValidationResult::TOO_LONG;
-            } else {
-                return ValidationResult::IS_POSSIBLE;
-            }
-        }
 
         $possibleNumberPattern = $generalNumDesc->getPossibleNumberPattern();
         return $this->testNumberLengthAgainstPattern($possibleNumberPattern, $nationalNumber);

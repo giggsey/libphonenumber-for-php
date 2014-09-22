@@ -1762,15 +1762,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             ValidationResult::TOO_LONG,
             $this->phoneUtil->isPossibleNumberWithReason(self::$internationalTollFreeTooLong)
         );
-
-        // Try with number that we don't have metadata for.
-        $adNumber = new PhoneNumber();
-        $adNumber->setCountryCode(376)->setNationalNumber(12345);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
-        $adNumber->setCountryCode(376)->setNationalNumber(1);
-        $this->assertEquals(ValidationResult::TOO_SHORT, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
-        $adNumber->setCountryCode(376)->setNationalNumber(123456789012345678);
-        $this->assertEquals(ValidationResult::TOO_LONG, $this->phoneUtil->isPossibleNumberWithReason($adNumber));
     }
 
     public function testIsNotPossibleNumber()
@@ -3089,7 +3080,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("+37612345", $this->phoneUtil->format($adNumber, PhoneNumberFormat::E164));
         $this->assertEquals("12345", $this->phoneUtil->format($adNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(PhoneNumberType::UNKNOWN, $this->phoneUtil->getNumberType($adNumber));
-        $this->assertTrue($this->phoneUtil->isValidNumber($adNumber));
+        $this->assertFalse($this->phoneUtil->isValidNumber($adNumber));
 
         // Test dialing a US number from within Andorra.
         $this->assertEquals(

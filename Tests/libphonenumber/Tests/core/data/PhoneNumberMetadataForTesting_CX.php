@@ -8,18 +8,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '5\\d{3,14}',
-    'PossibleNumberPattern' => '\\d{2,14}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '5\\d{3,14}',
-    'PossibleNumberPattern' => '\\d{2,14}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5\\d{3,14}',
-    'PossibleNumberPattern' => '\\d{2,14}',
   ),
   'tollFree' => 
   array (
