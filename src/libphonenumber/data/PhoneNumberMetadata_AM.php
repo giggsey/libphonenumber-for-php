@@ -35,6 +35,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
+            4[139]|
             55|
             77|
             9[1-9]
@@ -141,6 +142,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
+            4[139]|
             [5-7]|
             9[1-9]
           ',
@@ -179,6 +181,6 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingZeroPossible' => false,
-  'mobileNumberPortableRegion' => false,
+  'mobileNumberPortableRegion' => true,
 );
 /* EOF */

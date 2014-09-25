@@ -26,7 +26,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             [259]\\d|
-            4[0-2]
+            4[0-24]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

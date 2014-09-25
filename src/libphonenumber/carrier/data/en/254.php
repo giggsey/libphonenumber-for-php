@@ -9,6 +9,7 @@ return array (
   25471 => 'Safaricom',
   25472 => 'Safaricom',
   25473 => 'Airtel',
+  25476 => 'Airtel',
   254750 => 'Essar',
   254751 => 'Essar',
   254752 => 'Essar',

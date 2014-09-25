@@ -13,6 +13,7 @@ return array (
   67777 => 'Solomon Telekom',
   67778 => 'Solomon Telekom',
   677790 => 'Solomon Telekom',
+  677794 => 'Solomon Telekom',
   67784 => 'BMobile',
   67785 => 'BMobile',
   67786 => 'BMobile',

@@ -3145,9 +3145,8 @@ class PhoneNumberUtil
         $regionCode = $this->getRegionCodeForCountryCode($countryCode);
         // Metadata cannot be null because the country calling code is valid.
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
-        $generalNumDesc = $metadata->getGeneralDesc();
 
-        $possibleNumberPattern = $generalNumDesc->getPossibleNumberPattern();
+        $possibleNumberPattern = $metadata->getGeneralDesc()->getPossibleNumberPattern();
         return $this->testNumberLengthAgainstPattern($possibleNumberPattern, $nationalNumber);
     }
 

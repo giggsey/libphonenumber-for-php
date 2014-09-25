@@ -5,11 +5,12 @@
  */
 
 return array (
-  2162 => 'Tunisiana',
-  21640 => 'Tunicell',
-  21641 => 'Tunicell',
+  2162 => 'Ooredoo',
+  21640 => 'Tunisie Telecom',
+  21641 => 'Tunisie Telecom',
+  21642 => 'Tunisie Telecom',
+  21644 => 'Tunisie Telecom',
   2165 => 'Orange',
-  216797 => 'Tunicell',
-  2169 => 'Tunicell',
+  2169 => 'Tunisie Telecom',
 );
 /* EOF */

@@ -18,9 +18,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           4(?:
-            0[45689]\\d|
-            4|
-            99\\d
+            [09][45689]\\d|
+            4
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{6}(?:\\d{2})?',
@@ -28,9 +27,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-         8[79]\\d{6}
-        ',
+    'NationalNumberPattern' => '8[79]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '87123456',
   ),

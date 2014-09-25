@@ -18,6 +18,8 @@ return array (
   27613 => 'Cell C',
   27614 => 'Telkom Mobile',
   27615 => 'Cell C',
+  27616 => 'Cell C',
+  27617 => 'Cell C',
   27618 => 'Cell C',
   27619 => 'Cell C',
   27620 => 'Cell C',
