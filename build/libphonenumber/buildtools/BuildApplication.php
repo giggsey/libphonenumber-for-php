@@ -2,7 +2,6 @@
 
 namespace libphonenumber\buildtools;
 
-
 use libphonenumber\buildtools\Commands\BuildMetadataPHPFromXMLCommand;
 use libphonenumber\buildtools\Commands\GeneratePhonePrefixDataCommand;
 use libphonenumber\buildtools\Commands\GenerateTimeZonesMapDataCommand;
@@ -25,5 +24,3 @@ class BuildApplication extends Application
         );
     }
 }
-
-/* EOF */

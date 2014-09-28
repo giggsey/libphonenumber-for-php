@@ -461,5 +461,3 @@ class BuildMetadataFromXml
     }
 
 }
-
-/* EOF */

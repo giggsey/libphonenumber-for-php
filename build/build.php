@@ -5,5 +5,3 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $app = new \libphonenumber\buildtools\BuildApplication();
 $app->run();
-
-/* EOF */

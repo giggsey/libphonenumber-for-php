@@ -40,5 +40,3 @@ class BuildMetadataPHPFromXMLCommand extends Command
         );
     }
 }
-
-/* EOF */

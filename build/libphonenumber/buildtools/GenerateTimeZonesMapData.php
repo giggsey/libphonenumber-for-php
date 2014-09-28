@@ -68,13 +68,10 @@ EOT;
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
             . 'return ' . var_export($data, true) . ';'
-            . PHP_EOL
-            . "/* EOF */";
+            . PHP_EOL;
 
         $outputPath = $outputFile . DIRECTORY_SEPARATOR . PhoneNumberToTimeZonesMapper::MAPPING_DATA_FILE_NAME;
 
         file_put_contents($outputPath, $phpSource);
     }
 }
-
-/* EOF */

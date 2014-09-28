@@ -37,5 +37,3 @@ class GeneratePhonePrefixDataCommand extends Command
         );
     }
 }
-
-/* EOF */

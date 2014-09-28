@@ -376,8 +376,7 @@ EOT;
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
             . 'return ' . var_export($data, true) . ';'
-            . PHP_EOL
-            . "/* EOF */";
+            . PHP_EOL;
 
         $outputPath = $this->outputDir . $language . DIRECTORY_SEPARATOR . $outputFile . '.php';
 
@@ -398,13 +397,10 @@ EOT;
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
             . 'return ' . var_export($availableDataFiles, true) . ';'
-            . PHP_EOL
-            . "/* EOF */";
+            . PHP_EOL;
 
         $outputPath = $this->outputDir . 'Map.php';
 
         file_put_contents($outputPath, $phpSource);
     }
 }
-
-/* EOF */

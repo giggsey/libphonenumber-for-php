@@ -66,7 +66,7 @@ EOT;
             $data = '<?php' . PHP_EOL . self::GENERATION_COMMENT . PHP_EOL . 'return ' . var_export(
                     $metadata->toArray(),
                     true
-                ) . ';' . PHP_EOL . '/* EOF */';
+                ) . ';' . PHP_EOL;
 
             file_put_contents($filePrefix . "_" . $regionCode . '.php', $data);
         }
@@ -115,13 +115,10 @@ EOT;
         }
 
         $data .= PHP_EOL .
-            "}" . PHP_EOL .
-            '/* EOF */';
+            "}" . PHP_EOL;
 
         file_put_contents($outputDir . $mappingClass . '.php', $data);
     }
 
 
 }
-
-/* EOF */

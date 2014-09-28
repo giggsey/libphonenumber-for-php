@@ -28,5 +28,3 @@ class GenerateTimeZonesMapDataCommand extends Command
         new GenerateTimeZonesMapData($input->getArgument('InputFile'), $input->getArgument('OutputDirectory'));
     }
 }
-
-/* EOF */
