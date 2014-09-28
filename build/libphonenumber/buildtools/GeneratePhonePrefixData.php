@@ -123,6 +123,29 @@ EOT;
             foreach ($phonePrefixes as $prefix) {
                 $outputFiles[] = $this->generateFilename($prefix, $language);
             }
+        } elseif ($countryCode == 86) {
+
+            /*
+             * Reduce memory usage for China numbers
+             * @see https://github.com/giggsey/libphonenumber-for-php/issues/44
+             */
+
+            // Fetch the 4-digit prefixes stored in the file.
+            $phonePrefixes = array();
+
+            $this->parseTextFile(
+                $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
+                function ($prefix, $location) use (&$phonePrefixes) {
+                    $shortPrefix = substr($prefix, 0, 4);
+                    if (!in_array($shortPrefix, $phonePrefixes)) {
+                        $phonePrefixes[] = $shortPrefix;
+                    }
+                }
+            );
+
+            foreach ($phonePrefixes as $prefix) {
+                $outputFiles[] = $this->generateFilename($prefix, $language);
+            }
         } else {
             $outputFiles[] = $this->generateFilename($countryCode, $language);
         }
