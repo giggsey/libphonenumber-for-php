@@ -215,4 +215,3 @@ return array (
   1505995 => 'Santa Fe, NM',
   1505998 => 'Albuquerque, NM',
 );
-/* EOF */

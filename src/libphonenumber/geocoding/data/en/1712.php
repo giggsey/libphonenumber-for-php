@@ -88,4 +88,3 @@ return array (
   1712873 => 'Moville, IA',
   1712943 => 'Sergeant Bluff, IA',
 );
-/* EOF */

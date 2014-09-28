@@ -162,4 +162,3 @@ return array (
   1256974 => 'Moulton, AL',
   1256997 => 'Fort Payne, AL',
 );
-/* EOF */

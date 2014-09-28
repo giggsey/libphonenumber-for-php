@@ -10,4 +10,3 @@ return array (
   97155 => 'du',
   97156 => 'Etisalat',
 );
-/* EOF */

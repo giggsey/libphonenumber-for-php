@@ -7,4 +7,3 @@
 return array (
   1917 => 'New York',
 );
-/* EOF */

@@ -26,5 +26,3 @@ class Issue34Test extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, "DE"));
     }
 }
-
-/* EOF */

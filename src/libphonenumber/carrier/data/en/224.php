@@ -11,4 +11,3 @@ return array (
   22465 => 'Cellcom',
   22466 => 'Areeba',
 );
-/* EOF */

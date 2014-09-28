@@ -118,4 +118,3 @@ return array (
   1701965 => 'Crosby, ND',
   1701968 => 'Cando, ND',
 );
-/* EOF */

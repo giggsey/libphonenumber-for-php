@@ -57,4 +57,3 @@ return array (
   2783 => 'MTN',
   2784 => 'Cell C',
 );
-/* EOF */

@@ -314,4 +314,3 @@ return array (
   62985 => 'Nabire',
   62986 => 'Manokwari',
 );
-/* EOF */

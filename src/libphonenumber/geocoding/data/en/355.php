@@ -176,4 +176,3 @@ return array (
   355894 => 'Livadhja/Dhivër, Sarandë',
   355895 => 'Finiq/Mesopotam/Vergo, Delvinë',
 );
-/* EOF */

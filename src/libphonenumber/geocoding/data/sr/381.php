@@ -40,4 +40,3 @@ return array (
   38139 => 'Peć',
   381390 => 'Dakovica',
 );
-/* EOF */

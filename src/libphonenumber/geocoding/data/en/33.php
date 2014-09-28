@@ -5582,4 +5582,3 @@ return array (
   3359678 => 'Basse-Pointe',
   3359679 => 'Fort de France',
 );
-/* EOF */

@@ -36,4 +36,3 @@ return array (
   1807937 => 'Oxdrift, ON',
   1807939 => 'Thunder Bay, ON',
 );
-/* EOF */

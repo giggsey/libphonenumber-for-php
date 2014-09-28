@@ -11,4 +11,3 @@ return array (
   35797 => 'Cytamobile-Vodafone',
   35799 => 'Cytamobile-Vodafone',
 );
-/* EOF */

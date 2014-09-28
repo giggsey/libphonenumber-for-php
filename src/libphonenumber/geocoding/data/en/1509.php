@@ -192,4 +192,3 @@ return array (
   1509996 => 'Winthrop, WA',
   1509997 => 'Twisp, WA',
 );
-/* EOF */

@@ -125,4 +125,3 @@ return array (
   1507934 => 'St. Peter, MN',
   1507964 => 'Arlington, MN',
 );
-/* EOF */

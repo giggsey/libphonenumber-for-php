@@ -112,4 +112,3 @@ return array (
   1517913 => 'Lansing Charter Township, MI',
   1517975 => 'Lansing, MI',
 );
-/* EOF */

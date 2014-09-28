@@ -22,4 +22,3 @@ return array (
   8263 => 'Jeonbuk',
   8264 => 'Jeju',
 );
-/* EOF */

@@ -42,4 +42,3 @@ return array (
   2682538 => 'Mankayane, Manzini district',
   2682548 => 'Ludzeludze, Manzini district',
 );
-/* EOF */

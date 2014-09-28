@@ -36,7 +36,7 @@ class Matcher
         $this->subject = $subject;
     }
 
-    private function do_match($type = 'find')
+    private function doMatch($type = 'find')
     {
         $final_pattern = '(?:' . $this->pattern . ')';
         switch ($type) {
@@ -60,7 +60,7 @@ class Matcher
      */
     public function matches()
     {
-        return $this->do_match('matches');
+        return $this->doMatch('matches');
     }
 
     /**
@@ -68,7 +68,7 @@ class Matcher
      */
     public function lookingAt()
     {
-        return $this->do_match('lookingAt');
+        return $this->doMatch('lookingAt');
     }
 
     /**
@@ -76,7 +76,7 @@ class Matcher
      */
     public function find()
     {
-        return $this->do_match('find');
+        return $this->doMatch('find');
     }
 
     /**
@@ -159,5 +159,3 @@ class Matcher
         return $this;
     }
 }
-
-/* EOF */

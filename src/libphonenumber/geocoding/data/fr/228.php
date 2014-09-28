@@ -12,4 +12,3 @@ return array (
   22826 => 'Région de la Kara',
   22827 => 'Région des Savanes',
 );
-/* EOF */

@@ -210,7 +210,7 @@ class PhoneNumberUtil
 
     /**
      * The metadata loader used to inject alternative metadata sources.
-     * @var MetadataLoader
+     * @var MetadataLoaderInterface
      */
     private $metadataLoader;
 
@@ -259,7 +259,7 @@ class PhoneNumberUtil
     /**
      * This class implements a singleton, so the only constructor is private.
      */
-    private function __construct($filePrefix, MetadataLoader $metadataLoader, $countryCallingCodeToRegionCodeMap)
+    private function __construct($filePrefix, MetadataLoaderInterface $metadataLoader, $countryCallingCodeToRegionCodeMap)
     {
         $this->metadataLoader = $metadataLoader;
         $this->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
@@ -327,10 +327,10 @@ class PhoneNumberUtil
      *
      * @param string $baseFileLocation
      * @param array|null $countryCallingCodeToRegionCodeMap
-     * @param MetadataLoader $metadataLoader
+     * @param MetadataLoaderInterface $metadataLoader
      * @return PhoneNumberUtil instance
      */
-    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoader $metadataLoader = null)
+    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null)
     {
         if (self::$instance === null) {
             if ($countryCallingCodeToRegionCodeMap === null) {
@@ -659,10 +659,10 @@ class PhoneNumberUtil
      * @param string $filePrefix
      * @param string $regionCode
      * @param int $countryCallingCode
-     * @param MetadataLoader $metadataLoader
+     * @param MetadataLoaderInterface $metadataLoader
      * @throws \RuntimeException
      */
-    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode, MetadataLoader $metadataLoader)
+    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode, MetadataLoaderInterface $metadataLoader)
     {
         $isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
@@ -1368,11 +1368,13 @@ class PhoneNumberUtil
      */
     private function parseHelper($numberToParse, $defaultRegion, $keepRawInput, $checkRegion, PhoneNumber $phoneNumber)
     {
-        $numberToParse = trim($numberToParse);
-
         if ($numberToParse === null) {
             throw new NumberParseException(NumberParseException::NOT_A_NUMBER, "The phone number supplied was null.");
-        } elseif (mb_strlen($numberToParse) > self::MAX_INPUT_STRING_LENGTH) {
+        }
+
+        $numberToParse = trim($numberToParse);
+
+        if (mb_strlen($numberToParse) > self::MAX_INPUT_STRING_LENGTH) {
             throw new NumberParseException(
                 NumberParseException::TOO_LONG,
                 "The string supplied was too long to parse."
@@ -3176,5 +3178,3 @@ class PhoneNumberUtil
         return true;
     }
 }
-
-/* EOF */

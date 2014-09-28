@@ -13,4 +13,3 @@ return array (
   25577 => 'Zantel',
   25578 => 'Airtel',
 );
-/* EOF */

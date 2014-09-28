@@ -40,4 +40,3 @@ return array (
   68684 => 'Washington',
   68685 => 'Kanton',
 );
-/* EOF */

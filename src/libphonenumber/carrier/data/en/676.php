@@ -31,4 +31,3 @@ return array (
   67677 => 'U-Call',
   67678 => 'U-Call',
 );
-/* EOF */

@@ -16,4 +16,3 @@ return array (
   86138 => 'China Mobile',
   86139 => 'China Mobile',
 );
-/* EOF */

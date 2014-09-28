@@ -8,4 +8,3 @@ return array (
   86691 => 'Jinghong, Yunnan',
   86692 => 'Luxi, Yunnan',
 );
-/* EOF */

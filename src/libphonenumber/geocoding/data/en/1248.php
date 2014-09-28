@@ -130,4 +130,3 @@ return array (
   1248994 => 'Farmington Hills, MI',
   1248996 => 'Southfield, MI',
 );
-/* EOF */

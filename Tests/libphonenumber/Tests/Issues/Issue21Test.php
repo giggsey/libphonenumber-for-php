@@ -48,5 +48,3 @@ class Issue21Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals('00 49 12345678901234567', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
     }
 }
-
-/* EOF */

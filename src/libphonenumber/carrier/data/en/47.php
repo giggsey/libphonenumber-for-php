@@ -231,4 +231,3 @@ return array (
   47996 => 'Telenor',
   47997 => 'Telenor',
 );
-/* EOF */

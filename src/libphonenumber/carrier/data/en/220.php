@@ -11,4 +11,3 @@ return array (
   2207 => 'Africell',
   2209 => 'Gamcel',
 );
-/* EOF */

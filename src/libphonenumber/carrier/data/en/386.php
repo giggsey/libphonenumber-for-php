@@ -15,4 +15,3 @@ return array (
   38670 => 'Tušmobil',
   38671 => 'Mobitel',
 );
-/* EOF */

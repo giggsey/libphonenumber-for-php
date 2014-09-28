@@ -82,4 +82,3 @@ return array (
   1575894 => 'Truth Or Cnsqncs, NM',
   1575935 => 'Clovis, NM',
 );
-/* EOF */

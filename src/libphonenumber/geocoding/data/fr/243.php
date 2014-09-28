@@ -12,4 +12,3 @@ return array (
   2435 => 'Province Orientale (Kisanga/Mbandaka)',
   2436 => 'Nord-Kivu/Sud-Kivu/Maniema',
 );
-/* EOF */

@@ -22,4 +22,3 @@ return array (
   1778565 => 'Surrey, BC',
   1778574 => 'Surrey, BC',
 );
-/* EOF */

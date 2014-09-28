@@ -16,4 +16,3 @@ return array (
   86998 => 'Kashi, Xinjiang',
   86999 => 'Yining, Xinjiang',
 );
-/* EOF */

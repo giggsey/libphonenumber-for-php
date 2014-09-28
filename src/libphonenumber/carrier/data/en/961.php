@@ -14,4 +14,3 @@ return array (
   961791 => 'Alfa',
   961793 => 'Alfa',
 );
-/* EOF */

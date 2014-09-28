@@ -28,5 +28,3 @@ class Issue14Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(PhoneNumberType::MOBILE, $this->phoneUtil->getNumberType($phoneNumber));
     }
 }
-
-/* EOF */

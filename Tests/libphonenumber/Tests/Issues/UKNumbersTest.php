@@ -186,5 +186,3 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($valid, "Checking phone number is invalid");
     }
 }
-
-/* EOF */

@@ -16,4 +16,3 @@ return array (
   8491 => 'Vinaphone',
   8494 => 'Vinaphone',
 );
-/* EOF */

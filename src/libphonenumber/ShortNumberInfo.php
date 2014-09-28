@@ -491,5 +491,3 @@ class ShortNumberInfo
 
 
 }
-
-/* EOF */

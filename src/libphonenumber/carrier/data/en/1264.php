@@ -16,4 +16,3 @@ return array (
   1264729 => 'Cable & Wireless',
   1264772 => 'Cable & Wireless',
 );
-/* EOF */

@@ -44,4 +44,3 @@ return array (
   2757 => 'Voorspoed, Welkom/Welkom Central, Welkom',
   2758 => 'Bethlehem',
 );
-/* EOF */

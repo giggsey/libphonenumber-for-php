@@ -19,4 +19,3 @@ return array (
   886836 => 'Matsu',
   88689 => 'Taitung',
 );
-/* EOF */

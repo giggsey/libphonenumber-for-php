@@ -16,4 +16,3 @@ return array (
   612 => 'Australia/Sydney',
   82 => 'Asia/Seoul',
 );
-/* EOF */

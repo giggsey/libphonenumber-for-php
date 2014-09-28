@@ -9,4 +9,3 @@ return array (
   2406 => 'Orange GQ',
   2407 => 'Orange GQ',
 );
-/* EOF */

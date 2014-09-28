@@ -197,4 +197,3 @@ return array (
   1847995 => 'Schaumburg, IL',
   1847998 => 'Glenview, IL',
 );
-/* EOF */

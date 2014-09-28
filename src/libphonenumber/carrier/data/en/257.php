@@ -13,4 +13,3 @@ return array (
   25778 => 'Tempo',
   25779 => 'Leo',
 );
-/* EOF */

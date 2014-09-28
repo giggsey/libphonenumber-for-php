@@ -232,4 +232,3 @@ return array (
   1310979 => 'Los Angeles, CA',
   1310998 => 'Santa Monica, CA',
 );
-/* EOF */

@@ -299,4 +299,3 @@ return array (
   1770997 => 'Riverdale, GA',
   1770998 => 'Roswell, GA',
 );
-/* EOF */

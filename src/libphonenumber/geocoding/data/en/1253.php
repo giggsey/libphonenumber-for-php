@@ -111,4 +111,3 @@ return array (
   1253946 => 'Federal Way, WA',
   1253983 => 'Lakewood, WA',
 );
-/* EOF */

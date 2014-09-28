@@ -84,4 +84,3 @@ return array (
   1651923 => 'Goodhue, MN',
   1651999 => 'Saint Paul, MN',
 );
-/* EOF */

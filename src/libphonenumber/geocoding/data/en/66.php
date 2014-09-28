@@ -29,4 +29,3 @@ return array (
   6676 => 'Phang Nga/Phuket',
   6677 => 'Chumphon/Ranong/Surat Thani',
 );
-/* EOF */

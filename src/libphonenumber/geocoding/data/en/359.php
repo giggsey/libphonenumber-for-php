@@ -2091,4 +2091,3 @@ return array (
   3599785 => 'Vasilovtsi, Mont.',
   3599787 => 'Smirnenski, Mont.',
 );
-/* EOF */

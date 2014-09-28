@@ -21,4 +21,3 @@ return array (
   3281 => 'Namür',
   329 => 'Gent',
 );
-/* EOF */

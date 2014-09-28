@@ -17,4 +17,3 @@ return array (
   258282 => 'Xai-Xai',
   258293 => 'Inhambane',
 );
-/* EOF */

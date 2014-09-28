@@ -108,4 +108,3 @@ return array (
   1956992 => 'McAllen, TX',
   1956994 => 'McAllen, TX',
 );
-/* EOF */

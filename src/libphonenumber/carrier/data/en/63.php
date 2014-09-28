@@ -45,4 +45,3 @@ return array (
   63995 => 'Globe',
   63999 => 'Smart',
 );
-/* EOF */

@@ -142,7 +142,7 @@ class PhoneNumberOfflineGeocoder
         }
 
         return Locale::getDisplayRegion(
-            Locale::country_code_to_locale($regionCode),
+            Locale::countryCodeToLocale($regionCode),
             $locale
         );
     }
@@ -211,5 +211,3 @@ class PhoneNumberOfflineGeocoder
         // way for each language.
     }
 }
-
-/* EOF */

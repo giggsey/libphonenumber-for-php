@@ -2651,4 +2651,3 @@ return array (
   918965 => 'Gajapathinagaram, Andhra Pradesh',
   918966 => 'Srungavarapukota/Kothavalasa, Andhra Pradesh',
 );
-/* EOF */

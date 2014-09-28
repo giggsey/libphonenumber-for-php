@@ -215,4 +215,3 @@ return array (
   1706955 => 'Augusta, GA',
   1706965 => 'Ringgold, GA',
 );
-/* EOF */

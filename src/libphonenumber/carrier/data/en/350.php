@@ -11,4 +11,3 @@ return array (
   35058 => 'GibTel',
   35062 => 'Shine',
 );
-/* EOF */

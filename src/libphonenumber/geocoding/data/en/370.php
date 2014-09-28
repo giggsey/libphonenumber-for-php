@@ -53,4 +53,3 @@ return array (
   3705 => 'Vilnius',
   370528 => 'Elektrėnai/Trakai',
 );
-/* EOF */

@@ -166,4 +166,3 @@ return array (
   1903984 => 'Kilgore, TX',
   1903986 => 'Kilgore, TX',
 );
-/* EOF */

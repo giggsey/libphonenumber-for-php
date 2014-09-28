@@ -195,4 +195,3 @@ return array (
   1715985 => 'Independence, WI',
   1715986 => 'Turtle Lake, WI',
 );
-/* EOF */

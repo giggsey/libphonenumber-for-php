@@ -12,4 +12,3 @@ return array (
   22178 => 'Orange',
   22179 => 'ADIE',
 );
-/* EOF */

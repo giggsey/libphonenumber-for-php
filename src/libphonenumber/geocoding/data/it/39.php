@@ -173,4 +173,3 @@ return array (
   390984 => 'Cosenza',
   390985 => 'Scalea',
 );
-/* EOF */

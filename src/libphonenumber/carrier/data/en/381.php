@@ -15,4 +15,3 @@ return array (
   38168 => 'VIP',
   38169 => 'Telenor',
 );
-/* EOF */

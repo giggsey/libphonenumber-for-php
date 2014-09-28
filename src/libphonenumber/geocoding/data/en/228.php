@@ -12,4 +12,3 @@ return array (
   22826 => 'Kara region',
   22827 => 'Savannah region',
 );
-/* EOF */

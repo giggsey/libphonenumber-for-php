@@ -31,4 +31,3 @@ return array (
   373778 => 'IDC',
   373779 => 'IDC',
 );
-/* EOF */

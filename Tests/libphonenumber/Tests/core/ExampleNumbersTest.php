@@ -295,5 +295,3 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         }
     }
 }
-
-/* EOF */

@@ -15,4 +15,3 @@ return array (
   233554 => 'MTN',
   23357 => 'tiGO',
 );
-/* EOF */

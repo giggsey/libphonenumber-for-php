@@ -14,4 +14,3 @@ return array (
   7777 => 'Beeline',
   7778 => 'Kcell',
 );
-/* EOF */

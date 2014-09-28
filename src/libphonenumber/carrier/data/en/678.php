@@ -23,4 +23,3 @@ return array (
   67875 => 'SMILE',
   67876 => 'SMILE',
 );
-/* EOF */

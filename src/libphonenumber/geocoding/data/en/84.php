@@ -69,4 +69,3 @@ return array (
   8479 => 'Soc Trang province',
   848 => 'Ho Chi Minh City',
 );
-/* EOF */

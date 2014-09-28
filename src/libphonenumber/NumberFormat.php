@@ -232,5 +232,3 @@ class NumberFormat
         }
     }
 }
-
-/* EOF */

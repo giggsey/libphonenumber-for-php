@@ -56,4 +56,3 @@ class AlternateFormatsCountryCodeSet {
 );
 
 }
-/* EOF */

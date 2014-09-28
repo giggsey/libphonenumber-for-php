@@ -926,5 +926,3 @@ class PhoneMetadata
     }
 
 }
-
-/* EOF */

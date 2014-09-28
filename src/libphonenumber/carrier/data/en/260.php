@@ -9,4 +9,3 @@ return array (
   26096 => 'MTN',
   26097 => 'Airtel',
 );
-/* EOF */

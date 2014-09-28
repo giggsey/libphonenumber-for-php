@@ -85,4 +85,3 @@ return array (
   1908995 => 'Milford, NJ',
   1908996 => 'Frenchtown, NJ',
 );
-/* EOF */

@@ -9,4 +9,3 @@ return array (
   68575 => 'Bluesky',
   68577 => 'Digicel',
 );
-/* EOF */

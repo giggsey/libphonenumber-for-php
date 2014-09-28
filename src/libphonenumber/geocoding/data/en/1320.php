@@ -84,4 +84,3 @@ return array (
   1320974 => 'Atwater, MN',
   1320983 => 'Milaca, MN',
 );
-/* EOF */

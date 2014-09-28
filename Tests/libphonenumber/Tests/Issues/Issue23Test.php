@@ -37,5 +37,3 @@ class Issue23Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Tokelau', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }
-
-/* EOF */

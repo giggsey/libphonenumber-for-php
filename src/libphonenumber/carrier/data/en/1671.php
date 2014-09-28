@@ -13,4 +13,3 @@ return array (
   1671888 => 'Choice Phone',
   1671898 => 'Choice Phone',
 );
-/* EOF */

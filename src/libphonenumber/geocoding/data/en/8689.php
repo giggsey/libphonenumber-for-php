@@ -14,4 +14,3 @@ return array (
   86897 => 'GeEr, Tibet',
   86898 => 'Haikou, Hainan',
 );
-/* EOF */

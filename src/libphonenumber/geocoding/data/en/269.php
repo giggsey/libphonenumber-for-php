@@ -22,4 +22,3 @@ return array (
   269778 => 'Mitsamiouli',
   269779 => 'Foumbouni',
 );
-/* EOF */

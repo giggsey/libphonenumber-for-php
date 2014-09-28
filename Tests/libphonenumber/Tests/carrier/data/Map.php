@@ -16,4 +16,3 @@ return array (
     0 => 44,
   ),
 );
-/* EOF */

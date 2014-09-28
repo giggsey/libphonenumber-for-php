@@ -11,4 +11,3 @@ return array (
   23188 => 'Lonestar Cell',
   231994 => 'Atlantic Wireless',
 );
-/* EOF */

@@ -35,4 +35,3 @@ return array (
   1709896 => 'Happy Valley-Goose Bay, NL',
   1709944 => 'Labrador City, NL',
 );
-/* EOF */

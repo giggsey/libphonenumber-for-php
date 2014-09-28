@@ -102,4 +102,3 @@ return array (
   1479996 => 'Greenwood, AR',
   1479997 => 'Mulberry, AR',
 );
-/* EOF */

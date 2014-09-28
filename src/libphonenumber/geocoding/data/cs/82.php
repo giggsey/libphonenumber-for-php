@@ -22,4 +22,3 @@ return array (
   8263 => 'Severní Čolla',
   8264 => 'Čedžu',
 );
-/* EOF */

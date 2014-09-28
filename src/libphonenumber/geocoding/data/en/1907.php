@@ -115,4 +115,3 @@ return array (
   1907966 => 'Sitka, AK',
   1907983 => 'Skagway, AK',
 );
-/* EOF */

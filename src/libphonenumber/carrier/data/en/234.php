@@ -237,4 +237,3 @@ return array (
   234980 => 'Starcomms',
   234987 => 'Starcomms',
 );
-/* EOF */

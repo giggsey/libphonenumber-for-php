@@ -7,4 +7,3 @@
 return array (
   8623 => 'Chongqing',
 );
-/* EOF */

@@ -1034,4 +1034,3 @@ return array (
   264677166 => 'Kamanjab/Otavi',
   264677173 => 'Otjiwarongo',
 );
-/* EOF */

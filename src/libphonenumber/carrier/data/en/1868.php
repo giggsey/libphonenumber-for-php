@@ -15,4 +15,3 @@ return array (
   18686 => 'bmobile',
   18687 => 'bmobile',
 );
-/* EOF */

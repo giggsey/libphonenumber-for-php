@@ -10,4 +10,3 @@ return array (
   96896 => 'Nawras',
   96897 => 'Nawras',
 );
-/* EOF */

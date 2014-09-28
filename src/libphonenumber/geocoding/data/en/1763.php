@@ -38,4 +38,3 @@ return array (
   1763898 => 'Maple Grove, MN',
   1763972 => 'Delano, MN',
 );
-/* EOF */

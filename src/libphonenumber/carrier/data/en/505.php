@@ -91,4 +91,3 @@ return array (
   505898 => 'Movistar',
   505899 => 'Movistar',
 );
-/* EOF */

@@ -3326,5 +3326,3 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::BS));
     }
 }
-
-/* EOF */

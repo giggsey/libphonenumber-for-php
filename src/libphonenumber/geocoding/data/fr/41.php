@@ -12,4 +12,3 @@ return array (
   4171 => 'St. Gall',
   4181 => 'Coire',
 );
-/* EOF */

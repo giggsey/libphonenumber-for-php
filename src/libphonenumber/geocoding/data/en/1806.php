@@ -117,4 +117,3 @@ return array (
   1806983 => 'Floydada, TX',
   1806995 => 'Tulia, TX',
 );
-/* EOF */

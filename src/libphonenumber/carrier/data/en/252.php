@@ -14,4 +14,3 @@ return array (
   25279 => 'Somtel',
   252907 => 'Golis Telecom',
 );
-/* EOF */

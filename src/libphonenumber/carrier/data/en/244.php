@@ -11,4 +11,3 @@ return array (
   24494 => 'UNITEL',
   24499 => 'Movicel',
 );
-/* EOF */

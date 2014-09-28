@@ -287,4 +287,3 @@ return array (
   1519978 => 'Windsor, ON',
   1519986 => 'Markdale, ON',
 );
-/* EOF */

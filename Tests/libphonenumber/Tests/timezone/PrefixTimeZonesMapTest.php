@@ -122,5 +122,3 @@ class PrefixTimeZonesMapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(self::IRKUTSK_TZ), self::$prefixTimeZonesMapForRU->lookupTimeZonesForNumber($number));
     }
 }
-
-/* EOF */

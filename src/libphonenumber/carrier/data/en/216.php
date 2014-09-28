@@ -13,4 +13,3 @@ return array (
   2165 => 'Orange',
   2169 => 'Tunisie Telecom',
 );
-/* EOF */

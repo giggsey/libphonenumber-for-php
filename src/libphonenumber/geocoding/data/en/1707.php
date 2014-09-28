@@ -188,4 +188,3 @@ return array (
   1707996 => 'Sonoma, CA',
   1707998 => 'Clearlake Oaks, CA',
 );
-/* EOF */

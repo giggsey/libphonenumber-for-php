@@ -83,4 +83,3 @@ return array (
   1435946 => 'Garden City, UT',
   1435986 => 'St. George, UT',
 );
-/* EOF */

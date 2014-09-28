@@ -15,4 +15,3 @@ return array (
   38977 => 'vip',
   38978 => 'vip',
 );
-/* EOF */

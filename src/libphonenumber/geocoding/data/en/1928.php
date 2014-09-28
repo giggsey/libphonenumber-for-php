@@ -107,4 +107,3 @@ return array (
   1928899 => 'Prescott, AZ',
   1928927 => 'Quartzsite, AZ',
 );
-/* EOF */

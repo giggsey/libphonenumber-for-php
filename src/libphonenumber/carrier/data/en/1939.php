@@ -65,4 +65,3 @@ return array (
   1939940 => 'CENTENNIAL',
   1939969 => 'CENTENNIAL',
 );
-/* EOF */

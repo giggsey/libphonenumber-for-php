@@ -64,4 +64,3 @@ return array (
   1432837 => 'Alpine, TX',
   1432943 => 'Monahans, TX',
 );
-/* EOF */

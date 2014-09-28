@@ -24,4 +24,3 @@ return array (
   37278 => 'Võru',
   37279 => 'Põlva',
 );
-/* EOF */

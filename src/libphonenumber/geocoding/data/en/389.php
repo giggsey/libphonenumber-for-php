@@ -18,4 +18,3 @@ return array (
   38947 => 'Bitola/Demir Hisar/Resen',
   38948 => 'Prilep/Krusevo',
 );
-/* EOF */

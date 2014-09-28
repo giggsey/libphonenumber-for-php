@@ -93,4 +93,3 @@ return array (
   1506876 => 'Saint-Louis de Kent, NB',
   1506992 => 'Clair, NB',
 );
-/* EOF */

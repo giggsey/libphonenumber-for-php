@@ -12,4 +12,3 @@ return array (
   1980487 => 'Shelby, NC',
   1980819 => 'Charlotte, NC',
 );
-/* EOF */

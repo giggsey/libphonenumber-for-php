@@ -26,4 +26,3 @@ return array (
   22678 => 'Telecel Faso',
   22679 => 'Telecel Faso',
 );
-/* EOF */

@@ -10,4 +10,3 @@ return array (
   3248 => 'BASE',
   3249 => 'Mobistar',
 );
-/* EOF */

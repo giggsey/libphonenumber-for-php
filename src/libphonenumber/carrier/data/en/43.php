@@ -18,4 +18,3 @@ return array (
   43688 => 'Orange AT',
   43699 => 'Orange AT',
 );
-/* EOF */

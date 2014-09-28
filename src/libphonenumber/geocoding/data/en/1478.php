@@ -77,4 +77,3 @@ return array (
   1478992 => 'Forsyth, GA',
   1478994 => 'Forsyth, GA',
 );
-/* EOF */

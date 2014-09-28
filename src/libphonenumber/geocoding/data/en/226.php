@@ -36,4 +36,3 @@ return array (
   2265048 => 'Ouagadougou',
   2265049 => 'Ouagadougou',
 );
-/* EOF */

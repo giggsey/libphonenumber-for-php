@@ -3,7 +3,7 @@
 namespace libphonenumber;
 
 
-interface MetadataLoader
+interface MetadataLoaderInterface
 {
     /**
      * @param string $metadataFileName File name (including path) of metadata to load.
@@ -11,5 +11,3 @@ interface MetadataLoader
      */
     public function loadMetadata($metadataFileName);
 }
-
-/* EOF */

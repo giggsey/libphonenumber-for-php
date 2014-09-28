@@ -23,4 +23,3 @@ return array (
   1867979 => 'Iqaluit, NU',
   1867993 => 'Dawson, YT',
 );
-/* EOF */

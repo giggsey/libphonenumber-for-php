@@ -18,4 +18,3 @@ return array (
   90549 => 'Turkcell',
   9055 => 'Aycell',
 );
-/* EOF */

@@ -99,4 +99,3 @@ return array (
   1626969 => 'Azusa, CA',
   1626974 => 'Covina, CA',
 );
-/* EOF */

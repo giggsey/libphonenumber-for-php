@@ -121,4 +121,3 @@ return array (
   437954 => 'Sankt Georgen am Walde',
   437956 => 'Unterweißenbach',
 );
-/* EOF */

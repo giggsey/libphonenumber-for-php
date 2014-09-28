@@ -110,4 +110,3 @@ return array (
   1269982 => 'St. Joseph, MI',
   1269983 => 'St. Joseph, MI',
 );
-/* EOF */

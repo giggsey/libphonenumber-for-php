@@ -42,4 +42,3 @@ return array (
   1586978 => 'Sterling Heights, MI',
   1586979 => 'Sterling Heights, MI',
 );
-/* EOF */

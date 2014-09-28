@@ -138,4 +138,3 @@ return array (
   1412963 => 'Pittsburgh, PA',
   1412967 => 'Pittsburgh, PA',
 );
-/* EOF */

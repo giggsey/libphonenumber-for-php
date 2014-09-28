@@ -187,4 +187,3 @@ return array (
   1843971 => 'Mount Pleasant, SC',
   1843986 => 'Beaufort, SC',
 );
-/* EOF */

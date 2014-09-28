@@ -246,4 +246,3 @@ return array (
   302895 => 'Ano Viannos',
   302897 => 'Limenas Chersonisou',
 );
-/* EOF */

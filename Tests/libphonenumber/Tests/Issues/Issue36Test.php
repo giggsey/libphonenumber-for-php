@@ -35,5 +35,3 @@ class Issue36Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Jersey", $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }
-
-/* EOF */

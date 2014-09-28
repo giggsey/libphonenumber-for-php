@@ -321,4 +321,3 @@ return array (
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );
-/* EOF */

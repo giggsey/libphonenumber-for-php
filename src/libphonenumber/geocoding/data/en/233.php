@@ -73,4 +73,3 @@ return array (
   2333920 => 'Wa',
   233397 => 'Upper West Region',
 );
-/* EOF */

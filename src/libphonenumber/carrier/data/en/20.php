@@ -9,4 +9,3 @@ return array (
   2011 => 'Etisalat',
   2012 => 'Mobinil',
 );
-/* EOF */

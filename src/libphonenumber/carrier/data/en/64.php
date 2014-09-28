@@ -14,4 +14,3 @@ return array (
   6428 => 'Vodafone',
   6429 => 'TelstraClear',
 );
-/* EOF */

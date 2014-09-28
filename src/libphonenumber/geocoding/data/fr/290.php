@@ -12,4 +12,3 @@ return array (
   2907 => 'Sainte-Hélène',
   2908 => 'Tristan da Cunha',
 );
-/* EOF */

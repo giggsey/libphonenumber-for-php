@@ -18,4 +18,3 @@ return array (
   37498 => 'VivaCell-MTS',
   37499 => 'Beeline',
 );
-/* EOF */

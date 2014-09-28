@@ -7,4 +7,3 @@
 return array (
   25073 => 'Airtel',
 );
-/* EOF */

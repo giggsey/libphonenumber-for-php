@@ -12,4 +12,3 @@ return array (
   4076 => 'Cosmote',
   4077 => 'Digi.Mobil',
 );
-/* EOF */

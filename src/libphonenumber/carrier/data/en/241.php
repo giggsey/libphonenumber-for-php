@@ -27,4 +27,3 @@ return array (
   24195 => 'Libertis',
   24197 => 'Libertis',
 );
-/* EOF */

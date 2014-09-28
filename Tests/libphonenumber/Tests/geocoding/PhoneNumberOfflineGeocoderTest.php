@@ -195,5 +195,3 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, "en"));
     }
 }
-
-/* EOF */

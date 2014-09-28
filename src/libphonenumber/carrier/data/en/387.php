@@ -12,4 +12,3 @@ return array (
   38765 => 'm:tel',
   38766 => 'm:tel',
 );
-/* EOF */

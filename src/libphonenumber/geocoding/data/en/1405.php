@@ -187,4 +187,3 @@ return array (
   1405964 => 'McLoud, OK',
   1405969 => 'Crescent, OK',
 );
-/* EOF */

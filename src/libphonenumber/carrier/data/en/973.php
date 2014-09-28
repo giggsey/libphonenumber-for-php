@@ -19,4 +19,3 @@ return array (
   973666 => 'zain BH',
   973669 => 'zain BH',
 );
-/* EOF */

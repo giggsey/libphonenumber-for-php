@@ -35,5 +35,3 @@ class Issue17Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals("Isle of Man", $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }
-
-/* EOF */

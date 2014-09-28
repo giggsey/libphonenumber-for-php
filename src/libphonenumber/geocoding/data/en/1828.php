@@ -147,4 +147,3 @@ return array (
   1828898 => 'Banner Elk, NC',
   1828926 => 'Maggie Valley, NC',
 );
-/* EOF */

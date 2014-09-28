@@ -7,4 +7,3 @@
 return array (
   3763 => 'Mobiland',
 );
-/* EOF */

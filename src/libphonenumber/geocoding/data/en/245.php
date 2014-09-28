@@ -26,4 +26,3 @@ return array (
   245394 => 'Bula',
   245396 => 'Ingoré',
 );
-/* EOF */

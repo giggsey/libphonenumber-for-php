@@ -22,4 +22,3 @@ return array (
   1786621 => 'Miami, FL',
   1786662 => 'South Miami, FL',
 );
-/* EOF */

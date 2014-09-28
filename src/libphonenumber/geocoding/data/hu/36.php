@@ -33,4 +33,3 @@ return array (
   3695 => 'Sárvár',
   3696 => 'Győr',
 );
-/* EOF */

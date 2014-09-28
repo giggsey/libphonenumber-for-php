@@ -108,4 +108,3 @@ return array (
   1413863 => 'Turners Falls, MA',
   1413967 => 'Ware, MA',
 );
-/* EOF */

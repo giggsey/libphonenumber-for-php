@@ -10,4 +10,3 @@ return array (
   23675 => 'CTP',
   23677 => 'Nationlink',
 );
-/* EOF */

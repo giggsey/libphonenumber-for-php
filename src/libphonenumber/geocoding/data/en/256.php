@@ -19,4 +19,3 @@ return array (
   256485 => 'Mbarara',
   256486 => 'Kabale/Rukungiri/Kisoro',
 );
-/* EOF */

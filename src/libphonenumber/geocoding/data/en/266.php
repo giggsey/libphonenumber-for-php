@@ -7,4 +7,3 @@
 return array (
   26622 => 'Maseru',
 );
-/* EOF */

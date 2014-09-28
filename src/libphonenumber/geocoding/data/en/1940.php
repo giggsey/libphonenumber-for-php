@@ -76,4 +76,3 @@ return array (
   1940898 => 'Denton, TX',
   1940937 => 'Childress, TX',
 );
-/* EOF */

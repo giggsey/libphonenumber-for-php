@@ -44,4 +44,3 @@ return array (
   238284 => 'São Jorge, Fogo',
   238285 => 'Nova Sintra, Brava',
 );
-/* EOF */

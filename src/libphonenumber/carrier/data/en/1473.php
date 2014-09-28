@@ -13,4 +13,3 @@ return array (
   147353 => 'AWS Grenada',
   1473901 => 'Affordable Island Communications',
 );
-/* EOF */

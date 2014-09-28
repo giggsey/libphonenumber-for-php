@@ -19,4 +19,3 @@ return array (
   3569897 => 'Vodafone',
   35699 => 'Vodafone',
 );
-/* EOF */

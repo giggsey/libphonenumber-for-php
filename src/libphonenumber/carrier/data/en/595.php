@@ -11,4 +11,3 @@ return array (
   59598 => 'Personal',
   59599 => 'Personal',
 );
-/* EOF */

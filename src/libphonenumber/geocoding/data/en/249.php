@@ -17,4 +17,3 @@ return array (
   24971 => 'Kosti',
   24981 => 'Al-Ubayyid',
 );
-/* EOF */

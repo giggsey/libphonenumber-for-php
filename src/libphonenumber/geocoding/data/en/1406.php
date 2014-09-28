@@ -186,4 +186,3 @@ return array (
   1406994 => 'Bozeman, MT',
   1406995 => 'Big Sky, MT',
 );
-/* EOF */

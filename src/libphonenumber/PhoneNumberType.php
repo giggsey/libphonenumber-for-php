@@ -45,5 +45,3 @@ class PhoneNumberType
     // Standard Rate
     const STANDARD_RATE = 30;
 }
-
-/* EOF */

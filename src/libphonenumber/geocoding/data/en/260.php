@@ -14,4 +14,3 @@ return array (
   260217 => 'Solwezi/Western Province',
   260218 => 'Mongu/North-Western Province',
 );
-/* EOF */

@@ -17,4 +17,3 @@ return array (
   2572240 => 'Central east zone',
   2572250 => 'South zone',
 );
-/* EOF */

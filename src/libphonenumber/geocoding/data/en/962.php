@@ -19,4 +19,3 @@ return array (
   962533 => 'Balqa',
   9626 => 'Amman',
 );
-/* EOF */

@@ -97,4 +97,3 @@ return array (
   1251989 => 'Summerdale, AL',
   1251990 => 'Fairhope, AL',
 );
-/* EOF */

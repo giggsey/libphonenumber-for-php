@@ -114,4 +114,3 @@ return array (
   1859986 => 'Berea, KY',
   1859987 => 'Paris, KY',
 );
-/* EOF */

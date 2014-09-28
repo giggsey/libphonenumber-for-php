@@ -1969,4 +1969,3 @@ return array (
   996 => 'Asia/Bishkek',
   998 => 'Asia/Tashkent',
 );
-/* EOF */

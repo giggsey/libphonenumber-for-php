@@ -308,5 +308,3 @@ class PhoneNumber implements \Serializable
         $this->setPreferredDomesticCarrierCode($data[7]);
     }
 }
-
-/* EOF */

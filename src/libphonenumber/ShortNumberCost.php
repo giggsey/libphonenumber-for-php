@@ -13,5 +13,3 @@ class ShortNumberCost
     const STANDARD_RATE = 30;
     const UNKNOWN_COST = 10;
 }
-
-/* EOF */

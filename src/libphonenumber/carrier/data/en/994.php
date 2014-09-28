@@ -12,4 +12,3 @@ return array (
   99470 => 'Nar Mobile',
   99477 => 'Nar Mobile',
 );
-/* EOF */

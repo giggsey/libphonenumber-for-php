@@ -28,4 +28,3 @@ return array (
   2612094 => 'Toliary',
   2612095 => 'Morondava',
 );
-/* EOF */

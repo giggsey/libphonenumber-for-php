@@ -9,4 +9,3 @@ return array (
   4473 => 'British carrier',
   44760 => 'British pager',
 );
-/* EOF */

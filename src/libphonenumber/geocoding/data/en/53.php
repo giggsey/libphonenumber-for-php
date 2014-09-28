@@ -21,4 +21,3 @@ return array (
   5348 => 'Pinar del Río Province',
   537 => 'Havana City',
 );
-/* EOF */

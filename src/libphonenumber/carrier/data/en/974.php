@@ -10,4 +10,3 @@ return array (
   97466 => 'ooredoo',
   97477 => 'Vodafone',
 );
-/* EOF */

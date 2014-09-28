@@ -10,4 +10,3 @@ return array (
   96773 => 'Spacetel Yemen',
   96777 => 'SabaFon',
 );
-/* EOF */

@@ -186,4 +186,3 @@ return array (
   1970963 => 'Carbondale, CO',
   1970984 => 'New Castle, CO',
 );
-/* EOF */

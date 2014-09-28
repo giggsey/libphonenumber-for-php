@@ -14,4 +14,3 @@ return array (
   3170 => 'Den Haag',
   3174 => 'Hengelo',
 );
-/* EOF */

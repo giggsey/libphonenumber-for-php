@@ -194,4 +194,3 @@ return array (
   1208962 => 'Cottonwood, ID',
   1208983 => 'Grangeville, ID',
 );
-/* EOF */

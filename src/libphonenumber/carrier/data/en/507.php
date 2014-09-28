@@ -73,4 +73,3 @@ return array (
   507872 => 'Cable & Wireless',
   507873 => 'Cable & Wireless',
 );
-/* EOF */

@@ -198,4 +198,3 @@ return array (
   1918967 => 'Stigler, OK',
   1918968 => 'Stroud, OK',
 );
-/* EOF */

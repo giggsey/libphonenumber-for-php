@@ -166,5 +166,3 @@ class PhoneNumberDesc
         return $this;
     }
 }
-
-/* EOF */

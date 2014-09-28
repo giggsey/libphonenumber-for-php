@@ -1358,4 +1358,3 @@ return array (
   819979 => 'Tokunoshima, Kagoshima',
   81998 => 'Kagoshima, Kagoshima',
 );
-/* EOF */

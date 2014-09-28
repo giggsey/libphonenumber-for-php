@@ -7,4 +7,3 @@
 return array (
   1669 => 'California',
 );
-/* EOF */

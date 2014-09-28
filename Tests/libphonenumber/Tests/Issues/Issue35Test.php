@@ -49,5 +49,3 @@ class Issue35Test extends \PHPUnit_Framework_TestCase
         $this->assertTrue($phoneObject2->equals($phoneNumber));
     }
 }
-
-/* EOF */

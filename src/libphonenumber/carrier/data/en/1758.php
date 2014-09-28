@@ -20,4 +20,3 @@ return array (
   1758584 => 'Cable & Wireless',
   17587 => 'Digicel',
 );
-/* EOF */

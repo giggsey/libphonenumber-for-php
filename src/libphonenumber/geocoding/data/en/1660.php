@@ -60,4 +60,3 @@ return array (
   1660886 => 'Marshall, MO',
   1660947 => 'Unionville, MO',
 );
-/* EOF */

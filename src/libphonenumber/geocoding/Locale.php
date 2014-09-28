@@ -12,7 +12,7 @@ class Locale extends \Locale
      * @param string $language_code ISO 639-1-alpha 2 language code
      * @returns string a locale, formatted like en_US, or null if not found
      */
-    public static function country_code_to_locale($country_code, $language_code = '')
+    public static function countryCodeToLocale($country_code, $language_code = '')
     {
         $locale = 'en-' . $country_code;
         $locale_region = locale_get_region($locale);
@@ -32,5 +32,3 @@ class Locale extends \Locale
     }
 
 }
-
-/* EOF */

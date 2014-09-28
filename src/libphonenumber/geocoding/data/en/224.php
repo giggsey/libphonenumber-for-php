@@ -27,4 +27,3 @@ return array (
   2243097 => 'Guéckédou',
   2243098 => 'Kissidougou',
 );
-/* EOF */

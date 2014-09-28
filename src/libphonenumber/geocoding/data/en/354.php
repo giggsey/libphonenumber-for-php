@@ -12,4 +12,3 @@ return array (
   354561 => 'Reykjavík/Vesturbær/Miðbærinn',
   354562 => 'Reykjavík/Vesturbær/Miðbærinn',
 );
-/* EOF */

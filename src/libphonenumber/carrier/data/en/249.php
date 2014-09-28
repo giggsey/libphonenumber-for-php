@@ -11,4 +11,3 @@ return array (
   24996 => 'Zain',
   24999 => 'MTN',
 );
-/* EOF */

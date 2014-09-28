@@ -1026,4 +1026,3 @@ return array (
   437955 => 'Königswiesen',
   437956 => 'Unterweissenbach',
 );
-/* EOF */

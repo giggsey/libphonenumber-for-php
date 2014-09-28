@@ -205,4 +205,3 @@ return array (
   1760967 => 'Oceanside, CA',
   1760995 => 'Hesperia, CA',
 );
-/* EOF */

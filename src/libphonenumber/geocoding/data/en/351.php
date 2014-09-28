@@ -57,4 +57,3 @@ return array (
   351295 => 'Angra do Heroísmo',
   351296 => 'Ponta Delgada',
 );
-/* EOF */

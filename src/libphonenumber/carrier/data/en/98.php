@@ -19,4 +19,3 @@ return array (
   98938 => 'Irancell',
   98939 => 'Irancell',
 );
-/* EOF */

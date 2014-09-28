@@ -51,4 +51,3 @@ return array (
   230597 => 'Emtel',
   230598 => 'Emtel',
 );
-/* EOF */

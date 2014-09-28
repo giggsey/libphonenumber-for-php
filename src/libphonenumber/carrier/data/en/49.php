@@ -33,4 +33,3 @@ return array (
   49178 => 'Eplus',
   49179 => 'O2',
 );
-/* EOF */

@@ -155,4 +155,3 @@ return array (
   1573964 => 'Lake Ozark, MO',
   1573996 => 'Doniphan, MO',
 );
-/* EOF */

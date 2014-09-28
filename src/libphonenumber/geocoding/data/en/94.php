@@ -35,4 +35,3 @@ return array (
   9481 => 'Kandy',
   9491 => 'Galle',
 );
-/* EOF */

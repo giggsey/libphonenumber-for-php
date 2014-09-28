@@ -234,4 +234,3 @@ return array (
   1403986 => 'Red Deer, AB',
   1403995 => 'Okotoks, AB',
 );
-/* EOF */

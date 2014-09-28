@@ -26,4 +26,3 @@ return array (
   99598 => 'MagtiCom',
   99599 => 'MagtiCom',
 );
-/* EOF */

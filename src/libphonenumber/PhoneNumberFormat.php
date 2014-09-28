@@ -21,5 +21,3 @@ class PhoneNumberFormat
     const NATIONAL = 2;
     const RFC3966 = 3;
 }
-
-/* EOF */

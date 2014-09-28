@@ -37,4 +37,3 @@ return array (
   66909 => 'True Move',
   6691 => 'DTAC',
 );
-/* EOF */

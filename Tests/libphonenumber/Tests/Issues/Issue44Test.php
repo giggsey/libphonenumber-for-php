@@ -40,5 +40,3 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
         $this->assertLessThan(1000000, $memoryUsed, "Memory usage should be below 1MB");
     }
 }
-
-/* EOF */

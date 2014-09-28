@@ -123,4 +123,3 @@ return array (
   1417962 => 'Cabool, MO',
   1417967 => 'Houston, MO',
 );
-/* EOF */

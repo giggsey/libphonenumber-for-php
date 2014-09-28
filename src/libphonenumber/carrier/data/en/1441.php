@@ -12,4 +12,3 @@ return array (
   1441599 => 'Digicel Bermuda',
   14417 => 'Cellular One',
 );
-/* EOF */

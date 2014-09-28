@@ -5208,4 +5208,3 @@ return array (
   499977 => 'Arnschwang',
   499978 => 'Schönthal Oberpfalz',
 );
-/* EOF */

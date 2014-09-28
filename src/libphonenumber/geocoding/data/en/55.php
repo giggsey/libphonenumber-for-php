@@ -74,4 +74,3 @@ return array (
   5598 => 'São Luís - MA',
   5599 => 'Imperatriz - MA',
 );
-/* EOF */

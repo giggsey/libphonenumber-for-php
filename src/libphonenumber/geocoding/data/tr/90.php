@@ -80,4 +80,3 @@ return array (
   90486 => 'Şırnak',
   90487 => 'Şırnak',
 );
-/* EOF */

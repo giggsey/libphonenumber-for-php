@@ -42,4 +42,3 @@ return array (
   370698 => 'Omnitel',
   370699 => 'BITĖ',
 );
-/* EOF */

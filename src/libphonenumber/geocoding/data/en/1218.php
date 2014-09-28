@@ -126,4 +126,3 @@ return array (
   1218998 => 'Fergus Falls, MN',
   1218999 => 'Grand Rapids, MN',
 );
-/* EOF */

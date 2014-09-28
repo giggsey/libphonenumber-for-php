@@ -107,4 +107,3 @@ return array (
   1319986 => 'Mount Pleasant, IA',
   1319988 => 'Hudson, IA',
 );
-/* EOF */

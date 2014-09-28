@@ -16,4 +16,3 @@ return array (
   25678 => 'MTN',
   25679 => 'Orange',
 );
-/* EOF */

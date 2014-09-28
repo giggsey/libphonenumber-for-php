@@ -219,4 +219,3 @@ return array (
   35297 => 'Huldingen',
   35299 => 'Ulflingen',
 );
-/* EOF */

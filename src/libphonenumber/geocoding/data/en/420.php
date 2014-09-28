@@ -26,4 +26,3 @@ return array (
   42058 => 'Olomouc Region',
   42059 => 'Moravian-Silesian Region',
 );
-/* EOF */

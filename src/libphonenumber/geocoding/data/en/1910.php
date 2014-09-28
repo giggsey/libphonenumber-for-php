@@ -173,4 +173,3 @@ return array (
   1910974 => 'Candor, NC',
   1910997 => 'Rockingham, NC',
 );
-/* EOF */

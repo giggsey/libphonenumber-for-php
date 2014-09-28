@@ -14,4 +14,3 @@ return array (
   99670 => 'Nur Telecom',
   99677 => 'Sky mobile',
 );
-/* EOF */

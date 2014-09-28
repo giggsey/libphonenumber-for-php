@@ -47,5 +47,3 @@ class NumberParseException extends \Exception
     }
 
 }
-
-/* EOF */

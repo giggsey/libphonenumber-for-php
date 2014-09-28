@@ -104,4 +104,3 @@ return array (
   1231947 => 'Traverse City, MI',
   1231995 => 'Traverse City, MI',
 );
-/* EOF */

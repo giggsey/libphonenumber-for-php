@@ -64,4 +64,3 @@ return array (
   23489 => 'Yenegoa',
   2349 => 'Abuja',
 );
-/* EOF */

@@ -17,5 +17,3 @@ class UKTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array("Europe/London"), $timeZone->getTimeZonesForNumber($number));
     }
 }
-
-/* EOF */

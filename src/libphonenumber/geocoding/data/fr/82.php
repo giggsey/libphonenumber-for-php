@@ -15,4 +15,3 @@ return array (
   8263 => 'Jeonrabugdo',
   8264 => 'Jejudo',
 );
-/* EOF */

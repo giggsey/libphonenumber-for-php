@@ -43,4 +43,3 @@ return array (
   59177 => 'Tigo',
   59179 => 'Nuevatel',
 );
-/* EOF */

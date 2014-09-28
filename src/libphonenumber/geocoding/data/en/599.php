@@ -12,4 +12,3 @@ return array (
   599718 => 'Bonaire',
   599750 => 'Bonaire',
 );
-/* EOF */

@@ -526,4 +526,3 @@ return array (
   5699998 => 'Entel',
   5699999 => 'Entel',
 );
-/* EOF */

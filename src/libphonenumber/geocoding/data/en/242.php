@@ -13,4 +13,3 @@ return array (
   2422228 => 'Brazzaville',
   2422229 => 'Pointe-Noire',
 );
-/* EOF */

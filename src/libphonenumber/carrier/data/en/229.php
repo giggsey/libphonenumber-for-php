@@ -18,4 +18,3 @@ return array (
   22998 => 'Glo',
   22999 => 'Glo',
 );
-/* EOF */

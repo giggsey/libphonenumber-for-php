@@ -10,4 +10,3 @@ return array (
   4178 => 'Orange',
   4179 => 'Swisscom',
 );
-/* EOF */

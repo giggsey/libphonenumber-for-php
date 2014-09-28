@@ -9,4 +9,3 @@ return array (
   99366 => 'MTS (BARASH Communication)',
   99367 => 'MTS (BARASH Communication)',
 );
-/* EOF */

@@ -62,5 +62,3 @@ class PhonePrefixMap
     }
 
 }
-
-/* EOF */

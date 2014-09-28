@@ -26,4 +26,3 @@ return array (
   85596 => 'Smart',
   85598 => 'Smart',
 );
-/* EOF */

@@ -10,4 +10,3 @@ return array (
   35989 => 'GLOBUL',
   35998 => 'GLOBUL',
 );
-/* EOF */

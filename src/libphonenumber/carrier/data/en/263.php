@@ -9,4 +9,3 @@ return array (
   26373 => 'Telecel',
   26377 => 'Econet',
 );
-/* EOF */

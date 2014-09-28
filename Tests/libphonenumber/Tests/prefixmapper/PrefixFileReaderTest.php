@@ -77,5 +77,3 @@ class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("", $this->reader->getDescriptionForNumber(self::$SE_NUMBER, "en", "", ""));
     }
 }
-
-/* EOF */

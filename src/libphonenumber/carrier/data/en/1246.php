@@ -17,4 +17,3 @@ return array (
   124645 => 'Sunbeach Communications',
   124682 => 'Digicel',
 );
-/* EOF */

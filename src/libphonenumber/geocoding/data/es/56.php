@@ -10,4 +10,3 @@ return array (
   5661 => 'Punta Arenas, Magallanes',
   5667 => 'Coihaique, Aysén',
 );
-/* EOF */

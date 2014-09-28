@@ -47,4 +47,3 @@ return array (
   3289 => 'Genk',
   329 => 'Ghent',
 );
-/* EOF */

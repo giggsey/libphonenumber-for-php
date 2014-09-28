@@ -24,4 +24,3 @@ return array (
   1767616 => 'Digicel',
   1767617 => 'Digicel',
 );
-/* EOF */

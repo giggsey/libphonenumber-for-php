@@ -285,4 +285,3 @@ return array (
   1972988 => 'Grand Prairie, TX',
   1972991 => 'Dallas, TX',
 );
-/* EOF */

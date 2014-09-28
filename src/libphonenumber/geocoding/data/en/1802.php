@@ -86,4 +86,3 @@ return array (
   1802933 => 'Enosburg Falls, VT',
   1802985 => 'Shelburne, VT',
 );
-/* EOF */

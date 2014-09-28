@@ -18,4 +18,3 @@ return array (
   37533 => 'МТС',
   37544 => 'Velcom',
 );
-/* EOF */

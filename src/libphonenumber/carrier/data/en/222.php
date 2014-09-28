@@ -9,4 +9,3 @@ return array (
   2223 => 'Mattel',
   2224 => 'Mauritel',
 );
-/* EOF */

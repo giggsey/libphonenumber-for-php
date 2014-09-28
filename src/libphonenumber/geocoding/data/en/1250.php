@@ -232,4 +232,3 @@ return array (
   1250996 => 'Fort St James, BC',
   1250997 => 'Mackenzie, BC',
 );
-/* EOF */

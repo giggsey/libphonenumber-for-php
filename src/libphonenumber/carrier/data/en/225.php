@@ -37,4 +37,3 @@ return array (
   22569 => 'Aircom',
   22577 => 'Orange',
 );
-/* EOF */

@@ -34,4 +34,3 @@ return array (
   35486 => 'Síminn',
   35489 => 'Síminn',
 );
-/* EOF */

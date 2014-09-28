@@ -67,4 +67,3 @@ return array (
   1563928 => 'Edgewood, IA',
   1563933 => 'Strawberry Point, IA',
 );
-/* EOF */

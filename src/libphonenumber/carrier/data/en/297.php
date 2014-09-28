@@ -21,4 +21,3 @@ return array (
   297997 => 'SETAR',
   297998 => 'SETAR',
 );
-/* EOF */

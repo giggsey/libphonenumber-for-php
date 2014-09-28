@@ -37,4 +37,3 @@ return array (
   4777 => 'Troms',
   4778 => 'Finnmark',
 );
-/* EOF */

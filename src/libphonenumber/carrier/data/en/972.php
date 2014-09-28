@@ -21,4 +21,3 @@ return array (
   97258 => 'Golan Telecom',
   97259 => 'Jawwal',
 );
-/* EOF */

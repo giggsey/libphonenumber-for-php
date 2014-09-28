@@ -17,4 +17,3 @@ return array (
   4171 => 'San Gallo',
   4181 => 'Coira',
 );
-/* EOF */

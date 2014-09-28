@@ -10,4 +10,3 @@ return array (
   25884 => 'Vodacom',
   25887 => 'Movitel',
 );
-/* EOF */

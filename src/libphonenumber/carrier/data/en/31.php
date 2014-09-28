@@ -57,4 +57,3 @@ return array (
   31686 => 'Lycamobile',
   31687 => 'Lycamobile',
 );
-/* EOF */

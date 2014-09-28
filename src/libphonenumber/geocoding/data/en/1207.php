@@ -190,4 +190,3 @@ return array (
   1207992 => 'Bangor, ME',
   1207998 => 'Poland, ME',
 );
-/* EOF */

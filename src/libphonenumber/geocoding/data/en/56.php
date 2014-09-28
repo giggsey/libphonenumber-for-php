@@ -30,4 +30,3 @@ return array (
   5673 => 'Linares, Maule',
   5675 => 'Curicó, Maule',
 );
-/* EOF */

@@ -218,4 +218,3 @@ return array (
   35297 => 'Huldange',
   35299 => 'Troisvierges',
 );
-/* EOF */

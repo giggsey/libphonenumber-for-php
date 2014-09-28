@@ -96,4 +96,3 @@ return array (
   1254965 => 'Stephenville, TX',
   1254968 => 'Stephenville, TX',
 );
-/* EOF */

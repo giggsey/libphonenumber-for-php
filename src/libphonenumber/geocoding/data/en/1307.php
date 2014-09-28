@@ -87,4 +87,3 @@ return array (
   1307885 => 'Afton, WY',
   1307886 => 'Afton, WY',
 );
-/* EOF */

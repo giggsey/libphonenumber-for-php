@@ -13,4 +13,3 @@ return array (
   62736 => 'Kota Bengkulu',
   62741 => 'Kota Jambi',
 );
-/* EOF */

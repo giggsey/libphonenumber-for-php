@@ -14,4 +14,3 @@ return array (
   67388 => 'DSTCom',
   67389 => 'DSTCom',
 );
-/* EOF */

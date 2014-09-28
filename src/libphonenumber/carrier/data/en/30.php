@@ -12,4 +12,3 @@ return array (
   30697 => 'Cosmote',
   30698 => 'Cosmote',
 );
-/* EOF */

@@ -25,4 +25,3 @@ return array (
   99894 => 'Ucell',
   99897 => 'MTS',
 );
-/* EOF */

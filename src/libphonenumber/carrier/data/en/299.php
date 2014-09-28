@@ -9,4 +9,3 @@ return array (
   2994 => 'TELE Greenland A/S',
   2995 => 'TELE Greenland A/S',
 );
-/* EOF */

@@ -142,4 +142,3 @@ return array (
   1819985 => 'Thurso, QC',
   1819986 => 'Gatineau, QC',
 );
-/* EOF */

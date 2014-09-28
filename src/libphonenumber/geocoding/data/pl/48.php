@@ -21,4 +21,3 @@ return array (
   4886 => 'Łomża',
   4887 => 'Suwałki',
 );
-/* EOF */

@@ -11,4 +11,3 @@ return array (
   164934 => 'DIGICEL',
   164943 => 'Islandcom',
 );
-/* EOF */

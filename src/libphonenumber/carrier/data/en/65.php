@@ -395,4 +395,3 @@ return array (
   659889 => 'M1',
   65989 => 'SingTel',
 );
-/* EOF */

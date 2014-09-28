@@ -163,4 +163,3 @@ return array (
   1619934 => 'Chula Vista, CA',
   1619955 => 'San Diego, CA',
 );
-/* EOF */

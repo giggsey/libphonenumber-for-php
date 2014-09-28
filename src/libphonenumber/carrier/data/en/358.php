@@ -36,4 +36,3 @@ return array (
   3584944 => 'DNA',
   35850 => 'Elisa',
 );
-/* EOF */

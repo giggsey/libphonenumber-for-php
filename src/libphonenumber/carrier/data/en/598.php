@@ -17,4 +17,3 @@ return array (
   59898 => 'Antel',
   59899 => 'Antel',
 );
-/* EOF */

@@ -42,4 +42,3 @@ return array (
   2292382 => 'Natitingou',
   2292383 => 'Tanguiéta',
 );
-/* EOF */

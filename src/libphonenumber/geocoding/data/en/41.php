@@ -26,4 +26,3 @@ return array (
   4181 => 'Chur',
   4191 => 'Bellinzona',
 );
-/* EOF */

@@ -19,4 +19,3 @@ return array (
   21343 => 'Tlemcen',
   21349 => 'Adrar/Béchar/Tindouf',
 );
-/* EOF */

@@ -55,4 +55,3 @@ return array (
   4894 => 'Koszalin',
   4895 => 'Gorzów Wielkopolski',
 );
-/* EOF */

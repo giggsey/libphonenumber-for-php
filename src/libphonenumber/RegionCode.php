@@ -61,5 +61,3 @@ class RegionCode
     // Official code for the unknown region.
     const ZZ = "ZZ";
 }
-
-/* EOF */

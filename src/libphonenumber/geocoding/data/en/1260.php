@@ -94,4 +94,3 @@ return array (
   1260969 => 'Fort Wayne, IN',
   1260982 => 'North Manchester, IN',
 );
-/* EOF */

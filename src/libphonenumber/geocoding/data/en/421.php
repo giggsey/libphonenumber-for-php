@@ -31,4 +31,3 @@ return array (
   42157 => 'Humenné',
   42158 => 'Rožňava',
 );
-/* EOF */

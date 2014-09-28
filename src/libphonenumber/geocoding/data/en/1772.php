@@ -85,4 +85,3 @@ return array (
   1772882 => 'Fort Pierce, FL',
   1772978 => 'Vero Beach, FL',
 );
-/* EOF */

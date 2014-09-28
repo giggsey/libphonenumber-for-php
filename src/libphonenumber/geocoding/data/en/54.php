@@ -220,4 +220,3 @@ return array (
   54387 => 'Salta, Capital',
   54388 => 'San Salvador de Jujuy, Doctor Manuel Belgrano',
 );
-/* EOF */

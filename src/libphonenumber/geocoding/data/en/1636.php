@@ -79,4 +79,3 @@ return array (
   1636978 => 'O\'Fallon, MO',
   1636980 => 'O\'Fallon, MO',
 );
-/* EOF */

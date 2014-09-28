@@ -31,4 +31,3 @@ return array (
   29998 => 'Tasiilaq',
   29999 => 'Ittoqqortoormiit',
 );
-/* EOF */

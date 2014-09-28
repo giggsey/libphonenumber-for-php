@@ -13,4 +13,3 @@ return array (
   1684733 => 'ASTCA',
   1684770 => 'ASTCA',
 );
-/* EOF */

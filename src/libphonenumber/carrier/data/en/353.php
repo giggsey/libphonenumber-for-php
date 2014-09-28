@@ -12,4 +12,3 @@ return array (
   35388 => 'eMobile',
   35389 => 'Tesco Mobile',
 );
-/* EOF */

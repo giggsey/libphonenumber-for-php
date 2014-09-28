@@ -56,4 +56,3 @@ return array (
   499636 => 'Plößberg',
   499656 => 'Moosbach bei Vohenstrauß',
 );
-/* EOF */

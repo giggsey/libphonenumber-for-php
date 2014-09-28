@@ -343,4 +343,3 @@ return array (
   7878 => 'Karachayevo-Cherkessian Republic',
   7879 => 'Mineranye Vody',
 );
-/* EOF */

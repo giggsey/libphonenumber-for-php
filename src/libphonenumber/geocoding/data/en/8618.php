@@ -41856,4 +41856,3 @@ return array (
   86189998 => 'Urumchi, Xinjiang',
   86189999 => 'Urumchi, Xinjiang',
 );
-/* EOF */

@@ -83,5 +83,3 @@ class PrefixTimeZonesMap
         return $this->lookupTimeZonesForNumberKey($number->getCountryCode());
     }
 }
-
-/* EOF */

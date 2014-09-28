@@ -161,4 +161,3 @@ return array (
   1719948 => 'Pueblo, CO',
   1719955 => 'Colorado Springs, CO',
 );
-/* EOF */

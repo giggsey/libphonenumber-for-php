@@ -166,4 +166,3 @@ return array (
   1705949 => 'Sault Ste. Marie, ON',
   1705969 => 'Hanmer, ON',
 );
-/* EOF */

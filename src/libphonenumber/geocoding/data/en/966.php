@@ -17,4 +17,3 @@ return array (
   9666 => 'Hail/Qasim',
   9667 => 'Abha/Najran/Jezan',
 );
-/* EOF */

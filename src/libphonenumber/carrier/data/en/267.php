@@ -43,4 +43,3 @@ return array (
   267776 => 'Mascom',
   267777 => 'Mascom',
 );
-/* EOF */

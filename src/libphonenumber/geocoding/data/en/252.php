@@ -9,4 +9,3 @@ return array (
   25251 => 'Mangauno',
   25261 => 'Mogadishu',
 );
-/* EOF */

@@ -3,12 +3,10 @@
 namespace libphonenumber;
 
 
-class DefaultMetadataLoader implements MetadataLoader
+class DefaultMetadataLoader implements MetadataLoaderInterface
 {
     public function loadMetadata($metadataFileName)
     {
         return include $metadataFileName;
     }
 }
-
-/* EOF */

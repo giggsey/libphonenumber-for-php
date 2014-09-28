@@ -105,4 +105,3 @@ return array (
   601899 => 'TM Homeline',
   6019 => 'Celcom',
 );
-/* EOF */

@@ -86,4 +86,3 @@ return array (
   1810987 => 'Port Huron, MI',
   1810989 => 'Port Huron, MI',
 );
-/* EOF */

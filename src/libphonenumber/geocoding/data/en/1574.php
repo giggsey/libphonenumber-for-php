@@ -84,4 +84,3 @@ return array (
   1574967 => 'Flora, IN',
   1574970 => 'Elkhart, IN',
 );
-/* EOF */

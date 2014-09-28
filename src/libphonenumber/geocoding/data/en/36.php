@@ -60,4 +60,3 @@ return array (
   3696 => 'Gyor',
   3699 => 'Sopron',
 );
-/* EOF */

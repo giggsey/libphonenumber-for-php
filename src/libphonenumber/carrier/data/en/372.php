@@ -22,4 +22,3 @@ return array (
   37258 => 'Tele 2',
   372590 => 'EMT',
 );
-/* EOF */

@@ -39,4 +39,3 @@ return array (
   92346 => 'Telenor',
   92347 => 'Telenor',
 );
-/* EOF */

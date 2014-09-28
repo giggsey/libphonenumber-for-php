@@ -10,4 +10,3 @@ return array (
   21195 => 'Vivacell',
   21197 => 'Gemtel',
 );
-/* EOF */

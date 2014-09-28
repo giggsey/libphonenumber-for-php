@@ -44,4 +44,3 @@ return array (
   2442729 => 'Catumbela',
   2442777 => 'Dama Universal',
 );
-/* EOF */

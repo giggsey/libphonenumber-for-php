@@ -84,4 +84,3 @@ return array (
   1229985 => 'Moultrie, GA',
   1229995 => 'Dawson, GA',
 );
-/* EOF */

@@ -63,5 +63,3 @@ class ShortNumberUtil
         return ShortNumberInfo::getInstance($this->phoneUtil)->isEmergencyNumber($number, $regionCode);
     }
 }
-
-/* EOF */

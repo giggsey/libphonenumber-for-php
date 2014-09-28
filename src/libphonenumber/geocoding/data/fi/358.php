@@ -26,4 +26,3 @@ return array (
   3588 => 'Oulu',
   3589 => 'Helsinki',
 );
-/* EOF */

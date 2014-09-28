@@ -27,4 +27,3 @@ return array (
   57350 => 'Avantel',
   57351 => 'Avantel',
 );
-/* EOF */

@@ -125,4 +125,3 @@ return array (
   3752357 => 'Oktyabrskiy, Gomel Region',
   375236 => 'Mozyr',
 );
-/* EOF */

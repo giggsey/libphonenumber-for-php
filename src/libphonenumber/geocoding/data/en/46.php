@@ -255,4 +255,3 @@ return array (
   46980 => 'Kiruna',
   46981 => 'Vittangi',
 );
-/* EOF */

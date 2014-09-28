@@ -57,4 +57,3 @@ return array (
   1952975 => 'Eden Prairie, MN',
   1952985 => 'Lakeville, MN',
 );
-/* EOF */
