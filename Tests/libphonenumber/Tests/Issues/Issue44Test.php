@@ -3,6 +3,7 @@
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
+use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
 
 class Issue44Test extends \PHPUnit_Framework_TestCase
@@ -46,5 +47,16 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
         $location = $this->geocoder->getDescriptionForNumber($number, "en");
 
         $this->assertEquals("Luoyang, Henan", $location);
+    }
+
+    public function testChineseCarrierLookup()
+    {
+        $number = $this->phoneUtil->parse("+86 150 3657 7264", "CN");
+
+        $carrier = PhoneNumberToCarrierMapper::getInstance();
+
+        $location = $carrier->getNameForNumber($number, "en");
+
+        $this->assertEquals("China Mobile", $location);
     }
 }
