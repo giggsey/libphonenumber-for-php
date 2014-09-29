@@ -39,4 +39,12 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
 
         $this->assertLessThan(1000000, $memoryUsed, "Memory usage should be below 1MB");
     }
+
+    public function testChineseGeolocation()
+    {
+        $number = $this->phoneUtil->parse("+86 150 3657 7264", "CN");
+        $location = $this->geocoder->getDescriptionForNumber($number, "en");
+
+        $this->assertEquals("Luoyang, Henan", $location);
+    }
 }
