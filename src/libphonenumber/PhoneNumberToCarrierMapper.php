@@ -15,9 +15,9 @@ use libphonenumber\prefixmapper\PrefixFileReader;
 class PhoneNumberToCarrierMapper
 {
     /**
-     * @var PhoneNumberToCarrierMapper
+     * @var PhoneNumberToCarrierMapper[]
      */
-    private static $instance = null;
+    private static $instance = array();
 
     const MAPPING_DATA_DIRECTORY = '/carrier/data/';
 
@@ -47,11 +47,11 @@ class PhoneNumberToCarrierMapper
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (self::$instance === null) {
-            self::$instance = new self($mappingDir);
+        if (!array_key_exists($mappingDir, self::$instance)) {
+            self::$instance[$mappingDir] = new self($mappingDir);
         }
 
-        return self::$instance;
+        return self::$instance[$mappingDir];
     }
 
     /**

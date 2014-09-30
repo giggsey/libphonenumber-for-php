@@ -26,7 +26,7 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testMemoryUsageOfGeoLocation()
+    public function testMemoryUsageOfGeoLocationWithNoResult()
     {
         $number = $this->phoneUtil->parse("86-157-9662-1289", "CN");
 
@@ -38,7 +38,22 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
 
         $memoryUsed = $endMemory - $startMemory;
 
-        $this->assertLessThan(1000000, $memoryUsed, "Memory usage should be below 1MB");
+        $this->assertLessThan(5000000, $memoryUsed, "Memory usage should be below 5MB");
+    }
+
+    public function testMemoryUsageOfGeoLocationWithResult()
+    {
+        $number = $this->phoneUtil->parse("86-131-2270-1411", "CN");
+
+        $startMemory = memory_get_usage();
+        $location = $this->geocoder->getDescriptionForNumber($number, "en");
+        $endMemory = memory_get_usage();
+
+        $this->assertEquals("Shanghai", $location);
+
+        $memoryUsed = $endMemory - $startMemory;
+
+        $this->assertLessThan(5000000, $memoryUsed, "Memory usage should be below 5MB");
     }
 
     public function testChineseGeolocation()
@@ -60,3 +75,4 @@ class Issue44Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals("China Mobile", $location);
     }
 }
+

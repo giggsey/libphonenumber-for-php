@@ -130,13 +130,13 @@ EOT;
              * @see https://github.com/giggsey/libphonenumber-for-php/issues/44
              */
 
-            // Fetch the 4-digit prefixes stored in the file.
+            // Fetch the 5-digit prefixes stored in the file.
             $phonePrefixes = array();
 
             $this->parseTextFile(
                 $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
                 function ($prefix, $location) use (&$phonePrefixes) {
-                    $shortPrefix = substr($prefix, 0, 4);
+                    $shortPrefix = substr($prefix, 0, 5);
                     if (!in_array($shortPrefix, $phonePrefixes)) {
                         $phonePrefixes[] = $shortPrefix;
                     }

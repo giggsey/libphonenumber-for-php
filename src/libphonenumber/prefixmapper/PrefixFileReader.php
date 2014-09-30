@@ -108,7 +108,7 @@ class PrefixFileReader
         } elseif ($countryCallingCode === 86) {
             // Split China into multiple files to reduce PHP memory usage
             // @see https://github.com/giggsey/libphonenumber-for-php/issues/44
-            $phonePrefix = '86' . substr($number->getNationalNumber(), 0, 2);
+            $phonePrefix = '86' . substr($number->getNationalNumber(), 0, 3);
         } else {
             $phonePrefix = $countryCallingCode;
         }
