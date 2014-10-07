@@ -32,6 +32,10 @@ class PhoneNumberToCarrierMapper
 
     private function __construct($phonePrefixDataDirectory)
     {
+        if(!extension_loaded('intl')) {
+            throw new \RuntimeException('The intl extension must be installed');
+        }
+
         $this->prefixFileReader = new PrefixFileReader(dirname(__FILE__) . $phonePrefixDataDirectory);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }

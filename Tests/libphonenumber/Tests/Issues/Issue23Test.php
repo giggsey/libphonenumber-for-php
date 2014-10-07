@@ -14,7 +14,7 @@ class Issue23Test extends \PHPUnit_Framework_TestCase
      */
     private $phoneUtil;
     /**
-     * @var PhoneNumberOfflineGeocoder
+     * @var PhoneNumberOfflineGeocoder|null
      */
     private $geocoder;
 
@@ -23,7 +23,9 @@ class Issue23Test extends \PHPUnit_Framework_TestCase
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
+        if(extension_loaded('intl')) {
+            $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
+        }
     }
 
     public function testTKGeoLocation()
@@ -34,6 +36,8 @@ class Issue23Test extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('TK', $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 
-        $this->assertEquals('Tokelau', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        if($this->geocoder instanceof PhoneNumberOfflineGeocoder) {
+            $this->assertEquals('Tokelau', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        }
     }
 }

@@ -80,6 +80,10 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if(!extension_loaded('intl')) {
+            $this->markTestSkipped('The intl extension must be installed');
+        }
+
         PhoneNumberOfflineGeocoder::resetInstance();
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance(self::TEST_META_DATA_FILE_PREFIX);
     }

@@ -12,17 +12,10 @@ class CodeCoverageTest extends \PHPUnit_Framework_TestCase
      */
     private $phoneUtil;
 
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
-
     public function setUp()
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();
-
-        $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
     public function testNullException()

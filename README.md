@@ -21,7 +21,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 The library can be installed via [composer](http://getcomposer.org/). You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
 
-The PECL [mbstring](http://php.net/mbstring) and [intl](http://php.net/intl) extensions are required for this library to be used.
+The PECL [mbstring](http://php.net/mbstring) extension is required for this library to be used.
 
 ```json
 {
@@ -98,6 +98,8 @@ echo $phoneUtil->formatOutOfCountryCallingNumber($swissNumberProto, "GB");
 
 ### Geocoder
 
+The PECL [intl](http://php.net/intl) extension is required for the geocoder to be used.
+
 ```php
 $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
@@ -152,6 +154,8 @@ var_dump($shortNumberInfo->connectsToEmergencyNumber("911123", "US"));
 ```
 
 ### Mapping Phone Numbers to carrier
+
+The PECL [intl](http://php.net/intl) extension is required for the carrier mapper to be used.
 
 ```php
 
