@@ -8,8 +8,8 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-467]\\d{3}',
-    'PossibleNumberPattern' => '\\d{4}',
+    'NationalNumberPattern' => '[2-7]\\d{3,5}',
+    'PossibleNumberPattern' => '\\d{4,6}',
   ),
   'fixedLine' => 
   array (
@@ -25,8 +25,9 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '5\\d{5}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '501234',
   ),
   'tollFree' => 
   array (

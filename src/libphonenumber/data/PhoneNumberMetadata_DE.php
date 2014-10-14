@@ -20,7 +20,7 @@ return array (
               )|
               5\\d{1,2}|
               6[1-8]\\d?
-            )\\d{2,7}
+            )\\d{2,8}
           )
         ',
     'PossibleNumberPattern' => '\\d{2,15}',

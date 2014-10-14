@@ -38,7 +38,7 @@ return array (
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '41234567',
+    'ExampleNumber' => '40612345',
   ),
   'tollFree' => 
   array (

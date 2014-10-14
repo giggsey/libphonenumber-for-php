@@ -5,9 +5,11 @@
  */
 
 return array (
+  2562030 => 'Afrimax',
   25670 => 'Warid',
   25671 => 'UTL',
   256720 => 'Smile',
+  256723 => 'Afrimax',
   256730 => 'K2',
   25674 => 'Sure Telecom',
   25675 => 'Airtel',

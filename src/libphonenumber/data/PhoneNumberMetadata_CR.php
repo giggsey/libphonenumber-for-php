@@ -20,7 +20,10 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          57[0-3]\\d{5}|
+          5(?:
+            0[01]|
+            7[0-3]
+          )\\d{5}|
           6(?:
             [0-2]\\d|
             30
@@ -61,10 +64,14 @@ return array (
             0(?:
               0[01]\\d{4}|
               10[0-3]\\d{3}|
-              2900\\d{2}|
+              2(?:
+                00\\d{3}|
+                900\\d{2}
+              )|
               3[01]\\d{4}|
               40\\d{4}|
               5\\d{5}|
+              60\\d{4}|
               70[01]\\d{3}|
               8[0-2]\\d{4}
             )|
@@ -121,7 +128,7 @@ return array (
   'id' => 'CR',
   'countryCode' => 506,
   'internationalPrefix' => '00',
-  'nationalPrefixForParsing' => '(19(?:0[01468]|19|20|66|77))',
+  'nationalPrefixForParsing' => '(19(?:0[012468]|1[09]|20|66|77|99))',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

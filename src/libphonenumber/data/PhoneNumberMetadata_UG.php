@@ -33,10 +33,12 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
+          2030\\d{5}|
           7(?:
             0[0-7]|
             [15789]\\d|
-            [23]0|
+            2[03]|
+            30|
             [46][0-4]
           )\\d{6}
         ',

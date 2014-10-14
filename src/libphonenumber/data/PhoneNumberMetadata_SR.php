@@ -29,12 +29,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            7(?:
-              [1-357]\\d|
-              4[0-5]
-            )|
-            8[1-9]\\d
-          )\\d{4}
+            7[124-7]|
+            8[1-9]
+          )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '7412345',
@@ -61,8 +58,13 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '56\\d{4}',
-    'PossibleNumberPattern' => '\\d{6}',
+    'NationalNumberPattern' => '
+          5(?:
+            6\\d{4}|
+            90[0-4]\\d{3}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{6,7}',
     'ExampleNumber' => '561234',
   ),
   'pager' => 
@@ -142,7 +144,10 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[6-8]',
+        0 => '
+            59|
+            [6-8]
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
