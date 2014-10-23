@@ -20,11 +20,12 @@ class ShortNumberInfo
      */
     private static $instance = null;
     /**
-     * @var PhoneNumberUtil
+     * @var MatcherAPIInterface
      */
-    private $phoneUtil;
+    private $matcherAPI;
     private $currentFilePrefix;
     private $regionToMetadataMap = array();
+    private $countryCallingCodeToRegionCodeMap = array();
     private $countryCodeToNonGeographicalMetadataMap = array();
     private static $regionsWhereEmergencyNumbersMustBeExact = array(
         'BR',
@@ -32,26 +33,25 @@ class ShortNumberInfo
         'NI',
     );
 
-    private function __construct(PhoneNumberUtil $phoneNumberUtil = null)
+    private function __construct(MatcherAPIInterface $matcherAPI)
     {
-        if ($phoneNumberUtil === null) {
-            $this->phoneUtil = PhoneNumberUtil::getInstance();
-        } else {
-            $this->phoneUtil = $phoneNumberUtil;
-        }
+        $this->matcherAPI = $matcherAPI;
+
+        // TODO: Create ShortNumberInfo for a given map
+        $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
+
         $this->currentFilePrefix = dirname(__FILE__) . '/data/' . self::META_DATA_FILE_PREFIX;
     }
 
     /**
      * Returns the singleton instance of ShortNumberInfo
      *
-     * @param PhoneNumberUtil $phoneNumberUtil Optional instance of PhoneNumber Util
      * @return \libphonenumber\ShortNumberInfo
      */
-    public static function getInstance(PhoneNumberUtil $phoneNumberUtil = null)
+    public static function getInstance()
     {
         if (null === self::$instance) {
-            self::$instance = new self($phoneNumberUtil);
+            self::$instance = new self(RegexBasedMatcher::create());
         }
 
         return self::$instance;
@@ -60,6 +60,25 @@ class ShortNumberInfo
     public static function resetInstance()
     {
         self::$instance = null;
+    }
+
+    /**
+     * Returns a list with teh region codes that match the specific country calling code. For
+     * non-geographical country calling codes, the region code 001 is returned. Also, in the case
+     * of no region code being found, an empty list is returned.
+     *
+     * @param int $countryCallingCode
+     * @return array
+     */
+    private function getRegionCodesForCountryCode($countryCallingCode)
+    {
+        if (!array_key_exists($countryCallingCode, $this->countryCallingCodeToRegionCodeMap)) {
+            $regionCodes = null;
+        } else {
+            $regionCodes = $this->countryCallingCodeToRegionCodeMap[$countryCallingCode];
+        }
+
+        return ($regionCodes === null) ? array() : $regionCodes;
     }
 
     public function getSupportedRegions()
@@ -166,10 +185,14 @@ class ShortNumberInfo
     }
 
     /**
-     * Returns true if the number might be used to connect to an emergency service in the given region
-     *
-     * This method takes into account cases where the number might contain formatting, or might have
-     * additional digits appended (when it is okay to do that in the region specified).
+     * Returns true if the given number, exactly as dialed, might be used to connect to an emergency
+     * service in the given region.
+     * <p>
+     * This method accepts a string, rather than a PhoneNumber, because it needs to distinguish
+     * cases such as "+1 911" and "911", where the former may not connect to an emergency service in
+     * all cases but the latter would. This method takes into account cases where the number might
+     * contain formatting, or might have additional digits appended (when it is okay to do that in
+     * the specified region).
      *
      * @param string $number the phone number to test
      * @param string $regionCode the region where the phone number if being dialled
@@ -180,12 +203,18 @@ class ShortNumberInfo
         return $this->matchesEmergencyNumberHelper($number, $regionCode, true /* allows prefix match */);
     }
 
+    /**
+     * @param string $number
+     * @param string $regionCode
+     * @param bool $allowPrefixMatch
+     * @return bool
+     */
     private function matchesEmergencyNumberHelper($number, $regionCode, $allowPrefixMatch)
     {
         $number = PhoneNumberUtil::extractPossibleNumber($number);
         $matcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $number);
         if ($matcher->lookingAt()) {
-            // Returns false if the number starts with a plus sign. WE don't believe dialling the country
+            // Returns false if the number starts with a plus sign. We don't believe dialing the country
             // code before emergency numbers (e.g. +1911) works, but later, if that proves to work, we can
             // add additional logic here to handle it.
             return false;
@@ -196,14 +225,14 @@ class ShortNumberInfo
             return false;
         }
 
-        $emergencyNumberPattern = $metadata->getEmergency()->getNationalNumberPattern();
         $normalizedNumber = PhoneNumberUtil::normalizeDigitsOnly($number);
+        $emergencyDesc = $metadata->getEmergency();
 
-        $emergencyMatcher = new Matcher($emergencyNumberPattern, $normalizedNumber);
+        $allowPrefixMatchForRegion = ($allowPrefixMatch
+            && !in_array($regionCode, self::$regionsWhereEmergencyNumbersMustBeExact)
+        );
 
-        return (!$allowPrefixMatch || in_array($regionCode, self::$regionsWhereEmergencyNumbersMustBeExact))
-            ? $emergencyMatcher->matches()
-            : $emergencyMatcher->lookingAt();
+        return $this->matcherAPI->matchesNationalNumber($normalizedNumber, $emergencyDesc, $allowPrefixMatchForRegion);
     }
 
     /**
@@ -218,12 +247,12 @@ class ShortNumberInfo
      */
     public function isCarrierSpecific(PhoneNumber $number)
     {
-        $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
+        $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
         $regionCode = $this->getRegionCodeForShortNumberFromRegionList($number, $regionCodes);
-        $nationalNumber = $this->phoneUtil->getNationalSignificantNumber($number);
+        $nationalNumber = $this->getNationalSignificantNumber($number);
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
 
-        return ($phoneMetadata != null) && ($this->phoneUtil->isNumberMatchingDesc(
+        return ($phoneMetadata !== null) && ($this->matchesPossibleNumberAndNationalNumber(
             $nationalNumber,
             $phoneMetadata->getCarrierSpecific()
         ));
@@ -246,14 +275,12 @@ class ShortNumberInfo
             return $regionCodes[0];
         }
 
-        $nationalNumber = $this->phoneUtil->getNationalSignificantNumber($number);
+        $nationalNumber = $this->getNationalSignificantNumber($number);
 
         foreach ($regionCodes as $regionCode) {
             $phoneMetadata = $this->getMetadataForRegion($regionCode);
-            if ($phoneMetadata != null && $this->phoneUtil->isNumberMatchingDesc(
-                    $nationalNumber,
-                    $phoneMetadata->getShortCode()
-                )
+            if ($phoneMetadata !== null
+                && $this->matchesPossibleNumberAndNationalNumber($nationalNumber, $phoneMetadata->getShortCode())
             ) {
                 // The number is valid for this region.
                 return $regionCode;
@@ -266,19 +293,19 @@ class ShortNumberInfo
      * Check whether a short number is a possible number. If a country calling code is shared by
      * multiple regions, this returns true if it's possible in any of them. This provides a more
      * lenient check than {@link #isValidShortNumber}. See {@link
-     * #IsPossibleShortNumberForRegion(String, String)} for details.
+     * #IsPossibleShortNumberForRegion(PhoneNumber, String)} for details.
      *
      * @param $number PhoneNumber the short number to check
      * @return boolean whether the number is a possible short number
      */
     public function isPossibleShortNumber(PhoneNumber $number)
     {
-        $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
-        $shortNumber = $this->phoneUtil->getNationalSignificantNumber($number);
+        $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
+        $shortNumber = $this->getNationalSignificantNumber($number);
 
         foreach ($regionCodes as $region) {
             $phoneMetadata = $this->getMetadataForRegion($region);
-            if ($this->phoneUtil->isNumberPossibleForDesc($shortNumber, $phoneMetadata->getGeneralDesc())) {
+            if ($this->matcherAPI->matchesPossibleNumber($shortNumber, $phoneMetadata->getGeneralDesc())) {
                 return true;
             }
         }
@@ -291,8 +318,8 @@ class ShortNumberInfo
      * in the form of a string, and the region where the number is dialled from. This provides a more
      * lenient check than {@link #isValidShortNumber}.
      *
-     * @param $shortNumber String The short number to check
-     * @param $regionDialingFrom String Region dialing From
+     * @param PhoneNumber|string $shortNumber The short number to check
+     * @param string $regionDialingFrom Region dialing From
      * @return boolean whether the number is a possible short number
      */
     public function isPossibleShortNumberForRegion($shortNumber, $regionDialingFrom)
@@ -303,24 +330,36 @@ class ShortNumberInfo
             return false;
         }
 
-        $generalDesc = $phoneMetadata->getGeneralDesc();
+        if ($shortNumber instanceof PhoneNumber) {
+            return $this->matcherAPI->matchesPossibleNumber(
+                $this->getNationalSignificantNumber($shortNumber),
+                $phoneMetadata->getGeneralDesc()
+            );
+        } else {
+            /**
+             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
+             *        formatting characters) would have been getting the wrong result. You should parse
+             *        the string to PhoneNumber and use the method
+             *        {@code #isPossibleShortNumberForRegion(PhoneNumber, String)}. This method will be
+             *        removed in the next release.
+             */
 
-        return $this->phoneUtil->isNumberPossibleForDesc($shortNumber, $generalDesc);
+            return $this->matcherAPI->matchesPossibleNumber($shortNumber, $phoneMetadata->getGeneralDesc());
+        }
     }
 
     /**
      * Tests whether a short number matches a valid pattern. If a country calling code is shared by
      * multiple regions, this returns true if it's valid in any of them. Note that this doesn't verify
      * the number is actually in use, which is impossible to tell by just looking at the number
-     * itself. See {@link #isValidShortNumberForRegion(String, String)} for details.
+     * itself. See {@link #isValidShortNumberForRegion(PhoneNumber, String)} for details.
      *
      * @param $number PhoneNumber the short number for which we want to test the validity
      * @return boolean whether the short number matches a valid pattern
      */
     public function isValidShortNumber(PhoneNumber $number)
     {
-        $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
-        $shortNumber = $this->phoneUtil->getNationalSignificantNumber($number);
+        $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
         $regionCode = $this->getRegionCodeForShortNumberFromRegionList($number, $regionCodes);
         if (count($regionCodes) > 1 && $regionCode !== null) {
             // If a matching region had been found for the phone number from among two or more regions,
@@ -328,7 +367,7 @@ class ShortNumberInfo
             return true;
         }
 
-        return $this->isValidShortNumberForRegion($shortNumber, $regionCode);
+        return $this->isValidShortNumberForRegion($number, $regionCode);
     }
 
     /**
@@ -336,11 +375,11 @@ class ShortNumberInfo
      * the number is actually in use, which is impossible to tell by just looking at the number
      * itself.
      *
-     * @param $shortNumber
-     * @param $regionDialingFrom
-     * @return bool
+     * @param PhoneNumber|string $number The Short number for which we want to test the validity
+     * @param string $regionDialingFrom the region from which the number is dialed
+     * @return boolean whether the short number matches a valid pattern
      */
-    public function isValidShortNumberForRegion($shortNumber, $regionDialingFrom)
+    public function isValidShortNumberForRegion($number, $regionDialingFrom)
     {
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
 
@@ -348,23 +387,28 @@ class ShortNumberInfo
             return false;
         }
 
+        if ($number instanceof PhoneNumber) {
+            $shortNumber = $this->getNationalSignificantNumber($number);
+        } else {
+            /**
+             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
+             *             formatting characters) would have been getting the wrong result. You should parse
+             *             the string to PhoneNumber and use the method
+             *             {@code #isValidShortNumberForRegion(PhoneNumber, String)}. This method will be
+             *             removed in the next release.
+             */
+            $shortNumber = $number;
+        }
+
         $generalDesc = $phoneMetadata->getGeneralDesc();
 
-        if (!$generalDesc->hasNationalNumberPattern() || !$this->phoneUtil->isNumberMatchingDesc(
-                $shortNumber,
-                $generalDesc
-            )
-        ) {
+        if (!$this->matchesPossibleNumberAndNationalNumber($shortNumber, $generalDesc)) {
             return false;
         }
 
         $shortNumberDesc = $phoneMetadata->getShortCode();
-        if (!$shortNumberDesc->hasNationalNumberPattern()) {
-            // No short code national number pattern found for region
-            return false;
-        }
 
-        return $this->phoneUtil->isNumberMatchingDesc($shortNumber, $shortNumberDesc);
+        return $this->matchesPossibleNumberAndNationalNumber($shortNumber, $shortNumberDesc);
     }
 
     /**
@@ -382,14 +426,14 @@ class ShortNumberInfo
      *    // Do something with the cost information here.
      * }}</pre>
      *
-     * @param $shortNumber String the short number for which we want to know the expected cost category,
+     * @param PhoneNumber|string $number the short number for which we want to know the expected cost category,
      *     as a string
-     * @param $regionDialingFrom String the region from which the number is dialed
+     * @param string $regionDialingFrom the region from which the number is dialed
      * @return int the expected cost category for that region of the short number. Returns UNKNOWN_COST if
      *     the number does not match a cost category. Note that an invalid number may match any cost
      *     category.
      */
-    public function getExpectedCostForRegion($shortNumber, $regionDialingFrom)
+    public function getExpectedCostForRegion($number, $regionDialingFrom)
     {
         // Note that regionDialingFrom may be null, in which case phoneMetadata will also be null.
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
@@ -397,17 +441,30 @@ class ShortNumberInfo
             return ShortNumberCost::UNKNOWN_COST;
         }
 
+        if ($number instanceof PhoneNumber) {
+            $shortNumber = $this->getNationalSignificantNumber($number);
+        } else {
+            /**
+             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
+             *             formatting characters) would have been getting the wrong result. You should parse
+             *             the string to PhoneNumber and use the method
+             *             {@code #getExpectedCostForRegion(PhoneNumber, String)}. This method will be
+             *             removed in the next release.
+             */
+            $shortNumber = $number;
+        }
+
         // The cost categories are tested in order of decreasing expense, since if for some reason the
         // patterns overlap the most expensive matching cost category should be returned.
-        if ($this->phoneUtil->isNumberMatchingDesc($shortNumber, $phoneMetadata->getPremiumRate())) {
+        if ($this->matchesPossibleNumberAndNationalNumber($shortNumber, $phoneMetadata->getPremiumRate())) {
             return ShortNumberCost::PREMIUM_RATE;
         }
 
-        if ($this->phoneUtil->isNumberMatchingDesc($shortNumber, $phoneMetadata->getStandardRate())) {
+        if ($this->matchesPossibleNumberAndNationalNumber($shortNumber, $phoneMetadata->getStandardRate())) {
             return ShortNumberCost::STANDARD_RATE;
         }
 
-        if ($this->phoneUtil->isNumberMatchingDesc($shortNumber, $phoneMetadata->getTollFree())) {
+        if ($this->matchesPossibleNumberAndNationalNumber($shortNumber, $phoneMetadata->getTollFree())) {
             return ShortNumberCost::TOLL_FREE;
         }
 
@@ -422,37 +479,38 @@ class ShortNumberInfo
     /**
      * Gets the expected cost category of a short number (however, nothing is implied about its
      * validity). If the country calling code is unique to a region, this method behaves exactly the
-     * same as {@link #getExpectedCostForRegion(String, String)}. However, if the country calling
+     * same as {@link #getExpectedCostForRegion(PhoneNumber, String)}. However, if the country calling
      * code is shared by multiple regions, then it returns the highest cost in the sequence
      * PREMIUM_RATE, UNKNOWN_COST, STANDARD_RATE, TOLL_FREE. The reason for the position of
      * UNKNOWN_COST in this order is that if a number is UNKNOWN_COST in one region but STANDARD_RATE
      * or TOLL_FREE in another, its expected cost cannot be estimated as one of the latter since it
      * might be a PREMIUM_RATE number.
      *
-     * For example, if a number is STANDARD_RATE in the US, but TOLL_FREE in Canada, the expected cost
-     * returned by this method will be STANDARD_RATE, since the NANPA countries share the same country
-     * calling code.
+     * <p>
+     * For example, if a number is STANDARD_RATE in the US, but TOLL_FREE in Canada, the expected
+     * cost returned by this method will be STANDARD_RATE, since the NANPA countries share the same
+     * country calling code.
+     * </p>
      *
      * Note: If the region from which the number is dialed is known, it is highly preferable to call
-     * {@link #getExpectedCostForRegion(String, String)} instead.
+     * {@link #getExpectedCostForRegion(PhoneNumber, String)} instead.
      *
-     * @param $number PhoneNumber the short number for which we want to know the expected cost category
+     * @param PhoneNumber $number the short number for which we want to know the expected cost category
      * @return int the highest expected cost category of the short number in the region(s) with the given
      *     country calling code
      */
     public function getExpectedCost(PhoneNumber $number)
     {
-        $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
+        $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
         if (count($regionCodes) == 0) {
             return ShortNumberCost::UNKNOWN_COST;
         }
-        $shortNumber = $this->phoneUtil->getNationalSignificantNumber($number);
         if (count($regionCodes) == 1) {
-            return $this->getExpectedCostForRegion($shortNumber, $regionCodes[0]);
+            return $this->getExpectedCostForRegion($number, $regionCodes[0]);
         }
         $cost = ShortNumberCost::TOLL_FREE;
         foreach ($regionCodes as $regionCode) {
-            $costForRegion = $this->getExpectedCostForRegion($shortNumber, $regionCode);
+            $costForRegion = $this->getExpectedCostForRegion($number, $regionCode);
             switch ($costForRegion) {
                 case ShortNumberCost::PREMIUM_RATE:
                     return ShortNumberCost::PREMIUM_RATE;
@@ -475,10 +533,12 @@ class ShortNumberInfo
     }
 
     /**
-     * Returns true if the number exactly matches an emergency service number in the given region.
-     *
+     * Returns true if the given number exactly matches an emergency service number in the given
+     * region.
+     * <p>
      * This method takes into account cases where the number might contain formatting, but doesn't
-     * allow additional digits to be appended.
+     * allow additional digits to be appended. Note that {@code isEmergencyNumber(number, region)}
+     * implies {@code connectsToEmergencyNumber(number, region)}.
      *
      * @param string $number the phone number to test
      * @param string $regionCode the region where the phone number is being dialled
@@ -489,5 +549,41 @@ class ShortNumberInfo
         return $this->matchesEmergencyNumberHelper($number, $regionCode, false /* doesn't allow prefix match */);
     }
 
+    /**
+     * Gets the national significant number of the a phone number. Note a national significant number
+     * doesn't contain a national prefix or any formatting.
+     * <p>
+     * This is a temporary duplicate of the {@code getNationalSignificantNumber} method from
+     * {@code PhoneNumberUtil}. Ultimately a canonical static version should exist in a separate
+     * utility class (to prevent {@code ShortNumberInfo} needing to depend on PhoneNumberUtil).
+     *
+     * @param PhoneNumber $number the phone number for which the national significant number is needed
+     * @return string the national significant number of the PhoneNumber object passed in
+     */
+    private function getNationalSignificantNumber(PhoneNumber $number)
+    {
+        // If leading zero(s) have been set, we prefix this now. Note this is not a national prefix.
+        $nationalNumber = '';
+        if ($number->isItalianLeadingZero()) {
+            $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
+            $nationalNumber .= $zeros;
+        }
 
+        $nationalNumber .= $number->getNationalNumber();
+
+        return $nationalNumber;
+    }
+
+    /**
+     * // TODO: Once we have benchmarked ShortnumberInfo, consider if it is worth keeping
+     * this performance optimization, and if so move this into the matcher implementation
+     * @param string $number
+     * @param PhoneNumberDesc $numberDesc
+     * @return bool
+     */
+    private function matchesPossibleNumberAndNationalNumber($number, PhoneNumberDesc $numberDesc)
+    {
+        return ($this->matcherAPI->matchesPossibleNumber($number, $numberDesc)
+            && $this->matcherAPI->matchesNationalNumber($number, $numberDesc, false));
+    }
 }

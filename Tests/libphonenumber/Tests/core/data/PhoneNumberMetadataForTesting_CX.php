@@ -82,7 +82,7 @@ return array (
   ),
   'id' => 'CX',
   'countryCode' => 61,
-  'internationalPrefix' => '',
+  'internationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (

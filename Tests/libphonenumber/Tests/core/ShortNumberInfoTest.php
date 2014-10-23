@@ -3,6 +3,7 @@
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\CountryCodeToRegionCodeMapForTesting;
+use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
@@ -13,6 +14,10 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
 {
     private static $plusSymbol;
     /**
+     * @var PhoneNumberUtil
+     */
+    protected $phoneUtil;
+    /**
      * @var ShortNumberInfo
      */
     private $shortInfo;
@@ -22,12 +27,12 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         self::$plusSymbol = pack('H*', 'efbc8b');
 
         PhoneNumberUtil::resetInstance();
-        $this->shortInfo = ShortNumberInfo::getInstance(
-            PhoneNumberUtil::getInstance(
-                PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX,
-                CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
-            )
+        ShortNumberInfo::resetInstance();
+        $this->phoneUtil = PhoneNumberUtil::getInstance(
+            PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX,
+            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
         );
+        $this->shortInfo = ShortNumberInfo::getInstance();
     }
 
     public function testIsPossibleShortNumber()
@@ -36,12 +41,11 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $possibleNumber->setCountryCode(33)->setNationalNumber(123456);
 
         $this->assertTrue($this->shortInfo->isPossibleShortNumber($possibleNumber));
-        $this->assertTrue($this->shortInfo->isPossibleShortNumberForRegion(123456, RegionCode::FR));
+        $this->assertTrue($this->shortInfo->isPossibleShortNumberForRegion($this->parse(123456, RegionCode::FR), RegionCode::FR));
 
         $impossibleNumber = new PhoneNumber();
         $impossibleNumber->setCountryCode(33)->setNationalNumber(9);
         $this->assertFalse($this->shortInfo->isPossibleShortNumber($impossibleNumber));
-        $this->assertFalse($this->shortInfo->isPossibleShortNumberForRegion(9, RegionCode::FR));
 
         // Note that GB and GG share the country calling code 44, and that this number is possible but
         // not valid.
@@ -55,12 +59,12 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(33)->setNationalNumber(1010);
         $this->assertTrue($this->shortInfo->isValidShortNumber($phoneNumberObj));
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion(1010, RegionCode::FR));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse(1010, RegionCode::FR), RegionCode::FR));
 
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(33)->setNationalNumber(123456);
         $this->assertFalse($this->shortInfo->isValidShortNumber($phoneNumberObj));
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion(123456, RegionCode::FR));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse(123456, RegionCode::FR), RegionCode::FR));
 
         // Note that GB and GG share the country calling code 44
         $phoneNumberObj = new PhoneNumber();
@@ -76,7 +80,7 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             ShortNumberCost::PREMIUM_RATE,
-            $this->shortInfo->getExpectedCostForRegion($premiumRateExample, RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($premiumRateExample, RegionCode::FR), RegionCode::FR)
         );
 
         $premiumRateNumber = new PhoneNumber();
@@ -89,7 +93,7 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals(
             ShortNumberCost::STANDARD_RATE,
-            $this->shortInfo->getExpectedCostForRegion($standardRateExample, RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($standardRateExample, RegionCode::FR), RegionCode::FR)
         );
 
         $standardRateNumber = new PhoneNumber();
@@ -99,7 +103,7 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $tollFreeExample = $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE);
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($tollFreeExample, RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($tollFreeExample, RegionCode::FR), RegionCode::FR)
         );
         $tollFreeNumber = new PhoneNumber();
         $tollFreeNumber->setCountryCode(33)->setNationalNumber($tollFreeExample);
@@ -107,17 +111,17 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion("12345", RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("12345", RegionCode::FR), RegionCode::FR)
         );
         $unknownCostNumber = new PhoneNumber();
         $unknownCostNumber->setCountryCode(33)->setNationalNumber(12345);
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($unknownCostNumber));
 
         // Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion("116123", RegionCode::FR));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse("116123", RegionCode::FR), RegionCode::FR));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion("116123", RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("116123", RegionCode::FR), RegionCode::FR)
         );
         $invalidNumber = new PhoneNumber();
         $invalidNumber->setCountryCode(33)->setNationalNumber(116123);
@@ -127,7 +131,7 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         // Test a nonexistent country code.
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion("911", RegionCode::ZZ)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("911", RegionCode::US), RegionCode::ZZ)
         );
         $unknownCostNumber->clear();
         $unknownCostNumber->setCountryCode(123)->setNationalNumber(911);
@@ -153,15 +157,15 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->shortInfo->isValidShortNumber($ambiguousStandardRateNumber));
         $this->assertTrue($this->shortInfo->isValidShortNumber($ambiguousTollFreeNumber));
 
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousPremiumRateString, RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousPremiumRateString, RegionCode::AU), RegionCode::AU));
         $this->assertEquals(
             ShortNumberCost::PREMIUM_RATE,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousPremiumRateString, RegionCode::AU)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousPremiumRateString, RegionCode::AU), RegionCode::AU)
         );
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousPremiumRateString, RegionCode::CX));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousPremiumRateString, RegionCode::CX), RegionCode::CX));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousPremiumRateString, RegionCode::CX)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousPremiumRateString, RegionCode::CX), RegionCode::CX)
         );
         // PREMIUM_RATE takes precedence over UNKNOWN_COST.
         $this->assertEquals(
@@ -169,30 +173,30 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
             $this->shortInfo->getExpectedCost($ambiguousPremiumRateNumber)
         );
 
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousStandardRateString, RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousStandardRateString, RegionCode::AU), RegionCode::AU));
         $this->assertEquals(
             ShortNumberCost::STANDARD_RATE,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousStandardRateString, RegionCode::AU)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousStandardRateString, RegionCode::AU), RegionCode::AU)
         );
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousStandardRateString, RegionCode::CX));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousStandardRateString, RegionCode::CX), RegionCode::CX));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousStandardRateString, RegionCode::CX)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousStandardRateString, RegionCode::CX), RegionCode::CX)
         );
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
             $this->shortInfo->getExpectedCost($ambiguousStandardRateNumber)
         );
 
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($ambiguousTollFreeString, RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousTollFreeString, RegionCode::AU), RegionCode::AU));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousTollFreeString, RegionCode::AU)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousTollFreeString, RegionCode::AU), RegionCode::AU)
         );
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($ambiguousTollFreeString, RegionCode::CX));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse($ambiguousTollFreeString, RegionCode::CX), RegionCode::CX));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($ambiguousTollFreeString, RegionCode::CX)
+            $this->shortInfo->getExpectedCostForRegion($this->parse($ambiguousTollFreeString, RegionCode::CX), RegionCode::CX)
         );
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($ambiguousTollFreeNumber));
     }
@@ -369,16 +373,16 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
     {
         // Test the emergency number 112, which is valid in both Australia and the Christmas Islands.
         $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::AU));
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion("112", RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse("112", RegionCode::AU), RegionCode::AU));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion("112", RegionCode::AU)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("112", RegionCode::AU), RegionCode::AU)
         );
         $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::CX));
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion("112", RegionCode::CX));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse("112", RegionCode::CX), RegionCode::CX));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion("112", RegionCode::CX)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("112", RegionCode::CX), RegionCode::CX)
         );
         $sharedEmergencyNumber = new PhoneNumber();
         $sharedEmergencyNumber->setCountryCode(61)->setNationalNumber(112);
@@ -393,17 +397,31 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->shortInfo->isEmergencyNumber("211", RegionCode::BB));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::BB)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::BB), RegionCode::BB)
         );
         $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::US));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::US)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::US), RegionCode::US)
         );
         $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::CA));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion("211", RegionCode::CA)
+            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::CA), RegionCode::CA)
         );
+    }
+
+    /**
+     * @param string $number
+     * @param string $regionCode
+     * @return PhoneNumber
+     */
+    private function parse($number, $regionCode)
+    {
+        try {
+            return $this->phoneUtil->parse($number, $regionCode);
+        } catch (NumberParseException $e) {
+            $this->fail("Test input data should always parse correctly: " . $number . " (" . $regionCode . ")");
+        }
     }
 }

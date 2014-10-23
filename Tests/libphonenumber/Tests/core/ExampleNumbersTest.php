@@ -29,12 +29,13 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
     {
         PhoneNumberUtil::resetInstance();
         PhoneNumberUtil::getInstance();
+        ShortNumberInfo::resetInstance();
     }
 
     public function setUp()
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
-        $this->shortNumberInfo = ShortNumberInfo::getInstance($this->phoneNumberUtil);
+        $this->shortNumberInfo = ShortNumberInfo::getInstance();
     }
 
     public function regionList()
@@ -173,8 +174,8 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         $returnList = array();
 
         PhoneNumberUtil::resetInstance();
-        $phoneUtil = PhoneNumberUtil::getInstance();
-        $shortNumberInfo = ShortNumberInfo::getInstance($phoneUtil);
+        ShortNumberInfo::resetInstance();
+        $shortNumberInfo = ShortNumberInfo::getInstance();
         foreach ($shortNumberInfo->getSupportedRegions() as $regionCode) {
             $returnList[] = array($regionCode);
         }
@@ -222,7 +223,11 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
     public function testShortNumbersValidAndCorrectCost($regionCode)
     {
         $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumber($regionCode);
-        if (!$this->shortNumberInfo->isValidShortNumberForRegion($exampleShortNumber, $regionCode)) {
+        if (!$this->shortNumberInfo->isValidShortNumberForRegion(
+            $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode),
+            $regionCode
+        )
+        ) {
             $this->fail(
                 "Failed validation for string region_code: {$regionCode}, national_number: {$exampleShortNumber}"
             );
@@ -244,7 +249,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             if ($exampleShortNumber != '') {
                 $this->assertEquals(
                     $cost,
-                    $this->shortNumberInfo->getExpectedCostForRegion($exampleShortNumber, $regionCode),
+                    $this->shortNumberInfo->getExpectedCostForRegion($this->phoneNumberUtil->parse($exampleShortNumber, $regionCode), $regionCode),
                     "Wrong cost for " . (string)$phoneNumber
                 );
             }
@@ -259,15 +264,16 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)->getEmergency();
         if ($desc->hasExampleNumber()) {
             $exampleNumber = $desc->getExampleNumber();
-            $possibleNumberPattern = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
-            if (!$possibleNumberPattern->matches() || !$this->shortNumberInfo->isEmergencyNumber(
-                    $exampleNumber,
+            $phoneNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
+
+            if (!$this->shortNumberInfo->isPossibleShortNumberForRegion(
+                    $phoneNumber,
                     $regionCode
-                )
+                ) || !$this->shortNumberInfo->isEmergencyNumber($exampleNumber, $regionCode)
             ) {
                 $this->fail("Emergency example number test failed for " . $regionCode);
             } elseif ($this->shortNumberInfo->getExpectedCostForRegion(
-                    $exampleNumber,
+                    $phoneNumber,
                     $regionCode
                 ) !== ShortNumberCost::TOLL_FREE
             ) {
@@ -286,9 +292,11 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         if ($desc->hasExampleNumber()) {
             $exampleNumber = $desc->getExampleNumber();
             $carrierSpecificNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
-            $exampleNumberMatcher = new Matcher($desc->getPossibleNumberPattern(), $exampleNumber);
-            if (!$exampleNumberMatcher->matches() ||
-                !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)
+
+            if (!$this->shortNumberInfo->isPossibleShortNumberForRegion(
+                    $carrierSpecificNumber,
+                    $regionCode
+                ) || !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)
             ) {
                 $this->fail("Carrier-specific test failed for " . $regionCode);
             }
