@@ -20,16 +20,13 @@ return array (
     'NationalNumberPattern' => '
           (?:
             3[23589]|
-            4(?:
-              0\\d|
-              [3-8]
-            )|
+            4[3-8]|
             6\\d|
             7[1-9]|
             88
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '3212345',
   ),
   'mobile' => 
@@ -67,8 +64,13 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900\\d{4}',
-    'PossibleNumberPattern' => '\\d{7}',
+    'NationalNumberPattern' => '
+          (?:
+            40\\d{2}|
+            900
+          )\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '9001234',
   ),
   'sharedCost' => 

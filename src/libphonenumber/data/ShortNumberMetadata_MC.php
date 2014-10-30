@@ -77,6 +77,7 @@ return array (
     'NationalNumberPattern' => '
           1(?:
             12|
+            41|
             [578]
           )
         ',

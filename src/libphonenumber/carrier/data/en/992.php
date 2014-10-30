@@ -5,6 +5,8 @@
  */
 
 return array (
+  992501 => 'Tcell',
+  992502 => 'Tcell',
   99290 => 'Megafon',
   992917 => 'Tacom',
   992918 => 'Babilon-M',

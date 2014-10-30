@@ -32,7 +32,7 @@ return array (
           7(?:
             [0146-8]\\d|
             5[025-9]|
-            9[04]
+            9[0124]
           )\\d{4}|
           8[4-8]\\d{5}|
           9(?:
@@ -121,7 +121,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{5})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (

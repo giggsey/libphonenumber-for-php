@@ -35,5 +35,6 @@ return array (
   22566 => 'KoZ',
   22567 => 'KoZ',
   22569 => 'Aircom',
+  22575 => 'MTN',
   22577 => 'Orange',
 );
