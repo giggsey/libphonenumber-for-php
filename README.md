@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/giggsey/libphonenumber-for-php/license.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
-A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
+A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and was forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
 
 
 # Highlights of functionality
@@ -15,6 +15,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 * `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
 * `isValidNumber` - full validation of a phone number for a region using length and prefix information.
 * PhoneNumberOfflineGeocoder - provides geographical information related to a phone number.
+* PhoneNumberToTimeZonesMapper - provides timezone information related to a phone number.
 * PhoneNumberToCarrierMapper - provides carrier information related to a phone number.
 
 ## Installation
@@ -26,10 +27,17 @@ The PECL [mbstring](http://php.net/mbstring) extension is required for this libr
 ```json
 {
     "require": {
-        "giggsey/libphonenumber-for-php": "~6.0"
+        "giggsey/libphonenumber-for-php": "~7.0"
     }
 }
 ```
+
+## Versioning
+
+This library will try to follow the same version numbers as Google. There could be additional releases where needed to fix critical issues that can not wait until the next release from Google.
+
+This does mean that this project will not follow [Semantic Versioning](http://semver.org/), but instead Google's version policy. As a result, jumps in major versions may not actually contain any backwards
+incompatible changes. Please read the release notes for such releases.
 
 
 ## Online Demo
@@ -79,11 +87,13 @@ There are a few formats supported by the formatting method, as illustrated below
 
 ```php
 // Produces "+41446681800"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164) . PHP_EOL;
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164);
+
 // Produces "044 668 18 00"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::NATIONAL) . PHP_EOL;
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::NATIONAL);
+
 // Produces "+41 44 668 18 00"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::INTERNATIONAL) . PHP_EOL;
+echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::INTERNATIONAL);
 ```
 
 You could also choose to format the number in the way it is dialled from another country:
@@ -110,24 +120,29 @@ $gbNumberProto = $phoneUtil->parse("0161 496 0000", "GB");
 $geocoder = \libphonenumber\geocoding\PhoneNumberOfflineGeocoder::getInstance();
 
 // Outputs "Zurich"
-echo $geocoder->getDescriptionForNumber($swissNumberProto, "en_US") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($swissNumberProto, "en_US");
+
 // Outputs "Zürich"
-echo $geocoder->getDescriptionForNumber($swissNumberProto, "de_DE") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($swissNumberProto, "de_DE");
+
 // Outputs "Zurigo"
-echo $geocoder->getDescriptionForNumber($swissNumberProto, "it_IT") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($swissNumberProto, "it_IT");
 
 
 // Outputs "Mountain View, CA"
-echo $geocoder->getDescriptionForNumber($usNumberProto, "en_US") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($usNumberProto, "en_US");
+
 // Outputs "Mountain View, CA"
-echo $geocoder->getDescriptionForNumber($usNumberProto, "de_DE") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($usNumberProto, "de_DE");
+
 // Outputs "미국" (Korean for United States)
-echo $geocoder->getDescriptionForNumber($usNumberProto, "ko-KR") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($usNumberProto, "ko-KR");
 
 // Outputs "Manchester"
-echo $geocoder->getDescriptionForNumber($gbNumberProto, "en_GB") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($gbNumberProto, "en_GB");
+
 // Outputs "영국" (Korean for United Kingdom)
-echo $geocoder->getDescriptionForNumber($gbNumberProto, "ko-KR") . PHP_EOL;
+echo $geocoder->getDescriptionForNumber($gbNumberProto, "ko-KR");
 ```
 
 ### ShortNumberInfo
@@ -137,18 +152,22 @@ $shortNumberInfo = \libphonenumber\ShortNumberInfo::getInstance();
 
 // true
 var_dump($shortNumberInfo->isEmergencyNumber("999", "GB"));
+
 // true
 var_dump($shortNumberInfo->connectsToEmergencyNumber("999", "GB"));
+
 // false
 var_dump($shortNumberInfo->connectsToEmergencyNumber("911", "GB"));
 
 // true
 var_dump($shortNumberInfo->isEmergencyNumber("911", "US"));
+
 // true
 var_dump($shortNumberInfo->connectsToEmergencyNumber("911", "US"));
 
 // false
 var_dump($shortNumberInfo->isEmergencyNumber("911123", "US"));
+
 // true
 var_dump($shortNumberInfo->connectsToEmergencyNumber("911123", "US"));
 ```
@@ -197,4 +216,4 @@ Other packages exist that integrate libphonenumber-for-php into frameworks.
 These packages are supplied by third parties, and their quality can not be guaranteed.
 
  - Symfony: [PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)
- - Laravel: [Laravel Phone Validator](https://github.com/Propaganistas/laravel-phone)
+

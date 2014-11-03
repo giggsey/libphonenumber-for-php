@@ -1,7 +1,7 @@
 {
     "name": "giggsey/libphonenumber-for-php",
     "type": "library",
-    "description": "Unofficial PHP Port of Google's libphonenumber",
+    "description": "PHP Port of Google's libphonenumber",
     "keywords": ["phonenumber", "libphonenumber", "mobile", "validation", "geocoding", "geolocation"],
     "homepage": "https://github.com/giggsey/libphonenumber-for-php",
     "license": "Apache-2.0",
@@ -45,7 +45,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.x-dev"
+            "dev-master": "7.x-dev"
         }
     }
 }
