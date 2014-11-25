@@ -31,7 +31,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             7[578]|
-            8[7-9]
+            8[47-9]
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7}',
@@ -132,7 +132,7 @@ return array (
       array (
         0 => '
             7[5-9]|
-            8[7-9]
+            8[47-9]
           ',
       ),
       'nationalPrefixFormattingRule' => '',

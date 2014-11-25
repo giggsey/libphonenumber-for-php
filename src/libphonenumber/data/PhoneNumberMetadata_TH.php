@@ -10,7 +10,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           [2-9]\\d{7,8}|
-          1\\d{3}(?:\\d{6})?
+          1\\d{3}(?:\\d{5,6})?
         ',
     'PossibleNumberPattern' => '\\d{4}|\\d{8,10}',
   ),
@@ -32,7 +32,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            61|
+            14|
+            6[1-3]|
             [89]\\d
           )\\d{7}
         ',
@@ -130,11 +131,14 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([3-9]\\d)(\\d{3})(\\d{3,4})',
+      'pattern' => '([13-9]\\d)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[3-9]',
+        0 => '
+            14|
+            [3-9]
+          ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

@@ -6,6 +6,7 @@
 
 return array (
   25729 => 'Leo',
+  25769 => 'Viettel',
   25771 => 'Leo',
   25775 => 'Smart Mobile',
   25776 => 'Econet',

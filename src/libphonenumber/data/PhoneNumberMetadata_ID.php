@@ -21,7 +21,8 @@ return array (
               500\\d{3}|
               9\\d{6}
             )|
-            [24]\\d{7,8}
+            2\\d{6,8}|
+            4\\d{7,8}
           )|
           (?:
             2(?:
@@ -66,7 +67,7 @@ return array (
               4[1-6]
             )|
             7(?:
-              1[1-46-9]|
+              1[1-9]|
               2[14-9]|
               [36]\\d|
               4[1-8]|
@@ -84,7 +85,7 @@ return array (
             )
           )\\d{5,8}
         ',
-    'PossibleNumberPattern' => '\\d{5,10}',
+    'PossibleNumberPattern' => '\\d{5,11}',
     'ExampleNumber' => '612345678',
   ),
   'mobile' => 
@@ -265,7 +266,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{3})(\\d{5,7})',
+      'pattern' => '(\\d{3})(\\d{5,8})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
