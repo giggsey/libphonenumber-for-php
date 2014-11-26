@@ -20,7 +20,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          6\\d{8}|
+          [6-7]\\d{8}|
           7[5-9]\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{9}',
