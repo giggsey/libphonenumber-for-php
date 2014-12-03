@@ -1,8 +1,8 @@
-# libphonenumber for PHP [![Build Status](https://travis-ci.org/giggsey/libphonenumber-for-php.svg?branch=master)](https://travis-ci.org/giggsey/libphonenumber-for-php) [![Coverage Status](https://img.shields.io/coveralls/giggsey/libphonenumber-for-php.svg)](https://coveralls.io/r/giggsey/libphonenumber-for-php?branch=master)
+# libphonenumber for PHP [![Build Status](https://img.shields.io/travis/giggsey/libphonenumber-for-php.svg?style=flat-square)](https://travis-ci.org/giggsey/libphonenumber-for-php) [![Coverage Status](https://img.shields.io/coveralls/giggsey/libphonenumber-for-php.svg?style=flat-square)](https://coveralls.io/r/giggsey/libphonenumber-for-php?branch=master)
 
-[![Total Downloads](https://poser.pugx.org/giggsey/libphonenumber-for-php/downloads.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
-[![Latest Stable Version](https://poser.pugx.org/giggsey/libphonenumber-for-php/v/stable.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
-[![License](https://poser.pugx.org/giggsey/libphonenumber-for-php/license.svg)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![Total Downloads](https://img.shields.io/packagist/dt/giggsey/libphonenumber-for-php.svg?style=flat-square)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![Latest Stable Version](https://img.shields.io/packagist/v/giggsey/libphonenumber-for-php.svg?style=flat-square)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
+[![License](http://img.shields.io/badge/license-Apache%202.0-red.svg?style=flat-square)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and was forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
