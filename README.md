@@ -5,7 +5,7 @@
 [![License](http://img.shields.io/badge/license-Apache%202.0-red.svg?style=flat-square)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
-A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://code.google.com/p/libphonenumber/) and was forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
+A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber) and was forked from a version by [Davide Mendolia](https://github.com/davideme/libphonenumber-for-PHP).
 
 
 # Highlights of functionality
