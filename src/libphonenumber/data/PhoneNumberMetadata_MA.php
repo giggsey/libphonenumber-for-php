@@ -50,9 +50,8 @@ return array (
     'NationalNumberPattern' => '
           6(?:
             0[0-8]|
-            [12-7]\\d|
-            8[01]|
-            9[2457-9]
+            [12-79]\\d|
+            8[01]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',

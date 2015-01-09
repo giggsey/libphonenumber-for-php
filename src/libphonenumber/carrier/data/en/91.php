@@ -52,6 +52,8 @@ return array (
   917092 => 'Idea',
   917093 => 'AirTel',
   917094 => 'Vodafone',
+  917096 => 'Idea',
+  917098 => 'Aircel',
   917200 => 'TATA DOCOMO',
   917204 => 'TATA DOCOMO',
   917205 => 'TATA DOCOMO',

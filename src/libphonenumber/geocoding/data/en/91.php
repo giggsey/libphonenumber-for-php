@@ -1132,6 +1132,7 @@ return array (
   914575 => 'Sivaganga, Tamil Nadu',
   914576 => 'Mudukulathur, Tamil Nadu',
   914577 => 'Tirupathur, Tamil Nadu',
+  91460 => 'Taliparamba, Kerala',
   91461 => 'Thoothukudi, Tamil Nadu',
   91462 => 'Tirunelvelli, Tamil Nadu',
   914630 => 'Srivaikundam, Tamil Nadu',

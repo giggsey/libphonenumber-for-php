@@ -21,6 +21,7 @@ return array (
   92313 => 'Zong',
   92314 => 'Zong',
   92315 => 'Zong',
+  92316 => 'Zong',
   9232 => 'Warid',
   92330 => 'Ufone',
   92331 => 'Ufone',
