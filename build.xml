@@ -3,8 +3,8 @@
 
     <property name="build.script" value="build/build.php"/>
 
-    <property name="svn.url" value="http://libphonenumber.googlecode.com/svn/trunk/"/>
-    <property name="svn.path" value="libphonenumber-data-dir"/>
+    <property name="git.url" value="https://github.com/googlei18n/libphonenumber.git"/>
+    <property name="git.path" value="libphonenumber-data-dir"/>
 
     <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
     <property name="data.testPrefixMapperData" value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
@@ -75,18 +75,19 @@
         <mkdir dir="${data.timezoneData}"/>
     </target>
 
-    <target name="svn-checkout">
-        <exec executable="svn" passthru="true" checkreturn="true">
-            <arg value="checkout"/>
-            <arg value="${svn.url}"/>
-            <arg value="${svn.path}"/>
+    <target name="git-pull">
+        <delete dir="${git.path}"/>
+        <exec executable="git" passthru="true" checkreturn="true">
+            <arg value="clone"/>
+            <arg value="${git.url}"/>
+            <arg value="${git.path}"/>
         </exec>
     </target>
 
-    <target name="build-test-metadata" description="Build test Phone Metadata" depends="svn-checkout">
+    <target name="build-test-metadata" description="Build test Phone Metadata" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
-            <arg value="${svn.path}/resources/PhoneNumberMetadataForTesting.xml"/>
+            <arg value="${git.path}/resources/PhoneNumberMetadataForTesting.xml"/>
             <arg value="${data.testCoreData}"/>
             <arg value="PhoneNumberMetadataForTesting"/>
             <arg value="CountryCodeToRegionCodeMapForTesting"/>
@@ -95,27 +96,27 @@
         </exec>
     </target>
 
-    <target name="build-geo-test-data" depends="svn-checkout">
+    <target name="build-geo-test-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
-            <arg value="${svn.path}/resources/test/geocoding/"/>
+            <arg value="${git.path}/resources/test/geocoding/"/>
             <arg value="${data.testPrefixMapperData}"/>
         </exec>
     </target>
 
-    <target name="build-carrier-test-data" depends="svn-checkout">
+    <target name="build-carrier-test-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
-            <arg value="${svn.path}/resources/test/carrier/"/>
+            <arg value="${git.path}/resources/test/carrier/"/>
             <arg value="${data.testCarrierData}"/>
         </exec>
     </target>
 
 
-    <target name="build-phone-metadata" depends="svn-checkout">
+    <target name="build-phone-metadata" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
-            <arg value="${svn.path}/resources/PhoneNumberMetadata.xml"/>
+            <arg value="${git.path}/resources/PhoneNumberMetadata.xml"/>
             <arg value="${data.coreData}"/>
             <arg value="PhoneNumberMetadata"/>
             <arg value="CountryCodeToRegionCodeMap"/>
@@ -124,10 +125,10 @@
         </exec>
     </target>
 
-    <target name="build-short-metadata" depends="svn-checkout">
+    <target name="build-short-metadata" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
-            <arg value="${svn.path}/resources/ShortNumberMetadata.xml"/>
+            <arg value="${git.path}/resources/ShortNumberMetadata.xml"/>
             <arg value="${data.coreData}"/>
             <arg value="ShortNumberMetadata"/>
             <arg value="ShortNumbersRegionCodeSet"/>
@@ -136,10 +137,10 @@
         </exec>
     </target>
 
-    <target name="build-alternate-metadata" depends="svn-checkout">
+    <target name="build-alternate-metadata" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="BuildMetadataPHPFromXML"/>
-            <arg value="${svn.path}/resources/PhoneNumberAlternateFormats.xml"/>
+            <arg value="${git.path}/resources/PhoneNumberAlternateFormats.xml"/>
             <arg value="${data.coreData}"/>
             <arg value="PhoneNumberAlternateFormats"/>
             <arg value="AlternateFormatsCountryCodeSet"/>
@@ -148,34 +149,34 @@
         </exec>
     </target>
 
-    <target name="build-carrier-data" depends="svn-checkout">
+    <target name="build-carrier-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
-            <arg value="${svn.path}/resources/carrier/"/>
+            <arg value="${git.path}/resources/carrier/"/>
             <arg value="${data.carrierData}"/>
         </exec>
     </target>
 
-    <target name="build-geo-data" depends="svn-checkout">
+    <target name="build-geo-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
-            <arg value="${svn.path}/resources/geocoding/"/>
+            <arg value="${git.path}/resources/geocoding/"/>
             <arg value="${data.geocodingData}"/>
         </exec>
     </target>
 
-    <target name="build-timezones-data" depends="svn-checkout">
+    <target name="build-timezones-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GenerateTimeZonesMapData"/>
-            <arg value="${svn.path}/resources/timezones/map_data.txt"/>
+            <arg value="${git.path}/resources/timezones/map_data.txt"/>
             <arg value="${data.timezoneData}"/>
         </exec>
     </target>
 
-    <target name="build-timezones-test-data" depends="svn-checkout">
+    <target name="build-timezones-test-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GenerateTimeZonesMapData"/>
-            <arg value="${svn.path}/resources/test/timezones/map_data.txt"/>
+            <arg value="${git.path}/resources/test/timezones/map_data.txt"/>
             <arg value="${data.testTimezoneData}"/>
         </exec>
     </target>
