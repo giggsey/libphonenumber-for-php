@@ -18,18 +18,17 @@ return array (
             20[2-8]|
             3(?:
               0[2-7]|
-              1[35-7]|
-              2[3567]|
+              [12][35-7]|
               3[4-7]
             )|
             4(?:
-              0[237]|
-              1[27]
+              0[2367]|
+              1[267]
             )|
             5(?:
-              0[47]|
-              1[27]|
-              2[378]
+              0[467]|
+              1[267]|
+              2[367]
             )
           )\\d{5}
         ',
@@ -40,8 +39,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           6(?:
+            00\\d|
             32\\d|
             [89]\\d{2}|
+            61\\d|
             7(?:
               [0-8]\\d|
               9(?:
@@ -56,7 +57,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800[28]\\d{4}',
+    'NationalNumberPattern' => '80\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80080002',
   ),
@@ -64,10 +65,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            88\\d|
             9(?:
-              4[13-8]|
-              5[16-8]
+              4[1568]|
+              5[178]
             )
           )\\d{5}
         ',
@@ -145,11 +145,11 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-57-9]|6[3789]',
+        0 => '[2-57-9]|6[036-9]',
         1 => '
             [2-57-9]|
             6(?:
-              [389]|
+              [03689]|
               7(?:
                 [0-8]|
                 9[3-9]

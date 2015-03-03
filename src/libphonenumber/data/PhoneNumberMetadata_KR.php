@@ -34,7 +34,7 @@ return array (
   array (
     'NationalNumberPattern' => '1[0-26-9]\\d{7,8}',
     'PossibleNumberPattern' => '\\d{9,10}',
-    'ExampleNumber' => '1023456789',
+    'ExampleNumber' => '1000000000',
   ),
   'tollFree' => 
   array (

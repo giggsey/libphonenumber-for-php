@@ -5,7 +5,7 @@
  */
 
 return array (
-  1819 => 'Québec',
+  1819 => 'Quebec',
   1819205 => 'Gatineau, QC',
   1819228 => 'Louiseville, QC',
   1819242 => 'Grenville, QC',

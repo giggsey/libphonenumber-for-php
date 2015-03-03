@@ -19,9 +19,9 @@ return array (
     'NationalNumberPattern' => '
           (?:
             3[2-79]|
-            [49][2-689]|
+            [49][2-9]|
             6[235-9]|
-            7[2-5789]
+            7[2-57-9]
           )\\d{6}|
           24099\\d{3}
         ',
@@ -66,8 +66,9 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '70\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '701234567',
   ),
   'voip' => 
   array (
@@ -131,7 +132,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [3467]|
+            [346]|
+            7[2-57-9]|
             9[1-9]
           ',
       ),
@@ -174,6 +176,7 @@ return array (
               [69]|
               7[0-35-9]
             )|
+            70|
             86
           ',
       ),

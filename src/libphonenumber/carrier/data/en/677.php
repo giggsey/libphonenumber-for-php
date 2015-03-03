@@ -5,6 +5,7 @@
  */
 
 return array (
+  67773 => 'Solomon Telekom',
   67774 => 'Solomon Telekom',
   67775 => 'Solomon Telekom',
   67776 => 'Solomon Telekom',
