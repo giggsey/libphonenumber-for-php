@@ -95,7 +95,7 @@ return array (
             55|
             7[25-9]|
             8[05-9]|
-            9[015-9]
+            9[0-25-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',

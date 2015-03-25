@@ -55,7 +55,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90[01]\\d{5}',
+    'NationalNumberPattern' => '90[015]\\d{5}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90012345',
   ),
@@ -232,9 +232,13 @@ return array (
             )|
             [3-5]|
             7[1-9]|
-            [89](?:
+            8(?:
               [1-9]|
               0[2-9]
+            )|
+            9(?:
+              [1-9]|
+              0[2-46-9]
             )
           ',
       ),
@@ -248,8 +252,9 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [89]0[01]|
-            70
+            70|
+            80[01]|
+            90[015]
           ',
       ),
       'nationalPrefixFormattingRule' => '',
