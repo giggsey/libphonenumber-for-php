@@ -22,7 +22,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 The library can be installed via [composer](http://getcomposer.org/). You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
 
-The PECL [mbstring](http://php.net/mbstring) extension is required for this library to be used.
+The php-intl and PECL [mbstring](http://php.net/mbstring) extensions are required for this library to be used.
 
 ```json
 {
