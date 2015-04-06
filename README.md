@@ -87,13 +87,13 @@ There are a few formats supported by the formatting method, as illustrated below
 
 ```php
 // Produces "+41446681800"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::E164);
+echo $phoneUtil->format($swissNumberProto, \libphonenumber\PhoneNumberFormat::E164);
 
 // Produces "044 668 18 00"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::NATIONAL);
+echo $phoneUtil->format($swissNumberProto, \libphonenumber\PhoneNumberFormat::NATIONAL);
 
 // Produces "+41 44 668 18 00"
-echo $phoneUtil->format($swissNumberProto, PhoneNumberFormat::INTERNATIONAL);
+echo $phoneUtil->format($swissNumberProto, \libphonenumber\PhoneNumberFormat::INTERNATIONAL);
 ```
 
 You could also choose to format the number in the way it is dialled from another country:
