@@ -41,30 +41,25 @@ return array (
           6(?:
             51[01]|
             6(?:
-              [01][0-4]|
+              0[0-6]|
               2[016-9]|
-              88
-            )|
-            710
+              39
+            )
           )\\d{5}|
           7(?:
-            36|
-            4[25]|
-            56|
-            [7-9]\\d
+            [37-9]\\d|
+            42|
+            56
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
-    'ExampleNumber' => '661234567',
+    'ExampleNumber' => '660234567',
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => '
           80(?:
-            0(?:
-              2[238]|
-              79
-            )|
+            02[28]|
             9\\d{2}
           )\\d{2}
         ',
@@ -75,18 +70,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           90(?:
-            0(?:
-              2[278]|
-              79
-            )|
+            02[258]|
             1(?:
               23|
-              3[012]
+              3[14]
             )|
-            6(?:
-              4\\d|
-              6[0126]
-            )
+            66[136]
           )\\d{2}
         ',
     'PossibleNumberPattern' => '\\d{7}',
@@ -99,9 +88,8 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '701\\d{4}',
-    'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '7011234',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
   ),
   'voip' => 
   array (
@@ -116,13 +104,13 @@ return array (
   'uan' => 
   array (
     'NationalNumberPattern' => '
-          87(?:
-            0[128]|
-            7[0-4]
-          )\\d{3}
+          870(?:
+            28|
+            87
+          )\\d{2}
         ',
     'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '8770123',
+    'ExampleNumber' => '8702812',
   ),
   'emergency' => 
   array (
@@ -133,13 +121,13 @@ return array (
   array (
     'NationalNumberPattern' => '
           697(?:
-            [35]6|
-            4[25]|
+            42|
+            56|
             [7-9]\\d
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '697361234',
+    'ExampleNumber' => '697861234',
   ),
   'shortCode' => 
   array (
@@ -171,42 +159,27 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{3})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{3})(\\d{4})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '
-            [23]|
-            7[3-57-9]|
-            87
-          ',
+        0 => '[23789]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
-      'pattern' => '(6\\d)(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '6',
+        0 => '6[56]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     2 => 
-    array (
-      'pattern' => '(6[567]\\d)(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '6[567]',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    3 => 
     array (
       'pattern' => '(69)(7\\d{2})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -215,28 +188,6 @@ return array (
         0 => '697',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    4 => 
-    array (
-      'pattern' => '([7-9]0\\d)(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[7-9]0',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    5 => 
-    array (
-      'pattern' => '([89]0\\d)(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[89]0',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

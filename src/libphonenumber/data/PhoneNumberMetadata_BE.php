@@ -16,13 +16,15 @@ return array (
     'NationalNumberPattern' => '
           (?:
             1[0-69]|
-            [49][23]|
+            [23][2-8]|
+            4[23]|
             5\\d|
             6[013-57-9]|
             71|
-            8[0-79]
-          )[1-9]\\d{5}|
-          [23][2-8]\\d{6}
+            8[1-79]|
+            9[2-4]
+          )\\d{6}|
+          80[2-8]\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '12345678',
@@ -31,8 +33,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           4(?:
-            [679]\\d|
-            8[03-9]
+            6[0135-8]|
+            [79]\\d|
+            8[3-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -48,8 +51,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            70[2-7]|
-            90\\d
+            70[2-467]|
+            90[0-79]
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -121,7 +124,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(4[6-9]\\d)(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -132,13 +135,14 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([2-49])(\\d{3})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d)(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
         0 => '
             [23]|
-            [49][23]
+            4[23]|
+            9[2-4]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
@@ -146,7 +150,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([15-8]\\d)(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -164,7 +168,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '([89]\\d{2})(\\d{2})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

@@ -5,6 +5,7 @@
  */
 
 return array (
+  22788 => 'Airtel',
   22789 => 'Airtel',
   22790 => 'Orange',
   22791 => 'Orange',

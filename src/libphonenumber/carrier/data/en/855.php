@@ -15,6 +15,7 @@ return array (
   85568 => 'Beeline',
   85569 => 'Smart',
   85570 => 'Smart',
+  85571 => 'Metfone',
   85577 => 'Cellcard',
   85578 => 'Cellcard',
   85586 => 'Smart',

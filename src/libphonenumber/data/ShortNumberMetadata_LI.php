@@ -80,24 +80,14 @@ return array (
               [278]|
               45
             )|
-            4(?:
-              [03-57]|
-              14
-            )|
-            50\\d{4}|
-            6(?:
-              00|
-              [1-4]
-            )|
+            4[3-57]|
+            50|
             75|
-            8(?:
-              1[128]|
-              7
-            )
+            81[18]
           )
         ',
     'PossibleNumberPattern' => '\\d{3,4}',
-    'ExampleNumber' => '1600',
+    'ExampleNumber' => '1145',
   ),
   'standardRate' => 
   array (

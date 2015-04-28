@@ -27,8 +27,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
-            [05-9]\\d{7}|
-            29\\d{6}
+            [014-9]\\d{7}|
+            2[89]\\d{6}
           )
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -114,20 +114,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [2-6]|
-            7[013-9]
+            [2-7]
           ',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    1 => 
-    array (
-      'pattern' => '(729)(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '729',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
