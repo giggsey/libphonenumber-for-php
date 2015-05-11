@@ -41,6 +41,9 @@ class ShortNumberInfo
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
 
         $this->currentFilePrefix = dirname(__FILE__) . '/data/' . self::META_DATA_FILE_PREFIX;
+
+        // Initialise PhoneNumberUtil to make sure regex's are setup correctly
+        PhoneNumberUtil::getInstance();
     }
 
     /**
