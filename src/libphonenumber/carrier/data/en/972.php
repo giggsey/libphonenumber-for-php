@@ -16,6 +16,7 @@ return array (
   9725567 => 'Rami Levy',
   9725570 => 'Cellact',
   9725571 => 'Cellact',
+  9725587 => 'Alon',
   9725588 => 'Alon',
   9725589 => 'Alon',
   9725597 => 'Azi Communications',

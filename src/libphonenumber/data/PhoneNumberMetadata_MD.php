@@ -43,7 +43,6 @@ return array (
               [089]\\d{2}|
               1[01]\\d|
               21\\d|
-              50\\d|
               7(?:
                 [1-6]\\d|
                 7[0-4]
@@ -57,7 +56,7 @@ return array (
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '65012345',
+    'ExampleNumber' => '62112345',
   ),
   'tollFree' => 
   array (

@@ -9,7 +9,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[235-9]\\d{7,8}',
-    'PossibleNumberPattern' => '\\d{7,9}',
+    'PossibleNumberPattern' => '\\d{8,9}',
   ),
   'fixedLine' => 
   array (
@@ -21,8 +21,8 @@ return array (
                 3[0-57-8]|
                 4[24-7]|
                 5[0-24-8]|
-                [6-8][02]|
-                9[0-2]
+                [6-8][023]|
+                9[0-3]
               )|
               7(?:
                 0[1-79]|
@@ -38,13 +38,13 @@ return array (
               1[1-35-7]|
               2[024-7]|
               3\\d|
-              4[0-2]|
-              [57][02]|
-              60
+              4[0-3]|
+              [57][023]|
+              6[03]
             )|
             53(?:
-              0[0-2]|
-              [13][02]|
+              0[0-3]|
+              [13][023]|
               2[0-59]|
               49|
               5[0-35-9]|
@@ -55,7 +55,10 @@ return array (
             )|
             6(?:
               2[50]0|
-              300|
+              3(?:
+                 00|
+                 33
+              )|
               4(?:
                 0[0125]|
                 1[2-7]|
@@ -81,11 +84,11 @@ return array (
             87(?:
               [02]0|
               7[08]|
-              9[09]
+              90
             )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '\\d{7,8}',
+    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '62001234',
   ),
   'mobile' => 

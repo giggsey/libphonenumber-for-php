@@ -51,6 +51,7 @@ return array (
             )|
             9(?:
               0[09]|
+              22|
               4[049]|
               55|
               6[069]|
@@ -139,18 +140,24 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[1269]',
+        0 => '
+            [126]|
+            9[04-9]
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
     array (
-      'pattern' => '(5[015]\\d)(\\d{5})',
+      'pattern' => '(\\d{3})(\\d{5})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '5',
+        0 => '
+            5[015]|
+            92
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

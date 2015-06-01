@@ -10,7 +10,6 @@ return array (
   373610 => 'Orange',
   373611 => 'Orange',
   373621 => 'Orange',
-  373650 => 'Eventis Mobile',
   373671 => 'Moldtelecom',
   373672 => 'Moldtelecom',
   373673 => 'Moldtelecom',

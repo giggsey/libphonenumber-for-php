@@ -39,4 +39,5 @@ return array (
   92345 => 'Telenor',
   92346 => 'Telenor',
   92347 => 'Telenor',
+  92348 => 'Telenor',
 );

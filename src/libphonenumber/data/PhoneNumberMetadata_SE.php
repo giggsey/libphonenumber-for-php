@@ -104,7 +104,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7[0236]\\d{7}',
+    'NationalNumberPattern' => '7[02369]\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '701234567',
   ),

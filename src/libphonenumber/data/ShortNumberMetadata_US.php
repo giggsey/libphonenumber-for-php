@@ -160,7 +160,7 @@ return array (
           )|
           [2-9](?:
             11|
-            \\d{4,5}
+            \\d{3,5}
           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
@@ -207,6 +207,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '
+          [2-9]\\d{3}|
           33669|
           611
         ',

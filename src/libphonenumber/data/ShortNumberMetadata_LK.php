@@ -58,7 +58,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '11[0189]',
+    'NationalNumberPattern' => '11[02689]',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '119',
   ),
@@ -69,7 +69,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11[0189]',
+    'NationalNumberPattern' => '11[024-9]',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '119',
   ),

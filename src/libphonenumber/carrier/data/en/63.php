@@ -40,8 +40,10 @@ return array (
   63947 => 'Smart',
   63948 => 'Smart',
   63949 => 'Smart',
+  63950 => 'Smart',
   63975 => 'Globe',
   63976 => 'Globe',
   63995 => 'Globe',
+  63998 => 'Smart',
   63999 => 'Smart',
 );
