@@ -308,6 +308,11 @@ class ShortNumberInfo
 
         foreach ($regionCodes as $region) {
             $phoneMetadata = $this->getMetadataForRegion($region);
+
+            if ($phoneMetadata === null) {
+                continue;
+            }
+
             if ($this->matcherAPI->matchesPossibleNumber($shortNumber, $phoneMetadata->getGeneralDesc())) {
                 return true;
             }
