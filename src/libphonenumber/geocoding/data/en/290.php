@@ -5,10 +5,10 @@
  */
 
 return array (
-  2902 => 'Jamestown',
-  2903 => 'St. Helena',
-  2904 => 'St. Helena',
-  2906 => 'St. Helena',
-  2907 => 'St. Helena',
+  29022 => 'Jamestown',
+  29023 => 'St. Helena',
+  29024 => 'St. Helena',
+  29026 => 'St. Helena',
+  29027 => 'St. Helena',
   2908 => 'Tristan da Cunha',
 );

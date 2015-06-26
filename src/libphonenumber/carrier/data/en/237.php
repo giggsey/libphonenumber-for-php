@@ -17,5 +17,6 @@ return array (
   237659 => 'Orange',
   23766 => 'NEXTTEL',
   23767 => 'MTN Cameroon',
+  23768 => 'MTN Cameroon',
   23769 => 'Orange',
 );

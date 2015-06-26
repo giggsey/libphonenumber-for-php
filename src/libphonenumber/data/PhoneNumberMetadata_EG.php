@@ -163,9 +163,9 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-             1[012]|
-             [89]00
-           ',
+            1[012]|
+            [89]00
+          ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -177,10 +177,10 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-             1[35]|
-             [4-6]|
-             [89][2-9]
-           ',
+            1[35]|
+            [4-6]|
+            [89][2-9]
+          ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

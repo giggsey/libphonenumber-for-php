@@ -17,11 +17,13 @@ return array (
           (?:
             [14-6]\\d{2}|
             7(?:
-              [2-579]\\d|
+              [2-57]\\d|
               62|
-              8[0-7]
+              8[0-7]|
+              9[04-9]
             )|
-            [89][2-9]\\d
+            8[02-9]\\d|
+            9\\d{2}
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7}',
@@ -33,10 +35,12 @@ return array (
           (?:
             3\\d|
             7(?:
-              [019]\\d|
+              [01]\\d|
               6[013-9]|
-              8[89]
-            )
+              8[89]|
+              9[1-3]
+            )|
+            81\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,8}',
@@ -55,7 +59,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '8[01]\\d{6}',
+    'NationalNumberPattern' => '80\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
   ),
@@ -126,11 +130,13 @@ return array (
         0 => '
             [13-6]|
             7(?:
-              [2-579]|
+              [2-57]|
               62|
-              8[0-7]
+              8[0-7]|
+              9[04-9]
             )|
-            [89][2-9]
+            8[02-9]|
+            9
             ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
@@ -145,9 +151,10 @@ return array (
         0 => '
             [89][01]|
             7(?:
-              [019]|
+              [01]|
               6[013-9]|
-              8[89]
+              8[89]|
+              9[1-3]
             )
           ',
       ),

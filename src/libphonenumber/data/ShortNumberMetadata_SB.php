@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
+    'NationalNumberPattern' => '[127-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
+    'NationalNumberPattern' => '[127-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
+    'NationalNumberPattern' => '[127-9]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'tollFree' => 
@@ -71,12 +71,17 @@ return array (
   array (
     'NationalNumberPattern' => '
           1(?:
-            0[02-79]|
+            [02]\\d|
             1[12]|
-            2[0-26]|
-            4[189]|
-            68
+            [35][01]|
+            [49][1-9]|
+            6[2-9]|
+            7[7-9]|
+            8[0-8]
           )|
+          269|
+          777|
+          835|
           9(?:
             [01]1|
             22|

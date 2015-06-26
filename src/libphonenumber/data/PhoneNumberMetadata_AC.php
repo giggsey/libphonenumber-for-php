@@ -8,26 +8,31 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-7]\\d{3,5}',
+    'NationalNumberPattern' => '
+          [46]\\d{4}|
+          [2-467]\\d{3}|
+          [01589]\\d{5}
+        ',
     'PossibleNumberPattern' => '\\d{4,6}',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
+          6[2-467]\\d{3}|
           (?:
             [267]\\d|
             3[0-5]|
             4[4-69]
           )\\d{2}
         ',
-    'PossibleNumberPattern' => '\\d{4}',
-    'ExampleNumber' => '6889',
+    'PossibleNumberPattern' => '\\d{4,5}',
+    'ExampleNumber' => '62889',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5\\d{5}',
-    'PossibleNumberPattern' => '\\d{6}',
-    'ExampleNumber' => '501234',
+    'NationalNumberPattern' => '4\\d{4}',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '40123',
   ),
   'tollFree' => 
   array (
@@ -61,8 +66,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '[01589]\\d{5}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '542011',
   ),
   'emergency' => 
   array (

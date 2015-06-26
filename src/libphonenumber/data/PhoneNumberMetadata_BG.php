@@ -45,9 +45,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            8[7-9]|
-            98
-          )\\d{7}|
+            8[7-9]\\d|
+            9(?:
+              8\\d|
+              99
+            )
+          )\\d{6}|
           4(?:
             3[0789]|
             8\\d
@@ -195,6 +198,17 @@ return array (
     ),
     5 => 
     array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '999',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    6 => 
+    array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{2,3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -210,7 +224,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    6 => 
+    7 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',

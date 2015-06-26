@@ -5,6 +5,7 @@
  */
 
 return array (
+  186827 => 'Digicel',
   186828 => 'Digicel',
   186829 => 'Digicel',
   18683 => 'Digicel',

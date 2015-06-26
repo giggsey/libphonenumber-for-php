@@ -25,7 +25,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           5(?:
-            [02347-9]\\d{2}|
+            [02-47-9]\\d{2}|
             5(?:
               01|
               2[23]|
@@ -85,20 +85,23 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
+            18\\d|
             2[23]\\d|
             3[237]\\d|
             47\\d|
             6(?:
               5\\d|
-              8[068]
+              8[0168]
             )|
             7\\d{2}|
             8(?:
+              2\\d|
               33|
               55|
               77|
               81
-            )
+            )|
+            99\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9}',

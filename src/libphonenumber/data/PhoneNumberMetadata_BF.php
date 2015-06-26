@@ -8,24 +8,24 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[24-7]\\d{7}',
+    'NationalNumberPattern' => '[267]\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          (?:
-            20(?:
+          2(?:
+            0(?:
               49|
               5[23]|
               9[016-9]
             )|
-            40(?:
+            4(?:
               4[569]|
               5[4-6]|
               7[0179]
             )|
-            50(?:
+            5(?:
               [34]\\d|
               50
             )

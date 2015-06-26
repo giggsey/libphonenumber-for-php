@@ -5,6 +5,9 @@
  */
 
 return array (
-  24205 => 'Airtel',
-  24206 => 'Libertis Telecom',
+  24201 => 'Equateur Telecom',
+  24204 => 'Warid',
+  24205 => 'Celtel',
+  24206 => 'MTN',
+  2428001 => 'Hightech Pro',
 );
