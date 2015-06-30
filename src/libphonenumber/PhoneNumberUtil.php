@@ -206,7 +206,51 @@ class PhoneNumberUtil
      * @var string
      */
     private static $VALID_PHONE_NUMBER;
-    private static $numericCharacters = array();
+    private static $numericCharacters = array(
+        "\xef\xbc\x90" => 0,
+        "\xef\xbc\x91" => 1,
+        "\xef\xbc\x92" => 2,
+        "\xef\xbc\x93" => 3,
+        "\xef\xbc\x94" => 4,
+        "\xef\xbc\x95" => 5,
+        "\xef\xbc\x96" => 6,
+        "\xef\xbc\x97" => 7,
+        "\xef\xbc\x98" => 8,
+        "\xef\xbc\x99" => 9,
+
+        "\xd9\xa0" => 0,
+        "\xd9\xa1" => 1,
+        "\xd9\xa2" => 2,
+        "\xd9\xa3" => 3,
+        "\xd9\xa4" => 4,
+        "\xd9\xa5" => 5,
+        "\xd9\xa6" => 6,
+        "\xd9\xa7" => 7,
+        "\xd9\xa8" => 8,
+        "\xd9\xa9" => 9,
+
+        "\xdb\xb0" => 0,
+        "\xdb\xb1" => 1,
+        "\xdb\xb2" => 2,
+        "\xdb\xb3" => 3,
+        "\xdb\xb4" => 4,
+        "\xdb\xb5" => 5,
+        "\xdb\xb6" => 6,
+        "\xdb\xb7" => 7,
+        "\xdb\xb8" => 8,
+        "\xdb\xb9" => 9,
+
+        "\xe1\xa0\x90" => 0,
+        "\xe1\xa0\x91" => 1,
+        "\xe1\xa0\x92" => 2,
+        "\xe1\xa0\x93" => 3,
+        "\xe1\xa0\x94" => 4,
+        "\xe1\xa0\x95" => 5,
+        "\xe1\xa0\x96" => 6,
+        "\xe1\xa0\x97" => 7,
+        "\xe1\xa0\x98" => 8,
+        "\xe1\xa0\x99" => 9,
+    );
 
     /**
      * The metadata loader used to inject alternative metadata sources.
@@ -313,8 +357,6 @@ class PhoneNumberUtil
         self::$MOBILE_TOKEN_MAPPINGS = array();
         self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
         self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
-
-        self::loadNumericCharacters();
     }
 
     /**
@@ -344,53 +386,6 @@ class PhoneNumberUtil
             self::$instance = new PhoneNumberUtil($baseFileLocation, $metadataLoader, $countryCallingCodeToRegionCodeMap);
         }
         return self::$instance;
-    }
-
-    private static function loadNumericCharacters()
-    {
-        self::$numericCharacters[pack("H*", 'efbc90')] = 0;
-        self::$numericCharacters[pack("H*", 'efbc91')] = 1;
-        self::$numericCharacters[pack("H*", 'efbc92')] = 2;
-        self::$numericCharacters[pack("H*", 'efbc93')] = 3;
-        self::$numericCharacters[pack("H*", 'efbc94')] = 4;
-        self::$numericCharacters[pack("H*", 'efbc95')] = 5;
-        self::$numericCharacters[pack("H*", 'efbc96')] = 6;
-        self::$numericCharacters[pack("H*", 'efbc97')] = 7;
-        self::$numericCharacters[pack("H*", 'efbc98')] = 8;
-        self::$numericCharacters[pack("H*", 'efbc99')] = 9;
-
-        self::$numericCharacters[pack("H*", 'd9a0')] = 0;
-        self::$numericCharacters[pack("H*", 'd9a1')] = 1;
-        self::$numericCharacters[pack("H*", 'd9a2')] = 2;
-        self::$numericCharacters[pack("H*", 'd9a3')] = 3;
-        self::$numericCharacters[pack("H*", 'd9a4')] = 4;
-        self::$numericCharacters[pack("H*", 'd9a5')] = 5;
-        self::$numericCharacters[pack("H*", 'd9a6')] = 6;
-        self::$numericCharacters[pack("H*", 'd9a7')] = 7;
-        self::$numericCharacters[pack("H*", 'd9a8')] = 8;
-        self::$numericCharacters[pack("H*", 'd9a9')] = 9;
-
-        self::$numericCharacters[pack("H*", 'dbb0')] = 0;
-        self::$numericCharacters[pack("H*", 'dbb1')] = 1;
-        self::$numericCharacters[pack("H*", 'dbb2')] = 2;
-        self::$numericCharacters[pack("H*", 'dbb3')] = 3;
-        self::$numericCharacters[pack("H*", 'dbb4')] = 4;
-        self::$numericCharacters[pack("H*", 'dbb5')] = 5;
-        self::$numericCharacters[pack("H*", 'dbb6')] = 6;
-        self::$numericCharacters[pack("H*", 'dbb7')] = 7;
-        self::$numericCharacters[pack("H*", 'dbb8')] = 8;
-        self::$numericCharacters[pack("H*", 'dbb9')] = 9;
-
-        self::$numericCharacters[pack("H*", 'e1a090')] = 0;
-        self::$numericCharacters[pack("H*", 'e1a091')] = 1;
-        self::$numericCharacters[pack("H*", 'e1a092')] = 2;
-        self::$numericCharacters[pack("H*", 'e1a093')] = 3;
-        self::$numericCharacters[pack("H*", 'e1a094')] = 4;
-        self::$numericCharacters[pack("H*", 'e1a095')] = 5;
-        self::$numericCharacters[pack("H*", 'e1a096')] = 6;
-        self::$numericCharacters[pack("H*", 'e1a097')] = 7;
-        self::$numericCharacters[pack("H*", 'e1a098')] = 8;
-        self::$numericCharacters[pack("H*", 'e1a099')] = 9;
     }
 
     private function init($filePrefix)
