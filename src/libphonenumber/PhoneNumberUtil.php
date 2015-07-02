@@ -174,7 +174,19 @@ class PhoneNumberUtil
      * ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
      * @var array
      */
-    private static $asciiDigitMappings;
+    private static $asciiDigitMappings = array(
+        '0' => '0',
+        '1' => '1',
+        '2' => '2',
+        '3' => '3',
+        '4' => '4',
+        '5' => '5',
+        '6' => '6',
+        '7' => '7',
+        '8' => '8',
+        '9' => '9',
+    );
+
     /**
      * Regexp of all possible ways to write extensions, for use when parsing. This will be run as a
      * case-insensitive regexp match. Wide character versions are also provided after each ASCII
@@ -310,7 +322,6 @@ class PhoneNumberUtil
         $this->init($filePrefix);
         self::initCapturingExtnDigits();
         self::initExtnPatterns();
-        self::initAsciiDigitMappings();
         self::initExtnPattern();
         self::$PLUS_CHARS_PATTERN = "[" . self::PLUS_CHARS . "]+";
         self::$SEPARATOR_PATTERN = "[" . self::VALID_PUNCTUATION . "]+";
@@ -458,24 +469,6 @@ class PhoneNumberUtil
             "[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
             "[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . self::$CAPTURING_EXTN_DIGITS . "#?|" .
             "[- ]+(" . self::DIGITS . "{1,5})#");
-    }
-
-    private static function initAsciiDigitMappings()
-    {
-        // Simple ASCII digits map used to populate ALPHA_PHONE_MAPPINGS and
-        // ALL_PLUS_NUMBER_GROUPING_SYMBOLS.
-        self::$asciiDigitMappings = array(
-            '0' => '0',
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4',
-            '5' => '5',
-            '6' => '6',
-            '7' => '7',
-            '8' => '8',
-            '9' => '9',
-        );
     }
 
     private static function initExtnPattern()
