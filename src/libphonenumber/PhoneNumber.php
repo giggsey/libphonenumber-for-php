@@ -275,21 +275,21 @@ class PhoneNumber implements \Serializable
 
     public function __toString()
     {
-        return '+' . $this->getCountryCode() . $this->getNationalNumber();
+        return '+' . $this->countryCode . $this->nationalNumber;
     }
 
     public function serialize()
     {
         return serialize(
             array(
-                $this->getCountryCode(),
-                $this->getNationalNumber(),
-                $this->getExtension(),
-                $this->isItalianLeadingZero(),
-                $this->getNumberOfLeadingZeros(),
-                $this->getRawInput(),
-                $this->getCountryCodeSource(),
-                $this->getPreferredDomesticCarrierCode(),
+                $this->countryCode,
+                $this->nationalNumber,
+                $this->extension,
+                $this->italianLeadingZero,
+                $this->numberOfLeadingZeros,
+                $this->rawInput,
+                $this->countryCodeSource,
+                $this->preferredDomesticCarrierCode,
             )
         );
     }
