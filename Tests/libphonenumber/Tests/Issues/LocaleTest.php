@@ -172,7 +172,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'GW' => 'Guinea-Bissau',
             'GY' => 'Guyana',
             'HT' => 'Haiti',
-            'VA' => 'Vatican City',
             'HN' => 'Honduras',
             'HK' => 'Hong Kong SAR China',
             'HU' => 'Hungary',

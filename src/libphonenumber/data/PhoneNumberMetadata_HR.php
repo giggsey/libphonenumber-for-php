@@ -23,14 +23,19 @@ return array (
             3[1-5]|
             4[02-47-9]|
             5[1-3]
-          )\\d{6}
+          )\\d{6,7}
         ',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '12345678',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9[1257-9]\\d{6,10}',
+    'NationalNumberPattern' => '
+          9(?:
+            [1-9]\\d{6,10}|
+            01\\d{6,9}
+           )
+        ',
     'PossibleNumberPattern' => '\\d{8,12}',
     'ExampleNumber' => '912345678',
   ),
@@ -43,10 +48,9 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
-          6(?:
-            [09]\\d{7}|
-            [145]\\d{4,7}
-          )
+        6(?:
+          [01459]\\d{4,7}
+         )
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '611234',
@@ -74,7 +78,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '62\\d{6,7}',
+    'NationalNumberPattern' => '[76]2\\d{6,7}',
     'PossibleNumberPattern' => '\\d{8,9}',
     'ExampleNumber' => '62123456',
   ),
@@ -140,18 +144,18 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(62)(\\d{3})(\\d{3,4})',
+      'pattern' => '([67]2)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '62',
+        0 => '[67]2',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
     array (
-      'pattern' => '([2-5]\\d)(\\d{3})(\\d{3})',
+      'pattern' => '([2-5]\\d)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -200,7 +204,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            6[145]|
+            6[0145]|
             7
           ',
       ),
@@ -214,7 +218,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            6[145]|
+            6[0145]|
             7
           ',
       ),

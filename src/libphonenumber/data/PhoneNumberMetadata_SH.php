@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[25]\\d{4}',
+    'NationalNumberPattern' => '[256]\\d{4}',
     'PossibleNumberPattern' => '\\d{4,5}',
   ),
   'fixedLine' => 
@@ -24,8 +24,8 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5\\d{4}',
-    'PossibleNumberPattern' => '\\d{4,5}',
+    'NationalNumberPattern' => '[56]\\d{4}',
+    'PossibleNumberPattern' => '\\d{5}',
   ),
   'tollFree' => 
   array (
@@ -49,8 +49,8 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '262\\d{2}',
+    'PossibleNumberPattern' => '\\d{5}',
   ),
   'pager' => 
   array (

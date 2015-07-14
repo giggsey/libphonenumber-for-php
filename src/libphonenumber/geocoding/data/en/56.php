@@ -6,6 +6,7 @@
 
 return array (
   5622 => 'Santiago, Metropolitan Region',
+  56232 => 'Santiago, Metropolitan Region',
   5632 => 'Valparaíso',
   5633 => 'Quillota, Valparaíso',
   5634 => 'San Felipe, Valparaíso',

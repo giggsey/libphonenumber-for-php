@@ -19,6 +19,7 @@ return array (
   9725587 => 'Alon',
   9725588 => 'Alon',
   9725589 => 'Alon',
+  9725596 => 'Azi Communications',
   9725597 => 'Azi Communications',
   9725598 => 'Azi Communications',
   9725599 => 'Azi Communications',

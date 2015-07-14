@@ -5,6 +5,9 @@
  */
 
 return array (
+  491502 => 'Interactive digital media',
+  491505 => 'NAKA AG',
+  491508 => 'Easy World',
   49151 => 'T-Mobile',
   491520 => 'Vodafone',
   491521 => 'Vodafone/Lycamobile',
@@ -12,12 +15,15 @@ return array (
   491523 => 'Vodafone',
   491525 => 'Vodafone',
   491529 => 'Vodafone/Truphone',
+  491555 => 'Tismi BV',
+  491567 => 'Argon Networks',
   491570 => 'Eplus/Telogic',
   491573 => 'Eplus',
   491575 => 'Eplus',
   491577 => 'Eplus',
   491578 => 'Eplus',
   491579 => 'Eplus/Sipgate',
+  491588 => 'TelcoVillage',
   491590 => 'O2',
   49160 => 'T-Mobile',
   49162 => 'Vodafone',

@@ -360,7 +360,7 @@ return array (
   'intlNumberFormat' => 
   array (
   ),
-  'mainCountryForCode' => false,
+  'mainCountryForCode' => true,
   'leadingZeroPossible' => true,
   'mobileNumberPortableRegion' => true,
 );

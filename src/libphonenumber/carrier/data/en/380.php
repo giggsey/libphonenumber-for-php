@@ -5,5 +5,16 @@
  */
 
 return array (
-  38094 => 'IT',
+  38050 => 'MTS',
+  38063 => 'Life',
+  38066 => 'MTS',
+  38067 => 'Kyivstar',
+  38068 => 'Kyivstar',
+  38073 => 'Life',
+  38092 => 'PEOPLEnet',
+  38093 => 'Life',
+  38096 => 'Kyivstar',
+  38097 => 'Kyivstar',
+  38098 => 'Kyivstar',
+  38099 => 'MTS',
 );

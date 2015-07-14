@@ -33,7 +33,10 @@ return array (
               8[78]|
               9[89]
             )|
-            702
+            7(?:
+              02|
+              88
+            )
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',

@@ -10,22 +10,16 @@ return array (
   array (
     'NationalNumberPattern' => '
           [46]\\d{4}|
-          [2-467]\\d{3}|
           [01589]\\d{5}
         ',
-    'PossibleNumberPattern' => '\\d{4,6}',
+    'PossibleNumberPattern' => '\\d{5,6}',
   ),
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          6[2-467]\\d{3}|
-          (?:
-            [267]\\d|
-            3[0-5]|
-            4[4-69]
-          )\\d{2}
+          6[2-467]\\d{3}
         ',
-    'PossibleNumberPattern' => '\\d{4,5}',
+    'PossibleNumberPattern' => '\\d{5}',
     'ExampleNumber' => '62889',
   ),
   'mobile' => 

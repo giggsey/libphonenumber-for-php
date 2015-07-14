@@ -16,6 +16,8 @@ return array (
   267745 => 'Mascom',
   267746 => 'Mascom',
   267747 => 'Mascom',
+  267748 => 'Orange',
+  267749 => 'BTC Mobile',
   267750 => 'Orange',
   267751 => 'Orange',
   267752 => 'Orange',
@@ -42,4 +44,5 @@ return array (
   267775 => 'Orange',
   267776 => 'Mascom',
   267777 => 'Mascom',
+  267778 => 'Mascom',
 );

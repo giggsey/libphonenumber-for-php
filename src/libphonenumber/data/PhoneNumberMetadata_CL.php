@@ -22,6 +22,10 @@ return array (
     'NationalNumberPattern' => '
           2(?:
             2\\d{7}|
+            3(?:
+              20|
+              22
+            )\\d{5}|
             1962\\d{4}
           )|
           (?:
@@ -126,7 +130,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '22',
+        0 => '2[23]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '$CC ($1)',
@@ -235,7 +239,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '22',
+        0 => '2[23]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '$CC ($1)',

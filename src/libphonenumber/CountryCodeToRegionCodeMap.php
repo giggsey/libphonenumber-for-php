@@ -82,6 +82,7 @@ class CountryCodeToRegionCodeMap {
   39 => 
   array (
     0 => 'IT',
+    1 => 'VA',
   ),
   40 => 
   array (
@@ -544,10 +545,6 @@ class CountryCodeToRegionCodeMap {
   378 => 
   array (
     0 => 'SM',
-  ),
-  379 => 
-  array (
-    0 => 'VA',
   ),
   380 => 
   array (

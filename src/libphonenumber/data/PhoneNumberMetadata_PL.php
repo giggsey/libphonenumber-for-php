@@ -20,7 +20,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             1[2-8]|
-            2[2-59]|
+            2[2-69]|
             3[2-4]|
             4[1-468]|
             5[24-689]|
@@ -30,7 +30,6 @@ return array (
             9[145]
           )\\d{7}|
           [12]2\\d{5}|
-          261\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '123456789',
@@ -162,7 +161,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            261|
+            26|
             39|
             5[0137]|
             6[0469]|
