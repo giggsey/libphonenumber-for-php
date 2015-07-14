@@ -4,6 +4,7 @@ namespace libphonenumber\Tests\core;
 
 use libphonenumber\Matcher;
 use libphonenumber\NumberParseException;
+use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberCost;
@@ -210,11 +211,25 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider regionList
+     * @param string $regionCode
      */
-    public function getEveryRegionHasExampleNumber($regionCode)
+    public function testEveryRegionHasExampleNumber($regionCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumber($regionCode);
         $this->assertNotNull($exampleNumber, "None found for region " . $regionCode);
+
+        /*
+         * Check the number is valid
+         */
+
+        $e164 = $this->phoneNumberUtil->format($exampleNumber, PhoneNumberFormat::E164);
+
+        $phoneObject = $this->phoneNumberUtil->parse($e164, 'ZZ');
+
+        $this->assertEquals($phoneObject, $exampleNumber);
+
+        $this->assertTrue($this->phoneNumberUtil->isValidNumber($phoneObject));
+        $this->assertTrue($this->phoneNumberUtil->isValidNumberForRegion($phoneObject, $regionCode));
     }
 
     /**
