@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberUtil;
 
 class CodeCoverageTest extends \PHPUnit_Framework_TestCase

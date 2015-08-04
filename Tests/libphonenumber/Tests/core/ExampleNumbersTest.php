@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\core;
 
-use libphonenumber\Matcher;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;

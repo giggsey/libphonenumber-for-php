@@ -75,8 +75,6 @@ class PhoneNumberOfflineGeocoder
      */
     public function getDescriptionForNumber(PhoneNumber $number, $locale, $userRegion = null)
     {
-
-        /** @var PhoneNumberType $numberType */
         $numberType = $this->phoneUtil->getNumberType($number);
 
         if ($numberType === PhoneNumberType::UNKNOWN) {

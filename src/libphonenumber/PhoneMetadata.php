@@ -579,6 +579,9 @@ class PhoneMetadata
         return $this;
     }
 
+    /**
+     * @var PhoneNumberDesc
+     */
     private $standard_rate;
 
     public function hasStandardRate()
@@ -618,7 +621,9 @@ class PhoneMetadata
         return $this;
     }
 
-
+    /**
+     * @var PhoneNumberDesc
+     */
     private $noInternationalDialling = null;
 
     public function hasNoInternationalDialling()
@@ -791,6 +796,10 @@ class PhoneMetadata
         return $output;
     }
 
+    /**
+     * @param array $input
+     * @return PhoneMetadata
+     */
     public function fromArray(array $input)
     {
 
