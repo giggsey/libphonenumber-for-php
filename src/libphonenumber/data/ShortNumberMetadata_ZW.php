@@ -60,8 +60,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            112|
-            99[3459]
+            11[24]|
+            99[3-59]
           )
         ',
     'PossibleNumberPattern' => '\\d{3}',
@@ -76,8 +76,8 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            112|
-            99[3459]
+            11[249]|
+            99[3-59]
           )
         ',
     'PossibleNumberPattern' => '\\d{3}',

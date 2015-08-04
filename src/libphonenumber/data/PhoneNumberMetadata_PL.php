@@ -29,7 +29,7 @@ return array (
             8[1-79]|
             9[145]
           )\\d{7}|
-          [12]2\\d{5}|
+          [12]2\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '123456789',

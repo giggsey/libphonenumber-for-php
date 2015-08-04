@@ -13,32 +13,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          2(?:
-            2(?:
-              0[07]|
-              [13]7|
-              2[57]
-            )|
-            3(?:
-              0[34]|
-              [1278]3|
-              3[23]|
-              [46][34]
-            )|
-            (?:
-              40[4-69]|
-              67
-            )|
-            5(?:
-              0[5-7]|
-              1[6-9]|
-              [23][78]|
-              48|
-              5[01]
-            )
-          )\\d{4}
-        ',
+    'NationalNumberPattern' => '2[2-5]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '22171234',
   ),

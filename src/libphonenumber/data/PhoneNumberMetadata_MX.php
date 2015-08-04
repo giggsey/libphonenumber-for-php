@@ -21,6 +21,7 @@ return array (
           )\\d{8}|
           (?:
             2(?:
+              0[01]|
               2[2-9]|
               3[1-35-8]|
               4[13-9]|
@@ -159,7 +160,12 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7}',
+    'NationalNumberPattern' => '
+          8(?:
+            00|
+            88
+          )\\d{7}
+        ',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '8001234567',
   ),
@@ -171,13 +177,15 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '300\\d{7}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '3001234567',
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '500\\d{7}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '5001234567',
   ),
   'voip' => 
   array (
@@ -256,8 +264,8 @@ return array (
       array (
         0 => '
             [2467]|
-            3[12457-9]|
-            5[89]|
+            3[0-2457-9]|
+            5[089]|
             8[02-9]|
             9[0-35-9]
           ',
@@ -291,8 +299,8 @@ return array (
         0 => '
             1(?:
               [2467]|
-              3[12457-9]|
-              5[89]|
+              3[0-2457-9]|
+              5[089]|
               8[2-9]|
               9[1-35-9]
             )
@@ -327,8 +335,8 @@ return array (
       array (
         0 => '
             [2467]|
-            3[12457-9]|
-            5[89]|
+            3[0-2457-9]|
+            5[089]|
             8[02-9]|
             9[0-35-9]
           ',
@@ -360,8 +368,8 @@ return array (
         0 => '
             1(?:
               [2467]|
-              3[12457-9]|
-              5[89]|
+              3[0-2457-9]|
+              5[089]|
               8[2-9]|
               9[1-35-9]
             )
