@@ -265,24 +265,6 @@ class PhoneNumberUtil
     );
 
     /**
-     * The metadata loader used to inject alternative metadata sources.
-     * @var MetadataLoaderInterface
-     */
-    private $metadataLoader;
-
-    /**
-     * A mapping from a region code to the PhoneMetadata for that region.
-     * @var array
-     */
-    private $regionToMetadataMap = array();
-    /**
-     * A mapping from a country calling code for a non-geographical entity to the PhoneMetadata for
-     * that country calling code. Examples of the country calling codes include 800 (International
-     * Toll Free Service) and 808 (International Shared Cost Service).
-     * @var array
-     */
-    private $countryCodeToNonGeographicalMetadataMap = array();
-    /**
      * The set of county calling codes that map to the non-geo entity region ("001").
      * @var array
      */
@@ -292,11 +274,6 @@ class PhoneNumberUtil
      * @var array
      */
     private $supportedRegions = array();
-    /**
-     * The prefix of the metadata files from which region data is loaded.
-     * @var String
-     */
-    private $currentFilePrefix = self::META_DATA_FILE_PREFIX;
 
     /**
      * A mapping from a country calling code to the region codes which denote the region represented
@@ -313,13 +290,20 @@ class PhoneNumberUtil
     private $nanpaRegions = array();
 
     /**
-     * This class implements a singleton, so the only constructor is private.
+     * @var MetadataSourceInterface
      */
-    private function __construct($filePrefix, MetadataLoaderInterface $metadataLoader, $countryCallingCodeToRegionCodeMap)
+    private $metadataSource;
+
+    /**
+     * This class implements a singleton, so the only constructor is private.
+     * @param MetadataSourceInterface $metadataSource
+     * @param $countryCallingCodeToRegionCodeMap
+     */
+    private function __construct(MetadataSourceInterface $metadataSource, $countryCallingCodeToRegionCodeMap)
     {
-        $this->metadataLoader = $metadataLoader;
+        $this->metadataSource = $metadataSource;
         $this->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
-        $this->init($filePrefix);
+        $this->init();
         self::initCapturingExtnDigits();
         self::initExtnPatterns();
         self::initExtnPattern();
@@ -380,10 +364,11 @@ class PhoneNumberUtil
      *
      * @param string $baseFileLocation
      * @param array|null $countryCallingCodeToRegionCodeMap
-     * @param MetadataLoaderInterface $metadataLoader
+     * @param MetadataLoaderInterface|null $metadataLoader
+     * @param MetadataSourceInterface|null $metadataSource
      * @return PhoneNumberUtil instance
      */
-    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null)
+    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null, MetadataSourceInterface $metadataSource = null)
     {
         if (self::$instance === null) {
             if ($countryCallingCodeToRegionCodeMap === null) {
@@ -394,14 +379,17 @@ class PhoneNumberUtil
                 $metadataLoader = new DefaultMetadataLoader();
             }
 
-            self::$instance = new PhoneNumberUtil($baseFileLocation, $metadataLoader, $countryCallingCodeToRegionCodeMap);
+            if ($metadataSource === null) {
+                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, __DIR__ . '/data/' . $baseFileLocation);
+            }
+
+            self::$instance = new PhoneNumberUtil($metadataSource, $countryCallingCodeToRegionCodeMap);
         }
         return self::$instance;
     }
 
-    private function init($filePrefix)
+    private function init()
     {
-        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . $filePrefix;
         foreach ($this->countryCallingCodeToRegionCodeMap as $countryCode => $regionCodes) {
             // We can assume that if the country calling code maps to the non-geo entity region code then
             // that's the only region code it maps to.
@@ -625,12 +613,7 @@ class PhoneNumberUtil
             return null;
         }
 
-        if (!isset($this->regionToMetadataMap[$regionCode])) {
-            // The regionCode here will be valid and won't be '001', so we don't need to worry about
-            // what to pass in for the country calling code.
-            $this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0, $this->metadataLoader);
-        }
-        return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : null;
+        return $this->metadataSource->getMetadataForRegion($regionCode);
     }
 
     /**
@@ -641,31 +624,6 @@ class PhoneNumberUtil
     private function isValidRegionCode($regionCode)
     {
         return $regionCode !== null && in_array($regionCode, $this->supportedRegions);
-    }
-
-    /**
-     * @param string $filePrefix
-     * @param string $regionCode
-     * @param int $countryCallingCode
-     * @param MetadataLoaderInterface $metadataLoader
-     * @throws \RuntimeException
-     */
-    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode, MetadataLoaderInterface $metadataLoader)
-    {
-        $isNonGeoRegion = self::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
-        $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
-        if (!is_readable($fileName)) {
-            throw new \RuntimeException('missing metadata: ' . $fileName);
-        } else {
-            $data = $metadataLoader->loadMetadata($fileName);
-            $metadata = new PhoneMetadata();
-            $metadata->fromArray($data);
-            if ($isNonGeoRegion) {
-                $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
-            } else {
-                $this->regionToMetadataMap[$regionCode] = $metadata;
-            }
-        }
     }
 
     /**
@@ -883,15 +841,7 @@ class PhoneNumberUtil
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
             return null;
         }
-        if (!isset($this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode])) {
-            $this->loadMetadataFromFile(
-                $this->currentFilePrefix,
-                self::REGION_CODE_FOR_NON_GEO_ENTITY,
-                $countryCallingCode,
-                $this->metadataLoader
-            );
-        }
-        return $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode];
+        return $this->metadataSource->getMetadataForNonGeographicalRegion($countryCallingCode);
     }
 
     /**
