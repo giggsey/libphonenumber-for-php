@@ -60,6 +60,15 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::FIXED_LINE, $fixedLineTypes, $region);
     }
 
+    /**
+     * @dataProvider regionList
+     */
+    public function testFixedLineOrMobile($region)
+    {
+        $numberTypes = array(PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE);
+        $this->checkNumbersValidAndCorrectType(PhoneNumberType::FIXED_LINE_OR_MOBILE, $numberTypes, $region);
+    }
+
     private function checkNumbersValidAndCorrectType($exampleNumberRequestedType, $possibleExpectedTypes, $regionCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForType($regionCode, $exampleNumberRequestedType);
@@ -136,6 +145,15 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
     {
         $voicemailTypes = array(PhoneNumberType::VOICEMAIL);
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::VOICEMAIL, $voicemailTypes, $region);
+    }
+
+    /**
+     * @dataProvider regionList
+     */
+    public function testPersonalNumber($region)
+    {
+        $numberTypes = array(PhoneNumberType::PERSONAL_NUMBER);
+        $this->checkNumbersValidAndCorrectType(PhoneNumberType::PERSONAL_NUMBER, $numberTypes, $region);
     }
 
     /**
