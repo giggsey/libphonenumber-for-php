@@ -345,7 +345,7 @@ class PhoneNumberUtil
 
         self::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . self::DIGITS . "]{" . self::MIN_LENGTH_FOR_NSN . "}";
         self::$VALID_PHONE_NUMBER = "[" . self::PLUS_CHARS . "]*(?:[" . self::VALID_PUNCTUATION . self::STAR_SIGN . "]*[" . self::DIGITS . "]){3,}[" . self::VALID_PUNCTUATION . self::STAR_SIGN . self::VALID_ALPHA . self::DIGITS . "]*";
-        self::$VALID_PHONE_NUMBER_PATTERN = "%^" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?%" . self::REGEX_FLAGS;
+        self::$VALID_PHONE_NUMBER_PATTERN = "%^" . self::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . self::$VALID_PHONE_NUMBER . "(?:" . self::$EXTN_PATTERNS_FOR_PARSING . ")?$%" . self::REGEX_FLAGS;
 
         self::$UNWANTED_END_CHAR_PATTERN = "[^" . self::DIGITS . self::VALID_ALPHA . "#]+$";
 
