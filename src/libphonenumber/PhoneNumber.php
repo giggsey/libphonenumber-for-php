@@ -510,14 +510,30 @@ class PhoneNumber implements \Serializable
 
     /**
      * Returns a string representation of this phone number.
-     *
-     * The number is returned as an unformatted E164 international number with leading + sign.
-     *
      * @return string
      */
     public function __toString()
     {
-        return '+' . $this->countryCode . $this->nationalNumber;
+        $outputString = '';
+
+        $outputString .= 'Country Code: ' . $this->countryCode;
+        $outputString .= ' National Number: ' . $this->nationalNumber;
+        if ($this->hasItalianLeadingZero()) {
+            $outputString .= ' Leading Zero(s): true';
+        }
+        if ($this->hasNumberOfLeadingZeros()) {
+            $outputString .= ' Number of leading zeros: ' . $this->numberOfLeadingZeros;
+        }
+        if ($this->hasExtension()) {
+            $outputString .= ' Extension: ' . $this->extension;
+        }
+        if ($this->hasCountryCode()) {
+            $outputString .= ' Country Code Source: ' . $this->countryCodeSource;
+        }
+        if ($this->hasPreferredDomesticCarrierCode()) {
+            $outputString .= ' Preferred Domestic Carrier Code: ' . $this->preferredDomesticCarrierCode;
+        }
+        return $outputString;
     }
 
     /**
