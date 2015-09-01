@@ -6,6 +6,10 @@
     <property name="git.url" value="https://github.com/googlei18n/libphonenumber.git"/>
     <property name="git.path" value="libphonenumber-data-dir"/>
 
+    <loadfile property="metadata.version" file="METADATA-VERSION.txt">
+        <filterchain><striplinebreaks /></filterchain>
+    </loadfile>
+
     <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
     <property name="data.testPrefixMapperData" value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
     <property name="data.testCarrierData" value="Tests/libphonenumber/Tests/carrier/data/"/>
@@ -76,12 +80,22 @@
     </target>
 
     <target name="git-pull">
-        <delete dir="${git.path}"/>
-        <exec executable="git" passthru="true" checkreturn="true">
-            <arg value="clone"/>
-            <arg value="${git.url}"/>
-            <arg value="${git.path}"/>
-        </exec>
+        <available file='results' type='dir' property="git.path.exists"/>
+        <if>
+            <isfalse value="${git.path.exists}"/>
+            <then>
+                <gitclone
+                        repository="${git.url}"
+                        targetPath="${git.path}"/>
+            </then>
+        </if>
+
+        <gitfetch repository="${git.path}" all="true"/>
+        <echo message="Pulling Git project @ ${metadata.version}"/>
+
+        <gitcheckout
+                repository="${git.path}"
+                branchname="${metadata.version}" quiet="false"/>
     </target>
 
     <target name="build-test-metadata" description="Build test Phone Metadata" depends="git-pull">
