@@ -1,1 +1,5 @@
+# This file specifies the revision of the metadata to build from
+# It can be a commit, branch or tag of the https://github.com/googlei18n/libphonenumber project
+#
+# For more information, look at the phing tasks in build.xml
 994c913514a7dbd0e52fbb3646e9abd5270a4eef

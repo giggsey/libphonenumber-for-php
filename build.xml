@@ -7,7 +7,12 @@
     <property name="git.path" value="libphonenumber-data-dir"/>
 
     <loadfile property="metadata.version" file="METADATA-VERSION.txt">
-        <filterchain><striplinebreaks /></filterchain>
+        <filterchain>
+            <striplinecomments>
+                <comment value="#" />
+            </striplinecomments>
+            <striplinebreaks />
+        </filterchain>
     </loadfile>
 
     <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
