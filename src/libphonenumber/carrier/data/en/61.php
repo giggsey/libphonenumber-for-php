@@ -74,6 +74,7 @@ return array (
   614790 => 'Optus',
   614791 => 'Optus',
   61481 => 'Optus',
+  61484 => 'Telstra',
   61487 => 'Telstra',
   61488 => 'Telstra',
   614888 => 'My Number',

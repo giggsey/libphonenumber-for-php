@@ -10,9 +10,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           [1-4]\\d{8}|
+          800\\d{3,7}|
           [89]\\d{9,10}
         ',
-    'PossibleNumberPattern' => '\\d{7,11}',
+    'PossibleNumberPattern' => '\\d{6,11}',
   ),
   'fixedLine' => 
   array (
@@ -50,7 +51,7 @@ return array (
             )
           )\\d{5}
         ',
-    'PossibleNumberPattern' => '\\d{7,9}',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '152450911',
   ),
   'mobile' => 
@@ -74,9 +75,10 @@ return array (
           8(?:
             0[13]|
             20\\d
-          )\\d{7}
+          )\\d{7}|
+          800\\d{3,7}
         ',
-    'PossibleNumberPattern' => '\\d{10,11}',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '8011234567',
   ),
   'premiumRate' => 
@@ -148,9 +150,10 @@ return array (
             [013]|
             [12]0
           )\\d{8}|
+          800\\d{3,7}|
           902\\d{7}
         ',
-    'PossibleNumberPattern' => '\\d{10,11}',
+    'PossibleNumberPattern' => '\\d{6,11}',
     'ExampleNumber' => '82012345678',
   ),
   'id' => 'BY',
@@ -285,11 +288,33 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(82\\d)(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '82',
+      ),
+      'nationalPrefixFormattingRule' => '8 $1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    5 => 
+    array (
+      'pattern' => '(800)(\\d{3})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '800',
+      ),
+      'nationalPrefixFormattingRule' => '8 $1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    6 => 
+    array (
+      'pattern' => '(800)(\\d{2})(\\d{2,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '800',
       ),
       'nationalPrefixFormattingRule' => '8 $1',
       'domesticCarrierCodeFormattingRule' => '',

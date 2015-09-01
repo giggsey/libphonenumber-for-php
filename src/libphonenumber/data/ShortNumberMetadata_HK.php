@@ -73,7 +73,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          112|
+          11[0-9]|
           99[29]
         ',
     'PossibleNumberPattern' => '\\d{3}',

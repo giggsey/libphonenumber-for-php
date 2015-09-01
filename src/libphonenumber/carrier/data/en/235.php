@@ -6,4 +6,5 @@
 
 return array (
   2356 => 'Airtel',
+  2359 => 'Millicom',
 );

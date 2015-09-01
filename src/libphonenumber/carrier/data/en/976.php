@@ -5,8 +5,8 @@
  */
 
 return array (
-  4176 => 'Sunrise',
-  4177 => 'Tele4u',
-  4178 => 'Salt',
-  4179 => 'Swisscom',
+  97680 => 'Unitel',
+  97686 => 'Unitel',
+  97688 => 'Unitel',
+  97689 => 'Unitel',
 );
