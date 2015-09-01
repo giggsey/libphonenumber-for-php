@@ -38,6 +38,10 @@ class CountryCodeToRegionCodeMapForTesting {
     0 => 'GB',
     1 => 'GG',
   ),
+  46 => 
+  array (
+    0 => 'SE',
+  ),
   48 => 
   array (
     0 => 'PL',

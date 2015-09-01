@@ -411,6 +411,14 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCountryCallingCodeIsNotIgnored()
+    {
+        // +46 is the country calling code for Sweden (SE), and 40404 is a valid short number in the US.
+        $this->assertFalse($this->shortInfo->isPossibleShortNumberForRegion($this->parse('+4640404', RegionCode::SE), RegionCode::US));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse('+4640404', RegionCode::SE), RegionCode::US));
+        $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCostForRegion($this->parse('+4640404', RegionCode::SE), RegionCode::US));
+    }
+
     /**
      * @param string $number
      * @param string $regionCode
