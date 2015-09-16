@@ -46,7 +46,7 @@ return array (
                 [14-689]
               )|
               34|
-              6[29]|
+              6[289]|
               7[01]|
               81
             )|
@@ -209,7 +209,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(6\\d)(\\d{2,3})(\\d{4})',
+      'pattern' => '(6\\d)(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

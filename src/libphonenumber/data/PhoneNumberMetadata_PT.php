@@ -31,8 +31,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           9(?:
-            [136]\\d{2}|
-            2[0-79]\\d|
+            [1236]\\d{2}|
             480
           )\\d{5}
         ',
@@ -48,6 +47,10 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
+          6(?:
+             0[178]|
+             4[68]
+          )\\d{6}|
           76(?:
             0[1-57]|
             1[2-47]|
@@ -70,7 +73,7 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '884[128]\\d{5}',
+    'NationalNumberPattern' => '884[0-4689]\\d{5}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '884123456',
   ),
@@ -88,9 +91,11 @@ return array (
   'uan' => 
   array (
     'NationalNumberPattern' => '
-          70(?:
-            7\\d|
-            8[17]
+          7(?:
+            0(?:
+              7\\d|
+              8[17]
+            )
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -103,8 +108,9 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '600\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '600110000',
   ),
   'shortCode' => 
   array (

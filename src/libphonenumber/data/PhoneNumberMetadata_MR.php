@@ -23,25 +23,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            2(?:
-              2\\d|
-              70
-            )|
-            3(?:
-              3\\d|
-              6[1-36]|
-              7[1-3]
-            )|
-            4(?:
-              [49]\\d|
-              6[0457-9]|
-              7[4-9]|
-              8[01346-8]
-            )
-          )\\d{5}
-        ',
+    'NationalNumberPattern' => '[234][0-46-9]\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '22123456',
   ),

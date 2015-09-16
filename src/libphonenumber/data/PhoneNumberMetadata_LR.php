@@ -9,9 +9,10 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
-          2\\d{7}|
+          2\\d{7,8}|
           [37-9]\\d{8}|
-          [45]\\d{6}
+          4\\d{6}|
+          5\\d{6,8}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
   ),
@@ -31,7 +32,21 @@ return array (
             77\\d{2}|
             88\\d{2}|
             994\\d
-          )\\d{5}
+          )\\d{5}|
+          (?:
+            20\\d{3}|
+            33(?:
+                0\\d{2}|
+                2(?:
+                   02|
+                   5\\d
+                )
+            )|
+            555\\d{2}|
+            77[0567]\\d{2}|
+            88[068]\\d{2}|
+            994\\d{2}
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '770123456',
@@ -129,11 +144,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([79]\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[79]',
+        0 => '[2579]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

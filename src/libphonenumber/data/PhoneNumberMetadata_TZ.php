@@ -21,12 +21,12 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            6[1578]|
-            7[1-9]
+            6[25-8]|
+            7[13-9]
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '612345678',
+    'ExampleNumber' => '621234567',
   ),
   'tollFree' => 
   array (

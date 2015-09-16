@@ -39,7 +39,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            8[89]|
+            8[089]|
             9\\d
           )\\d{6}
         ',

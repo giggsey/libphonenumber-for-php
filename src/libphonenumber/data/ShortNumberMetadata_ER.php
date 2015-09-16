@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[12]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[12]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[12]\\d{2,5}',
     'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'tollFree' => 
@@ -59,13 +59,28 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
+          1(?:
+            1[2-46]|
+            2(?:
+              4422|
+              7799
+             )
+           )|
+          2(?:
+            0(?:
+              1(?:
+                606|
+                917
+               )|
+              2(?:
+                099|
+                914
+               )
+             )
+           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '112',
+    'ExampleNumber' => '113',
   ),
   'voicemail' => 
   array (
@@ -75,13 +90,28 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
+          1(?:
+            1[2-6]|
+            2(?:
+              4422|
+              7799
+             )
+           )|
+          2(?:
+            0(?:
+              1(?:
+                606|
+                917
+               )|
+              2(?:
+                099|
+                914
+               )
+             )
+           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '112',
+    'ExampleNumber' => '114',
   ),
   'standardRate' => 
   array (
@@ -98,7 +128,7 @@ return array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
   ),
-  'id' => 'NO',
+  'id' => 'ER',
   'countryCode' => 0,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,

@@ -5,6 +5,7 @@
  */
 
 return array (
+  40701 => 'Lycamobile',
   4072 => 'Vodafone',
   4073 => 'Vodafone',
   4074 => 'Orange',

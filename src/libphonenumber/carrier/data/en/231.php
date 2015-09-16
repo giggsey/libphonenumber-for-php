@@ -5,7 +5,10 @@
  */
 
 return array (
+  23120 => 'LIBTELCO',
   231330 => 'West Africa Telecom',
+  23133202 => 'Atlantic Reality',
+  2313325 => 'WASSCOM',
   231555 => 'Novafone',
   23177 => 'Cellcom',
   23188 => 'Lonestar Cell',

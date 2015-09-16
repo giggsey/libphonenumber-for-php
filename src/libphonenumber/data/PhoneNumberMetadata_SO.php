@@ -34,8 +34,11 @@ return array (
               4\\d|
               8
             )|
-            6[137-9]?\\d{2}|
-            7[1-9]\\d|
+            6[1-35-9]?\\d{2}|
+            7(?:
+             [1-8]\\d|
+             99?\\d
+            )|
             907\\d
           )\\d{5}
         ',
@@ -152,24 +155,14 @@ return array (
         0 => '
             15|
             28|
-            6[1378]
+            6[1-35-9]|
+            799
           ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
-    array (
-      'pattern' => '(69\\d)(\\d{6})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '69',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    4 => 
     array (
       'pattern' => '(90\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',

@@ -8,18 +8,27 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
-    'PossibleNumberPattern' => '\\d{3,6}',
+    'NationalNumberPattern' => '
+          [1-358]\\d{1,2}|
+          723141
+        ',
+    'PossibleNumberPattern' => '\\d{2,6}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
-    'PossibleNumberPattern' => '\\d{3,6}',
+    'NationalNumberPattern' => '
+          [1-358]\\d{1,2}|
+          723141
+        ',
+    'PossibleNumberPattern' => '\\d{2,6}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
-    'PossibleNumberPattern' => '\\d{3,6}',
+    'NationalNumberPattern' => '
+          [1-358]\\d{1,2}|
+          723141
+        ',
+    'PossibleNumberPattern' => '\\d{2,6}',
   ),
   'tollFree' => 
   array (
@@ -59,13 +68,11 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
+          1[578]|
+          723141
         ',
-    'PossibleNumberPattern' => '\\d{3,6}',
-    'ExampleNumber' => '112',
+    'PossibleNumberPattern' => '\\d{2,6}',
+    'ExampleNumber' => '17',
   ),
   'voicemail' => 
   array (
@@ -75,12 +82,24 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
+         1(?:
+           0[01]|
+           1[12]|
+           2[034]|
+           3[013]|
+           40|
+           55?|
+           60|
+           7|
+           8
+          )|
+         222|
+         333|
+         555|
+         723141|
+         888
         ',
-    'PossibleNumberPattern' => '\\d{3,6}',
+    'PossibleNumberPattern' => '\\d{2,6}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 
@@ -90,15 +109,30 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+         1(?:
+           0[01]|
+           1[12]|
+           2[034]|
+           3[013]|
+           40|
+           55|
+           60
+          )|
+         222|
+         333|
+         555|
+         888
+       ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '100',
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
   ),
-  'id' => 'NO',
+  'id' => 'NE',
   'countryCode' => 0,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => true,

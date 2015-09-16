@@ -8,18 +8,18 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '4\\d{4}',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '4\\d{4}',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '4\\d{4}',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'tollFree' => 
   array (
@@ -58,8 +58,15 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          1(?:
+            1[348]|
+            77|
+            88
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '113',
   ),
   'voicemail' => 
   array (
@@ -68,8 +75,16 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '40404',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '
+          1(?:
+            1[348]|
+            23|
+            77|
+            88
+          )|
+          40404
+        ',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '40404',
   ),
   'standardRate' => 
@@ -80,7 +95,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '40404',
-    'PossibleNumberPattern' => '\\d{5}',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'noInternationalDialling' => 
   array (

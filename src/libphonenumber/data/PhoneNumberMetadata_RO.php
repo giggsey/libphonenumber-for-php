@@ -36,8 +36,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           7(?:
-            000|
-            [1-8]\\d{2}|
+            [0-8]\\d{2}|
             99\\d
           )\\d{5}
         ',
@@ -125,7 +124,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([237]\\d)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
