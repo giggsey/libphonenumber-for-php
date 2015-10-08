@@ -18,4 +18,5 @@ return array (
   98937 => 'Irancell',
   98938 => 'Irancell',
   98939 => 'Irancell',
+  98990 => 'IR-MCI',
 );

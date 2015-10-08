@@ -38,8 +38,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           9(?:
-            0[12]|
-            [1-3]\\d
+            0[1-3]|
+            [13]\\d|
+            2[0-2]|
+            90
           )\\d{7}
         ',
     'PossibleNumberPattern' => '\\d{10}',

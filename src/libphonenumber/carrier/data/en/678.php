@@ -5,6 +5,9 @@
  */
 
 return array (
+  67850 => 'Digicel',
+  67851 => 'Digicel',
+  67852 => 'Digicel',
   67853 => 'Digicel',
   67854 => 'Digicel',
   67855 => 'Digicel',
@@ -15,6 +18,7 @@ return array (
   678575 => 'Digicel',
   678576 => 'Digicel',
   678577 => 'Digicel',
+  67858 => 'Digicel',
   67859 => 'Digicel',
   67870 => 'SMILE',
   67871 => 'SMILE',

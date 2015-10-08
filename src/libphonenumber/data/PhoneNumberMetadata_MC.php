@@ -26,7 +26,7 @@ return array (
           6\\d{8}|
           4(?:
             4\\d|
-            5[2-9]
+            5[1-9]
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{8,9}',
