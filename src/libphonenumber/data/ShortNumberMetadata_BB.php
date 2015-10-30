@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[235]\\d{2}',
+    'NationalNumberPattern' => '[2-689]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[235]\\d{2}',
+    'NationalNumberPattern' => '[2-689]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[235]\\d{2}',
+    'NationalNumberPattern' => '[2-689]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'tollFree' => 
@@ -58,7 +58,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '[235]11',
+    'NationalNumberPattern' => '[2359]11',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '211',
   ),
@@ -69,7 +69,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '[235]11',
+    'NationalNumberPattern' => '[2-689]11',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '211',
   ),

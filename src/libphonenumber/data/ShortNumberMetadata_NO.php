@@ -23,8 +23,9 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '116117',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '116117',
   ),
   'premiumRate' => 
   array (
@@ -58,13 +59,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
-        ',
-    'PossibleNumberPattern' => '\\d{3,6}',
+    'NationalNumberPattern' => '11[023]',
+    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '112',
   ),
   'voicemail' => 

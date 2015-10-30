@@ -8,8 +8,13 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d{6,10}',
-    'PossibleNumberPattern' => '\\d{5,11}',
+    'NationalNumberPattern' => '
+          (?:
+           [1-79]\\d{6,10}|
+           8\\d{7,11}
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{5,12}',
   ),
   'fixedLine' => 
   array (
@@ -164,9 +169,9 @@ return array (
               7[178]9
             )
           )\\d{5,6}|
-          8[1-35-9]\\d{7,9}
+          8[1-35-9]\\d{7,10}
         ',
-    'PossibleNumberPattern' => '\\d{9,11}',
+    'PossibleNumberPattern' => '\\d{9,12}',
     'ExampleNumber' => '812345678',
   ),
   'tollFree' => 
@@ -280,7 +285,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{3,4})(\\d{3,4})',
+      'pattern' => '(8\\d{2})(\\d{3,4})(\\d{3,5})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (

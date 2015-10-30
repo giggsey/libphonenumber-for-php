@@ -5,8 +5,8 @@
  */
 
 return array (
-  245955 => 'Orange',
-  245966 => 'Spacetel',
-  245969 => 'Spacetel',
-  245977 => 'Guinetel',
+  96823 => 'Dhofar & Al Wusta',
+  96824 => 'Muscat',
+  96825 => 'A’Dakhliyah, Al Sharqiya & A’Dhahira',
+  96826 => 'Al Batinah & Musandam',
 );

@@ -106,11 +106,14 @@ return array (
   array (
     'NationalNumberPattern' => '
           8(?:
-            10|
-            2[018]
-          )\\d{6,10}
+            10\\d|
+            2(?:
+              [01]\\d|
+              8\\d?
+            )
+          )\\d{5,9}
         ',
-    'PossibleNumberPattern' => '\\d{9,13}',
+    'PossibleNumberPattern' => '\\d{8,13}',
     'ExampleNumber' => '810123456',
   ),
   'personalNumber' => 

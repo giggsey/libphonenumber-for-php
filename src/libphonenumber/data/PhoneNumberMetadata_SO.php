@@ -39,7 +39,10 @@ return array (
              [1-8]\\d|
              99?\\d
             )|
-            907\\d
+            9(?:
+              07|
+              [2-9]
+            )\\d
           )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
@@ -156,7 +159,8 @@ return array (
             15|
             28|
             6[1-35-9]|
-            799
+            799|
+            9[2-9]
           ',
       ),
       'nationalPrefixFormattingRule' => '',

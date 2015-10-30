@@ -9,6 +9,7 @@ return array (
   37360 => 'Orange',
   373610 => 'Orange',
   373611 => 'Orange',
+  373620 => 'Orange',
   373621 => 'Orange',
   373671 => 'Moldtelecom',
   373672 => 'Moldtelecom',

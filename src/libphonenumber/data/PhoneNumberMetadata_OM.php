@@ -12,7 +12,7 @@ return array (
           (?:
             2[2-6]|
             5|
-            9[1-9]
+            9\\d
           )\\d{6}|
           800\\d{5,6}
         ',
@@ -26,7 +26,12 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9[1-9]\\d{6}',
+    'NationalNumberPattern' => '
+          9(?:
+            0[1-9]|
+            [1-9]\\d
+          )\\d{5}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '92123456',
   ),
@@ -41,8 +46,13 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          (?:
+            900
+          )\\d{5}
+        ',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '90012345',
   ),
   'sharedCost' => 
   array (

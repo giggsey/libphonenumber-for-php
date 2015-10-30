@@ -16,4 +16,12 @@ return array (
   25269 => 'Nationlink',
   25279 => 'Somtel',
   252907 => 'Golis Telecom',
+  25292 => 'STG',
+  25293 => 'STG',
+  25294 => 'STG',
+  25295 => 'STG',
+  25296 => 'STG',
+  25297 => 'STG',
+  25298 => 'STG',
+  25299 => 'STG',
 );
