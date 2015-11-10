@@ -164,7 +164,7 @@ return array (
             )
             ',
       ),
-      'nationalPrefixFormattingRule' => '0$1',
+      'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
   ),

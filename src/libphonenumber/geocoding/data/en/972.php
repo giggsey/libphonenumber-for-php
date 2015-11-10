@@ -5,7 +5,9 @@
  */
 
 return array (
-  97516 => 'B-Mobile of Bhutan Telecom',
-  97517 => 'B-Mobile of Bhutan Telecom',
-  97577 => 'TashiCell of Tashi InfoComm',
+  9722 => 'Jerusalem',
+  9723 => 'Tel Aviv',
+  9724 => 'Haifa and North Regions',
+  9728 => 'Hashfela and South Regions',
+  9729 => 'Hasharon',
 );

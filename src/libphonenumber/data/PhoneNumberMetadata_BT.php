@@ -28,7 +28,12 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[17]7\\d{6}',
+    'NationalNumberPattern' => '
+          (?:
+            1[67]|
+            77
+          )\\d{6}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '17123456',
   ),
@@ -105,7 +110,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([17]7)(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (

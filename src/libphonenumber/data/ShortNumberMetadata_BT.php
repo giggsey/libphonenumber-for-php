@@ -70,7 +70,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          11[023]|
+          11[0-6]|
           40404
         ',
     'PossibleNumberPattern' => '\\d{3,5}',

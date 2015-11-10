@@ -6,10 +6,13 @@
 
 return array (
   25729 => 'Leo',
+  25761 => 'Viettel',
+  25768 => 'Viettel',
   25769 => 'Viettel',
   25771 => 'Leo',
+  25772 => 'Leo',
   25775 => 'Smart Mobile',
-  25776 => 'Econet',
+  25776 => 'Leo',
   25777 => 'Onatel',
   25778 => 'Tempo',
   25779 => 'Leo',
