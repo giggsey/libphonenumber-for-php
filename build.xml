@@ -85,13 +85,19 @@
     </target>
 
     <target name="git-pull">
-        <available file='results' type='dir' property="git.path.exists"/>
+        <available file="${git.path}" type="dir" property="git.path.exists" />
         <if>
-            <isfalse value="${git.path.exists}"/>
+            <or>
+                <not>
+                    <isset property="git.path.exists" />
+                </not>
+                <isfalse value="${git.path.exists}"/>
+            </or>
             <then>
+                <echo>Cloning repository</echo>
                 <gitclone
-                        repository="${git.url}"
-                        targetPath="${git.path}"/>
+                    repository="${git.url}"
+                    targetPath="${git.path}"/>
             </then>
         </if>
 
@@ -99,8 +105,20 @@
         <echo message="Pulling Git project @ ${metadata.version}"/>
 
         <gitcheckout
-                repository="${git.path}"
-                branchname="${metadata.version}" quiet="false"/>
+            repository="${git.path}"
+            branchname="${metadata.version}" quiet="false" force="true" />
+
+        <foreach param="filename" absparam="absfilename" target="apply-data-patch">
+            <fileset dir="build/data-patches">
+                <include name="*.patch" />
+            </fileset>
+        </foreach>
+    </target>
+
+    <target name="apply-data-patch">
+        <echo>Applying patch ${filename}</echo>
+        <resolvepath propertyName="fullpath" file="${absfilename}"/>
+        <patch patchfile="${fullpath}" dir="${git.path}/" strip="1" />
     </target>
 
     <target name="build-test-metadata" description="Build test Phone Metadata" depends="git-pull">

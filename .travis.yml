@@ -5,7 +5,6 @@ language: php
 matrix:
   allow_failures:
     - php: hhvm
-    - php: 7
 
 php:
   - 5.3
