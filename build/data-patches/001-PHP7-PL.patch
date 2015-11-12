@@ -1,0 +1,13 @@
+diff --git a/resources/PhoneNumberMetadata.xml b/resources/PhoneNumberMetadata.xml
+index a53b48d..820598c 100644
+--- a/resources/PhoneNumberMetadata.xml
++++ b/resources/PhoneNumberMetadata.xml
+@@ -19031,7 +19031,7 @@
+       <generalDesc>
+         <nationalNumberPattern>
+           [12]\d{6,8}|
+-          [3-57-9]\d{8}|
++          (?:[3-5]|[7-9])\d{8}|
+           6\d{5,8}
+         </nationalNumberPattern>
+         <possibleNumberPattern>\d{6,9}</possibleNumberPattern>
