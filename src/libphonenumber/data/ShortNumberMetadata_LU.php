@@ -8,23 +8,29 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          116(?:
+            000|
+            111
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '116000',
   ),
   'premiumRate' => 
   array (
@@ -71,11 +77,17 @@ return array (
   array (
     'NationalNumberPattern' => '
           1(?:
-            1[23]|
+            1(?:
+              [23]|
+              6(?:
+                000|
+                111
+              )
+            )|
             2\\d{3}
           )
         ',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '12123',
   ),
   'standardRate' => 

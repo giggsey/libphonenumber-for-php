@@ -191,8 +191,9 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '804\\d{7}',
+    'PossibleNumberPattern' => '\\d{10}',
+    'ExampleNumber' => '8041234567',
   ),
   'personalNumber' => 
   array (
@@ -211,8 +212,11 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '8071\\d{6}',
-    'PossibleNumberPattern' => '\\d{10}',
+    'NationalNumberPattern' => '
+          1500\\d{3}|
+          8071\\d{6}
+        ',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '8071123456',
   ),
   'emergency' => 
@@ -296,16 +300,27 @@ return array (
     ),
     3 => 
     array (
+      'pattern' => '(1)(500)(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '15',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    4 => 
+    array (
       'pattern' => '(177)(\\d{6,8})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '17',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    4 => 
+    5 => 
     array (
       'pattern' => '(800)(\\d{5,7})',
       'format' => '$1 $2',
@@ -316,7 +331,18 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    5 => 
+    6 => 
+    array (
+      'pattern' => '(804)(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '804',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    7 => 
     array (
       'pattern' => '(80\\d)(\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3 $4',

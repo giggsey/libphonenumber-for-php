@@ -31,7 +31,7 @@ return array (
             5[0-25-9]|
             6[6-9]|
             7[03-9]|
-            8[17-9]|
+            8[147-9]|
             9[017-9]
           )\\d{6}
         ',
@@ -41,16 +41,12 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '
-          1(?:
-            80(?:
-              0\\d{2}
-            )?|
-            3(?:
-              00\\d{2}
-            )?
-          )\\d{4}
+          180(?:
+            0\\d{3}|
+            2
+          )\\d{3}
         ',
-    'PossibleNumberPattern' => '\\d{6,10}',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '1800123456',
   ),
   'premiumRate' => 
@@ -61,8 +57,13 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          13(?:
+            00\\d{2}
+          )?\\d{4}
+        ',
+    'PossibleNumberPattern' => '\\d{6,10}',
+    'ExampleNumber' => '1300123456',
   ),
   'personalNumber' => 
   array (

@@ -14,7 +14,11 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          3[012]\\d{6}|
+          3(?:
+            [012]\\d|
+            6[0-4]|
+            91
+          )\\d{5}|
           7\\d{7}|
           81200\\d{3}
         ',
@@ -26,7 +30,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             [259]\\d|
-            4[0-24]
+            4[0-6]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8}',

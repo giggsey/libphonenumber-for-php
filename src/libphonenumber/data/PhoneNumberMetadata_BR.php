@@ -64,7 +64,15 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '[34]00\\d{5}',
+    'NationalNumberPattern' => '
+          (?:
+           300\\d|
+           40(?:
+              0\\d|
+              20
+           )
+          )\\d{4}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '40041234',
   ),
@@ -115,7 +123,15 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '[34]00\\d{5}',
+    'NationalNumberPattern' => '
+          (?:
+           300\\d|
+           40(?:
+              0\\d|
+              20
+           )
+          )\\d{4}
+        ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '40041234',
   ),
@@ -202,11 +218,19 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '([34]00\\d)(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[34]00',
+        0 => '
+            (?:
+             300|
+             40(?:
+                0|
+                20
+             )
+            )
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -256,11 +280,19 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([34]00\\d)(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[34]00',
+        0 => '
+            (?:
+             300|
+             40(?:
+                0|
+                20
+             )
+            )
+          ',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

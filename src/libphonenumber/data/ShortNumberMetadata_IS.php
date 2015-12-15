@@ -8,28 +8,30 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '1\\d{2,5}',
+    'PossibleNumberPattern' => '\\d{3,6}',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1717',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '1717',
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1848',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '1848',
   ),
   'sharedCost' => 
   array (
@@ -59,7 +61,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '112',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '112',
   ),
   'voicemail' => 
@@ -69,8 +71,39 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '
+          1(?:
+            1(?:
+              [28]|
+              6(?:
+                1(?:
+                  23|
+                  16
+                )
+              )
+            )|
+            4(?:
+              00|
+              1[145]|
+              4[0146]
+            )|
+            55|
+            7(?:
+              00|
+              17|
+              7[07-9]
+            )|
+            8(?:
+              0[08]|
+              1[016-9]|
+              20|
+              48|
+              8[018]
+            )|
+            900
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 
@@ -80,8 +113,9 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1441',
+    'PossibleNumberPattern' => '\\d{4}',
+    'ExampleNumber' => '1441',
   ),
   'noInternationalDialling' => 
   array (

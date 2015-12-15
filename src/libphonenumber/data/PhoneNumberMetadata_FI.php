@@ -171,6 +171,17 @@ return array (
     ),
     1 => 
     array (
+      'pattern' => '(116\\d{3})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '116',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
+    array (
       'pattern' => '(\\d{2})(\\d{4,10})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
@@ -185,7 +196,7 @@ return array (
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    2 => 
+    3 => 
     array (
       'pattern' => '(\\d)(\\d{4,11})',
       'format' => '$1 $2',

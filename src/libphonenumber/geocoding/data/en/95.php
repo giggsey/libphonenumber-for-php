@@ -5,7 +5,7 @@
  */
 
 return array (
-  6866 => 'TSKL',
-  6867 => 'ATHKL',
-  6869 => 'TSKL',
+  9522000 => 'Mingalar Mandalay',
+  955645 => 'Tandar',
+  9582320 => 'Manton',
 );
