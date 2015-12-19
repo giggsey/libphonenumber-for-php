@@ -20,17 +20,15 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
-The library can be installed via [composer](http://getcomposer.org/). You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
+The PECL [mbstring](http://php.net/mbstring) extension is required.
 
-The PECL [mbstring](http://php.net/mbstring) extension is required for this library to be used.
+It is recommended to use [composer](https://getcomposer.org) to install the library.
 
-```json
-{
-    "require": {
-        "giggsey/libphonenumber-for-php": "~7.0"
-    }
-}
+```bash
+$ composer require giggsey/libphonenumber-for-php
 ```
+
+You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
 
 ## Versioning
 
@@ -211,12 +209,12 @@ If Google's [Online Demo](https://libphonenumber.appspot.com/) gives a different
 
 ## Generating data
 
-Phing is used to 'compile' the metadata.
+Generating the data is not normally needed, as this repository will generally always have the up to data metadata.
 
-Ensure you have all the dev composer dependencies installed, then run
+If you do need to generate the data, the commands are provided by [Phing](https://www.phing.info). Ensure you have all the dev composer dependencies installed, then run
 
 ```bash
-vendor/bin/phing compile
+$ vendor/bin/phing compile
 ```
 
 This compile process clones the [libphonenumber](https://github.com/googlei18n/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).
@@ -225,8 +223,7 @@ This compile process clones the [libphonenumber](https://github.com/googlei18n/l
 
 Other packages exist that integrate libphonenumber-for-php into frameworks.
 
-These packages are supplied by third parties, and their quality can not be guaranteed.
-
  - Symfony: [PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)
  - Laravel: [Laravel Phone](https://github.com/Propaganistas/Laravel-Phone)
 
+These packages are supplied by third parties, and their quality can not be guaranteed.
