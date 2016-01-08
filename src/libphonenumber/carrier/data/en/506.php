@@ -11,6 +11,7 @@ return array (
   506571 => 'OMV',
   506572 => 'OMV',
   506573 => 'OMV',
+  5066 => 'Movistar',
   50670010 => 'Claro',
   50670011 => 'Claro',
   50670012 => 'Claro',

@@ -65,6 +65,7 @@ return array (
   61468 => 'Optus',
   61469 => 'Lycamobile',
   61470 => 'Lycamobile',
+  61472 => 'Telstra',
   61473 => 'Telstra',
   61474 => 'Telstra',
   61475 => 'Telstra',

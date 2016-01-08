@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[5-7]\\d{5}',
+    'NationalNumberPattern' => '[4-8]\\d{5}',
     'PossibleNumberPattern' => '\\d{6}',
   ),
   'fixedLine' => 
@@ -29,7 +29,8 @@ return array (
           (?:
             50|
             68|
-            72
+            72|
+            8[23]
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{6}',
@@ -77,8 +78,9 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '[48]0\\d{4}',
+    'PossibleNumberPattern' => '\\d{6}',
+    'ExampleNumber' => '401234',
   ),
   'shortCode' => 
   array (
@@ -103,7 +105,7 @@ return array (
   'id' => 'WF',
   'countryCode' => 681,
   'internationalPrefix' => '00',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 

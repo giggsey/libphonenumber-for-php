@@ -23,8 +23,15 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          1(?:
+            1[78]|
+            28|
+            82
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '118',
   ),
   'premiumRate' => 
   array (
@@ -72,11 +79,14 @@ return array (
     'NationalNumberPattern' => '
          1(?:
            0[01]|
-           1[29]|
+           1[027-9]|
+           2[01389]|
            3(?:
-            39|
-            9[18]
-           )
+             2|
+             39|
+             9[18]
+           )|
+           82
           )
         ',
     'PossibleNumberPattern' => '\\d{3,4}',

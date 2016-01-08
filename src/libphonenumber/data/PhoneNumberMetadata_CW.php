@@ -34,11 +34,11 @@ return array (
     'NationalNumberPattern' => '
           9(?:
             5(?:
-              [1246]\\d|
+              [12467]\\d|
               3[01]
             )|
             6(?:
-              [16-9]\\d|
+              [15-9]\\d|
               3[01]
             )
           )\\d{4}
@@ -58,14 +58,9 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            10|
-            69
-          )\\d{5}
-        ',
+    'NationalNumberPattern' => '60[0-2]\\d{4}',
     'PossibleNumberPattern' => '\\d{7}',
-    'ExampleNumber' => '1011234',
+    'ExampleNumber' => '6001234',
   ),
   'personalNumber' => 
   array (

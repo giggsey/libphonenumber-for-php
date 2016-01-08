@@ -5,5 +5,9 @@
  */
 
 return array (
-  25191 => 'ETH-MTN',
+  25191 => 'Ethio Telecom',
+  25192 => 'Ethio Telecom',
+  25193 => 'Ethio Telecom',
+  25194 => 'Ethio Telecom',
+  25195 => 'Ethio Telecom',
 );

@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '9\\d{2}',
+    'NationalNumberPattern' => '[19]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '9\\d{2}',
+    'NationalNumberPattern' => '[19]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9\\d{2}',
+    'NationalNumberPattern' => '[19]\\d{2}',
     'PossibleNumberPattern' => '\\d{3}',
   ),
   'tollFree' => 
@@ -69,7 +69,10 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '911',
+    'NationalNumberPattern' => '
+          1\\d{2}|
+          911
+        ',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '911',
   ),
