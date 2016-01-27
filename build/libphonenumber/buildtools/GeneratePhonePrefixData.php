@@ -22,16 +22,12 @@ EOT;
     private $filesToIgnore = array('.', '..', '.svn', '.git');
     private $outputDir;
     private $englishMaps = array();
-    /**
-     * @var OutputInterface
-     */
-    private static $consoleOutput;
+
 
     public function start($inputDir, $outputDir, OutputInterface $consoleOutput)
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
-        self::$consoleOutput = $consoleOutput;
 
         $inputOutputMappings = $this->createInputOutputMappings();
         $availableDataFiles = array();
