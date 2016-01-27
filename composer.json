@@ -38,9 +38,9 @@
         "phing/phing": "~2.7",
         "pear/versioncontrol_git": "dev-master",
         "pear/pear-core-minimal": "^1.9",
-        "pear/pear_exception": "*",
+        "pear/pear_exception": "^1.0",
         "phpunit/phpunit": "~4.0",
-        "symfony/console": "~2.4",
+        "symfony/console": "^2.5",
         "satooshi/php-coveralls":  "~0.6"
     },
     "suggest": {
