@@ -194,7 +194,6 @@ class PhoneNumberUtil
      * @var String
      */
     private static $EXTN_PATTERNS_FOR_PARSING;
-    private static $EXTN_PATTERNS_FOR_MATCHING;
     private static $EXTN_PATTERN = null;
     private static $VALID_PHONE_NUMBER_PATTERN;
     private static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
@@ -426,7 +425,6 @@ class PhoneNumberUtil
         $singleExtnSymbolsForParsing = "," . $singleExtnSymbolsForMatching;
 
         self::$EXTN_PATTERNS_FOR_PARSING = self::createExtnPattern($singleExtnSymbolsForParsing);
-        self::$EXTN_PATTERNS_FOR_MATCHING = self::createExtnPattern($singleExtnSymbolsForMatching);
     }
 
     // The FIRST_GROUP_PATTERN was originally set to $1 but there are some countries for which the

@@ -2,7 +2,7 @@
 
 namespace libphonenumber\buildtools;
 
-use Symfony\Component\Console\Helper\ProgressHelper;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class GeneratePhonePrefixData
@@ -22,21 +22,19 @@ EOT;
     private $filesToIgnore = array('.', '..', '.svn', '.git');
     private $outputDir;
     private $englishMaps = array();
-    /**
-     * @var OutputInterface
-     */
-    private static $consoleOutput;
 
-    public function start($inputDir, $outputDir, OutputInterface $consoleOutput, ProgressHelper $progress)
+
+    public function start($inputDir, $outputDir, OutputInterface $consoleOutput)
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
-        self::$consoleOutput = $consoleOutput;
 
         $inputOutputMappings = $this->createInputOutputMappings();
         $availableDataFiles = array();
 
-        $progress->start($consoleOutput, count($inputOutputMappings));
+        $progress = new ProgressBar($consoleOutput, count($inputOutputMappings));
+
+        $progress->start();
         foreach ($inputOutputMappings as $textFile => $outputFiles) {
             $mappings = $this->readMappingsFromFile($textFile);
 
