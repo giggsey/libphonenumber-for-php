@@ -121,15 +121,18 @@ return array (
             98[07]\\d
           )\\d{4}|
           (?:
-            70(?:
-              [13-9]\\d|
-              2[1-9]
-            )|
+            70[1-689]\\d|
             8(?:
-              0[2-9]|
-              1\\d
-            )\\d|
-            90[2359]\\d
+              0(?:
+                1[01]|
+                [2-9]\\d
+              )|
+              1(?:
+                [0-8]\\d|
+                9[01]
+              )
+            )|
+            90[23589]\\d
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{8,10}',
@@ -212,16 +215,37 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([129])(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[129]',
+        0 => '
+            70|
+            8[01]|
+            90[23589]
+          ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
     1 => 
+    array (
+      'pattern' => '(\\d)(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+             [12]|
+             9(?:
+               0[3-9]|
+               [1-9]
+             )
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    2 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{2,3})',
       'format' => '$1 $2 $3',
@@ -234,21 +258,6 @@ return array (
               0[1-9]
             )|
             8[2-9]
-          ',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-    ),
-    2 => 
-    array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3,4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '
-            70|
-            8[01]|
-            90[2359]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',

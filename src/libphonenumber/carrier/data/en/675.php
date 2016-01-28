@@ -10,7 +10,10 @@ return array (
   67571 => 'Digicel',
   67572 => 'Digicel',
   67573 => 'Digicel',
+  67574 => 'Digicel',
+  67575 => 'bmobile',
   67576 => 'bmobile',
   675775 => 'Telikom',
+  67578 => 'Telikom',
   67579 => 'Digicel',
 );

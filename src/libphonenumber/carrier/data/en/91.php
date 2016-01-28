@@ -211,6 +211,7 @@ return array (
   917308 => 'Reliance',
   917309 => 'Idea',
   917310 => 'Vodafone',
+  917319 => 'Airtel',
   917350 => 'Idea',
   917351 => 'Idea',
   917352 => 'Idea',

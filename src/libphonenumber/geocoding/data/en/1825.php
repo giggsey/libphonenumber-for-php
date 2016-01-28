@@ -5,7 +5,5 @@
  */
 
 return array (
-  2356 => 'Airtel',
-  23577 => 'Sotel',
-  2359 => 'Millicom',
+  1825 => 'Alberta',
 );
