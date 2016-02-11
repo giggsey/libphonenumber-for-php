@@ -145,7 +145,8 @@ return array (
             33|
             44|
             66|
-            77
+            77|
+            88
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{10}',

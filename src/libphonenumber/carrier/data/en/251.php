@@ -10,4 +10,5 @@ return array (
   25193 => 'Ethio Telecom',
   25194 => 'Ethio Telecom',
   25195 => 'Ethio Telecom',
+  251966 => 'Ethio Telecom',
 );

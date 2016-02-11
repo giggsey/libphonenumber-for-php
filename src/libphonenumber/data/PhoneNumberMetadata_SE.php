@@ -8,8 +8,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d{5,9}',
-    'PossibleNumberPattern' => '\\d{5,10}',
+    'NationalNumberPattern' => '
+          [1-35-9]\\d{5,11}|
+          4\\d{6,8}
+        ',
+    'PossibleNumberPattern' => '\\d{6,12}',
   ),
   'fixedLine' => 
   array (
@@ -49,8 +52,7 @@ return array (
             )\\d{5,6}
           )|
           4(?:
-            0[1-9]\\d{4,6}|
-            [246]\\d{5,7}|
+            [0246]\\d{5,7}|
             (?:
               1[013-8]|
               3[0135]|
@@ -72,8 +74,7 @@ return array (
             9[01]
           )\\d{5,6}|
           6(?:
-            0[1-9]\\d{4,6}|
-            3\\d{5,7}|
+            [03]\\d{5,7}|
             (?:
               1[1-3]|
               2[0-4]|
@@ -85,7 +86,7 @@ return array (
               9[0-356]
             )\\d{5,6}
           )|
-          8[1-9]\\d{5,7}|
+          8\\d{6,8}|
           9(?:
             0[1-9]\\d{4,6}|
             (?:
@@ -99,7 +100,7 @@ return array (
             )\\d{5,6}
           )
         ',
-    'PossibleNumberPattern' => '\\d{5,9}',
+    'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '8123456',
   ),
   'mobile' => 
@@ -110,82 +111,29 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '
-          20(?:
-            0(?:
-              0\\d{2}|
-              [1-9](?:
-                0\\d{1,4}|
-                [1-9]\\d{4}
-              )
-            )|
-            1(?:
-              0\\d{4}|
-              [1-9]\\d{4,5}
-            )|
-            [2-9]\\d{5}
-          )
-        ',
+    'NationalNumberPattern' => '20\\d{4,7}',
     'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '20123456',
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '
+          649\\d{6}|
           9(?:
             00|
             39|
             44
-          )(?:
-            1(?:
-              [0-26]\\d{5}|
-              [3-57-9]\\d{2}
-            )|
-            2(?:
-              [0-2]\\d{5}|
-              [3-9]\\d{2}
-            )|
-            3(?:
-              [0139]\\d{5}|
-              [24-8]\\d{2}
-            )|
-            4(?:
-              [045]\\d{5}|
-              [1-36-9]\\d{2}
-            )|
-            5(?:
-              5\\d{5}|
-              [0-46-9]\\d{2}
-            )|
-            6(?:
-              [679]\\d{5}|
-              [0-58]\\d{2}
-            )|
-            7(?:
-              [078]\\d{5}|
-              [1-69]\\d{2}
-            )|
-            8(?:
-              [578]\\d{5}|
-              [0-469]\\d{2}
-            )
-          )
+          )[1-8]\\d{3,6}
         ',
-    'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
+    'PossibleNumberPattern' => '\\d{7,10}',
     'ExampleNumber' => '9001234567',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => '
           77(?:
-            0(?:
-              0\\d{2}|
-              [1-9](?:
-                0\\d|
-                [1-9]\\d{4}
-              )
-            )|
-            [1-6][1-9]\\d{5}
+            0\\d{3}(?:\\d{3})?|
+            [1-7]\\d{6}
           )
         ',
     'PossibleNumberPattern' => '\\d{6}(?:\\d{3})?',
@@ -220,8 +168,14 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '
+          (?:
+            25[245]|
+            67[3-6]
+          )\\d{9}
+        ',
+    'PossibleNumberPattern' => '\\d{12}',
+    'ExampleNumber' => '254123456789',
   ),
   'shortCode' => 
   array (
