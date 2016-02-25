@@ -7,6 +7,7 @@
 return array (
   212520 => 'Casablanca',
   212521 => 'Casablanca/Maroc Central',
+  2125220 => 'Casablanca',
   2125222 => 'Casablanca',
   2125223 => 'Casablanca',
   2125224 => 'Casablanca',
