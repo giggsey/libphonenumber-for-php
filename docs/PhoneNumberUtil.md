@@ -42,7 +42,7 @@ object(libphonenumber\PhoneNumber)#31 (9) {
 }
 ```
 
-A `PhoneNumberException` will be thrown if it is unable to obtain a viable number. For example, if the number is too short/long, or the region is invalid. This does not tell you whether the number is valid or not. In order to determine whether the number is valid, it needs to be checked in the validation functions.
+A `NumberParseException` will be thrown if it is unable to obtain a viable number. For example, if the number is too short/long, or the region is invalid. This does not tell you whether the number is valid or not. In order to determine whether the number is valid, it needs to be checked in the validation functions.
 
 The returned `PhoneNumber` object is used with other functions to provide additional information.
 
