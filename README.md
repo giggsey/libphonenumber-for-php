@@ -225,5 +225,6 @@ Other packages exist that integrate libphonenumber-for-php into frameworks.
 
  - Symfony: [PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)
  - Laravel: [Laravel Phone](https://github.com/Propaganistas/Laravel-Phone)
+ - Yii2: [PhoneInput](https://github.com/Borales/yii2-phone-input)
 
 These packages are supplied by third parties, and their quality can not be guaranteed.
