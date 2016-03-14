@@ -137,7 +137,7 @@ return array (
             [38]\\d|
             4[57]|
             5[0-35-9]|
-            7[06-8]
+            7[036-8]
           )\\d{8}
         ',
     'PossibleNumberPattern' => '\\d{11}',
