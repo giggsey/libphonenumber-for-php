@@ -14,9 +14,9 @@ A PHP library for parsing, formatting, storing and validating international phon
 * `isNumberMatch` - gets a confidence level on whether two numbers could be the same.
 * `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
 * `isValidNumber` - full validation of a phone number for a region using length and prefix information.
-* PhoneNumberOfflineGeocoder - provides geographical information related to a phone number.
-* PhoneNumberToTimeZonesMapper - provides timezone information related to a phone number.
-* PhoneNumberToCarrierMapper - provides carrier information related to a phone number.
+* `PhoneNumberOfflineGeocoder` - provides geographical information related to a phone number.
+* `PhoneNumberToTimeZonesMapper` - provides timezone information related to a phone number.
+* `PhoneNumberToCarrierMapper` - provides carrier information related to a phone number.
 
 ## Installation
 
