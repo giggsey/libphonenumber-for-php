@@ -34,4 +34,7 @@ return array (
   254790 => 'Safaricom',
   254791 => 'Safaricom',
   254792 => 'Safaricom',
+  254795 => 'Safaricom',
+  254796 => 'Safaricom',
+  254797 => 'Safaricom',
 );

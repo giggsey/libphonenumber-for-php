@@ -5,5 +5,5 @@
  */
 
 return array (
-  86435 => 'Tonghua, Jilin',
+  86435 => 'Tonghua/Meihekou, Jilin',
 );

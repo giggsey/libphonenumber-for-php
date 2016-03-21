@@ -5,5 +5,5 @@
  */
 
 return array (
-  86433 => 'Yanbian Zhou, Jilin',
+  86433 => 'Yanbian Zhou/Hunchun/Yanji, Jilin',
 );

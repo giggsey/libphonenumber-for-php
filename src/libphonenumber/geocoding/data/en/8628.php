@@ -5,5 +5,5 @@
  */
 
 return array (
-  8628 => 'Chengdu, Sichuan',
+  8628 => 'Chengdu/Ziyang/Meishan, Sichuan',
 );

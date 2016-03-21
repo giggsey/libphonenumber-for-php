@@ -5,5 +5,5 @@
  */
 
 return array (
-  86897 => 'GeEr, Tibet',
+  86897 => 'GeEr/Pulan/Zhada, Tibet',
 );

@@ -58,7 +58,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '112',
+    'NationalNumberPattern' => '11[24]',
     'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '112',
   ),

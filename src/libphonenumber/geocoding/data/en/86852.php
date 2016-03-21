@@ -5,5 +5,5 @@
  */
 
 return array (
-  8629 => '陕西省西安市、咸阳市',
+  86852 => 'Zunyi, Guizhou',
 );
