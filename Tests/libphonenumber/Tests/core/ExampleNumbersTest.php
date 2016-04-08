@@ -51,6 +51,27 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         return $returnList;
     }
 
+    public function numberTypes()
+    {
+        return array(
+            array(PhoneNumberType::FIXED_LINE),
+            array(PhoneNumberType::MOBILE),
+            array(PhoneNumberType::FIXED_LINE_OR_MOBILE),
+            array(PhoneNumberType::TOLL_FREE),
+            array(PhoneNumberType::PREMIUM_RATE),
+            array(PhoneNumberType::SHARED_COST),
+            array(PhoneNumberType::VOIP),
+            array(PhoneNumberType::PERSONAL_NUMBER),
+            array(PhoneNumberType::PAGER),
+            array(PhoneNumberType::UAN),
+            array(PhoneNumberType::UNKNOWN),
+            array(PhoneNumberType::EMERGENCY),
+            array(PhoneNumberType::VOICEMAIL),
+            array(PhoneNumberType::SHORT_CODE),
+            array(PhoneNumberType::STANDARD_RATE),
+        );
+    }
+
     /**
      * @dataProvider regionList
      */
@@ -230,10 +251,10 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
      * @dataProvider regionList
      * @param string $regionCode
      */
-    public function testEveryRegionHasExampleNumber($regionCode)
+    public function testEveryRegionHasAnExampleNumber($regionCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumber($regionCode);
-        $this->assertNotNull($exampleNumber, "None found for region " . $regionCode);
+        $this->assertNotNull($exampleNumber, "No example number found for region " . $regionCode);
 
         /*
          * Check the number is valid
@@ -247,6 +268,26 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->phoneNumberUtil->isValidNumber($phoneObject));
         $this->assertTrue($this->phoneNumberUtil->isValidNumberForRegion($phoneObject, $regionCode));
+    }
+
+    /**
+     * @dataProvider regionList
+     * @param string $regionCode
+     */
+    public function testEveryRegionHasAnInvalidExampleNumber($regionCode)
+    {
+        $exampleNumber = $this->phoneNumberUtil->getInvalidExampleNumber($regionCode);
+        $this->assertNotNull($exampleNumber, 'No invalid example number found for region ' . $regionCode);
+    }
+
+    /**
+     * @dataProvider numberTypes
+     * @param string $numberType
+     */
+    public function testEveryTypeHasAnExampleNumber($numberType)
+    {
+        $exampleNumber = $this->phoneNumberUtil->getExampleNumberForType($numberType);
+        $this->assertNotNull($exampleNumber, 'No example number found for type ' . $numberType);
     }
 
     /**
@@ -268,7 +309,10 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
         if (!$this->shortNumberInfo->isValidShortNumber($phoneNumber)) {
             $this->fail("Failed validation for " . (string)$phoneNumber);
         }
+    }
 
+    public function shortRegionListAndNumberCost()
+    {
         $costArray = array(
             ShortNumberCost::PREMIUM_RATE,
             ShortNumberCost::STANDARD_RATE,
@@ -276,15 +320,30 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             ShortNumberCost::UNKNOWN_COST
         );
 
-        foreach ($costArray as $cost) {
-            $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumberForCost($regionCode, $cost);
-            if ($exampleShortNumber != '') {
-                $this->assertEquals(
-                    $cost,
-                    $this->shortNumberInfo->getExpectedCostForRegion($this->phoneNumberUtil->parse($exampleShortNumber, $regionCode), $regionCode),
-                    "Wrong cost for " . (string)$phoneNumber
-                );
+        $output = array();
+
+        foreach ($this->shortNumberRegionList() as $region) {
+            foreach ($costArray as $cost) {
+                $output[] = array($region[0], $cost);
             }
+        }
+
+        return $output;
+    }
+
+    /**
+     * @dataProvider shortRegionListAndNumberCost
+     * @param $regionCode
+     * @param $cost
+     */
+    public function testShortNumberHasCorrectCost($regionCode, $cost)
+    {
+        $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumberForCost($regionCode, $cost);
+        if ($exampleShortNumber != '') {
+            $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
+            $exampleShortNumberCost = $this->shortNumberInfo->getExpectedCostForRegion($phoneNumber, $regionCode);
+
+            $this->assertEquals($cost, $exampleShortNumberCost, 'Wrong cost for ' . (string)$phoneNumber);
         }
     }
 

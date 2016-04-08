@@ -30,7 +30,7 @@ return array (
     'NationalNumberPattern' => '
           (?:
             222|
-            551
+            55[15]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',

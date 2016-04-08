@@ -43,7 +43,7 @@ return array (
               1[0-7]\\d|
               2(?:
                 22|
-                55
+                5[25]
               )
             )|
             6(?:
@@ -145,8 +145,12 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            [126]|
-            9[04-9]|
+            [16]|
+            2(?:
+              [0-35-9]|
+              4[0-35-9]
+            )|
+            9[024-9]|
             52[25]
           ',
       ),
@@ -160,8 +164,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            5[015]|
-            92
+            244|
+            5[015]
           ',
       ),
       'nationalPrefixFormattingRule' => '',
