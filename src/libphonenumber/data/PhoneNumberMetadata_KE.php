@@ -40,9 +40,8 @@ return array (
           7(?:
             [0-36]\\d|
             5[0-6]|
-            7[0-5]|
-            8[0-25-9]|
-            9[0-7]
+            [79][0-7]|
+            8[0-25-9]
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -119,7 +118,7 @@ return array (
   'countryCode' => 254,
   'internationalPrefix' => '000',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'nationalPrefixForParsing' => '005|0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

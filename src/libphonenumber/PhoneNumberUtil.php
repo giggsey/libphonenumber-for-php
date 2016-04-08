@@ -157,6 +157,15 @@ class PhoneNumberUtil
     private static $MOBILE_TOKEN_MAPPINGS;
 
     /**
+     * Set of country calling codes that have geographically assigned mobile numbers. This may not be
+     * complete; we add calling codes case by case, as we find geographical mobile numbers or hear
+     * from user reports.
+     *
+     * @var array
+     */
+    private static $GEO_MOBILE_COUNTRIES;
+
+    /**
      * For performance reasons, amalgamate both into one map.
      * @var array
      */
@@ -351,6 +360,11 @@ class PhoneNumberUtil
         self::$MOBILE_TOKEN_MAPPINGS = array();
         self::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
         self::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
+
+        self::$GEO_MOBILE_COUNTRIES = array();
+        self::$GEO_MOBILE_COUNTRIES[] = 52; // Mexico
+        self::$GEO_MOBILE_COUNTRIES[] = 54; // Argentina
+        self::$GEO_MOBILE_COUNTRIES[] = 55; // Brazil
     }
 
     /**
@@ -798,9 +812,11 @@ class PhoneNumberUtil
     public function isNumberGeographical(PhoneNumber $phoneNumber)
     {
         $numberType = $this->getNumberType($phoneNumber);
-        // TODO: Include mobile phone numbers from countries like Indonesia, which has some
-        // mobile numbers that are geographical.
-        return $numberType == PhoneNumberType::FIXED_LINE || $numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE;
+
+        return $numberType == PhoneNumberType::FIXED_LINE
+        || $numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE
+        || (in_array($phoneNumber->getCountryCode(), self::$GEO_MOBILE_COUNTRIES)
+            && $numberType == PhoneNumberType::MOBILE);
     }
 
     /**
@@ -2643,10 +2659,17 @@ class PhoneNumberUtil
     }
 
     /**
-     * Parses a string and returns it in proto buffer format. This method will throw a
-     * {@link NumberParseException} if the number is not considered to be
-     * a possible number. Note that validation of whether the number is actually a valid number for a
-     * particular region is not performed. This can be done separately with {@link #isValidNumber}.
+     * Parses a string and returns it as a phone number in proto buffer format. The method is quite
+     * lenient and looks for a number in the input text (raw input) and does not check whether the
+     * string is definitely only a phone number. To do this, it ignores punctuation and white-space,
+     * as well as any text before the number (e.g. a leading “Tel: ”) and trims the non-number bits.
+     * It will accept a number in any format (E164, national, international etc), assuming it can
+     * interpreted with the defaultRegion supplied. It also attempts to convert any alpha characters
+     * into digits if it thinks this is a vanity number of the type "1800 MICROSOFT".
+     *
+     * <p> This method will throw a {@link NumberParseException} if the number is not considered to
+     * be a possible number. Note that validation of whether the number is actually a valid number
+     * for a particular region is not performed. This can be done separately with {@link #isValidnumber}.
      *
      * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                          such as +, ( and -, as well as a phone number extension.
@@ -2659,9 +2682,10 @@ class PhoneNumberUtil
      * @param PhoneNumber|null $phoneNumber
      * @param bool $keepRawInput
      * @return PhoneNumber a phone number proto buffer filled with the parsed number
-     * @throws NumberParseException  if the string is not considered to be a viable phone number or if
-     *                               no default region was supplied and the number is not in
-     *                               international format (does not start with +)
+     * @throws NumberParseException  if the string is not considered to be a viable phone number (e.g.
+     *                               too few or too many digits) or if no default region was supplied
+     *                               and the number is not in international format (does not start
+     *                               with +)
      */
     public function parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = null, $keepRawInput = false)
     {
@@ -2745,25 +2769,111 @@ class PhoneNumberUtil
     }
 
     /**
+     * Gets an invalid number for the specified region. This is useful for unit-testing purposes,
+     * where you want to test what will happen with an invalid number. Note that the number that is
+     * returned will always be able to be parsed and will have the correct country code. It may also
+     * be a valid *short* number/code for this region. Validity checking such numbers is handled with
+     * {@link ShortNumberInfo}.
+     *
+     * @param string $regionCode The region for which an example number is needed
+     * @return PhoneNumber|null An invalid number for the specified region. Returns null when an unsupported region
+     * or the region 001 (Earth) is passed in.
+     */
+    public function getInvalidExampleNumber($regionCode)
+    {
+        if (!$this->isValidRegionCode($regionCode)) {
+            return null;
+        }
+
+        // We start off with a valid fixed-line number since every country supports this. Alternatively
+        // we could start with a different number type, since fixed-line numbers typically have a wide
+        // breadth of valid number lengths and we may have to make it very short before we get an
+        // invalid number.
+
+        $desc = $this->getNumberDescByType($this->getMetadataForRegion($regionCode), PhoneNumberType::FIXED_LINE);
+
+        if ($desc->getExampleNumber() == '') {
+            // This shouldn't happen; we have a test for this.
+            return null;
+        }
+
+        $exampleNumber = $desc->getExampleNumber();
+
+        // Try and make the number invalid. We do this by changing the length. We try reducing the
+        // length of the number, since currently no region has a number that is the same length as
+        // MIN_LENGTH_FOR_NSN. This is probably quicker than making the number longer, which is another
+        // alternative. We could also use the possible number pattern to extract the possible lengths of
+        // the number to make this faster, but this method is only for unit-testing so simplicity is
+        // preferred to performance.  We don't want to return a number that can't be parsed, so we check
+        // the number is long enough. We try all possible lengths because phone number plans often have
+        // overlapping prefixes so the number 123456 might be valid as a fixed-line number, and 12345 as
+        // a mobile number. It would be faster to loop in a different order, but we prefer numbers that
+        // look closer to real numbers (and it gives us a variety of different lengths for the resulting
+        // phone numbers - otherwise they would all be MIN_LENGTH_FOR_NSN digits long.)
+        for ($phoneNumberLength = mb_strlen($exampleNumber) - 1; $phoneNumberLength >= self::MIN_LENGTH_FOR_NSN; $phoneNumberLength--) {
+            $numberToTry = mb_substr($exampleNumber, 0, $phoneNumberLength);
+            try {
+                $possiblyValidNumber = $this->parse($numberToTry, $regionCode);
+                if (!$this->isValidNumber($possiblyValidNumber)) {
+                    return $possiblyValidNumber;
+                }
+            } catch (NumberParseException $e) {
+                // Shouldn't happen: we have already checked the length, we know example numbers have
+                // only valid digits, and we know the region code is fine.
+            }
+        }
+        // We have a test to check that this doesn't happen for any of our supported regions.
+        return null;
+    }
+
+    /**
      * Gets a valid number for the specified region and number type.
      *
-     * @param string $regionCode the region for which an example number is needed
+     * @param string $regionCodeOrType the region for which an example number is needed
      * @param int $type the PhoneNumberType of number that is needed
      * @return PhoneNumber a valid number for the specified region and type. Returns null when the metadata
      *     does not contain such information or if an invalid region or region 001 was entered.
      *     For 001 (representing non-geographical numbers), call
      *     {@link #getExampleNumberForNonGeoEntity} instead.
+     *
+     * If $regionCodeOrType is the only parameter supplied, then a valid number for the specified number type
+     * will be returned that may belong to any country.
      */
-    public function getExampleNumberForType($regionCode, $type)
+    public function getExampleNumberForType($regionCodeOrType, $type = null)
     {
-        // Check the region code is valid.
-        if (!$this->isValidRegionCode($regionCode)) {
+        if ($regionCodeOrType !== null && $type === null) {
+            /*
+             * Gets a valid number for the specified number type (it may belong to any country).
+             */
+            foreach ($this->getSupportedRegions() as $regionCode) {
+                $exampleNumber = $this->getExampleNumberForType($regionCode, $regionCodeOrType);
+                if ($exampleNumber !== null) {
+                    return $exampleNumber;
+                }
+            }
+
+            // If there wasn't an example number for a region, try the non-geographical entities
+            foreach ($this->getSupportedGlobalNetworkCallingCodes() as $countryCallingCode) {
+                $desc = $this->getNumberDescByType($this->getMetadataForNonGeographicalRegion($countryCallingCode), $regionCodeOrType);
+                try {
+                    if ($desc->getExampleNumber() != '') {
+                        return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), self::UNKNOWN_REGION);
+                    }
+                } catch (NumberParseException $e) {
+                }
+            }
+            // There are no example numbers of this type for any country in the library.
             return null;
         }
-        $desc = $this->getNumberDescByType($this->getMetadataForRegion($regionCode), $type);
+
+        // Check the region code is valid.
+        if (!$this->isValidRegionCode($regionCodeOrType)) {
+            return null;
+        }
+        $desc = $this->getNumberDescByType($this->getMetadataForRegion($regionCodeOrType), $type);
         try {
             if ($desc->hasExampleNumber()) {
-                return $this->parse($desc->getExampleNumber(), $regionCode);
+                return $this->parse($desc->getExampleNumber(), $regionCodeOrType);
             }
         } catch (NumberParseException $e) {
         }
@@ -2819,7 +2929,7 @@ class PhoneNumberUtil
             $desc = $metadata->getGeneralDesc();
             try {
                 if ($desc->hasExampleNumber()) {
-                    return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), "ZZ");
+                    return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), self::UNKNOWN_REGION);
                 }
             } catch (NumberParseException $e) {
             }
