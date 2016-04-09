@@ -6,7 +6,7 @@
 
 Returns a `PhoneNumber` object version of the `$number`  supplied with the `$region` code.
 
-If the number is passed in an international format (e.g. `+44 117 496 123`), then the region code is not needed, and can be `null`. Failing that, the library will use the region code to work out the phone number based on rules loaded for that region. 
+If the number is passed in an international format (e.g. `+44 117 496 0123`), then the region code is not needed, and can be `null`. Failing that, the library will use the region code to work out the phone number based on rules loaded for that region. 
 
 ```php
 $phoneNumberUtil = \libphonenumber\PhoneNumberUtil::getInstance();
