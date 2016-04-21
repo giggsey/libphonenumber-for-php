@@ -26,6 +26,10 @@ class MappingFileProvider
             return "";
         }
 
+        if ($language === 'zh' && ($region == 'TW' || $region == 'HK' || $region == 'MO')) {
+            $language = 'zh_Hant';
+        }
+
         if ($this->inMap($language, $countryCallingCode)) {
             return $language . DIRECTORY_SEPARATOR . $countryCallingCode . '.php';
         }
