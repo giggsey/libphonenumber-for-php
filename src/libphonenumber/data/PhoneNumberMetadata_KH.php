@@ -38,8 +38,8 @@ return array (
     'NationalNumberPattern' => '
           (?:
             1(?:
-              [013-9]|
-              2\\d?
+              [013-79]|
+              [28]\\d?
             )|
             3[18]\\d|
             6[016-9]|

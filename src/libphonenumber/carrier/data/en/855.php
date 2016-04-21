@@ -9,6 +9,7 @@ return array (
   85512 => 'Cellcard',
   85514 => 'Cellcard',
   85517 => 'Cellcard',
+  85518 => 'Seatel',
   85560 => 'Beeline',
   85566 => 'Beeline',
   85567 => 'Beeline',

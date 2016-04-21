@@ -95,7 +95,10 @@ return array (
             81|
             9[0-5789]
           )|
-          27878|
+          27(?:
+            330|
+            878
+          )|
           40404|
           911
         ',
@@ -104,8 +107,9 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '27330',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '27330',
   ),
   'carrierSpecific' => 
   array (
