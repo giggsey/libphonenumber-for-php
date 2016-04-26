@@ -8,7 +8,7 @@ class PhoneMetadata
     /**
      * @var string
      */
-    private $id = null;
+    protected $id = null;
 
     /**
      * @return boolean
@@ -39,7 +39,7 @@ class PhoneMetadata
     /**
      * @var int
      */
-    private $countryCode = null;
+    protected $countryCode = null;
 
     /**
      * @return boolean
@@ -67,7 +67,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $leadingDigits = null;
+    protected $leadingDigits = null;
 
     /**
      * @return bool
@@ -88,7 +88,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $internationalPrefix = null;
+    protected $internationalPrefix = null;
 
     public function hasInternationalPrefix()
     {
@@ -106,7 +106,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $preferredInternationalPrefix = null;
+    protected $preferredInternationalPrefix = null;
 
     public function hasPreferredInternationalPrefix()
     {
@@ -124,7 +124,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $nationalPrefixForParsing = null;
+    protected $nationalPrefixForParsing = null;
 
     public function hasNationalPrefixForParsing()
     {
@@ -142,7 +142,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $nationalPrefixTransformRule = null;
+    protected $nationalPrefixTransformRule = null;
 
     public function hasNationalPrefixTransformRule()
     {
@@ -160,7 +160,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $nationalPrefix = null;
+    protected $nationalPrefix = null;
 
     public function hasNationalPrefix()
     {
@@ -178,7 +178,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $preferredExtnPrefix = null;
+    protected $preferredExtnPrefix = null;
 
     public function hasPreferredExtnPrefix()
     {
@@ -196,7 +196,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $mainCountryForCode = false;
+    protected $mainCountryForCode = false;
 
     public function hasMainCountryForCode()
     {
@@ -219,7 +219,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $leadingZeroPossible = false;
+    protected $leadingZeroPossible = false;
 
     public function hasLeadingZeroPossible()
     {
@@ -237,7 +237,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $mobileNumberPortableRegion = false;
+    protected $mobileNumberPortableRegion = false;
 
     public function hasMobileNumberPortableRegion()
     {
@@ -255,7 +255,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $generalDesc = null;
+    protected $generalDesc = null;
 
     public function hasGeneralDesc()
     {
@@ -279,7 +279,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    private $mobile = null;
+    protected $mobile = null;
 
     public function hasMobile()
     {
@@ -300,7 +300,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $premiumRate = null;
+    protected $premiumRate = null;
 
     public function hasPremiumRate()
     {
@@ -321,7 +321,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $fixedLine = null;
+    protected $fixedLine = null;
 
     public function hasFixedLine()
     {
@@ -342,7 +342,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $sameMobileAndFixedLinePattern = false;
+    protected $sameMobileAndFixedLinePattern = false;
 
     public function hasSameMobileAndFixedLinePattern()
     {
@@ -360,7 +360,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $numberFormat = array();
+    protected $numberFormat = array();
 
     /**
      * @return NumberFormat[]
@@ -390,7 +390,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $tollFree = null;
+    protected $tollFree = null;
 
     public function hasTollFree()
     {
@@ -411,7 +411,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $sharedCost = null;
+    protected $sharedCost = null;
 
     public function hasSharedCost()
     {
@@ -432,7 +432,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $personalNumber;
+    protected $personalNumber;
 
     public function hasPersonalNumber()
     {
@@ -453,7 +453,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $voip;
+    protected $voip;
 
     public function hasVoip()
     {
@@ -474,7 +474,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $pager;
+    protected $pager;
 
     public function hasPager()
     {
@@ -495,7 +495,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $uan;
+    protected $uan;
 
     public function hasUan()
     {
@@ -516,7 +516,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $emergency;
+    protected $emergency;
 
     public function hasEmergency()
     {
@@ -537,7 +537,7 @@ class PhoneMetadata
         return $this;
     }
 
-    private $voicemail;
+    protected $voicemail;
 
     public function hasVoicemail()
     {
@@ -561,7 +561,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    private $short_code;
+    protected $short_code;
 
     public function hasShortCode()
     {
@@ -582,7 +582,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    private $standard_rate;
+    protected $standard_rate;
 
     public function hasStandardRate()
     {
@@ -603,7 +603,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    private $carrierSpecific;
+    protected $carrierSpecific;
 
     public function hasCarrierSpecific()
     {
@@ -624,7 +624,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    private $noInternationalDialling = null;
+    protected $noInternationalDialling = null;
 
     public function hasNoInternationalDialling()
     {
@@ -646,7 +646,7 @@ class PhoneMetadata
      *
      * @var NumberFormat[]
      */
-    private $intlNumberFormat = array();
+    protected $intlNumberFormat = array();
 
     public function intlNumberFormats()
     {

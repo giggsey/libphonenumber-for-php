@@ -20,7 +20,7 @@ class ShortNumberUtil
     /**
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
+    protected $phoneUtil;
 
     public function __construct(PhoneNumberUtil $phoneNumberUtil = null)
     {

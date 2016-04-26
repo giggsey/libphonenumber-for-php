@@ -24,7 +24,7 @@ class NumberParseException extends \Exception
     // This indicates the string had more digits than any valid phone number could have.
     const TOO_LONG = 4;
 
-    private $errorType;
+    protected $errorType;
 
     public function __construct($errorType, $message, $previous = null)
     {

@@ -7,11 +7,11 @@ namespace libphonenumber;
  */
 class NumberFormat
 {
-    private $pattern = null;
-    private $format = null;
-    private $leadingDigitsPattern = array();
-    private $nationalPrefixFormattingRule = null;
-    private $domesticCarrierCodeFormattingRule = null;
+    protected $pattern = null;
+    protected $format = null;
+    protected $leadingDigitsPattern = array();
+    protected $nationalPrefixFormattingRule = null;
+    protected $domesticCarrierCodeFormattingRule = null;
 
     /**
      * @return boolean

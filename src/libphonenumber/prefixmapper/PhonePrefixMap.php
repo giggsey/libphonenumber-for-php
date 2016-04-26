@@ -16,11 +16,11 @@ use libphonenumber\PhoneNumberUtil;
  */
 class PhonePrefixMap
 {
-    private $phonePrefixMapStorage = array();
+    protected $phonePrefixMapStorage = array();
     /**
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
+    protected $phoneUtil;
 
     public function __construct($map)
     {

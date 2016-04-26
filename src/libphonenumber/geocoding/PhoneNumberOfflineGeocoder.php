@@ -15,17 +15,17 @@ class PhoneNumberOfflineGeocoder
     /**
      * @var PhoneNumberOfflineGeocoder
      */
-    private static $instance;
+    protected static $instance;
     /**
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
+    protected $phoneUtil;
     /**
      * @var PrefixFileReader
      */
-    private $prefixFileReader = null;
+    protected $prefixFileReader = null;
 
-    private function __construct($phonePrefixDataDirectory)
+    protected function __construct($phonePrefixDataDirectory)
     {
         if(!extension_loaded('intl')) {
             throw new \RuntimeException('The intl extension must be installed');
@@ -94,7 +94,7 @@ class PhoneNumberOfflineGeocoder
      * @param int $numberType
      * @return boolean
      */
-    private function canBeGeocoded($numberType)
+    protected function canBeGeocoded($numberType)
     {
         return ($numberType === PhoneNumberType::FIXED_LINE || $numberType === PhoneNumberType::MOBILE || $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE);
     }
@@ -107,7 +107,7 @@ class PhoneNumberOfflineGeocoder
      * @param $locale
      * @return string
      */
-    private function getCountryNameForNumber(PhoneNumber $number, $locale)
+    protected function getCountryNameForNumber(PhoneNumber $number, $locale)
     {
         $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
 
@@ -137,7 +137,7 @@ class PhoneNumberOfflineGeocoder
      * @param $locale
      * @return string
      */
-    private function getRegionDisplayName($regionCode, $locale)
+    protected function getRegionDisplayName($regionCode, $locale)
     {
         if ($regionCode === null || $regionCode == 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) {
             return "";
