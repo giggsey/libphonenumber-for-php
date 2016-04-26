@@ -40,7 +40,7 @@ class ShortNumberInfo
         // TODO: Create ShortNumberInfo for a given map
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
 
-        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . self::META_DATA_FILE_PREFIX;
+        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
 
         // Initialise PhoneNumberUtil to make sure regex's are setup correctly
         PhoneNumberUtil::getInstance();
@@ -53,16 +53,16 @@ class ShortNumberInfo
      */
     public static function getInstance()
     {
-        if (null === self::$instance) {
-            self::$instance = new self(RegexBasedMatcher::create());
+        if (null === static::$instance) {
+            static::$instance = new self(RegexBasedMatcher::create());
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 
     public static function resetInstance()
     {
-        self::$instance = null;
+        static::$instance = null;
     }
 
     /**
@@ -246,7 +246,7 @@ class ShortNumberInfo
         $emergencyDesc = $metadata->getEmergency();
 
         $allowPrefixMatchForRegion = ($allowPrefixMatch
-            && !in_array($regionCode, self::$regionsWhereEmergencyNumbersMustBeExact)
+            && !in_array($regionCode, static::$regionsWhereEmergencyNumbersMustBeExact)
         );
 
         return $this->matcherAPI->matchesNationalNumber($normalizedNumber, $emergencyDesc, $allowPrefixMatchForRegion);

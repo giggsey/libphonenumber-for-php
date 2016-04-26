@@ -69,7 +69,7 @@ class PrefixTimeZonesMap
      */
     protected function tokenizeRawOutputString($timezonesString)
     {
-        return explode(self::RAW_STRING_TIMEZONES_SEPARATOR, $timezonesString);
+        return explode(static::RAW_STRING_TIMEZONES_SEPARATOR, $timezonesString);
     }
 
     /**

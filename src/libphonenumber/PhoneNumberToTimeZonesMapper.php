@@ -28,12 +28,12 @@ class PhoneNumberToTimeZonesMapper
 
     protected function __construct($phonePrefixDataDirectory)
     {
-        $this->prefixTimeZonesMap = self::loadPrefixTimeZonesMapFromFile(
-            dirname(__FILE__) . $phonePrefixDataDirectory . DIRECTORY_SEPARATOR . self::MAPPING_DATA_FILE_NAME
+        $this->prefixTimeZonesMap = static::loadPrefixTimeZonesMapFromFile(
+            dirname(__FILE__) . $phonePrefixDataDirectory . DIRECTORY_SEPARATOR . static::MAPPING_DATA_FILE_NAME
         );
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->unknownTimeZoneList[] = self::UNKNOWN_TIMEZONE;
+        $this->unknownTimeZoneList[] = static::UNKNOWN_TIMEZONE;
     }
 
     protected static function loadPrefixTimeZonesMapFromFile($path)
@@ -60,11 +60,11 @@ class PhoneNumberToTimeZonesMapper
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (self::$instance === null) {
-            self::$instance = new self($mappingDir);
+        if (static::$instance === null) {
+            static::$instance = new static($mappingDir);
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 
     /**
@@ -73,7 +73,7 @@ class PhoneNumberToTimeZonesMapper
      */
     public static function getUnknownTimeZone()
     {
-        return self::UNKNOWN_TIMEZONE;
+        return static::UNKNOWN_TIMEZONE;
     }
 
     /**

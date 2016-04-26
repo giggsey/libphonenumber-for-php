@@ -47,16 +47,16 @@ class PhoneNumberOfflineGeocoder
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (self::$instance === null) {
-            self::$instance = new self($mappingDir);
+        if (static::$instance === null) {
+            static::$instance = new static($mappingDir);
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 
     public static function resetInstance()
     {
-        self::$instance = null;
+        static::$instance = null;
     }
 
     /**

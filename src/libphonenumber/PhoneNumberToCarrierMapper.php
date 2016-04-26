@@ -51,11 +51,11 @@ class PhoneNumberToCarrierMapper
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (!array_key_exists($mappingDir, self::$instance)) {
-            self::$instance[$mappingDir] = new self($mappingDir);
+        if (!array_key_exists($mappingDir, static::$instance)) {
+            static::$instance[$mappingDir] = new static($mappingDir);
         }
 
-        return self::$instance[$mappingDir];
+        return static::$instance[$mappingDir];
     }
 
     /**
