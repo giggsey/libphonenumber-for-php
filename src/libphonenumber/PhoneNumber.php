@@ -551,7 +551,7 @@ class PhoneNumber implements \Serializable
         if ($this->hasExtension()) {
             $outputString .= ' Extension: ' . $this->extension;
         }
-        if ($this->hasCountryCode()) {
+        if ($this->hasCountryCodeSource()) {
             $outputString .= ' Country Code Source: ' . $this->countryCodeSource;
         }
         if ($this->hasPreferredDomesticCarrierCode()) {
