@@ -14,17 +14,17 @@ class Matcher
     /**
      * @var string
      */
-    private $pattern;
+    protected $pattern;
 
     /**
      * @var string
      */
-    private $subject;
+    protected $subject;
 
     /**
      * @var array
      */
-    private $groups = array();
+    protected $groups = array();
 
     /**
      * @param string $pattern
@@ -36,7 +36,7 @@ class Matcher
         $this->subject = $subject;
     }
 
-    private function doMatch($type = 'find')
+    protected function doMatch($type = 'find')
     {
         $final_pattern = '(?:' . $this->pattern . ')';
         switch ($type) {

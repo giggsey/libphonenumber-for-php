@@ -11,19 +11,19 @@ use libphonenumber\PhoneNumber;
  */
 class PrefixFileReader
 {
-    private $phonePrefixDataDirectory;
+    protected $phonePrefixDataDirectory;
     /**
      * The mappingFileProvider knows for which combination of countryCallingCode and language a phone
      * prefix mapping file is available in the file system, so that a file can be loaded when needed.
      * @var MappingFileProvider
      */
-    private $mappingFileProvider;
+    protected $mappingFileProvider;
     /**
      * A mapping from countryCallingCode_lang to the corresponding phone prefix map that has been
      * loaded.
      * @var array
      */
-    private $availablePhonePrefixMaps = array();
+    protected $availablePhonePrefixMaps = array();
 
     public function __construct($phonePrefixDataDirectory)
     {
@@ -31,7 +31,7 @@ class PrefixFileReader
         $this->loadMappingFileProvider();
     }
 
-    private function loadMappingFileProvider()
+    protected function loadMappingFileProvider()
     {
         $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . "Map.php";
         if (!file_exists($mapPath)) {
@@ -65,7 +65,7 @@ class PrefixFileReader
         return $this->availablePhonePrefixMaps[$fileName];
     }
 
-    private function loadPhonePrefixMapFromFile($fileName)
+    protected function loadPhonePrefixMapFromFile($fileName)
     {
         $path = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . $fileName;
         if (!file_exists($path)) {

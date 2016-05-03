@@ -10,7 +10,7 @@ class PhoneNumber implements \Serializable
      *
      * @var int|null
      */
-    private $countryCode = null;
+    protected $countryCode = null;
     /**
      * National (significant) Number is defined in International Telecommunication Union (ITU)
      * Recommendation E.164. It is a language/country-neutral representation of a phone number at a
@@ -22,7 +22,7 @@ class PhoneNumber implements \Serializable
      *
      * @var string|null
      */
-    private $nationalNumber = null;
+    protected $nationalNumber = null;
     /**
      * Extension is not standardized in ITU recommendations, except for being defined as a series of
      * numbers with a maximum length of 40 digits. It is defined as a string here to accommodate for the
@@ -31,7 +31,7 @@ class PhoneNumber implements \Serializable
      *
      * @var string|null
      */
-    private $extension = null;
+    protected $extension = null;
     /**
      * In some countries, the national (significant) number starts with one or more "0"s without this
      * being a national prefix or trunk code of some kind. For example, the leading zero in the national
@@ -49,7 +49,7 @@ class PhoneNumber implements \Serializable
      *
      * @var bool|null
      */
-    private $italianLeadingZero = null;
+    protected $italianLeadingZero = null;
     /**
      * This field is used to store the raw input string containing phone numbers before it was
      * canonicalized by the library. For example, it could be used to store alphanumerical numbers
@@ -57,7 +57,7 @@ class PhoneNumber implements \Serializable
      *
      * @var string|null
      */
-    private $rawInput = null;
+    protected $rawInput = null;
     /**
      * The source from which the country_code is derived. This is not set in the general parsing method,
      * but in the method that parses and keeps raw_input. New fields could be added upon request.
@@ -68,7 +68,7 @@ class PhoneNumber implements \Serializable
      *
      * @var int|null
      */
-    private $countryCodeSource = null;
+    protected $countryCodeSource = null;
     /**
      * The carrier selection code that is preferred when calling this phone number domestically. This
      * also includes codes that need to be dialed in some countries when calling from landlines to
@@ -79,19 +79,19 @@ class PhoneNumber implements \Serializable
      *
      * @var string|null
      */
-    private $preferredDomesticCarrierCode = null;
+    protected $preferredDomesticCarrierCode = null;
     /**
      * Whether this phone number has a number of leading zeros set.
      *
      * @var bool
      */
-    private $hasNumberOfLeadingZeros = false;
+    protected $hasNumberOfLeadingZeros = false;
     /**
      * The number of leading zeros of this phone number.
      *
      * @var int
      */
-    private $numberOfLeadingZeros = 1;
+    protected $numberOfLeadingZeros = 1;
 
     /**
      * Clears this phone number.

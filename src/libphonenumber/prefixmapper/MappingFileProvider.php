@@ -13,7 +13,7 @@ namespace libphonenumber\prefixmapper;
 class MappingFileProvider
 {
 
-    private $map;
+    protected $map;
 
     public function __construct($map)
     {
@@ -38,7 +38,7 @@ class MappingFileProvider
         return "";
     }
 
-    private function inMap($language, $countryCallingCode)
+    protected function inMap($language, $countryCallingCode)
     {
         return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language]));
     }

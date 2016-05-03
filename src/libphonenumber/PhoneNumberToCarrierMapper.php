@@ -17,20 +17,20 @@ class PhoneNumberToCarrierMapper
     /**
      * @var PhoneNumberToCarrierMapper[]
      */
-    private static $instance = array();
+    protected static $instance = array();
 
     const MAPPING_DATA_DIRECTORY = '/carrier/data/';
 
     /**
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
+    protected $phoneUtil;
     /**
      * @var PrefixFileReader
      */
-    private $prefixFileReader;
+    protected $prefixFileReader;
 
-    private function __construct($phonePrefixDataDirectory)
+    protected function __construct($phonePrefixDataDirectory)
     {
         if(!extension_loaded('intl')) {
             throw new \RuntimeException('The intl extension must be installed');
@@ -51,11 +51,11 @@ class PhoneNumberToCarrierMapper
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (!array_key_exists($mappingDir, self::$instance)) {
-            self::$instance[$mappingDir] = new self($mappingDir);
+        if (!array_key_exists($mappingDir, static::$instance)) {
+            static::$instance[$mappingDir] = new static($mappingDir);
         }
 
-        return self::$instance[$mappingDir];
+        return static::$instance[$mappingDir];
     }
 
     /**
@@ -125,7 +125,7 @@ class PhoneNumberToCarrierMapper
      * @param int $numberType A PhoneNumberType int
      * @return bool
      */
-    private function isMobile($numberType)
+    protected function isMobile($numberType)
     {
         return ($numberType === PhoneNumberType::MOBILE ||
             $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE ||

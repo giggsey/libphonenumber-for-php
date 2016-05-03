@@ -18,29 +18,29 @@ class ShortNumberInfo
     /**
      * @var ShortNumberInfo
      */
-    private static $instance = null;
+    protected static $instance = null;
     /**
      * @var MatcherAPIInterface
      */
-    private $matcherAPI;
-    private $currentFilePrefix;
-    private $regionToMetadataMap = array();
-    private $countryCallingCodeToRegionCodeMap = array();
-    private $countryCodeToNonGeographicalMetadataMap = array();
-    private static $regionsWhereEmergencyNumbersMustBeExact = array(
+    protected $matcherAPI;
+    protected $currentFilePrefix;
+    protected $regionToMetadataMap = array();
+    protected $countryCallingCodeToRegionCodeMap = array();
+    protected $countryCodeToNonGeographicalMetadataMap = array();
+    protected static $regionsWhereEmergencyNumbersMustBeExact = array(
         'BR',
         'CL',
         'NI',
     );
 
-    private function __construct(MatcherAPIInterface $matcherAPI)
+    protected function __construct(MatcherAPIInterface $matcherAPI)
     {
         $this->matcherAPI = $matcherAPI;
 
         // TODO: Create ShortNumberInfo for a given map
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
 
-        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . self::META_DATA_FILE_PREFIX;
+        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
 
         // Initialise PhoneNumberUtil to make sure regex's are setup correctly
         PhoneNumberUtil::getInstance();
@@ -53,16 +53,16 @@ class ShortNumberInfo
      */
     public static function getInstance()
     {
-        if (null === self::$instance) {
-            self::$instance = new self(RegexBasedMatcher::create());
+        if (null === static::$instance) {
+            static::$instance = new self(RegexBasedMatcher::create());
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 
     public static function resetInstance()
     {
-        self::$instance = null;
+        static::$instance = null;
     }
 
     /**
@@ -73,7 +73,7 @@ class ShortNumberInfo
      * @param int $countryCallingCode
      * @return array
      */
-    private function getRegionCodesForCountryCode($countryCallingCode)
+    protected function getRegionCodesForCountryCode($countryCallingCode)
     {
         if (!array_key_exists($countryCallingCode, $this->countryCallingCodeToRegionCodeMap)) {
             $regionCodes = null;
@@ -91,7 +91,7 @@ class ShortNumberInfo
      * @param string $regionDialingFrom
      * @return bool
      */
-    private function regionDialingFromMatchesNumber(PhoneNumber $number, $regionDialingFrom)
+    protected function regionDialingFromMatchesNumber(PhoneNumber $number, $regionDialingFrom)
     {
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
 
@@ -144,7 +144,7 @@ class ShortNumberInfo
         return isset($this->regionToMetadataMap[$regionCode]) ? $this->regionToMetadataMap[$regionCode] : null;
     }
 
-    private function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode)
+    protected function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode)
     {
         $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
@@ -226,7 +226,7 @@ class ShortNumberInfo
      * @param bool $allowPrefixMatch
      * @return bool
      */
-    private function matchesEmergencyNumberHelper($number, $regionCode, $allowPrefixMatch)
+    protected function matchesEmergencyNumberHelper($number, $regionCode, $allowPrefixMatch)
     {
         $number = PhoneNumberUtil::extractPossibleNumber($number);
         $matcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $number);
@@ -246,7 +246,7 @@ class ShortNumberInfo
         $emergencyDesc = $metadata->getEmergency();
 
         $allowPrefixMatchForRegion = ($allowPrefixMatch
-            && !in_array($regionCode, self::$regionsWhereEmergencyNumbersMustBeExact)
+            && !in_array($regionCode, static::$regionsWhereEmergencyNumbersMustBeExact)
         );
 
         return $this->matcherAPI->matchesNationalNumber($normalizedNumber, $emergencyDesc, $allowPrefixMatchForRegion);
@@ -284,7 +284,7 @@ class ShortNumberInfo
      * @param $regionCodes
      * @return String|null Region Code (or null if none are found)
      */
-    private function getRegionCodeForShortNumberFromRegionList(PhoneNumber $number, $regionCodes)
+    protected function getRegionCodeForShortNumberFromRegionList(PhoneNumber $number, $regionCodes)
     {
         if (count($regionCodes) == 0) {
             return null;
@@ -597,7 +597,7 @@ class ShortNumberInfo
      * @param PhoneNumber $number the phone number for which the national significant number is needed
      * @return string the national significant number of the PhoneNumber object passed in
      */
-    private function getNationalSignificantNumber(PhoneNumber $number)
+    protected function getNationalSignificantNumber(PhoneNumber $number)
     {
         // If leading zero(s) have been set, we prefix this now. Note this is not a national prefix.
         $nationalNumber = '';
@@ -618,7 +618,7 @@ class ShortNumberInfo
      * @param PhoneNumberDesc $numberDesc
      * @return bool
      */
-    private function matchesPossibleNumberAndNationalNumber($number, PhoneNumberDesc $numberDesc)
+    protected function matchesPossibleNumberAndNationalNumber($number, PhoneNumberDesc $numberDesc)
     {
         return ($this->matcherAPI->matchesPossibleNumber($number, $numberDesc)
             && $this->matcherAPI->matchesNationalNumber($number, $numberDesc, false));

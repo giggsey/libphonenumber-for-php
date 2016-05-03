@@ -12,13 +12,13 @@ namespace libphonenumber;
 
 class MultiFileMetadataSourceImpl implements MetadataSourceInterface
 {
-    private static $metaDataFilePrefix = PhoneNumberUtil::META_DATA_FILE_PREFIX;
+    protected static $metaDataFilePrefix = PhoneNumberUtil::META_DATA_FILE_PREFIX;
 
     /**
      * A mapping from a region code to the PhoneMetadata for that region.
      * @var PhoneMetadata[]
      */
-    private $regionToMetadataMap = array();
+    protected $regionToMetadataMap = array();
 
     /**
      * A mapping from a country calling code for a non-geographical entity to the PhoneMetadata for
@@ -26,20 +26,20 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
      * Toll Free Service) and 808 (International Shared Cost Service).
      * @var PhoneMetadata[]
      */
-    private $countryCodeToNonGeographicalMetadataMap = array();
+    protected $countryCodeToNonGeographicalMetadataMap = array();
 
     /**
      * The prefix of the metadata files from which region data is loaded.
      * @var String
      */
-    private $currentFilePrefix;
+    protected $currentFilePrefix;
 
 
     /**
      * The metadata loader used to inject alternative metadata sources.
      * @var MetadataLoaderInterface
      */
-    private $metadataLoader;
+    protected $metadataLoader;
 
     /**
      * @param MetadataLoaderInterface $metadataLoader
@@ -48,7 +48,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
     public function __construct(MetadataLoaderInterface $metadataLoader, $currentFilePrefix = null)
     {
         if ($currentFilePrefix === null) {
-            $currentFilePrefix = self::$metaDataFilePrefix;
+            $currentFilePrefix = static::$metaDataFilePrefix;
         }
 
         $this->currentFilePrefix = $currentFilePrefix;

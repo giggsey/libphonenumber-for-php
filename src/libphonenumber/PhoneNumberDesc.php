@@ -7,12 +7,12 @@ namespace libphonenumber;
  */
 class PhoneNumberDesc
 {
-    private $hasNationalNumberPattern = false;
-    private $nationalNumberPattern = "";
-    private $hasPossibleNumberPattern = false;
-    private $possibleNumberPattern = "";
-    private $hasExampleNumber = false;
-    private $exampleNumber = "";
+    protected $hasNationalNumberPattern = false;
+    protected $nationalNumberPattern = "";
+    protected $hasPossibleNumberPattern = false;
+    protected $possibleNumberPattern = "";
+    protected $hasExampleNumber = false;
+    protected $exampleNumber = "";
 
     /**
      * @return boolean

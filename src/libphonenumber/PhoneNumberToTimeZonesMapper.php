@@ -18,25 +18,25 @@ class PhoneNumberToTimeZonesMapper
     /**
      * @var PhoneNumberToTimeZonesMapper
      */
-    private static $instance = null;
-    private $unknownTimeZoneList = array();
+    protected static $instance = null;
+    protected $unknownTimeZoneList = array();
     /**
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
-    private $prefixTimeZonesMap;
+    protected $phoneUtil;
+    protected $prefixTimeZonesMap;
 
-    private function __construct($phonePrefixDataDirectory)
+    protected function __construct($phonePrefixDataDirectory)
     {
-        $this->prefixTimeZonesMap = self::loadPrefixTimeZonesMapFromFile(
-            dirname(__FILE__) . $phonePrefixDataDirectory . DIRECTORY_SEPARATOR . self::MAPPING_DATA_FILE_NAME
+        $this->prefixTimeZonesMap = static::loadPrefixTimeZonesMapFromFile(
+            dirname(__FILE__) . $phonePrefixDataDirectory . DIRECTORY_SEPARATOR . static::MAPPING_DATA_FILE_NAME
         );
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->unknownTimeZoneList[] = self::UNKNOWN_TIMEZONE;
+        $this->unknownTimeZoneList[] = static::UNKNOWN_TIMEZONE;
     }
 
-    private static function loadPrefixTimeZonesMapFromFile($path)
+    protected static function loadPrefixTimeZonesMapFromFile($path)
     {
         if (!is_readable($path)) {
             throw new \InvalidArgumentException("Mapping file can not be found");
@@ -60,11 +60,11 @@ class PhoneNumberToTimeZonesMapper
      */
     public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
     {
-        if (self::$instance === null) {
-            self::$instance = new self($mappingDir);
+        if (static::$instance === null) {
+            static::$instance = new static($mappingDir);
         }
 
-        return self::$instance;
+        return static::$instance;
     }
 
     /**
@@ -73,7 +73,7 @@ class PhoneNumberToTimeZonesMapper
      */
     public static function getUnknownTimeZone()
     {
-        return self::UNKNOWN_TIMEZONE;
+        return static::UNKNOWN_TIMEZONE;
     }
 
     /**
@@ -121,7 +121,7 @@ class PhoneNumberToTimeZonesMapper
      * @return array the list of corresponding time zones or a single element list with the default
      *     unknown time zone if no other time zone was found
      */
-    private function getCountryLevelTimeZonesforNumber(PhoneNumber $number)
+    protected function getCountryLevelTimeZonesforNumber(PhoneNumber $number)
     {
         $timezones = $this->prefixTimeZonesMap->lookupCountryLevelTimeZonesForNumber($number);
         return (count($timezones) == 0) ? $this->unknownTimeZoneList : $timezones;
@@ -150,7 +150,7 @@ class PhoneNumberToTimeZonesMapper
      * @return array the list of correspondiing time zones or a single element list with the default
      * unknown timezone if no other time zone was found or if the number was invalid
      */
-    private function getTimeZonesForGeocodableNumber(PhoneNumber $number)
+    protected function getTimeZonesForGeocodableNumber(PhoneNumber $number)
     {
         $timezones = $this->prefixTimeZonesMap->lookupTimeZonesForNumber($number);
         return (count($timezones) == 0) ? $this->unknownTimeZoneList : $timezones;

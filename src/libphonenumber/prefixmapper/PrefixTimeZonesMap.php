@@ -10,11 +10,11 @@ class PrefixTimeZonesMap
 {
     /*
 
-    private final PhonePrefixMap phonePrefixMap = new PhonePrefixMap();
-    private static final String RAW_STRING_TIMEZONES_SEPARATOR = "&";
+    protected final PhonePrefixMap phonePrefixMap = new PhonePrefixMap();
+    protected static final String RAW_STRING_TIMEZONES_SEPARATOR = "&";
     */
     const RAW_STRING_TIMEZONES_SEPARATOR = "&";
-    private $phonePrefixMap;
+    protected $phonePrefixMap;
 
     public function __construct($map)
     {
@@ -48,7 +48,7 @@ class PrefixTimeZonesMap
      * @param $key int the key to look up
      * @return array the list of corresponding time zones
      */
-    private function lookupTimeZonesForNumberKey($key)
+    protected function lookupTimeZonesForNumberKey($key)
     {
         // Lookup in the map data. The returned String may consist of several time zones, so it must be
         // split.
@@ -67,9 +67,9 @@ class PrefixTimeZonesMap
      * @param $timezonesString String
      * @return array
      */
-    private function tokenizeRawOutputString($timezonesString)
+    protected function tokenizeRawOutputString($timezonesString)
     {
-        return explode(self::RAW_STRING_TIMEZONES_SEPARATOR, $timezonesString);
+        return explode(static::RAW_STRING_TIMEZONES_SEPARATOR, $timezonesString);
     }
 
     /**
