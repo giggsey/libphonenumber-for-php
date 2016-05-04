@@ -17,9 +17,8 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          1[1-9][2-5]\\d{7}|
           (?:
-            [4689][1-9]|
+            [14689][1-9]|
             2[12478]|
             3[1-578]|
             5[1-5]|
@@ -39,11 +38,14 @@ return array (
           (?:
             2[12478]|
             3[1-578]|
-            7[13-579]|
-            [89][1-9]
-          )9?[6-9]\\d{7}|
+            [689][1-9]|
+            7[13-579]
+          )(?:
+            [6-8]|
+            9\\d?
+          )\\d{7}|
           (?:
-            [46][1-9]|
+            4[1-9]|
             5[1-5]
           )[6-9]\\d{7}
         ',
@@ -58,7 +60,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '[359]00\\d{6,7}',
+    'NationalNumberPattern' => '
+          (?:
+            300|
+            [59]00\\d?
+          )\\d{6}
+        ',
     'PossibleNumberPattern' => '\\d{8,11}',
     'ExampleNumber' => '300123456',
   ),
@@ -66,14 +73,14 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-           300\\d|
+           300\\d(?:\\d{2})?|
            40(?:
               0\\d|
               20
            )
           )\\d{4}
         ',
-    'PossibleNumberPattern' => '\\d{8}',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '40041234',
   ),
   'personalNumber' => 
@@ -195,7 +202,7 @@ return array (
       array (
         0 => '
             (?:
-              [189][1-9]|
+              [1689][1-9]|
               2[12478]|
               3[1-578]|
               7[13-579]
@@ -224,11 +231,11 @@ return array (
       array (
         0 => '
             (?:
-             300|
-             40(?:
+              300|
+              40(?:
                 0|
                 20
-             )
+              )
             )
           ',
       ),
@@ -257,7 +264,7 @@ return array (
       array (
         0 => '
             (?:
-              [189][1-9]|
+              [1689][1-9]|
               2[12478]|
               3[1-578]|
               7[13-579]
@@ -286,11 +293,11 @@ return array (
       array (
         0 => '
             (?:
-             300|
-             40(?:
+              300|
+              40(?:
                 0|
                 20
-             )
+              )
             )
           ',
       ),

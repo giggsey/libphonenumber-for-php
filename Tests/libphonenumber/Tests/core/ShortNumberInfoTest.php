@@ -406,7 +406,7 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::CA));
         $this->assertEquals(
-            ShortNumberCost::UNKNOWN_COST,
+            ShortNumberCost::TOLL_FREE,
             $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::CA), RegionCode::CA)
         );
     }

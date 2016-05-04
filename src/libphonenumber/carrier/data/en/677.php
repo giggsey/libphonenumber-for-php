@@ -21,6 +21,7 @@ return array (
   67786 => 'BMobile',
   67787 => 'BMobile',
   67788 => 'BMobile',
+  67789 => 'BMobile',
   67791 => 'Satsol',
   67792 => 'Satsol',
   677930 => 'Satsol',

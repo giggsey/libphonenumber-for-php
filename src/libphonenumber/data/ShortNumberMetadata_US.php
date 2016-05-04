@@ -209,7 +209,7 @@ return array (
     'NationalNumberPattern' => '
           [2-9]\\d{3}|
           33669|
-          611
+          [2356]11
         ',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '33669',

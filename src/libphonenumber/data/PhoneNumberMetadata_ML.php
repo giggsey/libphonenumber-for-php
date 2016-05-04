@@ -17,16 +17,15 @@ return array (
           (?:
             2(?:
               0(?:
-                2[0-589]|
-                7\\d
+                2\\d|
+                7[0-8]
               )|
               1(?:
                 2[5-7]|
-                [3-689]\\d|
-                7[2-4689]
+                [3-689]\\d
               )
             )|
-            44[239]\\d
+            44[1239]\\d
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8}',
@@ -36,17 +35,20 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            [67]\\d|
-            8[23]|
-            9[0-25-9]
-          )\\d{6}
+            2(?:
+              079|
+              17\\d
+            )|
+            [679]\\d{3}|
+            8[239]\\d{2}
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '65012345',
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{5}',
+    'NationalNumberPattern' => '80\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80012345',
   ),
@@ -107,8 +109,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '80\\d{6}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '80012345',
   ),
   'id' => 'ML',
   'countryCode' => 223,

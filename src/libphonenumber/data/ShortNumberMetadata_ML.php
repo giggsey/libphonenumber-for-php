@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1367]\\d{1,4}',
+    'NationalNumberPattern' => '[13678]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[1367]\\d{1,4}',
+    'NationalNumberPattern' => '[13678]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[1367]\\d{1,4}',
+    'NationalNumberPattern' => '[13678]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'tollFree' => 
@@ -32,7 +32,8 @@ return array (
           74(?:
             02|
             44
-          )
+          )|
+          8000[12]
         ',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '35200',
@@ -49,7 +50,8 @@ return array (
               99
             )|
             7574
-          )
+          )|
+          8002[12]
         ',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '35211',
@@ -81,13 +83,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          1(?:
-            12|
-            [578]
-          )
-        ',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'NationalNumberPattern' => '1[578]',
+    'PossibleNumberPattern' => '\\d{2}',
     'ExampleNumber' => '17',
   ),
   'voicemail' => 
@@ -115,32 +112,9 @@ return array (
                 35|
                 57
               )|
-              2(?:
-                00|
-                11|
-                2[02]|
-                3[04-6]
-                5[0-25-8]|
-                6[0-69]|
-                7[0-47]|
-                80|
-                99
-              )
+              2\\d{2}
             )|
-            6(?:
-              666|
-              777
-            )|
-            7(?:
-              4\\d{2}|
-              5(?:
-                05|
-                1[59]|
-                25|
-                5[57]|
-                7[45]
-              )
-            )
+            [67]\\d{3}
           )|
           67(?:
             0[09]|
@@ -153,7 +127,8 @@ return array (
             0[02]|
             44|
             55
-          )
+          )|
+          800[012][12]
         ',
     'PossibleNumberPattern' => '\\d{2,5}',
     'ExampleNumber' => '1210',
@@ -165,7 +140,8 @@ return array (
             433|
             575
           )|
-          7400
+          7400|
+          8001[12]
         ',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '7400',
@@ -175,8 +151,9 @@ return array (
     'NationalNumberPattern' => '
           3(?:
             5035|
-            6\\d{3}
-          )
+            [67]\\d{3}
+          )|
+          800[012][12]
         ',
     'PossibleNumberPattern' => '\\d{5}',
     'ExampleNumber' => '35035',

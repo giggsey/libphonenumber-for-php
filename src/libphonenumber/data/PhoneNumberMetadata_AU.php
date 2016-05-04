@@ -16,8 +16,7 @@ return array (
     'NationalNumberPattern' => '
           [237]\\d{8}|
           8(?:
-            [68]\\d{3}|
-            7[0-69]\\d{2}|
+            [6-8]\\d{3}|
             9(?:
               [02-9]\\d{2}|
               1(?:
@@ -38,8 +37,7 @@ return array (
             71
           )\\d{5}|
           4(?:
-            [0-2]\\d|
-            3[0-57-9]|
+            [0-3]\\d|
             4[47-9]|
             5[0-25-9]|
             6[6-9]|
@@ -64,16 +62,23 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '190[0126]\\d{6}',
-    'PossibleNumberPattern' => '\\d{10}',
+    'NationalNumberPattern' => '
+          19(?:
+            0[0126]\\d|
+            [679]
+          )\\d{5}
+        ',
+    'PossibleNumberPattern' => '\\d{8,10}',
     'ExampleNumber' => '1900123456',
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => '
           13(?:
-            00\\d{2}
-          )?\\d{4}
+            00\\d{3}|
+            45[0-4]|
+            \\d
+          )\\d{3}
         ',
     'PossibleNumberPattern' => '\\d{6,10}',
     'ExampleNumber' => '1300123456',
@@ -131,9 +136,10 @@ return array (
     'NationalNumberPattern' => '
           1(?:
             3(?:
-              \\d{4}|
-              00\\d{6}
-            )|
+              00\\d{3}|
+              45[0-4]|
+              \\d
+            )\\d{3}|
             80(?:
               0\\d{6}|
               2\\d{3}
@@ -239,7 +245,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '19[67]',
+        0 => '19[679]',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',

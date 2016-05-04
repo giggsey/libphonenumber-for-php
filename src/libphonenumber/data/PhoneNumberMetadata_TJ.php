@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[3-59]\\d{8}',
+    'NationalNumberPattern' => '[3-589]\\d{8}',
     'PossibleNumberPattern' => '\\d{3,9}',
   ),
   'fixedLine' => 
@@ -37,7 +37,9 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
+            41[18]|
             50[125]|
+            88\\d|
             9[0-35-9]\\d
           )\\d{6}
         ',
@@ -134,13 +136,13 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([459]\\d)(\\d{3})(\\d{4})',
+      'pattern' => '([4589]\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '
-            4[48]|
-            5|
+            4[148]|
+            [58]|
             9(?:
               1[59]|
               [0235-9]

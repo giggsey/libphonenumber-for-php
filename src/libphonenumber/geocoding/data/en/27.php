@@ -13,7 +13,7 @@ return array (
   2715 => 'Polokwane',
   2716 => 'Vaal Triangle',
   2717 => 'Ermelo/Secunda',
-  2718 => 'Potschefstroom/Klerksdorp',
+  2718 => 'Potchefstroom/Klerksdorp',
   2720 => 'Fraserberg/Leeugamka/Merweville',
   2721 => 'Cape Town',
   2722 => 'Malmesbury/Vredenburg',
