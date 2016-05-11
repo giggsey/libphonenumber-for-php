@@ -58,7 +58,7 @@ class PrefixFileReader
             return null;
         }
 
-        if (!in_array($fileName, $this->availablePhonePrefixMaps)) {
+        if (!isset($this->availablePhonePrefixMaps[$fileName])) {
             $this->loadPhonePrefixMapFromFile($fileName);
         }
 
