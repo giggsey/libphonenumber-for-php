@@ -396,7 +396,7 @@ class PhoneNumberUtil
                 $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, __DIR__ . '/data/' . $baseFileLocation);
             }
 
-            static::$instance = new PhoneNumberUtil($metadataSource, $countryCallingCodeToRegionCodeMap);
+            static::$instance = new static($metadataSource, $countryCallingCodeToRegionCodeMap);
         }
         return static::$instance;
     }
