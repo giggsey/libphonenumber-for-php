@@ -31,7 +31,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80\\d{7}',
+    'NationalNumberPattern' => '80[0-5]\\d{6}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '801234567',
   ),
@@ -72,8 +72,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '80[6-9]\\d{6}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '806123456',
   ),
   'emergency' => 
   array (
