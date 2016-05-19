@@ -118,7 +118,7 @@
     <target name="apply-data-patch">
         <echo>Applying patch ${filename}</echo>
         <resolvepath propertyName="fullpath" file="${absfilename}"/>
-        <patch patchfile="${fullpath}" dir="${git.path}/" strip="1" />
+        <patch patchfile="${fullpath}" dir="${git.path}/" strip="1" haltonfailure="true" />
     </target>
 
     <target name="build-test-metadata" description="Build test Phone Metadata" depends="git-pull">
