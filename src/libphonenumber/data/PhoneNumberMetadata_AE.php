@@ -22,7 +22,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5[0256]\\d{7}',
+    'NationalNumberPattern' => '5[024-6]\\d{7}',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '501234567',
   ),
@@ -119,7 +119,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(5[0256])(\\d{3})(\\d{4})',
+      'pattern' => '(5\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

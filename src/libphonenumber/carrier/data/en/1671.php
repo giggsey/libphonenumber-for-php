@@ -5,6 +5,7 @@
  */
 
 return array (
+  1671747 => 'PTI PACIFICA',
   1671838 => 'i CAN_GSM',
   1671848 => 'i CAN_GSM',
   1671858 => 'i CAN_GSM',
