@@ -32,6 +32,7 @@
         "exclude": ["Tests/", "build/", "/.travis.yml", "/build.xml", "phpunit.xml.dist", "libphonenumber-for-php.spec"]
     },
     "require": {
+        "php": ">=5.3",
         "ext-mbstring": "*"
     },
     "require-dev": {
