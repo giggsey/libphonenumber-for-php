@@ -21,6 +21,8 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
+PHP versions 5.3 up to PHP 7 are currently supported. HHVM is not yet supported.
+
 The PECL [mbstring](http://php.net/mbstring) extension is required.
 
 It is recommended to use [composer](https://getcomposer.org) to install the library.
