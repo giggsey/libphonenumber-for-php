@@ -599,4 +599,12 @@ class PhoneNumber implements \Serializable
 
         $this->hasNumberOfLeadingZeros = true;
     }
+
+    /**
+     * @return string Our customized version of the toString which outputs data in the following format: +{country_code} {national_number}
+     */
+    public function enflickToString()
+    {
+        return '+' . $this->getCountryCode() . $this->getNationalNumber();
+    }
 }

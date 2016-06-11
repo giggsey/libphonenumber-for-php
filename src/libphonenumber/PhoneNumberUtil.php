@@ -2659,6 +2659,22 @@ class PhoneNumberUtil
     }
 
     /**
+     * Cleans all non-digit characters off of a phone number preserving a leading + sign if one is supplied.
+     * @param $phoneNumber String phone number that you want to clean
+     * @return string
+     */
+    public function cleanPhoneNumber($phoneNumber)
+    {
+        $addPlus = substr($phoneNumber, 0, 1) == '+';
+        $phoneNumber = preg_replace("/[^\\d]/", "", $phoneNumber);
+        if ($addPlus) {
+            $phoneNumber = '+' . $phoneNumber;
+        }
+
+        return $phoneNumber;
+    }
+
+    /**
      * Parses a string and returns it as a phone number in proto buffer format. The method is quite
      * lenient and looks for a number in the input text (raw input) and does not check whether the
      * string is definitely only a phone number. To do this, it ignores punctuation and white-space,
@@ -2692,7 +2708,8 @@ class PhoneNumberUtil
         if ($phoneNumber === null) {
             $phoneNumber = new PhoneNumber();
         }
-        $this->parseHelper($numberToParse, $defaultRegion, $keepRawInput, true, $phoneNumber);
+        $number = $this->cleanPhoneNumber($numberToParse);
+        $this->parseHelper($number, $defaultRegion, $keepRawInput, true, $phoneNumber);
         return $phoneNumber;
     }
 

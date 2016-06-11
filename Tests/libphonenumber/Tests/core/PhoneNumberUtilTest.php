@@ -3311,4 +3311,20 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::AE));
         $this->assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::BS));
     }
+
+    public function testCleanPhoneNumberWhenNotNumberShouldMakeNumeric()
+    {
+        $testCase = "1 (519) 555-1234";
+        $result = $this->phoneUtil->cleanPhoneNumber($testCase);
+        $this->assertNotNull($result);
+        $this->assertEquals("15195551234", $result);
+    }
+
+    public function testCleanPhoneNumberWhenLeadingPlusShouldMakeNumericAndPreserve()
+    {
+        $testCase = "+1 (519) 555-1234";
+        $result = $this->phoneUtil->cleanPhoneNumber($testCase);
+        $this->assertNotNull($result);
+        $this->assertEquals("+15195551234", $result);
+    }
 }
