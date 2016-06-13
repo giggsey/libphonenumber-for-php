@@ -2703,7 +2703,7 @@ class PhoneNumberUtil
      *                               and the number is not in international format (does not start
      *                               with +)
      */
-    public function parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = null, $keepRawInput = false)
+    public function parse($numberToParse, $defaultRegion='ZZ', PhoneNumber $phoneNumber = null, $keepRawInput = false)
     {
         if ($phoneNumber === null) {
             $phoneNumber = new PhoneNumber();
