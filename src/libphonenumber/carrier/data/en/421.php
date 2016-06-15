@@ -13,6 +13,7 @@ return array (
   421906 => 'Orange',
   421907 => 'Orange',
   421908 => 'Orange',
+  421909 => 'Juro',
   421910 => 'Telekom',
   421911 => 'Telekom',
   421912 => 'Telekom',

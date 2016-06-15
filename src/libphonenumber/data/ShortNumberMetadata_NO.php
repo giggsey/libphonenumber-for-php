@@ -71,10 +71,19 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '
-          11(?:
-             [023]|
-             6117
-            )
+          1(?:
+            1(?:
+              [0239]|
+              6117
+            )|
+            2[048]|
+            4(?:
+              12|
+              [59]
+            )|
+            7[57]|
+            90
+          )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',
     'ExampleNumber' => '112',

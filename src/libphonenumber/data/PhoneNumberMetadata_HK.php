@@ -118,7 +118,8 @@ return array (
   ),
   'id' => 'HK',
   'countryCode' => 852,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '00(?:[126-9]|30|5[09])?',
+  'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

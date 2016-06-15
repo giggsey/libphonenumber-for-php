@@ -38,7 +38,7 @@ return array (
               6[5-7]
             )|
             66\\d|
-            76[02-6]
+            76[02-7]
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{10}',

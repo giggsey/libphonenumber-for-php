@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'NationalNumberPattern' => '[01389]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'NationalNumberPattern' => '[01389]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[0189]\\d{1,4}',
+    'NationalNumberPattern' => '[01389]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
   ),
   'tollFree' => 
@@ -87,6 +87,7 @@ return array (
             2[15]|
             9
           )|
+          3372|
           89338|
           911
         ',
@@ -100,8 +101,11 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '89338',
-    'PossibleNumberPattern' => '\\d{5}',
+    'NationalNumberPattern' => '
+          89338|
+          911
+        ',
+    'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'noInternationalDialling' => 
   array (

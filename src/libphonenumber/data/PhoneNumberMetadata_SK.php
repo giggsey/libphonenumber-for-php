@@ -35,11 +35,16 @@ return array (
   array (
     'NationalNumberPattern' => '
           9(?:
-            0[1-8]|
-            1[0-24-9]|
-            4[0489]|
-            50
-          )\\d{6}
+            0(?:
+              [1-8]\\d|
+              9[1-9]
+            )|
+            (?:
+              1[0-24-9]|
+              4[0489]|
+              50
+            )\\d
+          )\\d{5}
         ',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '912123456',
