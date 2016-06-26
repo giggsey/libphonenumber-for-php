@@ -9,6 +9,7 @@
 
 namespace libphonenumber;
 
+use Giggsey\Locale\Locale;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
 class PhoneNumberToCarrierMapper
@@ -31,10 +32,6 @@ class PhoneNumberToCarrierMapper
 
     protected function __construct($phonePrefixDataDirectory)
     {
-        if (!extension_loaded('intl')) {
-            throw new \RuntimeException('The intl extension must be installed');
-        }
-
         $this->prefixFileReader = new PrefixFileReader(dirname(__FILE__) . $phonePrefixDataDirectory);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
@@ -73,9 +70,9 @@ class PhoneNumberToCarrierMapper
      */
     public function getNameForValidNumber(PhoneNumber $number, $languageCode)
     {
-        $languageStr = \Locale::getPrimaryLanguage($languageCode);
+        $languageStr = Locale::getPrimaryLanguage($languageCode);
         $scriptStr = "";
-        $regionStr = \Locale::getRegion($languageCode);
+        $regionStr = Locale::getRegion($languageCode);
 
         return $this->prefixFileReader->getDescriptionForNumber($number, $languageStr, $scriptStr, $regionStr);
     }
