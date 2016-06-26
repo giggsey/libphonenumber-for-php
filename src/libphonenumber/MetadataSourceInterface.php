@@ -2,7 +2,6 @@
 
 namespace libphonenumber;
 
-
 interface MetadataSourceInterface
 {
     /**

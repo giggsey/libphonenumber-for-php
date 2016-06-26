@@ -2,7 +2,6 @@
 
 namespace libphonenumber\buildtools\Commands;
 
-
 use libphonenumber\buildtools\GenerateTimeZonesMapData;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

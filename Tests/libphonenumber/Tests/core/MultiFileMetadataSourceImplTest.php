@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\core;
 
-
 use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;

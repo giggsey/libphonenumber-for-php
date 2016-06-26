@@ -7,7 +7,6 @@ use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 
-
 class UKNumbersTest extends \PHPUnit_Framework_TestCase
 {
     const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
@@ -22,7 +21,8 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance(
             self::META_DATA_FILE_PREFIX,
             CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap
-        );;
+        );
+        ;
     }
 
     public function testMobileNumber()

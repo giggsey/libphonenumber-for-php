@@ -5,7 +5,6 @@ namespace libphonenumber\Tests\geocoding;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumber;
 
-
 class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "/../../../Tests/libphonenumber/Tests/prefixmapper/data/";
@@ -75,12 +74,11 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 
         self::$internationalTollFree = new PhoneNumber();
         self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
-
     }
 
     public function setUp()
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             $this->markTestSkipped('The intl extension must be installed');
         }
 

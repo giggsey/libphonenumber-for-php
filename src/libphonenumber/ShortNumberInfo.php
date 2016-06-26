@@ -11,7 +11,6 @@
 
 namespace libphonenumber;
 
-
 class ShortNumberInfo
 {
     const META_DATA_FILE_PREFIX = 'ShortNumberMetadata';

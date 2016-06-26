@@ -9,7 +9,6 @@
 
 namespace libphonenumber;
 
-
 use libphonenumber\prefixmapper\PrefixFileReader;
 
 class PhoneNumberToCarrierMapper
@@ -32,7 +31,7 @@ class PhoneNumberToCarrierMapper
 
     protected function __construct($phonePrefixDataDirectory)
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             throw new \RuntimeException('The intl extension must be installed');
         }
 

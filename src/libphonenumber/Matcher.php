@@ -48,7 +48,7 @@ class Matcher
                 break;
             case 'find':
             default:
-                // no changes	    
+                // no changes
                 break;
         }
         $final_pattern = '/' . $final_pattern . '/x';

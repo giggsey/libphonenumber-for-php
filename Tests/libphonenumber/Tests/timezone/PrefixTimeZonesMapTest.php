@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\timezone;
 
-
 use libphonenumber\PhoneNumber;
 use libphonenumber\prefixmapper\PrefixTimeZonesMap;
 

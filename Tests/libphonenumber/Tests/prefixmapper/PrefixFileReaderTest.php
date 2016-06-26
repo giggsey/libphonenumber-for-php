@@ -5,7 +5,6 @@ namespace libphonenumber\Tests\prefixmapper;
 use libphonenumber\PhoneNumber;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
-
 class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "/data/";

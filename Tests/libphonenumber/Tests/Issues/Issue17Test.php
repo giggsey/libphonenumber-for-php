@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberUtil;
 
@@ -20,7 +19,7 @@ class Issue17Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             $this->markTestSkipped('The intl extension must be installed');
         }
 

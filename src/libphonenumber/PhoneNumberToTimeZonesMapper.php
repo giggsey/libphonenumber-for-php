@@ -155,5 +155,4 @@ class PhoneNumberToTimeZonesMapper
         $timezones = $this->prefixTimeZonesMap->lookupTimeZonesForNumber($number);
         return (count($timezones) == 0) ? $this->unknownTimeZoneList : $timezones;
     }
-
 }

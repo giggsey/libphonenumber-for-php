@@ -12,13 +12,13 @@ class Issue106Test extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-      self::$TW_Number1 = new PhoneNumber();
-      self::$TW_Number1->setCountryCode(886)->setNationalNumber(223113731);
+        self::$TW_Number1 = new PhoneNumber();
+        self::$TW_Number1->setCountryCode(886)->setNationalNumber(223113731);
     }
 
     public function setUp()
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             $this->markTestSkipped('The intl extension must be installed');
         }
 
@@ -39,6 +39,5 @@ class Issue106Test extends \PHPUnit_Framework_TestCase
             pack('H*', 'e887ba') . pack('H*', 'e58c97'),
             $this->geocoder->getDescriptionForNumber(self::$TW_Number1, "zh_TW")
         );
-
     }
 }

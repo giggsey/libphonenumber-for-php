@@ -1,7 +1,6 @@
 <?php
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 

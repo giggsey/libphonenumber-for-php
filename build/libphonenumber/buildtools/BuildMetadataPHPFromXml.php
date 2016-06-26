@@ -119,6 +119,4 @@ EOT;
 
         file_put_contents($outputDir . $mappingClass . '.php', $data);
     }
-
-
 }

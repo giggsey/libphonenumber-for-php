@@ -197,7 +197,6 @@ class BuildMetadataFromXml
         $nationalPrefix,
         $nationalPrefixFormattingRule
     ) {
-
         $carrierCodeFormattingRule = "";
         if ($element->hasAttribute(self::CARRIER_CODE_FORMATTING_RULE)) {
             $carrierCodeFormattingRule = self::getDomesticCarrierCodeFormattingRuleFromElement(
@@ -459,5 +458,4 @@ class BuildMetadataFromXml
 
         return $countryCodeToRegionCodeMap;
     }
-
 }

@@ -682,7 +682,7 @@ class PhoneNumberUtil
                 if ($nbMatches > 0 && $matches[0][1] === 0) {
                     return $regionCode;
                 }
-            } else if ($this->getNumberTypeHelper($nationalNumber, $metadata) != PhoneNumberType::UNKNOWN) {
+            } elseif ($this->getNumberTypeHelper($nationalNumber, $metadata) != PhoneNumberType::UNKNOWN) {
                 return $regionCode;
             }
         }
@@ -748,7 +748,7 @@ class PhoneNumberUtil
         if ($isFixedLine) {
             if ($metadata->isSameMobileAndFixedLinePattern()) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
-            } else if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
+            } elseif ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
             }
             return PhoneNumberType::FIXED_LINE;
@@ -1124,7 +1124,6 @@ class PhoneNumberUtil
             } else {
                 $formattedNationalNumber = $m->replaceAll($numberFormatRule);
             }
-
         }
         if ($numberFormat == PhoneNumberFormat::RFC3966) {
             // Strip any leading punctuation.
@@ -1412,7 +1411,7 @@ class PhoneNumberUtil
             if ($defaultRegion !== null) {
                 $countryCode = $regionMetadata->getCountryCode();
                 $phoneNumber->setCountryCode($countryCode);
-            } else if ($keepRawInput) {
+            } elseif ($keepRawInput) {
                 $phoneNumber->clearCountryCodeSource();
             }
         }
@@ -1652,7 +1651,7 @@ class PhoneNumberUtil
                 NumberParseException::INVALID_COUNTRY_CODE,
                 "Country calling code supplied was not recognised."
             );
-        } else if ($defaultRegionMetadata !== null) {
+        } elseif ($defaultRegionMetadata !== null) {
             // Check to see if the number starts with the country calling code for the default region. If
             // so, we remove the country calling code, and do some checks on the validity of the number
             // before and after.
@@ -2234,7 +2233,7 @@ class PhoneNumberUtil
             if ($this->isNANPACountry($regionCallingFrom)) {
                 return $countryCode . " " . $rawInput;
             }
-        } else if ($metadataForRegionCallingFrom !== null &&
+        } elseif ($metadataForRegionCallingFrom !== null &&
             $countryCode == $this->getCountryCodeForValidRegion($regionCallingFrom)
         ) {
             $formattingPattern =
@@ -2328,7 +2327,7 @@ class PhoneNumberUtil
                 // country calling code.
                 return $countryCallingCode . " " . $this->format($number, PhoneNumberFormat::NATIONAL);
             }
-        } else if ($countryCallingCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
+        } elseif ($countryCallingCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
             // If regions share a country calling code, the country calling code need not be dialled.
             // This also applies when dialling within a region, so this if clause covers both these cases.
             // Technically this is the case for dialling from La Reunion to other overseas departments of
@@ -2349,7 +2348,7 @@ class PhoneNumberUtil
 
         if ($uniqueInternationalPrefixMatcher->matches()) {
             $internationalPrefixForFormatting = $internationalPrefix;
-        } else if ($metadataForRegionCallingFrom->hasPreferredInternationalPrefix()) {
+        } elseif ($metadataForRegionCallingFrom->hasPreferredInternationalPrefix()) {
             $internationalPrefixForFormatting = $metadataForRegionCallingFrom->getPreferredInternationalPrefix();
         }
 

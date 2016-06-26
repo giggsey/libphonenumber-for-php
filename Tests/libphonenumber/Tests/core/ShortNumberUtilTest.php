@@ -153,5 +153,4 @@ class ShortNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->shortUtil->isEmergencyNumber("01312345", RegionCode::ZW));
         $this->assertFalse($this->shortUtil->isEmergencyNumber("0711234567", RegionCode::ZW));
     }
-
 }

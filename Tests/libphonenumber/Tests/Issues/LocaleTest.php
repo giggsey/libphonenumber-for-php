@@ -9,7 +9,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberType;
@@ -29,7 +28,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             $this->markTestSkipped('The intl extension must be installed');
         }
 

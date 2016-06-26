@@ -2,7 +2,6 @@
 
 namespace libphonenumber\geocoding;
 
-
 class Locale extends \Locale
 {
     /**
@@ -30,5 +29,4 @@ class Locale extends \Locale
 
         return null;
     }
-
 }

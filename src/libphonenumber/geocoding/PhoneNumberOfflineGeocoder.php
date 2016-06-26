@@ -2,7 +2,6 @@
 
 namespace libphonenumber\geocoding;
 
-
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberType;
@@ -27,7 +26,7 @@ class PhoneNumberOfflineGeocoder
 
     protected function __construct($phonePrefixDataDirectory)
     {
-        if(!extension_loaded('intl')) {
+        if (!extension_loaded('intl')) {
             throw new \RuntimeException('The intl extension must be installed');
         }
 
