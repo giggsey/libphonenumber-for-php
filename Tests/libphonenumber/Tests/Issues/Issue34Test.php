@@ -1,7 +1,6 @@
 <?php
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\PhoneNumberUtil;
 
 class Issue34Test extends \PHPUnit_Framework_TestCase

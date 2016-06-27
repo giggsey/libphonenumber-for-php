@@ -586,7 +586,7 @@ class PhoneNumber implements \Serializable
     {
         $data = unserialize($serialized);
 
-        list (
+        list(
             $this->countryCode,
             $this->nationalNumber,
             $this->extension,

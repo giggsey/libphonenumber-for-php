@@ -127,5 +127,4 @@ class PrefixFileReader
 
         return ($description !== null) ? $description : "";
     }
-
 }

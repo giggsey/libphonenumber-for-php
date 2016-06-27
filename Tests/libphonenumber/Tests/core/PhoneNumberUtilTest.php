@@ -16,10 +16,8 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
 use libphonenumber\ValidationResult;
 
-
 class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 {
-
     const TEST_META_DATA_FILE_PREFIX = "../../../Tests/libphonenumber/Tests/core/data/PhoneNumberMetadataForTesting";
     private static $bsNumber = null;
     private static $internationalTollFree = null;
@@ -151,8 +149,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
         $this->assertGreaterThan(0, count($globalNetworkCallingCodes));
 
-        foreach ($globalNetworkCallingCodes as $callingCode)
-        {
+        foreach ($globalNetworkCallingCodes as $callingCode) {
             $this->assertGreaterThan(0, $callingCode);
             $this->assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForCountryCode($callingCode));
         }
@@ -1769,7 +1766,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->phoneUtil->isPossibleNumber("1 3000", RegionCode::GB));
         $this->assertFalse($this->phoneUtil->isPossibleNumber("+44 300", RegionCode::GB));
         $this->assertFalse($this->phoneUtil->isPossibleNumber("+800 1234 5678 9", RegionCode::UN001));
-
     }
 
     public function testTruncateTooLongNumber()

@@ -9,7 +9,6 @@
 
 namespace libphonenumber;
 
-
 class MultiFileMetadataSourceImpl implements MetadataSourceInterface
 {
     protected static $metaDataFilePrefix = PhoneNumberUtil::META_DATA_FILE_PREFIX;
@@ -105,5 +104,4 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
             }
         }
     }
-
 }

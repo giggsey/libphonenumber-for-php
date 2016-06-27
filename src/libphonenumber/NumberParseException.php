@@ -8,7 +8,6 @@ namespace libphonenumber;
  */
 class NumberParseException extends \Exception
 {
-
     const INVALID_COUNTRY_CODE = 0;
     // This generally indicates the string passed in had less than 3 digits in it. More
     // specifically, the number failed to match the regular expression VALID_PHONE_NUMBER in
@@ -45,5 +44,4 @@ class NumberParseException extends \Exception
     {
         return "Error type: " . $this->errorType . ". " . $this->message;
     }
-
 }

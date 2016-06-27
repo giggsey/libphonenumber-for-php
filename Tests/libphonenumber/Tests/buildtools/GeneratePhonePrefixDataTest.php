@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\buildtools;
 
-
 use libphonenumber\buildtools\GeneratePhonePrefixData;
 
 class GeneratePhonePrefixDataTest extends \PHPUnit_Framework_TestCase
@@ -51,6 +50,4 @@ class GeneratePhonePrefixDataTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains("zh_Hans", $languagesForCN);
     }
-
-
 }

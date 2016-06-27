@@ -3,7 +3,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 

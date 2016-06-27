@@ -2,7 +2,6 @@
 
 namespace libphonenumber\prefixmapper;
 
-
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 

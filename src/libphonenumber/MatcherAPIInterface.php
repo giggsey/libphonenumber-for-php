@@ -2,7 +2,6 @@
 
 namespace libphonenumber;
 
-
 /**
  * Interface MatcherAPIInterface
  *

@@ -191,7 +191,6 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeInternationallyDialled($regionCode)
     {
-
         $exampleNumber = null;
         /** @var \libphonenumber\PhoneNumberDesc $desc */
         $desc = $this->phoneNumberUtil->getMetadataForRegion($regionCode)->getNoInternationalDialling();
@@ -200,7 +199,6 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
                 $exampleNumber = $this->phoneNumberUtil->parse($desc->getExampleNumber(), $regionCode);
             }
         } catch (NumberParseException $e) {
-
         }
 
         if ($exampleNumber !== null && $this->phoneNumberUtil->canBeInternationallyDialled($exampleNumber)) {

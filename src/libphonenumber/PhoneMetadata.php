@@ -802,7 +802,6 @@ class PhoneMetadata
      */
     public function fromArray(array $input)
     {
-
         if (isset($input['generalDesc'])) {
             $desc = new PhoneNumberDesc();
             $this->setGeneralDesc($desc->fromArray($input['generalDesc']));
@@ -933,5 +932,4 @@ class PhoneMetadata
 
         return $this;
     }
-
 }

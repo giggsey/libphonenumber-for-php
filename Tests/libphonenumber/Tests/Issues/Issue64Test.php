@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberInfo;
 

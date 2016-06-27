@@ -2,10 +2,8 @@
 
 namespace libphonenumber\prefixmapper;
 
-
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
-
 
 /**
  * A utility that maps phone number prefixes to a description string,
@@ -60,5 +58,4 @@ class PhonePrefixMap
 
         return null;
     }
-
 }

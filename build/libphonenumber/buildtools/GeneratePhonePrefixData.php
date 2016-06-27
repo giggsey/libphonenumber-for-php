@@ -162,7 +162,6 @@ EOT;
      */
     private function parseTextFile($filePath, \Closure $handler)
     {
-
         if (!file_exists($filePath) || !is_readable($filePath)) {
             throw new \InvalidArgumentException("File '{$filePath}' does not exist");
         }
@@ -190,11 +189,9 @@ EOT;
 
                 $handler($prefix, $location);
             }
-
         }
 
         return $countryData;
-
     }
 
     private function getFilePathFromLanguageAndCountryCode($language, $code)
@@ -285,7 +282,6 @@ EOT;
     private function compressAccordingToEnglishData($englishMap, &$nonEnglishMap)
     {
         foreach ($nonEnglishMap as $prefix => $value) {
-
             if (array_key_exists($prefix, $englishMap)) {
                 $englishDescription = $englishMap[$prefix];
                 if ($englishDescription == $value) {
@@ -366,7 +362,6 @@ EOT;
 
     private function writeMappingFile($language, $outputFile, $data)
     {
-
         if (!file_exists($this->outputDir . $language)) {
             mkdir($this->outputDir . $language);
         }

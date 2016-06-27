@@ -2,7 +2,6 @@
 
 namespace libphonenumber\buildtools;
 
-
 use libphonenumber\PhoneNumberToTimeZonesMapper;
 
 class GenerateTimeZonesMapData
