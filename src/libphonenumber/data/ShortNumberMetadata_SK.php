@@ -89,7 +89,8 @@ return array (
                 111
               )
             )|
-            5[058]
+            5[058]|
+            8\\d{3}
           )
         ',
     'PossibleNumberPattern' => '\\d{3,6}',

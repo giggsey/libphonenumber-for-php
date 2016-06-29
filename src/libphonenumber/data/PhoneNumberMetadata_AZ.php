@@ -15,7 +15,7 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            1[28]\\d|
+            1[28]\\d{3}|
             2(?:
               02|
               1[24]|
@@ -23,9 +23,12 @@ return array (
               33|
               [45]2|
               6[23]
-            )|
-            365
-          )\\d{6}
+            )\\d{2}|
+            365(?:
+              [0-46-9]\\d|
+              5[0-35-9]
+            )
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '123123456',
@@ -34,11 +37,14 @@ return array (
   array (
     'NationalNumberPattern' => '
           (?:
-            4[04]|
-            5[015]|
-            60|
-            7[07]
-          )\\d{7}
+            36554|
+            (?:
+              4[04]|
+              5[015]|
+              60|
+              7[07]
+            )\\d{3}
+          )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{9}',
     'ExampleNumber' => '401234567',

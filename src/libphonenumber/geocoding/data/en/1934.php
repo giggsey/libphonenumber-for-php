@@ -5,6 +5,5 @@
  */
 
 return array (
-  5042407 => 'Roatan, Bay Islands',
-  5042617 => 'Choloma, Cortés',
+  1934 => 'New York, NY',
 );

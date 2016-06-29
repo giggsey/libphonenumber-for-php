@@ -8,18 +8,18 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[125]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[125]\\d{2,6}',
+    'PossibleNumberPattern' => '\\d{3,7}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[125]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[125]\\d{2,6}',
+    'PossibleNumberPattern' => '\\d{3,7}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[125]\\d{2,4}',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'NationalNumberPattern' => '[125]\\d{2,6}',
+    'PossibleNumberPattern' => '\\d{3,7}',
   ),
   'tollFree' => 
   array (
@@ -83,15 +83,19 @@ return array (
             298
           )|
           2611|
-          53000
+          5(?:
+            3000|
+            757555
+          )
         ',
-    'PossibleNumberPattern' => '\\d{3,5}',
+    'PossibleNumberPattern' => '\\d{3,7}',
     'ExampleNumber' => '108',
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '5757555',
+    'PossibleNumberPattern' => '\\d{7}',
+    'ExampleNumber' => '5757555',
   ),
   'carrierSpecific' => 
   array (

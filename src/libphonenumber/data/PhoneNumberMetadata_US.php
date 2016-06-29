@@ -94,7 +94,7 @@ return array (
               0[1346-9]|
               1[02-9]|
               2[0589]|
-              3[01678]|
+              3[014678]|
               4[0179]|
               5[12469]|
               7[0-3589]|
@@ -103,7 +103,7 @@ return array (
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '2015555555',
+    'ExampleNumber' => '2015550123',
   ),
   'mobile' => 
   array (
@@ -188,7 +188,7 @@ return array (
               0[1346-9]|
               1[02-9]|
               2[0589]|
-              3[01678]|
+              3[014678]|
               4[0179]|
               5[12469]|
               7[0-3589]|
@@ -197,7 +197,7 @@ return array (
           )[2-9]\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '2015555555',
+    'ExampleNumber' => '2015550123',
   ),
   'tollFree' => 
   array (

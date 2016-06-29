@@ -5,10 +5,13 @@
  */
 
 return array (
+  99436554 => 'Nakhtel',
   99440 => 'FONEX',
+  99444 => 'Aztelekom',
   99450 => 'Azercell',
   99451 => 'Azercell',
   99455 => 'Bakcell',
+  99460 => 'Nakhtel',
   99470 => 'Nar Mobile',
   99477 => 'Nar Mobile',
 );
