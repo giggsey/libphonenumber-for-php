@@ -6,5 +6,8 @@
 
 return array (
   5042407 => 'Roatan, Bay Islands',
+  5042516 => 'San Pedro Sula, Cortés',
+  5042564 => 'San Pedro Sula, Cortés',
   5042617 => 'Choloma, Cortés',
+  5042780 => 'Choluteca',
 );

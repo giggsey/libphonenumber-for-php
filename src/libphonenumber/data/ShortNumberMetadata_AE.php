@@ -8,18 +8,18 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[149]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[149]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[149]\\d{2,3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
   ),
   'tollFree' => 
   array (
@@ -62,7 +62,7 @@ return array (
           112|
           99[789]
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '112',
   ),
   'voicemail' => 
@@ -74,9 +74,10 @@ return array (
   array (
     'NationalNumberPattern' => '
           112|
+          4451|
           99[789]
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '112',
   ),
   'standardRate' => 

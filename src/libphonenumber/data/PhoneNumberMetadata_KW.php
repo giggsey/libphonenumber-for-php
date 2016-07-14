@@ -44,7 +44,8 @@ return array (
               2(?:
                 22|
                 5[25]
-              )
+              )|
+              66\\d
             )|
             6(?:
               0[034679]\\d|
@@ -166,7 +167,10 @@ return array (
       array (
         0 => '
             244|
-            5[015]
+            5(?:
+              [015]|
+              66
+            )
           ',
       ),
       'nationalPrefixFormattingRule' => '',

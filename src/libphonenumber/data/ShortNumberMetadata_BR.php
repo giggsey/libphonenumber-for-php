@@ -27,9 +27,10 @@ return array (
           1(?:
             00|
             81
-          )
+          )|
+          4828
         ',
-    'PossibleNumberPattern' => '\\d{3}',
+    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '181',
   ),
   'premiumRate' => 
@@ -102,7 +103,10 @@ return array (
             )|
             85959?
           )|
-          40404|
+          4(?:
+            0404|
+            828
+          )|
           911
         ',
     'PossibleNumberPattern' => '\\d{3,6}',

@@ -5,6 +5,8 @@
  */
 
 return array (
+  37161 => 'Jūrmala',
+  37162 => 'Valmiera',
   371630 => 'Jelgava',
   371631 => 'Tukums',
   371632 => 'Talsi',
@@ -41,4 +43,5 @@ return array (
   371683 => 'Jēkabpils',
   371684 => 'Liepāja',
   371686 => 'Jelgava',
+  37169 => 'Riga',
 );

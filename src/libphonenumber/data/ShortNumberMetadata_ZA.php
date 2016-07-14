@@ -8,17 +8,17 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,4}',
+    'NationalNumberPattern' => '[14]\\d{2,4}',
     'PossibleNumberPattern' => '\\d{3,5}',
   ),
   'tollFree' => 
@@ -84,15 +84,17 @@ return array (
               77
             )|
             12
-          )
+          )|
+          47751
         ',
     'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '10111',
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '47751',
+    'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '47751',
   ),
   'carrierSpecific' => 
   array (
