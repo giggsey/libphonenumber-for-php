@@ -1938,7 +1938,7 @@ class PhoneNumberUtil
      * non-geographical country calling codes, the region code 001 is returned. Also, in the case
      * of no region code being found, an empty list is returned.
      * @param int $countryCallingCode
-     * @return array|null
+     * @return array
      */
     public function getRegionCodesForCountryCode($countryCallingCode)
     {
