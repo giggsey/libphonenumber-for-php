@@ -34,7 +34,7 @@
     "require": {
         "php": ">=5.3.2",
         "ext-mbstring": "*",
-        "giggsey/locale": "dev-master"
+        "giggsey/locale": "^1.0"
     },
     "require-dev": {
         "phing/phing": "~2.7",
