@@ -9,6 +9,7 @@ return array (
   992418 => 'Megafon',
   992501 => 'Tcell',
   992502 => 'Tcell',
+  99255 => 'Megafon',
   99288 => 'Megafon',
   99290 => 'Megafon',
   992917 => 'Tacom',

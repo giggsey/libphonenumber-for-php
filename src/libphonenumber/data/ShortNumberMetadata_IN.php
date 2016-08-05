@@ -84,6 +84,7 @@ return array (
           )|
           2611|
           5(?:
+            143[46]|
             3000|
             757555
           )
@@ -93,8 +94,13 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '5757555',
-    'PossibleNumberPattern' => '\\d{7}',
+    'NationalNumberPattern' => '
+          5(?:
+            143[46]|
+            757555
+          )
+        ',
+    'PossibleNumberPattern' => '\\d{5,7}',
     'ExampleNumber' => '5757555',
   ),
   'carrierSpecific' => 

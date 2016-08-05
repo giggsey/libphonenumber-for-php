@@ -17,10 +17,7 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '
-          2(?:
-            [0-8]\\d{5,6}|
-            9\\d{4,6}
-          )|
+          2\\d{5,7}|
           (?:
             [36]\\d|
             5[1-9]|
@@ -137,11 +134,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(2)(\\d{5})',
-      'format' => '$1 $2',
+      'pattern' => '(2)(\\d)(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '29',
+        0 => '2',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

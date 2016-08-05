@@ -9,6 +9,7 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '
+          008\\d{9}|
           1\\d{7,12}|
           [2-9]\\d{9,10}
         ',
@@ -202,7 +203,8 @@ return array (
                 [14][017-9]\\d|
                 8(?:
                   [0-59]\\d|
-                  6[089]
+                  6[089]|
+                  78
                 )|
                 9[389]\\d
               )|
@@ -247,7 +249,7 @@ return array (
                 )|
                 5(?:
                   0[089]|
-                  99
+                  [59]9
                 )|
                 7(?:
                   0[3-9]|
@@ -286,7 +288,7 @@ return array (
               )\\d|
               8(?:
                 [0-79]\\d{2}|
-                880
+                88[01]
               )|
               99[4-9]\\d
             )|
@@ -333,6 +335,7 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '
+          00800\\d{7}|
           1(?:
             600\\d{6}|
             80(?:
@@ -405,6 +408,7 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '
+          00800\\d{7}|
           1(?:
             600\\d{6}|
             8(?:
@@ -462,7 +466,7 @@ return array (
               2(?:
                 [0235679]|
                 [14][017-9]|
-                8[0-569]|
+                8[0-79]|
                 9[389]
               )|
               3(?:
@@ -478,7 +482,7 @@ return array (
                 1[014-9]|
                 3\\d|
                 [47][017-9]|
-                5[09]|
+                5[059]|
                 [89]
               )|
               5(?:
@@ -544,7 +548,10 @@ return array (
               2(?:
                 [0235679]|
                 [14][017-9]|
-                8[0-569]|
+                8(?:
+                  [0-569]|
+                  78
+                )|
                 9[389]
               )|
               3(?:
@@ -588,7 +595,7 @@ return array (
                 )|
                 5(?:
                   0[089]|
-                  99
+                  [59]9
                 )|
                 7(?:
                   0[3-9]|
@@ -627,7 +634,7 @@ return array (
               )|
               8(?:
                 [0-79]|
-                880
+                88[01]
               )|
               99[4-9]
             )|
@@ -830,6 +837,17 @@ return array (
     ),
     6 => 
     array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})(\\d{3})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '008',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    7 => 
+    array (
       'pattern' => '(1600)(\\d{2})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -840,7 +858,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    7 => 
+    8 => 
     array (
       'pattern' => '(1800)(\\d{4,5})',
       'format' => '$1 $2',
@@ -852,7 +870,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    8 => 
+    9 => 
     array (
       'pattern' => '(18[06]0)(\\d{2,4})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -864,7 +882,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    9 => 
+    10 => 
     array (
       'pattern' => '(140)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -875,7 +893,7 @@ return array (
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
     ),
-    10 => 
+    11 => 
     array (
       'pattern' => '(\\d{4})(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -897,6 +915,6 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => false,
+  'leadingZeroPossible' => true,
   'mobileNumberPortableRegion' => true,
 );

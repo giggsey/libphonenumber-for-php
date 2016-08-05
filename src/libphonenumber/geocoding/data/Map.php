@@ -21,6 +21,11 @@ return array (
   'bg' => 
   array (
     0 => 359,
+    1 => 82,
+  ),
+  'ca' => 
+  array (
+    0 => 82,
   ),
   'cs' => 
   array (
@@ -37,6 +42,7 @@ return array (
   'el' => 
   array (
     0 => 30,
+    1 => 82,
   ),
   'en' => 
   array (
@@ -862,6 +868,7 @@ return array (
     3 => 54,
     4 => 56,
     5 => 58,
+    6 => 82,
   ),
   'fa' => 
   array (
@@ -871,6 +878,7 @@ return array (
   'fi' => 
   array (
     0 => 358,
+    1 => 82,
   ),
   'fr' => 
   array (
@@ -890,9 +898,14 @@ return array (
     13 => 41,
     14 => 82,
   ),
+  'hi' => 
+  array (
+    0 => 82,
+  ),
   'hu' => 
   array (
     0 => 36,
+    1 => 82,
   ),
   'id' => 
   array (
@@ -903,9 +916,14 @@ return array (
     0 => 39,
     1 => 41,
   ),
+  'iw' => 
+  array (
+    0 => 82,
+  ),
   'ja' => 
   array (
     0 => 81,
+    1 => 82,
   ),
   'ko' => 
   array (
@@ -960,7 +978,8 @@ return array (
   ),
   'tr' => 
   array (
-    0 => 90,
+    0 => 82,
+    1 => 90,
   ),
   'vi' => 
   array (
