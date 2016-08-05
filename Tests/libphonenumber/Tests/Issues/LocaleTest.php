@@ -28,10 +28,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!extension_loaded('intl')) {
-            $this->markTestSkipped('The intl extension must be installed');
-        }
-
         PhoneNumberUtil::resetInstance();
         PhoneNumberOfflineGeocoder::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();
@@ -73,9 +69,6 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
     /**
      * This list was got from the Internet, and altered slightly to make the tests pass
      *
-     * Bad country codes were removed, and names updated to match my Windows 7 Locale settings (these might be different
-     * on different operating systems and other Locales).
-     *
      * @see https://gist.github.com/vxnick/380904
      * @return array
      */
@@ -90,7 +83,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'AD' => 'Andorra',
             'AO' => 'Angola',
             'AI' => 'Anguilla',
-            'AG' => 'Antigua and Barbuda',
+            'AG' => 'Antigua & Barbuda',
             'AR' => 'Argentina',
             'AU' => 'Australia',
             'AT' => 'Austria',
@@ -106,7 +99,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'BM' => 'Bermuda',
             'BT' => 'Bhutan',
             'BO' => 'Bolivia',
-            'BA' => 'Bosnia and Herzegovina',
+            'BA' => 'Bosnia & Herzegovina',
             'BW' => 'Botswana',
             'BR' => 'Brazil',
             'IO' => 'British Indian Ocean Territory',
@@ -124,7 +117,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'CL' => 'Chile',
             'CN' => 'China',
             'CX' => 'Christmas Island',
-            'CC' => 'Cocos [Keeling] Islands',
+            'CC' => 'Cocos (Keeling) Islands',
             'CO' => 'Colombia',
             'KM' => 'Comoros',
             'CG' => 'Congo - Brazzaville',
@@ -225,7 +218,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'MS' => 'Montserrat',
             'MA' => 'Morocco',
             'MZ' => 'Mozambique',
-            'MM' => 'Myanmar [Burma]',
+            'MM' => 'Myanmar (Burma)',
             'NA' => 'Namibia',
             'NR' => 'Nauru',
             'NP' => 'Nepal',
@@ -256,14 +249,14 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'RO' => 'Romania',
             'RU' => 'Russia',
             'RW' => 'Rwanda',
-            'SH' => 'Saint Helena',
-            'KN' => 'Saint Kitts and Nevis',
-            'LC' => 'Saint Lucia',
-            'PM' => 'Saint Pierre and Miquelon',
-            'VC' => 'Saint Vincent and the Grenadines',
+            'SH' => 'St. Helena',
+            'KN' => 'St. Kitts & Nevis',
+            'LC' => 'St. Lucia',
+            'PM' => 'St. Pierre & Miquelon',
+            'VC' => 'St. Vincent & Grenadines',
             'WS' => 'Samoa',
             'SM' => 'San Marino',
-            'ST' => 'São Tomé and Príncipe',
+            'ST' => 'São Tomé & Príncipe',
             'SA' => 'Saudi Arabia',
             'SN' => 'Senegal',
             'RS' => 'Serbia',
@@ -279,7 +272,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'LK' => 'Sri Lanka',
             'SD' => 'Sudan',
             'SR' => 'Suriname',
-            'SJ' => 'Svalbard and Jan Mayen',
+            'SJ' => 'Svalbard & Jan Mayen',
             'SZ' => 'Swaziland',
             'SE' => 'Sweden',
             'CH' => 'Switzerland',
@@ -292,11 +285,11 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'TG' => 'Togo',
             'TK' => 'Tokelau',
             'TO' => 'Tonga',
-            'TT' => 'Trinidad and Tobago',
+            'TT' => 'Trinidad & Tobago',
             'TN' => 'Tunisia',
             'TR' => 'Turkey',
             'TM' => 'Turkmenistan',
-            'TC' => 'Turks and Caicos Islands',
+            'TC' => 'Turks & Caicos Islands',
             'TV' => 'Tuvalu',
             'UG' => 'Uganda',
             'UA' => 'Ukraine',
@@ -310,7 +303,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'VN' => 'Vietnam',
             'VG' => 'British Virgin Islands',
             'VI' => 'U.S. Virgin Islands',
-            'WF' => 'Wallis and Futuna',
+            'WF' => 'Wallis & Futuna',
             'EH' => 'Western Sahara',
             'YE' => 'Yemen',
             'ZM' => 'Zambia',
