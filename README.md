@@ -33,6 +33,8 @@ $ composer require giggsey/libphonenumber-for-php
 
 You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
 
+If you do not use composer, ensure that you also load any dependencies that this project has, such as [giggsey/locale](https://github.com/giggsey/Locale).
+
 ## Versioning
 
 This library will try to follow the same version numbers as Google. There could be additional releases where needed to fix critical issues that can not wait until the next release from Google.
@@ -109,8 +111,6 @@ echo $phoneUtil->formatOutOfCountryCallingNumber($swissNumberProto, "GB");
 
 ### Geocoder
 
-The PECL [intl](http://php.net/intl) extension is required for the geocoder to be used.
-
 ```php
 $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 
@@ -174,8 +174,6 @@ var_dump($shortNumberInfo->connectsToEmergencyNumber("911123", "US"));
 ```
 
 ### Mapping Phone Numbers to carrier
-
-The PECL [intl](http://php.net/intl) extension is required for the carrier mapper to be used.
 
 ```php
 
