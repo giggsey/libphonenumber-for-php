@@ -22,7 +22,7 @@ php:
   - nightly
 
 before_script:
- - composer install --no-interaction $PREFER_LOWEST
+ - composer update --no-interaction $PREFER_LOWEST
  - mkdir -p build/logs
 
 script:
