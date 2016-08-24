@@ -8,12 +8,31 @@
 return array (
   'generalDesc' => 
   array (
+    'NationalNumberPattern' => '
+          [1-7]\\d{6,11}|
+          8[0-357-9]\\d{6,9}|
+          9\\d{7,10}
+        ',
+    'PossibleNumberPattern' => '\\d{4,12}',
   ),
   'fixedLine' => 
   array (
+    'NationalNumberPattern' => '[2-9]\\d{10}',
+    'PossibleNumberPattern' => '\\d{11}',
+    'ExampleNumber' => '91234567',
   ),
   'mobile' => 
   array (
+    'NationalNumberPattern' => '
+          1(?:
+            [38]\\d|
+            4[57]|
+            5[0-35-9]|
+            7[0136-8]
+          )\\d{8}
+        ',
+    'PossibleNumberPattern' => '\\d{11}',
+    'ExampleNumber' => '13123456789',
   ),
   'tollFree' => 
   array (
@@ -83,7 +102,9 @@ return array (
   'id' => 'CN',
   'countryCode' => 86,
   'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => true,
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 
@@ -101,8 +122,19 @@ return array (
             )
           ',
       ),
-      'nationalPrefixFormattingRule' => '$1',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '$CC $1',
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{8})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '1',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
     ),
   ),
   'intlNumberFormat' => 

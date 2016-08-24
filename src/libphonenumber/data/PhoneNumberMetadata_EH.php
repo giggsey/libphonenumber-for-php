@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[5689]\\d{8}',
+    'NationalNumberPattern' => '[5-9]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
   ),
   'fixedLine' => 
@@ -20,10 +20,15 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          6(?:
-            0[0-8]|
-            [12-79]\\d|
-            8[017]
+          (?:
+            6(?:
+              [0-79]\\d|
+              8[0-247-9]
+            )|
+            7(?:
+              [07][07]|
+              6[12]
+            )
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -53,8 +58,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '5924[01]\\d{4}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '592401234',
   ),
   'pager' => 
   array (

@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[5689]\\d{8}',
+    'NationalNumberPattern' => '[5-9]\\d{8}',
     'PossibleNumberPattern' => '\\d{9}',
   ),
   'fixedLine' => 
@@ -39,7 +39,11 @@ return array (
                 0\\d|
                 [89]0
               )
-            )
+            )|
+            (?:
+              4[067]|
+              5[03]
+            )\\d{2}
           )\\d{4}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -48,10 +52,15 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '
-          6(?:
-            0[0-8]|
-            [12-79]\\d|
-            8[017]
+          (?:
+            6(?:
+              [0-79]\\d|
+              8[0-247-9]
+            )|
+            7(?:
+              [07][07]|
+              6[12]
+            )
           )\\d{6}
         ',
     'PossibleNumberPattern' => '\\d{9}',
@@ -81,8 +90,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '5924[01]\\d{4}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '592401234',
   ),
   'pager' => 
   array (
@@ -134,7 +144,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([56]\\d{2})(\\d{6})',
+      'pattern' => '([5-7]\\d{2})(\\d{6})',
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
@@ -143,7 +153,7 @@ return array (
               2[015-7]|
               3[0-4]
             )|
-            6
+            [67]
           ',
       ),
       'nationalPrefixFormattingRule' => '0$1',
@@ -158,7 +168,8 @@ return array (
         0 => '
             5(?:
               2[2-489]|
-              3[5-9]
+              3[5-9]|
+              92
             )|
             892
           ',
@@ -171,7 +182,8 @@ return array (
               3(?:
                 [5-79]|
                 80
-              )
+              )|
+              924
             )|
             892
           ',
@@ -202,6 +214,22 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
     ),
     3 => 
+    array (
+      'pattern' => '([5]\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '
+            5(?:
+              4[067]|
+              5[03]
+            )
+          ',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+    ),
+    4 => 
     array (
       'pattern' => '(8[09])(\\d{7})',
       'format' => '$1-$2',

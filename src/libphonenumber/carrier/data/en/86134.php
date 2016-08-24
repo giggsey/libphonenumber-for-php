@@ -5,5 +5,13 @@
  */
 
 return array (
-  86134 => 'China Mobile',
+  861340 => 'China Mobile',
+  861341 => 'China Mobile',
+  861342 => 'China Mobile',
+  861343 => 'China Mobile',
+  861344 => 'China Mobile',
+  861345 => 'China Mobile',
+  861346 => 'China Mobile',
+  861347 => 'China Mobile',
+  861348 => 'China Mobile',
 );

@@ -12,6 +12,7 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
     private static $KO_Number2;
     private static $KO_Number3;
     private static $KO_InvalidNumber;
+    private static $KO_Mobile;
     private static $US_Number1;
     private static $US_Number2;
     private static $US_Number3;
@@ -41,6 +42,9 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 
         self::$KO_InvalidNumber = new PhoneNumber();
         self::$KO_InvalidNumber->setCountryCode(82)->setNationalNumber(1234);
+
+        self::$KO_Mobile = new PhoneNumber();
+        self::$KO_Mobile->setCountryCode(82)->setNationalNumber(101234567);
 
         self::$US_Number1 = new PhoneNumber();
         self::$US_Number1->setCountryCode(1)->setNationalNumber(6502530000);
@@ -191,5 +195,11 @@ class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$KO_InvalidNumber, "en"));
         $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, "en"));
+    }
+
+    public function testGetDescriptionForNonGeographicalNumberWithGeocodingPrefix()
+    {
+        // We have a geocoding prefix, but we shouldn't use it since this is not geographical.
+        $this->assertEquals("South Korea", $this->geocoder->getDescriptionForNumber(self::$KO_Mobile, 'en'));
     }
 }

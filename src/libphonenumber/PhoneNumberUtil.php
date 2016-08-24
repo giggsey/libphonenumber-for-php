@@ -157,9 +157,21 @@ class PhoneNumberUtil
     protected static $MOBILE_TOKEN_MAPPINGS;
 
     /**
+     * Set of country codes that have geographically assigned mobile numbers (see GEO_MOBILE_COUNTRIES
+     * below) which are not based on *area codes*. For example, in China mobile numbers start with a
+     * carrier indicator, and beyond that are geographically assigned: this carrier indicator is not
+     * considered to be an area code.
+     *
+     * @var array
+     */
+    protected static $GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES;
+
+    /**
      * Set of country calling codes that have geographically assigned mobile numbers. This may not be
      * complete; we add calling codes case by case, as we find geographical mobile numbers or hear
-     * from user reports.
+     * from user reports. Note that countries like the US, where we can't distinguish between
+     * fixed-line or mobile numbers, are not listed here, since we consider FIXED_LINE_OR_MOBILE to be
+     * a possibly geographically-related type anyway (like FIXED_LINE).
      *
      * @var array
      */
@@ -361,10 +373,16 @@ class PhoneNumberUtil
         static::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
         static::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
 
+        static::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = array();
+        static::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES[] = 86; // China
+
         static::$GEO_MOBILE_COUNTRIES = array();
         static::$GEO_MOBILE_COUNTRIES[] = 52; // Mexico
         static::$GEO_MOBILE_COUNTRIES[] = 54; // Argentina
         static::$GEO_MOBILE_COUNTRIES[] = 55; // Brazil
+        static::$GEO_MOBILE_COUNTRIES[] = 62; // Indonesia: some prefixes only (fixed CMDA wireless)
+
+        static::$GEO_MOBILE_COUNTRIES = array_merge(static::$GEO_MOBILE_COUNTRIES, static::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES);
     }
 
     /**
@@ -606,7 +624,19 @@ class PhoneNumberUtil
             return 0;
         }
 
-        if (!$this->isNumberGeographical($number)) {
+        $type = $this->getNumberType($number);
+        $countryCallingCode = $number->getCountryCode();
+
+        if ($type === PhoneNumberType::MOBILE
+            // Note this is a rough heuristic; it doesn't cover Indonesia well, for example, where area
+            // codes are present for some mobile phones but not for others. We have no better way of
+            // representing this in the metadata at this point.
+            && in_array($countryCallingCode, self::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES)
+        ) {
+            return 0;
+        }
+
+        if (!$this->isNumberGeographical($type, $countryCallingCode)) {
             return 0;
         }
 
@@ -803,20 +833,34 @@ class PhoneNumberUtil
     }
 
     /**
+     * isNumberGeographical(PhoneNumber)
+     *
      * Tests whether a phone number has a geographical association. It checks if the number is
      * associated to a certain region in the country where it belongs to. Note that this doesn't
      * verify if the number is actually in use.
-     * @param PhoneNumber $phoneNumber
+     *
+     * isNumberGeographical(PhoneNumberType, $countryCallingCode)
+     *
+     * Tests whether a phone number has a geographical association, as represented by its type and the
+     * country it belongs to.
+     *
+     * This version exists since calculating the phone number type is expensive; if we have already
+     * done this, we don't want to do it again.
+     *
+     * @param PhoneNumber|PhoneNumberType $phoneNumberObjOrType A PhoneNumber object, or a PhoneNumberType integer
+     * @param int|null $countryCallingCode Used when passing a PhoneNumberType
      * @return bool
      */
-    public function isNumberGeographical(PhoneNumber $phoneNumber)
+    public function isNumberGeographical($phoneNumberObjOrType, $countryCallingCode = null)
     {
-        $numberType = $this->getNumberType($phoneNumber);
+        if ($phoneNumberObjOrType instanceof PhoneNumber) {
+            return $this->isNumberGeographical($this->getNumberType($phoneNumberObjOrType), $phoneNumberObjOrType->getCountryCode());
+        }
 
-        return $numberType == PhoneNumberType::FIXED_LINE
-        || $numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE
-        || (in_array($phoneNumber->getCountryCode(), static::$GEO_MOBILE_COUNTRIES)
-            && $numberType == PhoneNumberType::MOBILE);
+        return $phoneNumberObjOrType == PhoneNumberType::FIXED_LINE
+        || $phoneNumberObjOrType == PhoneNumberType::FIXED_LINE_OR_MOBILE
+        || (in_array($countryCallingCode, static::$GEO_MOBILE_COUNTRIES)
+            && $phoneNumberObjOrType == PhoneNumberType::MOBILE);
     }
 
     /**

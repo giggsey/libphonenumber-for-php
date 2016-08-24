@@ -75,24 +75,11 @@ class PhoneNumberOfflineGeocoder
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
             return "";
-        } elseif (!$this->canBeGeocoded($numberType)) {
+        } elseif (!$this->phoneUtil->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryNameForNumber($number, $locale);
         }
 
         return $this->getDescriptionForValidNumber($number, $locale, $userRegion);
-    }
-
-    /**
-     * A similar method is implemented as PhoneNumberUtil.isNumberGeographical, which performs a
-     * stricter check, as it determines if a number has a geographical association. Also, if new
-     * phone number types were added, we should check if this other method should be updated too.
-     *
-     * @param int $numberType
-     * @return boolean
-     */
-    protected function canBeGeocoded($numberType)
-    {
-        return ($numberType === PhoneNumberType::FIXED_LINE || $numberType === PhoneNumberType::MOBILE || $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE);
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 
 return array (
+  8210 => 'Mobile prefix, should not be geocoded.',
   822 => 'Seoul',
   8231 => 'Gyeonggi',
   8232 => 'Incheon',
