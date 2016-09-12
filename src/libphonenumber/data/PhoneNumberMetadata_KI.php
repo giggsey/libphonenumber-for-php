@@ -8,97 +8,151 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '
-          [2458]\\d{4}|
-          3\\d{4,7}|
-          7\\d{7}
-        ',
+    'NationalNumberPattern' => '[2458]\\d{4}|3\\d{4,7}|7\\d{7}',
     'PossibleNumberPattern' => '\\d{5,8}',
+    'PossibleLength' => 
+    array (
+      0 => '5',
+      1 => '8',
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '
-          (?:
-            [24]\\d|
-            3[1-9]|
-            50|
-            8[0-5]
-          )\\d{3}
-        ',
+    'NationalNumberPattern' => '(?:[24]\\d|3[1-9]|50|8[0-5])\\d{3}',
     'PossibleNumberPattern' => '\\d{5}',
     'ExampleNumber' => '31234',
+    'PossibleLength' => 
+    array (
+      0 => '5',
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7\\d{7}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '72012345',
+    'PossibleLength' => 
+    array (
+      0 => '8',
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '3001\\d{4}',
     'PossibleNumberPattern' => '\\d{5,8}',
     'ExampleNumber' => '30010000',
+    'PossibleLength' => 
+    array (
+      0 => '8',
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-  ),
-  'emergency' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-  ),
-  'shortCode' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'standardRate' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'carrierSpecific' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'id' => 'KI',
   'countryCode' => 686,

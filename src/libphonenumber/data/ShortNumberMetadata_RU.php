@@ -10,94 +10,89 @@ return array (
   array (
     'NationalNumberPattern' => '[01]\\d{1,2}',
     'PossibleNumberPattern' => '\\d{2,3}',
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '[01]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '[01]\\d{1,2}',
-    'PossibleNumberPattern' => '\\d{2,3}',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-  ),
-  'sharedCost' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'personalNumber' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'voip' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'pager' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'uan' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '
-          0[123]|
-          112
-        ',
+    'NationalNumberPattern' => '0[123]|112',
     'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '112',
-  ),
-  'voicemail' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '
-          0[123]|
-          112
-        ',
+    'NationalNumberPattern' => '0[123]|112',
     'PossibleNumberPattern' => '\\d{2,3}',
     'ExampleNumber' => '112',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-  ),
-  'noInternationalDialling' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'id' => 'RU',
   'countryCode' => 0,
   'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),

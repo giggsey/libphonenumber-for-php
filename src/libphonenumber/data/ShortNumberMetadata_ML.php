@@ -10,163 +10,89 @@ return array (
   array (
     'NationalNumberPattern' => '[13678]\\d{1,4}',
     'PossibleNumberPattern' => '\\d{2,5}',
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '[13678]\\d{1,4}',
-    'PossibleNumberPattern' => '\\d{2,5}',
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '[13678]\\d{1,4}',
-    'PossibleNumberPattern' => '\\d{2,5}',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '
-          35200|
-          67(?:
-            00|
-            77
-          )|
-          74(?:
-            02|
-            44
-          )|
-          8000[12]
-        ',
+    'NationalNumberPattern' => '35200|67(?:00|77)|74(?:02|44)|8000[12]',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '35200',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '
-          122[13]|
-          3(?:
-            52(?:
-              11|
-              2[02]|
-              3[04-6]|
-              99
-            )|
-            7574
-          )|
-          8002[12]
-        ',
+    'NationalNumberPattern' => '122[13]|3(?:52(?:11|2[02]|3[04-6]|99)|7574)|8002[12]',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '35211',
-  ),
-  'sharedCost' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'personalNumber' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'voip' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'pager' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
-  ),
-  'uan' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'emergency' => 
   array (
     'NationalNumberPattern' => '1[578]',
     'PossibleNumberPattern' => '\\d{2}',
     'ExampleNumber' => '17',
-  ),
-  'voicemail' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '
-          1(?:
-            1(?:
-              2|
-              [013-9]\\d
-            )|
-            2(?:
-              1[02-469]|
-              2[13]
-            )|
-            [578]
-          )|
-          3(?:
-            5(?:
-              0(?:
-                35|
-                57
-              )|
-              2\\d{2}
-            )|
-            [67]\\d{3}
-          )|
-          67(?:
-            0[09]|
-            59|
-            77|
-            8[89]|
-            99
-          )|
-          74(?:
-            0[02]|
-            44|
-            55
-          )|
-          800[012][12]
-        ',
+    'NationalNumberPattern' => '1(?:1(?:2|[013-9]\\d)|2(?:1[02-469]|2[13])|[578])|3(?:5(?:0(?:35|57)|2\\d{2})|[67]\\d{3})|67(?:0[09]|59|77|8[89]|99)|74(?:0[02]|44|55)|800[012][12]',
     'PossibleNumberPattern' => '\\d{2,5}',
     'ExampleNumber' => '1210',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '
-          37(?:
-            433|
-            575
-          )|
-          7400|
-          8001[12]
-        ',
+    'NationalNumberPattern' => '37(?:433|575)|7400|8001[12]',
     'PossibleNumberPattern' => '\\d{4,5}',
     'ExampleNumber' => '7400',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '
-          3(?:
-            5035|
-            [67]\\d{3}
-          )|
-          800[012][12]
-        ',
+    'NationalNumberPattern' => '3(?:5035|[67]\\d{3})|800[012][12]',
     'PossibleNumberPattern' => '\\d{5}',
     'ExampleNumber' => '35035',
-  ),
-  'noInternationalDialling' => 
-  array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
   ),
   'id' => 'ML',
   'countryCode' => 0,
   'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),
