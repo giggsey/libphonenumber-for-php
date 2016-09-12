@@ -751,7 +751,8 @@ class BuildMetadataFromXml
         return $numberType == self::FIXED_LINE || $numberType == self::MOBILE || $numberType == self::GENERAL_DESC;
     }
 
-    private static function arePossibleLengthsEqual($possibleLengths, PhoneNumberDesc $desc) {
+    private static function arePossibleLengthsEqual($possibleLengths, PhoneNumberDesc $desc)
+    {
         $descPossibleLength = $desc->getPossibleLength();
         if (count($possibleLengths) != count($descPossibleLength)) {
             return false;
