@@ -175,6 +175,11 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("\\d{7}(?:\\d{3})?", $metadata->getGeneralDesc()->getPossibleNumberPattern());
         $this->assertTrue($metadata->getGeneralDesc()->exactlySameAs($metadata->getFixedLine()));
         $this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
+        $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
+        $this->assertEquals(10, $possibleLength[0]);
+        // Possible lengths are the same as the general description, so aren't stored separately in the
+        // toll free element as well.
+        $this->assertCount(0, $metadata->getTollFree()->getPossibleLength());
         $this->assertEquals("900\\d{7}", $metadata->getPremiumRate()->getNationalNumberPattern());
         // No shared-cost data is available, so it should be initialised to "NA".
         $this->assertEquals("NA", $metadata->getSharedCost()->getNationalNumberPattern());
@@ -193,8 +198,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("900", $metadata->getNumberFormat(5)->getLeadingDigitsPattern(0));
         $this->assertEquals("(\\d{3})(\\d{3,4})(\\d{4})", $metadata->getNumberFormat(5)->getPattern());
         $this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(5)->getFormat());
+        $this->assertCount(2, $metadata->getGeneralDesc()->getPossibleLengthLocalOnly());
+        $this->assertCount(8, $metadata->getGeneralDesc()->getPossibleLength());
+        // Nothing is present for fixed-line, since it is the same as the general desc, so for
+        // efficiency reasons we don't store an extra value.
+        $this->assertCount(0, $metadata->getFixedLine()->getPossibleLength());
+        $this->assertCount(2, $metadata->getMobile()->getPossibleLength());
+
         $this->assertEquals(
-            "(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:[1-9]\\d|0[2-9]))\\d{1,8}",
+            "(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
             $metadata->getFixedLine()->getNationalNumberPattern()
         );
         $this->assertEquals("\\d{2,14}", $metadata->getFixedLine()->getPossibleNumberPattern());

@@ -11,7 +11,31 @@ class NumberFormat
     protected $format = null;
     protected $leadingDigitsPattern = array();
     protected $nationalPrefixFormattingRule = null;
+    /**
+     * @var bool
+     */
+    protected $nationalPrefixOptionalWhenFormatting = false;
     protected $domesticCarrierCodeFormattingRule = null;
+
+    public function __construct()
+    {
+        $this->clear();
+    }
+
+    /**
+     * @return NumberFormat
+     */
+    public function clear()
+    {
+        $this->pattern = "";
+        $this->format = "";
+        $this->leadingDigitsPattern = array();
+        $this->nationalPrefixFormattingRule = "";
+        $this->nationalPrefixOptionalWhenFormatting = false;
+        $this->domesticCarrierCodeFormattingRule = "";
+
+        return $this;
+    }
 
     /**
      * @return boolean
@@ -43,9 +67,25 @@ class NumberFormat
     /**
      * @return boolean
      */
+    public function isNationalPrefixOptionalWhenFormatting()
+    {
+        return $this->nationalPrefixOptionalWhenFormatting;
+    }
+
+    /**
+     * @param boolean $nationalPrefixOptionalWhenFormatting
+     */
+    public function setNationalPrefixOptionalWhenFormatting($nationalPrefixOptionalWhenFormatting)
+    {
+        $this->nationalPrefixOptionalWhenFormatting = $nationalPrefixOptionalWhenFormatting;
+    }
+
+    /**
+     * @return boolean
+     */
     public function hasFormat()
     {
-        return isset($this->format);
+        return ($this->format);
     }
 
     /**
@@ -189,6 +229,8 @@ class NumberFormat
         if ($other->hasDomesticCarrierCodeFormattingRule()) {
             $this->setDomesticCarrierCodeFormattingRule($other->getDomesticCarrierCodeFormattingRule());
         }
+        $this->setNationalPrefixOptionalWhenFormatting($other->isNationalPrefixOptionalWhenFormatting());
+
         return $this;
     }
 
@@ -210,6 +252,9 @@ class NumberFormat
         if ($this->hasDomesticCarrierCodeFormattingRule()) {
             $output['domesticCarrierCodeFormattingRule'] = $this->getDomesticCarrierCodeFormattingRule();
         }
+
+        $output['nationalPrefixOptionalWhenFormatting'] = $this->isNationalPrefixOptionalWhenFormatting();
+
         return $output;
     }
 
@@ -230,5 +275,7 @@ class NumberFormat
         if (isset($input['domesticCarrierCodeFormattingRule'])) {
             $this->setDomesticCarrierCodeFormattingRule($input['domesticCarrierCodeFormattingRule']);
         }
+
+        $this->setNationalPrefixOptionalWhenFormatting($input['nationalPrefixOptionalWhenFormatting']);
     }
 }

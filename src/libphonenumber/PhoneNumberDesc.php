@@ -13,6 +13,65 @@ class PhoneNumberDesc
     protected $possibleNumberPattern = "";
     protected $hasExampleNumber = false;
     protected $exampleNumber = "";
+    /**
+     * @var array
+     */
+    protected $possibleLength;
+    /**
+     * @var array
+     */
+    protected $possibleLengthLocalOnly;
+
+    public function __construct()
+    {
+        $this->clear();
+    }
+
+    /**
+     * @return PhoneNumberDesc
+     */
+    public function clear()
+    {
+        $this->nationalNumberPattern = "";
+        $this->possibleNumberPattern = "";
+        $this->possibleLength = array();
+        $this->possibleLengthLocalOnly = array();
+        $this->exampleNumber = "";
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPossibleLength()
+    {
+        return $this->possibleLength;
+    }
+
+    /**
+     * @param array $possibleLength
+     */
+    public function setPossibleLength($possibleLength)
+    {
+        $this->possibleLength = $possibleLength;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPossibleLengthLocalOnly()
+    {
+        return $this->possibleLengthLocalOnly;
+    }
+
+    /**
+     * @param array $possibleLengthLocalOnly
+     */
+    public function setPossibleLengthLocalOnly($possibleLengthLocalOnly)
+    {
+        $this->possibleLengthLocalOnly = $possibleLengthLocalOnly;
+    }
 
     /**
      * @return boolean
@@ -113,6 +172,8 @@ class PhoneNumberDesc
         if ($other->hasExampleNumber()) {
             $this->setExampleNumber($other->getExampleNumber());
         }
+        $this->setPossibleLength($other->getPossibleLength());
+        $this->setPossibleLengthLocalOnly($other->getPossibleLengthLocalOnly());
 
         return $this;
     }
@@ -144,6 +205,9 @@ class PhoneNumberDesc
             $data['ExampleNumber'] = $this->getExampleNumber();
         }
 
+        $data['PossibleLength'] = $this->getPossibleLength();
+        $data['PossibleLengthLocalOnly'] = $this->getPossibleLengthLocalOnly();
+
         return $data;
     }
 
@@ -162,6 +226,8 @@ class PhoneNumberDesc
         if (isset($input['ExampleNumber']) && $input['NationalNumberPattern'] != '') {
             $this->setExampleNumber($input['ExampleNumber']);
         }
+        $this->setPossibleLength($input['PossibleLength']);
+        $this->setPossibleLengthLocalOnly($input['PossibleLengthLocalOnly']);
 
         return $this;
     }
