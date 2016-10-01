@@ -632,7 +632,7 @@ class BuildMetadataFromXml
                 // a valid national length for fixedLine, so the generalDesc would have the 7 removed from
                 // localOnly.
                 if ($parentDesc === null
-                    || in_array($length, $parentDesc->getPossibleLengthOnly())
+                    || in_array($length, $parentDesc->getPossibleLength())
                     || in_array($length, $parentDesc->getPossibleLengthLocalOnly())
                 ) {
                     $desc->addPossibleLengthLocalOnly($length);
