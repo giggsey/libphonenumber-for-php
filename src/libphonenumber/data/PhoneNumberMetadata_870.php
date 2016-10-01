@@ -13,8 +13,8 @@ return array (
     'ExampleNumber' => '301234567',
     'PossibleLength' => 
     array (
-      0 => '-1',
-      1 => '9',
+      0 => -1,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -27,7 +27,7 @@ return array (
     'ExampleNumber' => '301234567',
     'PossibleLength' => 
     array (
-      0 => '-1',
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -40,7 +40,7 @@ return array (
     'ExampleNumber' => '301234567',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

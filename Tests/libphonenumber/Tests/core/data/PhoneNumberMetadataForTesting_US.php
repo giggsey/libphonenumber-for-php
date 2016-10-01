@@ -13,11 +13,11 @@ return array (
     'ExampleNumber' => '1234567890',
     'PossibleLength' => 
     array (
-      0 => '10',
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '7',
+      0 => 7,
     ),
   ),
   'fixedLine' => 

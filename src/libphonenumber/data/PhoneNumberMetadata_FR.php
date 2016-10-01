@@ -12,7 +12,7 @@ return array (
     'PossibleNumberPattern' => '\\d{9}',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -472,7 +472,7 @@ class BuildMetadataFromXml
                     if (in_array($j, $lengthSet)) {
                         throw new \RuntimeException("Duplicate length element found ({$j}) in possibleLength string {$possibleLengthString}.");
                     }
-                    array_push($lengthSet, $j);
+                    $lengthSet[] = (int)$j;
                 }
             } else {
                 $length = $lengthSubstring;
@@ -482,7 +482,7 @@ class BuildMetadataFromXml
                 if (!is_numeric($length)) {
                     throw new \RuntimeException("For input string \"{$length}\"");
                 }
-                array_push($lengthSet, $length);
+                $lengthSet[] = (int)$length;
             }
         }
         return $lengthSet;

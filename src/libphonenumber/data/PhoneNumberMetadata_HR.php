@@ -14,8 +14,8 @@ return array (
     array (
       0 => 6,
       1 => 7,
-      2 => '8',
-      3 => '9',
+      2 => 8,
+      3 => 9,
       4 => 10,
       5 => 11,
       6 => 12,
@@ -31,8 +31,8 @@ return array (
     'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
-      0 => '8',
-      1 => '9',
+      0 => 8,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -146,8 +146,8 @@ return array (
     'ExampleNumber' => '62123456',
     'PossibleLength' => 
     array (
-      0 => '8',
-      1 => '9',
+      0 => 8,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

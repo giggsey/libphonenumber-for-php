@@ -23,8 +23,8 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '2',
-      1 => '3',
+      0 => 2,
+      1 => 3,
     ),
   ),
   'fixedLine' => 
@@ -45,8 +45,8 @@ return array (
     'PossibleNumberPattern' => '\\d{10,11}',
     'PossibleLength' => 
     array (
-      0 => '10',
-      1 => '11',
+      0 => 10,
+      1 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,7 +58,7 @@ return array (
     'PossibleNumberPattern' => '\\d{10}',
     'PossibleLength' => 
     array (
-      0 => '10',
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -70,8 +70,8 @@ return array (
     'PossibleNumberPattern' => '\\d{10,11}',
     'PossibleLength' => 
     array (
-      0 => '10',
-      1 => '11',
+      0 => 10,
+      1 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (

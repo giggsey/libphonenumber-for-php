@@ -13,11 +13,11 @@ return array (
     'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
-      0 => '-1',
-      1 => '7',
+      0 => -1,
+      1 => 7,
       2 => 8,
-      3 => '9',
-      4 => '10',
+      3 => 9,
+      4 => 10,
       5 => 11,
       6 => 12,
     ),
@@ -32,7 +32,7 @@ return array (
     'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
-      0 => '-1',
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -45,9 +45,9 @@ return array (
     'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
-      0 => '7',
-      1 => '9',
-      2 => '10',
+      0 => 7,
+      1 => 9,
+      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -150,7 +150,7 @@ return array (
     'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
-      0 => '11',
+      0 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (

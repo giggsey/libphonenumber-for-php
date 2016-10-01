@@ -12,13 +12,13 @@ return array (
     'PossibleNumberPattern' => '\\d{3,9}',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '3',
-      1 => '5',
-      2 => '7',
+      0 => 3,
+      1 => 5,
+      2 => 7,
     ),
   ),
   'fixedLine' => 

@@ -19,7 +19,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '5',
+      0 => 5,
     ),
   ),
   'fixedLine' => 
@@ -44,7 +44,7 @@ return array (
     'ExampleNumber' => '961456789',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -105,7 +105,7 @@ return array (
     'ExampleNumber' => '870012345',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

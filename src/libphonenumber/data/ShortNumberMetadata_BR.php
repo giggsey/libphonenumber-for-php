@@ -28,8 +28,8 @@ return array (
     'ExampleNumber' => '181',
     'PossibleLength' => 
     array (
-      0 => '3',
-      1 => '4',
+      0 => 3,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -54,7 +54,7 @@ return array (
     'ExampleNumber' => '190',
     'PossibleLength' => 
     array (
-      0 => '3',
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -79,8 +79,8 @@ return array (
     'ExampleNumber' => '27330',
     'PossibleLength' => 
     array (
-      0 => '3',
-      1 => '5',
+      0 => 3,
+      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (

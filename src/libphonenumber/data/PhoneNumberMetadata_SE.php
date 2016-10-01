@@ -17,7 +17,7 @@ return array (
       2 => 8,
       3 => 9,
       4 => 10,
-      5 => '12',
+      5 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -45,7 +45,7 @@ return array (
     'ExampleNumber' => '701234567',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -90,8 +90,8 @@ return array (
     'ExampleNumber' => '771234567',
     'PossibleLength' => 
     array (
-      0 => '6',
-      1 => '9',
+      0 => 6,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -104,7 +104,7 @@ return array (
     'ExampleNumber' => '751234567',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -129,7 +129,7 @@ return array (
     'ExampleNumber' => '740123456',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -154,7 +154,7 @@ return array (
     'ExampleNumber' => '254123456789',
     'PossibleLength' => 
     array (
-      0 => '12',
+      0 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (

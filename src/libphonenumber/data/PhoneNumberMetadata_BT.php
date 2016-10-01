@@ -12,12 +12,12 @@ return array (
     'PossibleNumberPattern' => '\\d{6,8}',
     'PossibleLength' => 
     array (
-      0 => '7',
-      1 => '8',
+      0 => 7,
+      1 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '6',
+      0 => 6,
     ),
   ),
   'fixedLine' => 
@@ -27,7 +27,7 @@ return array (
     'ExampleNumber' => '2345678',
     'PossibleLength' => 
     array (
-      0 => '7',
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -40,7 +40,7 @@ return array (
     'ExampleNumber' => '17123456',
     'PossibleLength' => 
     array (
-      0 => '8',
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (

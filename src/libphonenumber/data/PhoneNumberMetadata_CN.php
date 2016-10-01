@@ -21,8 +21,8 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '5',
-      1 => '6',
+      0 => 5,
+      1 => 6,
     ),
   ),
   'fixedLine' => 
@@ -44,7 +44,7 @@ return array (
     'ExampleNumber' => '13123456789',
     'PossibleLength' => 
     array (
-      0 => '11',
+      0 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -57,8 +57,8 @@ return array (
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
-      0 => '10',
-      1 => '12',
+      0 => 10,
+      1 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -71,7 +71,7 @@ return array (
     'ExampleNumber' => '16812345',
     'PossibleLength' => 
     array (
-      0 => '8',
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -78,8 +78,8 @@ return array (
     'ExampleNumber' => '600123456',
     'PossibleLength' => 
     array (
-      0 => '8',
-      1 => '9',
+      0 => 8,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

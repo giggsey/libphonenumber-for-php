@@ -12,11 +12,11 @@ return array (
     'PossibleNumberPattern' => '\\d{5,6}',
     'PossibleLength' => 
     array (
-      0 => '6',
+      0 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => '5',
+      0 => 5,
     ),
   ),
   'fixedLine' => 

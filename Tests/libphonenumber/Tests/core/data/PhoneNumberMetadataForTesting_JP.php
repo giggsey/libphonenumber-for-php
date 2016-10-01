@@ -54,7 +54,7 @@ return array (
     'ExampleNumber' => '0777012',
     'PossibleLength' => 
     array (
-      0 => '7',
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -150,7 +150,7 @@ return array (
     'PossibleNumberPattern' => '\\d{4}',
     'PossibleLength' => 
     array (
-      0 => '4',
+      0 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
