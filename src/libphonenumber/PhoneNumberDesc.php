@@ -34,8 +34,8 @@ class PhoneNumberDesc
     {
         $this->nationalNumberPattern = "";
         $this->possibleNumberPattern = "";
-        $this->possibleLength = array();
-        $this->possibleLengthLocalOnly = array();
+        $this->clearPossibleLength();
+        $this->clearPossibleLengthLocalOnly();
         $this->exampleNumber = "";
 
         return $this;
@@ -57,6 +57,18 @@ class PhoneNumberDesc
         $this->possibleLength = $possibleLength;
     }
 
+    public function addPossibleLength($possibleLength)
+    {
+        if (!in_array($possibleLength, $this->possibleLength)) {
+            $this->possibleLength[] = $possibleLength;
+        }
+    }
+
+    public function clearPossibleLength()
+    {
+        $this->possibleLength = array();
+    }
+
     /**
      * @return array
      */
@@ -71,6 +83,18 @@ class PhoneNumberDesc
     public function setPossibleLengthLocalOnly($possibleLengthLocalOnly)
     {
         $this->possibleLengthLocalOnly = $possibleLengthLocalOnly;
+    }
+
+    public function addPossibleLengthLocalOnly($possibleLengthLocalOnly)
+    {
+        if (!in_array($possibleLengthLocalOnly, $this->possibleLengthLocalOnly)) {
+            $this->possibleLengthLocalOnly[] = $possibleLengthLocalOnly;
+        }
+    }
+
+    public function clearPossibleLengthLocalOnly()
+    {
+        $this->possibleLengthLocalOnly = array();
     }
 
     /**

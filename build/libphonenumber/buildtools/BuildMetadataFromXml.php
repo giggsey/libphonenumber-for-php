@@ -602,19 +602,17 @@ class BuildMetadataFromXml
      */
     private static function setPossibleLengths($lengths, $localOnlyLengths, PhoneNumberDesc $parentDesc = null, PhoneNumberDesc $desc)
     {
-        $parentDescPossibleLengths = ($parentDesc === null) ? null : $parentDesc->getPossibleLength();
-        $parentDescPossibleLengthLocalOnlys = ($parentDesc === null) ? null : $parentDesc->getPossibleLengthLocalOnly();
-        $descPossibleLengths = array();
-        $descPossibleLengthLocalOnlys = array();
+        // We clear these fields since the metadata tends to inherit from the parent element for other
+        // fields (via a mergeFrom).
+        $desc->clearPossibleLength();
+        $desc->clearPossibleLengthLocalOnly();
 
         // Only add the lengths to this sub-type if they aren't exactly the same as the possible
         // lengths in the general desc (for metadata size reasons).
         if ($parentDesc === null || !self::arePossibleLengthsEqual($lengths, $parentDesc)) {
             foreach ($lengths as $length) {
-                if ($parentDesc === null || in_array($length, $parentDescPossibleLengths)) {
-                    if (!in_array($length, $descPossibleLengths)) {
-                        $descPossibleLengths[] = $length;
-                    }
+                if ($parentDesc === null || in_array($length, $parentDesc->getPossibleLength())) {
+                    $desc->addPossibleLength($length);
                 } else {
                     // We shouldn't have possible lengths defined in a child element that are not covered by
                     // the general description. We check this here even though the general description is
@@ -633,17 +631,16 @@ class BuildMetadataFromXml
                 // PhoneNumberDesc, because for example 7 might be a valid localOnly length for mobile, but
                 // a valid national length for fixedLine, so the generalDesc would have the 7 removed from
                 // localOnly.
-                if ($parentDesc === null || in_array($length, $parentDescPossibleLengthLocalOnlys) || in_array($length, $parentDescPossibleLengths)) {
-                    if (!in_array($length, $descPossibleLengthLocalOnlys)) {
-                        $descPossibleLengthLocalOnlys[] = $length;
-                    }
+                if ($parentDesc === null
+                    || in_array($length, $parentDesc->getPossibleLengthOnly())
+                    || in_array($length, $parentDesc->getPossibleLengthLocalOnly())
+                ) {
+                    $desc->addPossibleLengthLocalOnly($length);
                 } else {
                     throw new \RuntimeException("Out-of-range local-only possible length found ({$length}), parent length {$parentDesc->getPossibleLengthLocalOnly()}");
                 }
             }
         }
-        $desc->setPossibleLength($descPossibleLengths);
-        $desc->setPossibleLengthLocalOnly($descPossibleLengthLocalOnlys);
     }
 
     /**
