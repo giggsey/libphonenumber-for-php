@@ -2,6 +2,11 @@
 
 namespace libphonenumber;
 
+/**
+ * Class PhoneMetadata
+ * @package libphonenumber
+ * @internal Used internally, and can change at any time
+ */
 class PhoneMetadata
 {
     /**
