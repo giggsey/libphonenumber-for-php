@@ -90,28 +90,11 @@ class PhoneNumberToTimeZonesMapper
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
             return $this->unknownTimeZoneList;
-        } elseif (!$this->canBeGeocoded($numberType)) {
+        } elseif (!!PhoneNumberUtil::getInstance()->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryLevelTimeZonesforNumber($number);
         }
 
         return $this->getTimeZonesForGeographicalNumber($number);
-    }
-
-    /**
-     * A similar method is implemented as PhoneNumberUtil.isNumberGeographical, which performs a
-     * stricter check, as it determines if a number has a geographical association. Also, if new
-     * phone number types were added, we should check if this other method should be updated too.
-     * TODO: Remove duplication by completing the logic in the method in PhoneNumberUtil.
-     *                   For more information, see the comments in that method.
-     * @param $numberType
-     * @return bool
-     */
-    public function canBeGeocoded($numberType)
-    {
-        return ($numberType === PhoneNumberType::FIXED_LINE ||
-            $numberType === PhoneNumberType::MOBILE ||
-            $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE
-        );
     }
 
     /**
