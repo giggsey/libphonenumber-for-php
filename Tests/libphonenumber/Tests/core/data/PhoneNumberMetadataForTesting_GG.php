@@ -8,15 +8,21 @@
 return array (
   'generalDesc' => 
   array (
+    'NationalNumberPattern' => '\\d{6,10}',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'PossibleLength' => 
     array (
+      0 => '10',
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => '6',
     ),
   ),
   'fixedLine' => 
   array (
+    'NationalNumberPattern' => '\\d{6,10}',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'PossibleLength' => 
     array (
     ),
@@ -26,6 +32,8 @@ return array (
   ),
   'mobile' => 
   array (
+    'NationalNumberPattern' => '\\d{6,10}',
+    'PossibleNumberPattern' => '\\d{6,10}',
     'PossibleLength' => 
     array (
     ),

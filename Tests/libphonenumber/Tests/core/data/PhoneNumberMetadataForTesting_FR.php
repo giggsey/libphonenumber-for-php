@@ -12,6 +12,7 @@ return array (
     'PossibleNumberPattern' => '\\d{7}',
     'PossibleLength' => 
     array (
+      0 => '7',
     ),
     'PossibleLengthLocalOnly' => 
     array (

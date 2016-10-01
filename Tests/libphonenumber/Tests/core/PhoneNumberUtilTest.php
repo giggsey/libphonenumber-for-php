@@ -173,8 +173,11 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(1)->getFormat());
         $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getGeneralDesc()->getNationalNumberPattern());
         $this->assertEquals("\\d{7}(?:\\d{3})?", $metadata->getGeneralDesc()->getPossibleNumberPattern());
-        $this->assertTrue($metadata->getGeneralDesc()->exactlySameAs($metadata->getFixedLine()));
+        // Fixed-line data should be inherited from the general desc for the national number pattern,
+        // since it wasn't overridden
+        $this->assertEquals($metadata->getGeneralDesc()->getNationalNumberPattern(), $metadata->getFixedLine()->getNationalNumberPattern());
         $this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
+        $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
         $this->assertEquals(10, $possibleLength[0]);
         // Possible lengths are the same as the general description, so aren't stored separately in the
@@ -1734,7 +1737,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->phoneUtil->isPossibleNumber("253-0000", RegionCode::US));
         $this->assertTrue($this->phoneUtil->isPossibleNumber("+1 650 253 0000", RegionCode::GB));
         $this->assertTrue($this->phoneUtil->isPossibleNumber("+44 20 7031 3000", RegionCode::GB));
-        $this->assertTrue($this->phoneUtil->isPossibleNumber("(020) 7031 3000", RegionCode::GB));
+        $this->assertTrue($this->phoneUtil->isPossibleNumber("(020) 7031 300", RegionCode::GB));
         $this->assertTrue($this->phoneUtil->isPossibleNumber("7031 3000", RegionCode::GB));
         $this->assertTrue($this->phoneUtil->isPossibleNumber("3331 6005", RegionCode::NZ));
         $this->assertTrue($this->phoneUtil->isPossibleNumber("+800 1234 5678", RegionCode::UN001));
