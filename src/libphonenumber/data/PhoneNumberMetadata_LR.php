@@ -8,7 +8,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '2\\d{7,8}|[37-9]\\d{8}|4\\d{6}|5\\d{6,8}',
+    'NationalNumberPattern' => '2\\d{7,8}|[378]\\d{8}|4\\d{6}|5\\d{6,8}',
     'PossibleNumberPattern' => '\\d{7,9}',
     'PossibleLength' => 
     array (
@@ -35,7 +35,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:330\\d|4[67]|5\\d|77\\d{2}|88\\d{2}|994\\d)\\d{5}|(?:20\\d{3}|33(?:0\\d{2}|2(?:02|5\\d))|555\\d{2}|77[0567]\\d{2}|88[068]\\d{2}|994\\d{2})\\d{4}',
+    'NationalNumberPattern' => '(?:20\\d{3}|330\\d{2}|4[67]\\d|5(?:55)?\\d{2}|77\\d{3}|88\\d{3})\\d{4}',
     'PossibleNumberPattern' => '\\d{7,9}',
     'ExampleNumber' => '770123456',
     'PossibleLength' => 
@@ -61,12 +61,11 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90[03]\\d{6}',
-    'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '900123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
-      0 => '9',
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -98,9 +97,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '332(?:0[02]|5\\d)\\d{4}',
+    'NationalNumberPattern' => '332(?:02|[25]\\d)\\d{4}',
     'PossibleNumberPattern' => '\\d{9}',
-    'ExampleNumber' => '332001234',
+    'ExampleNumber' => '332021234',
     'PossibleLength' => 
     array (
       0 => '9',
@@ -179,11 +178,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
+      'pattern' => '([4-5])(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2579]',
+        0 => '[45]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -191,23 +190,11 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([4-6])(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[4-6]',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    3 => 
-    array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[38]',
+        0 => '[23578]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

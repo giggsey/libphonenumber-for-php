@@ -12,6 +12,8 @@ return array (
     'PossibleNumberPattern' => '\\d{3,5}',
     'PossibleLength' => 
     array (
+      0 => '3',
+      1 => '5',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -48,6 +50,7 @@ return array (
     'ExampleNumber' => '999',
     'PossibleLength' => 
     array (
+      0 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -81,8 +84,10 @@ return array (
   array (
     'NationalNumberPattern' => '88000|98555',
     'PossibleNumberPattern' => '\\d{5}',
+    'ExampleNumber' => '88000',
     'PossibleLength' => 
     array (
+      0 => '5',
     ),
     'PossibleLengthLocalOnly' => 
     array (

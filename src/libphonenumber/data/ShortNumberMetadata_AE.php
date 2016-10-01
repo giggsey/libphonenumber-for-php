@@ -12,6 +12,8 @@ return array (
     'PossibleNumberPattern' => '\\d{3,4}',
     'PossibleLength' => 
     array (
+      0 => '3',
+      1 => '4',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -48,6 +50,7 @@ return array (
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
+      0 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -55,7 +58,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112|4451|99[789]',
+    'NationalNumberPattern' => '112|445[16]|99[789]',
     'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '112',
     'PossibleLength' => 

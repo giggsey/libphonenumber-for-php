@@ -12,6 +12,8 @@ return array (
     'PossibleNumberPattern' => '\\d{2,3}',
     'PossibleLength' => 
     array (
+      0 => '2',
+      1 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -12,6 +12,10 @@ return array (
     'PossibleNumberPattern' => '\\d{3,6}',
     'PossibleLength' => 
     array (
+      0 => 3,
+      1 => 4,
+      2 => 5,
+      3 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -24,6 +28,8 @@ return array (
     'ExampleNumber' => '181',
     'PossibleLength' => 
     array (
+      0 => '3',
+      1 => '4',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -48,6 +54,7 @@ return array (
     'ExampleNumber' => '190',
     'PossibleLength' => 
     array (
+      0 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -72,6 +79,8 @@ return array (
     'ExampleNumber' => '27330',
     'PossibleLength' => 
     array (
+      0 => '3',
+      1 => '5',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -80,10 +89,13 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '27878|4(?:0404?|11[12]|57)|55555',
-    'PossibleNumberPattern' => '\\d{5}',
+    'PossibleNumberPattern' => '\\d{3,5}',
     'ExampleNumber' => '27878',
     'PossibleLength' => 
     array (
+      0 => 3,
+      1 => 4,
+      2 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -17,4 +17,5 @@ return array (
   90548 => 'Turkcell',
   90549 => 'Turkcell',
   9055 => 'Aycell',
+  9056161 => 'Turkcell',
 );

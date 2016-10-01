@@ -18,6 +18,10 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 4,
+      1 => 5,
+      2 => 6,
+      3 => 8,
     ),
   ),
   'fixedLine' => 
@@ -41,6 +45,7 @@ return array (
     'ExampleNumber' => '7400123456',
     'PossibleLength' => 
     array (
+      0 => '10',
     ),
     'PossibleLengthLocalOnly' => 
     array (

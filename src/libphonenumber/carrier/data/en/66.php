@@ -7,6 +7,7 @@
 return array (
   6661 => 'AIS',
   6664 => 'Penguin SIM',
+  6665 => 'AIS',
   66800 => 'AIS',
   66801 => 'AIS',
   66802 => 'AIS',

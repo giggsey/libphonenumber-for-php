@@ -380,6 +380,7 @@ return array (
   9173919 => 'Vodafone',
   9173959 => 'Airtel',
   917396 => 'Telewings',
+  9173970 => 'Airtel',
   917398 => 'Telewings',
   917399 => 'Dishnet',
   917401 => 'Aircel',

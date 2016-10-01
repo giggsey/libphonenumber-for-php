@@ -12,6 +12,8 @@ return array (
     'PossibleNumberPattern' => '\\d{2,3}',
     'PossibleLength' => 
     array (
+      0 => '2',
+      1 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -48,6 +50,7 @@ return array (
     'ExampleNumber' => '17',
     'PossibleLength' => 
     array (
+      0 => '2',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -83,6 +86,7 @@ return array (
     'PossibleNumberPattern' => '\\d{3}',
     'PossibleLength' => 
     array (
+      0 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (

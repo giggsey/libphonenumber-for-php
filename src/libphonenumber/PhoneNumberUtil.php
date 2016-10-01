@@ -1962,7 +1962,7 @@ class PhoneNumberUtil
             return ValidationResult::IS_POSSIBLE;
         } elseif ($minimumLength > $actualLength) {
             return ValidationResult::TOO_SHORT;
-        } elseif ($possibleLengths[count($possibleLengths) - 1] < $actualLength) {
+        } elseif (isset($possibleLengths[count($possibleLengths) - 1]) && $possibleLengths[count($possibleLengths) - 1] < $actualLength) {
             return ValidationResult::TOO_LONG;
         }
 

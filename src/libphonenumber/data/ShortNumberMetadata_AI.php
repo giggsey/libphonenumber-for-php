@@ -12,6 +12,7 @@ return array (
     'PossibleNumberPattern' => '\\d{3}',
     'PossibleLength' => 
     array (
+      0 => '3',
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -81,6 +82,7 @@ return array (
   array (
     'NationalNumberPattern' => '176',
     'PossibleNumberPattern' => '\\d{3}',
+    'ExampleNumber' => '176',
     'PossibleLength' => 
     array (
     ),
