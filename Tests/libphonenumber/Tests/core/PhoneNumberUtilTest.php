@@ -933,11 +933,18 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             "01234 19 12-5678",
             $this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "")
         );
-        // When the preferred_domestic_carrier_code is present (even when it contains an empty string),
-        // use it instead of the default carrier code passed in.
+        // When the preferred_domestic_carrier_code is present (even when it is just a space), use it
+        // instead of the default carrier code passed in.
+        $arNumber->setPreferredDomesticCarrierCode(" ");
+        $this->assertEquals(
+            "01234   12-5678",
+            $this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "15")
+        );
+        // When the preferred_domestic_carrier_code is present but empty, treat it as unset and use
+        // instead of the default carrier code passed in.
         $arNumber->setPreferredDomesticCarrierCode("");
         $this->assertEquals(
-            "01234 12-5678",
+            "01234 15 12-5678",
             $this->phoneUtil->formatNationalNumberWithPreferredCarrierCode($arNumber, "15")
         );
         // We don't support this for the US so there should be no change.
@@ -2880,13 +2887,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->parse("tel:03-331-6005;isub=12345;phone-context=+64", RegionCode::ZZ)
         );
 
-        // It is important that we set the carrier code to an empty string, since we used
-        // ParseAndKeepRawInput and no carrier code was found.
         $nzNumberWithRawInput = new PhoneNumber();
         $nzNumberWithRawInput->mergeFrom(self::$nzNumber);
         $nzNumberWithRawInput->setRawInput("+64 3 331 6005");
         $nzNumberWithRawInput->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
-        $nzNumberWithRawInput->setPreferredDomesticCarrierCode("");
         $this->assertEquals(
             $nzNumberWithRawInput,
             $this->phoneUtil->parseAndKeepRawInput("+64 3 331 6005", RegionCode::ZZ)
@@ -3010,7 +3014,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $alphaNumericNumber->mergeFrom(self::$alphaNumericNumber);
         $alphaNumericNumber->setRawInput("800 six-flags");
         $alphaNumericNumber->setCountryCodeSource(CountryCodeSource::FROM_DEFAULT_COUNTRY);
-        $alphaNumericNumber->setPreferredDomesticCarrierCode("");
         $this->assertEquals(
             $alphaNumericNumber,
             $this->phoneUtil->parseAndKeepRawInput("800 six-flags", RegionCode::US)
@@ -3018,9 +3021,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
         $shorterAlphaNumber = new PhoneNumber();
         $shorterAlphaNumber->setCountryCode(1)->setNationalNumber(8007493524);
-        $shorterAlphaNumber->setRawInput("1800 six-flag")->setCountryCodeSource(
-            CountryCodeSource::FROM_NUMBER_WITHOUT_PLUS_SIGN
-        )->setPreferredDomesticCarrierCode("");
+        $shorterAlphaNumber
+            ->setRawInput("1800 six-flag")
+            ->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITHOUT_PLUS_SIGN);
         $this->assertEquals(
             $shorterAlphaNumber,
             $this->phoneUtil->parseAndKeepRawInput("1800 six-flag", RegionCode::US)

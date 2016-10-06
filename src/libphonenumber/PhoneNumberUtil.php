@@ -1456,7 +1456,7 @@ class PhoneNumberUtil
             // since the original number could be a valid short number.
             if ($this->testNumberLength($potentialNationalNumber, $regionMetadata->getGeneralDesc()) !== ValidationResult::TOO_SHORT) {
                 $normalizedNationalNumber = $potentialNationalNumber;
-                if ($keepRawInput) {
+                if ($keepRawInput && mb_strlen($carrierCode) > 0) {
                     $phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
                 }
             }
@@ -2055,11 +2055,15 @@ class PhoneNumberUtil
                     static::COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX
                 );
             } elseif ($regionCode == "BR" && $isFixedLineOrMobile) {
-                // Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
-                // called within Brazil. Without that, most of the carriers won't connect the call.
-                // Because of that, we return an empty string here.
-                $formattedNumber = $numberNoExt->hasPreferredDomesticCarrierCode(
-                ) ? $this->formatNationalNumberWithCarrierCode($numberNoExt, "") : "";
+                // Historically, we set this to an empty string when parsing with raw input if none was
+                // found in the input string. However, this doesn't result in a number we can dial. For this
+                // reason, we treat the empty string the same as if it isn't set at all.
+                $formattedNumber = mb_strlen($numberNoExt->getPreferredDomesticCarrierCode()) > 0
+                    ? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, "")
+                    // Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
+                    // called within Brazil. Without that, most of the carriers won't connect the call.
+                    // Because of that, we return an empty string here.
+                    : "";
             } elseif ($isValidNumber && $regionCode == "HU") {
                 // The national format for HU numbers doesn't contain the national prefix, because that is
                 // how numbers are normally written down. However, the national prefix is obligatory when
@@ -2177,7 +2181,10 @@ class PhoneNumberUtil
     {
         return $this->formatNationalNumberWithCarrierCode(
             $number,
-            $number->hasPreferredDomesticCarrierCode()
+            // Historically, we set this to an empty string when parsing with raw input if none was
+            // found in the input string. However, this doesn't result in a number we can dial. For this
+            // reason, we treat the empty string the same as if it isn't set at all.
+            mb_strlen($number->getPreferredDomesticCarrierCode()) > 0
                 ? $number->getPreferredDomesticCarrierCode()
                 : $fallbackCarrierCode
         );
