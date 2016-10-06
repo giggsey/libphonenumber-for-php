@@ -18,6 +18,9 @@ return array (
     'PossibleNumberPattern' => '\\d{2,4}',
     'PossibleLength' => 
     array (
+      0 => 2,
+      1 => 3,
+      2 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
