@@ -358,13 +358,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             "1",
-            $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX))
+            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX))
         );
 
         // Country calling code for Sweden, which has no mobile token.
         $this->assertEquals(
             "",
-            $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::SE))
+            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::SE))
         );
     }
 
@@ -412,7 +412,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $input = "1800-ABC-DEF";
         // Alpha chars are converted to digits; everything else is left untouched.
         $expectedOutput = "1800-222-333";
-        $this->assertEquals($expectedOutput, $this->phoneUtil->convertAlphaCharactersInNumber($input));
+        $this->assertEquals($expectedOutput, PhoneNumberUtil::convertAlphaCharactersInNumber($input));
     }
 
     public function testNormaliseRemovePunctuation()

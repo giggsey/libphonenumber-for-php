@@ -1294,7 +1294,7 @@ class PhoneNumberUtil
         $find = preg_match(static::$EXTN_PATTERN, $number, $matches, PREG_OFFSET_CAPTURE);
         // If we find a potential extension, and the number preceding this is a viable number, we assume
         // it is an extension.
-        if ($find > 0 && $this->isViablePhoneNumber(substr($number, 0, $matches[0][1]))) {
+        if ($find > 0 && static::isViablePhoneNumber(substr($number, 0, $matches[0][1]))) {
             // The numbers are captured into groups in the regular expression.
 
             for ($i = 1, $length = count($matches); $i <= $length; $i++) {
@@ -1387,7 +1387,7 @@ class PhoneNumberUtil
         $nationalNumber = '';
         $this->buildNationalNumberForParsing($numberToParse, $nationalNumber);
 
-        if (!$this->isViablePhoneNumber($nationalNumber)) {
+        if (!static::isViablePhoneNumber($nationalNumber)) {
             throw new NumberParseException(
                 NumberParseException::NOT_A_NUMBER,
                 "The string supplied did not seem to be a phone number."
@@ -1500,8 +1500,7 @@ class PhoneNumberUtil
                 "The string supplied is too long to be a phone number."
             );
         }
-        $this->setItalianLeadingZerosForPhoneNumber($normalizedNationalNumber, $phoneNumber);
-
+        static::setItalianLeadingZerosForPhoneNumber($normalizedNationalNumber, $phoneNumber);
 
         /*
          * We have to store the National Number as a string instead of a "long" as Google do
