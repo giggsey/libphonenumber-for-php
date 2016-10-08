@@ -276,7 +276,7 @@ EOT;
 
     private function getEnglishDataPath($textFile)
     {
-        return "en" . DIRECTORY_SEPARATOR . substr($textFile, 3, 2) . self::DATA_FILE_EXTENSION;
+        return "en" . DIRECTORY_SEPARATOR . substr($textFile, 3);
     }
 
     private function compressAccordingToEnglishData($englishMap, &$nonEnglishMap)
@@ -322,7 +322,6 @@ EOT;
                     break;
                 }
             }
-
 
             if (!array_key_exists($targetFile, $mappingForFiles)) {
                 $mappingForFiles[$targetFile] = array();

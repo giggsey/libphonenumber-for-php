@@ -5,10 +5,8 @@
  */
 
 return array (
-  29022 => 'Jamestown',
   29023 => 'Sainte-Hélène',
   29024 => 'Sainte-Hélène',
   29026 => 'Sainte-Hélène',
   29027 => 'Sainte-Hélène',
-  2908 => 'Tristan da Cunha',
 );
