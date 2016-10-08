@@ -28,7 +28,15 @@ EOT;
     private $outputDir;
     private $englishMaps = array();
     private $prefixesToExpand = array(
-        861 => 5
+        861 => 5,
+        12 => 2,
+        13 => 2,
+        14 => 2,
+        15 => 2,
+        16 => 2,
+        17 => 2,
+        18 => 2,
+        19 => 2,
     );
 
 
@@ -118,58 +126,36 @@ EOT;
             return $outputFiles;
         }
 
-        if ($countryCode == self::NANPA_COUNTRY_CODE) {
-            // Fetch the 4-digit prefixes stored in the file.
-            $phonePrefixes = array();
+        /*
+         * Reduce memory usage for China numbers
+         * @see https://github.com/giggsey/libphonenumber-for-php/issues/44
+         *
+         * Analytics of the data suggests that the following prefixes need expanding:
+         *  - 861 (to 5 chars)
+         */
+        $phonePrefixes = array();
+        $prefixesToExpand = $this->prefixesToExpand;
 
-            $this->parseTextFile(
-                $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
-                function ($prefix, $location) use (&$phonePrefixes) {
-                    $shortPrefix = substr($prefix, 0, 4);
-                    if (!in_array($shortPrefix, $phonePrefixes)) {
-                        $phonePrefixes[] = $shortPrefix;
+        $this->parseTextFile(
+            $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
+            function ($prefix, $location) use (&$phonePrefixes, $prefixesToExpand, $countryCode) {
+                $length = strlen($countryCode);
+                foreach ($prefixesToExpand as $p => $l) {
+                    if (GeneratePhonePrefixData::startsWith($prefix, $p)) {
+                        // Allow later entries to overwrite initial ones
+                        $length = $l;
                     }
                 }
-            );
 
-            foreach ($phonePrefixes as $prefix) {
-                $outputFiles[] = $this->generateFilename($prefix, $language);
-            }
-        } elseif ($countryCode == 86) {
-
-            /*
-             * Reduce memory usage for China numbers
-             * @see https://github.com/giggsey/libphonenumber-for-php/issues/44
-             *
-             * Analytics of the data suggests that the following prefixes need expanding:
-             *  - 861 (to 5 chars)
-             */
-            $phonePrefixes = array();
-            $prefixesToExpand = $this->prefixesToExpand;
-
-            $this->parseTextFile(
-                $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
-                function ($prefix, $location) use (&$phonePrefixes, $prefixesToExpand, $countryCode) {
-                    $length = strlen($countryCode);
-                    foreach ($prefixesToExpand as $p => $l) {
-                        if (GeneratePhonePrefixData::startsWith($prefix, $p)) {
-                            // Allow later entries to overwrite initial ones
-                            $length = $l;
-                        }
-                    }
-
-                    $shortPrefix = substr($prefix, 0, $length);
-                    if (!in_array($shortPrefix, $phonePrefixes)) {
-                        $phonePrefixes[] = $shortPrefix;
-                    }
+                $shortPrefix = substr($prefix, 0, $length);
+                if (!in_array($shortPrefix, $phonePrefixes)) {
+                    $phonePrefixes[] = $shortPrefix;
                 }
-            );
-
-            foreach ($phonePrefixes as $prefix) {
-                $outputFiles[] = $this->generateFilename($prefix, $language);
             }
-        } else {
-            $outputFiles[] = $this->generateFilename($countryCode, $language);
+        );
+
+        foreach ($phonePrefixes as $prefix) {
+            $outputFiles[] = $this->generateFilename($prefix, $language);
         }
 
         return $outputFiles;
