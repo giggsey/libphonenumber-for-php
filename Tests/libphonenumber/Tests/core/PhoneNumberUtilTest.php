@@ -358,13 +358,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             "1",
-            $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX))
+            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX))
         );
 
         // Country calling code for Sweden, which has no mobile token.
         $this->assertEquals(
             "",
-            $this->phoneUtil->getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::SE))
+            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::SE))
         );
     }
 
@@ -412,7 +412,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $input = "1800-ABC-DEF";
         // Alpha chars are converted to digits; everything else is left untouched.
         $expectedOutput = "1800-222-333";
-        $this->assertEquals($expectedOutput, $this->phoneUtil->convertAlphaCharactersInNumber($input));
+        $this->assertEquals($expectedOutput, PhoneNumberUtil::convertAlphaCharactersInNumber($input));
     }
 
     public function testNormaliseRemovePunctuation()
@@ -421,7 +421,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03456234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly remove punctuation"
         );
     }
@@ -432,7 +432,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "034426486479";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace alpha characters"
         );
     }
@@ -444,7 +444,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "255";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace non-latin digits"
         );
         // Eastern-Arabic digits.
@@ -453,7 +453,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "520";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace non-latin digits"
         );
     }
@@ -464,7 +464,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03456234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalizeDigitsOnly($inputNumber),
+            PhoneNumberUtil::normalizeDigitsOnly($inputNumber),
             "Conversion did not correctly remove alpha character"
         );
     }
@@ -475,7 +475,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03*456+234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalizeDiallableCharsOnly($inputNumber),
+            PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
             "Conversion did not correctly remove non-diallable characters"
         );
     }
