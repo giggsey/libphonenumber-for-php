@@ -29,7 +29,7 @@ class ShortNumberUtil
 
     public function getSupportedRegions()
     {
-        return ShortNumberInfo::getInstance($this->phoneUtil)->getSupportedRegions();
+        return ShortNumberInfo::getInstance()->getSupportedRegions();
     }
 
     /**
@@ -45,7 +45,7 @@ class ShortNumberUtil
      */
     public function connectsToEmergencyNumber($number, $regionCode)
     {
-        return ShortNumberInfo::getInstance($this->phoneUtil)->connectsToEmergencyNumber($number, $regionCode);
+        return ShortNumberInfo::getInstance()->connectsToEmergencyNumber($number, $regionCode);
     }
 
     /**
@@ -60,6 +60,6 @@ class ShortNumberUtil
      */
     public function isEmergencyNumber($number, $regionCode)
     {
-        return ShortNumberInfo::getInstance($this->phoneUtil)->isEmergencyNumber($number, $regionCode);
+        return ShortNumberInfo::getInstance()->isEmergencyNumber($number, $regionCode);
     }
 }
