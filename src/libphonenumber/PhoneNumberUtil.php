@@ -1215,7 +1215,7 @@ class PhoneNumberUtil
      */
     public function isAlphaNumber($number)
     {
-        if (!$this->isViablePhoneNumber($number)) {
+        if (!static::isViablePhoneNumber($number)) {
             // Number is too short, or doesn't match the basic phone number pattern.
             return false;
         }
@@ -1433,7 +1433,7 @@ class PhoneNumberUtil
             // If no extracted country calling code, use the region supplied instead. The national number
             // is just the normalized version of the number we were given to parse.
 
-            $normalizedNationalNumber .= $this->normalize($nationalNumber);
+            $normalizedNationalNumber .= static::normalize($nationalNumber);
             if ($defaultRegion !== null) {
                 $countryCode = $regionMetadata->getCountryCode();
                 $phoneNumber->setCountryCode($countryCode);
@@ -1530,7 +1530,7 @@ class PhoneNumberUtil
         } else {
             // Extract a possible number from the string passed in (this strips leading characters that
             // could not be the start of a phone number.)
-            $nationalNumber .= $this->extractPossibleNumber($numberToParse);
+            $nationalNumber .= static::extractPossibleNumber($numberToParse);
         }
 
         // Delete the isdn-subaddress and everything after it if it is present. Note extension won't
@@ -1739,12 +1739,12 @@ class PhoneNumberUtil
         if ($match > 0) {
             $number = mb_substr($number, $matches[0][1] + mb_strlen($matches[0][0]));
             // Can now normalize the rest of the number since we've consumed the "+" sign at the start.
-            $number = $this->normalize($number);
+            $number = static::normalize($number);
             return CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN;
         }
         // Attempt to parse the first digits as an international prefix.
         $iddPattern = $possibleIddPrefix;
-        $number = $this->normalize($number);
+        $number = static::normalize($number);
         return $this->parsePrefixAsIdd($iddPattern, $number)
             ? CountryCodeSource::FROM_NUMBER_WITH_IDD
             : CountryCodeSource::FROM_DEFAULT_COUNTRY;
@@ -1830,7 +1830,7 @@ class PhoneNumberUtil
             // cannot begin with 0.
             $digitMatcher = new Matcher(static::$CAPTURING_DIGIT_PATTERN, substr($number, $matchEnd));
             if ($digitMatcher->find()) {
-                $normalizedGroup = $this->normalizeDigitsOnly($digitMatcher->group(1));
+                $normalizedGroup = static::normalizeDigitsOnly($digitMatcher->group(1));
                 if ($normalizedGroup == "0") {
                     return false;
                 }
@@ -2116,7 +2116,7 @@ class PhoneNumberUtil
                 $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL) :
                 $this->format($numberNoExt, PhoneNumberFormat::E164);
         }
-        return $withFormatting ? $formattedNumber : $this->normalizeDiallableCharsOnly($formattedNumber);
+        return $withFormatting ? $formattedNumber : static::normalizeDiallableCharsOnly($formattedNumber);
     }
 
     /**
@@ -2523,7 +2523,7 @@ class PhoneNumberUtil
                     break;
                 }
                 $candidateNationalPrefixRule = substr($candidateNationalPrefixRule, 0, $indexOfFirstGroup);
-                $candidateNationalPrefixRule = $this->normalizeDigitsOnly($candidateNationalPrefixRule);
+                $candidateNationalPrefixRule = static::normalizeDigitsOnly($candidateNationalPrefixRule);
                 if (mb_strlen($candidateNationalPrefixRule) == 0) {
                     // National prefix not used when formatting this number.
                     $formattedNumber = $nationalFormat;
@@ -2542,8 +2542,8 @@ class PhoneNumberUtil
         // If no digit is inserted/removed/modified as a result of our formatting, we return the
         // formatted phone number; otherwise we return the raw input the user entered.
         if ($formattedNumber !== null && mb_strlen($rawInput) > 0) {
-            $normalizedFormattedNumber = $this->normalizeDiallableCharsOnly($formattedNumber);
-            $normalizedRawInput = $this->normalizeDiallableCharsOnly($rawInput);
+            $normalizedFormattedNumber = static::normalizeDiallableCharsOnly($formattedNumber);
+            $normalizedRawInput = static::normalizeDiallableCharsOnly($rawInput);
             if ($normalizedFormattedNumber != $normalizedRawInput) {
                 $formattedNumber = $rawInput;
             }
@@ -2641,7 +2641,7 @@ class PhoneNumberUtil
      */
     protected function rawInputContainsNationalPrefix($rawInput, $nationalPrefix, $regionCode)
     {
-        $normalizedNationalNumber = $this->normalizeDigitsOnly($rawInput);
+        $normalizedNationalNumber = static::normalizeDigitsOnly($rawInput);
         if (strpos($normalizedNationalNumber, $nationalPrefix) === 0) {
             try {
                 // Some Japanese numbers (e.g. 00777123) might be mistaken to contain the national prefix

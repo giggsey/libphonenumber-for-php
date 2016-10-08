@@ -421,7 +421,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03456234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly remove punctuation"
         );
     }
@@ -432,7 +432,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "034426486479";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace alpha characters"
         );
     }
@@ -444,7 +444,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "255";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace non-latin digits"
         );
         // Eastern-Arabic digits.
@@ -453,7 +453,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "520";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalize($inputNumber),
+            PhoneNumberUtil::normalize($inputNumber),
             "Conversion did not correctly replace non-latin digits"
         );
     }
@@ -464,7 +464,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03456234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalizeDigitsOnly($inputNumber),
+            PhoneNumberUtil::normalizeDigitsOnly($inputNumber),
             "Conversion did not correctly remove alpha character"
         );
     }
@@ -475,7 +475,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = "03*456+234";
         $this->assertEquals(
             $expectedOutput,
-            $this->phoneUtil->normalizeDiallableCharsOnly($inputNumber),
+            PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
             "Conversion did not correctly remove non-diallable characters"
         );
     }
