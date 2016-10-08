@@ -97,7 +97,7 @@ class Matcher
      */
     public function group($group = null)
     {
-        if (!isset($group)) {
+        if (!isset($group) || $group === null) {
             $group = 0;
         }
         return (isset($this->groups[$group][0])) ? $this->groups[$group][0] : null;
