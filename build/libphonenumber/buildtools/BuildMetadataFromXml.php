@@ -10,6 +10,7 @@ use libphonenumber\PhoneNumberDesc;
  * Library to build phone number metadata from the XML format.
  *
  * @author Davide Mendolia
+ * @internal
  */
 class BuildMetadataFromXml
 {

@@ -5,6 +5,11 @@ namespace libphonenumber\buildtools;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class GeneratePhonePrefixData
+ * @package libphonenumber\buildtools
+ * @internal
+ */
 class GeneratePhonePrefixData
 {
     const NANPA_COUNTRY_CODE = 1;
@@ -22,14 +27,17 @@ EOT;
     private $filesToIgnore = array('.', '..', '.svn', '.git');
     private $outputDir;
     private $englishMaps = array();
+    private $prefixesToExpand = array(
+        861 => 5
+    );
 
 
-    public function start($inputDir, $outputDir, OutputInterface $consoleOutput)
+    public function start($inputDir, $outputDir, OutputInterface $consoleOutput, $expandCountries)
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
 
-        $inputOutputMappings = $this->createInputOutputMappings();
+        $inputOutputMappings = $this->createInputOutputMappings($expandCountries);
         $availableDataFiles = array();
 
         $progress = new ProgressBar($consoleOutput, count($inputOutputMappings));
@@ -55,7 +63,7 @@ EOT;
         $progress->finish();
     }
 
-    private function createInputOutputMappings()
+    private function createInputOutputMappings($expandCountries)
     {
         $topLevel = scandir($this->inputDir);
 
@@ -82,7 +90,8 @@ EOT;
                     $outputFiles = $this->createOutputFileNames(
                         $countryCodeFileName,
                         $this->getCountryCodeFromTextFileName($countryCodeFileName),
-                        $languageDirectory
+                        $languageDirectory,
+                        $expandCountries
                     );
 
                     $mappings[$languageDirectory . DIRECTORY_SEPARATOR . $countryCodeFileName] = $outputFiles;
@@ -100,9 +109,14 @@ EOT;
      * code. Otherwise, a single file is added to the list.
      */
 
-    private function createOutputFileNames($file, $countryCode, $language)
+    private function createOutputFileNames($file, $countryCode, $language, $expandCountries)
     {
         $outputFiles = array();
+
+        if ($expandCountries === false) {
+            $outputFiles[] = $this->generateFilename($countryCode, $language);
+            return $outputFiles;
+        }
 
         if ($countryCode == self::NANPA_COUNTRY_CODE) {
             // Fetch the 4-digit prefixes stored in the file.
@@ -126,15 +140,25 @@ EOT;
             /*
              * Reduce memory usage for China numbers
              * @see https://github.com/giggsey/libphonenumber-for-php/issues/44
+             *
+             * Analytics of the data suggests that the following prefixes need expanding:
+             *  - 861 (to 5 chars)
              */
-
-            // Fetch the 5-digit prefixes stored in the file.
             $phonePrefixes = array();
+            $prefixesToExpand = $this->prefixesToExpand;
 
             $this->parseTextFile(
                 $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
-                function ($prefix, $location) use (&$phonePrefixes) {
-                    $shortPrefix = substr($prefix, 0, 5);
+                function ($prefix, $location) use (&$phonePrefixes, $prefixesToExpand, $countryCode) {
+                    $length = strlen($countryCode);
+                    foreach ($prefixesToExpand as $p => $l) {
+                        if (GeneratePhonePrefixData::startsWith($prefix, $p)) {
+                            // Allow later entries to overwrite initial ones
+                            $length = $l;
+                        }
+                    }
+
+                    $shortPrefix = substr($prefix, 0, $length);
                     if (!in_array($shortPrefix, $phonePrefixes)) {
                         $phonePrefixes[] = $shortPrefix;
                     }

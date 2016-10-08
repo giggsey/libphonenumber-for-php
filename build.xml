@@ -197,6 +197,7 @@
     <target name="build-geo-data" depends="git-pull">
         <exec executable="${build.script}" passthru="true">
             <arg value="GeneratePhonePrefixData"/>
+            <arg line="--expandCountries"/>
             <arg value="${git.path}/resources/geocoding/"/>
             <arg value="${data.geocodingData}"/>
         </exec>

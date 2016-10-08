@@ -7,6 +7,7 @@ use libphonenumber\PhoneMetadata;
  * Tool to convert phone number metadata from the XML format to protocol buffer format.
  *
  * @author Davide Mendolia
+ * @internal
  */
 class BuildMetadataPHPFromXml
 {
