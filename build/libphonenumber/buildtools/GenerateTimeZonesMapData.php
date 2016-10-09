@@ -4,6 +4,11 @@ namespace libphonenumber\buildtools;
 
 use libphonenumber\PhoneNumberToTimeZonesMapper;
 
+/**
+ * Class GenerateTimeZonesMapData
+ * @package libphonenumber\buildtools
+ * @internal
+ */
 class GenerateTimeZonesMapData
 {
     const GENERATION_COMMENT = <<<'EOT'
