@@ -14,11 +14,38 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
-    'PossibleNumberPattern' => '\\d{3}',
+    'NationalNumberPattern' => '[1-9]\\d{7}',
+    'PossibleNumberPattern' => '\\d{5,8}',
+    'ExampleNumber' => '10123456',
     'PossibleLength' => 
     array (
-      0 => 3,
+      0 => 8,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+      0 => 5,
+      1 => 6,
+    ),
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '[1-9]\\d{7}',
+    'PossibleNumberPattern' => '\\d{5,8}',
+    'ExampleNumber' => '10123456',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'mobile' => 
+  array (
+    'NationalNumberPattern' => '[1-9]\\d{7}',
+    'PossibleNumberPattern' => '\\d{5,8}',
+    'ExampleNumber' => '10123456',
+    'PossibleLength' => 
+    array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -48,31 +75,7 @@ return array (
     array (
     ),
   ),
-  'emergency' => 
-  array (
-    'NationalNumberPattern' => '11[378]',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '113',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'shortCode' => 
-  array (
-    'NationalNumberPattern' => '11[378]',
-    'PossibleNumberPattern' => '\\d{3}',
-    'ExampleNumber' => '113',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'standardRate' => 
+  'sharedCost' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
@@ -84,7 +87,7 @@ return array (
     array (
     ),
   ),
-  'carrierSpecific' => 
+  'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
@@ -96,10 +99,72 @@ return array (
     array (
     ),
   ),
-  'id' => 'GW',
-  'countryCode' => 0,
-  'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => false,
+  'voip' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'pager' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'uan' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'voicemail' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'noInternationalDialling' => 
+  array (
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'id' => 'AM',
+  'countryCode' => 374,
+  'internationalPrefix' => '00',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
+  'sameMobileAndFixedLinePattern' => true,
   'numberFormat' => 
   array (
   ),

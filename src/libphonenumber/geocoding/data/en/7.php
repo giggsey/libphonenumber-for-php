@@ -284,6 +284,7 @@ return array (
   772777 => 'Kegen',
   772778 => 'Chundzha',
   772779 => 'Narynkol',
+  77279 => 'Almaty',
   77282 => 'Taldykorgan',
   772831 => 'Zharkent',
   772832 => 'Zhansugurov',

@@ -18,6 +18,10 @@ return array (
     'PossibleNumberPattern' => '\\d{2,5}',
     'PossibleLength' => 
     array (
+      0 => 2,
+      1 => 3,
+      2 => 4,
+      3 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -30,6 +34,8 @@ return array (
     'ExampleNumber' => '35200',
     'PossibleLength' => 
     array (
+      0 => 4,
+      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,6 +48,8 @@ return array (
     'ExampleNumber' => '35211',
     'PossibleLength' => 
     array (
+      0 => 4,
+      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -54,6 +62,7 @@ return array (
     'ExampleNumber' => '17',
     'PossibleLength' => 
     array (
+      0 => 2,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -78,6 +87,8 @@ return array (
     'ExampleNumber' => '7400',
     'PossibleLength' => 
     array (
+      0 => 4,
+      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -90,6 +101,7 @@ return array (
     'ExampleNumber' => '35035',
     'PossibleLength' => 
     array (
+      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (

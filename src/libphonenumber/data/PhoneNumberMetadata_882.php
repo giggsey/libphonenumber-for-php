@@ -109,9 +109,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '1(?:3(?:0[0347]|[13][0139]|2[035]|4[013568]|6[0459]|7[06]|8[15678]|9[0689])\\d{4}|6\\d{5,10})|345\\d{7}',
+    'NationalNumberPattern' => '1(?:3(?:0[0347]|[13][0139]|2[035]|4[013568]|6[0459]|7[06]|8[15678]|9[0689])\\d{4}|6\\d{5,10})|3(?:45|9\\d{3})\\d{7}',
     'PossibleNumberPattern' => '\\d{7,12}',
-    'ExampleNumber' => '3451234567',
+    'ExampleNumber' => '390123456789',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -258,7 +258,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '16',
+        0 => '16|39',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
