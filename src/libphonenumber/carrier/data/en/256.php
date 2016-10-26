@@ -5,16 +5,15 @@
  */
 
 return array (
-  2562030 => 'Afrimax',
-  25670 => 'Warid',
+  25670 => 'Airtel',
   25671 => 'UTL',
   256720 => 'Smile',
   256723 => 'Afrimax',
+  2567260 => 'Tangerine',
   256730 => 'K2',
   25674 => 'Sure Telecom',
   25675 => 'Airtel',
-  25676 => 'i-Tel',
   25677 => 'MTN',
   25678 => 'MTN',
-  25679 => 'Orange',
+  25679 => 'Africell',
 );

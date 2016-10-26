@@ -24,16 +24,16 @@ return array (
     'PossibleLengthLocalOnly' => 
     array (
       0 => 6,
-      1 => 7,
     ),
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:1\\d|2(?:1\\d|[2-9])|3(?:[2-7]|8\\d)|4[24-9]|5[2-79]|6[23689]|7(?:1\\d|[2-9])|8[2-57-9]|9[2-69])\\d{6}',
-    'PossibleNumberPattern' => '\\d{6,9}',
+    'NationalNumberPattern' => '(?:1\\d|2[2-9]|3[2-7]|4[24-9]|5[2-79]|6[23689]|7[2-9]|8[2-57-9]|9[2-69])\\d{6}',
+    'PossibleNumberPattern' => '\\d{6,8}',
     'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -54,7 +54,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80\\d{6}',
+    'NationalNumberPattern' => '[48]0\\d{6}',
     'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
     'PossibleLength' => 
@@ -80,12 +80,11 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '40\\d{6}',
-    'PossibleNumberPattern' => '\\d{8}',
-    'ExampleNumber' => '40123456',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
-      0 => 8,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -105,11 +104,12 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '21\\d{7}',
+    'PossibleNumberPattern' => '\\d{9}',
+    'ExampleNumber' => '211234567',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -129,11 +129,12 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '38\\d{7}',
+    'PossibleNumberPattern' => '\\d{6,9}',
+    'ExampleNumber' => '381234567',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

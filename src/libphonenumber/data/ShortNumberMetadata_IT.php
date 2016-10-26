@@ -18,6 +18,11 @@ return array (
     'PossibleNumberPattern' => '\\d{3,7}',
     'PossibleLength' => 
     array (
+      0 => 3,
+      1 => 4,
+      2 => 5,
+      3 => 6,
+      4 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -30,6 +35,8 @@ return array (
     'ExampleNumber' => '187',
     'PossibleLength' => 
     array (
+      0 => 3,
+      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -37,11 +44,15 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:12|4(?:[478]\\d{3,5}|55))\\d{2}',
+    'NationalNumberPattern' => '(?:12|4(?:[478]\\d{1,3}|55))\\d{2}',
     'PossibleNumberPattern' => '\\d{4,7}',
     'ExampleNumber' => '1254',
     'PossibleLength' => 
     array (
+      0 => 4,
+      1 => 5,
+      2 => 6,
+      3 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -54,6 +65,7 @@ return array (
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -304,10 +304,6 @@ return array (
     3 => 7,
     4 => 82,
   ),
-  'se' => 
-  array (
-    0 => 358,
-  ),
   'sl' => 
   array (
     0 => 82,
@@ -319,7 +315,8 @@ return array (
   ),
   'sv' => 
   array (
-    0 => 46,
+    0 => 358,
+    1 => 46,
   ),
   'th' => 
   array (
