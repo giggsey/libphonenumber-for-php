@@ -2900,6 +2900,7 @@ return array (
   1248987 => 'Farmington Hills, MI',
   1248994 => 'Farmington Hills, MI',
   1248996 => 'Southfield, MI',
+  1249 => 'Ontario',
   1250 => 'British Columbia',
   1250212 => 'Kelowna, BC',
   1250215 => 'Kelowna, BC',

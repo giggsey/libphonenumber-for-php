@@ -5132,7 +5132,7 @@ return array (
   1781963 => 'Randolph, MA',
   1781979 => 'Melrose, MA',
   1781986 => 'Randolph, MA',
-  1782 => 'Nova Scotia',
+  1782 => 'Nova Scotia/Prince Edward Island',
   1785 => 'Kansas',
   1785215 => 'Topeka, KS',
   1785222 => 'La Crosse, KS',

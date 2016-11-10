@@ -32,7 +32,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:1[137]|2[13-68]|3[1458]|4[145]|5[146-8]|6[146]|7[1467]|8[13467])\\d{8}',
+    'NationalNumberPattern' => '(?:(?:1[137]|2[13-68]|3[1458]|4[145]|5[1468]|6[16]|7[1467]|8[13467])\\d{3}|94(?:000|2\\d{2}))\\d{5}',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '2123456789',
     'PossibleLength' => 
@@ -45,7 +45,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9(?:0[1-3]|[13]\\d|2[0-2]|90)\\d{7}',
+    'NationalNumberPattern' => '9(?:0[1-3]|[1-3]\\d|90)\\d{7}',
     'PossibleNumberPattern' => '\\d{10}',
     'ExampleNumber' => '9123456789',
     'PossibleLength' => 
@@ -200,8 +200,8 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3,4})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{3})(\\d{3})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '9',
@@ -224,8 +224,8 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})',
-      'format' => '$1 $2',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3,4})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
         0 => '9',

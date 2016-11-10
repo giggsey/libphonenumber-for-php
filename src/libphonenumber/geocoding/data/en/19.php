@@ -142,7 +142,7 @@ return array (
   1901946 => 'Memphis, TN',
   1901947 => 'Memphis, TN',
   1901948 => 'Memphis, TN',
-  1902 => 'Nova Scotia',
+  1902 => 'Nova Scotia/Prince Edward Island',
   1902224 => 'Chéticamp, NS',
   1902245 => 'Digby, NS',
   1902254 => 'Parrsboro, NS',

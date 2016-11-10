@@ -14,12 +14,13 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[346-9]|180)\\d{5}',
-    'PossibleNumberPattern' => '\\d{6,8}',
+    'NationalNumberPattern' => '[16]\\d{5,8}|[37-9]\\d{5}',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'PossibleLength' => 
     array (
       0 => 6,
       1 => 8,
+      2 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -40,12 +41,13 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[346]\\d{5}',
-    'PossibleNumberPattern' => '\\d{6}',
+    'NationalNumberPattern' => '(?:3\\d|6(?:[0-8]|90\\d{2}))\\d{4}',
+    'PossibleNumberPattern' => '\\d{6,9}',
     'ExampleNumber' => '312345',
     'PossibleLength' => 
     array (
       0 => 6,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -66,7 +68,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '9\\d{5}',
+    'NationalNumberPattern' => '[19]\\d{5}',
     'PossibleNumberPattern' => '\\d{6}',
     'ExampleNumber' => '912345',
     'PossibleLength' => 
@@ -151,11 +153,12 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1800\\d{4}',
+    'PossibleNumberPattern' => '\\d{8}',
+    'ExampleNumber' => '18000000',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -173,7 +176,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[346-9]',
+        0 => '[137-9]|6[0-8]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -181,11 +184,24 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(180[02])(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '180',
+        1 => '180[02]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    2 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '690',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

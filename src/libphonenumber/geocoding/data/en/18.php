@@ -4247,6 +4247,7 @@ return array (
   1865992 => 'Maynardville, TN',
   1865993 => 'Bean Station, TN',
   1865995 => 'Friendsville, TN',
+  1867 => 'Northwest Territories/Nunavut/Yukon',
   1867393 => 'Whitehorse, YT',
   1867456 => 'Whitehorse, YT',
   1867536 => 'Watson Lake Hospital',

@@ -144,6 +144,7 @@ return array (
   234704 => 'Visafone',
   234705 => 'Glo',
   234706 => 'MTN',
+  234707 => 'Zoom',
   234708 => 'Airtel',
   234709 => 'Multilinks',
   2347380 => 'Starcomms',
