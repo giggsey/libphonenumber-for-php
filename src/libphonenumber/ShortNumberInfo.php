@@ -317,7 +317,7 @@ class ShortNumberInfo
     public function isPossibleShortNumber(PhoneNumber $number)
     {
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
-        $shortNumber = $this->getNationalSignificantNumber($number);
+        $shortNumberLength = strlen($this->getNationalSignificantNumber($number));
 
         foreach ($regionCodes as $region) {
             $phoneMetadata = $this->getMetadataForRegion($region);
@@ -326,7 +326,7 @@ class ShortNumberInfo
                 continue;
             }
 
-            if ($this->matcherAPI->matchesPossibleNumber($shortNumber, $phoneMetadata->getGeneralDesc())) {
+            if (in_array($shortNumberLength, $phoneMetadata->getGeneralDesc()->getPossibleLength())) {
                 return true;
             }
         }
@@ -357,10 +357,8 @@ class ShortNumberInfo
         }
 
         if ($shortNumber instanceof PhoneNumber) {
-            return $this->matcherAPI->matchesPossibleNumber(
-                $this->getNationalSignificantNumber($shortNumber),
-                $phoneMetadata->getGeneralDesc()
-            );
+            $numberLength = strlen($this->getNationalSignificantNumber($shortNumber));
+            return in_array($numberLength, $phoneMetadata->getGeneralDesc()->getPossibleLength());
         } else {
             /**
              * @deprecated Anyone who was using it and passing in a string with whitespace (or other
@@ -370,7 +368,7 @@ class ShortNumberInfo
              *        removed in the next release.
              */
 
-            return $this->matcherAPI->matchesPossibleNumber($shortNumber, $phoneMetadata->getGeneralDesc());
+            return in_array(strlen($shortNumber), $phoneMetadata->getGeneralDesc()->getPossibleLength());
         }
     }
 
@@ -488,6 +486,13 @@ class ShortNumberInfo
              *             removed in the next release.
              */
             $shortNumber = $number;
+        }
+
+        // The possible lengths are not present for a particular sub-type if they match the general
+        // description; for this reason, we check the possible lengths against the general description
+        // first to allow an early exit if possible.
+        if (!in_array(strlen($shortNumber), $phoneMetadata->getGeneralDesc()->getPossibleLength())) {
+            return ShortNumberCost::UNKNOWN_COST;
         }
 
         // The cost categories are tested in order of decreasing expense, since if for some reason the
@@ -611,15 +616,18 @@ class ShortNumberInfo
     }
 
     /**
-     * // TODO: Once we have benchmarked ShortnumberInfo, consider if it is worth keeping
-     * this performance optimization, and if so move this into the matcher implementation
+     * TODO: Once we have benchmarked ShortnumberInfo, consider if it is worth keeping
+     * this performance optimization.
      * @param string $number
      * @param PhoneNumberDesc $numberDesc
      * @return bool
      */
     protected function matchesPossibleNumberAndNationalNumber($number, PhoneNumberDesc $numberDesc)
     {
-        return ($this->matcherAPI->matchesPossibleNumber($number, $numberDesc)
-            && $this->matcherAPI->matchesNationalNumber($number, $numberDesc, false));
+        if (count($numberDesc->getPossibleLength()) > 0 && !in_array(strlen($number), $numberDesc->getPossibleLength())) {
+            return false;
+        }
+
+        return $this->matcherAPI->matchesNationalNumber($number, $numberDesc, false);
     }
 }
