@@ -32,11 +32,11 @@ class PhoneNumberDesc
      */
     public function clear()
     {
-        $this->nationalNumberPattern = "";
-        $this->possibleNumberPattern = "";
+        $this->clearNationalNumberPattern();
+        $this->clearPossibleNumberPattern();
         $this->clearPossibleLength();
         $this->clearPossibleLengthLocalOnly();
-        $this->exampleNumber = "";
+        $this->clearExampleNumber();
 
         return $this;
     }
@@ -126,6 +126,16 @@ class PhoneNumberDesc
     }
 
     /**
+     * @return PhoneNumberDesc
+     */
+    public function clearNationalNumberPattern()
+    {
+        $this->hasNationalNumberPattern = false;
+        $this->nationalNumberPattern = '';
+        return $this;
+    }
+
+    /**
      * @return boolean
      */
     public function hasPossibleNumberPattern()
@@ -139,6 +149,16 @@ class PhoneNumberDesc
     public function getPossibleNumberPattern()
     {
         return $this->possibleNumberPattern;
+    }
+
+    /**
+     * @return PhoneNumberDesc
+     */
+    public function clearPossibleNumberPattern()
+    {
+        $this->hasPossibleNumberPattern = false;
+        $this->possibleNumberPattern = '';
+        return $this;
     }
 
     /**
@@ -177,6 +197,17 @@ class PhoneNumberDesc
     {
         $this->hasExampleNumber = true;
         $this->exampleNumber = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return PhoneNumberDesc
+     */
+    public function clearExampleNumber()
+    {
+        $this->hasExampleNumber = false;
+        $this->exampleNumber = '';
 
         return $this;
     }

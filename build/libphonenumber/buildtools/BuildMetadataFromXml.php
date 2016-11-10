@@ -87,18 +87,28 @@ class BuildMetadataFromXml
      *
      * @param string $inputXmlFile
      * @param boolean $liteBuild
+     * @param boolean $specialBuild
+     * @param bool $isShortNumberMetadata
+     * @param bool $isAlternateFormatsMetadata
      * @return PhoneMetadata[]
      */
-    public static function buildPhoneMetadataCollection($inputXmlFile, $liteBuild)
+    public static function buildPhoneMetadataCollection($inputXmlFile, $liteBuild, $specialBuild, $isShortNumberMetadata = false, $isAlternateFormatsMetadata = false)
     {
-        $document = new \DOMDocument();
-        $document->load($inputXmlFile);
-        $document->normalizeDocument();
+        if ($inputXmlFile instanceof \DOMElement) {
+            $document = $inputXmlFile;
+        } else {
+            $document = new \DOMDocument();
+            $document->load($inputXmlFile);
+            $document->normalizeDocument();
+
+            $isShortNumberMetadata = strpos($inputXmlFile, 'ShortNumberMetadata');
+            $isAlternateFormatsMetadata = strpos($inputXmlFile, 'PhoneNumberAlternateFormats');
+        }
+
         $territories = $document->getElementsByTagName("territory");
         $metadataCollection = array();
 
-        $isShortNumberMetadata = strpos($inputXmlFile, 'ShortNumberMetadata');
-        $isAlternateFormatsMetadata = strpos($inputXmlFile, 'PhoneNumberAlternateFormats');
+        $metadataFilter = self::getMetadataFilter($liteBuild, $specialBuild);
 
         foreach ($territories as $territoryElement) {
             /** @var $territoryElement \DOMElement */
@@ -109,7 +119,8 @@ class BuildMetadataFromXml
             } else {
                 $regionCode = "";
             }
-            $metadata = self::loadCountryMetadata($regionCode, $territoryElement, $liteBuild, $isShortNumberMetadata, $isAlternateFormatsMetadata);
+            $metadata = self::loadCountryMetadata($regionCode, $territoryElement, $isShortNumberMetadata, $isAlternateFormatsMetadata);
+            $metadataFilter->filterMetadata($metadata);
             $metadataCollection[] = $metadata;
         }
         return $metadataCollection;
@@ -123,7 +134,7 @@ class BuildMetadataFromXml
      * @param string $isAlternateFormatsMetadata
      * @return PhoneMetadata
      */
-    public static function loadCountryMetadata($regionCode, \DOMElement $element, $liteBuild, $isShortNumberMetadata, $isAlternateFormatsMetadata)
+    public static function loadCountryMetadata($regionCode, \DOMElement $element, $isShortNumberMetadata, $isAlternateFormatsMetadata)
     {
         $nationalPrefix = self::getNationalPrefix($element);
         $metadata = self::loadTerritoryTagMetadata($regionCode, $element, $nationalPrefix);
@@ -132,9 +143,31 @@ class BuildMetadataFromXml
         self::loadAvailableFormats($metadata, $element, $nationalPrefix, $nationalPrefixFormattingRule, $element->hasAttribute(self::NATIONAL_PREFIX_OPTIONAL_WHEN_FORMATTING));
         if (!$isAlternateFormatsMetadata) {
             // The alternate formats metadata does not need most of the patterns to be set.
-            self::setRelevantDescPatterns($metadata, $element, $liteBuild, $isShortNumberMetadata);
+            self::setRelevantDescPatterns($metadata, $element, $isShortNumberMetadata);
         }
         return $metadata;
+    }
+
+    /**
+     * Processes the custom build flags and gets a MetadataFilter which may be used to
+     * filter PhoneMetadata objects. Incompatible flag combinations throw RuntimeException.
+     * @param bool $liteBuild
+     * @param bool $specialBuild
+     * @return MetadataFilter
+     */
+    public static function getMetadataFilter($liteBuild, $specialBuild)
+    {
+        if ($specialBuild) {
+            if ($liteBuild) {
+                throw new \RuntimeException("liteBuild and specialBuild may not both be set");
+            }
+            return MetadataFilter::forSpecialBuild();
+        }
+        if ($liteBuild) {
+            return MetadataFilter::forLiteBuild();
+        }
+
+        return MetadataFilter::emptyFilter();
     }
 
     /**
@@ -389,12 +422,11 @@ class BuildMetadataFromXml
      * @internal
      * @param PhoneMetadata $metadata
      * @param \DOMElement $element
-     * @param bool $liteBuild
      * @param bool $isShortNumberMetadata
      */
-    public static function setRelevantDescPatterns(PhoneMetadata $metadata, \DOMElement $element, $liteBuild, $isShortNumberMetadata)
+    public static function setRelevantDescPatterns(PhoneMetadata $metadata, \DOMElement $element, $isShortNumberMetadata)
     {
-        $generalDesc = self::processPhoneNumberDescElement(null, $element, self::GENERAL_DESC, $liteBuild);
+        $generalDesc = self::processPhoneNumberDescElement(null, $element, self::GENERAL_DESC);
         $metadata->setGeneralDesc($generalDesc);
 
         $metadataId = $metadata->getId();
@@ -404,26 +436,26 @@ class BuildMetadataFromXml
 
         if (!$isShortNumberMetadata) {
             // Set fields used by regular length phone numbers.
-            $metadata->setFixedLine(self::processPhoneNumberDescElement($generalDesc, $element, self::FIXED_LINE, $liteBuild));
-            $metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE, $liteBuild));
-            $metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST, $liteBuild));
-            $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP, $liteBuild));
-            $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER, $liteBuild));
-            $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER, $liteBuild));
-            $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN, $liteBuild));
-            $metadata->setVoicemail(self::processPhoneNumberDescElement($generalDesc, $element, self::VOICEMAIL, $liteBuild));
-            $metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING, $liteBuild));
+            $metadata->setFixedLine(self::processPhoneNumberDescElement($generalDesc, $element, self::FIXED_LINE));
+            $metadata->setMobile(self::processPhoneNumberDescElement($generalDesc, $element, self::MOBILE));
+            $metadata->setSharedCost(self::processPhoneNumberDescElement($generalDesc, $element, self::SHARED_COST));
+            $metadata->setVoip(self::processPhoneNumberDescElement($generalDesc, $element, self::VOIP));
+            $metadata->setPersonalNumber(self::processPhoneNumberDescElement($generalDesc, $element, self::PERSONAL_NUMBER));
+            $metadata->setPager(self::processPhoneNumberDescElement($generalDesc, $element, self::PAGER));
+            $metadata->setUan(self::processPhoneNumberDescElement($generalDesc, $element, self::UAN));
+            $metadata->setVoicemail(self::processPhoneNumberDescElement($generalDesc, $element, self::VOICEMAIL));
+            $metadata->setNoInternationalDialling(self::processPhoneNumberDescElement($generalDesc, $element, self::NO_INTERNATIONAL_DIALLING));
             $metadata->setSameMobileAndFixedLinePattern($metadata->getMobile()->getNationalNumberPattern() === $metadata->getFixedLine()->getNationalNumberPattern());
-            $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE, $liteBuild));
-            $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE, $liteBuild));
+            $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
+            $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
         } else {
             // Set fields used by short numbers.
-            $metadata->setStandardRate(self::processPhoneNumberDescElement($generalDesc, $element, self::STANDARD_RATE, $liteBuild));
-            $metadata->setShortCode(self::processPhoneNumberDescElement($generalDesc, $element, self::SHORT_CODE, $liteBuild));
-            $metadata->setCarrierSpecific(self::processPhoneNumberDescElement($generalDesc, $element, self::CARRIER_SPECIFIC, $liteBuild));
-            $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY, $liteBuild));
-            $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE, $liteBuild));
-            $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE, $liteBuild));
+            $metadata->setStandardRate(self::processPhoneNumberDescElement($generalDesc, $element, self::STANDARD_RATE));
+            $metadata->setShortCode(self::processPhoneNumberDescElement($generalDesc, $element, self::SHORT_CODE));
+            $metadata->setCarrierSpecific(self::processPhoneNumberDescElement($generalDesc, $element, self::CARRIER_SPECIFIC));
+            $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
+            $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
+            $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
         }
     }
 
@@ -661,14 +693,12 @@ class BuildMetadataFromXml
      * @param \DOMElement $countryElement XML element representing all the country information
      * @param string $numberType name of the number type, corresponding to the appropriate tag in the XML
      * file with information about that type
-     * @param bool $liteBuild
      * @return PhoneNumberDesc complete description of that phone number type
      */
     public static function processPhoneNumberDescElement(
         PhoneNumberDesc $parentDesc = null,
         \DOMElement $countryElement,
-        $numberType,
-        $liteBuild
+        $numberType
     ) {
         $phoneNumberDescList = $countryElement->getElementsByTagName($numberType);
         $numberDesc = new PhoneNumberDesc();
@@ -729,11 +759,9 @@ class BuildMetadataFromXml
                 $numberDesc->setNationalNumberPattern(self::validateRE($validPattern->item(0)->firstChild->nodeValue, true));
             }
 
-            if (!$liteBuild) {
-                $exampleNumber = $element->getElementsByTagName(self::EXAMPLE_NUMBER);
-                if ($exampleNumber->length > 0) {
-                    $numberDesc->setExampleNumber($exampleNumber->item(0)->firstChild->nodeValue);
-                }
+            $exampleNumber = $element->getElementsByTagName(self::EXAMPLE_NUMBER);
+            if ($exampleNumber->length > 0) {
+                $numberDesc->setExampleNumber($exampleNumber->item(0)->firstChild->nodeValue);
             }
         }
         return $numberDesc;

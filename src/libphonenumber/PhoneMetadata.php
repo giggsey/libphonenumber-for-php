@@ -108,6 +108,12 @@ class PhoneMetadata
         return $this;
     }
 
+    public function clearMainCountryForCode()
+    {
+        $this->mainCountryForCode = false;
+        return $this;
+    }
+
     public function hasLeadingZeroPossible()
     {
         return isset($this->leadingZeroPossible);
@@ -640,6 +646,12 @@ class PhoneMetadata
         return $this;
     }
 
+    public function clearPreferredInternationalPrefix()
+    {
+        $this->preferredInternationalPrefix = '';
+        return $this;
+    }
+
     public function hasNationalPrefix()
     {
         return isset($this->nationalPrefix);
@@ -656,6 +668,12 @@ class PhoneMetadata
         return $this;
     }
 
+    public function clearNationalPrefix()
+    {
+        $this->nationalPrefix = '';
+        return $this;
+    }
+
     public function hasPreferredExtnPrefix()
     {
         return isset($this->preferredExtnPrefix);
@@ -669,6 +687,12 @@ class PhoneMetadata
     public function setPreferredExtnPrefix($value)
     {
         $this->preferredExtnPrefix = $value;
+        return $this;
+    }
+
+    public function clearPreferredExtnPrefix()
+    {
+        $this->preferredExtnPrefix = '';
         return $this;
     }
 
@@ -704,6 +728,12 @@ class PhoneMetadata
         return $this;
     }
 
+    public function clearNationalPrefixTransformRule()
+    {
+        $this->nationalPrefixTransformRule = '';
+        return $this;
+    }
+
     public function isSameMobileAndFixedLinePattern()
     {
         return $this->sameMobileAndFixedLinePattern;
@@ -712,6 +742,12 @@ class PhoneMetadata
     public function setSameMobileAndFixedLinePattern($value)
     {
         $this->sameMobileAndFixedLinePattern = $value;
+        return $this;
+    }
+
+    public function clearSameMobileAndFixedLinePattern()
+    {
+        $this->sameMobileAndFixedLinePattern = false;
         return $this;
     }
 
@@ -758,6 +794,12 @@ class PhoneMetadata
         return $this;
     }
 
+    public function clearLeadingZeroPossible()
+    {
+        $this->leadingZeroPossible = false;
+        return $this;
+    }
+
     public function isMobileNumberPortableRegion()
     {
         return $this->mobileNumberPortableRegion;
@@ -766,6 +808,12 @@ class PhoneMetadata
     public function setMobileNumberPortableRegion($value)
     {
         $this->mobileNumberPortableRegion = $value;
+        return $this;
+    }
+
+    public function clearMobileNumberPortableRegion()
+    {
+        $this->mobileNumberPortableRegion = false;
         return $this;
     }
 

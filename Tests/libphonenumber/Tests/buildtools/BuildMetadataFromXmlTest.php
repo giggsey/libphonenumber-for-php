@@ -8,6 +8,7 @@
 namespace libphonenumber\Tests\buildtools;
 
 use libphonenumber\buildtools\BuildMetadataFromXml;
+use libphonenumber\buildtools\MetadataFilter;
 use libphonenumber\NumberFormat;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
@@ -406,7 +407,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $generalDesc = new PhoneNumberDesc();
         $territoryElement = $this->parseXMLString("<territory/>");
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'invalidType', false);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'invalidType');
         $this->assertEquals('NA', $phoneNumberDesc->getPossibleNumberPattern());
         $this->assertEquals('NA', $phoneNumberDesc->getNationalNumberPattern());
     }
@@ -417,7 +418,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $generalDesc->setPossibleNumberPattern('\\d{6}');
         $territoryElement = $this->parseXMLString('<territory><fixedLine/></territory>');
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
         $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
     }
 
@@ -431,21 +432,153 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $territoryElement = $this->parseXMLString($xmlInput);
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
         $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
     }
 
-    public function testProcessPhoneNumberDescElementHandlesLiteBuild()
+    public function testFilterMetadata_liteBuild()
     {
-        $generalDesc = new PhoneNumberDesc();
-        $xmlInput = "<territory><fixedLine>"
-            . "  <exampleNumber>01 01 01 01</exampleNumber>"
-            . "</fixedLine></territory>";
+        $xmlInput = "<phoneNumberMetadata>"
+            . "  <territories>"
+            . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
+            . "      <generalDesc>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </generalDesc>"
+            . "      <fixedLine>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </fixedLine>"
+            . "      <mobile>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </mobile>"
+            . "    </territory>"
+            . "  </territories>"
+            . "</phoneNumberMetadata>";
 
-        $territoryElement = $this->parseXMLString($xmlInput);
+        $document = $this->parseXMLString($xmlInput);
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', true);
-        $this->assertEquals('', $phoneNumberDesc->getExampleNumber());
+        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($document,
+            true, // liteBuild
+            false, // specialBuild
+            false, // isShortNumberMetadata
+            false // isAlternateFormatsMetadata
+        );
+
+        $this->assertCount(1, $metadataCollection);
+        $metadata = $metadataCollection[0];
+
+        $this->assertTrue($metadata->hasGeneralDesc());
+        $this->assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getGeneralDesc()->getExampleNumber());
+        $this->assertTrue($metadata->hasFixedLine());
+        $this->assertFalse($metadata->getFixedLine()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getFixedLine()->getExampleNumber());
+        $this->assertTrue($metadata->hasMobile());
+        $this->assertFalse($metadata->getMobile()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getMobile()->getExampleNumber());
+    }
+
+    public function testFilterMetadata_specialBuild()
+    {
+        $xmlInput = "<phoneNumberMetadata>"
+            . "  <territories>"
+            . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
+            . "      <generalDesc>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </generalDesc>"
+            . "      <fixedLine>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </fixedLine>"
+            . "      <mobile>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </mobile>"
+            . "    </territory>"
+            . "  </territories>"
+            . "</phoneNumberMetadata>";
+
+        $document = $this->parseXMLString($xmlInput);
+
+        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($document,
+            false, // liteBuild
+            true, // specialBuild
+            false, // isShortNumberMetadata
+            false // isAlternateFormatsMetadata
+        );
+
+        $this->assertCount(1, $metadataCollection);
+        $metadata = $metadataCollection[0];
+        $this->assertTrue($metadata->hasGeneralDesc());
+        $this->assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getGeneralDesc()->getExampleNumber());
+        // Consider clearing fixed-line if empty after being filtered.
+        $this->assertTrue($metadata->hasFixedLine());
+        $this->assertFalse($metadata->getFixedLine()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getFixedLine()->getExampleNumber());
+        $this->assertTrue($metadata->hasMobile());
+        $this->assertTrue($metadata->getMobile()->hasExampleNumber());
+        $this->assertEquals("10123456", $metadata->getMobile()->getExampleNumber());
+    }
+
+    public function testFilterMetadata_fullBuild() {
+        $xmlInput = "<phoneNumberMetadata>"
+            . "  <territories>"
+            . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
+            . "      <generalDesc>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </generalDesc>"
+            . "      <fixedLine>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </fixedLine>"
+            . "      <mobile>"
+            . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
+            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
+            . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
+            . "        <exampleNumber>10123456</exampleNumber>"
+            . "      </mobile>"
+            . "    </territory>"
+            . "  </territories>"
+            . "</phoneNumberMetadata>";
+
+        $document = $this->parseXMLString($xmlInput);
+
+        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($document,
+            false, // liteBuild
+            false, // specialBuild
+            false, // isShortNumberMetadata
+            false // isAlternateFormatsMetadata
+        );
+
+        $this->assertCount(1, $metadataCollection);
+        $metadata = $metadataCollection[0];
+        $this->assertTrue($metadata->hasGeneralDesc());
+        $this->assertTrue($metadata->getGeneralDesc()->hasExampleNumber());
+        $this->assertEquals("10123456", $metadata->getGeneralDesc()->getExampleNumber());
+        $this->assertTrue($metadata->hasFixedLine());
+        $this->assertTrue($metadata->getFixedLine()->hasExampleNumber());
+        $this->assertEquals("10123456", $metadata->getFixedLine()->getExampleNumber());
+        $this->assertTrue($metadata->hasMobile());
+        $this->assertTrue($metadata->getMobile()->hasExampleNumber());
+        $this->assertEquals("10123456", $metadata->getMobile()->getExampleNumber());
     }
 
     public function testProcessPhoneNumberDescOutputsExampleNumberByDefault()
@@ -457,7 +590,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $territoryElement = $this->parseXMLString($xmlInput);
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
         $this->assertEquals('01 01 01 01', $phoneNumberDesc->getExampleNumber());
     }
 
@@ -470,7 +603,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $countryElement = $this->parseXMLString($xmlInput);
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $countryElement, 'fixedLine', false);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $countryElement, 'fixedLine');
         $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
     }
 
@@ -484,7 +617,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
         // Should set sameMobileAndFixedPattern to true.
-        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */);
+        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* isShortNumberMetadata */);
         $this->assertTrue($metadata->hasSameMobileAndFixedLinePattern());
     }
 
@@ -504,7 +637,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
-        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */);
+        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* isShortNumberMetadata */);
         $this->assertEquals("\\d{1}", $metadata->getFixedLine()->getNationalNumberPattern());
         $this->assertEquals("\\d{2}", $metadata->getMobile()->getNationalNumberPattern());
         $this->assertEquals("\\d{3}", $metadata->getPager()->getNationalNumberPattern());
@@ -530,7 +663,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
-        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* liteBuild */, true /* isShortNumberMetadata */);
+        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, true /* isShortNumberMetadata */);
         $this->assertEquals("\\d{1}", $metadata->getTollFree()->getNationalNumberPattern());
         $this->assertEquals("\\d{2}", $metadata->getStandardRate()->getNationalNumberPattern());
         $this->assertEquals("\\d{3}", $metadata->getPremiumRate()->getNationalNumberPattern());
@@ -551,7 +684,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
-        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */);
+        BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* isShortNumberMetadata */);
     }
 
     public function testAlternateFormatsOmitsDescPatterns()
@@ -568,7 +701,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</territory>";
 
         $territoryElement = $this->parseXMLString($xmlInput);
-        $metadata = BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */, true /* isAlternateFormatsMetadata */);
+        $metadata = BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* isShortNumberMetadata */, true /* isAlternateFormatsMetadata */);
         $this->assertEquals('(1)(\\d{3})', $metadata->getNumberFormat(0)->getPattern());
         $this->assertEquals('1', $metadata->getNumberFormat(0)->getLeadingDigitsPattern(0));
         $this->assertEquals('$1', $metadata->getNumberFormat(0)->getFormat());
@@ -593,7 +726,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "  <fixedLine><nationalNumberPattern>\\d{1}</nationalNumberPattern></fixedLine>"
             . "</territory>";
         $territoryElement = $this->parseXMLString($xmlInput);
-        $metadata = BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */, true /* isAlternateFormatsMetadata */);
+        $metadata = BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* isShortNumberMetadata */, true /* isAlternateFormatsMetadata */);
         $this->assertTrue($metadata->getNumberFormat(0)->isNationalPrefixOptionalWhenFormatting());
         // This is inherited from the territory, with $NP replaced by the actual national prefix, and
         // $FG replaced with $1.
@@ -615,7 +748,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* no liteBuild */);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
         $possibleLength = $phoneNumberDesc->getPossibleLength();
         $this->assertCount(2, $possibleLength);
         $this->assertEquals(4, $possibleLength[0]);
@@ -730,7 +863,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</mobile>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile');
     }
 
     /**
@@ -748,7 +881,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</mobile>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile');
     }
 
     /**
@@ -767,7 +900,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</noInternationalDialling>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'noInternationalDialling', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'noInternationalDialling');
     }
 
     public function testProcessPhoneNumberDescElement_SameAsParent()
@@ -784,7 +917,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
 
         // No possible lengths should be present, because they match the general description.
         $this->assertCount(0, $phoneNumberDesc->getPossibleLength());
@@ -805,7 +938,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
     /**
@@ -824,7 +957,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* liteBuild */, false /* isShortNumberMetadata */, false /* isAlternateFormatsMetadata */);
+        BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false /* isShortNumberMetadata */, false /* isAlternateFormatsMetadata */);
     }
 
     /**
@@ -841,7 +974,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
     /**
@@ -858,7 +991,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
     /**
@@ -876,7 +1009,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
     /**
@@ -893,7 +1026,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
     /**
@@ -910,6 +1043,20 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine', false /* not light build */);
+        BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
+    }
+
+    public function testGetMetadataFilter()
+    {
+        $this->assertEquals(BuildMetadataFromXml::getMetadataFilter(false, false), MetadataFilter::emptyFilter());
+        $this->assertEquals(BuildMetadataFromXml::getMetadataFilter(true, false), MetadataFilter::forLiteBuild());
+        $this->assertEquals(BuildMetadataFromXml::getMetadataFilter(false, true), MetadataFilter::forSpecialBuild());
+
+        try {
+            BuildMetadataFromXml::getMetadataFilter(true, true);
+            $this->fail("getMetadataFilter should fail when liteBuild and specialBuild are both set");
+        } catch (\RuntimeException $e) {
+            $this->assertEquals("liteBuild and specialBuild may not both be set", $e->getMessage());
+        }
     }
 }

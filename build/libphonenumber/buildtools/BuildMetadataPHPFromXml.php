@@ -41,7 +41,7 @@ EOT;
     {
         $savePath = $outputDir . $filePrefix;
 
-        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($inputFile, $liteBuild);
+        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($inputFile, $liteBuild, false);
         $this->writeMetadataToFile($metadataCollection, $savePath);
 
         $countryCodeToRegionCodeMap = BuildMetadataFromXml::buildCountryCodeToRegionCodeMap($metadataCollection);
