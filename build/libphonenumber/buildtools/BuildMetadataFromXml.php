@@ -62,7 +62,7 @@ class BuildMetadataFromXml
 
     /**
      * @internal
-     * @param $regex
+     * @param string $regex
      * @param bool $removeWhitespace
      * @return string
      */
@@ -129,7 +129,6 @@ class BuildMetadataFromXml
     /**
      * @param string $regionCode
      * @param \DOMElement $element
-     * @param string $liteBuild
      * @param string $isShortNumberMetadata
      * @param string $isAlternateFormatsMetadata
      * @return PhoneMetadata
@@ -323,7 +322,7 @@ class BuildMetadataFromXml
      * @internal
      * @param \DOMElement $element
      * @param string $nationalPrefix
-     * @return mixed|string
+     * @return string
      */
     public static function getDomesticCarrierCodeFormattingRuleFromElement(\DOMElement $element, $nationalPrefix)
     {
@@ -796,7 +795,7 @@ class BuildMetadataFromXml
     }
 
     /**
-     * @param $metadataCollection PhoneMetadata[]
+     * @param PhoneMetadata[] $metadataCollection
      * @return array
      */
     public static function buildCountryCodeToRegionCodeMap($metadataCollection)

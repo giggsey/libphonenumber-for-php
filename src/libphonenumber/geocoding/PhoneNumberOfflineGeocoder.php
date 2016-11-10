@@ -25,6 +25,10 @@ class PhoneNumberOfflineGeocoder
      */
     protected $prefixFileReader = null;
 
+    /**
+     * PhoneNumberOfflineGeocoder constructor.
+     * @param string $phonePrefixDataDirectory
+     */
     protected function __construct($phonePrefixDataDirectory)
     {
         $this->phoneUtil = PhoneNumberUtil::getInstance();
@@ -87,7 +91,7 @@ class PhoneNumberOfflineGeocoder
      * number is from. If it could be from many territories, nothing is returned.
      *
      * @param PhoneNumber $number
-     * @param $locale
+     * @param string $locale
      * @return string
      */
     protected function getCountryNameForNumber(PhoneNumber $number, $locale)

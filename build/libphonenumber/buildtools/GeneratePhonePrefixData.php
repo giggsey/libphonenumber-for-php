@@ -115,8 +115,12 @@ EOT;
      * from the provided input text file. For the data files expected to be large (currently only
      * NANPA is supported), this method generates a list containing one output file for each area
      * code. Otherwise, a single file is added to the list.
+     * @param string $file
+     * @param string $countryCode
+     * @param string $language
+     * @param bool $expandCountries
+     * @return array
      */
-
     private function createOutputFileNames($file, $countryCode, $language, $expandCountries)
     {
         $outputFiles = array();
@@ -165,8 +169,8 @@ EOT;
      * Reads phone prefix data from the provides file path and invokes the given handler for each
      * mapping read.
      *
-     * @param $filePath
-     * @param $handler
+     * @param string $filePath
+     * @param \Closure $handler
      * @return array
      * @throws \InvalidArgumentException
      */
@@ -204,11 +208,20 @@ EOT;
         return $countryData;
     }
 
+    /**
+     * @param string $language
+     * @param string $code
+     * @return string
+     */
     private function getFilePathFromLanguageAndCountryCode($language, $code)
     {
         return $this->getFilePath($language . DIRECTORY_SEPARATOR . $code . self::DATA_FILE_EXTENSION);
     }
 
+    /**
+     * @param string $fileName
+     * @return string
+     */
     private function getFilePath($fileName)
     {
         $path = $this->inputDir . $fileName;
@@ -216,16 +229,29 @@ EOT;
         return $path;
     }
 
+    /**
+     * @param string $prefix
+     * @param string $language
+     * @return string
+     */
     private function generateFilename($prefix, $language)
     {
         return $language . DIRECTORY_SEPARATOR . $prefix . self::DATA_FILE_EXTENSION;
     }
 
+    /**
+     * @param string $countryCodeFileName
+     * @return string
+     */
     private function getCountryCodeFromTextFileName($countryCodeFileName)
     {
         return str_replace(self::DATA_FILE_EXTENSION, '', $countryCodeFileName);
     }
 
+    /**
+     * @param string $inputFile
+     * @return array
+     */
     private function readMappingsFromFile($inputFile)
     {
         $areaCodeMap = array();
@@ -240,6 +266,10 @@ EOT;
         return $areaCodeMap;
     }
 
+    /**
+     * @param string $textFile
+     * @return mixed
+     */
     private function getLanguageFromTextFile($textFile)
     {
         $parts = explode(DIRECTORY_SEPARATOR, $textFile);
@@ -247,6 +277,10 @@ EOT;
         return $parts[0];
     }
 
+    /**
+     * @param array $mappings
+     * @param string $language
+     */
     private function removeEmptyEnglishMappings(&$mappings, $language)
     {
         if ($language != "en") {
