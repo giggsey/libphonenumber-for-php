@@ -11,7 +11,9 @@ use libphonenumber\ShortNumberInfo;
 
 /**
  * Verifies all of the example numbers in the metadata are valid and of the correct type. If no
- * example number exists for a particular type, the test still passes.
+ * example number exists for a particular type, the test still passes since not all types are
+ * relevant for all regions. Tests that check the XML schema will ensure that an exampleNumber
+ * node is present for every phone number description.
  */
 class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
 {
@@ -64,11 +66,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             array(PhoneNumberType::PERSONAL_NUMBER),
             array(PhoneNumberType::PAGER),
             array(PhoneNumberType::UAN),
-            array(PhoneNumberType::UNKNOWN),
-            array(PhoneNumberType::EMERGENCY),
             array(PhoneNumberType::VOICEMAIL),
-            array(PhoneNumberType::SHORT_CODE),
-            array(PhoneNumberType::STANDARD_RATE),
         );
     }
 

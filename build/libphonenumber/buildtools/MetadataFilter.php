@@ -229,13 +229,6 @@ class MetadataFilter
      */
     public function filterMetadata(PhoneMetadata $metadata)
     {
-        if (count($this->blackList) !== 0 && $metadata->hasGeneralDesc()) {
-            $builder = new PhoneNumberDesc();
-            $builder->mergeFrom($metadata->getGeneralDesc());
-            $builder->clearExampleNumber();
-            $metadata->setGeneralDesc($builder);
-        }
-
         if ($metadata->hasFixedLine()) {
             $metadata->setFixedLine($this->getFiltered('fixedLine', $metadata->getFixedLine()));
         }

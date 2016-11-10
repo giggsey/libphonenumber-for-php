@@ -16,16 +16,14 @@ return array (
   array (
     'NationalNumberPattern' => '[13]\\d{6,11}',
     'PossibleNumberPattern' => '\\d{7,12}',
-    'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
-      0 => -1,
-      1 => 7,
-      2 => 8,
-      3 => 9,
-      4 => 10,
-      5 => 11,
-      6 => 12,
+      0 => 7,
+      1 => 8,
+      2 => 9,
+      3 => 10,
+      4 => 11,
+      5 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -35,7 +33,6 @@ return array (
   array (
     'NationalNumberPattern' => 'NA',
     'PossibleNumberPattern' => 'NA',
-    'ExampleNumber' => '3451234567',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -48,7 +45,7 @@ return array (
   array (
     'NationalNumberPattern' => '3(?:2\\d{3}|37\\d{2}|4(?:2|7\\d{3}))\\d{4}',
     'PossibleNumberPattern' => '\\d{7,10}',
-    'ExampleNumber' => '3451234567',
+    'ExampleNumber' => '3421234',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -114,12 +111,6 @@ return array (
     'ExampleNumber' => '390123456789',
     'PossibleLength' => 
     array (
-      0 => 7,
-      1 => 8,
-      2 => 9,
-      3 => 10,
-      4 => 11,
-      5 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -153,7 +144,7 @@ return array (
   array (
     'NationalNumberPattern' => '348[57]\\d{7}',
     'PossibleNumberPattern' => '\\d{11}',
-    'ExampleNumber' => '3451234567',
+    'ExampleNumber' => '34851234567',
     'PossibleLength' => 
     array (
       0 => 11,

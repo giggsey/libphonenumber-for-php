@@ -26,10 +26,11 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '30\\d{7}',
-    'PossibleNumberPattern' => '\\d{9}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -159,7 +160,7 @@ return array (
   'internationalPrefix' => '',
   'nationalPrefix' => '06',
   'nationalPrefixForParsing' => '06',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),

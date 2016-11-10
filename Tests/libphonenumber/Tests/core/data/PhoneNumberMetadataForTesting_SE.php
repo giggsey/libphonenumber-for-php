@@ -37,10 +37,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '\\d{9}',
-    'PossibleNumberPattern' => '\\d{9}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -157,7 +158,7 @@ return array (
   'id' => 'SE',
   'countryCode' => 46,
   'internationalPrefix' => '00',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),

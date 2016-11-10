@@ -38,10 +38,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '\\d{8,10}',
-    'PossibleNumberPattern' => '\\d{8,10}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -158,7 +159,7 @@ return array (
   'id' => 'CX',
   'countryCode' => 61,
   'internationalPrefix' => '00',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),

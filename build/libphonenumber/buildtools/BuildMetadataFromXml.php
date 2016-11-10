@@ -701,7 +701,7 @@ class BuildMetadataFromXml
     ) {
         $phoneNumberDescList = $countryElement->getElementsByTagName($numberType);
         $numberDesc = new PhoneNumberDesc();
-        if ($phoneNumberDescList->length == 0 && !self::numberTypeShouldAlwaysBeFilledIn($numberType)) {
+        if ($phoneNumberDescList->length == 0) {
             $numberDesc->setNationalNumberPattern("NA");
             $numberDesc->setPossibleNumberPattern("NA");
             // -1 will never match a possible phone number length, so is safe to use to ensure this never
@@ -764,16 +764,6 @@ class BuildMetadataFromXml
             }
         }
         return $numberDesc;
-    }
-
-    /**
-     * @internal
-     * @param string $numberType
-     * @return bool
-     */
-    public static function numberTypeShouldAlwaysBeFilledIn($numberType)
-    {
-        return $numberType == self::FIXED_LINE || $numberType == self::MOBILE || $numberType == self::GENERAL_DESC;
     }
 
     private static function arePossibleLengthsEqual($possibleLengths, PhoneNumberDesc $desc)

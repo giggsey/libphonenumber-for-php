@@ -38,10 +38,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '246\\d{7}',
-    'PossibleNumberPattern' => '\\d{7,10}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -158,7 +159,7 @@ return array (
   'id' => 'BB',
   'countryCode' => 1,
   'internationalPrefix' => '011',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
   ),

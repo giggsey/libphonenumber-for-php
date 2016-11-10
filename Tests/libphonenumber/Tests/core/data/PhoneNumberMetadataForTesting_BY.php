@@ -38,10 +38,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d{5}',
-    'PossibleNumberPattern' => '\\d{6}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -160,7 +161,7 @@ return array (
   'internationalPrefix' => '810',
   'nationalPrefix' => '8',
   'nationalPrefixForParsing' => '80?|99999',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 

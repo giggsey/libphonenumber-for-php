@@ -2913,7 +2913,7 @@ class PhoneNumberUtil
     /**
      * Gets a valid number for the specified region and number type.
      *
-     * @param string $regionCodeOrType the region for which an example number is needed
+     * @param string|int $regionCodeOrType the region for which an example number is needed
      * @param int $type the PhoneNumberType of number that is needed
      * @return PhoneNumber a valid number for the specified region and type. Returns null when the metadata
      *     does not contain such information or if an invalid region or region 001 was entered.
@@ -3010,12 +3010,27 @@ class PhoneNumberUtil
     {
         $metadata = $this->getMetadataForNonGeographicalRegion($countryCallingCode);
         if ($metadata !== null) {
-            $desc = $metadata->getGeneralDesc();
-            try {
-                if ($desc->hasExampleNumber()) {
-                    return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), static::UNKNOWN_REGION);
+            // For geographical entities, fixed-line data is always present. However, for non-geographical
+            // entities, this is not the case, so we have to go through different types to find the
+            // example number. We don't check fixed-line or personal number since they aren't used by
+            // non-geographical entities (if this changes, a unit-test will catch this.)
+            /** @var PhoneNumberDesc[] $list */
+            $list = array(
+                $metadata->getMobile(),
+                $metadata->getTollFree(),
+                $metadata->getSharedCost(),
+                $metadata->getVoip(),
+                $metadata->getVoicemail(),
+                $metadata->getUan(),
+                $metadata->getPremiumRate(),
+            );
+            foreach ($list as $desc) {
+                try {
+                    if ($desc !== null && $desc->hasExampleNumber()) {
+                        return $this->parse('+' . $countryCallingCode . $desc->getExampleNumber(), self::UNKNOWN_REGION);
+                    }
+                } catch (NumberParseException $e) {
                 }
-            } catch (NumberParseException $e) {
             }
         }
         return null;

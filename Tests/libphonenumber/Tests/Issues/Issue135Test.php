@@ -84,7 +84,7 @@ class Issue135Test extends \PHPUnit_Framework_TestCase
     public function testNormalizeDiallableCharsOnly()
     {
         $inputNumber = "03*4-56&+a#234";
-        $expectedOutput = "03*456+234";
+        $expectedOutput = "03*456+#234";
         $this->assertEquals($expectedOutput, PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
             "Conversion did not correctly remove non-diallable characters");
     }

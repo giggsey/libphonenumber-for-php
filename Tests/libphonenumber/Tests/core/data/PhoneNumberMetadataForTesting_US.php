@@ -16,7 +16,6 @@ return array (
   array (
     'NationalNumberPattern' => '[13-689]\\d{9}|2[0-35-9]\\d{8}',
     'PossibleNumberPattern' => '\\d{7}(?:\\d{3})?',
-    'ExampleNumber' => '1234567890',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -54,7 +53,6 @@ return array (
   array (
     'NationalNumberPattern' => '8(?:00|66|77|88)\\d{7}',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '1234567890',
     'PossibleLength' => 
     array (
     ),
@@ -66,7 +64,6 @@ return array (
   array (
     'NationalNumberPattern' => '900\\d{7}',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '1234567890',
     'PossibleLength' => 
     array (
     ),
@@ -150,7 +147,6 @@ return array (
   array (
     'NationalNumberPattern' => '800\\d{7}',
     'PossibleNumberPattern' => '\\d{10}',
-    'ExampleNumber' => '1234567890',
     'PossibleLength' => 
     array (
     ),

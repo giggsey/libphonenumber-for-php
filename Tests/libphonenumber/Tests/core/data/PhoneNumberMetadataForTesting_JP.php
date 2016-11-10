@@ -44,10 +44,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '07\\d{5}|[1-357-9]\\d{3,10}',
-    'PossibleNumberPattern' => '\\d{4,11}',
+    'NationalNumberPattern' => 'NA',
+    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -167,7 +168,7 @@ return array (
   'internationalPrefix' => '010',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
-  'sameMobileAndFixedLinePattern' => true,
+  'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 

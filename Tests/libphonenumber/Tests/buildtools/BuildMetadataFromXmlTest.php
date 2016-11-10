@@ -401,12 +401,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             BuildMetadataFromXml::getDomesticCarrierCodeFormattingRuleFromElement($element, '0'));
     }
 
-    public function testIsValidNumberTypeWithInvalidInput()
-    {
-        $this->assertFalse(BuildMetadataFromXml::numberTypeShouldAlwaysBeFilledIn('invalidType'));
-        $this->assertFalse(BuildMetadataFromXml::numberTypeShouldAlwaysBeFilledIn('tollFree'));
-    }
-
     public function testProcessPhoneNumberDescElementWithInvalidInputWithRegex()
     {
         $generalDesc = new PhoneNumberDesc();
@@ -418,30 +412,19 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('NA', $phoneNumberDesc->getNationalNumberPattern());
     }
 
-    public function testProcessPhoneNumberDescElementMergesWithGeneralDesc()
-    {
-        $generalDesc = new PhoneNumberDesc();
-        $generalDesc->setPossibleNumberPattern('\\d{6}');
-        $territoryElement = $this->parseXMLString('<territory><fixedLine/></territory>');
-
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
-            'fixedLine');
-        $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
-    }
-
     public function testProcessPhoneNumberDescElementOverridesGeneralDesc()
     {
         $generalDesc = new PhoneNumberDesc();
-        $generalDesc->setPossibleNumberPattern('\\d{8');
+        $generalDesc->setNationalNumberPattern('\\d{8}');
         $xmlInput = "<territory><fixedLine>"
-            . "  <possibleNumberPattern>\\d{6}</possibleNumberPattern>"
+            . "  <nationalNumberPattern>\\d{6}</nationalNumberPattern>"
             . "</fixedLine></territory>";
 
         $territoryElement = $this->parseXMLString($xmlInput);
 
         $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
             'fixedLine');
-        $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
+        $this->assertEquals('\\d{6}', $phoneNumberDesc->getNationalNumberPattern());
     }
 
     public function testFilterMetadata_liteBuild()
@@ -452,7 +435,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
             . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
-            . "        <exampleNumber>10123456</exampleNumber>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
@@ -501,7 +483,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
             . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
-            . "        <exampleNumber>10123456</exampleNumber>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
@@ -550,7 +531,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
             . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
-            . "        <exampleNumber>10123456</exampleNumber>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
@@ -580,8 +560,8 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(1, $metadataCollection);
         $metadata = $metadataCollection[0];
         $this->assertTrue($metadata->hasGeneralDesc());
-        $this->assertTrue($metadata->getGeneralDesc()->hasExampleNumber());
-        $this->assertEquals("10123456", $metadata->getGeneralDesc()->getExampleNumber());
+        $this->assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
+        $this->assertEquals("", $metadata->getGeneralDesc()->getExampleNumber());
         $this->assertTrue($metadata->hasFixedLine());
         $this->assertTrue($metadata->getFixedLine()->hasExampleNumber());
         $this->assertEquals("10123456", $metadata->getFixedLine()->getExampleNumber());

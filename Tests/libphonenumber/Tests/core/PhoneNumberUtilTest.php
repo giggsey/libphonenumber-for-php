@@ -173,9 +173,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(1)->getFormat());
         $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getGeneralDesc()->getNationalNumberPattern());
         $this->assertEquals("\\d{7}(?:\\d{3})?", $metadata->getGeneralDesc()->getPossibleNumberPattern());
-        // Fixed-line data should be inherited from the general desc for the national number pattern,
-        // since it wasn't overridden
-        $this->assertEquals($metadata->getGeneralDesc()->getNationalNumberPattern(), $metadata->getFixedLine()->getNationalNumberPattern());
+        $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getFixedLine()->getNationalNumberPattern());
         $this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
         $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
@@ -240,7 +238,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(800, $metadata->getCountryCode());
         $this->assertEquals("$1 $2", $metadata->getNumberFormat(0)->getFormat());
         $this->assertEquals("(\\d{4})(\\d{4})", $metadata->getNumberFormat(0)->getPattern());
-        $this->assertEquals("12345678", $metadata->getGeneralDesc()->getExampleNumber());
+        $this->assertCount(0, $metadata->getGeneralDesc()->getPossibleLengthLocalOnly());
+        $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $this->assertEquals("12345678", $metadata->getTollFree()->getExampleNumber());
     }
 
@@ -390,8 +389,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::FIXED_LINE)
         );
         $this->assertEquals(null, $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::MOBILE));
-        // For the US, the example number is placed under general description, and hence should be used
-        // for both fixed line and mobile, so neither of these should return null.
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::FIXED_LINE));
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::MOBILE));
         // CS is an invalid region, so we have no data for it.
