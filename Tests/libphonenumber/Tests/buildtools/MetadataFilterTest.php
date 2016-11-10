@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\buildtools;
 
-
 use libphonenumber\buildtools\BuildMetadataFromXml;
 use libphonenumber\buildtools\MetadataFilter;
 
