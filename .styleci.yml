@@ -1,0 +1,22 @@
+preset: psr2
+
+finder:
+  exclude:
+    - "src/libphonenumber/ShortNumbersRegionCodeSet.php"
+    - "src/libphonenumber/CountryCodeToRegionCodeMap.php"
+    - "src/libphonenumber/CountryCodeToRegionCodeMapForTesting.php"
+    - "src/libphonenumber/AlternateFormatsCountryCodeSet.php"
+    - "src/libphonenumber/CountryCodeToRegionCodeMap.php"
+    - "src/libphonenumber/CountryCodeToRegionCodeMapForTesting.php"
+    - "src/libphonenumber/ShortNumbersRegionCodeSet.php"
+
+  not-path:
+    - "Tests/libphonenumber/Tests/core/data/"
+    - "Tests/libphonenumber/Tests/carrier/data/"
+    - "Tests/libphonenumber/Tests/prefixmapper/data/"
+    - "Tests/libphonenumber/Tests/timezone/data/"
+    - "Tests/libphonenumber/Tests/carrier/data/"
+    - "src/libphonenumber/data/"
+    - "src/libphonenumber/carrier/data/"
+    - "src/libphonenumber/geocoding/data/"
+    - "src/libphonenumber/timezone/data/"

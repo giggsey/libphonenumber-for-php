@@ -278,6 +278,20 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ":noInternationalDialling"));
     }
 
+    /**
+     * Need to sort some of the results, as PHP arrays are ordered by when they were added
+     * @param $array
+     * @return bool
+     */
+    private function recursive_ksort($array)
+    {
+        foreach ($array as &$value) {
+            if (is_array($value)) {
+                $this->recursive_ksort($value);
+            }
+        }
+        return ksort($array);
+    }
 
     public function testParseFieldMapFromString_RuntimeExceptionCases()
     {
@@ -884,20 +898,5 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
             $this->assertGreaterThan(0, strlen($field));
             $this->assertEquals($field, trim($field));
         }
-    }
-
-    /**
-     * Need to sort some of the results, as PHP arrays are ordered by when they were added
-     * @param $array
-     * @return bool
-     */
-    private function recursive_ksort($array)
-    {
-        foreach ($array as &$value) {
-            if (is_array($value)) {
-                $this->recursive_ksort($value);
-            }
-        }
-        return ksort($array);
     }
 }
