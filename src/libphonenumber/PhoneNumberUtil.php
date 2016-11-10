@@ -510,6 +510,7 @@ class PhoneNumberUtil
         static::$DIALLABLE_CHAR_MAPPINGS = static::$asciiDigitMappings;
         static::$DIALLABLE_CHAR_MAPPINGS[static::PLUS_SIGN] = static::PLUS_SIGN;
         static::$DIALLABLE_CHAR_MAPPINGS['*'] = '*';
+        static::$DIALLABLE_CHAR_MAPPINGS['#'] = '#';
     }
 
     /**

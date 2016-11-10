@@ -471,8 +471,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 
     public function testNormaliseStripNonDiallableCharacters()
     {
-        $inputNumber = "03*4-56&+a#234";
-        $expectedOutput = "03*456+234";
+        $inputNumber = "03*4-56&+1a#234";
+        $expectedOutput = "03*456+1#234";
         $this->assertEquals(
             $expectedOutput,
             PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
