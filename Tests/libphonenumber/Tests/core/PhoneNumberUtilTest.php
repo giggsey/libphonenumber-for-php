@@ -172,9 +172,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("(\\d{3})(\\d{3})(\\d{4})", $metadata->getNumberFormat(1)->getPattern());
         $this->assertEquals("$1 $2 $3", $metadata->getNumberFormat(1)->getFormat());
         $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getGeneralDesc()->getNationalNumberPattern());
-        $this->assertEquals("\\d{7}(?:\\d{3})?", $metadata->getGeneralDesc()->getPossibleNumberPattern());
         $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getFixedLine()->getNationalNumberPattern());
-        $this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
         $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
         $this->assertEquals(10, $possibleLength[0]);
@@ -184,7 +182,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("900\\d{7}", $metadata->getPremiumRate()->getNationalNumberPattern());
         // No shared-cost data is available, so it should be initialised to "NA".
         $this->assertEquals("NA", $metadata->getSharedCost()->getNationalNumberPattern());
-        $this->assertEquals("NA", $metadata->getSharedCost()->getPossibleNumberPattern());
     }
 
     public function testGetInstanceLoadDEMetadata()
@@ -210,9 +207,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             "(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
             $metadata->getFixedLine()->getNationalNumberPattern()
         );
-        $this->assertEquals("\\d{2,14}", $metadata->getFixedLine()->getPossibleNumberPattern());
         $this->assertEquals("30123456", $metadata->getFixedLine()->getExampleNumber());
-        $this->assertEquals("\\d{10}", $metadata->getTollFree()->getPossibleNumberPattern());
+        $this->assertContains(10, $metadata->getTollFree()->getPossibleLength());
         $this->assertEquals("900([135]\\d{6}|9\\d{7})", $metadata->getPremiumRate()->getNationalNumberPattern());
     }
 

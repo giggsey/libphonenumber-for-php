@@ -15,7 +15,6 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[13-9]\\d{6,7}',
-    'PossibleNumberPattern' => '\\d{7,8}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -28,7 +27,6 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '(?:[14-6]\\d{2}|7(?:[2-57]\\d|62|8[0-7]|9[04-9])|8[02-9]\\d|9\\d{2})\\d{4}',
-    'PossibleNumberPattern' => '\\d{7}',
     'ExampleNumber' => '1123456',
     'PossibleLength' => 
     array (
@@ -41,7 +39,6 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '(?:3\\d|7(?:[01]\\d|6[013-9]|8[89]|9[1-3])|81\\d)\\d{5}',
-    'PossibleNumberPattern' => '\\d{7,8}',
     'ExampleNumber' => '71123456',
     'PossibleLength' => 
     array (
@@ -53,7 +50,6 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -65,7 +61,6 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '9[01]\\d{6}',
-    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '90123456',
     'PossibleLength' => 
     array (
@@ -78,7 +73,6 @@ return array (
   'sharedCost' => 
   array (
     'NationalNumberPattern' => '80\\d{6}',
-    'PossibleNumberPattern' => '\\d{8}',
     'ExampleNumber' => '80123456',
     'PossibleLength' => 
     array (
@@ -91,7 +85,6 @@ return array (
   'personalNumber' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -103,7 +96,6 @@ return array (
   'voip' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -115,7 +107,6 @@ return array (
   'pager' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -127,7 +118,6 @@ return array (
   'uan' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -139,7 +129,6 @@ return array (
   'voicemail' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -151,7 +140,6 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,

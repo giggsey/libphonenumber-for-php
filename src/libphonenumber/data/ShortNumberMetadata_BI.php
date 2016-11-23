@@ -15,7 +15,6 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[16-9]\\d{2,3}',
-    'PossibleNumberPattern' => '\\d{3,4}',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -28,7 +27,6 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '611',
-    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (
@@ -41,7 +39,6 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -53,7 +50,6 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '11[237]',
-    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '117',
     'PossibleLength' => 
     array (
@@ -66,7 +62,6 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '1(?:1\\d|5[2-9]|6[0-256])|611|7(?:10|77|979)|8[28]8|900',
-    'PossibleNumberPattern' => '\\d{3,4}',
     'ExampleNumber' => '117',
     'PossibleLength' => 
     array (
@@ -78,7 +73,6 @@ return array (
   'standardRate' => 
   array (
     'NationalNumberPattern' => 'NA',
-    'PossibleNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -90,7 +84,6 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '611|7(?:10|77)|888|900',
-    'PossibleNumberPattern' => '\\d{3}',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (

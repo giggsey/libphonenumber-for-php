@@ -408,7 +408,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
             'invalidType');
-        $this->assertEquals('NA', $phoneNumberDesc->getPossibleNumberPattern());
         $this->assertEquals('NA', $phoneNumberDesc->getNationalNumberPattern());
     }
 
@@ -434,17 +433,14 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </fixedLine>"
             . "      <mobile>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </mobile>"
@@ -482,17 +478,14 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </fixedLine>"
             . "      <mobile>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </mobile>"
@@ -530,17 +523,14 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "    <territory id=\"AM\" countryCode=\"374\" internationalPrefix=\"00\">"
             . "      <generalDesc>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "      </generalDesc>"
             . "      <fixedLine>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </fixedLine>"
             . "      <mobile>"
             . "        <nationalNumberPattern>[1-9]\\d{7}</nationalNumberPattern>"
-            . "        <possibleNumberPattern>\\d{5,8}</possibleNumberPattern>"
             . "        <possibleLengths national=\"8\" localOnly=\"5,6\"/>"
             . "        <exampleNumber>10123456</exampleNumber>"
             . "      </mobile>"
@@ -588,14 +578,14 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
     {
         $generalDesc = new PhoneNumberDesc();
         $xmlInput = "<territory><fixedLine>"
-            . "  <possibleNumberPattern>\t \\d { 6 } </possibleNumberPattern>"
+            . "  <nationalNumberPattern>\t \\d { 6 } </nationalNumberPattern>"
             . "</fixedLine></territory>";
 
         $countryElement = $this->parseXMLString($xmlInput);
 
         $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $countryElement,
             'fixedLine');
-        $this->assertEquals('\\d{6}', $phoneNumberDesc->getPossibleNumberPattern());
+        $this->assertEquals('\\d{6}', $phoneNumberDesc->getNationalNumberPattern());
     }
 
     public function testSetRelevantDescPatternsSetsSameMobileAndFixedLinePattern()

@@ -68,7 +68,6 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $fieldMap = array();
         $fieldMap['fixedLine'] = array(
             'nationalNumberPattern',
-            'possibleNumberPattern',
             'possibleLength',
             'possibleLengthLocalOnly',
             'exampleNumber'
@@ -131,7 +130,6 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $fieldMap['pager'] = array('exampleNumber', 'nationalNumberPattern');
         $fieldMap['fixedLine'] = array(
             'nationalNumberPattern',
-            'possibleNumberPattern',
             'possibleLength',
             'possibleLengthLocalOnly',
             'exampleNumber'
@@ -182,7 +180,6 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ':carrierSpecific'
                 . ':noInternationalDialling'
             ), MetadataFilter::parseFieldMapFromString('nationalNumberPattern'
-            . ':possibleNumberPattern'
             . ':possibleLength'
             . ':possibleLengthLocalOnly'
             . ':exampleNumber'
@@ -205,14 +202,13 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         // Parent explicitly listing all possible children.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleNumberPattern,possibleLength,exampleNumber,"
-                . "possibleLengthLocalOnly)")),
+                "uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)")),
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString("uan")));
 
         // All parent's children covered, some implicitly and some explicitly.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleNumberPattern,possibleLength,exampleNumber)"
+                "uan(nationalNumberPattern,possibleLength,exampleNumber)"
                 . ":possibleLengthLocalOnly")),
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString("uan:possibleLengthLocalOnly")));
 
@@ -550,7 +546,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         // Child field given first as a child in a group and then as a group by itself.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleNumberPattern,possibleLength,exampleNumber)"
+                "uan(nationalNumberPattern,possibleLength,exampleNumber)"
                 . ":possibleLengthLocalOnly"
                 . ":exampleNumber");
             $this->fail();
@@ -796,7 +792,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $map1['mobile'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['emergency'] = array('nationalNumberPattern', 'possibleNumberPattern');
+        $map1['emergency'] = array('nationalNumberPattern');
         $map1['voicemail'] = array('possibleLength', 'exampleNumber');
         $map1['shortCode'] = array('exampleNumber');
         $map1['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -815,10 +811,9 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $map2['pager'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['uan'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['emergency'] = array('possibleLength', 'possibleLengthLocalOnly', 'exampleNumber');
-        $map2['voicemail'] = array('nationalNumberPattern', 'possibleNumberPattern', 'possibleLengthLocalOnly');
+        $map2['voicemail'] = array('nationalNumberPattern', 'possibleLengthLocalOnly');
         $map2['shortCode'] = array(
             'nationalNumberPattern',
-            'possibleNumberPattern',
             'possibleLength',
             'possibleLengthLocalOnly'
         );
@@ -837,7 +832,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $blacklist['mobile'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $blacklist['emergency'] = array('nationalNumberPattern', 'possibleNumberPattern');
+        $blacklist['emergency'] = array('nationalNumberPattern');
         $blacklist['voicemail'] = array('possibleLength', 'exampleNumber');
         $blacklist['shortCode'] = array('exampleNumber');
         $blacklist['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;

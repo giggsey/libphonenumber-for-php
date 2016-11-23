@@ -41,7 +41,6 @@ class BuildMetadataFromXml
     const CARRIER_SPECIFIC = 'carrierSpecific';
     const PATTERN = "pattern";
     const PERSONAL_NUMBER = "personalNumber";
-    const POSSIBLE_NUMBER_PATTERN = "possibleNumberPattern";
     const POSSIBLE_LENGTHS = "possibleLengths";
     const NATIONAL = "national";
     const LOCAL_ONLY = "localOnly";
@@ -703,7 +702,6 @@ class BuildMetadataFromXml
         $numberDesc = new PhoneNumberDesc();
         if ($phoneNumberDescList->length == 0) {
             $numberDesc->setNationalNumberPattern("NA");
-            $numberDesc->setPossibleNumberPattern("NA");
             // -1 will never match a possible phone number length, so is safe to use to ensure this never
             // matches. We don't leave it empty, since for compression reasons, we use the empty list to
             // mean that the generalDesc possible lengths apply.
@@ -730,12 +728,6 @@ class BuildMetadataFromXml
 
             /** @var \DOMElement $element */
             $element = $phoneNumberDescList->item(0);
-            // Old way of handling possible number lengths. This will be deleted when no data is
-            // represented in this way anymore.
-            $possiblePattern = $element->getElementsByTagName(self::POSSIBLE_NUMBER_PATTERN);
-            if ($possiblePattern->length > 0) {
-                $numberDesc->setPossibleNumberPattern(self::validateRE($possiblePattern->item(0)->firstChild->nodeValue, true));
-            }
 
             if ($parentDesc != null) {
                 // New way of handling possible number lengths. We don't do this for the general

@@ -36,7 +36,6 @@ class MetadataFilter
 
     public static $EXCLUDABLE_CHILD_FIELDS = array(
         "nationalNumberPattern",
-        "possibleNumberPattern",
         "possibleLength",
         "possibleLengthLocalOnly",
         "exampleNumber"
@@ -331,10 +330,6 @@ class MetadataFilter
 
         if ($this->drop($type, 'nationalNumberPattern')) {
             $builder->clearNationalNumberPattern();
-        }
-
-        if ($this->drop($type, 'possibleNumberPattern')) {
-            $builder->clearPossibleNumberPattern();
         }
 
         if ($this->drop($type, 'possibleLength')) {
