@@ -83,6 +83,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '4040',
+    'ExampleNumber' => '4040',
     'PossibleLength' => 
     array (
       0 => 4,

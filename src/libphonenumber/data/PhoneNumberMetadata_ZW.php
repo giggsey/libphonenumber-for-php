@@ -47,6 +47,7 @@ return array (
     'ExampleNumber' => '711234567',
     'PossibleLength' => 
     array (
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

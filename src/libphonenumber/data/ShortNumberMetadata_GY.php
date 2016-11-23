@@ -83,6 +83,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '1443',
+    'ExampleNumber' => '1443',
     'PossibleLength' => 
     array (
       0 => 4,

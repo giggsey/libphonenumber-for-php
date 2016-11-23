@@ -464,6 +464,6 @@ return array (
     ),
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => false,
+  'leadingZeroPossible' => true,
   'mobileNumberPortableRegion' => true,
 );

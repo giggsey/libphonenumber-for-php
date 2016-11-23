@@ -41,6 +41,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '909\\d{2}',
+    'ExampleNumber' => '90912',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -86,6 +87,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '1(?:0400|3[01]|5(?:1[01]|2[25])|65\\d{2})|(?:2[0-79]|3[0-29]|4[0-4])\\d{3}|5(?:[0-2]\\d|99)\\d{2}|(?:6[2357]|7[0-29])\\d{3}|8(?:988|[0-9]\\d{3})|909\\d{2}',
+    'ExampleNumber' => '90912',
     'PossibleLength' => 
     array (
     ),

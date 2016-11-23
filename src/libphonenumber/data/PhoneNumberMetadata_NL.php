@@ -155,6 +155,7 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '14\\d{3,4}',
+    'ExampleNumber' => '14123',
     'PossibleLength' => 
     array (
       0 => 5,

@@ -87,6 +87,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '89338|911',
+    'ExampleNumber' => '89338',
     'PossibleLength' => 
     array (
       0 => 3,

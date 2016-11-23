@@ -38,6 +38,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '[56]\\d{4}',
+    'ExampleNumber' => '51234',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -93,6 +94,7 @@ return array (
   'voip' => 
   array (
     'NationalNumberPattern' => '262\\d{2}',
+    'ExampleNumber' => '26212',
     'PossibleLength' => 
     array (
       0 => 5,
