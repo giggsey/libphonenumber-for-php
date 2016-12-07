@@ -8,7 +8,7 @@ use libphonenumber\PhoneNumberUtil;
 
 class PhoneNumberToCarrierMapperTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = "/../../tests/libphonenumber/Tests/carrier/data/";
+    const TEST_META_DATA_FILE_PREFIX = "/../tests/carrier/data/";
     private static $AO_MOBILE1;
     private static $AO_MOBILE2;
     private static $AO_FIXED1;

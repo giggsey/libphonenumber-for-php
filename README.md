@@ -21,7 +21,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
-PHP versions 5.3 up to PHP 7 are currently supported. HHVM is also supported.
+PHP versions 5.3 up to PHP 7.1 are currently supported. HHVM is also supported.
 
 The PECL [mbstring](http://php.net/mbstring) extension is required.
 
@@ -31,7 +31,7 @@ It is recommended to use [composer](https://getcomposer.org) to install the libr
 $ composer require giggsey/libphonenumber-for-php
 ```
 
-You can also use any other [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) compliant autoloader.
+You can also use any other [PSR-4](http://www.php-fig.org/psr/psr-4/) compliant autoloader.
 
 If you do not use composer, ensure that you also load any dependencies that this project has, such as [giggsey/locale](https://github.com/giggsey/Locale).
 
@@ -43,8 +43,10 @@ Documentation can be found in the [docs](docs/) directory.
 
 This library will try to follow the same version numbers as Google. There could be additional releases where needed to fix critical issues that can not wait until the next release from Google.
 
-This does mean that this project will not follow [Semantic Versioning](http://semver.org/), but instead Google's version policy. As a result, jumps in major versions may not actually contain any backwards
+This does mean that this project may not follow [Semantic Versioning](http://semver.org/), but instead Google's version policy. As a result, jumps in major versions may not actually contain any backwards
 incompatible changes. Please read the release notes for such releases.
+
+Google try to release their versions according to Semantic Versioning, as laid out of in their [Versioning Guide](https://github.com/googlei18n/libphonenumber#versioning-and-announcements).
 
 
 ## Online Demo

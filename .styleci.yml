@@ -2,14 +2,14 @@ preset: psr2
 
 finder:
   not-path:
-    - "src/libphonenumber/data/"
-    - "src/libphonenumber/carrier/data/"
-    - "src/libphonenumber/geocoding/data/"
-    - "src/libphonenumber/timezone/data/"
-    - "tests/libphonenumber/Tests/core/data/"
-    - "tests/libphonenumber/Tests/carrier/data/"
-    - "tests/libphonenumber/Tests/prefixmapper/data/"
-    - "tests/libphonenumber/Tests/timezone/data/"
+    - "src/data/"
+    - "src/carrier/data/"
+    - "src/geocoding/data/"
+    - "src/timezone/data/"
+    - "tests/core/data/"
+    - "tests/carrier/data/"
+    - "tests/prefixmapper/data/"
+    - "tests/timezone/data/"
   not-name:
     - "CountryCodeToRegionCodeMap.php"
     - "CountryCodeToRegionCodeMapForTesting.php"

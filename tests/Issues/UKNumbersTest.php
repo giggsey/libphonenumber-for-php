@@ -15,7 +15,7 @@ class UKNumbersTest extends \PHPUnit_Framework_TestCase
      */
     protected $phoneUtil;
 
-    public function __construct()
+    public function setUp()
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance(

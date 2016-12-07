@@ -9,6 +9,7 @@ namespace libphonenumber\prefixmapper;
  *
  * Class MappingFileProvider
  * @package libphonenumber\prefixmapper
+ * @internal
  */
 class MappingFileProvider
 {

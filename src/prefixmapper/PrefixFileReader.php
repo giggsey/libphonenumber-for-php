@@ -36,7 +36,7 @@ class PrefixFileReader
     {
         $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . "Map.php";
         if (!file_exists($mapPath)) {
-            throw new \InvalidArgumentException("Invalid data directory");
+            throw new \InvalidArgumentException("Invalid data directory: $mapPath");
         }
 
         $map = require $mapPath;
