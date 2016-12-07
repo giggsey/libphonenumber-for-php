@@ -339,37 +339,24 @@ class ShortNumberInfo
      * in the form of a string, and the region where the number is dialled from. This provides a more
      * lenient check than {@link #isValidShortNumber}.
      *
-     * @param PhoneNumber|string $shortNumber The short number to check
+     * @param PhoneNumber $shortNumber The short number to check
      * @param string $regionDialingFrom Region dialing From
      * @return boolean whether the number is a possible short number
      */
-    public function isPossibleShortNumberForRegion($shortNumber, $regionDialingFrom)
+    public function isPossibleShortNumberForRegion(PhoneNumber $shortNumber, $regionDialingFrom)
     {
-        if ($shortNumber instanceof PhoneNumber) {
-            if (!$this->regionDialingFromMatchesNumber($shortNumber, $regionDialingFrom)) {
-                return false;
-            }
+        if (!$this->regionDialingFromMatchesNumber($shortNumber, $regionDialingFrom)) {
+            return false;
         }
+
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
 
         if ($phoneMetadata === null) {
             return false;
         }
 
-        if ($shortNumber instanceof PhoneNumber) {
-            $numberLength = strlen($this->getNationalSignificantNumber($shortNumber));
-            return in_array($numberLength, $phoneMetadata->getGeneralDesc()->getPossibleLength());
-        } else {
-            /**
-             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
-             *        formatting characters) would have been getting the wrong result. You should parse
-             *        the string to PhoneNumber and use the method
-             *        {@code #isPossibleShortNumberForRegion(PhoneNumber, String)}. This method will be
-             *        removed in the next release.
-             */
-
-            return in_array(strlen($shortNumber), $phoneMetadata->getGeneralDesc()->getPossibleLength());
-        }
+        $numberLength = strlen($this->getNationalSignificantNumber($shortNumber));
+        return in_array($numberLength, $phoneMetadata->getGeneralDesc()->getPossibleLength());
     }
 
     /**
@@ -399,16 +386,14 @@ class ShortNumberInfo
      * the number is actually in use, which is impossible to tell by just looking at the number
      * itself.
      *
-     * @param PhoneNumber|string $number The Short number for which we want to test the validity
+     * @param PhoneNumber $number The Short number for which we want to test the validity
      * @param string $regionDialingFrom the region from which the number is dialed
      * @return boolean whether the short number matches a valid pattern
      */
-    public function isValidShortNumberForRegion($number, $regionDialingFrom)
+    public function isValidShortNumberForRegion(PhoneNumber $number, $regionDialingFrom)
     {
-        if ($number instanceof PhoneNumber) {
-            if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
-                return false;
-            }
+        if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
+            return false;
         }
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
 
@@ -416,18 +401,7 @@ class ShortNumberInfo
             return false;
         }
 
-        if ($number instanceof PhoneNumber) {
-            $shortNumber = $this->getNationalSignificantNumber($number);
-        } else {
-            /**
-             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
-             *             formatting characters) would have been getting the wrong result. You should parse
-             *             the string to PhoneNumber and use the method
-             *             {@code #isValidShortNumberForRegion(PhoneNumber, String)}. This method will be
-             *             removed in the next release.
-             */
-            $shortNumber = $number;
-        }
+        $shortNumber = $this->getNationalSignificantNumber($number);
 
         $generalDesc = $phoneMetadata->getGeneralDesc();
 
@@ -448,26 +422,24 @@ class ShortNumberInfo
      * Example usage:
      * <pre>{@code
      * $shortInfo = ShortNumberInfo::getInstance();
-     * $shortNumber = "110";
+     * $shortNumber = PhoneNumberUtil::parse("110", "US);
      * $regionCode = "FR";
      * if ($shortInfo->isValidShortNumberForRegion($shortNumber, $regionCode)) {
      *     $cost = $shortInfo->getExpectedCostForRegion($shortNumber, $regionCode);
      *    // Do something with the cost information here.
      * }}</pre>
      *
-     * @param PhoneNumber|string $number the short number for which we want to know the expected cost category,
+     * @param PhoneNumber $number the short number for which we want to know the expected cost category,
      *     as a string
      * @param string $regionDialingFrom the region from which the number is dialed
      * @return int the expected cost category for that region of the short number. Returns UNKNOWN_COST if
      *     the number does not match a cost category. Note that an invalid number may match any cost
      *     category.
      */
-    public function getExpectedCostForRegion($number, $regionDialingFrom)
+    public function getExpectedCostForRegion(PhoneNumber $number, $regionDialingFrom)
     {
-        if ($number instanceof PhoneNumber) {
-            if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
-                return ShortNumberCost::UNKNOWN_COST;
-            }
+        if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
+            return ShortNumberCost::UNKNOWN_COST;
         }
         // Note that regionDialingFrom may be null, in which case phoneMetadata will also be null.
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
@@ -475,18 +447,7 @@ class ShortNumberInfo
             return ShortNumberCost::UNKNOWN_COST;
         }
 
-        if ($number instanceof PhoneNumber) {
-            $shortNumber = $this->getNationalSignificantNumber($number);
-        } else {
-            /**
-             * @deprecated Anyone who was using it and passing in a string with whitespace (or other
-             *             formatting characters) would have been getting the wrong result. You should parse
-             *             the string to PhoneNumber and use the method
-             *             {@code #getExpectedCostForRegion(PhoneNumber, String)}. This method will be
-             *             removed in the next release.
-             */
-            $shortNumber = $number;
-        }
+        $shortNumber = $this->getNationalSignificantNumber($number);
 
         // The possible lengths are not present for a particular sub-type if they match the general
         // description; for this reason, we check the possible lengths against the general description
