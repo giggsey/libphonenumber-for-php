@@ -7,6 +7,7 @@
 return array (
   37441 => 'Ucom',
   37443 => 'Beeline',
+  37444 => 'Ucom',
   37449 => 'VivaCell-MTS',
   37455 => 'Ucom',
   37477 => 'VivaCell-MTS',

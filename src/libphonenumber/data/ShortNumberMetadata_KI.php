@@ -48,8 +48,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '99[2349]',
-    'ExampleNumber' => '999',
+    'NationalNumberPattern' => '19[2-5]|99[2349]',
+    'ExampleNumber' => '192',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -60,7 +60,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '10(?:[0-8]|5[01259])|777|99[2349]',
+    'NationalNumberPattern' => '1(?:0(?:[0-8]|5[01259])|88|9[2-5])|777|99[2349]',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (

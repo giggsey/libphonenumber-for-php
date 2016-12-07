@@ -5,14 +5,14 @@
  */
 
 return array (
-  25561 => 'Dovetel',
   25562 => 'Viettel',
+  25563 => 'MTC',
+  25564 => 'Cootel',
   25565 => 'tiGO',
   25566 => 'SMILE',
   25567 => 'tiGO',
   25568 => 'Airtel',
   25571 => 'tiGO',
-  25572 => 'Mycel',
   25573 => 'Tanzania Telecom',
   25574 => 'Vodacom',
   25575 => 'Vodacom',

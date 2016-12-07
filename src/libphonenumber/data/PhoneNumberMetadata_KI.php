@@ -26,11 +26,10 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:[24]\\d|3[1-9]|50|8[0-5])\\d{3}',
+    'NationalNumberPattern' => '(?:[24]\\d|3[1-9]|50|8[0-5])\\d{3}|7(?:27|31|5[0-4])\\d{5}',
     'ExampleNumber' => '31234',
     'PossibleLength' => 
     array (
-      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -38,7 +37,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7\\d{7}',
+    'NationalNumberPattern' => '7[23]0\\d{5}',
     'ExampleNumber' => '72012345',
     'PossibleLength' => 
     array (
@@ -61,11 +60,10 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '3001\\d{4}',
-    'ExampleNumber' => '30010000',
+    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
-      0 => 8,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -95,10 +93,11 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '30(?:0[01]\\d{2}|12(?:11|20))\\d{2}',
+    'ExampleNumber' => '30010000',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (

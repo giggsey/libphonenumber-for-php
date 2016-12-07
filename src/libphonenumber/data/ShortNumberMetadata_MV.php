@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
+    'NationalNumberPattern' => '[14]\\d{2,3}',
     'PossibleLength' => 
     array (
       0 => 3,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,10 +48,11 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1(?:02|19)',
+    'NationalNumberPattern' => '1(?:02|1[89])',
     'ExampleNumber' => '102',
     'PossibleLength' => 
     array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,7 +60,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:02|1[09]|23|90)',
+    'NationalNumberPattern' => '1(?:[0-37-9]\\d|[45](?:1|\\d{2})|6\\d{2})|4040',
     'ExampleNumber' => '123',
     'PossibleLength' => 
     array (
@@ -80,10 +82,11 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '1[45]1',
+    'ExampleNumber' => '141',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -37,7 +37,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:6[125-9]|7[1-9])\\d{7}',
+    'NationalNumberPattern' => '(?:6[2-9]|7[13-9])\\d{7}',
     'ExampleNumber' => '621234567',
     'PossibleLength' => 
     array (
@@ -141,10 +141,11 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '(?:8(?:[04]0|6[01])|90\\d)\\d{6}',
+    'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
