@@ -2960,6 +2960,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $usWithExtension->setCountryCode(1)->setNationalNumber(8009013355)->setExtension("7246433");
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 x 7246433", RegionCode::US));
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 , ext 7246433", RegionCode::US));
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ; 7246433", RegionCode::US));
+        // To test an extension character without surrounding spaces.
+        $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355;7246433", RegionCode::US));
         $this->assertEquals(
             $usWithExtension,
             $this->phoneUtil->parse("(800) 901-3355 ,extension 7246433", RegionCode::US)
@@ -3143,6 +3146,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             MatchType::EXACT_MATCH,
             $this->phoneUtil->isNumberMatch("+64 3 331-6005 extn 1234", "+6433316005#1234")
+        );
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+64 3 331-6005 ext. 1234", "+6433316005;1234")
         );
         // Test proto buffers.
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch(self::$nzNumber, "+6403 331 6005"));

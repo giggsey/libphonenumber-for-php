@@ -446,9 +446,9 @@ class PhoneNumberUtil
         // One-character symbols that can be used to indicate an extension.
         $singleExtnSymbolsForMatching = "x\xEF\xBD\x98#\xEF\xBC\x83~\xEF\xBD\x9E";
         // For parsing, we are slightly more lenient in our interpretation than for matching. Here we
-        // allow a "comma" as a possible extension indicator. When matching, this is hardly ever used to
-        // indicate this.
-        $singleExtnSymbolsForParsing = "," . $singleExtnSymbolsForMatching;
+        // allow "comma" and "semicolon" as possible extension indicators. When matching, these are
+        // hardly ever used to indicate this.
+        $singleExtnSymbolsForParsing = ",;" . $singleExtnSymbolsForMatching;
 
         static::$EXTN_PATTERNS_FOR_PARSING = static::createExtnPattern($singleExtnSymbolsForParsing);
     }
@@ -468,9 +468,9 @@ class PhoneNumberUtil
     {
         // There are three regular expressions here. The first covers RFC 3966 format, where the
         // extension is added using ";ext=". The second more generic one starts with optional white
-        // space and ends with an optional full stop (.), followed by zero or more spaces/tabs and then
-        // the numbers themselves. The other one covers the special case of American numbers where the
-        // extension is written with a hash at the end, such as "- 503#".
+        // space and ends with an optional full stop (.), followed by zero or more spaces/tabs/commas
+        // and then the numbers themselves. The other one covers the special case of American numbers
+        // where the extension is written with a hash at the end, such as "- 503#"
         // Note that the only capturing groups should be around the digits that you want to capture as
         // part of the extension, or else parsing will fail!
         // Canonical-equivalence doesn't seem to be an option with Android java, so we allow two options
