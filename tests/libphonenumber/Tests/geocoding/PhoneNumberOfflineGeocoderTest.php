@@ -7,7 +7,7 @@ use libphonenumber\PhoneNumber;
 
 class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = "/../../../Tests/libphonenumber/Tests/prefixmapper/data/";
+    const TEST_META_DATA_FILE_PREFIX = "/../../../tests/libphonenumber/Tests/prefixmapper/data/";
     private static $KO_Number1;
     private static $KO_Number2;
     private static $KO_Number3;

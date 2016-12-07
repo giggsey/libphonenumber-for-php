@@ -15,10 +15,10 @@
         </filterchain>
     </loadfile>
 
-    <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
-    <property name="data.testPrefixMapperData" value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
-    <property name="data.testCarrierData" value="Tests/libphonenumber/Tests/carrier/data/"/>
-    <property name="data.testTimezoneData" value="Tests/libphonenumber/Tests/timezone/data/"/>
+    <property name="data.testCoreData" value="tests/libphonenumber/Tests/core/data/"/>
+    <property name="data.testPrefixMapperData" value="tests/libphonenumber/Tests/prefixmapper/data/"/>
+    <property name="data.testCarrierData" value="tests/libphonenumber/Tests/carrier/data/"/>
+    <property name="data.testTimezoneData" value="tests/libphonenumber/Tests/timezone/data/"/>
 
     <property name="data.coreData" value="src/libphonenumber/data/"/>
     <property name="data.carrierData" value="src/libphonenumber/carrier/data/"/>
@@ -96,8 +96,9 @@
             <then>
                 <echo>Cloning repository</echo>
                 <gitclone
-                    repository="${git.url}"
-                    targetPath="${git.path}"/>
+                        branch="master"
+                        repository="${git.url}"
+                        targetPath="${git.path}"/>
             </then>
         </if>
 

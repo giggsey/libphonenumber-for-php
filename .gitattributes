@@ -1,4 +1,4 @@
-Tests/ export-ignore
+tests/ export-ignore
 build/ export-ignore
 .travis.yml export-ignore
 .styleci.yml export-ignore

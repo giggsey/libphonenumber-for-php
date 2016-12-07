@@ -18,7 +18,7 @@ use libphonenumber\ValidationResult;
 
 class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = "../../../Tests/libphonenumber/Tests/core/data/PhoneNumberMetadataForTesting";
+    const TEST_META_DATA_FILE_PREFIX = "../../../tests/libphonenumber/Tests/core/data/PhoneNumberMetadataForTesting";
     private static $bsNumber = null;
     private static $internationalTollFree = null;
     private static $sgNumber = null;

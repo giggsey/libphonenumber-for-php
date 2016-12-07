@@ -32,12 +32,12 @@
   "autoload-dev": {
     "psr-0": {
       "libphonenumber\\buildtools": "build/",
-      "libphonenumber\\Tests": "Tests/"
+      "libphonenumber\\Tests": "tests/"
     }
   },
   "archive": {
     "exclude": [
-      "Tests/",
+      "tests/",
       "build/",
       "/.travis.yml",
       "/build.xml",

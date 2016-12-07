@@ -8,6 +8,9 @@ use libphonenumber\PhoneNumber;
 class Issue106Test extends \PHPUnit_Framework_TestCase
 {
     private static $TW_Number1;
+    /**
+     * @var PhoneNumberOfflineGeocoder
+     */
     protected $geocoder;
 
     public static function setUpBeforeClass()
