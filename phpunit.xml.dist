@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./Tests/bootstrap.php"
+<phpunit bootstrap="./tests/bootstrap.php"
          colors="true">
 
     <testsuites>
         <testsuite>
-            <directory>./Tests/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 
@@ -13,17 +13,16 @@
             <directory suffix=".php">./src/</directory>
             <exclude>
                 <!-- Exclude data directories, and files -->
-                <directory suffix=".php">./src/libphonenumber/data/</directory>
-                <directory suffix=".php">./src/libphonenumber/carrier/data/</directory>
-                <directory suffix=".php">./src/libphonenumber/geocoding/data/</directory>
-                <directory suffix=".php">./src/libphonenumber/timezone/data/</directory>
-                <file>./src/libphonenumber/AlternateFormatsCountryCodeSet.php</file>
-                <file>./src/libphonenumber/CountryCodeToRegionCodeMap.php</file>
-                <file>./src/libphonenumber/CountryCodeToRegionCodeMapForTesting.php</file>
-                <file>./src/libphonenumber/RegionCode.php</file>
+                <directory suffix=".php">./src/data/</directory>
+                <directory suffix=".php">./src/carrier/data/</directory>
+                <directory suffix=".php">./src/geocoding/data/</directory>
+                <directory suffix=".php">./src/timezone/data/</directory>
+                <file>./src/AlternateFormatsCountryCodeSet.php</file>
+                <file>./src/CountryCodeToRegionCodeMap.php</file>
+                <file>./src/CountryCodeToRegionCodeMapForTesting.php</file>
+                <file>./src/RegionCode.php</file>
             </exclude>
         </whitelist>
     </filter>
 
 </phpunit>
-

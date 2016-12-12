@@ -21,23 +21,23 @@
     {
       "name": "Joshua Gigg",
       "email": "giggsey@gmail.com",
-      "homepage": "http://giggsey.com/"
+      "homepage": "https://giggsey.com/"
     }
   ],
   "autoload": {
-    "psr-0": {
-      "libphonenumber": "src/"
+    "psr-4": {
+      "libphonenumber\\": "src/"
     }
   },
   "autoload-dev": {
-    "psr-0": {
-      "libphonenumber\\buildtools": "build/",
-      "libphonenumber\\Tests": "Tests/"
+    "psr-4": {
+      "libphonenumber\\buildtools\\": "build/",
+      "libphonenumber\\Tests\\": "tests/"
     }
   },
   "archive": {
     "exclude": [
-      "Tests/",
+      "tests/",
       "build/",
       "/.travis.yml",
       "/build.xml",
@@ -62,7 +62,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "7.x-dev"
+      "dev-master": "8.x-dev"
     }
   }
 }

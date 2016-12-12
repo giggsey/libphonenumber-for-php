@@ -15,15 +15,15 @@
         </filterchain>
     </loadfile>
 
-    <property name="data.testCoreData" value="Tests/libphonenumber/Tests/core/data/"/>
-    <property name="data.testPrefixMapperData" value="Tests/libphonenumber/Tests/prefixmapper/data/"/>
-    <property name="data.testCarrierData" value="Tests/libphonenumber/Tests/carrier/data/"/>
-    <property name="data.testTimezoneData" value="Tests/libphonenumber/Tests/timezone/data/"/>
+    <property name="data.testCoreData" value="tests/core/data/"/>
+    <property name="data.testPrefixMapperData" value="tests/prefixmapper/data/"/>
+    <property name="data.testCarrierData" value="tests/carrier/data/"/>
+    <property name="data.testTimezoneData" value="tests/timezone/data/"/>
 
-    <property name="data.coreData" value="src/libphonenumber/data/"/>
-    <property name="data.carrierData" value="src/libphonenumber/carrier/data/"/>
-    <property name="data.geocodingData" value="src/libphonenumber/geocoding/data/"/>
-    <property name="data.timezoneData" value="src/libphonenumber/timezone/data/"/>
+    <property name="data.coreData" value="src/data/"/>
+    <property name="data.carrierData" value="src/carrier/data/"/>
+    <property name="data.geocodingData" value="src/geocoding/data/"/>
+    <property name="data.timezoneData" value="src/timezone/data/"/>
 
 
     <target name="test" description="Run unit tests" depends="compile-test-data">
@@ -65,8 +65,8 @@
     </target>
 
     <target name="delete-coredata">
-        <delete dir="${data.coreData}"/>
-        <mkdir dir="${data.coreData}"/>
+        <delete dir="src/data"/>
+        <mkdir dir="src/data"/>
     </target>
 
     <target name="delete-carrierdata">
@@ -96,8 +96,9 @@
             <then>
                 <echo>Cloning repository</echo>
                 <gitclone
-                    repository="${git.url}"
-                    targetPath="${git.path}"/>
+                        branch="master"
+                        repository="${git.url}"
+                        targetPath="${git.path}"/>
             </then>
         </if>
 
@@ -128,7 +129,7 @@
             <arg value="${data.testCoreData}"/>
             <arg value="PhoneNumberMetadataForTesting"/>
             <arg value="CountryCodeToRegionCodeMapForTesting"/>
-            <arg value="src/libphonenumber/"/>
+            <arg value="src/"/>
             <arg value="false"/>
         </exec>
     </target>
@@ -157,7 +158,7 @@
             <arg value="${data.coreData}"/>
             <arg value="PhoneNumberMetadata"/>
             <arg value="CountryCodeToRegionCodeMap"/>
-            <arg value="src/libphonenumber/"/>
+            <arg value="src/"/>
             <arg value="false"/>
         </exec>
     </target>
@@ -169,7 +170,7 @@
             <arg value="${data.coreData}"/>
             <arg value="ShortNumberMetadata"/>
             <arg value="ShortNumbersRegionCodeSet"/>
-            <arg value="src/libphonenumber/"/>
+            <arg value="src/"/>
             <arg value="false"/>
         </exec>
     </target>
@@ -181,7 +182,7 @@
             <arg value="${data.coreData}"/>
             <arg value="PhoneNumberAlternateFormats"/>
             <arg value="AlternateFormatsCountryCodeSet"/>
-            <arg value="src/libphonenumber/"/>
+            <arg value="src/"/>
             <arg value="false"/>
         </exec>
     </target>
