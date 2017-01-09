@@ -1004,25 +1004,30 @@ class PhoneNumberUtil
         $formattedNumber = "";
         $countryCallingCode = $number->getCountryCode();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+
         if ($numberFormat == PhoneNumberFormat::E164) {
             // Early exit for E164 case (even if the country calling code is invalid) since no formatting
             // of the national number needs to be applied. Extensions are not formatted.
             $formattedNumber .= $nationalSignificantNumber;
             $this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
-        } elseif (!$this->hasValidCountryCallingCode($countryCallingCode)) {
-            $formattedNumber .= $nationalSignificantNumber;
-        } else {
-            // Note getRegionCodeForCountryCode() is used because formatting information for regions which
-            // share a country calling code is contained by only one region for performance reasons. For
-            // example, for NANPA regions it will be contained in the metadata for US.
-            $regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
-            // Metadata cannot be null because the country calling code is valid (which means that the
-            // region code cannot be ZZ and must be one of our supported region codes).
-            $metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
-            $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
-            $this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+            return $formattedNumber;
         }
+
+        if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
+            $formattedNumber .= $nationalSignificantNumber;
+            return $formattedNumber;
+        }
+
+        // Note getRegionCodeForCountryCode() is used because formatting information for regions which
+        // share a country calling code is contained by only one region for performance reasons. For
+        // example, for NANPA regions it will be contained in the metadata for US.
+        $regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
+        // Metadata cannot be null because the country calling code is valid (which means that the
+        // region code cannot be ZZ and must be one of our supported region codes).
+        $metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
+        $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
         $this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
+        $this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
         return $formattedNumber;
     }
 
