@@ -1000,7 +1000,7 @@ class PhoneNumberUtil
                 return $rawInput;
             }
         }
-        $metadata = null;
+
         $formattedNumber = "";
         $countryCallingCode = $number->getCountryCode();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
