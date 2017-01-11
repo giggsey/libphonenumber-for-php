@@ -6,6 +6,12 @@
 
 return array (
   245955 => 'Orange',
+  2459560 => 'Orange',
+  2459561 => 'Orange',
+  2459562 => 'Orange',
+  2459650 => 'Spacetel',
+  2459651 => 'Spacetel',
+  2459652 => 'Spacetel',
   245966 => 'Spacetel',
   245969 => 'Spacetel',
   245977 => 'Guinetel',

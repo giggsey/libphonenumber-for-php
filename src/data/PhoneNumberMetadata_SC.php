@@ -14,11 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2468]\\d{5,6}',
+    'NationalNumberPattern' => '[24689]\\d{5,6}',
     'PossibleLength' => 
     array (
-      0 => 6,
-      1 => 7,
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -30,7 +29,6 @@ return array (
     'ExampleNumber' => '4217123',
     'PossibleLength' => 
     array (
-      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,7 +40,6 @@ return array (
     'ExampleNumber' => '2510123',
     'PossibleLength' => 
     array (
-      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -50,11 +47,10 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '8000\\d{2}',
-    'ExampleNumber' => '800000',
+    'NationalNumberPattern' => '8000\\d{3}',
+    'ExampleNumber' => '8000000',
     'PossibleLength' => 
     array (
-      0 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -95,11 +91,10 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '64\\d{5}',
+    'NationalNumberPattern' => '(?:64\\d|971)\\d{4}',
     'ExampleNumber' => '6412345',
     'PossibleLength' => 
     array (
-      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -151,24 +146,12 @@ return array (
   ),
   'id' => 'SC',
   'countryCode' => 248,
-  'internationalPrefix' => '0[0-2]',
+  'internationalPrefix' => '0(?:[02]|10?)',
   'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 
-    array (
-      'pattern' => '(\\d{3})(\\d{3})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '8',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    1 => 
     array (
       'pattern' => '(\\d)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',

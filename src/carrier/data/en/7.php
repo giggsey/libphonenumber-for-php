@@ -5,15 +5,20 @@
  */
 
 return array (
-  7701 => 'Kcell',
-  7702 => 'Kcell',
+  7700 => 'Altel',
+  7701 => 'Kcell/Activ',
+  7702 => 'Kcell/Activ',
   7705 => 'Beeline',
   7707 => 'Tele2',
   7708 => 'Altel',
   7747 => 'Tele2',
+  7760 => 'Kulan',
+  7762 => 'Nursat',
+  7763 => 'Arna',
+  7764 => '2Day Telecom',
   7771 => 'Beeline',
-  7775 => 'Kcell',
+  7775 => 'Kcell/Activ',
   7776 => 'Beeline',
   7777 => 'Beeline',
-  7778 => 'Kcell',
+  7778 => 'Kcell/Activ',
 );

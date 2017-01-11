@@ -103,7 +103,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6(?:5\\d|8[0168])|7\\d{2}|8(?:2\\d|33|55|77|81)|9[29]\\d)\\d{5}',
+    'NationalNumberPattern' => '7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6[58]\\d|7\\d{2}|8(?:2\\d|33|55|77|81)|9[2579]\\d)\\d{5}',
     'ExampleNumber' => '771234567',
     'PossibleLength' => 
     array (

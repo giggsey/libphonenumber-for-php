@@ -204,11 +204,11 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:[14689][1-9]|2[12478]|3[1-578]|5[1-5]|7[13-579])9',
+        0 => '[1-9][1-9]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
@@ -216,11 +216,11 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[1-9][1-9]',
+        0 => '(?:[14689][1-9]|2[12478]|3[1-578]|5[1-5]|7[13-579])9',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
@@ -255,11 +255,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:[14689][1-9]|2[12478]|3[1-578]|5[1-5]|7[13-579])9',
+        0 => '[1-9][1-9]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',
@@ -267,11 +267,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[1-9][1-9]',
+        0 => '(?:[14689][1-9]|2[12478]|3[1-578]|5[1-5]|7[13-579])9',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0 $CC ($1)',

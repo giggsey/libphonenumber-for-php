@@ -657,6 +657,7 @@ return array (
   62832 => 'AXIS',
   62833 => 'AXIS',
   62838 => 'AXIS',
+  62851 => 'Telkomsel',
   62852 => 'Telkomsel',
   62853 => 'Telkomsel',
   62855 => 'IM3',

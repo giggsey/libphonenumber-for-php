@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[379]\\d{6}',
+    'NationalNumberPattern' => '[3478]\\d{6}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '7(?:6[0-37-9]|7[0-57-9])\\d{4}',
+    'NationalNumberPattern' => '7[4-7]\\d{5}',
     'ExampleNumber' => '7712345',
     'PossibleLength' => 
     array (
@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '3[234]\\d{5}',
+    'NationalNumberPattern' => '[34]\\d{6}',
     'ExampleNumber' => '3212345',
     'PossibleLength' => 
     array (
@@ -58,8 +58,8 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:39[01]|9[01]0)\\d{4}',
-    'ExampleNumber' => '9001234',
+    'NationalNumberPattern' => '(?:39[01]|8\\d{2})\\d{4}',
+    'ExampleNumber' => '8001234',
     'PossibleLength' => 
     array (
     ),
