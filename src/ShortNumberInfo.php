@@ -253,8 +253,9 @@ class ShortNumberInfo
 
     /**
      * Given a valid short number, determines whether it is carrier-specific (however, nothing is
-     * implied about its validity). If it is important that the number is valid, then its validity
-     * must first be checked using {@link isValidShortNumber} or
+     * implied about its validity). Carrier-specific numbers may connect to a different end-point, or
+     * not connect at all, depending on the user's carrier. If it is important that the number is
+     * valid, then its validity must first be checked using {@link #isValidShortNumber} or
      * {@link #isValidShortNumberForRegion}.
      *
      * @param PhoneNumber $number the valid short number to check
@@ -272,6 +273,31 @@ class ShortNumberInfo
             $nationalNumber,
             $phoneMetadata->getCarrierSpecific()
         ));
+    }
+
+    /**
+     * Given a valid short number, determines whether it is carrier-specific when dialed from the
+     * given region (however, nothing is implied about its validity). Carrier-specific numbers may
+     * connect to a different end-point, or not connect at all, depending on the user's carrier. If
+     * it is important that the number is valid, then its validity must first be checked using
+     * {@link #isValidShortNumber} or {@link #isValidShortNumberForRegion}. Returns false if the
+     * number doesn't match the region provided.
+     * @param PhoneNumber $number The valid short number to check
+     * @param string $regionDialingFrom The region from which the number is dialed
+     * @return bool Whether the short number is carrier-specific (Assuming the input was a valid short
+     *  number)
+     */
+    public function isCarrierSpecificForRegion(PhoneNumber $number, $regionDialingFrom)
+    {
+        if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
+            return false;
+        }
+
+        $nationalNumber = $this->getNationalSignificantNumber($number);
+        $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
+
+        return ($phoneMetadata !== null)
+            && ($this->matchesPossibleNumberAndNationalNumber($nationalNumber, $phoneMetadata->getCarrierSpecific()));
     }
 
     /**

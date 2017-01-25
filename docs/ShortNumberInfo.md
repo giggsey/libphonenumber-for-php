@@ -140,6 +140,19 @@ var_dump($shortNumberUtil->isCarrierSpecific($phoneNumber));
 // (bool) true
 ```
 
+### `isCarrierSpecificForRegion()`
+
+Returns whether the supplied `PhoneNumber` is a carrier specific short number in the `$region` provided.
+
+```php
+$phoneNumber = new \libphonenumber\PhoneNumber();
+$phoneNumber->setCountryCode(1);
+$phoneNumber->setNationalNumber(611);
+
+var_dump($shortNumberUtil->isCarrierSpecificForRegion($phoneNumber, 'US'));
+// (bool) true
+```
+
 ## Expected Costs
 
 ### `getExpectedCost()`

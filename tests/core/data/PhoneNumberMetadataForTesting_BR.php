@@ -146,7 +146,7 @@ return array (
   ),
   'id' => 'BR',
   'countryCode' => 55,
-  'internationalPrefix' => '',
+  'internationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

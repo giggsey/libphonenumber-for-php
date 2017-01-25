@@ -146,7 +146,7 @@ return array (
   ),
   'id' => 'GG',
   'countryCode' => 44,
-  'internationalPrefix' => '',
+  'internationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

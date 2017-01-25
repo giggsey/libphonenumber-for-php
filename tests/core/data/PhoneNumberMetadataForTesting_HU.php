@@ -145,7 +145,7 @@ return array (
   ),
   'id' => 'HU',
   'countryCode' => 36,
-  'internationalPrefix' => '',
+  'internationalPrefix' => '00',
   'nationalPrefix' => '06',
   'nationalPrefixForParsing' => '06',
   'sameMobileAndFixedLinePattern' => false,

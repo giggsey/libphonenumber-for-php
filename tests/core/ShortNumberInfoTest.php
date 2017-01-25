@@ -72,6 +72,25 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->shortInfo->isValidShortNumber($phoneNumberObj));
     }
 
+    public function testIsCarrierSpecific()
+    {
+        $carrierSpecificNumber = new PhoneNumber();
+        $carrierSpecificNumber->setCountryCode(1)->setNationalNumber(33669);
+        $this->assertTrue($this->shortInfo->isCarrierSpecific($carrierSpecificNumber));
+        $this->assertTrue($this->shortInfo->isCarrierSpecificForRegion($this->parse('33669', RegionCode::US), RegionCode::US));
+
+        $notCarrierSpecificNumber = new PhoneNumber();
+        $notCarrierSpecificNumber->setCountryCode(1)->setNationalNumber(911);
+        $this->assertFalse($this->shortInfo->isCarrierSpecific($notCarrierSpecificNumber));
+        $this->assertFalse($this->shortInfo->isCarrierSpecificForRegion($this->parse('911', RegionCode::US), RegionCode::US));
+
+        $carrierSpecificNumberForSomeRegion = new PhoneNumber();
+        $carrierSpecificNumberForSomeRegion->setCountryCode(1)->setNationalNumber(211);
+        $this->assertTrue($this->shortInfo->isCarrierSpecific($carrierSpecificNumberForSomeRegion));
+        $this->assertTrue($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::US));
+        $this->assertFalse($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::BB));
+    }
+
     public function testGetExpectedCost()
     {
         $premiumRateExample = $this->shortInfo->getExampleShortNumberForCost(

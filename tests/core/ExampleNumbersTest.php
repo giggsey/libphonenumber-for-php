@@ -371,6 +371,7 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider shortNumberRegionList
+     * @param string $regionCode
      */
     public function testCarrierSpecificShortNumbers($regionCode)
     {
@@ -380,10 +381,8 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             $exampleNumber = $desc->getExampleNumber();
             $carrierSpecificNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
 
-            if (!$this->shortNumberInfo->isPossibleShortNumberForRegion(
-                    $carrierSpecificNumber,
-                    $regionCode
-                ) || !$this->shortNumberInfo->isCarrierSpecific($carrierSpecificNumber)
+            if (!$this->shortNumberInfo->isPossibleShortNumberForRegion($carrierSpecificNumber, $regionCode)
+                || !$this->shortNumberInfo->isCarrierSpecificForRegion($carrierSpecificNumber, $regionCode)
             ) {
                 $this->fail("Carrier-specific test failed for " . $regionCode);
             }

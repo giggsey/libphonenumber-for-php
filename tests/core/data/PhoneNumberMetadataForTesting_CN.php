@@ -146,7 +146,7 @@ return array (
   ),
   'id' => 'CN',
   'countryCode' => 86,
-  'internationalPrefix' => '',
+  'internationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

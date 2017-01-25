@@ -15,7 +15,6 @@ return array (
   'generalDesc' => 
   array (
     'NationalNumberPattern' => '[1-9]\\d{7}',
-    'ExampleNumber' => '10123456',
     'PossibleLength' => 
     array (
       0 => 8,
