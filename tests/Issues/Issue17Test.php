@@ -27,7 +27,7 @@ class Issue17Test extends \PHPUnit_Framework_TestCase
 
     public function testIsleOfManLocale()
     {
-        $number = "447624806000";
+        $number = "447624206000";
 
         $phoneNumber = $this->phoneUtil->parse($number, 'GB');
 

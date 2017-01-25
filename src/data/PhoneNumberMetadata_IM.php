@@ -37,7 +37,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7[569]24\\d{6}',
+    'NationalNumberPattern' => '7(?:4576|[59]24\\d)\\d{5}',
     'ExampleNumber' => '7924123456',
     'PossibleLength' => 
     array (
@@ -103,10 +103,10 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '76242\\d{5}',
+    'ExampleNumber' => '7624212345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

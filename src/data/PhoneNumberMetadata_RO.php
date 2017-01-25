@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '2\\d{5,8}|[37-9]\\d{8}',
+    'NationalNumberPattern' => '[23]\\d{5,8}|[7-9]\\d{8}',
     'PossibleLength' => 
     array (
       0 => 6,
@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2(?:1(?:\\d{7}|9\\d{3})|[3-6](?:\\d{7}|\\d9\\d{2}))|3[13-6]\\d{7}',
+    'NationalNumberPattern' => '2(?:1(?:\\d{7}|9\\d{3})|[3-6](?:\\d{7}|\\d9\\d{2}))|3(?:1\\d{4}(?:\\d{3})?|[3-6]\\d{7})',
     'ExampleNumber' => '211234567',
     'PossibleLength' => 
     array (
@@ -174,11 +174,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(21)(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '21',
+        0 => '[23]1',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

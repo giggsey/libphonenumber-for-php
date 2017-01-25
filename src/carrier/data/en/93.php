@@ -6,6 +6,7 @@
 
 return array (
   9370 => 'AWCC',
+  93711 => 'AWCC',
   937280 => 'Roshan',
   93729 => 'Roshan',
   93744 => 'Afghan Telecom',

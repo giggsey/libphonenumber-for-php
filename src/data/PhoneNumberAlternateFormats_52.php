@@ -13,54 +13,30 @@
 
 return array (
   'id' => '',
-  'countryCode' => 62,
+  'countryCode' => 52,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
     0 => 
     array (
-      'pattern' => '(\\d{2})(\\d{3,4})(\\d{4})',
-      'format' => '$1 $2',
+      'pattern' => '([358]\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2[124]|[36]1',
-      ),
-      'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    1 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{3})(\\d{3})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '2[124]|[36]1',
-      ),
-      'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    2 => 
-    array (
-      'pattern' => '(8\\d{2})(\\d{3})(\\d{4,6})',
-      'format' => '$1-$2-$3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '8[1-35-9]',
+        0 => '33|55|81',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    3 => 
+    1 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{3})(\\d{2})(\\d{3})',
-      'format' => '$1-$2-$3-$4',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '8[1-35-9]',
+        0 => '[2467]|3[0-2457-9]|5[089]|8[02-9]|9[0-35-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

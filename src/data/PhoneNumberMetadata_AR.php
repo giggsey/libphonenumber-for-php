@@ -45,7 +45,6 @@ return array (
     'ExampleNumber' => '91123456789',
     'PossibleLength' => 
     array (
-      0 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (

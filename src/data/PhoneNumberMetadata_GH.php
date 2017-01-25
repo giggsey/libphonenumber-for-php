@@ -39,7 +39,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:2[034678]\\d|5(?:[047]\\d|5[3-6]|6[01]))\\d{6}',
+    'NationalNumberPattern' => '(?:2[034678]\\d|5(?:[0457]\\d|6[01]))\\d{6}',
     'ExampleNumber' => '231234567',
     'PossibleLength' => 
     array (
