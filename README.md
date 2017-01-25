@@ -9,16 +9,6 @@
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber).
 
 
-# Highlights of functionality
-* Parsing/formatting/validating phone numbers for all countries/regions of the world.
-* `getNumberType` - gets the type of the number based on the number itself; able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared Cost, VoIP and Personal Numbers (whenever feasible).
-* `isNumberMatch` - gets a confidence level on whether two numbers could be the same.
-* `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
-* `isValidNumber` - full validation of a phone number for a region using length and prefix information.
-* `PhoneNumberOfflineGeocoder` - provides geographical information related to a phone number.
-* `PhoneNumberToTimeZonesMapper` - provides timezone information related to a phone number.
-* `PhoneNumberToCarrierMapper` - provides carrier information related to a phone number.
-
 ## Installation
 
 PHP versions 5.3 up to PHP 7.1 are currently supported. HHVM is also supported.
@@ -37,7 +27,24 @@ If you do not use composer, ensure that you also load any dependencies that this
 
 ## Documentation
 
-Documentation can be found in the [docs](docs/) directory.
+ - [PhoneNumber Util](docs/PhoneNumberUtil.md)
+ - [ShortNumber Info](docs/ShortNumberInfo.md)
+ - [Phone Number Geolocation](docs/PhoneNumberOfflineGeocoder.md)
+ - [Phone Number to Carrier Mapping](docs/PhoneNumberToCarrierMapper.md)
+ - [Phone Number to Timezone Mapping](docs/PhoneNumberToTimeZonesMapper.md)
+
+## Online Demo
+An [online demo](http://giggsey.com/libphonenumber/) is available, and the source can be found at [giggsey/libphonenumber-example](https://github.com/giggsey/libphonenumber-example).
+
+# Highlights of functionality
+* Parsing/formatting/validating phone numbers for all countries/regions of the world.
+* `getNumberType` - gets the type of the number based on the number itself; able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared Cost, VoIP and Personal Numbers (whenever feasible).
+* `isNumberMatch` - gets a confidence level on whether two numbers could be the same.
+* `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
+* `isValidNumber` - full validation of a phone number for a region using length and prefix information.
+* `PhoneNumberOfflineGeocoder` - provides geographical information related to a phone number.
+* `PhoneNumberToTimeZonesMapper` - provides timezone information related to a phone number.
+* `PhoneNumberToCarrierMapper` - provides carrier information related to a phone number.
 
 ## Versioning
 
@@ -47,10 +54,6 @@ This does mean that this project may not follow [Semantic Versioning](http://sem
 incompatible changes. Please read the release notes for such releases.
 
 Google try to release their versions according to Semantic Versioning, as laid out of in their [Versioning Guide](https://github.com/googlei18n/libphonenumber#versioning-and-announcements).
-
-
-## Online Demo
-An [online demo](http://giggsey.com/libphonenumber/) is available, and the source can be found at [giggsey/libphonenumber-example](https://github.com/giggsey/libphonenumber-example).
 
 ## Quick Examples
 Let's say you have a string representing a phone number from Switzerland. This is how you parse/normalize it into a PhoneNumber object:
