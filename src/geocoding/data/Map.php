@@ -5,10 +5,6 @@
  */
 
 return array (
-  'am' => 
-  array (
-    0 => 374,
-  ),
   'ar' => 
   array (
     0 => 82,
@@ -251,6 +247,10 @@ return array (
   array (
     0 => 36,
     1 => 82,
+  ),
+  'hy' => 
+  array (
+    0 => 374,
   ),
   'id' => 
   array (

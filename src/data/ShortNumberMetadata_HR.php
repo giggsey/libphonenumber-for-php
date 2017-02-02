@@ -20,7 +20,8 @@ return array (
       0 => 2,
       1 => 3,
       2 => 4,
-      3 => 6,
+      3 => 5,
+      4 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -28,11 +29,12 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '116\\d{3}',
+    'NationalNumberPattern' => '1(?:16\\d{3}|3977)',
     'ExampleNumber' => '116000',
     'PossibleLength' => 
     array (
-      0 => 6,
+      0 => 5,
+      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -64,7 +66,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1[28]|16(?:00[06]|1(?:1[17]|23))|987|9[2-5])|9[34]',
+    'NationalNumberPattern' => '1(?:1[28]|16(?:00[06]|1(?:1[17]|23))|3977|9(?:[2-5]|87))|9[34]',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -86,10 +88,11 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '13977',
+    'ExampleNumber' => '13977',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
