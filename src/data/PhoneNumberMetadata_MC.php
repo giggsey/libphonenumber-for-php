@@ -138,8 +138,8 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '8\\d{7}',
-    'ExampleNumber' => '81234567',
+    'NationalNumberPattern' => '870\\d{5}',
+    'ExampleNumber' => '87012345',
     'PossibleLength' => 
     array (
       0 => 8,
