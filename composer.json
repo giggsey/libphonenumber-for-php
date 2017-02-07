@@ -27,7 +27,9 @@
   "autoload": {
     "psr-4": {
       "libphonenumber\\": "src/"
-    }
+    },
+    "exclude-from-classmap": ["/src/geocoding/data/"]
+
   },
   "autoload-dev": {
     "psr-4": {
