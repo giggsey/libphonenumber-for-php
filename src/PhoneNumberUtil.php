@@ -1526,6 +1526,30 @@ class PhoneNumberUtil
     }
 
     /**
+     * Returns a new phone number containing only the fields needed to uniquely identify a phone
+     * number, rather than any fields that capture the context in which  the phone number was created.
+     * These fields correspond to those set in parse() rather than parseHelper()
+     *
+     * @param PhoneNumber $phoneNumberIn
+     * @return PhoneNumber
+     */
+    private static function copyCoreFieldsOnly(PhoneNumber $phoneNumberIn)
+    {
+        $phoneNumber = new PhoneNumber();
+        $phoneNumber->setCountryCode($phoneNumberIn->getCountryCode());
+        $phoneNumber->setNationalNumber($phoneNumberIn->getNationalNumber());
+        if (mb_strlen($phoneNumberIn->getExtension()) > 0) {
+            $phoneNumber->setExtension($phoneNumberIn->getExtension());
+        }
+        if ($phoneNumberIn->isItalianLeadingZero()) {
+            $phoneNumber->setItalianLeadingZero(true);
+            // This field is only relevant if there are leading zeros at all.
+            $phoneNumber->setNumberOfLeadingZeros($phoneNumberIn->getNumberOfLeadingZeros());
+        }
+        return $phoneNumber;
+    }
+
+    /**
      * Converts numberToParse to a form that we can parse and write it to nationalNumber if it is
      * written in RFC3966; otherwise extract a possible number out of it and write to nationalNumber.
      * @param string $numberToParse
@@ -3130,27 +3154,10 @@ class PhoneNumberUtil
             }
         }
         if ($firstNumberIn instanceof PhoneNumber && $secondNumberIn instanceof PhoneNumber) {
-            // Make copies of the phone number so that the numbers passed in are not edited.
-            $firstNumber = new PhoneNumber();
-            $firstNumber->mergeFrom($firstNumberIn);
-            $secondNumber = new PhoneNumber();
-            $secondNumber->mergeFrom($secondNumberIn);
-
-            // First clear raw_input, country_code_source and preferred_domestic_carrier_code fields and any
-            // empty-string extensions so that we can use the proto-buffer equality method.
-            $firstNumber->clearRawInput();
-            $firstNumber->clearCountryCodeSource();
-            $firstNumber->clearPreferredDomesticCarrierCode();
-            $secondNumber->clearRawInput();
-            $secondNumber->clearCountryCodeSource();
-            $secondNumber->clearPreferredDomesticCarrierCode();
-            if ($firstNumber->hasExtension() && mb_strlen($firstNumber->getExtension()) === 0) {
-                $firstNumber->clearExtension();
-            }
-
-            if ($secondNumber->hasExtension() && mb_strlen($secondNumber->getExtension()) === 0) {
-                $secondNumber->clearExtension();
-            }
+            // We only care about the fields that uniquely define a number, so we copy these across
+            // explicitly.
+            $firstNumber = static::copyCoreFieldsOnly($firstNumberIn);
+            $secondNumber = static::copyCoreFieldsOnly($secondNumberIn);
 
             // Early exit if both had extensions and these are different.
             if ($firstNumber->hasExtension() && $secondNumber->hasExtension() &&
