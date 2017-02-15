@@ -2977,6 +2977,7 @@ class PhoneNumberUtil
                         return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), static::UNKNOWN_REGION);
                     }
                 } catch (NumberParseException $e) {
+                    // noop
                 }
             }
             // There are no example numbers of this type for any country in the library.
@@ -2993,6 +2994,7 @@ class PhoneNumberUtil
                 return $this->parse($desc->getExampleNumber(), $regionCodeOrType);
             }
         } catch (NumberParseException $e) {
+            // noop
         }
         return null;
     }
@@ -3063,6 +3065,7 @@ class PhoneNumberUtil
                         return $this->parse('+' . $countryCallingCode . $desc->getExampleNumber(), self::UNKNOWN_REGION);
                     }
                 } catch (NumberParseException $e) {
+                    // noop
                 }
             }
         }
@@ -3156,8 +3159,8 @@ class PhoneNumberUtil
         if ($firstNumberIn instanceof PhoneNumber && $secondNumberIn instanceof PhoneNumber) {
             // We only care about the fields that uniquely define a number, so we copy these across
             // explicitly.
-            $firstNumber = static::copyCoreFieldsOnly($firstNumberIn);
-            $secondNumber = static::copyCoreFieldsOnly($secondNumberIn);
+            $firstNumber = self::copyCoreFieldsOnly($firstNumberIn);
+            $secondNumber = self::copyCoreFieldsOnly($secondNumberIn);
 
             // Early exit if both had extensions and these are different.
             if ($firstNumber->hasExtension() && $secondNumber->hasExtension() &&
