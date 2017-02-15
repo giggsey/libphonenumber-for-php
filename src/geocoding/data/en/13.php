@@ -3739,7 +3739,7 @@ return array (
   1352872 => 'Gainesville, FL',
   1352873 => 'Ocala, FL',
   1352955 => 'Gainesville, FL',
-  1360 => 'Washington',
+  1360 => 'Washington State',
   1360210 => 'Camas, WA',
   1360213 => 'Vancouver, WA',
   1360221 => 'Langley, WA',

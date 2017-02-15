@@ -24,6 +24,7 @@ return array (
   57320 => 'Claro',
   57321 => 'Claro',
   57322 => 'Claro',
+  57323 => 'Claro',
   57350 => 'Avantel',
   57351 => 'Avantel',
 );

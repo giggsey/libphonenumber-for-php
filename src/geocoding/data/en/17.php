@@ -4170,6 +4170,7 @@ return array (
   1760966 => 'Oceanside, CA',
   1760967 => 'Oceanside, CA',
   1760995 => 'Hesperia, CA',
+  1762 => 'Georgia',
   1763 => 'Minnesota',
   1763205 => 'Minneapolis, MN',
   1763208 => 'Minneapolis, MN',

@@ -3878,6 +3878,8 @@ return array (
   1678973 => 'Atlanta, GA',
   1678974 => 'Atlanta, GA',
   1678985 => 'Lawrenceville, GA',
+  1680 => 'New York',
+  1681 => 'West Virginia',
   1682 => 'Texas',
   1682518 => 'Mansfield, TX',
   1682622 => 'Mansfield, TX',
