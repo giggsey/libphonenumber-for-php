@@ -753,7 +753,7 @@ class PhoneNumberUtil
     {
         // If leading zero(s) have been set, we prefix this now. Note this is not a national prefix.
         $nationalNumber = '';
-        if ($number->isItalianLeadingZero()) {
+        if ($number->isItalianLeadingZero() && $number->getNumberOfLeadingZeros() > 0) {
             $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
             $nationalNumber .= $zeros;
         }

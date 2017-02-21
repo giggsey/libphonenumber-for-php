@@ -376,6 +376,21 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("12345678", $this->phoneUtil->getNationalSignificantNumber(self::$internationalTollFree));
     }
 
+    public function testGetNationalSignificantNumber_ManyLeadingZeros()
+    {
+        $number = new PhoneNumber();
+        $number->setCountryCode(1);
+        $number->setNationalNumber(650);
+        $number->setItalianLeadingZero(true);
+        $number->setNumberOfLeadingZeros(2);
+
+        $this->assertEquals('00650', $this->phoneUtil->getNationalSignificantNumber($number));
+
+        // Set a bad value; we shouldn't crash; we shouldn't output any leading zeros at all;
+        $number->setNumberOfLeadingZeros(-3);
+        $this->assertEquals('650', $this->phoneUtil->getNationalSignificantNumber($number));
+    }
+
     public function testGetExampleNumber()
     {
         $this->assertEquals(self::$deNumber, $this->phoneUtil->getExampleNumber(RegionCode::DE));
