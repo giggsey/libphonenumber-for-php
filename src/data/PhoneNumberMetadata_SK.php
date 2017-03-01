@@ -27,7 +27,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2(?:1(?:6\\d{3,4}|7\\d{3})|[2-9]\\d{7})|[3-5][1-8](?:16\\d{2,3}|\\d{7})',
+    'NationalNumberPattern' => '2(?:1(?:6\\d{3,4}|7\\d{3})|[2-9]\\d{7})|[3-5][1-8](?:1(?:6\\d{2,3}|7\\d{3})|\\d{7})',
     'ExampleNumber' => '221234567',
     'PossibleLength' => 
     array (
@@ -177,7 +177,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([3-5]\\d)(16)(\\d{2,3})',
+      'pattern' => '([3-5]\\d)(1[67])(\\d{2,3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
