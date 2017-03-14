@@ -12,6 +12,7 @@ return array (
   23327 => 'tiGO',
   23328 => 'Expresso',
   23350 => 'Vodafone',
+  23354 => 'MTN',
   233553 => 'MTN',
   233554 => 'MTN',
   233555 => 'MTN',

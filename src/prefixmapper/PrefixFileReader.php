@@ -96,8 +96,8 @@ class PrefixFileReader
      * @param string $script four-letter titlecase (the first letter is uppercase and the rest of the letters
      *     are lowercase) ISO script codes as defined in ISO 15924
      * @param string $region two-letter uppercase ISO country codes as defined by ISO 3166-1
-     * @return string a text description in the given language for the given phone number, or an empty
-     *     string if a description is not available
+     * @return string a text description for the given language code for the given phone number, or empty
+     *     string if the number passed in is invalid or could belong to multiple countries
      */
     public function getDescriptionForNumber(PhoneNumber $number, $language, $script, $region)
     {

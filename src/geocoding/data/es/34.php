@@ -5,7 +5,9 @@
  */
 
 return array (
+  34844 => 'Vizcaya',
   34845 => 'Álava',
+  34846 => 'Vizcaya',
   34848 => 'Navarra',
   34850 => 'Álmería',
   34854 => 'Sevilla',
@@ -13,12 +15,15 @@ return array (
   34871 => 'Baleares',
   34873 => 'Lérida',
   34888 => 'Orense',
+  34944 => 'Vizcaya',
   34945 => 'Álava',
+  34946 => 'Vizcaya',
   34948 => 'Navarra',
   34954 => 'Sevilla',
   34955 => 'Sevilla',
   34957 => 'Córdoba',
   34971 => 'Baleares',
   34973 => 'Lérida',
+  34981 => 'A Coruña',
   34988 => 'Orense',
 );
