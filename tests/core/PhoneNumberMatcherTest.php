@@ -1096,14 +1096,12 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
 
     private function ensureTermination($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
     {
-
         $textLength = mb_strlen($text);
         for ($index = 0; $index <= $textLength; $index++) {
             $sub = mb_substr($text, $index);
             $matches = "";
             // Iterates over all matches.
-            foreach ($this->phoneUtil->findNumbers($sub, $defaultCountry, $leniency, PHP_INT_MAX) as $match)
-            {
+            foreach ($this->phoneUtil->findNumbers($sub, $defaultCountry, $leniency, PHP_INT_MAX) as $match) {
                 $matches .= ", " . $match;
             }
         }
