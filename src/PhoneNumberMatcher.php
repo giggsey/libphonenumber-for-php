@@ -120,10 +120,8 @@ class PhoneNumberMatcher implements \Iterator
          * to make the pattern more easily understood.
          */
 
-        $openingParens = "(\\[\xEF\xBC\x88}\xEF\xBC\xBB}";
-        $openingParens = "(\\[（［";
-        $closingParens = ")\\]\\x{FF09}\\x{FF3D}";
-        $closingParens = ")\\]）］";
+        $openingParens = "(\\[\xEF\xBC\x88\xEF\xBC\xBB";
+        $closingParens = ")\\]\xEF\xBC\x89\xEF\xBC\xBD";
         $nonParens = "[^" . $openingParens . $closingParens . "]";
 
         // Limit on the number of pairs of brackets in a phone number.
