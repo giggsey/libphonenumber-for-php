@@ -6,7 +6,7 @@ use libphonenumber\Leniency\AbstractLeniency;
 
 class PhoneNumberMatcher implements \Iterator
 {
-    private static $initialized = false;
+    protected static $initialized = false;
 
     /**
      * The phone number pattern used by $this->find(), similar to
@@ -25,7 +25,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    private static $pattern;
+    protected static $pattern;
 
     /**
      * Matches strings that look like publication pages. Example:
@@ -36,7 +36,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    private static $pubPages = "\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}";
+    protected static $pubPages = "\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}";
 
     /**
      * Matches strings that look like dates using "/" as a separator. Examples 3/10/2011, 31/10/2011 or
@@ -44,7 +44,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    private static $slashSeparatedDates = "(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}";
+    protected static $slashSeparatedDates = "(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}";
 
     /**
      * Matches timestamps. Examples: "2012-01-02 08:00". Note that the reg-ex does not include the
@@ -52,8 +52,8 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    private static $timeStamps = "[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d +[0-2]\\d$";
-    private static $timeStampsSuffix = ":[0-5]\\d";
+    protected static $timeStamps = "[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d +[0-2]\\d$";
+    protected static $timeStampsSuffix = ":[0-5]\\d";
 
     /**
      * Pattern to check that brackets match. Opening brackets should be closed within a phone number.
@@ -62,7 +62,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    private static $matchingBrackets;
+    protected static $matchingBrackets;
 
     /**
      * Patterns used to extract phone numbers from a larger phone-number-like pattern. These are
@@ -76,23 +76,23 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string[]
      */
-    private static $innerMatches = array();
+    protected static $innerMatches = array();
 
     /**
      * Punctuation that may be at the start of a phone number - brackets and plus signs.
      *
      * @var string
      */
-    private static $leadClass;
+    protected static $leadClass;
 
     /**
      * Prefix of the files
      * @var string
      */
-    private static $alternateFormatsFilePrefix;
+    protected static $alternateFormatsFilePrefix;
     const META_DATA_FILE_PREFIX = 'PhoneNumberAlternateFormats';
 
-    private static function init()
+    protected static function init()
     {
         static::$alternateFormatsFilePrefix = dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
 
@@ -181,7 +181,14 @@ class PhoneNumberMatcher implements \Iterator
         static::$initialized = true;
     }
 
-    private static function limit($lower, $upper)
+    /**
+     * Helper function to generate regular expression with an upper and lower limit.
+     *
+     * @param int $lower
+     * @param int $upper
+     * @return string
+     */
+    protected static function limit($lower, $upper)
     {
         if (($lower < 0) || ($upper <= 0) || ($upper < $lower)) {
             throw new \InvalidArgumentException();
@@ -194,32 +201,32 @@ class PhoneNumberMatcher implements \Iterator
      * The phone number utility.
      * @var PhoneNumberUtil
      */
-    private $phoneUtil;
+    protected $phoneUtil;
 
     /**
      * The text searched for phone numbers.
      * @var string
      */
-    private $text;
+    protected $text;
 
     /**
      * The region (country) to assume for phone numbers without an international prefix, possibly
      * null.
      * @var string
      */
-    private $preferredRegion;
+    protected $preferredRegion;
 
     /**
      * The degrees of validation requested.
      * @var AbstractLeniency
      */
-    private $leniency;
+    protected $leniency;
 
     /**
      * The maximum number of retires after matching an invalid number.
      * @var int
      */
-    private $maxTries;
+    protected $maxTries;
 
     /**
      * One of:
@@ -228,19 +235,19 @@ class PhoneNumberMatcher implements \Iterator
      *  - DONE
      * @var string
      */
-    private $state = 'NOT_READY';
+    protected $state = 'NOT_READY';
 
     /**
      * The last successful match, null unless $this->state = READY
      * @var PhoneNumberMatch
      */
-    private $lastMatch;
+    protected $lastMatch;
 
     /**
      * The next index to start searching at. Undefined when $this->state = DONE
      * @var int
      */
-    private $searchIndex = 0;
+    protected $searchIndex = 0;
 
     /**
      * Creates a new instance. See the factory methods in PhoneNumberUtil on how to obtain a new instance.
@@ -274,9 +281,16 @@ class PhoneNumberMatcher implements \Iterator
         }
     }
 
-    private function find($index)
+    /**
+     * Attempts to find the next subsequence in the searched sequence on or after {@code searchIndex}
+     * that represents a phone number. Returns the next match, null if none was found.
+     *
+     * @param int $index The search index to start searching at
+     * @return PhoneNumberMatch|null The Phone Number Match found, null if none can be found
+     */
+    protected function find($index)
     {
-        $matcher = new Matcher(self::$pattern, $this->text);
+        $matcher = new Matcher(static::$pattern, $this->text);
         while (($this->maxTries > 0) && $matcher->find($index)) {
             $start = $matcher->start();
             $cutLength = $matcher->end() - $start;
@@ -307,7 +321,7 @@ class PhoneNumberMatcher implements \Iterator
      * @param string $candidate
      * @return string
      */
-    private static function trimAfterFirstMatch($pattern, $candidate)
+    protected static function trimAfterFirstMatch($pattern, $candidate)
     {
         $trailingCharsMatcher = new Matcher($pattern, $candidate);
         if ($trailingCharsMatcher->find()) {
@@ -329,15 +343,19 @@ class PhoneNumberMatcher implements \Iterator
     public static function isLatinLetter($letter)
     {
         // Combining marks are a subset of non-spacing-mark.
-        if (!preg_match('/\p{L}/u', $letter) && preg_match('/\p{Mn}/u', $letter) != true) {
+        if (preg_match('/\p{L}/u', $letter) !== 1 && preg_match('/\p{Mn}/u', $letter) !== 1) {
             return false;
         }
 
-        return preg_match('/\p{Latin}/u', $letter)
-        || preg_match('/\pM+/u', $letter);
+        return (preg_match('/\p{Latin}/u', $letter) === 1)
+        || (preg_match('/\pM+/u', $letter) === 1);
     }
 
-    private static function isInvalidPunctuationSymbol($character)
+    /**
+     * @param string $character
+     * @return bool
+     */
+    protected static function isInvalidPunctuationSymbol($character)
     {
         return $character == '%' || preg_match('/\p{Sc}/u', $character);
     }
@@ -349,7 +367,7 @@ class PhoneNumberMatcher implements \Iterator
      * @param int $offset The offset of $candidate within $this->text
      * @return PhoneNumberMatch|null The match found, null if none can be found
      */
-    private function extractMatch($candidate, $offset)
+    protected function extractMatch($candidate, $offset)
     {
         // Skip a match that is more likely to be a date.
         $dateMatcher = new Matcher(static::$slashSeparatedDates, $candidate);
@@ -387,7 +405,7 @@ class PhoneNumberMatcher implements \Iterator
      * @param int $offset The current offset of $candidate within $this->text
      * @return PhoneNumberMatch|null The match found, null if none can be found
      */
-    private function extractInnerMatch($candidate, $offset)
+    protected function extractInnerMatch($candidate, $offset)
     {
         foreach (static::$innerMatches as $possibleInnerMatch) {
             $groupMatcher = new Matcher($possibleInnerMatch, $candidate);
@@ -427,7 +445,7 @@ class PhoneNumberMatcher implements \Iterator
      * @param int $offset The offset of $candidate within $this->text
      * @return PhoneNumberMatch|null The parsed and validated phone number match, or null
      */
-    private function parseAndVerify($candidate, $offset)
+    protected function parseAndVerify($candidate, $offset)
     {
         try {
             // Check the candidate doesn't contain any formatting which would indicate that it really
@@ -562,6 +580,13 @@ class PhoneNumberMatcher implements \Iterator
         return true;
     }
 
+    /**
+     * @param PhoneNumberUtil $util
+     * @param PhoneNumber $number
+     * @param string $normalizedCandidate
+     * @param string[] $formattedNumberGroups
+     * @return bool
+     */
     public static function allNumberGroupsAreExactlyPresent(
         PhoneNumberUtil $util,
         PhoneNumber $number,
@@ -609,7 +634,7 @@ class PhoneNumberMatcher implements \Iterator
      * @param NumberFormat $formattingPattern
      * @return string[]
      */
-    private static function getNationalNumberGroups(
+    protected static function getNationalNumberGroups(
         PhoneNumberUtil $util,
         PhoneNumber $number,
         NumberFormat $formattingPattern = null
@@ -706,6 +731,12 @@ class PhoneNumberMatcher implements \Iterator
         return true;
     }
 
+    /**
+     * @param PhoneNumber $number
+     * @param string $candidate
+     * @param PhoneNumberUtil $util
+     * @return bool
+     */
     public static function containsOnlyValidXChars(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
     {
         // The characters 'x' and 'X' can be (1) a carrier code, in which case they always precede the
@@ -791,13 +822,13 @@ class PhoneNumberMatcher implements \Iterator
      * Storage for Alternate Formats
      * @var PhoneMetadata[]
      */
-    private static $callingCodeToAlternateFormatsMap = array();
+    protected static $callingCodeToAlternateFormatsMap = array();
 
     /**
      * @param $countryCallingCode
      * @return PhoneMetadata|null
      */
-    private static function getAlternateFormatsForCountry($countryCallingCode)
+    protected static function getAlternateFormatsForCountry($countryCallingCode)
     {
         $countryCodeSet = AlternateFormatsCountryCodeSet::$alternateFormatsCountryCodeSet;
 
@@ -812,7 +843,11 @@ class PhoneNumberMatcher implements \Iterator
         return static::$callingCodeToAlternateFormatsMap[$countryCallingCode];
     }
 
-    private static function loadAlternateFormatsMetadataFromFile($countryCallingCode)
+    /**
+     * @param string $countryCallingCode
+     * @throws \Exception
+     */
+    protected static function loadAlternateFormatsMetadataFromFile($countryCallingCode)
     {
         $fileName = static::$alternateFormatsFilePrefix . '_' . $countryCallingCode . '.php';
 

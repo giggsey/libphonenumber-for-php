@@ -20,6 +20,7 @@ abstract class AbstractLeniency
      * @param string $candidate
      * @param PhoneNumberUtil $util
      * @return bool
+     * @codeCoverageIgnore
      */
     public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
     {
@@ -40,7 +41,7 @@ abstract class AbstractLeniency
     protected static function getLevel()
     {
         if (static::$level === null) {
-            throw new \RuntimeException('$level should not defined');
+            throw new \RuntimeException('$level should be defined');
         }
 
         return static::$level;

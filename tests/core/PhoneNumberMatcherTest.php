@@ -717,7 +717,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::EXACT_GROUPING());
     }
 
-    private function doTestNumberMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
+    protected function doTestNumberMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
     {
         $iterator = $this->findNumbersForLeniency($string, $region, $leniency);
 
@@ -728,7 +728,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($string, $match->rawString(), "Found wrong match in test {$string} ({$region}). Found {$match->rawString()}");
     }
 
-    private function doTestNumberNonMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
+    protected function doTestNumberNonMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
     {
         $iterator = $this->findNumbersForLeniency($string, $region, $leniency);
 
@@ -752,7 +752,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param string $region
      * @param string $number
      */
-    private function findMatchesInContexts($contexts, $isValid, $isPossible, $region = RegionCode::US, $number = "415-666-7777")
+    protected function findMatchesInContexts($contexts, $isValid, $isPossible, $region = RegionCode::US, $number = "415-666-7777")
     {
         if ($isValid) {
             $this->doTestInContext($number, $region, $contexts, Leniency::VALID());
@@ -957,7 +957,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param string $number
      * @param string $region
      */
-    private function assertMatchProperties(PhoneNumberMatch $match, $text, $number, $region)
+    protected function assertMatchProperties(PhoneNumberMatch $match, $text, $number, $region)
     {
         $expectedResult = $this->phoneUtil->parse($number, $region);
         $this->assertNotNull($match, "Did not find a number in {$text}; expected {$number}");
@@ -974,7 +974,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param int $start
      * @param int $end
      */
-    private function assertEqualRange($text, $index, $start, $end)
+    protected function assertEqualRange($text, $index, $start, $end)
     {
         $sub = mb_substr($text, $index, mb_strlen($text) - $index);
         $matches = $this->phoneUtil->findNumbers($sub, RegionCode::NZ, Leniency::POSSIBLE(), PHP_INT_MAX);
@@ -996,7 +996,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param string $number The number to test
      * @param string $defaultCountry The corresponding region code
      */
-    private function doTestFindInContext($number, $defaultCountry)
+    protected function doTestFindInContext($number, $defaultCountry)
     {
         $this->findPossibleInContext($number, $defaultCountry);
 
@@ -1011,7 +1011,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param $number
      * @param $defaultCountry
      */
-    private function findPossibleInContext($number, $defaultCountry)
+    protected function findPossibleInContext($number, $defaultCountry)
     {
         $contextPairs = array();
         $contextPairs[] = array("", ""); // no content
@@ -1052,7 +1052,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
      * @param string $number
      * @param string $defaultCountry
      */
-    private function findValidInContext($number, $defaultCountry)
+    protected function findValidInContext($number, $defaultCountry)
     {
         $contextPairs = array();
         // With other small numbers
@@ -1069,7 +1069,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
         $this->doTestInContext($number, $defaultCountry, $contextPairs, Leniency::VALID());
     }
 
-    private function doTestInContext($number, $defaultCountry, $contextPairs, Leniency\AbstractLeniency $leniency)
+    protected function doTestInContext($number, $defaultCountry, $contextPairs, Leniency\AbstractLeniency $leniency)
     {
         foreach ($contextPairs as $context) {
             $prefix = $context[0];
@@ -1094,7 +1094,7 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    private function ensureTermination($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
+    protected function ensureTermination($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
     {
         $textLength = mb_strlen($text);
         for ($index = 0; $index <= $textLength; $index++) {
@@ -1107,12 +1107,12 @@ class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    private function findNumbersForLeniency($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
+    protected function findNumbersForLeniency($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
     {
         return $this->phoneUtil->findNumbers($text, $defaultCountry, $leniency, PHP_INT_MAX);
     }
 
-    private function hasNoMatches(PhoneNumberMatcher $match)
+    protected function hasNoMatches(PhoneNumberMatcher $match)
     {
         return !$match->valid();
     }

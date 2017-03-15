@@ -1565,7 +1565,7 @@ class PhoneNumberUtil
      * @param PhoneNumber $phoneNumberIn
      * @return PhoneNumber
      */
-    private static function copyCoreFieldsOnly(PhoneNumber $phoneNumberIn)
+    protected static function copyCoreFieldsOnly(PhoneNumber $phoneNumberIn)
     {
         $phoneNumber = new PhoneNumber();
         $phoneNumber->setCountryCode($phoneNumberIn->getCountryCode());
