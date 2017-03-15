@@ -8,6 +8,8 @@ namespace libphonenumber;
  * Note that this is NOT the same as google's java PhoneNumberMatcher class.
  * This class is a minimal port of java's built-in matcher class, whereas PhoneNumberMatcher
  * is designed to recognize phone numbers embedded in any text.
+ *
+ * @internal
  */
 class Matcher
 {

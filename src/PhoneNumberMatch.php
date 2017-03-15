@@ -36,7 +36,7 @@ class PhoneNumberMatch
             throw new \InvalidArgumentException("Start index must be >= 0.");
         }
 
-        if ($rawString === null || $number === null) {
+        if ($rawString === null) {
             throw new \NullPointerException;
         }
 
