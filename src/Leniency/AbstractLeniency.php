@@ -21,7 +21,11 @@ abstract class AbstractLeniency
      * @param PhoneNumberUtil $util
      * @return bool
      */
-    abstract public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util);
+    public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
+    {
+        // This can not be called directly
+        throw new \BadMethodCallException;
+    }
 
     /**
      * Compare against another Leniency
