@@ -104,9 +104,9 @@ class PhoneNumberOfflineGeocoder
             $regionWhereNumberIsValid = 'ZZ';
             foreach ($regionCodes as $regionCode) {
                 if ($this->phoneUtil->isValidNumberForRegion($number, $regionCode)) {
+                    // If the number has already been found valid for one region, then we don't know which
+                    // region it belongs to so we return nothing.
                     if ($regionWhereNumberIsValid !== 'ZZ') {
-                        // If we can't assign the phone number as definitely belonging to only one territory,
-                        // then we return nothing.
                         return "";
                     }
                     $regionWhereNumberIsValid = $regionCode;
@@ -161,7 +161,9 @@ class PhoneNumberOfflineGeocoder
      * @param string $userRegion the region code for a given user. This region will be omitted from the
      *     description if the phone number comes from this region. It is a two-letter uppercase ISO
      *     country code as defined by ISO 3166-1.
-     * @return string a text description for the given language code for the given phone number
+     * @return string a text description for the given language code for the given phone number, or an
+     *     empty string if the number could come from multiple countries, or the country code is
+     *     in fact invalid
      */
     public function getDescriptionForValidNumber(PhoneNumber $number, $locale, $userRegion = null)
     {

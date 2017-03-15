@@ -93,10 +93,11 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '5(?:6\\d{4}|90[0-4]\\d{3})',
+    'NationalNumberPattern' => '56\\d{4}',
     'ExampleNumber' => '561234',
     'PossibleLength' => 
     array (
+      0 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -182,7 +183,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '59|[6-8]',
+        0 => '[6-8]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
