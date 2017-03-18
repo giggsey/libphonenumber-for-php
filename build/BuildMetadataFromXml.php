@@ -189,7 +189,7 @@ class BuildMetadataFromXml
     public static function getNationalPrefixFormattingRuleFromElement(\DOMElement $element, $nationalPrefix)
     {
         $nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
-// Replace $NP with national prefix and $FG with the first group ($1).
+        // Replace $NP with national prefix and $FG with the first group ($1).
         $nationalPrefixFormattingRule = str_replace('$NP', $nationalPrefix, $nationalPrefixFormattingRule);
         $nationalPrefixFormattingRule = str_replace('$FG', '$1', $nationalPrefixFormattingRule);
         return $nationalPrefixFormattingRule;
