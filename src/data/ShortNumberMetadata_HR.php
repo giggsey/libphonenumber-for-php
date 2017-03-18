@@ -42,10 +42,11 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '118\\d{2}',
+    'ExampleNumber' => '11812',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -66,7 +67,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1[28]|16(?:00[06]|1(?:1[17]|23))|3977|9(?:[2-5]|87))|9[34]',
+    'NationalNumberPattern' => '1(?:1(?:2|6(?:00[06]|1(?:1[17]|23))|8\\d{2}?)|3977|9(?:[2-5]|87))|9[34]',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (

@@ -2230,7 +2230,7 @@ return array (
   917867 => 'Bokaband, Madhya Pradesh',
   917868 => 'Kanker, Madhya Pradesh',
   91788 => 'Durg, Madhya Pradesh',
-  9179 => 'Ahemdabad Local, Gujarat',
+  9179 => 'Ahmedabad Local, Gujarat',
   9180 => 'Bangalore, Karnataka',
   918110 => 'Anekal, Karnataka',
   918111 => 'Hosakote, Karnataka',
