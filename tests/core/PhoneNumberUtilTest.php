@@ -161,6 +161,35 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($this->phoneUtil->getMetadataForRegion(-1));
     }
 
+    public function testGetSupportedTypesForRegion()
+    {
+        $this->assertContains(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::BR));
+        // Our test data has no mobile numbers for Brazil.
+        $this->assertNotContains(PhoneNumberType::MOBILE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::BR));
+        // UNKNOWN should never be returned.
+        $this->assertNotContains(PhoneNumberType::UNKNOWN, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::BR));
+
+        // In the US, many numbers are classified as FIXED_LINE_OR_MOBILE; but we don't want to expose
+        // this as a supported type, instead we say FIXED_LINE and MOBILE are both present
+        $this->assertContains(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::US));
+        $this->assertContains(PhoneNumberType::MOBILE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::US));
+        $this->assertNotContains(PhoneNumberType::FIXED_LINE_OR_MOBILE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::US));
+
+        // Test the invalid region code.
+        $this->assertCount(0, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::ZZ));
+    }
+
+    public function testGetSupportedTypesForNonGeoEntity()
+    {
+        // No data exists for 999 at all, no types should be returned.
+        $this->assertCount(0, $this->phoneUtil->getSupportedTypesForNonGeoEntity(999));
+
+        $typesFor979 = $this->phoneUtil->getSupportedTypesForNonGeoEntity(979);
+        $this->assertContains(PhoneNumberType::PREMIUM_RATE, $typesFor979);
+        $this->assertNotContains(PhoneNumberType::MOBILE, $typesFor979);
+        $this->assertNotContains(PhoneNumberType::UNKNOWN, $typesFor979);
+    }
+
     public function testGetInstanceLoadUSMetadata()
     {
         $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::US);
@@ -399,9 +428,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             self::$deNumber,
             $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::FIXED_LINE)
         );
-        $this->assertEquals(null, $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::MOBILE));
+        // Should return the sample response if asked for FIXED_LINE_OR_MOBILE too.
+        $this->assertEquals(
+            self::$deNumber,
+            $this->phoneUtil->getExampleNumberForType(RegionCode::DE, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::FIXED_LINE));
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::MOBILE));
+        // We have data for the US, but no data for VOICEMAIL, so return null
+        $this->assertNull($this->phoneUtil->getExampleNumberForType(RegionCode::US, PhoneNumberType::VOICEMAIL));
         // CS is an invalid region, so we have no data for it.
         $this->assertNull($this->phoneUtil->getExampleNumberForType(RegionCode::CS, PhoneNumberType::MOBILE));
         // RegionCode 001 is reserved for supporting non-geographical country calling code. We don't
@@ -413,6 +448,14 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::$internationalTollFree, $this->phoneUtil->getExampleNumberForNonGeoEntity(800));
         $this->assertEquals(self::$universalPremiumRate, $this->phoneUtil->getExampleNumberForNonGeoEntity(979));
+    }
+
+    public function testGetExampleNumberWithoutRegion()
+    {
+        // In our test metadata we don't cover all types: in our real metadata, we do.
+        $this->assertNotnull($this->phoneUtil->getExampleNumberForType(PhoneNumberType::FIXED_LINE));
+        $this->assertNotnull($this->phoneUtil->getExampleNumberForType(PhoneNumberType::MOBILE));
+        $this->assertNotnull($this->phoneUtil->getExampleNumberForType(PhoneNumberType::PREMIUM_RATE));
     }
 
     public function testConvertAlphaCharactersInNumber()
@@ -1758,6 +1801,93 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->phoneUtil->isPossibleNumber("+800 1234 5678", RegionCode::UN001));
     }
 
+    public function testIsPossibleNumberForType_DifferentTypeLengths()
+    {
+        // We use Argentinian numbers since they have different possible lengths for different types.
+        $number = new PhoneNumber();
+        $number->setCountryCode(54)->setNationalNumber(12345);
+
+        // Too short for any Argentinian number, including fixed-line.
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+
+        // 6-digit numbers are oaky for fixed-line.
+        $number->setNationalNumber(1234567);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        // But too short for mobile.
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        // And too short for toll-free
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::TOLL_FREE));
+
+        // The same applies for 9-digit numbers
+        $number->setNationalNumber(123456789);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::TOLL_FREE));
+
+        // 10-digit numbers are universally possible.
+        $number->setNationalNumber(1234567890);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::TOLL_FREE));
+
+        // 11-digit numbers are only possible for mobile numbers. Note we don't require the leading 9,
+        // which all mobile numbers start with, and would be required for a valid mobile number.
+        $number->setNationalNumber(12345678901);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::TOLL_FREE));
+    }
+
+    public function testIsPossibleNumberForType_LocalOnly()
+    {
+        $number = new PhoneNumber();
+        // Here we test a number length which matches a local-only length.
+        $number->setCountryCode(49)->setNationalNumber(12);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        // Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+    }
+
+    public function testIsPossibleNumberForType_DataMissingForSizeReasons()
+    {
+        $number = new PhoneNumber();
+        // Here we test something where the possible lengths match the possible lengths of the country
+        // as a whole, and hence aren't present in the binary for size reasons - this should still work.
+        // Local-only number.
+        $number->setCountryCode(55)->setNationalNumber(12345678);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+
+        $number->setNationalNumber(1234567890);
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::UNKNOWN));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+    }
+
+    public function testIsPossibleNumberForType_NumberTypeNotSupportedForRegion()
+    {
+        $number = new PhoneNumber();
+        // There are *no* mobile numbers for this region at all, so we return false.
+        $number->setCountryCode(55)->setNationalNumber(12345678);
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        // This matches a fixed-line length though.
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+
+        // There are *no* fixed-line OR mobile numbers for this country calling code at all, so we
+        // return false for these
+        $number->setCountryCode(979)->setNationalNumber(123456789);
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
+        $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::PREMIUM_RATE));
+    }
+
     public function testIsPossibleNumberWithReason()
     {
         // National numbers for country calling code +1 that are within 7 to 10 digits are possible.
@@ -1795,6 +1925,187 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             ValidationResult::TOO_LONG,
             $this->phoneUtil->isPossibleNumberWithReason(self::$internationalTollFreeTooLong)
         );
+    }
+
+    public function testIsPossibleNumberForTypeWithReason_DifferentTypeLengths()
+    {
+        // We use Argentinian numbers since they have different possible lengths for different types.
+        $number = new PhoneNumber();
+        $number->setCountryCode(54)->setNationalNumber(12345);
+        // Too short for any Argentinian number.
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+
+        // 6-digit numbers are okay for fixed-line.
+        $number->setNationalNumber(123456);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        // But too short for mobile.
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        // And too short for toll-free.
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+
+        // The same applies to 9-digit numbers.
+        $number->setNationalNumber(123456789);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+
+        // 10-digit numbers are universally possible.
+        $number->setNationalNumber(1234567890);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+
+        // 11-digit numbers are only possible for mobile numbers. Note we don't require the leading 9,
+        // which all mobile numbers start with, and would be required for a valid mobile number.
+        $number->setNationalNumber(12345678901);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+    }
+
+    public function testIsPossibleNumberForTypeWithReason_LocalOnly()
+    {
+        $number = new PhoneNumber();
+        // Here we test a number length which matches a local-only length.
+        $number->setCountryCode(49)->setNationalNumber(12);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        // Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+    }
+
+    public function testIsPossibleNumberForTypeWithReason_DataMissingForSizeReasons()
+    {
+        $number = new PhoneNumber();
+        // Here we test something where the possible lengths match the possible lengths of the country
+        // as a whole, and hence aren't present in the binary for size reasons - this should still work.
+        // Local-only number.
+        $number->setCountryCode(55)->setNationalNumber(12345678);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+
+        // Normal-length number.
+        $number->setNationalNumber(1234567890);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+    }
+
+    public function testIsPossibleNumberForTypeWithReason_NumberTypeNotSupportedForRegion()
+    {
+        $number = new PhoneNumber();
+        // There are *no* mobile numbers for this region at all, so we return INVALID_LENGTH.
+        $number->setCountryCode(55)->setNationalNumber(12345678);
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        // This matches a fixed-line length though.
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        // This is too short for fixed-line, and no mobile numbers exist.
+        $number->setCountryCode(55)->setNationalNumber(1234567);
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+
+        // This is too short for mobile, and no fixed-line numbers exist.
+        $number->setCountryCode(882)->setNationalNumber(1234567);
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+
+        // There are *no* fixed-line OR mobile numbers for this country calling code at all, so we
+        // return INVALID_LENGTH.
+        $number->setCountryCode(979)->setNationalNumber(123456789);
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::PREMIUM_RATE));
+    }
+
+    public function testIsPossibleNumberForTypeWithReason_FixedLineOrMobile()
+    {
+        $number = new PhoneNumber();
+        // For FIXED_LINE_OR_MOBILE, a number should be considered valid if it matches the possible
+        // lengths for mobile *or* fixed-line numbers.
+        $number->setCountryCode(290)->setNationalNumber(1234);
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+
+        $number->setNationalNumber(12345);
+        $this->assertEquals(ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        // This will change to INVALID_LENGTH once we start returning this type in the main
+        // isPossibleNumberWithReason API.
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+
+        $number->setNationalNumber(123456);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+
+        $number->setNationalNumber(1234567);
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+
+        // 8-digit numbers are possible for toll-free and premium-rate numbers only.
+        $number->setNationalNumber(12345678);
+        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+        $this->assertEquals(ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
     }
 
     public function testIsNotPossibleNumber()

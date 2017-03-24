@@ -33,6 +33,7 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '07\\d{5}|[1-357-9]\\d{3,10}',
+    'ExampleNumber' => '0712345',
     'PossibleLength' => 
     array (
     ),
@@ -143,6 +144,7 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '[23]\\d{3}',
+    'ExampleNumber' => '2123',
     'PossibleLength' => 
     array (
       0 => 4,

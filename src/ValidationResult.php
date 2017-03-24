@@ -37,7 +37,9 @@ class ValidationResult
     /**
      * The number is longer than the shortest valid numbers for this region, shorter than the
      * longest valid numbers for this region, and does not itself have a number length that matches
-     * valid numbers for this region.
+     * valid numbers for this region. This can also be returned in the case where
+     * isPossibleNumberForTypeWithReason was called, and there are no numbers of this type at all
+     * for this region.
      */
     const INVALID_LENGTH = 5;
 }

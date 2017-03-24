@@ -44,4 +44,25 @@ class PhoneNumberType
 
     // Standard Rate
     const STANDARD_RATE = 30;
+
+    public static function values()
+    {
+        return array(
+            self::FIXED_LINE => 'FIXED_LINE',
+            self::MOBILE => 'MOBILE',
+            self::FIXED_LINE_OR_MOBILE => 'FIXED_LINE_OR_MOBILE',
+            self::TOLL_FREE => 'TOLL_FREE',
+            self::PREMIUM_RATE => 'PREMIUM_RATE',
+            self::SHARED_COST => 'SHARED_COST',
+            self::VOIP => 'VOIP',
+            self::PERSONAL_NUMBER => 'PERSONAL_NUMBER',
+            self::PAGER => 'PAGER',
+            self::UAN => 'UAN',
+            self::UNKNOWN => 'UNKNOWN',
+            self::EMERGENCY => 'EMERGENCY',
+            self::VOICEMAIL => 'VOICEMAIL',
+            self::SHORT_CODE => 'SHORT_CODE',
+            self::STANDARD_RATE => 'STANDARD_RATE',
+        );
+    }
 }
