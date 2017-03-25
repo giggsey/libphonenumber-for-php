@@ -68,8 +68,8 @@ class PhoneNumberOfflineGeocoder
      * @param PhoneNumber $number a valid phone number for which we want to get a text description
      * @param string $locale the language code for which the description should be written
      * @param string $userRegion the region code for a given user. This region will be omitted from the
-     *     description if the phone number comes from this region. It is a two-letter uppercase ISO
-     *     country code as defined by ISO 3166-1.
+     *     description if the phone number comes from this region. It is a two-letter uppercase CLDR region
+     *     code.
      * @return string a text description for the given language code for the given phone number, or empty
      *     string if the number passed in is invalid
      */
@@ -159,8 +159,8 @@ class PhoneNumberOfflineGeocoder
      * @param PhoneNumber $number a valid phone number for which we want to get a text description
      * @param string $locale the language code for which the description should be written
      * @param string $userRegion the region code for a given user. This region will be omitted from the
-     *     description if the phone number comes from this region. It is a two-letter uppercase ISO
-     *     country code as defined by ISO 3166-1.
+     *     description if the phone number comes from this region. It is a two-letter upper-case CLDR
+     *     region code.
      * @return string a text description for the given language code for the given phone number, or an
      *     empty string if the number could come from multiple countries, or the country code is
      *     in fact invalid
