@@ -30,16 +30,21 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[1-6]\\d{9}',
+    'ExampleNumber' => '3123456789',
     'PossibleLength' => 
     array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 6,
+      1 => 7,
+      2 => 8,
     ),
   ),
   'mobile' => 
   array (
     'NationalNumberPattern' => '7[1-57-9]\\d{8}',
+    'ExampleNumber' => '7123456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -51,6 +56,7 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '80\\d{8}',
+    'ExampleNumber' => '8023456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -62,6 +68,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '9[018]\\d{8}',
+    'ExampleNumber' => '9023456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -73,6 +80,7 @@ return array (
   'sharedCost' => 
   array (
     'NationalNumberPattern' => '8(?:4[3-5]|7[0-2])\\d{7}',
+    'ExampleNumber' => '8433456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -84,6 +92,7 @@ return array (
   'personalNumber' => 
   array (
     'NationalNumberPattern' => '70\\d{8}',
+    'ExampleNumber' => '7033456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -95,6 +104,7 @@ return array (
   'voip' => 
   array (
     'NationalNumberPattern' => '56\\d{8}',
+    'ExampleNumber' => '5633456789',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -106,6 +116,7 @@ return array (
   'pager' => 
   array (
     'NationalNumberPattern' => '76\\d{8}',
+    'ExampleNumber' => '7623456789',
     'PossibleLength' => 
     array (
       0 => 10,

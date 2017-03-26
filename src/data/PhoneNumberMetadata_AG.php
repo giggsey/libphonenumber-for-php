@@ -33,6 +33,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'mobile' => 
@@ -44,6 +45,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'tollFree' => 
@@ -99,6 +101,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'pager' => 
@@ -110,6 +113,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'uan' => 

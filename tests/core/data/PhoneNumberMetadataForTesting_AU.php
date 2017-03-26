@@ -27,6 +27,7 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '[2378]\\d{8}',
+    'ExampleNumber' => '212345678',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -38,6 +39,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '4\\d{8}',
+    'ExampleNumber' => '412345678',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -49,6 +51,7 @@ return array (
   'tollFree' => 
   array (
     'NationalNumberPattern' => '1800\\d{6}',
+    'ExampleNumber' => '1800123456',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -60,6 +63,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '190[0126]\\d{6}',
+    'ExampleNumber' => '1900123456',
     'PossibleLength' => 
     array (
       0 => 10,

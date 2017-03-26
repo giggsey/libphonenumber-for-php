@@ -128,7 +128,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
             'HR' => 'Croatia',
             'CU' => 'Cuba',
             'CY' => 'Cyprus',
-            'CZ' => 'Czech Republic',
+            'CZ' => 'Czechia',
             'DK' => 'Denmark',
             'DJ' => 'Djibouti',
             'DM' => 'Dominica',

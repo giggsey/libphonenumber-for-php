@@ -737,8 +737,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $possibleLength);
         $this->assertEquals(4, $possibleLength[0]);
         $this->assertEquals(13, $possibleLength[1]);
-        // We don't set the local-only lengths on child elements such as fixed-line.
-        $this->assertCount(0, $phoneNumberDesc->getPossibleLengthLocalOnly());
+        $this->assertCount(1, $phoneNumberDesc->getPossibleLengthLocalOnly());
     }
 
     public function testSetPossibleLengthsGeneralDesc_BuiltFromChildElements()
@@ -910,7 +909,8 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         // No possible lengths should be present, because they match the general description.
         $this->assertCount(0, $phoneNumberDesc->getPossibleLength());
-        $this->assertCount(0, $phoneNumberDesc->getPossibleLengthLocalOnly());
+        // Local-only lengths should be present for child elements such as fixed-line
+        $this->assertCount(1, $phoneNumberDesc->getPossibleLengthLocalOnly());
     }
 
     /**

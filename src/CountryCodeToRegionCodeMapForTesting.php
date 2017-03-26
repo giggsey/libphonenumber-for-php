@@ -103,6 +103,10 @@ class CountryCodeToRegionCodeMapForTesting {
     0 => 'RE',
     1 => 'YT',
   ),
+  290 => 
+  array (
+    0 => 'TA',
+  ),
   374 => 
   array (
     0 => 'AM',
@@ -116,6 +120,10 @@ class CountryCodeToRegionCodeMapForTesting {
     0 => 'AD',
   ),
   800 => 
+  array (
+    0 => '001',
+  ),
+  882 => 
   array (
     0 => '001',
   ),

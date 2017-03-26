@@ -189,7 +189,7 @@ class BuildMetadataFromXml
     public static function getNationalPrefixFormattingRuleFromElement(\DOMElement $element, $nationalPrefix)
     {
         $nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
-// Replace $NP with national prefix and $FG with the first group ($1).
+        // Replace $NP with national prefix and $FG with the first group ($1).
         $nationalPrefixFormattingRule = str_replace('$NP', $nationalPrefix, $nationalPrefixFormattingRule);
         $nationalPrefixFormattingRule = str_replace('$FG', '$1', $nationalPrefixFormattingRule);
         return $nationalPrefixFormattingRule;
@@ -737,12 +737,7 @@ class BuildMetadataFromXml
                 $lengths = array();
                 $localOnlyLengths = array();
                 self::populatePossibleLengthSets($element, $lengths, $localOnlyLengths);
-                // NOTE: We don't use the localOnlyLengths for specific number types yet, since they aren't
-                // used in the API and won't be until a method that assesses whether a number is possible
-                // for a certain type or not is available. To ensure size is small, we don't set them
-                // outside the general desc at this time. If we want this data later, the empty set here
-                // should be replaced with the localOnlyLengths set above.
-                self::setPossibleLengths($lengths, array(), $parentDesc, $numberDesc);
+                self::setPossibleLengths($lengths, $localOnlyLengths, $parentDesc, $numberDesc);
             }
 
             $validPattern = $element->getElementsByTagName(self::NATIONAL_NUMBER_PATTERN);

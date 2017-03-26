@@ -27,11 +27,13 @@ return array (
   'fixedLine' => 
   array (
     'NationalNumberPattern' => '\\d{8,10}',
+    'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 8,
     ),
   ),
   'mobile' => 

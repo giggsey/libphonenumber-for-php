@@ -42,6 +42,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 3,
     ),
   ),
   'mobile' => 

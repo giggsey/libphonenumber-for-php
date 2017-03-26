@@ -105,6 +105,15 @@ var_dump($phoneNumberUtil->isPossibleNumberWithReason($phoneNumberObject));
 // int(0) (ValidationResult::IS_POSSIBLE)
 ```
 
+### `isPossibleNumberForTypeWithReason()`
+
+Returns a `ValidationResult` constant with the result of whether the supplied `PhoneNumber` object is a possible number of a particular `PhoneNumberType` type.
+
+```php
+var_dump($phoneNumberUtil->isPossibleNumberForTypeWithReason($phoneNumberObject, PhoneNumberType::FIXED_LINE));
+// int(0) (ValidationResult::IS_POSSIBLE)
+```
+
 ### `isValidNumber()`
 
 Returns a `boolean` whether the supplied `PhoneNumber` object is valid or not.
