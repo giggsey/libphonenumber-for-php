@@ -238,7 +238,7 @@ class AsYouTypeFormatter
         }
         // Set to a default instance of teh metadata. This allows us to function with an incorrect
         // region code, even if the formatting only works for numbers specified with "+".
-        return static::$emptyMetadata;
+        return self::$emptyMetadata;
     }
 
     /**
