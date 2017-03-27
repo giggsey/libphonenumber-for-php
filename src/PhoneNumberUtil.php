@@ -582,13 +582,11 @@ class PhoneNumberUtil
      */
     public static function formattingRuleHasFirstGroupOnly($nationalPrefixFormattingRule)
     {
-        if (mb_strlen($nationalPrefixFormattingRule) === 0) {
-            return false;
-        }
+        $firstGroupOnlyPrefixPatternMatcher = new Matcher(static::FIRST_GROUP_ONLY_PREFIX_PATTERN,
+            $nationalPrefixFormattingRule);
 
-        $firstGroupOnlyPrefixPatternMatcher = new Matcher(static::FIRST_GROUP_ONLY_PREFIX_PATTERN, $nationalPrefixFormattingRule);
-
-        return $firstGroupOnlyPrefixPatternMatcher->matches();
+        return mb_strlen($nationalPrefixFormattingRule) === 0
+            || $firstGroupOnlyPrefixPatternMatcher->matches();
     }
 
     /**
@@ -1468,6 +1466,17 @@ class PhoneNumberUtil
     }
 
     /**
+     * Gets an AsYouTypeFormatter for the specific region.
+     *
+     * @param string $regionCode The region where the phone number is being entered.
+     * @return AsYouTypeFormatter
+     */
+    public function getAsYouTypeFormatter($regionCode)
+    {
+        return new AsYouTypeFormatter($regionCode);
+    }
+
+    /**
      * A helper function to set the values related to leading zeros in a PhoneNumber.
      * @param string $nationalNumber
      * @param PhoneNumber $phoneNumber
@@ -2037,8 +2046,9 @@ class PhoneNumberUtil
      * @param string $fullNumber
      * @param string $nationalNumber
      * @return int
+     * @internal
      */
-    protected function extractCountryCode(&$fullNumber, &$nationalNumber)
+    public function extractCountryCode($fullNumber, &$nationalNumber)
     {
         if ((mb_strlen($fullNumber) == 0) || ($fullNumber[0] == '0')) {
             // Country codes do not begin with a '0'.
