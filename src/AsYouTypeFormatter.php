@@ -308,6 +308,9 @@ class AsYouTypeFormatter
         return $eligibleFormatMatcher->matches();
     }
 
+    /**
+     * @param $leadingDigits
+     */
     private function narrowDownPossibleFormats($leadingDigits)
     {
         $indexOfLeadingDigitsPattern = mb_strlen($leadingDigits) - self::$minLeadingDigitsLength;
@@ -567,6 +570,10 @@ class AsYouTypeFormatter
         return ($this->extractedNationalPrefix !== $this->removeNationalPrefixFromNationalNumber());
     }
 
+    /**
+     * @param string $nextChar
+     * @return bool
+     */
     private function isDigitOrLeadingPlusSign($nextChar)
     {
         $plusCharsMatcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $nextChar);
@@ -622,7 +629,7 @@ class AsYouTypeFormatter
      * Combines the national number with any prefix (IDD/+ and country code or national prefix) that
      * was collected. A space will be inserted between them if the current formatting template
      * indicates this to be suitable.
-     * @param $nationalNumber
+     * @param string $nationalNumber
      * @return string
      */
     private function appendNationalNumber($nationalNumber)
