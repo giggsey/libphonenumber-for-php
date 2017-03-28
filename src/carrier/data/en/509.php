@@ -11,8 +11,7 @@
  */
 
 return array (
-  509281 => 'Digicel',
-  50929 => 'Digicel',
+  50930 => 'Digicel',
   50931 => 'Digicel',
   50934 => 'Digicel',
   50936 => 'Digicel',

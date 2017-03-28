@@ -32,6 +32,8 @@ If you do not use composer, ensure that you also load any dependencies that this
  - [Phone Number Geolocation](docs/PhoneNumberOfflineGeocoder.md)
  - [Phone Number to Carrier Mapping](docs/PhoneNumberToCarrierMapper.md)
  - [Phone Number to Timezone Mapping](docs/PhoneNumberToTimeZonesMapper.md)
+ - [Phone Number Matcher](docs/PhoneNumberMatcher.md)
+ - [As You Type Formatter](docs/AsYouTypeFormatter.md)
 
 ## Online Demo
 An [online demo](http://giggsey.com/libphonenumber/) is available, and the source can be found at [giggsey/libphonenumber-example](https://github.com/giggsey/libphonenumber-example).

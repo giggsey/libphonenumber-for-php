@@ -11,12 +11,8 @@
  */
 
 return array (
-  226550 => 'Airtel',
-  226551 => 'Airtel',
-  226552 => 'Airtel',
-  226553 => 'Airtel',
-  226554 => 'Airtel',
-  226555 => 'Airtel',
+  22651 => 'Telmob',
+  22655 => 'Airtel',
   22660 => 'Telmob',
   22661 => 'Telmob',
   22662 => 'Telmob',
