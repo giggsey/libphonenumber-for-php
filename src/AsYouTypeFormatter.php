@@ -825,7 +825,7 @@ class AsYouTypeFormatter
         $digitMatcher = new Matcher(self::$digitPattern, $this->formattingTemplate);
         if ($digitMatcher->find($this->lastMatchPosition)) {
             $tempTemplate = $digitMatcher->replaceFirst($nextChar);
-            $this->formattingTemplate = $tempTemplate . mb_substr($this->formattingTemplate, mb_strlen($tempTemplate));
+            $this->formattingTemplate = $tempTemplate . mb_substr($this->formattingTemplate, mb_strlen($tempTemplate, "UTF-8"), null, "UTF-8");
             $this->lastMatchPosition = $digitMatcher->start();
             return mb_substr($this->formattingTemplate, 0, $this->lastMatchPosition + 1);
         } else {
