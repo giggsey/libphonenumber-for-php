@@ -93,7 +93,7 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '8[1-3]\\d{6}',
+    'NationalNumberPattern' => '8(?:1[1-4679]|2[0-367]|3[02-47])\\d{5}',
     'ExampleNumber' => '81123456',
     'PossibleLength' => 
     array (
@@ -116,7 +116,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '7\\d{7}',
+    'NationalNumberPattern' => '7(?:1[0-369]|[23][0-37-9]|47|5[1578]|6[0235]|7[278]|8[236-9]|9[025-9])\\d{5}',
     'ExampleNumber' => '71234567',
     'PossibleLength' => 
     array (
