@@ -88,7 +88,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '27878|4(?:0404?|11[12]|57)|55555',
+    'NationalNumberPattern' => '151|27878|4(?:0404?|11[12]|57)|55555',
     'ExampleNumber' => '27878',
     'PossibleLength' => 
     array (

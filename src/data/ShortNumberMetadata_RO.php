@@ -14,11 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '[18]\\d{2,5}',
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 6,
+      1 => 4,
+      2 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -38,10 +39,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => 'NA',
+    'NationalNumberPattern' => '(?:1(?:18(?:300|932)|[24]\\d{2})|8[48]\\d{2})',
+    'ExampleNumber' => '8844',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 4,
+      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -61,7 +64,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11(?:2|6(?:000|111))',
+    'NationalNumberPattern' => '1(?:1(?:2|6(?:000|111)|8(?:300|932))|[24]\\d{2}|9(?:21|3[02]|5[178]))|8[48]\\d{2}',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
