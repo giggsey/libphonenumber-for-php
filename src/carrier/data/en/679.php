@@ -11,6 +11,9 @@
  */
 
 return array (
+  67950 => 'Digicel',
+  67951 => 'Digicel',
+  67958 => 'Vodafone',
   6797 => 'Digicel',
   67984 => 'Vodafone',
   67989 => 'Vodafone',

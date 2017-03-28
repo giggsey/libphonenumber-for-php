@@ -12,7 +12,7 @@
 
 return array (
   822 => 'Seul',
-  8232 => 'Daejeon',
+  8232 => 'İncheon',
   8241 => 'Güney Chungcheong',
   8243 => 'Kuzey Chungcheong',
   8244 => 'Sejong',

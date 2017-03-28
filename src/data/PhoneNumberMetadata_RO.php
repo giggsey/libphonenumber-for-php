@@ -85,11 +85,10 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '802\\d{6}',
-    'ExampleNumber' => '802123456',
+    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
-      0 => 9,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
