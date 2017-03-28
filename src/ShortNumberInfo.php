@@ -149,15 +149,17 @@ class ShortNumberInfo
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
         if (!is_readable($fileName)) {
             throw new \Exception('missing metadata: ' . $fileName);
+        }
+
+        $metadataLoader = new DefaultMetadataLoader();
+        $data = $metadataLoader->loadMetadata($fileName);
+
+        $metadata = new PhoneMetadata();
+        $metadata->fromArray($data);
+        if ($isNonGeoRegion) {
+            $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
         } else {
-            $data = include $fileName;
-            $metadata = new PhoneMetadata();
-            $metadata->fromArray($data);
-            if ($isNonGeoRegion) {
-                $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
-            } else {
-                $this->regionToMetadataMap[$regionCode] = $metadata;
-            }
+            $this->regionToMetadataMap[$regionCode] = $metadata;
         }
     }
 

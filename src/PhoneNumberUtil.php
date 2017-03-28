@@ -2,6 +2,8 @@
 
 namespace libphonenumber;
 
+use libphonenumber\Leniency\AbstractLeniency;
+
 /**
  * Utility for international phone numbers. Functionality includes formatting, parsing and
  * validation.
@@ -104,8 +106,8 @@ class PhoneNumberUtil
     protected static $SEPARATOR_PATTERN;
     protected static $CAPTURING_DIGIT_PATTERN;
     protected static $VALID_START_CHAR_PATTERN = null;
-    protected static $SECOND_NUMBER_START_PATTERN = "[\\\\/] *x";
-    protected static $UNWANTED_END_CHAR_PATTERN = "[[\\P{N}&&\\P{L}]&&[^#]]+$";
+    public static $SECOND_NUMBER_START_PATTERN = '[\\\\/] *x';
+    public static $UNWANTED_END_CHAR_PATTERN = "[[\\P{N}&&\\P{L}]&&[^#]]+$";
     protected static $DIALLABLE_CHAR_MAPPINGS = array();
     protected static $CAPTURING_EXTN_DIGITS;
 
@@ -214,6 +216,11 @@ class PhoneNumberUtil
      * @var String
      */
     protected static $EXTN_PATTERNS_FOR_PARSING;
+    /**
+     * @var string
+     * @internal
+     */
+    public static $EXTN_PATTERNS_FOR_MATCHING;
     protected static $EXTN_PATTERN = null;
     protected static $VALID_PHONE_NUMBER_PATTERN;
     protected static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
@@ -435,12 +442,18 @@ class PhoneNumberUtil
         $this->nanpaRegions = $this->countryCallingCodeToRegionCodeMap[static::NANPA_COUNTRY_CODE];
     }
 
-    protected static function initCapturingExtnDigits()
+    /**
+     * @internal
+     */
+    public static function initCapturingExtnDigits()
     {
         static::$CAPTURING_EXTN_DIGITS = "(" . static::DIGITS . "{1,7})";
     }
 
-    protected static function initExtnPatterns()
+    /**
+     * @internal
+     */
+    public static function initExtnPatterns()
     {
         // One-character symbols that can be used to indicate an extension.
         $singleExtnSymbolsForMatching = "x\xEF\xBD\x98#\xEF\xBC\x83~\xEF\xBD\x9E";
@@ -450,12 +463,8 @@ class PhoneNumberUtil
         $singleExtnSymbolsForParsing = ",;" . $singleExtnSymbolsForMatching;
 
         static::$EXTN_PATTERNS_FOR_PARSING = static::createExtnPattern($singleExtnSymbolsForParsing);
+        static::$EXTN_PATTERNS_FOR_MATCHING = static::createExtnPattern($singleExtnSymbolsForMatching);
     }
-
-    // The FIRST_GROUP_PATTERN was originally set to $1 but there are some countries for which the
-    // first group is not used in the national pattern (e.g. Argentina) so the $1 group does not match
-    // correctly.  Therefore, we use \d, so that the first group actually used in the pattern will be
-    // matched.
 
     /**
      * Helper initialiser method to create the regular-expression pattern to match extensions,
@@ -478,8 +487,8 @@ class PhoneNumberUtil
         return (static::RFC3966_EXTN_PREFIX . static::$CAPTURING_EXTN_DIGITS . "|" . "[ \xC2\xA0\\t,]*" .
             "(?:e?xt(?:ensi(?:o\xCC\x81?|\xC3\xB3))?n?|(?:\xEF\xBD\x85)?\xEF\xBD\x98\xEF\xBD\x94(?:\xEF\xBD\x8E)?|" .
             "[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
-            "[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . static::$CAPTURING_EXTN_DIGITS . "#?|" .
-            "[- ]+(" . static::DIGITS . "{1,5})#");
+            "[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . static::$CAPTURING_EXTN_DIGITS . "\\#?|" .
+            "[- ]+(" . static::DIGITS . "{1,5})\\#");
     }
 
     protected static function initExtnPattern()
@@ -573,8 +582,11 @@ class PhoneNumberUtil
      */
     public static function formattingRuleHasFirstGroupOnly($nationalPrefixFormattingRule)
     {
-        $m = preg_match(static::FIRST_GROUP_ONLY_PREFIX_PATTERN, $nationalPrefixFormattingRule);
-        return $m > 0;
+        $firstGroupOnlyPrefixPatternMatcher = new Matcher(static::FIRST_GROUP_ONLY_PREFIX_PATTERN,
+            $nationalPrefixFormattingRule);
+
+        return mb_strlen($nationalPrefixFormattingRule) === 0
+            || $firstGroupOnlyPrefixPatternMatcher->matches();
     }
 
     /**
@@ -1238,7 +1250,7 @@ class PhoneNumberUtil
      * @param null|string $carrierCode
      * @return string
      */
-    protected function formatNsnUsingPattern(
+    public function formatNsnUsingPattern(
         $nationalNumber,
         NumberFormat $formattingPattern,
         $numberFormat,
@@ -1436,6 +1448,35 @@ class PhoneNumberUtil
     }
 
     /**
+     * Returns an iterable over all PhoneNumberMatches in $text
+     *
+     * @param string $text
+     * @param string $defaultRegion
+     * @param AbstractLeniency $leniency Defaults to Leniency::VALID()
+     * @param int $maxTries Defaults to PHP_INT_MAX
+     * @return PhoneNumberMatcher
+     */
+    public function findNumbers($text, $defaultRegion, AbstractLeniency $leniency = null, $maxTries = PHP_INT_MAX)
+    {
+        if ($leniency === null) {
+            $leniency = Leniency::VALID();
+        }
+
+        return new PhoneNumberMatcher($this, $text, $defaultRegion, $leniency, $maxTries);
+    }
+
+    /**
+     * Gets an AsYouTypeFormatter for the specific region.
+     *
+     * @param string $regionCode The region where the phone number is being entered.
+     * @return AsYouTypeFormatter
+     */
+    public function getAsYouTypeFormatter($regionCode)
+    {
+        return new AsYouTypeFormatter($regionCode);
+    }
+
+    /**
      * A helper function to set the values related to leading zeros in a PhoneNumber.
      * @param string $nationalNumber
      * @param PhoneNumber $phoneNumber
@@ -1628,7 +1669,7 @@ class PhoneNumberUtil
      * @param PhoneNumber $phoneNumberIn
      * @return PhoneNumber
      */
-    private static function copyCoreFieldsOnly(PhoneNumber $phoneNumberIn)
+    protected static function copyCoreFieldsOnly(PhoneNumber $phoneNumberIn)
     {
         $phoneNumber = new PhoneNumber();
         $phoneNumber->setCountryCode($phoneNumberIn->getCountryCode());
@@ -1959,16 +2000,13 @@ class PhoneNumberUtil
         $normalizedDigits = "";
         $numberAsArray = preg_split('/(?<!^)(?!$)/u', $number);
         foreach ($numberAsArray as $character) {
-            if (is_numeric($character)) {
-                $normalizedDigits .= $character;
-            } elseif ($keepNonDigits) {
-                $normalizedDigits .= $character;
-            }
-            // If neither of the above are true, we remove this character.
-
             // Check if we are in the unicode number range
             if (array_key_exists($character, static::$numericCharacters)) {
                 $normalizedDigits .= static::$numericCharacters[$character];
+            } elseif (is_numeric($character)) {
+                $normalizedDigits .= $character;
+            } elseif ($keepNonDigits) {
+                $normalizedDigits .= $character;
             }
         }
         return $normalizedDigits;
@@ -2008,8 +2046,9 @@ class PhoneNumberUtil
      * @param string $fullNumber
      * @param string $nationalNumber
      * @return int
+     * @internal
      */
-    protected function extractCountryCode(&$fullNumber, &$nationalNumber)
+    public function extractCountryCode($fullNumber, &$nationalNumber)
     {
         if ((mb_strlen($fullNumber) == 0) || ($fullNumber[0] == '0')) {
             // Country codes do not begin with a '0'.

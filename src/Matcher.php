@@ -8,6 +8,8 @@ namespace libphonenumber;
  * Note that this is NOT the same as google's java PhoneNumberMatcher class.
  * This class is a minimal port of java's built-in matcher class, whereas PhoneNumberMatcher
  * is designed to recognize phone numbers embedded in any text.
+ *
+ * @internal
  */
 class Matcher
 {
@@ -26,6 +28,8 @@ class Matcher
      */
     protected $groups = array();
 
+    private $searchIndex = 0;
+
     /**
      * @param string $pattern
      * @param string $subject
@@ -36,7 +40,7 @@ class Matcher
         $this->subject = $subject;
     }
 
-    protected function doMatch($type = 'find')
+    protected function doMatch($type = 'find', $offset = 0)
     {
         $final_pattern = '(?:' . $this->pattern . ')';
         switch ($type) {
@@ -51,8 +55,28 @@ class Matcher
                 // no changes
                 break;
         }
-        $final_pattern = '/' . $final_pattern . '/x';
-        return (preg_match($final_pattern, $this->subject, $this->groups, PREG_OFFSET_CAPTURE) == 1) ? true : false;
+        $final_pattern = '/' . $final_pattern . '/ui';
+
+        $search = mb_substr($this->subject, $offset);
+
+        $result = preg_match($final_pattern, $search, $groups, PREG_OFFSET_CAPTURE);
+
+        if ($result === 1) {
+            // Expand $groups into $this->groups, but being multi-byte aware
+
+            $positions = array();
+
+            foreach ($groups as $group) {
+                $positions[] = array(
+                    $group[0],
+                    $offset + mb_strlen(mb_strcut($search, 0, $group[1]))
+                );
+            }
+
+            $this->groups = $positions;
+        }
+
+        return ($result === 1);
     }
 
     /**
@@ -74,9 +98,15 @@ class Matcher
     /**
      * @return bool
      */
-    public function find()
+    public function find($offset = null)
     {
-        return $this->doMatch('find');
+        if ($offset === null) {
+            $offset = $this->searchIndex;
+        }
+
+        // Increment search index for the next time we call this
+        $this->searchIndex++;
+        return $this->doMatch('find', $offset);
     }
 
     /**
@@ -115,12 +145,12 @@ class Matcher
         if (!isset($this->groups[$group])) {
             return null;
         }
-        return $this->groups[$group][1] + strlen($this->groups[$group][0]);
+        return $this->groups[$group][1] + mb_strlen($this->groups[$group][0]);
     }
 
     public function start($group = null)
     {
-        if (isset($group) || $group === null) {
+        if (!isset($group) || $group === null) {
             $group = 0;
         }
         if (!isset($this->groups[$group])) {
