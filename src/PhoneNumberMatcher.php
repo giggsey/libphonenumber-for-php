@@ -4,6 +4,15 @@ namespace libphonenumber;
 
 use libphonenumber\Leniency\AbstractLeniency;
 
+/**
+ * A class that finds and extracts telephone numbers from $text.
+ * Instances can be created using PhoneNumberUtil::findNumbers()
+ *
+ * Vanity numbers (phone numbers using alphabetic digits such as '1-800-SIX-FLAGS' are
+ * not found.
+ *
+ * @package libphonenumber
+ */
 class PhoneNumberMatcher implements \Iterator
 {
     protected static $initialized = false;
