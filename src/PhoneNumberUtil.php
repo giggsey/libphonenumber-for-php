@@ -222,7 +222,7 @@ class PhoneNumberUtil
      */
     public static $EXTN_PATTERNS_FOR_MATCHING;
     protected static $EXTN_PATTERN = null;
-    protected static $VALID_PHONE_NUMBER_PATTERN;
+    protected static $VALID_PHONE_NUMBER_PATTERN = null;
     protected static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
     /**
      *  Regular expression of viable phone numbers. This is location independent. Checks we have at
@@ -365,9 +365,7 @@ class PhoneNumberUtil
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
 
 
-        static::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . static::DIGITS . "]{" . static::MIN_LENGTH_FOR_NSN . "}";
-        static::$VALID_PHONE_NUMBER = "[" . static::PLUS_CHARS . "]*(?:[" . static::VALID_PUNCTUATION . static::STAR_SIGN . "]*[" . static::DIGITS . "]){3,}[" . static::VALID_PUNCTUATION . static::STAR_SIGN . static::VALID_ALPHA . static::DIGITS . "]*";
-        static::$VALID_PHONE_NUMBER_PATTERN = "%^" . static::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . static::$VALID_PHONE_NUMBER . "(?:" . static::$EXTN_PATTERNS_FOR_PARSING . ")?$%" . static::REGEX_FLAGS;
+        static::initValidPhoneNumberPatterns();
 
         static::$UNWANTED_END_CHAR_PATTERN = "[^" . static::DIGITS . static::VALID_ALPHA . "#]+$";
 
@@ -494,6 +492,15 @@ class PhoneNumberUtil
     protected static function initExtnPattern()
     {
         static::$EXTN_PATTERN = "/(?:" . static::$EXTN_PATTERNS_FOR_PARSING . ")$/" . static::REGEX_FLAGS;
+    }
+
+    protected static function initValidPhoneNumberPatterns()
+    {
+        static::initCapturingExtnDigits();
+        static::initExtnPatterns();
+        static::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . static::DIGITS . "]{" . static::MIN_LENGTH_FOR_NSN . "}";
+        static::$VALID_PHONE_NUMBER = "[" . static::PLUS_CHARS . "]*(?:[" . static::VALID_PUNCTUATION . static::STAR_SIGN . "]*[" . static::DIGITS . "]){3,}[" . static::VALID_PUNCTUATION . static::STAR_SIGN . static::VALID_ALPHA . static::DIGITS . "]*";
+        static::$VALID_PHONE_NUMBER_PATTERN = "%^" . static::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . static::$VALID_PHONE_NUMBER . "(?:" . static::$EXTN_PATTERNS_FOR_PARSING . ")?$%" . static::REGEX_FLAGS;
     }
 
     protected static function initAlphaPhoneMappings()
@@ -1374,6 +1381,10 @@ class PhoneNumberUtil
      */
     public static function isViablePhoneNumber($number)
     {
+        if (static::$VALID_PHONE_NUMBER_PATTERN === null) {
+            static::initValidPhoneNumberPatterns();
+        }
+
         if (mb_strlen($number) < static::MIN_LENGTH_FOR_NSN) {
             return false;
         }
