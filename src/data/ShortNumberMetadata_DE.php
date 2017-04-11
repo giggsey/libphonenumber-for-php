@@ -26,7 +26,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '116(?:00[06]|1(?:1[17]|23))',
+    'NationalNumberPattern' => '116\\d{3}',
     'ExampleNumber' => '116000',
     'PossibleLength' => 
     array (

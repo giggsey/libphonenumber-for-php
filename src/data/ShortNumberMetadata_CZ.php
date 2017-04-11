@@ -51,7 +51,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1(?:12|5[058])',
+    'NationalNumberPattern' => '1(?:12|5[0568])',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -63,7 +63,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:2|6\\d{3}|8\\d)|2\\d{2,3}|3\\d{3,4}|4\\d{3}|5[058]|99)',
+    'NationalNumberPattern' => '1(?:1(?:2|6\\d{3}|8\\d)|2\\d{2,3}|3\\d{3,4}|4\\d{3}|5[0568]|99)',
     'ExampleNumber' => '116123',
     'PossibleLength' => 
     array (

@@ -27,6 +27,8 @@ return array (
   9725587 => 'Alon',
   9725588 => 'Alon',
   9725589 => 'Alon',
+  9725592 => 'Telzar',
+  9725593 => 'Telzar',
   9725594 => 'Telzar',
   9725595 => 'Telzar',
   9725596 => 'Telzar',
