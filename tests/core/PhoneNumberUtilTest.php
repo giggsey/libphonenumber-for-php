@@ -1897,7 +1897,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            ValidationResult::IS_POSSIBLE,
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberWithReason(self::$usLocalNumber)
         );
 
@@ -1991,9 +1991,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $number = new PhoneNumber();
         // Here we test a number length which matches a local-only length.
         $number->setCountryCode(49)->setNationalNumber(12);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
         // Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
         $this->assertEquals(ValidationResult::TOO_SHORT,
@@ -2007,9 +2007,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // as a whole, and hence aren't present in the binary for size reasons - this should still work.
         // Local-only number.
         $number->setCountryCode(55)->setNationalNumber(12345678);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
 
         // Normal-length number.
@@ -2028,7 +2028,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(ValidationResult::INVALID_LENGTH,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
         // This matches a fixed-line length though.
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
+        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
         // This is too short for fixed-line, and no mobile numbers exist.
         $number->setCountryCode(55)->setNationalNumber(1234567);
@@ -2079,9 +2079,7 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
         $this->assertEquals(ValidationResult::TOO_LONG,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        // This will change to INVALID_LENGTH once we start returning this type in the main
-        // isPossibleNumberWithReason API.
-        $this->assertEquals(ValidationResult::TOO_LONG,
+        $this->assertEquals(ValidationResult::INVALID_LENGTH,
             $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
 
         $number->setNationalNumber(123456);

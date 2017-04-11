@@ -807,7 +807,8 @@ class PhoneNumberUtil
 
     /**
      * Returns the region where a phone number is from. This could be used for geocoding at the region
-     * level.
+     * level. Only guarantees correct results for valid, full numbers (not short-codes, or invalid
+     * numbers).
      *
      * @param PhoneNumber $number the phone number whose origin we want to know
      * @return null|string  the region where the phone number is from, or null if no region matches this calling
@@ -2147,7 +2148,11 @@ class PhoneNumberUtil
 
     /**
      * Convenience wrapper around isPossibleNumberForTypeWithReason. Instead of returning the reason
-     * for failure, this method returns a boolean value
+     * reason for failure, this method returns true if the number is either a possible fully-qualified
+     * number (containing the area code and country code), or if the number could be a possible local
+     * number (with a country code, but missing an area code). Local numbers are considered possible
+     * if they could be possibly dialled in this format: if the area code is needed for a call to
+     * connect, the number is not considered possible without it.
      *
      * @param PhoneNumber $number The number that needs to be checked
      * @param int $type PhoneNumberType The type we are interested in
@@ -2155,7 +2160,9 @@ class PhoneNumberUtil
      */
     public function isPossibleNumberForType(PhoneNumber $number, $type)
     {
-        return $this->isPossibleNumberForTypeWithReason($number, $type) === ValidationResult::IS_POSSIBLE;
+        $result = $this->isPossibleNumberForTypeWithReason($number, $type);
+        return $result === ValidationResult::IS_POSSIBLE
+            || $result === ValidationResult::IS_POSSIBLE_LOCAL_ONLY;
     }
 
     /**
@@ -2222,8 +2229,11 @@ class PhoneNumberUtil
 
         $actualLength = mb_strlen($number);
 
+        // This is safe because there is never an overlap between the possible lengths and the local-only
+        // lengths; this is checked at build time.
+
         if (in_array($actualLength, $localLengths)) {
-            return ValidationResult::IS_POSSIBLE;
+            return ValidationResult::IS_POSSIBLE_LOCAL_ONLY;
         }
 
         $minimumLength = reset($possibleLengths);
@@ -2235,13 +2245,9 @@ class PhoneNumberUtil
             return ValidationResult::TOO_LONG;
         }
 
-        // Note that actually the number is not too long if possibleLengths does not contain the length:
-        // we know it is less than the highest possible number length, and higher than the lowest
-        // possible number length. However, we don't currently have an enum to express this, so we
-        // return TOO_LONG in the short-term.
         // We skip the first element; we've already checked it.
         array_shift($possibleLengths);
-        return in_array($actualLength, $possibleLengths) ? ValidationResult::IS_POSSIBLE : ValidationResult::TOO_LONG;
+        return in_array($actualLength, $possibleLengths) ? ValidationResult::IS_POSSIBLE : ValidationResult::INVALID_LENGTH;
     }
 
     /**
@@ -3451,11 +3457,21 @@ class PhoneNumberUtil
      * the region where the number could be dialed from. It provides a more lenient check than
      * {@link #isValidNumber}. See {@link #isPossibleNumber(PhoneNumber)} for details.
      *
-     * <p>This method first parses the number, then invokes {@link #isPossibleNumber(PhoneNumber)}
-     * with the resultant PhoneNumber object.
+     * Convenience wrapper around {@link #isPossibleNumberWithReason}. Instead of returning the reason
+     * for failure, this method returns a boolean value.
+     * for failure, this method returns true if the number is either a possible fully-qualified number
+     * (containing the area code and country code), or if the number could be a possible local number
+     * (with a country code, but missing an area code). Local numbers are considered possible if they
+     * could be possibly dialled in this format: if the area code is needed for a call to connect, the
+     * number is not considered possible without it.
+     *
+     * Note: There are two ways to call this method.
+     *
+     * isPossibleNumber(PhoneNumber $numberObject)
+     * isPossibleNumber(string '+441174960126', string 'GB')
      *
      * @param PhoneNumber|string $number the number that needs to be checked, in the form of a string
-     * @param string $regionDialingFrom the region that we are expecting the number to be dialed from.
+     * @param string|null $regionDialingFrom the region that we are expecting the number to be dialed from.
      *     Note this is different from the region where the number belongs.  For example, the number
      *     +1 650 253 0000 is a number that belongs to US. When written in this form, it can be
      *     dialed from any region. When it is written as 00 1 650 253 0000, it can be dialed from any
@@ -3469,14 +3485,14 @@ class PhoneNumberUtil
     {
         if ($regionDialingFrom !== null && is_string($number)) {
             try {
-                return $this->isPossibleNumberWithReason(
-                    $this->parse($number, $regionDialingFrom)
-                ) === ValidationResult::IS_POSSIBLE;
+                return $this->isPossibleNumber($this->parse($number, $regionDialingFrom));
             } catch (NumberParseException $e) {
                 return false;
             }
         } else {
-            return $this->isPossibleNumberWithReason($number) === ValidationResult::IS_POSSIBLE;
+            $result = $this->isPossibleNumberWithReason($number);
+            return $result === ValidationResult::IS_POSSIBLE
+                || $result === ValidationResult::IS_POSSIBLE_LOCAL_ONLY;
         }
     }
 
@@ -3485,19 +3501,19 @@ class PhoneNumberUtil
      * Check whether a phone number is a possible number. It provides a more lenient check than
      * {@link #isValidNumber} in the following sense:
      * <ol>
-     * <li> It only checks the length of phone numbers. In particular, it doesn't check starting
-     *      digits of the number.
-     * <li> It doesn't attempt to figure out the type of the number, but uses general rules which
-     *      applies to all types of phone numbers in a region. Therefore, it is much faster than
-     *      isValidNumber.
-     * <li> For fixed line numbers, many regions have the concept of area code, which together with
-     *      subscriber number constitute the national significant number. It is sometimes okay to dial
-     *      only the subscriber number when dialing in the same area. This function will return
-     *      true if the subscriber-number-only version is passed in. On the other hand, because
-     *      isValidNumber validates using information on both starting digits (for fixed line
-     *      numbers, that would most likely be area codes) and length (obviously includes the
-     *      length of area codes for fixed line numbers), it will return false for the
-     *      subscriber-number-only version.
+     *   <li> It only checks the length of phone numbers. In particular, it doesn't check starting
+     *        digits of the number.
+     *   <li> It doesn't attempt to figure out the type of the number, but uses general rules which
+     *        applies to all types of phone numbers in a region. Therefore, it is much faster than
+     *        isValidNumber.
+     *   <li> For some numbers (particularly fixed-line), many regions have the concept of area code,
+     *        which together with subscriber number constitute the national significant number. It is
+     *        sometimes okay to dial only the subscriber number when dialing in the same area. This
+     *        function will return IS_POSSIBLE_LOCAL_ONLY if the subscriber-number-only version is
+     *        passed in. On the other hand, because isValidNumber validates using information on both
+     *        starting digits (for fixed line numbers, that would most likely be area codes) and
+     *        length (obviously includes the length of area codes for fixed line numbers), it will
+     *        return false for the subscriber-number-only version.
      * </ol>
      * @param PhoneNumber $number the number that needs to be checked
      * @return int a ValidationResult object which indicates whether the number is possible
@@ -3518,15 +3534,15 @@ class PhoneNumberUtil
     *
     * <ol>
     *   <li> It only checks the length of phone numbers. In particular, it doesn't check starting
-    *       digits of the number.
-    *   <li> For fixed line numbers, many regions have the concept of area code, which together with
-    *       subscriber number constitute the national significant number. It is sometimes okay to
-    *       dial the subscriber number only when dialing in the same area. This function will return
-    *       true if the subscriber-number-only version is passed in. On the other hand, because
-    *       isValidNumber validates using information on both starting digits (for fixed line
-    *       numbers, that would most likely be area codes) and length (obviously includes the length
-    *       of area codes for fixed line numbers), it will return false for the
-    *       subscriber-number-only version.
+    *        digits of the number.
+    *   <li> For some numbers (particularly fixed-line), many regions have the concept of area code,
+    *        which together with subscriber number constitute the national significant number. It is
+    *        sometimes okay to dial only the subscriber number when dialing in the same area. This
+    *        function will return IS_POSSIBLE_LOCAL_ONLY if the subscriber-number-only version is
+    *        passed in. On the other hand, because isValidNumber validates using information on both
+    *        starting digits (for fixed line numbers, that would most likely be area codes) and
+    *        length (obviously includes the length of area codes for fixed line numbers), it will
+    *        return false for the subscriber-number-only version.
     * </ol>
     *
     * @param PhoneNumber $number the number that needs to be checked
