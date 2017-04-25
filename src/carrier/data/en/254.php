@@ -18,6 +18,7 @@ return array (
   254740 => 'Safaricom',
   254741 => 'Safaricom',
   254742 => 'Safaricom',
+  254743 => 'Safaricom',
   254744 => 'Homeland Media',
   254747 => 'JTL',
   254749 => 'WiAfrica',
