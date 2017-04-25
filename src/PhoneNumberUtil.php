@@ -1706,11 +1706,12 @@ class PhoneNumberUtil
     protected function buildNationalNumberForParsing($numberToParse, &$nationalNumber)
     {
         $indexOfPhoneContext = strpos($numberToParse, static::RFC3966_PHONE_CONTEXT);
-        if ($indexOfPhoneContext > 0) {
+        if ($indexOfPhoneContext !== false) {
             $phoneContextStart = $indexOfPhoneContext + mb_strlen(static::RFC3966_PHONE_CONTEXT);
             // If the phone context contains a phone number prefix, we need to capture it, whereas domains
             // will be ignored.
-            if (substr($numberToParse, $phoneContextStart, 1) == static::PLUS_SIGN) {
+            if ($phoneContextStart < (strlen($numberToParse) - 1)
+                && substr($numberToParse, $phoneContextStart, 1) == static::PLUS_SIGN) {
                 // Additional parameters might follow the phone context. If so, we will remove them here
                 // because the parameters after phone context are not important for parsing the
                 // phone number.

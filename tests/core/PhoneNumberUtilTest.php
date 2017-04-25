@@ -3175,6 +3175,20 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
                 "Wrong error type stored in exception."
             );
         }
+
+        try {
+            // Only the phone-context symbol is present, but no data.
+            $invalidRfcPhoneContext = ';phone-context=';
+            $this->phoneUtil->parse($invalidRfcPhoneContext, RegionCode::ZZ);
+            $this->fail('No number is present: should fail.');
+        } catch (NumberParseException $e) {
+            // Expected this exception.
+            $this->assertEquals(
+                NumberParseException::NOT_A_NUMBER,
+                $e->getErrorType(),
+                "Wrong error type stored in exception."
+            );
+        }
     }
 
     public function testParseNumbersWithPlusWithNoRegion()
