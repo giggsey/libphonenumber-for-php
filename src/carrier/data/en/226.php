@@ -13,6 +13,7 @@
 return array (
   22651 => 'Telmob',
   22655 => 'Airtel',
+  22656 => 'Airtel',
   22660 => 'Telmob',
   22661 => 'Telmob',
   22662 => 'Telmob',
