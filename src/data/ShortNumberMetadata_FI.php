@@ -14,11 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2,5}',
+    'NationalNumberPattern' => '1\\d{2,5}|75[12]\\d{2}',
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 6,
+      1 => 5,
+      2 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -61,7 +62,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11(?:2|6111)',
+    'NationalNumberPattern' => '11(?:2|6111)|75[12]\\d{2}',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (

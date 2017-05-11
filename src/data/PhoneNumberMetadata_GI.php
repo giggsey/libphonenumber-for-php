@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2(?:00\\d|1(?:6[24-7]|9\\d)|2(?:00|2[2457]))\\d{4}',
+    'NationalNumberPattern' => '2(?:00\\d{2}|1(?:6[24-7]\\d|90[0-2])|2(?:00\\d|2[2457]\\d|50[0-2]))\\d{3}',
     'ExampleNumber' => '20012345',
     'PossibleLength' => 
     array (
@@ -47,10 +47,10 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80\\d{6}',
-    'ExampleNumber' => '80123456',
+    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,7 +58,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '8[1-689]\\d{6}',
+    'NationalNumberPattern' => '88\\d{6}',
     'ExampleNumber' => '88123456',
     'PossibleLength' => 
     array (
@@ -69,10 +69,10 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '87\\d{6}',
-    'ExampleNumber' => '87123456',
+    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
