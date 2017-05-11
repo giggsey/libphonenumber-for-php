@@ -209,7 +209,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse(BuildMetadataFromXml::loadInternationalFormat($metadata, $numberFormatElement,
             $nationalFormat));
-        $this->assertTrue($metadata->getIntlNumberFormat(0)->isNationalPrefixOptionalWhenFormatting());
+        $this->assertTrue($metadata->getIntlNumberFormat(0)->getNationalPrefixOptionalWhenFormatting());
     }
 
     public function testLoadNationalFormat()
@@ -599,7 +599,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $metadata = new PhoneMetadata();
         // Should set sameMobileAndFixedPattern to true.
         BuildMetadataFromXml::setRelevantDescPatterns($metadata, $territoryElement, false /* isShortNumberMetadata */);
-        $this->assertTrue($metadata->hasSameMobileAndFixedLinePattern());
+        $this->assertTrue($metadata->getSameMobileAndFixedLinePattern());
     }
 
     public function testSetRelevantDescPatternsSetsAllDescriptionsForRegularLengthNumbers()
@@ -710,12 +710,12 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $metadata = BuildMetadataFromXml::loadCountryMetadata('FR', $territoryElement, false
             /* isShortNumberMetadata */, true /* isAlternateFormatsMetadata */);
-        $this->assertTrue($metadata->getNumberFormat(0)->isNationalPrefixOptionalWhenFormatting());
+        $this->assertTrue($metadata->getNumberFormat(0)->getNationalPrefixOptionalWhenFormatting());
         // This is inherited from the territory, with $NP replaced by the actual national prefix, and
         // $FG replaced with $1.
         $this->assertEquals("0$1", $metadata->getNumberFormat(0)->getNationalPrefixFormattingRule());
         // Here it is explicitly set to false.
-        $this->assertFalse($metadata->getNumberFormat(1)->isNationalPrefixOptionalWhenFormatting());
+        $this->assertFalse($metadata->getNumberFormat(1)->getNationalPrefixOptionalWhenFormatting());
     }
 
     public function testProcessPhoneNumberDescElement_PossibleLengthsSetCorrectly()

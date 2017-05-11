@@ -286,7 +286,7 @@ class AsYouTypeFormatter
         foreach ($formatList as $format) {
             if (!$nationalPrefixIsUsedByCountry
                 || $this->isCompleteNumber
-                || $format->isNationalPrefixOptionalWhenFormatting()
+                || $format->getNationalPrefixOptionalWhenFormatting()
                 || PhoneNumberUtil::formattingRuleHasFirstGroupOnly($format->getNationalPrefixFormattingRule())
             ) {
                 if ($this->isFormatEligible($format->getFormat())) {

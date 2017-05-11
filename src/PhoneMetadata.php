@@ -261,7 +261,7 @@ class PhoneMetadata
         }
 
         if ($this->hasSameMobileAndFixedLinePattern()) {
-            $output['sameMobileAndFixedLinePattern'] = $this->isSameMobileAndFixedLinePattern();
+            $output['sameMobileAndFixedLinePattern'] = $this->getSameMobileAndFixedLinePattern();
         }
 
         $output['numberFormat'] = array();
@@ -734,7 +734,7 @@ class PhoneMetadata
         return $this;
     }
 
-    public function isSameMobileAndFixedLinePattern()
+    public function getSameMobileAndFixedLinePattern()
     {
         return $this->sameMobileAndFixedLinePattern;
     }
