@@ -9,6 +9,7 @@ namespace libphonenumber;
  * matcher and allow different implementations to be swapped in easily.
  *
  * @package libphonenumber
+ * @internal
  */
 interface MatcherAPIInterface
 {
@@ -21,5 +22,5 @@ interface MatcherAPIInterface
      * @param boolean $allowPrefixMatch
      * @return boolean
      */
-    public function matchesNationalNumber($nationalNumber, PhoneNumberDesc $numberDesc, $allowPrefixMatch);
+    public function matchNationalNumber($nationalNumber, PhoneNumberDesc $numberDesc, $allowPrefixMatch);
 }

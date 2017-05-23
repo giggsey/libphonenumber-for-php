@@ -2,6 +2,11 @@
 
 namespace libphonenumber;
 
+/**
+ * Class RegexBasedMatcher
+ * @package libphonenumber
+ * @internal
+ */
 class RegexBasedMatcher implements MatcherAPIInterface
 {
     public static function create()
@@ -18,7 +23,7 @@ class RegexBasedMatcher implements MatcherAPIInterface
      * @param boolean $allowPrefixMatch
      * @return boolean
      */
-    public function matchesNationalNumber($nationalNumber, PhoneNumberDesc $numberDesc, $allowPrefixMatch)
+    public function matchNationalNumber($nationalNumber, PhoneNumberDesc $numberDesc, $allowPrefixMatch)
     {
         $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
 
