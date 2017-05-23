@@ -22,6 +22,7 @@ return array (
   9725533 => 'Free Telecom',
   9725566 => 'Rami Levy',
   9725567 => 'Rami Levy',
+  9725568 => 'Rami Levy',
   9725570 => 'Cellact',
   9725571 => 'Cellact',
   9725587 => 'Alon',

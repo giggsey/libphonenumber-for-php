@@ -3122,6 +3122,7 @@ return array (
   1330971 => 'Cuyahoga Falls, OH',
   1330995 => 'Aurora, OH',
   1331 => 'Illinois',
+  1332 => 'New York, NY',
   1334 => 'Alabama',
   1334209 => 'Auburn, AL',
   1334213 => 'Montgomery, AL',
