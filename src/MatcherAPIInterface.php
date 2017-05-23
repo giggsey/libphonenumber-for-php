@@ -17,10 +17,10 @@ interface MatcherAPIInterface
      * Returns whether the given national number (a string containing only decimal digits) matches
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
      *
-     * @param string $nationalNumber
+     * @param string $number
      * @param PhoneNumberDesc $numberDesc
      * @param boolean $allowPrefixMatch
      * @return boolean
      */
-    public function matchNationalNumber($nationalNumber, PhoneNumberDesc $numberDesc, $allowPrefixMatch);
+    public function matchNationalNumber($number, PhoneNumberDesc $numberDesc, $allowPrefixMatch);
 }

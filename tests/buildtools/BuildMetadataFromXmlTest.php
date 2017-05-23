@@ -408,7 +408,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
 
         $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
             'invalidType');
-        $this->assertEquals('NA', $phoneNumberDesc->getNationalNumberPattern());
+        $this->assertFalse($phoneNumberDesc->hasNationalNumberPattern());
     }
 
     public function testProcessPhoneNumberDescElementOverridesGeneralDesc()

@@ -652,7 +652,7 @@ class PhoneNumberUtil
         // support the type at all: no type-specific methods will work with only this data.
         return $desc->hasExampleNumber()
             || static::descHasPossibleNumberData($desc)
-            || ($desc->hasNationalNumberPattern() && $desc->getNationalNumberPattern() != 'NA');
+            || $desc->hasNationalNumberPattern();
     }
 
     /**
