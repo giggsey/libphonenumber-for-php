@@ -321,6 +321,11 @@ class PhoneNumberUtil
     protected $metadataSource;
 
     /**
+     * @var MatcherAPIInterface
+     */
+    protected $matcherAPI;
+
+    /**
      * This class implements a singleton, so the only constructor is protected.
      * @param MetadataSourceInterface $metadataSource
      * @param $countryCallingCodeToRegionCodeMap
@@ -330,6 +335,7 @@ class PhoneNumberUtil
         $this->metadataSource = $metadataSource;
         $this->countryCallingCodeToRegionCodeMap = $countryCallingCodeToRegionCodeMap;
         $this->init();
+        $this->matcherAPI = RegexBasedMatcher::create();
         static::initCapturingExtnDigits();
         static::initExtnPatterns();
         static::initExtnPattern();
@@ -646,7 +652,7 @@ class PhoneNumberUtil
         // support the type at all: no type-specific methods will work with only this data.
         return $desc->hasExampleNumber()
             || static::descHasPossibleNumberData($desc)
-            || ($desc->hasNationalNumberPattern() && $desc->getNationalNumberPattern() != 'NA');
+            || $desc->hasNationalNumberPattern();
     }
 
     /**
@@ -947,9 +953,7 @@ class PhoneNumberUtil
             return false;
         }
 
-        $nationalNumberPatternMatcher = new Matcher($numberDesc->getNationalNumberPattern(), $nationalNumber);
-
-        return $nationalNumberPatternMatcher->matches();
+        return $this->matcherAPI->matchNationalNumber($nationalNumber, $numberDesc, false);
     }
 
     /**
@@ -1895,7 +1899,6 @@ class PhoneNumberUtil
             if (strpos($normalizedNumber, $defaultCountryCodeString) === 0) {
                 $potentialNationalNumber = substr($normalizedNumber, mb_strlen($defaultCountryCodeString));
                 $generalDesc = $defaultRegionMetadata->getGeneralDesc();
-                $validNumberPattern = $generalDesc->getNationalNumberPattern();
                 // Don't need the carrier code.
                 $carriercode = null;
                 $this->maybeStripNationalPrefixAndCarrierCode(
@@ -1906,10 +1909,8 @@ class PhoneNumberUtil
                 // If the number was not valid before but is valid now, or if it was too long before, we
                 // consider the number with the country calling code stripped to be a better result and
                 // keep that instead.
-                $validNumberPatternFullNumberMatcher = new Matcher($validNumberPattern, $fullNumber);
-                $validNumberPatternPotentialNationalNumberMatcher = new Matcher($validNumberPattern, $potentialNationalNumber);
-                if ((!$validNumberPatternFullNumberMatcher->matches()
-                        && $validNumberPatternPotentialNationalNumberMatcher->matches())
+                if ((!$this->matcherAPI->matchNationalNumber($fullNumber, $generalDesc, false)
+                        && $this->matcherAPI->matchNationalNumber($potentialNationalNumber, $generalDesc, false))
                     || $this->testNumberLength($fullNumber, $defaultRegionMetadata) === ValidationResult::TOO_LONG
                 ) {
                     $nationalNumber .= $potentialNationalNumber;
@@ -2099,10 +2100,9 @@ class PhoneNumberUtil
         // Attempt to parse the first digits as a national prefix.
         $prefixMatcher = new Matcher($possibleNationalPrefix, $number);
         if ($prefixMatcher->lookingAt()) {
-            $nationalNumberRule = $metadata->getGeneralDesc()->getNationalNumberPattern();
+            $generalDesc = $metadata->getGeneralDesc();
             // Check if the original number is viable.
-            $nationalNumberRuleMatcher = new Matcher($nationalNumberRule, $number);
-            $isViableOriginalNumber = $nationalNumberRuleMatcher->matches();
+            $isViableOriginalNumber = $this->matcherAPI->matchNationalNumber($number, $generalDesc, false);
             // $prefixMatcher->group($numOfGroups) === null implies nothing was captured by the capturing
             // groups in $possibleNationalPrefix; therefore, no transformation is necessary, and we just
             // remove the national prefix
@@ -2113,8 +2113,9 @@ class PhoneNumberUtil
                 || $prefixMatcher->group($numOfGroups - 1) === null
             ) {
                 // If the original number was viable, and the resultant number is not, we return.
-                $matcher = new Matcher($nationalNumberRule, substr($number, $prefixMatcher->end()));
-                if ($isViableOriginalNumber && !$matcher->matches()) {
+                if ($isViableOriginalNumber &&
+                    !$this->matcherAPI->matchNationalNumber(
+                        substr($number, $prefixMatcher->end()), $generalDesc, false)) {
                     return false;
                 }
                 if ($carrierCode !== null && $numOfGroups > 0 && $prefixMatcher->group($numOfGroups) !== null) {
@@ -2133,8 +2134,8 @@ class PhoneNumberUtil
                     0,
                     $numberLength
                 );
-                $matcher = new Matcher($nationalNumberRule, $transformedNumber);
-                if ($isViableOriginalNumber && !$matcher->matches()) {
+                if ($isViableOriginalNumber
+                    && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
                     return false;
                 }
                 if ($carrierCode !== null && $numOfGroups > 1) {
@@ -2469,8 +2470,8 @@ class PhoneNumberUtil
     /**
      * Returns true if the number can be dialled from outside the region, or unknown. If the number
      * can only be dialled from within the region, returns false. Does not check the number is a valid
-     * number.
-     * TODO: Make this method public when we have enough metadata to make it worthwhile.
+     * number. Note that, at the moment, this method does not handle short numbers (which are
+     * currently all presumed to not be diallable from outside their country).
      *
      * @param PhoneNumber $number the phone-number for which we want to know whether it is diallable from outside the region
      * @return bool

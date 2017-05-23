@@ -209,8 +209,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // toll free element as well.
         $this->assertCount(0, $metadata->getTollFree()->getPossibleLength());
         $this->assertEquals("900\\d{7}", $metadata->getPremiumRate()->getNationalNumberPattern());
-        // No shared-cost data is available, so it should be initialised to "NA".
-        $this->assertEquals("NA", $metadata->getSharedCost()->getNationalNumberPattern());
+        // No shared-cost data is available, so its national number data should not be set.
+        $this->assertFalse($metadata->getSharedCost()->hasNationalNumberPattern());
     }
 
     public function testGetInstanceLoadDEMetadata()

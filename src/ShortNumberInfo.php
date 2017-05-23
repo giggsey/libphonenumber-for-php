@@ -250,7 +250,7 @@ class ShortNumberInfo
             && !in_array($regionCode, static::$regionsWhereEmergencyNumbersMustBeExact)
         );
 
-        return $this->matcherAPI->matchesNationalNumber($normalizedNumber, $emergencyDesc, $allowPrefixMatchForRegion);
+        return $this->matcherAPI->matchNationalNumber($normalizedNumber, $emergencyDesc, $allowPrefixMatchForRegion);
     }
 
     /**
@@ -617,6 +617,6 @@ class ShortNumberInfo
             return false;
         }
 
-        return $this->matcherAPI->matchesNationalNumber($number, $numberDesc, false);
+        return $this->matcherAPI->matchNationalNumber($number, $numberDesc, false);
     }
 }

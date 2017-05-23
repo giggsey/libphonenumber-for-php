@@ -26,6 +26,7 @@ return array (
   23277 => 'Africell',
   23278 => 'Airtel',
   23279 => 'Airtel',
+  23280 => 'Africell',
   23288 => 'Africell',
   23299 => 'Africell',
 );

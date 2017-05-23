@@ -104,7 +104,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '76242\\d{5}',
+    'NationalNumberPattern' => '7624[0-4689]\\d{5}',
     'ExampleNumber' => '7624212345',
     'PossibleLength' => 
     array (
@@ -126,7 +126,6 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -137,7 +136,6 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,

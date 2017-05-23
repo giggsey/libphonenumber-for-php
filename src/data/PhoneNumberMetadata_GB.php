@@ -121,7 +121,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '76(?:0[012]\\d|2(?:[356]\\d|4[013-9])|4[0134]\\d|5[49]\\d|6[0-369]\\d|77\\d|81\\d|9[39]\\d)\\d{5}',
+    'NationalNumberPattern' => '76(?:0[012]|2[356]|4[0134]|5[49]|6[0-369]|77|81|9[39])\\d{6}',
     'ExampleNumber' => '7640123456',
     'PossibleLength' => 
     array (
@@ -145,7 +145,6 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -156,7 +155,6 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => 'NA',
     'PossibleLength' => 
     array (
       0 => -1,
@@ -180,9 +178,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '7(?:[1-5789]|62)',
-        1 => '7(?:[1-5789]|624)',
-        2 => '7(?:[1-5789]|6242)',
+        0 => '7(?:[1-57-9]|62)',
+        1 => '7(?:[1-57-9]|624)',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
