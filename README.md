@@ -25,6 +25,18 @@ You can also use any other [PSR-4](http://www.php-fig.org/psr/psr-4/) compliant 
 
 If you do not use composer, ensure that you also load any dependencies that this project has, such as [giggsey/locale](https://github.com/giggsey/Locale).
 
+## Use
+
+To import libphonenumber into your project, use the following:
+
+```php
+use libphonenumber\PhoneNumberUtil;
+use libphonenumber\PhoneNumberFormat;
+$phoneUtil = PhoneNumberUtil::getInstance();
+$number = $phoneUtil->parse('+441234567891', 'UK');
+$formattedNumber = $phoneUtil->format($number, PhoneNumberFormat::E164);
+```
+
 ## Documentation
 
  - [PhoneNumber Util](docs/PhoneNumberUtil.md)
