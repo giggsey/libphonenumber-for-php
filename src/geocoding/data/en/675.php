@@ -11,5 +11,13 @@
  */
 
 return array (
+  6753 => 'NCD',
+  67542 => 'Madang',
+  67545 => 'Sepik',
   67547 => 'Morobe',
+  67553 => 'Highlands',
+  67554 => 'Highlands',
+  67562 => 'Oro',
+  67564 => 'MP/Gulf/Tabubil/Kiunga',
+  6759 => 'Islands',
 );
