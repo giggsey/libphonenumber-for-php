@@ -11,7 +11,6 @@
  */
 
 return array (
-  67520150 => 'bmobile/Telikom',
   67570 => 'Digicel',
   67571 => 'Digicel',
   67572 => 'Digicel',

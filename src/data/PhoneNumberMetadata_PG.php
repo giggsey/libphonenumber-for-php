@@ -38,10 +38,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:20150|68\\d{2}|7(?:[0-689]\\d|75)\\d{2})\\d{3}',
-    'ExampleNumber' => '6812345',
+    'NationalNumberPattern' => '7(?:[0-689]\\d|75)\\d{5}',
+    'ExampleNumber' => '70123456',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -91,7 +92,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '27[568]\\d{4}',
+    'NationalNumberPattern' => '2(?:0[0-47]|7[568])\\d{4}',
     'ExampleNumber' => '2751234',
     'PossibleLength' => 
     array (
@@ -143,7 +144,8 @@ return array (
   ),
   'id' => 'PG',
   'countryCode' => 675,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '140[1-3]|00',
+  'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
