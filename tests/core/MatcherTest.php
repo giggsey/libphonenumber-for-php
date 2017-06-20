@@ -3,6 +3,7 @@
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\MatcherAPIInterface;
+use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberDesc;
 use libphonenumber\RegexBasedMatcher;
 
@@ -61,19 +62,31 @@ class MatcherTest extends \PHPUnit_Framework_TestCase
 
     private function assertMatched(MatcherAPIInterface $matcher, $number, PhoneNumberDesc $desc)
     {
-        $this->assertTrue($matcher->matchNationalNumber($number, $desc, false));
-        $this->assertTrue($matcher->matchNationalNumber($number, $desc, true));
+        $this->assertTrue($matcher->matchNationalNumber($number, $desc, false), "{$number} should have matched {$this->descToString($desc)}");
+        $this->assertTrue($matcher->matchNationalNumber($number, $desc, true), "{$number} should have matched {$this->descToString($desc)}");
     }
 
     private function assertInvalid(MatcherAPIInterface $matcher, $number, PhoneNumberDesc $desc)
     {
-        $this->assertFalse($matcher->matchNationalNumber($number, $desc, false));
-        $this->assertFalse($matcher->matchNationalNumber($number, $desc, true));
+        $this->assertFalse($matcher->matchNationalNumber($number, $desc, false), "{$number} should not have matched {$this->descToString($desc)}");
+        $this->assertFalse($matcher->matchNationalNumber($number, $desc, true), "{$number} should  not have matched {$this->descToString($desc)}");
     }
 
     private function assertTooLong(MatcherAPIInterface $matcher, $number, PhoneNumberDesc $desc)
     {
-        $this->assertFalse($matcher->matchNationalNumber($number, $desc, false));
-        $this->assertTrue($matcher->matchNationalNumber($number, $desc, true));
+        $this->assertFalse($matcher->matchNationalNumber($number, $desc, false), "{$number} should have been too long for {$this->descToString($desc)}");
+        $this->assertTrue($matcher->matchNationalNumber($number, $desc, true), "{$number} should have been too long for {$this->descToString($desc)}");
+    }
+
+    private function descToString(PhoneNumberDesc $desc)
+    {
+        $string = "pattern: ";
+        if ($desc->hasNationalNumberPattern()) {
+            $string .= $desc->getNationalNumberPattern();
+        } else {
+            $string .= "none";
+        }
+
+        return $string;
     }
 }
