@@ -184,11 +184,23 @@ return array (
     ),
     2 => 
     array (
+      'pattern' => '(\\d{2})(\\d{7})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '70',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    3 => 
+    array (
       'pattern' => '(\\d{3})(\\d{5,6})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '70|8[0158]|9',
+        0 => '8[0158]|9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

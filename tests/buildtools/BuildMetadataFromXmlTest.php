@@ -731,13 +731,24 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "</fixedLine>"
             . "</territory>");
 
-        $phoneNumberDesc = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
+        $fixedLine = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
             'fixedLine');
-        $possibleLength = $phoneNumberDesc->getPossibleLength();
+        $mobile = BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement,
+            'mobile');
+
+        $possibleLength = $fixedLine->getPossibleLength();
         $this->assertCount(2, $possibleLength);
         $this->assertEquals(4, $possibleLength[0]);
         $this->assertEquals(13, $possibleLength[1]);
-        $this->assertCount(1, $phoneNumberDesc->getPossibleLengthLocalOnly());
+        $this->assertCount(1, $fixedLine->getPossibleLengthLocalOnly());
+
+        // We use [-1] to denote that there are no possible lengths; we don't leave it empty, since for
+        // compression reasons, we use the empty list to mean that the generalDesc possible lengths
+        // apply.
+        $mobileLength = $mobile->getPossibleLength();
+        $this->assertCount(1, $mobileLength);
+        $this->assertEquals(-1, $mobileLength[0]);
+        $this->assertCount(0, $mobile->getPossibleLengthLocalOnly());
     }
 
     public function testSetPossibleLengthsGeneralDesc_BuiltFromChildElements()

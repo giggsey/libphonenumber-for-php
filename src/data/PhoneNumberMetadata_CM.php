@@ -50,8 +50,8 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{5}',
-    'ExampleNumber' => '80012345',
+    'NationalNumberPattern' => '88\\d{6}',
+    'ExampleNumber' => '88012345',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -62,11 +62,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '88\\d{6}',
-    'ExampleNumber' => '88012345',
     'PossibleLength' => 
     array (
-      0 => 8,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -167,18 +165,6 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '[23]|88',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    2 => 
-    array (
-      'pattern' => '(800)(\\d{2})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '80',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
