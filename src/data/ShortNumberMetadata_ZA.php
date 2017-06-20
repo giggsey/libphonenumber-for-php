@@ -60,7 +60,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:1(?:11|77)|20)|12|3[24-7]|77(?:3[237]|[45]7|6[279]|9[26]))|37567|47751',
+    'NationalNumberPattern' => '1(?:0(?:1(?:11|77)|20)|12|3[24-7]|77(?:3[237]|[45]7|6[279]|9[26]))|3(?:7567|8126)|47751',
     'ExampleNumber' => '10111',
     'PossibleLength' => 
     array (
@@ -71,7 +71,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '37567|47751',
+    'NationalNumberPattern' => '3(?:7567|8126)|47751',
     'ExampleNumber' => '47751',
     'PossibleLength' => 
     array (

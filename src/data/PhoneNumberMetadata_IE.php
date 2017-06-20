@@ -137,8 +137,8 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => '8[35-9]\\d{8}',
-    'ExampleNumber' => '8501234567',
+    'NationalNumberPattern' => '8[35-9]5\\d{7}',
+    'ExampleNumber' => '8551234567',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -241,7 +241,7 @@ return array (
     ),
     6 => 
     array (
-      'pattern' => '([78]\\d)(\\d{3,4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -253,6 +253,18 @@ return array (
     ),
     7 => 
     array (
+      'pattern' => '(8\\d)(\\d)(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8[35-9]5',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    8 => 
+    array (
       'pattern' => '(700)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -263,7 +275,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    8 => 
+    9 => 
     array (
       'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',

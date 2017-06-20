@@ -18,6 +18,8 @@ return array (
   38649 => 'Mobitel',
   38651 => 'Mobitel',
   38664 => 'T-2',
+  386696 => 'HoT',
+  386699 => 'HoT',
   38670 => 'Tušmobil',
   38671 => 'Mobitel',
 );
