@@ -13,7 +13,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
     private static $countryCode = 374;
     private static $internationalPrefix = "0[01]";
     private static $preferredInternationalPrefix = "00";
-    private static $nationalNumberPattern = "[1-9]\\d{7}";
+    private static $nationalNumberPattern = "\\d{8}";
     private static $possibleLengths = array(8);
     private static $possibleLengthsLocalOnly = array(5, 6);
     private static $exampleNumber = "10123456";
