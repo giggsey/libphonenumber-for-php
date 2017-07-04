@@ -709,9 +709,6 @@ class BuildMetadataFromXml
             if ($parentDesc->getNationalNumberPattern() !== "") {
                 $numberDesc->setNationalNumberPattern($parentDesc->getNationalNumberPattern());
             }
-            if ($parentDesc->getPossibleNumberPattern() !== "") {
-                $numberDesc->setPossibleNumberPattern($parentDesc->getPossibleNumberPattern());
-            }
             if ($parentDesc->getExampleNumber() !== "") {
                 $numberDesc->setExampleNumber($parentDesc->getExampleNumber());
             }
