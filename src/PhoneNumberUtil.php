@@ -960,7 +960,7 @@ class PhoneNumberUtil
      * isNumberGeographical(PhoneNumber)
      *
      * Tests whether a phone number has a geographical association. It checks if the number is
-     * associated to a certain region in the country where it belongs to. Note that this doesn't
+     * associated with a certain region in the country to which it belongs. Note that this doesn't
      * verify if the number is actually in use.
      *
      * isNumberGeographical(PhoneNumberType, $countryCallingCode)
@@ -2721,9 +2721,8 @@ class PhoneNumberUtil
      * Formats a phone number using the original phone number format that the number is parsed from.
      * The original format is embedded in the country_code_source field of the PhoneNumber object
      * passed in. If such information is missing, the number will be formatted into the NATIONAL
-     * format by default. When the number contains a leading zero and this is unexpected for this
-     * country, or we don't have a formatting pattern for the number, the method returns the raw input
-     * when it is available.
+     * format by default. When we don't have a formatting pattern for the number, the method returns
+     * the raw inptu when it is available.
      *
      * Note this method guarantees no digit will be inserted, removed or modified as a result of
      * formatting.
@@ -2735,9 +2734,7 @@ class PhoneNumberUtil
      */
     public function formatInOriginalFormat(PhoneNumber $number, $regionCallingFrom)
     {
-        if ($number->hasRawInput() &&
-            ($this->hasUnexpectedItalianLeadingZero($number) || !$this->hasFormattingPatternForNumber($number))
-        ) {
+        if ($number->hasRawInput() && !$this->hasFormattingPatternForNumber($number)) {
             // We check if we have the formatting pattern because without that, we might format the number
             // as a group without national prefix.
             return $number->getRawInput();
@@ -3000,7 +2997,13 @@ class PhoneNumberUtil
      *
      * <p> This method will throw a {@link NumberParseException} if the number is not considered to
      * be a possible number. Note that validation of whether the number is actually a valid number
-     * for a particular region is not performed. This can be done separately with {@link #isValidnumber}.
+     * for a particular region is not performed. This can be done separately with {@link #isValidNumber}.
+     *
+     * <p> Note this method canonicalizes the phone number such that different representations can be
+     * easily compared, no matter what form it was originally entered in (e.g. national,
+     * international). If you want to record context about the number being parsed, such as the raw
+     * input that was entered, how the country code was derived etc. then call {@link
+     * #parseAndKeepRawInput} instead.
      *
      * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                          such as +, ( and -, as well as a phone number extension.

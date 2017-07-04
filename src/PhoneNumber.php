@@ -68,7 +68,7 @@ class PhoneNumber implements \Serializable
      *
      * @var int|null
      */
-    protected $countryCodeSource = null;
+    protected $countryCodeSource = CountryCodeSource::UNSPECIFIED;
     /**
      * The carrier selection code that is preferred when calling this phone number domestically. This
      * also includes codes that need to be dialed in some countries when calling from landlines to
@@ -187,7 +187,7 @@ class PhoneNumber implements \Serializable
      */
     public function clearCountryCodeSource()
     {
-        $this->countryCodeSource = null;
+        $this->countryCodeSource = CountryCodeSource::UNSPECIFIED;
         return $this;
     }
 
@@ -444,7 +444,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasCountryCodeSource()
     {
-        return isset($this->countryCodeSource);
+        return $this->countryCodeSource !== CountryCodeSource::UNSPECIFIED;
     }
 
     /**

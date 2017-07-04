@@ -12,6 +12,7 @@
 
 return array (
   97250 => 'Pelephone',
+  97251 => 'Xphone',
   97252 => 'Cellcom',
   97253 => 'Hot Mobile',
   97254 => 'Orange',

@@ -289,31 +289,31 @@ class MetadataFilter
                 $metadata->getNoInternationalDialling()));
         }
 
-        if ($this->drop('preferredInternationalPrefix')) {
+        if ($this->shouldDrop('preferredInternationalPrefix')) {
             $metadata->clearPreferredInternationalPrefix();
         }
 
-        if ($this->drop('preferredExtnPrefix')) {
+        if ($this->shouldDrop('preferredExtnPrefix')) {
             $metadata->clearPreferredExtnPrefix();
         }
 
-        if ($this->drop('nationalPrefixTransformRule')) {
+        if ($this->shouldDrop('nationalPrefixTransformRule')) {
             $metadata->clearNationalPrefixTransformRule();
         }
 
-        if ($this->drop('sameMobileAndFixedLinePattern')) {
+        if ($this->shouldDrop('sameMobileAndFixedLinePattern')) {
             $metadata->clearSameMobileAndFixedLinePattern();
         }
 
-        if ($this->drop('mainCountryForCode')) {
+        if ($this->shouldDrop('mainCountryForCode')) {
             $metadata->clearMainCountryForCode();
         }
 
-        if ($this->drop('leadingZeroPossible')) {
+        if ($this->shouldDrop('leadingZeroPossible')) {
             $metadata->clearLeadingZeroPossible();
         }
 
-        if ($this->drop('mobileNumberPortableRegion')) {
+        if ($this->shouldDrop('mobileNumberPortableRegion')) {
             $metadata->clearMobileNumberPortableRegion();
         }
     }
@@ -328,19 +328,19 @@ class MetadataFilter
         $builder = new PhoneNumberDesc();
         $builder->mergeFrom($desc);
 
-        if ($this->drop($type, 'nationalNumberPattern')) {
+        if ($this->shouldDrop($type, 'nationalNumberPattern')) {
             $builder->clearNationalNumberPattern();
         }
 
-        if ($this->drop($type, 'possibleLength')) {
+        if ($this->shouldDrop($type, 'possibleLength')) {
             $builder->clearPossibleLength();
         }
 
-        if ($this->drop($type, 'possibleLengthLocalOnly')) {
+        if ($this->shouldDrop($type, 'possibleLengthLocalOnly')) {
             $builder->clearPossibleLengthLocalOnly();
         }
 
-        if ($this->drop($type, 'exampleNumber')) {
+        if ($this->shouldDrop($type, 'exampleNumber')) {
             $builder->clearExampleNumber();
         }
 
@@ -352,7 +352,7 @@ class MetadataFilter
      * @param $child
      * @return bool
      */
-    public function drop($parent, $child = null)
+    public function shouldDrop($parent, $child = null)
     {
         if ($child !== null) {
             if (!in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {

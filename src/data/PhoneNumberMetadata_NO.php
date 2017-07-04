@@ -186,6 +186,6 @@ return array (
   array (
   ),
   'mainCountryForCode' => true,
-  'leadingZeroPossible' => true,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

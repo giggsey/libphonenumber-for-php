@@ -632,7 +632,7 @@ class PhoneMetadata
 
     public function hasPreferredInternationalPrefix()
     {
-        return isset($this->preferredInternationalPrefix);
+        return ($this->preferredInternationalPrefix !== null);
     }
 
     public function getPreferredInternationalPrefix()
@@ -648,7 +648,7 @@ class PhoneMetadata
 
     public function clearPreferredInternationalPrefix()
     {
-        $this->preferredInternationalPrefix = '';
+        $this->preferredInternationalPrefix = null;
         return $this;
     }
 

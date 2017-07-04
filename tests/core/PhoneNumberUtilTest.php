@@ -27,6 +27,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     private static $usNumber = null;
     private static $usLocalNumber = null;
     private static $usLongNumber = null;
+    /**
+     * @var PhoneNumber
+     */
     private static $nzNumber = null;
     private static $usPremium = null;
     private static $usSpoof = null;
@@ -274,17 +277,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->phoneUtil->isNumberGeographical(self::$auNumber)); // Australian fixed line number.
         $this->assertFalse($this->phoneUtil->isNumberGeographical(self::$internationalTollFree)); // International toll
         // free number
-    }
-
-    public function testIsLeadingZeroPossible()
-    {
-        $this->assertTrue($this->phoneUtil->isLeadingZeroPossible(39)); // Italy
-        $this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1)); // USA
-        $this->assertTrue($this->phoneUtil->isLeadingZeroPossible(800)); // International toll free numbers
-        $this->assertFalse($this->phoneUtil->isLeadingZeroPossible(979)); // International premium-rate
-        $this->assertFalse(
-            $this->phoneUtil->isLeadingZeroPossible(888)
-        ); // Not in metadata file, just default to false.
     }
 
     public function testGetLengthOfGeographicalAreaCode()
@@ -2581,6 +2573,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     {
         // National prefix attached.
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("033316005", RegionCode::NZ));
+        // Some fields are not filled in by parse, but only by parseAndKeepRawInput
+        $this->assertFalse(self::$nzNumber->hasCountryCodeSource());
+        $this->assertEquals(CountryCodeSource::UNSPECIFIED, self::$nzNumber->getCountryCodeSource());
+
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("33316005", RegionCode::NZ));
         // National prefix attached and some formatting present.
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("03-331 6005", RegionCode::NZ));

@@ -4,9 +4,20 @@ namespace libphonenumber\Tests\buildtools;
 
 use libphonenumber\buildtools\BuildMetadataFromXml;
 use libphonenumber\buildtools\MetadataFilter;
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
 
 class MetadataFilterTest extends \PHPUnit_Framework_TestCase
 {
+    private static $ID = "AM";
+    private static $countryCode = 374;
+    private static $internationalPrefix = "0[01]";
+    private static $preferredInternationalPrefix = "00";
+    private static $nationalNumberPattern = "\\d{8}";
+    private static $possibleLengths = array(8);
+    private static $possibleLengthsLocalOnly = array(5, 6);
+    private static $exampleNumber = "10123456";
+
     public function testForLiteBuild()
     {
         $blackList = array();
@@ -825,7 +836,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
     }
 
-    public function testDrop()
+    public function testShouldDrop()
     {
         $blacklist = array();
         $blacklist['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -845,31 +856,156 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $blacklist['mobileNumberPortableRegion'] = array();
 
         $filter = new MetadataFilter($blacklist);
-        $this->assertTrue($filter->drop('fixedLine', 'exampleNumber'));
-        $this->assertFalse($filter->drop('sharedCost', 'exampleNumber'));
-        $this->assertFalse($filter->drop('emergency', 'exampleNumber'));
-        $this->assertTrue($filter->drop('emergency', 'nationalNumberPattern'));
-        $this->assertFalse($filter->drop('preferredInternationalPrefix'));
-        $this->assertTrue($filter->drop('mobileNumberPortableRegion'));
+        $this->assertTrue($filter->shouldDrop('fixedLine', 'exampleNumber'));
+        $this->assertFalse($filter->shouldDrop('sharedCost', 'exampleNumber'));
+        $this->assertFalse($filter->shouldDrop('emergency', 'exampleNumber'));
+        $this->assertTrue($filter->shouldDrop('emergency', 'nationalNumberPattern'));
+        $this->assertFalse($filter->shouldDrop('preferredInternationalPrefix'));
+        $this->assertTrue($filter->shouldDrop('mobileNumberPortableRegion'));
 
         // Integration tests starting with flag values
-        $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->drop('fixedLine', 'exampleNumber'));
+        $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop('fixedLine',
+            'exampleNumber'));
 
         // Integration tests starting with blacklist strings.
         $metadataFilter = new MetadataFilter(MetadataFilter::parseFieldMapFromString('fixedLine'));
-        $this->assertTrue($metadataFilter->drop('fixedLine', 'exampleNumber'));
+        $this->assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
         $metadataFilter = new MetadataFilter(MetadataFilter::parseFieldMapFromString('uan'));
-        $this->assertFalse($metadataFilter->drop('fixedLine', 'exampleNumber'));
+        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
 
         // Integration tests starting with whitelist strings.
         $metadataFilter = new MetadataFilter(MetadataFilter::computeComplement(MetadataFilter::parseFieldMapFromString('exampleNumber')));
-        $this->assertFalse($metadataFilter->drop('fixedLine', 'exampleNumber'));
+        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
         $metadataFilter = new MetadataFilter(MetadataFilter::computeComplement(MetadataFilter::parseFieldMapFromString('uan')));
-        $this->assertTrue($metadataFilter->drop('fixedLine', 'exampleNumber'));
+        $this->assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
 
         // Integration tests with an empty blacklist.
         $metadataFilter = new MetadataFilter();
-        $this->assertFalse($metadataFilter->drop('fixedLine', 'exampleNumber'));
+        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+    }
+
+    public function testFilterMetadata_liteBuild()
+    {
+        $metadata = $this->getFakeArmeniaPhoneMetadata();
+
+        MetadataFilter::forLiteBuild()->filterMetadata($metadata);
+
+        $this->assertEquals(self::$ID, $metadata->getId());
+        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
+        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
+
+        $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
+
+        /** @var PhoneNumberDesc[] $combinedDesc */
+        $combinedDesc = array(
+            $metadata->getGeneralDesc(),
+            $metadata->getFixedLine(),
+            $metadata->getMobile(),
+            $metadata->getTollFree()
+        );
+        foreach ($combinedDesc as $desc) {
+            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
+            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+            $this->assertFalse($desc->hasExampleNumber());
+        }
+    }
+
+    private function getFakeArmeniaPhoneMetadata()
+    {
+        $metadata = new PhoneMetadata();
+        $metadata->setId(self::$ID);
+        $metadata->setCountryCode(self::$countryCode);
+        $metadata->setInternationalPrefix(self::$internationalPrefix);
+        $metadata->setPreferredInternationalPrefix(self::$preferredInternationalPrefix);
+        $metadata->setGeneralDesc($this->getFakeArmeniaPhoneNumberDesc(true));
+        $metadata->setFixedLine($this->getFakeArmeniaPhoneNumberDesc(false));
+        $metadata->setMobile($this->getFakeArmeniaPhoneNumberDesc(false));
+        $metadata->setTollFree($this->getFakeArmeniaPhoneNumberDesc(false));
+        return $metadata;
+    }
+
+    /**
+     * @param bool $generalDesc
+     * @return PhoneNumberDesc
+     */
+    private function getFakeArmeniaPhoneNumberDesc($generalDesc)
+    {
+        $desc = new PhoneNumberDesc();
+        $desc->setNationalNumberPattern(self::$nationalNumberPattern);
+
+        if (!$generalDesc) {
+            $desc->setExampleNumber(self::$exampleNumber);
+        }
+
+        foreach (self::$possibleLengths as $i) {
+            $desc->addPossibleLength($i);
+        }
+
+        foreach (self::$possibleLengthsLocalOnly as $i) {
+            $desc->addPossibleLengthLocalOnly($i);
+        }
+
+        return $desc;
+    }
+
+    public function testFilterMetadata_specialBuild()
+    {
+        $metadata = $this->getFakeArmeniaPhoneMetadata();
+
+        MetadataFilter::forSpecialBuild()->filterMetadata($metadata);
+
+        $this->assertEquals(self::$ID, $metadata->getId());
+        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
+        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
+
+        $this->assertFalse($metadata->hasPreferredInternationalPrefix());
+
+        /** @var PhoneNumberDesc[] $combinedDesc */
+        $combinedDesc = array($metadata->getGeneralDesc(), $metadata->getMobile());
+        foreach ($combinedDesc as $desc) {
+            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
+            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+        }
+
+        $combinedDesc = array($metadata->getFixedLine(), $metadata->getTollFree());
+        foreach ($combinedDesc as $desc) {
+            $this->assertFalse($desc->hasNationalNumberPattern());
+            $this->assertCount(0, $desc->getPossibleLength());
+            $this->assertCount(0, $desc->getPossibleLengthLocalOnly());
+            $this->assertFalse($desc->hasExampleNumber());
+        }
+    }
+
+    public function testFilterMetadata_emptyFilter()
+    {
+        $metadata = $this->getFakeArmeniaPhoneMetadata();
+
+        MetadataFilter::emptyFilter()->filterMetadata($metadata);
+
+        $this->assertEquals(self::$ID, $metadata->getId());
+        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
+        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
+        $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
+
+        /** @var PhoneNumberDesc[] $combinedDesc */
+        $combinedDesc = array(
+            $metadata->getGeneralDesc(),
+            $metadata->getFixedLine(),
+            $metadata->getMobile(),
+            $metadata->getTollFree()
+        );
+        foreach ($combinedDesc as $desc) {
+            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
+            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+        }
+
+        $this->assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
+        $this->assertEquals($metadata->getFixedLine()->getExampleNumber(), self::$exampleNumber);
+        $this->assertEquals($metadata->getMobile()->getExampleNumber(), self::$exampleNumber);
+        $this->assertEquals($metadata->getTollFree()->getExampleNumber(), self::$exampleNumber);
     }
 
     public function testIntegrityOfFieldSets()

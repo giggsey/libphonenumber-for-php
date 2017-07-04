@@ -11,6 +11,10 @@
  */
 
 return array (
+  951422 => 'Yangon',
+  951423 => 'Yangon',
+  951426 => 'Yangon',
+  951439 => 'Yangon',
   951550 => 'Bahan',
   951551 => 'Bahan',
   951552 => 'Bahan',
@@ -25,7 +29,10 @@ return array (
   951687 => 'Bayintnaung',
   951688 => 'Bayintnaung',
   9522000 => 'Mingalar Mandalay',
+  952426 => 'Mandalay',
+  952439 => 'Mandalay',
   95256 => 'Amarapura',
+  9543202 => 'Rakhine',
   954353 => 'Buthidaung',
   9543565 => 'Palatwa',
   95522221 => 'Bago',
@@ -50,6 +57,7 @@ return array (
   956324 => 'Magway',
   95642487 => 'Shawpin',
   956525 => 'Ngape',
+  9567439 => 'Naypyidaw',
   9567550 => 'Naypyidaw',
   9569200 => 'Aunglan',
   956940 => 'Sinpaungwae',

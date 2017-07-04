@@ -112,7 +112,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("0", $phoneMetadata->getNationalPrefix());
         $this->assertEquals(" x", $phoneMetadata->getPreferredExtnPrefix());
         $this->assertTrue($phoneMetadata->isMainCountryForCode());
-        $this->assertTrue($phoneMetadata->isLeadingZeroPossible());
         $this->assertTrue($phoneMetadata->isMobileNumberPortableRegion());
     }
 
@@ -122,7 +121,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $phoneMetadata = BuildMetadataFromXml::loadTerritoryTagMetadata('33', $territoryElement, '');
         $this->assertFalse($phoneMetadata->isMainCountryForCode());
-        $this->assertFalse($phoneMetadata->isLeadingZeroPossible());
         $this->assertFalse($phoneMetadata->isMobileNumberPortableRegion());
     }
 
@@ -401,7 +399,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             BuildMetadataFromXml::getDomesticCarrierCodeFormattingRuleFromElement($element, '0'));
     }
 
-    public function testProcessPhoneNumberDescElementWithInvalidInputWithRegex()
+    public function testProcessPhoneNumberDescElementWithInvalidInput()
     {
         $generalDesc = new PhoneNumberDesc();
         $territoryElement = $this->parseXMLString("<territory/>");
@@ -426,7 +424,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('\\d{6}', $phoneNumberDesc->getNationalNumberPattern());
     }
 
-    public function testFilterMetadata_liteBuild()
+    public function testBuildPhoneMetadataCollection_liteBuild()
     {
         $xmlInput = "<phoneNumberMetadata>"
             . "  <territories>"
@@ -471,7 +469,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("", $metadata->getMobile()->getExampleNumber());
     }
 
-    public function testFilterMetadata_specialBuild()
+    public function testBuildPhoneMetadataCollection_specialBuild()
     {
         $xmlInput = "<phoneNumberMetadata>"
             . "  <territories>"
@@ -516,7 +514,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("10123456", $metadata->getMobile()->getExampleNumber());
     }
 
-    public function testFilterMetadata_fullBuild()
+    public function testBuildPhoneMetadataCollection_fullBuild()
     {
         $xmlInput = "<phoneNumberMetadata>"
             . "  <territories>"

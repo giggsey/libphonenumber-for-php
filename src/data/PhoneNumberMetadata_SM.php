@@ -229,6 +229,6 @@ return array (
     ),
   ),
   'mainCountryForCode' => false,
-  'leadingZeroPossible' => true,
+  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );
