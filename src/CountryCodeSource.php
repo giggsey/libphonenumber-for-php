@@ -29,4 +29,6 @@ class CountryCodeSource
      * parsing the French number "01 42 68 53 00", when defaultCountry is supplied as France.
      */
     const FROM_DEFAULT_COUNTRY = 3;
+
+    const UNSPECIFIED = 4;
 }
