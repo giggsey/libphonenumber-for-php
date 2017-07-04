@@ -46,7 +46,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5(?:[02-47-9]\\d{2}|5(?:01|2[23]|3[2-4]|4[45]|5[5689]|6[6-8]|7[0178]|8[6-9]|9[2-9])|6[2-9]\\d)\\d{5}',
+    'NationalNumberPattern' => '5(?:[0-47-9]\\d{2}|5(?:01|2[23]|3[2-4]|4[45]|5[5689]|6[6-8]|7[0178]|8[6-9]|9[2-9])|6[2-9]\\d)\\d{5}',
     'ExampleNumber' => '501234567',
     'PossibleLength' => 
     array (
@@ -142,9 +142,12 @@ return array (
   ),
   'voicemail' => 
   array (
+    'NationalNumberPattern' => '151\\d{8,9}',
+    'ExampleNumber' => '15112340000',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 11,
+      1 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -261,13 +264,25 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '15',
+        0 => '1599',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     8 => 
+    array (
+      'pattern' => '(151)(\\d{1,2})(\\d{3})(\\d{4})',
+      'format' => '$1-$2 $3-$4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '151',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    9 => 
     array (
       'pattern' => '(\\d{4})',
       'format' => '*$1',
