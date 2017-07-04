@@ -399,7 +399,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             BuildMetadataFromXml::getDomesticCarrierCodeFormattingRuleFromElement($element, '0'));
     }
 
-    public function testProcessPhoneNumberDescElementWithInvalidInputWithRegex()
+    public function testProcessPhoneNumberDescElementWithInvalidInput()
     {
         $generalDesc = new PhoneNumberDesc();
         $territoryElement = $this->parseXMLString("<territory/>");
