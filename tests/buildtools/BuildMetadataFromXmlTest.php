@@ -112,7 +112,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("0", $phoneMetadata->getNationalPrefix());
         $this->assertEquals(" x", $phoneMetadata->getPreferredExtnPrefix());
         $this->assertTrue($phoneMetadata->isMainCountryForCode());
-        $this->assertTrue($phoneMetadata->isLeadingZeroPossible());
         $this->assertTrue($phoneMetadata->isMobileNumberPortableRegion());
     }
 
@@ -122,7 +121,6 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         $phoneMetadata = BuildMetadataFromXml::loadTerritoryTagMetadata('33', $territoryElement, '');
         $this->assertFalse($phoneMetadata->isMainCountryForCode());
-        $this->assertFalse($phoneMetadata->isLeadingZeroPossible());
         $this->assertFalse($phoneMetadata->isMobileNumberPortableRegion());
     }
 

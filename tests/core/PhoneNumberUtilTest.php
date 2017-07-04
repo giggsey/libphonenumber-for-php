@@ -276,17 +276,6 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         // free number
     }
 
-    public function testIsLeadingZeroPossible()
-    {
-        $this->assertTrue($this->phoneUtil->isLeadingZeroPossible(39)); // Italy
-        $this->assertFalse($this->phoneUtil->isLeadingZeroPossible(1)); // USA
-        $this->assertTrue($this->phoneUtil->isLeadingZeroPossible(800)); // International toll free numbers
-        $this->assertFalse($this->phoneUtil->isLeadingZeroPossible(979)); // International premium-rate
-        $this->assertFalse(
-            $this->phoneUtil->isLeadingZeroPossible(888)
-        ); // Not in metadata file, just default to false.
-    }
-
     public function testGetLengthOfGeographicalAreaCode()
     {
         // Google MTV, which has area code "650".

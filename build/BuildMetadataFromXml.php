@@ -25,7 +25,6 @@ class BuildMetadataFromXml
     const INTERNATIONAL_PREFIX = "internationalPrefix";
     const INTL_FORMAT = "intlFormat";
     const LEADING_DIGITS = "leadingDigits";
-    const LEADING_ZERO_POSSIBLE = "leadingZeroPossible";
     const MOBILE_NUMBER_PORTABLE_REGION = "mobileNumberPortableRegion";
     const MAIN_COUNTRY_FOR_CODE = "mainCountryForCode";
     const MOBILE = "mobile";
@@ -238,9 +237,6 @@ class BuildMetadataFromXml
         }
         if ($element->hasAttribute(self::MAIN_COUNTRY_FOR_CODE)) {
             $metadata->setMainCountryForCode(true);
-        }
-        if ($element->hasAttribute(self::LEADING_ZERO_POSSIBLE)) {
-            $metadata->setLeadingZeroPossible(true);
         }
         if ($element->hasAttribute(self::MOBILE_NUMBER_PORTABLE_REGION)) {
             $metadata->setMobileNumberPortableRegion(true);
