@@ -960,7 +960,7 @@ class PhoneNumberUtil
      * isNumberGeographical(PhoneNumber)
      *
      * Tests whether a phone number has a geographical association. It checks if the number is
-     * associated to a certain region in the country where it belongs to. Note that this doesn't
+     * associated with a certain region in the country to which it belongs. Note that this doesn't
      * verify if the number is actually in use.
      *
      * isNumberGeographical(PhoneNumberType, $countryCallingCode)
