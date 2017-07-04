@@ -2997,7 +2997,13 @@ class PhoneNumberUtil
      *
      * <p> This method will throw a {@link NumberParseException} if the number is not considered to
      * be a possible number. Note that validation of whether the number is actually a valid number
-     * for a particular region is not performed. This can be done separately with {@link #isValidnumber}.
+     * for a particular region is not performed. This can be done separately with {@link #isValidNumber}.
+     *
+     * <p> Note this method canonicalizes the phone number such that different representations can be
+     * easily compared, no matter what form it was originally entered in (e.g. national,
+     * international). If you want to record context about the number being parsed, such as the raw
+     * input that was entered, how the country code was derived etc. then call {@link
+     * #parseAndKeepRawInput} instead.
      *
      * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                          such as +, ( and -, as well as a phone number extension.
