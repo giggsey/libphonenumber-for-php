@@ -126,9 +126,11 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '30(?:0[1-9]|[15-7]\\d|2[047]|89)\\d{4}',
+    'ExampleNumber' => '30161234',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (

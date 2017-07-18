@@ -14,32 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[25-7]\\d{7}',
+    'NationalNumberPattern' => '1\\d{2}',
     'PossibleLength' => 
     array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '2(?:0(?:49|5[23]|6[56]|9[016-9])|4(?:4[569]|5[4-6]|6[56]|7[0179])|5(?:[34]\\d|50|6[5-7]))\\d{4}',
-    'ExampleNumber' => '20491234',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '(?:5[1568]\\d|[67]\\d{2})\\d{5}',
-    'ExampleNumber' => '70123456',
-    'PossibleLength' => 
-    array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,9 +25,10 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '166',
+    'ExampleNumber' => '166',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -65,7 +44,29 @@ return array (
     array (
     ),
   ),
-  'sharedCost' => 
+  'emergency' => 
+  array (
+    'NationalNumberPattern' => '10[0-2]',
+    'ExampleNumber' => '100',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'shortCode' => 
+  array (
+    'NationalNumberPattern' => '1(?:0[0-2]|44|66|99)',
+    'ExampleNumber' => '199',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'standardRate' => 
   array (
     'PossibleLength' => 
     array (
@@ -75,7 +76,7 @@ return array (
     array (
     ),
   ),
-  'personalNumber' => 
+  'carrierSpecific' => 
   array (
     'PossibleLength' => 
     array (
@@ -85,7 +86,7 @@ return array (
     array (
     ),
   ),
-  'voip' => 
+  'smsServices' => 
   array (
     'PossibleLength' => 
     array (
@@ -95,63 +96,12 @@ return array (
     array (
     ),
   ),
-  'pager' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'uan' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voicemail' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'noInternationalDialling' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'BF',
-  'countryCode' => 226,
-  'internationalPrefix' => '00',
+  'id' => 'PS',
+  'countryCode' => 0,
+  'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
-    0 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
-      'leadingDigitsPatterns' => 
-      array (
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
   ),
   'intlNumberFormat' => 
   array (
