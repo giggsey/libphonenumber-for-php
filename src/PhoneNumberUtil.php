@@ -94,9 +94,11 @@ class PhoneNumberUtil
     // correctly.  Therefore, we use \d, so that the first group actually used in the pattern will be
     // matched.
     const FIRST_GROUP_PATTERN = "(\\$\\d)";
-    const NP_PATTERN = '\\$NP';
-    const FG_PATTERN = '\\$FG';
-    const CC_PATTERN = '\\$CC';
+    // Constants used in the formatting rules to represent the national prefix, first group and
+    // carrier code respectively.
+    const NP_STRING = '$NP';
+    const FG_STRING = '$FG';
+    const CC_STRING = '$CC';
 
     // A pattern that is used to determine if the national prefix formatting rule has the first group
     // only, i.e., does not start with the national prefix. Note that the pattern explicitly allows
@@ -1276,8 +1278,7 @@ class PhoneNumberUtil
         ) {
             // Replace the $CC in the formatting rule with the desired carrier code.
             $carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
-            $ccPatternMatcher = new Matcher(static::CC_PATTERN, $carrierCodeFormattingRule);
-            $carrierCodeFormattingRule = $ccPatternMatcher->replaceFirst($carrierCode);
+            $carrierCodeFormattingRule = str_replace(static::CC_STRING, $carrierCode, $carrierCodeFormattingRule);
             // Now replace the $FG in the formatting rule with the first group and the carrier code
             // combined in the appropriate way.
             $firstGroupMatcher = new Matcher(static::FIRST_GROUP_PATTERN, $numberFormatRule);
@@ -1971,9 +1972,9 @@ class PhoneNumberUtil
      *       E.161. This is only done if there are 3 or more letters in the number,
      *       to lessen the risk that such letters are typos.
      *   For other numbers:
-     *   Wide-ascii digits are converted to normal ASCII (European) digits.
-     *   Arabic-Indic numerals are converted to European numerals.
-     *   Spurious alpha characters are stripped.
+     *    - Wide-ascii digits are converted to normal ASCII (European) digits.
+     *    - Arabic-Indic numerals are converted to European numerals.
+     *    - Spurious alpha characters are stripped.
      *
      * @param string $number a string of characters representing a phone number.
      * @return string the normalized string version of the phone number.
@@ -2830,36 +2831,6 @@ class PhoneNumberUtil
     }
 
     /**
-     * Returns true if a number is from a region whose national significant number couldn't contain a
-     * leading zero, but has the italian_leading_zero field set to true.
-     * @param PhoneNumber $number
-     * @return bool
-     */
-    protected function hasUnexpectedItalianLeadingZero(PhoneNumber $number)
-    {
-        return $number->isItalianLeadingZero() && !$this->isLeadingZeroPossible($number->getCountryCode());
-    }
-
-    /**
-     * Checks whether the country calling code is from a region whose national significant number
-     * could contain a leading zero. An example of such a region is Italy. Returns false if no
-     * metadata for the country is found.
-     * @param int $countryCallingCode
-     * @return bool
-     */
-    public function isLeadingZeroPossible($countryCallingCode)
-    {
-        $mainMetadataForCallingCode = $this->getMetadataForRegionOrCallingCode(
-            $countryCallingCode,
-            $this->getRegionCodeForCountryCode($countryCallingCode)
-        );
-        if ($mainMetadataForCallingCode === null) {
-            return false;
-        }
-        return (bool)$mainMetadataForCallingCode->isLeadingZeroPossible();
-    }
-
-    /**
      * @param PhoneNumber $number
      * @return bool
      */
@@ -3072,10 +3043,8 @@ class PhoneNumberUtil
                 $nationalPrefix = $metadata->getNationalPrefix();
                 if (mb_strlen($nationalPrefix) > 0) {
                     // Replace $NP with national prefix and $FG with the first group ($1).
-                    $npPatternMatcher = new Matcher(static::NP_PATTERN, $nationalPrefixFormattingRule);
-                    $nationalPrefixFormattingRule = $npPatternMatcher->replaceFirst($nationalPrefix);
-                    $fgPatternMatcher = new Matcher(static::FG_PATTERN, $nationalPrefixFormattingRule);
-                    $nationalPrefixFormattingRule = $fgPatternMatcher->replaceFirst("\\$1");
+                    $nationalPrefixFormattingRule = str_replace(static::NP_STRING, $nationalPrefix, $nationalPrefixFormattingRule);
+                    $nationalPrefixFormattingRule = str_replace(static::FG_STRING, '$1', $nationalPrefixFormattingRule);
                     $numFormatCopy->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
                 } else {
                     // We don't want to have a rule for how to format the national prefix if there isn't one.
