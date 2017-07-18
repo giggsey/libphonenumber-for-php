@@ -627,6 +627,20 @@ class PhoneNumberUtil
     }
 
     /**
+     * Returns all country calling codes the library has metadata for, covering both non-geographical
+     * entities (global network calling codes) and those used for geographical entities. The could be
+     * used to populate a drop-down box of country calling codes for a phone-number widget, for
+     * instance.
+     *
+     * @return array An unordered array of the country calling codes for every geographical and
+     *      non-geographical entity the library supports
+     */
+    public function getSupportedCallingCodes()
+    {
+        return array_keys($this->countryCallingCodeToRegionCodeMap);
+    }
+
+    /**
      * Returns true if there is any possible number data set for a particular PhoneNumberDesc.
      *
      * @param PhoneNumberDesc $desc
