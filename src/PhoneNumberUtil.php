@@ -71,8 +71,8 @@ class PhoneNumberUtil
     // as the default extension prefix. This can be overridden by region-specific preferences.
     const DEFAULT_EXTN_PREFIX = " ext. ";
 
-    // Regular expression of acceptable punctuation found in phone numbers. This excludes punctuation
-    // found as a leading character only.
+    // Regular expression of acceptable punctuation found in phone numbers, used to find numbers in
+    // text and to decide what is a viable phone number. This excludes diallable characters.
     // This consists of dash characters, white space characters, full stops, slashes,
     // square brackets, parentheses and tildes. It also includes the letter 'x' as that is found as a
     // placeholder for carrier information in some phone numbers. Full-width variants are also
@@ -80,13 +80,13 @@ class PhoneNumberUtil
     const VALID_PUNCTUATION = "-x\xE2\x80\x90-\xE2\x80\x95\xE2\x88\x92\xE3\x83\xBC\xEF\xBC\x8D-\xEF\xBC\x8F \xC2\xA0\xC2\xAD\xE2\x80\x8B\xE2\x81\xA0\xE3\x80\x80()\xEF\xBC\x88\xEF\xBC\x89\xEF\xBC\xBB\xEF\xBC\xBD.\\[\\]/~\xE2\x81\x93\xE2\x88\xBC";
     const DIGITS = "\\p{Nd}";
 
-    // Pattern that makes it easy to distinguish whether a region has a unique international dialing
-    // prefix or not. If a region has a unique international prefix (e.g. 011 in USA), it will be
-    // represented as a string that contains a sequence of ASCII digits. If there are multiple
-    // available international prefixes in a region, they will be represented as a regex string that
-    // always contains character(s) other than ASCII digits.
-    // Note this regex also includes tilde, which signals waiting for the tone.
-    const UNIQUE_INTERNATIONAL_PREFIX = "[\\d]+(?:[~\xE2\x81\x93\xE2\x88\xBC\xEF\xBD\x9E][\\d]+)?";
+    // Pattern that makes it easy to distinguish whether a region has a single international dialing
+    // prefix or not. If a region has a single international prefix (e.g. 011 in USA), it will be
+    // represented as a string that contains a sequence of ASCII digits, and possible a tilde, which
+    // signals waiting for the tone. If there are multiple available international prefixes in a
+    // region, they will be represented as a regex string that always contains one or more characters
+    // that are not ASCII digits or a tilde.
+    const SINGLE_INTERNATIONAL_PREFIX = "[\\d]+(?:[~\xE2\x81\x93\xE2\x88\xBC\xEF\xBD\x9E][\\d]+)?";
     const NON_DIGITS_PATTERN = "(\\D+)";
 
     // The FIRST_GROUP_PATTERN was originally set to $1 but there are some countries for which the
@@ -2592,7 +2592,7 @@ class PhoneNumberUtil
         // international prefix.
         if ($metadataForRegionCallingFrom !== null) {
             $internationalPrefix = $metadataForRegionCallingFrom->getInternationalPrefix();
-            $uniqueInternationalPrefixMatcher = new Matcher(static::UNIQUE_INTERNATIONAL_PREFIX, $internationalPrefix);
+            $uniqueInternationalPrefixMatcher = new Matcher(static::SINGLE_INTERNATIONAL_PREFIX, $internationalPrefix);
             $internationalPrefixForFormatting =
                 $uniqueInternationalPrefixMatcher->matches()
                     ? $internationalPrefix
@@ -2672,7 +2672,7 @@ class PhoneNumberUtil
         // For regions that have multiple international prefixes, the international format of the
         // number is returned, unless there is a preferred international prefix.
         $internationalPrefixForFormatting = "";
-        $uniqueInternationalPrefixMatcher = new Matcher(static::UNIQUE_INTERNATIONAL_PREFIX, $internationalPrefix);
+        $uniqueInternationalPrefixMatcher = new Matcher(static::SINGLE_INTERNATIONAL_PREFIX, $internationalPrefix);
 
         if ($uniqueInternationalPrefixMatcher->matches()) {
             $internationalPrefixForFormatting = $internationalPrefix;
