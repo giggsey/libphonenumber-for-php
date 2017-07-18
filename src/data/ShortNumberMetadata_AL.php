@@ -88,6 +88,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '5\\d{4}',
+    'ExampleNumber' => '51234',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'AL',
   'countryCode' => 0,
   'internationalPrefix' => '',

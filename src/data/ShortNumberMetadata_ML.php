@@ -100,6 +100,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '3(?:6\\d{3}|7(?:4(?:0[24-9]|[1-9]\\d)|5\\d{2}))|7400',
+    'ExampleNumber' => '37575',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'ML',
   'countryCode' => 0,
   'internationalPrefix' => '',

@@ -98,6 +98,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '13977',
+    'ExampleNumber' => '13977',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'HR',
   'countryCode' => 0,
   'internationalPrefix' => '',

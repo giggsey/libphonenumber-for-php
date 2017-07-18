@@ -89,6 +89,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '1443',
+    'ExampleNumber' => '1443',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'GY',
   'countryCode' => 0,
   'internationalPrefix' => '',

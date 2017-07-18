@@ -107,6 +107,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '(?:114|[3-8]\\d{4})',
+    'ExampleNumber' => '33700',
+    'PossibleLength' => 
+    array (
+      0 => 3,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'FR',
   'countryCode' => 0,
   'internationalPrefix' => '',

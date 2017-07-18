@@ -93,6 +93,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '88000|98555',
+    'ExampleNumber' => '88000',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'BH',
   'countryCode' => 0,
   'internationalPrefix' => '',

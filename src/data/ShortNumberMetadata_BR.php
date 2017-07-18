@@ -99,6 +99,20 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '2(?:7(?:330|878)|85959?)|4(?:0404|828)|6(?:0\\d{4}|10000)',
+    'ExampleNumber' => '27878',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+      2 => 6,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'BR',
   'countryCode' => 0,
   'internationalPrefix' => '',

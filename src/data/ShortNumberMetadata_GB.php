@@ -94,6 +94,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '1250|2(?:0202|1300)|7\\d{4}|8[01]\\d{3}',
+    'ExampleNumber' => '20202',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'GB',
   'countryCode' => 0,
   'internationalPrefix' => '',

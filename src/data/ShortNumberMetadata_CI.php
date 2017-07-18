@@ -89,6 +89,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '4443',
+    'ExampleNumber' => '4443',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'CI',
   'countryCode' => 0,
   'internationalPrefix' => '',

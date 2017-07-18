@@ -93,6 +93,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '3(7567|8126)|47751',
+    'ExampleNumber' => '47751',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'ZA',
   'countryCode' => 0,
   'internationalPrefix' => '',

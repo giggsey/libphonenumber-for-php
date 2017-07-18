@@ -95,6 +95,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '3372|89338',
+    'ExampleNumber' => '3372',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'AR',
   'countryCode' => 0,
   'internationalPrefix' => '',

@@ -388,4 +388,22 @@ class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
+    /**
+     * @dataProvider shortNumberRegionList
+     * @param string $regionCode
+     */
+    public function testSmsServiceShortNumbers($regionCode)
+    {
+        $desc = $this->shortNumberInfo->getMetadataForRegion($regionCode)->getSmsServices();
+
+        if ($desc->hasExampleNumber()) {
+            $exampleNumber = $desc->getExampleNumber();
+            $smsServiceNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
+            if (!$this->shortNumberInfo->isPossibleShortNumberForRegion($smsServiceNumber, $regionCode)
+                || !$this->shortNumberInfo->isSmsServiceForRegion($smsServiceNumber, $regionCode)) {
+                $this->fail('SMS service test failed for ' . $regionCode);
+            }
+        }
+    }
 }

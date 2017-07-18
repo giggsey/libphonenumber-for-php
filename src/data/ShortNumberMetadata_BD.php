@@ -90,6 +90,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '9594',
+    'ExampleNumber' => '9594',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'BD',
   'countryCode' => 0,
   'internationalPrefix' => '',

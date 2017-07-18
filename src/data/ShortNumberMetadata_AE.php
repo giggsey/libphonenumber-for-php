@@ -87,6 +87,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '445[16]',
+    'ExampleNumber' => '4451',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'AE',
   'countryCode' => 0,
   'internationalPrefix' => '',

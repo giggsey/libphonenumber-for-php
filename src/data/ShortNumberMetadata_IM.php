@@ -88,6 +88,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '8(?:6444|9887)',
+    'ExampleNumber' => '86444',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IM',
   'countryCode' => 0,
   'internationalPrefix' => '',

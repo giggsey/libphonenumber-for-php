@@ -93,6 +93,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '(?:1[24]|8[48])\\d{2}',
+    'ExampleNumber' => '8844',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'RO',
   'countryCode' => 0,
   'internationalPrefix' => '',

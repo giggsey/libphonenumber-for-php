@@ -89,6 +89,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '71400',
+    'ExampleNumber' => '71400',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'ID',
   'countryCode' => 0,
   'internationalPrefix' => '',

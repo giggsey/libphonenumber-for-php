@@ -97,6 +97,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '7\\d{4}',
+    'ExampleNumber' => '72123',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'SE',
   'countryCode' => 0,
   'internationalPrefix' => '',

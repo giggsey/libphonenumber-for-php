@@ -35,6 +35,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $blackList['shortCode'] = array('exampleNumber');
         $blackList['standardRate'] = array('exampleNumber');
         $blackList['carrierSpecific'] = array('exampleNumber');
+        $blackList['smsServices'] = array('exampleNumber');
         $blackList['noInternationalDialling'] = array('exampleNumber');
 
         $this->assertEquals(MetadataFilter::forLiteBuild(), new MetadataFilter($blackList));
@@ -56,6 +57,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $blackList['shortCode'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
+        $blackList['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['preferredInternationalPrefix'] = array();
         $blackList['nationalPrefix'] = array();
@@ -104,9 +106,10 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $fieldMap['shortCode'] = array('exampleNumber');
         $fieldMap['standardRate'] = array('exampleNumber');
         $fieldMap['carrierSpecific'] = array('exampleNumber');
+        $fieldMap['smsServices'] = array('exampleNumber');
         $fieldMap['noInternationalDialling'] = array('exampleNumber');
 
-        $this->AssertEquals(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
+        $this->assertEquals(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_childlessFieldAsGroup()
@@ -157,6 +160,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $fieldMap['shortCode'] = array('nationalNumberPattern');
         $fieldMap['standardRate'] = array('nationalNumberPattern');
         $fieldMap['carrierSpecific'] = array('nationalNumberPattern');
+        $fieldMap['smsServices'] = array('nationalNumberPattern');
         $fieldMap['noInternationalDialling'] = array('nationalNumberPattern');
 
         $this->assertEquals(
@@ -189,6 +193,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ':shortCode'
                 . ':standardRate'
                 . ':carrierSpecific'
+                . ':smsServices'
                 . ':noInternationalDialling'
             ), MetadataFilter::parseFieldMapFromString('nationalNumberPattern'
             . ':possibleLength'
@@ -242,6 +247,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ":shortCode(exampleNumber)"
                 . ":standardRate(exampleNumber)"
                 . ":carrierSpecific(exampleNumber)"
+                . ":smsServices(exampleNumber)"
                 . ":noInternationalDialling(exampleNumber)"),
             MetadataFilter::parseFieldMapFromString("exampleNumber"));
 
@@ -264,6 +270,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ":shortCode"
                 . ":standardRate"
                 . ":carrierSpecific"
+                . ":smsServices"
                 . ":noInternationalDialling"
                 . ":exampleNumber"),
             MetadataFilter::parseFieldMapFromString(
@@ -281,6 +288,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ":shortCode"
                 . ":standardRate"
                 . ":carrierSpecific"
+                . ":smsServices"
                 . ":noInternationalDialling"));
     }
 
@@ -619,6 +627,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
                 . ":shortCode(exampleNumber)"
                 . ":standardRate(exampleNumber)"
                 . ":carrierSpecific(exampleNumber)"
+                . ":smsServices"
                 . ":noInternationalDialling(exampleNumber)"
                 . ":exampleNumber");
             $this->fail();
@@ -780,6 +789,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $map1['shortCode'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
+        $map1['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['preferredInternationalPrefix'] = array();
         $map1['nationalPrefix'] = array();
@@ -808,6 +818,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $map1['shortCode'] = array('exampleNumber');
         $map1['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
+        $map1['smsServices'] = array('nationalNumberPattern');
         $map1['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['nationalPrefixTransformRule'] = array();
         $map1['sameMobileAndFixedLinePattern'] = array();
@@ -822,6 +833,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $map2['pager'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['uan'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['emergency'] = array('possibleLength', 'possibleLengthLocalOnly', 'exampleNumber');
+        $map2['smsServices'] = array('possibleLength', 'possibleLengthLocalOnly', 'exampleNumber');
         $map2['voicemail'] = array('nationalNumberPattern', 'possibleLengthLocalOnly');
         $map2['shortCode'] = array(
             'nationalNumberPattern',
@@ -848,6 +860,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $blacklist['shortCode'] = array('exampleNumber');
         $blacklist['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
+        $blacklist['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['nationalPrefixTransformRule'] = array();
         $blacklist['sameMobileAndFixedLinePattern'] = array();
@@ -862,6 +875,7 @@ class MetadataFilterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($filter->shouldDrop('emergency', 'nationalNumberPattern'));
         $this->assertFalse($filter->shouldDrop('preferredInternationalPrefix'));
         $this->assertTrue($filter->shouldDrop('mobileNumberPortableRegion'));
+        $this->assertTrue($filter->shouldDrop('smsServices', 'nationalNumberPattern'));
 
         // Integration tests starting with flag values
         $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop('fixedLine',

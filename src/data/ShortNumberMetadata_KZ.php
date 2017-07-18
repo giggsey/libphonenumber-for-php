@@ -91,6 +91,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '30400|4040',
+    'ExampleNumber' => '30400',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'KZ',
   'countryCode' => 0,
   'internationalPrefix' => '',

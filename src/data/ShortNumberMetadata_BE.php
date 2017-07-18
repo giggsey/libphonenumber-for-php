@@ -91,6 +91,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '[2-9]\\d{3}',
+    'ExampleNumber' => '2787',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'BE',
   'countryCode' => 0,
   'internationalPrefix' => '',

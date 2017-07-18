@@ -91,6 +91,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '40404|(?:54|83)00',
+    'ExampleNumber' => '5400',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'GH',
   'countryCode' => 0,
   'internationalPrefix' => '',

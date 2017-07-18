@@ -91,6 +91,14 @@ class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::BB));
     }
 
+    public function testIsSmsService()
+    {
+        $smsServiceNumberForSomeRegion = new PhoneNumber();
+        $smsServiceNumberForSomeRegion->setCountryCode(1)->setNationalNumber(21234);
+        $this->assertTrue($this->shortInfo->isSmsServiceForRegion($smsServiceNumberForSomeRegion, RegionCode::US));
+        $this->assertFalse($this->shortInfo->isSmsServiceForRegion($smsServiceNumberForSomeRegion, RegionCode::BB));
+    }
+
     public function testGetExpectedCost()
     {
         $premiumRateExample = $this->shortInfo->getExampleShortNumberForCost(

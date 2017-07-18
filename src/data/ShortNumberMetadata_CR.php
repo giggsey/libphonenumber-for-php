@@ -87,6 +87,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '3855|5(?:0(?:30|49)|510)',
+    'ExampleNumber' => '3855',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'CR',
   'countryCode' => 0,
   'internationalPrefix' => '',

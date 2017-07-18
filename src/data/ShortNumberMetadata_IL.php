@@ -90,6 +90,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '10400',
+    'ExampleNumber' => '10400',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IL',
   'countryCode' => 0,
   'internationalPrefix' => '',

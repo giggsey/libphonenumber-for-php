@@ -94,6 +94,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '990009',
+    'ExampleNumber' => '990009',
+    'PossibleLength' => 
+    array (
+      0 => 6,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IR',
   'countryCode' => 0,
   'internationalPrefix' => '',

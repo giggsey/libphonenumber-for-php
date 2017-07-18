@@ -89,6 +89,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '4040|8800',
+    'ExampleNumber' => '4040',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'AZ',
   'countryCode' => 0,
   'internationalPrefix' => '',

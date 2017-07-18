@@ -89,6 +89,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '5420',
+    'ExampleNumber' => '5420',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'TR',
   'countryCode' => 0,
   'internationalPrefix' => '',

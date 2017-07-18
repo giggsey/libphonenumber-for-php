@@ -100,6 +100,16 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'LV',
   'countryCode' => 0,
   'internationalPrefix' => '',
