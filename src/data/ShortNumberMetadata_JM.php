@@ -86,6 +86,17 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '176',
+    'ExampleNumber' => '176',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'JM',
   'countryCode' => 0,
   'internationalPrefix' => '',

@@ -85,6 +85,17 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '40404',
+    'ExampleNumber' => '40404',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'GN',
   'countryCode' => 0,
   'internationalPrefix' => '',

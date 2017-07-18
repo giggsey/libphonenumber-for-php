@@ -48,6 +48,7 @@ class BuildMetadataFromXml
     const PREMIUM_RATE = "premiumRate";
     const SHARED_COST = "sharedCost";
     const SHORT_CODE = "shortCode";
+    const SMS_SERVICES = "smsServices";
     const STANDARD_RATE = "standardRate";
     const TOLL_FREE = "tollFree";
     const UAN = "uan";
@@ -450,6 +451,7 @@ class BuildMetadataFromXml
             $metadata->setEmergency(self::processPhoneNumberDescElement($generalDesc, $element, self::EMERGENCY));
             $metadata->setTollFree(self::processPhoneNumberDescElement($generalDesc, $element, self::TOLL_FREE));
             $metadata->setPremiumRate(self::processPhoneNumberDescElement($generalDesc, $element, self::PREMIUM_RATE));
+            $metadata->setSmsServices(self::processPhoneNumberDescElement($generalDesc, $element, self::SMS_SERVICES));
         }
     }
 

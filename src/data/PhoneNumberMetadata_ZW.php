@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '2(?:[0-2457-9]\\d{3,8}|6(?:[14]\\d{7}|\\d{4}))|[13-79]\\d{4,9}|8[06]\\d{8}',
+    'NationalNumberPattern' => '2(?:[0-2457-9]\\d{3,8}|6(?:[14]\\d{7}|\\d{4}))|[13-79]\\d{4,9}|8[06]\\d{5,8}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -45,11 +45,12 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7[1378]\\d{7}',
-    'ExampleNumber' => '711234567',
+    'NationalNumberPattern' => '(?:7(?:1[2-8]|3[2-9]|7[1-9]|8[2-5])|8644)\\d{6}',
+    'ExampleNumber' => '712345678',
     'PossibleLength' => 
     array (
       0 => 9,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -57,11 +58,11 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7}',
-    'ExampleNumber' => '8001234567',
+    'NationalNumberPattern' => '80(?:[01]\\d|20|8[0-8])\\d{3}',
+    'ExampleNumber' => '8001234',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -99,7 +100,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '86(?:1[12]|30|44|55|77|8[367]|99)\\d{6}',
+    'NationalNumberPattern' => '86(?:1[12]|30|55|77|8[368])\\d{6}',
     'ExampleNumber' => '8686123456',
     'PossibleLength' => 
     array (
@@ -268,8 +269,8 @@ return array (
     ),
     9 => 
     array (
-      'pattern' => '(80\\d)(\\d{3})(\\d{4})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(80\\d)(\\d{4})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '80',

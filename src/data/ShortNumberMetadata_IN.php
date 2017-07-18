@@ -102,6 +102,21 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '1(?:39|90[019])|5(?:14(?:2[5-9]|[34]\\d)|757555)',
+    'ExampleNumber' => '51431',
+    'PossibleLength' => 
+    array (
+      0 => 3,
+      1 => 4,
+      2 => 5,
+      3 => 7,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IN',
   'countryCode' => 0,
   'internationalPrefix' => '',

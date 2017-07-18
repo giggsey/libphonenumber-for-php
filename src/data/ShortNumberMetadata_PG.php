@@ -90,6 +90,21 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '16\\d{2,5}',
+    'ExampleNumber' => '1612',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+      2 => 6,
+      3 => 7,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'PG',
   'countryCode' => 0,
   'internationalPrefix' => '',

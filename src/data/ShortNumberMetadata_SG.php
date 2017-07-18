@@ -88,6 +88,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '77222',
+    'ExampleNumber' => '77222',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'SG',
   'countryCode' => 0,
   'internationalPrefix' => '',

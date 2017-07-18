@@ -638,6 +638,9 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "  <carrierSpecific>"
             . "    <nationalNumberPattern>\\d{5}</nationalNumberPattern>"
             . "  </carrierSpecific>"
+            . "  <smsServices>"
+            . "    <nationalNumberPattern>\\d{6}</nationalNumberPattern>"
+            . "  </smsServices>"
             . "</territory>";
 
         $territoryElement = $this->parseXMLString($xmlInput);
@@ -648,6 +651,7 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("\\d{3}", $metadata->getPremiumRate()->getNationalNumberPattern());
         $this->assertEquals("\\d{4}", $metadata->getShortCode()->getNationalNumberPattern());
         $this->assertEquals("\\d{5}", $metadata->getCarrierSpecific()->getNationalNumberPattern());
+        $this->assertEquals("\\d{6}", $metadata->getSmsServices()->getNationalNumberPattern());
     }
 
     /**
@@ -814,6 +818,9 @@ class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
             . "<tollFree>"
             . "  <possibleLengths national=\"15\"/>"
             . "</tollFree>"
+            . "<smsServices>"
+            . "  <possibleLengths national=\"5\"/>"
+            . "</smsServices>"
             . "</territory>");
 
         $generalDesc = new PhoneNumberDesc();

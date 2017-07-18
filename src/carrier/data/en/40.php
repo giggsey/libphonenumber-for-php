@@ -16,6 +16,6 @@ return array (
   4073 => 'Vodafone',
   4074 => 'Orange',
   4075 => 'Orange',
-  4076 => 'Cosmote',
+  4076 => 'Telekom',
   4077 => 'Digi.Mobil',
 );

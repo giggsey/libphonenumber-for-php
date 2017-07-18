@@ -91,6 +91,19 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '4432|71117|9988',
+    'ExampleNumber' => '4432',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IQ',
   'countryCode' => 0,
   'internationalPrefix' => '',

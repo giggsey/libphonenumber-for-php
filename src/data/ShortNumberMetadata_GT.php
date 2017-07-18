@@ -90,6 +90,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '40404',
+    'ExampleNumber' => '40404',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'GT',
   'countryCode' => 0,
   'internationalPrefix' => '',

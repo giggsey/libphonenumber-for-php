@@ -91,6 +91,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '8711',
+    'ExampleNumber' => '8711',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'CM',
   'countryCode' => 0,
   'internationalPrefix' => '',

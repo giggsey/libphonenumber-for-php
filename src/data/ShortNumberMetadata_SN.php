@@ -102,6 +102,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '2[468]\\d{3}',
+    'ExampleNumber' => '24123',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'SN',
   'countryCode' => 0,
   'internationalPrefix' => '',

@@ -91,6 +91,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '45400',
+    'ExampleNumber' => '45400',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'UZ',
   'countryCode' => 0,
   'internationalPrefix' => '',

@@ -158,6 +158,23 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetSupportedCallingCodes()
+    {
+        $callingCodes = $this->phoneUtil->getSupportedCallingCodes();
+
+        $this->assertGreaterThan(0, count($callingCodes));
+
+        foreach ($callingCodes as $callingCode) {
+            $this->assertGreaterThan(0, $callingCode);
+            $this->assertNotEquals(RegionCode::ZZ, $this->phoneUtil->getRegionCodeForCountryCode($callingCode));
+        }
+
+        // There should be more than just the global network calling codes in this set.
+        $this->assertGreaterThan(count($this->phoneUtil->getSupportedGlobalNetworkCallingCodes()), count($callingCodes));
+        // But they should be includes. Tested one of them
+        $this->assertContains(979, $callingCodes);
+    }
+
     public function testGetInstanceLoadBadMetadata()
     {
         $this->assertNull($this->phoneUtil->getMetadataForRegion("No Such Region"));

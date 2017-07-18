@@ -91,6 +91,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '710|900',
+    'ExampleNumber' => '900',
+    'PossibleLength' => 
+    array (
+      0 => 3,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'BI',
   'countryCode' => 0,
   'internationalPrefix' => '',

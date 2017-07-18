@@ -92,6 +92,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '51210',
+    'ExampleNumber' => '51210',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IE',
   'countryCode' => 0,
   'internationalPrefix' => '',

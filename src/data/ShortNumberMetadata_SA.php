@@ -97,6 +97,16 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'PossibleLength' => 
+    array (
+      0 => -1,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'SA',
   'countryCode' => 0,
   'internationalPrefix' => '',

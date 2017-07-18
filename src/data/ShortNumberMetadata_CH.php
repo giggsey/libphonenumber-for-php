@@ -103,6 +103,20 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '[2-9]\\d{2,4}',
+    'ExampleNumber' => '600',
+    'PossibleLength' => 
+    array (
+      0 => 3,
+      1 => 4,
+      2 => 5,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'CH',
   'countryCode' => 0,
   'internationalPrefix' => '',

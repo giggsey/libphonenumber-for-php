@@ -16,7 +16,6 @@ return array (
   35815 => 'Mikkeli',
   35816 => 'Lappi',
   35817 => 'Kuopio',
-  35818 => 'Ahvenanmaa',
   35819 => 'Uusimaa',
   35821 => 'Turku/Pori',
   35822 => 'Turku/Pori',

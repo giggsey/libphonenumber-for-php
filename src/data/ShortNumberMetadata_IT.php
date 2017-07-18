@@ -98,6 +98,20 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '4[3-578]\\d{3,5}',
+    'ExampleNumber' => '43000',
+    'PossibleLength' => 
+    array (
+      0 => 5,
+      1 => 6,
+      2 => 7,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'IT',
   'countryCode' => 0,
   'internationalPrefix' => '',

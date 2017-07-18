@@ -87,6 +87,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '4098',
+    'ExampleNumber' => '4098',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'NZ',
   'countryCode' => 0,
   'internationalPrefix' => '',

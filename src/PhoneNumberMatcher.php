@@ -395,15 +395,14 @@ class PhoneNumberMatcher implements \Iterator
         }
 
         // Try to come up with a valid match given the entire candidate.
-        $rawString = $candidate;
-        $match = $this->parseAndVerify($rawString, $offset);
+        $match = $this->parseAndVerify($candidate, $offset);
         if ($match !== null) {
             return $match;
         }
 
         // If that failed, try to find an "inner match" - there might be a phone number within this
         // candidate.
-        return $this->extractInnerMatch($rawString, $offset);
+        return $this->extractInnerMatch($candidate, $offset);
     }
 
     /**

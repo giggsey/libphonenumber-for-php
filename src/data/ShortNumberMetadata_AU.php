@@ -108,6 +108,20 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '19\\d{4,6}',
+    'ExampleNumber' => '191123',
+    'PossibleLength' => 
+    array (
+      0 => 6,
+      1 => 7,
+      2 => 8,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'AU',
   'countryCode' => 0,
   'internationalPrefix' => '',

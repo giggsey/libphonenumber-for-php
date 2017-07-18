@@ -92,6 +92,18 @@ return array (
     array (
     ),
   ),
+  'smsServices' => 
+  array (
+    'NationalNumberPattern' => '[34]000',
+    'ExampleNumber' => '4000',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
   'id' => 'NL',
   'countryCode' => 0,
   'internationalPrefix' => '',

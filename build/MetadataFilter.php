@@ -31,6 +31,7 @@ class MetadataFilter
         "shortCode",
         "standardRate",
         "carrierSpecific",
+        "smsServices",
         "noInternationalDialling"
     );
 
@@ -282,6 +283,10 @@ class MetadataFilter
 
         if ($metadata->hasCarrierSpecific()) {
             $metadata->setCarrierSpecific($this->getFiltered('carrierSpecific', $metadata->getCarrierSpecific()));
+        }
+
+        if ($metadata->hasSmsServices()) {
+            $metadata->setSmsServices($this->getFiltered('smsServices', $metadata->getSmsServices()));
         }
 
         if ($metadata->hasNoInternationalDialling()) {

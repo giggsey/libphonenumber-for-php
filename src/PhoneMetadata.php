@@ -59,6 +59,10 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
+    protected $smsServices;
+    /**
+     * @var PhoneNumberDesc
+     */
     protected $noInternationalDialling = null;
     /**
      *
@@ -225,6 +229,10 @@ class PhoneMetadata
 
         if ($this->hasCarrierSpecific()) {
             $output['carrierSpecific'] = $this->getCarrierSpecific()->toArray();
+        }
+
+        if ($this->hasSmsServices()) {
+            $output['smsServices'] = $this->getSmsServices()->toArray();
         }
 
         if ($this->hasNoInternationalDialling()) {
@@ -567,6 +575,22 @@ class PhoneMetadata
         return $this;
     }
 
+    public function hasSmsServices()
+    {
+        return isset($this->smsServices);
+    }
+
+    public function getSmsServices()
+    {
+        return $this->smsServices;
+    }
+
+    public function setSmsServices(PhoneNumberDesc $value)
+    {
+        $this->smsServices = $value;
+        return $this;
+    }
+
     public function hasNoInternationalDialling()
     {
         return isset($this->noInternationalDialling);
@@ -896,6 +920,11 @@ class PhoneMetadata
         if (isset($input['carrierSpecific'])) {
             $desc = new PhoneNumberDesc();
             $this->setCarrierSpecific($desc->fromArray($input['carrierSpecific']));
+        }
+
+        if (isset($input['smsServices'])) {
+            $desc = new PhoneNumberDesc();
+            $this->setSmsServices($desc->fromArray($input['smsServices']));
         }
 
         if (isset($input['noInternationalDialling'])) {
