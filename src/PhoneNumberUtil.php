@@ -1004,9 +1004,9 @@ class PhoneNumberUtil
     }
 
     /**
-     * Gets the type of a phone number.
+     * Gets the type of a valid phone number.
      * @param PhoneNumber $number the number the phone number that we want to know the type
-     * @return int PhoneNumberType the type of the phone number
+     * @return int PhoneNumberType the type of the phone number, or UNKNOWN if it is invalid
      */
     public function getNumberType(PhoneNumber $number)
     {
