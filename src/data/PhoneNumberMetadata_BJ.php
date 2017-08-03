@@ -14,11 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2689]\\d{7}|7\\d{3}',
+    'NationalNumberPattern' => '[2689]\\d{7}',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 8,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -30,7 +29,6 @@ return array (
     'ExampleNumber' => '20211234',
     'PossibleLength' => 
     array (
-      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,7 +40,6 @@ return array (
     'ExampleNumber' => '90011234',
     'PossibleLength' => 
     array (
-      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -50,11 +47,9 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '7[3-5]\\d{2}',
-    'ExampleNumber' => '7312',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -96,7 +91,6 @@ return array (
     'ExampleNumber' => '85751234',
     'PossibleLength' => 
     array (
-      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -118,7 +112,6 @@ return array (
     'ExampleNumber' => '81123456',
     'PossibleLength' => 
     array (
-      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -156,6 +149,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[2689]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

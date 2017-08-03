@@ -14,14 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{3,4}|[3-9]\\d{6,7}|800\\d{6,7}',
+    'NationalNumberPattern' => '[3-9]\\d{6,7}|800\\d{6,7}',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 5,
-      2 => 7,
-      3 => 8,
-      4 => 10,
+      0 => 7,
+      1 => 8,
+      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,9 +56,6 @@ return array (
     'ExampleNumber' => '80012345',
     'PossibleLength' => 
     array (
-      0 => 7,
-      1 => 8,
-      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -123,12 +118,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '1(?:2[01245]|3[0-6]|4[1-489]|5[0-59]|6[1-46-9]|7[0-27-9]|8[189]|9[012])\\d{1,2}',
-    'ExampleNumber' => '12123',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 5,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -146,13 +138,11 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '1\\d{3,4}|800[2-9]\\d{3}',
+    'NationalNumberPattern' => '800[2-9]\\d{3}',
     'ExampleNumber' => '8002123',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 5,
-      2 => 7,
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (

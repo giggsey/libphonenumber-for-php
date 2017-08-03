@@ -17,6 +17,7 @@ return array (
   37449 => 'VivaCell-MTS',
   37455 => 'Ucom',
   37477 => 'VivaCell-MTS',
+  37488 => 'VivaCell-MTS',
   37491 => 'Beeline',
   37493 => 'VivaCell-MTS',
   37494 => 'VivaCell-MTS',

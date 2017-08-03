@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[125]\\d{2,6}',
+    'NationalNumberPattern' => '[125]\\d{2,7}',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -22,6 +22,7 @@ return array (
       2 => 5,
       3 => 6,
       4 => 7,
+      5 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -44,11 +45,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '11[67][0-2]\\d{3}',
+    'NationalNumberPattern' => '11[67][0-2]\\d{3}|56161561',
     'ExampleNumber' => '1160530',
     'PossibleLength' => 
     array (
       0 => 7,
+      1 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -69,7 +71,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:[01248]|5(?:010|6|902)|7(?:[07]|80)|9[0157])|1(?:[289]|[67][0-2]\\d{3})|2(?:1|98)|39|4[01]|55[23]\\d{2}|7000|9(?:0[019]|47|50|6[1347]|[89]))|2611|5(?:14(?:2[5-9]|[34]\\d)|3000|757555)',
+    'NationalNumberPattern' => '1(?:0(?:[01248]|5(?:010|6|902)|7(?:[07]|80)|9[0157])|1(?:[289]|[67][0-2]\\d{3})|2(?:1|98)|39|4[01]|55[23]\\d{2}|7000|9(?:0[019]|47|50|6[1347]|[89]))|2611|5(?:14(?:2[5-9]|[34]\\d)|3000|6161(?:17[89]|561)|757555)',
     'ExampleNumber' => '108',
     'PossibleLength' => 
     array (
@@ -93,7 +95,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:[67][0-2]\\d{3}|[89])|21|4[01]|55330|7\\d{3}|9(?:[89]|09))|53000',
+    'NationalNumberPattern' => '1(?:1(?:[67][0-2]\\d{3}|[89])|21|4[01]|55330|7\\d{3}|9(?:[89]|09))|5(?:3000|6161(?:17[89]|561))',
     'ExampleNumber' => '53000',
     'PossibleLength' => 
     array (
@@ -104,7 +106,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '1(?:39|90[019])|5(?:14(?:2[5-9]|[34]\\d)|757555)',
+    'NationalNumberPattern' => '1(?:39|90[019])|5(?:14(?:2[5-9]|[34]\\d)|6161(?:17[89]|561)|757555)',
     'ExampleNumber' => '51431',
     'PossibleLength' => 
     array (
@@ -112,6 +114,7 @@ return array (
       1 => 4,
       2 => 5,
       3 => 7,
+      4 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (

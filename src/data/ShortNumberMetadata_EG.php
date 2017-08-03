@@ -58,7 +58,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:2[23]|80)|34400',
+    'NationalNumberPattern' => '1(?:2[23]|[69]\\d{3}|80)|34400',
     'ExampleNumber' => '122',
     'PossibleLength' => 
     array (

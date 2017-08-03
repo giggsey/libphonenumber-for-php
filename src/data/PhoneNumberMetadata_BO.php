@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[23467]\\d{7}',
+    'NationalNumberPattern' => '[23467]\\d{7}|8\\d{8}',
     'PossibleLength' => 
     array (
       0 => 8,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -30,6 +31,7 @@ return array (
     'ExampleNumber' => '22123456',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,6 +44,7 @@ return array (
     'ExampleNumber' => '71234567',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -49,9 +52,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '80017\\d{4}',
+    'ExampleNumber' => '800171234',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -164,6 +169,18 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '[67]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '0$CC $1',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    2 => 
+    array (
+      'pattern' => '(800)(\\d{2})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '800',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',
