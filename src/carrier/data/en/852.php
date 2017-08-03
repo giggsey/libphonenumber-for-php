@@ -71,6 +71,7 @@ return array (
   852566 => '3',
   852568 => '1O1O / One2Free',
   852569 => '3',
+  8525730 => 'Tai Tung',
   8525900 => 'PCCW Mobile',
   8525901 => 'PCCW Mobile',
   8525902 => 'PCCW Mobile',

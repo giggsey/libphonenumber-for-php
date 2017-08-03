@@ -22,6 +22,7 @@ return array (
   254744 => 'Homeland Media',
   254746 => 'Safaricom',
   254747 => 'JTL',
+  254748 => 'Safaricom',
   254749 => 'WiAfrica',
   254750 => 'Airtel',
   254751 => 'Airtel',
