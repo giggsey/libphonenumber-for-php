@@ -1653,7 +1653,10 @@ class PhoneNumberUtil
             // We require that the NSN remaining after stripping the national prefix and carrier code be
             // long enough to be a possible length for the region. Otherwise, we don't do the stripping,
             // since the original number could be a valid short number.
-            if ($this->testNumberLength($potentialNationalNumber, $regionMetadata) !== ValidationResult::TOO_SHORT) {
+            $validationResult = $this->testNumberLength($potentialNationalNumber, $regionMetadata);
+            if ($validationResult !== ValidationResult::TOO_SHORT
+                && $validationResult !== ValidationResult::IS_POSSIBLE_LOCAL_ONLY
+                && $validationResult !== ValidationResult::INVALID_LENGTH) {
                 $normalizedNationalNumber = $potentialNationalNumber;
                 if ($keepRawInput && mb_strlen($carrierCode) > 0) {
                     $phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
@@ -2184,9 +2187,7 @@ class PhoneNumberUtil
 
     /**
      * Helper method to check a number against possible lengths for this number type, and determine
-     * whether it matches, or is too short or too long. Currently, if a number pattern suggests that
-     * numbers of length 7 and 10 are possible, and a number in between these possible lengths is
-     * entered, such as of length 8, this will return TOO_LONG.
+     * whether it matches, or is too short or too long.
      *
      * @param string $number
      * @param PhoneMetadata $metadata

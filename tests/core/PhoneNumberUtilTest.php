@@ -2683,6 +2683,13 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $shortNumber = new PhoneNumber();
         $shortNumber->setCountryCode(64)->setNationalNumber(12);
         $this->assertEquals($shortNumber, $this->phoneUtil->parse("12", RegionCode::NZ));
+
+        // Test for short-code with leading zero for a country which has 0 as national prefix. Ensure
+        // it's not interpreted as national prefix if the remaining number length is local-only in
+        // terms of length. Example: In GB, length 6-7 are only possible local-only.
+        $shortNumber = new PhoneNumber();
+        $shortNumber->setCountryCode(44)->setNationalNumber(123456)->setItalianLeadingZero(true);
+        $this->assertEquals($shortNumber, $this->phoneUtil->parse("0123456", RegionCode::GB));
     }
 
     public function testParseNumberWithAlphaCharacters()
