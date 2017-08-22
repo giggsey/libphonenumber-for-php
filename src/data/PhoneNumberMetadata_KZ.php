@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:33\\d|7\\d{2}|80[09])\\d{7}',
+    'NationalNumberPattern' => '(?:33\\d|7\\d{2}|80[089])\\d{7}',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -79,9 +79,10 @@ return array (
   ),
   'personalNumber' => 
   array (
+    'NationalNumberPattern' => '808\\d{7}',
+    'ExampleNumber' => '8081234567',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
