@@ -14,10 +14,13 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{2}',
+    'NationalNumberPattern' => '1\\d{2,5}',
     'PossibleLength' => 
     array (
       0 => 3,
+      1 => 4,
+      2 => 5,
+      3 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -25,9 +28,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '116\\d{3}',
+    'ExampleNumber' => '116000',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -45,10 +50,11 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '12[234]',
+    'NationalNumberPattern' => '12[2-4]',
     'ExampleNumber' => '122',
     'PossibleLength' => 
     array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -56,7 +62,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '12[234]',
+    'NationalNumberPattern' => '1(?:1(?:6(?:00[06]|1(?:1[17]|23))|8\\d{1,2})|2(?:0[0-7]|[2-5]|6[0-26]|[78]\\d{1,2})|[3-5]\\d{2}|7\\d{3})',
     'ExampleNumber' => '122',
     'PossibleLength' => 
     array (

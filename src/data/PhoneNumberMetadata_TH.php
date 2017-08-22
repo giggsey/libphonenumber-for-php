@@ -14,13 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2-9]\\d{7,8}|1\\d{3}(?:\\d{5,6})?',
+    'NationalNumberPattern' => '1\\d{8,9}|[2-9]\\d{7,8}',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 8,
-      2 => 9,
-      3 => 10,
+      0 => 8,
+      1 => 9,
+      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -118,11 +117,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '1\\d{3}',
-    'ExampleNumber' => '1100',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -140,11 +137,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '1\\d{3}',
-    'ExampleNumber' => '1100',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

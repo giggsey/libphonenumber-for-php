@@ -4919,6 +4919,7 @@ return array (
   1985892 => 'Covington, LA',
   1985893 => 'Covington, LA',
   1985898 => 'Covington, LA',
+  1986 => 'Idaho',
   1989 => 'Michigan',
   1989224 => 'St. Johns, MI',
   1989227 => 'St. Johns, MI',

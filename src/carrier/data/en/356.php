@@ -18,6 +18,7 @@ return array (
   3569211 => 'Vodafone',
   3569231 => 'Vodafone',
   3569696 => 'YOM',
+  3569697 => 'YOM',
   3569811 => 'Redtouch Fone',
   3569812 => 'Redtouch Fone',
   3569813 => 'Redtouch Fone',

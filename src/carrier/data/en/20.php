@@ -14,4 +14,6 @@ return array (
   2010 => 'Vodafone',
   2011 => 'Etisalat',
   2012 => 'Mobinil',
+  201550 => 'TE',
+  201555 => 'TE',
 );

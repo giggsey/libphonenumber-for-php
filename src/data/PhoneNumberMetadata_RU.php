@@ -79,9 +79,10 @@ return array (
   ),
   'personalNumber' => 
   array (
+    'NationalNumberPattern' => '808\\d{7}',
+    'ExampleNumber' => '8081234567',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
