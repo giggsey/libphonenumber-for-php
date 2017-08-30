@@ -3444,6 +3444,15 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($threeZeros, $this->phoneUtil->parse("0000", RegionCode::AU));
     }
 
+    public function testParseHasDefaultNullRegion()
+    {
+        $ukNumber = '+441174960123';
+
+        $phone = $this->phoneUtil->parse($ukNumber);
+
+        $this->assertTrue($this->phoneUtil->isValidNumber($phone));
+    }
+
     public function testCountryWithNoNumberDesc()
     {
         // Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
