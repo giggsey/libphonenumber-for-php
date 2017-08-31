@@ -2993,7 +2993,7 @@ class PhoneNumberUtil
      *
      * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                          such as +, ( and -, as well as a phone number extension.
-     * @param string $defaultRegion region that we are expecting the number to be from. This is only used
+     * @param string|null $defaultRegion region that we are expecting the number to be from. This is only used
      *                          if the number being parsed is not written in international format.
      *                          The country_code for the number in this case would be stored as that
      *                          of the default region supplied. If the number is guaranteed to
@@ -3007,7 +3007,7 @@ class PhoneNumberUtil
      *                               and the number is not in international format (does not start
      *                               with +)
      */
-    public function parse($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = null, $keepRawInput = false)
+    public function parse($numberToParse, $defaultRegion = null, PhoneNumber $phoneNumber = null, $keepRawInput = false)
     {
         if ($phoneNumber === null) {
             $phoneNumber = new PhoneNumber();
