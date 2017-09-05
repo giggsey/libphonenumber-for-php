@@ -157,7 +157,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[7-9]|20(?:[013-8]|2[5-9])|4(?:6[45]|[7-9])',
+        0 => '20[0-8]|4(?:6[45]|[7-9])|[7-9]',
+        1 => '20(?:[013-8]|2[5-9])|4(?:6[45]|[7-9])|[7-9]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -181,7 +182,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2024',
+        0 => '202',
+        1 => '2024',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

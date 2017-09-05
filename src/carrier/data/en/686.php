@@ -11,7 +11,6 @@
  */
 
 return array (
-  6866 => 'TSKL',
+  6866 => 'Ocean Link',
   6867 => 'ATHKL',
-  6869 => 'TSKL',
 );

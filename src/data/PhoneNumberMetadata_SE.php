@@ -201,7 +201,7 @@ return array (
       'format' => '$1-$2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[136]|2[136]|3[356]|4[0246]|6[03]|90',
+        0 => '[12][136]|3[356]|4[0246]|6[03]|90',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -336,7 +336,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[136]|2[136]|3[356]|4[0246]|6[03]|90',
+        0 => '[12][136]|3[356]|4[0246]|6[03]|90',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

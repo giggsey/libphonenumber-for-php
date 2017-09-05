@@ -168,7 +168,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '4[148]|[578]|9(?:1[59]|[0235-9])',
+        0 => '4[148]|[578]|9(?:[0235-9]|1[59])',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',

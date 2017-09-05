@@ -193,7 +193,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[4579]|2[035-9]|[36][02-9]',
+        0 => '2[035-9]|[36][02-9]|[4579]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

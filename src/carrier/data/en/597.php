@@ -23,8 +23,6 @@ return array (
   597774 => 'Telesur',
   59781 => 'Digicel',
   59782 => 'Digicel',
-  59783 => 'Uniqa',
-  59784 => 'Uniqa',
   59785 => 'Telesur',
   59786 => 'Telesur',
   59787 => 'Telesur',

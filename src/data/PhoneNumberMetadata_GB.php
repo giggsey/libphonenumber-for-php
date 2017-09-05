@@ -203,7 +203,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1(?:1|\\d1)|3|9[018]',
+        0 => '1(?:[02-9]1|1)|3|9[018]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -216,8 +216,8 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '1(?:38|5[23]|69|76|94)',
-        1 => '1(?:387|5(?:24|39)|697|768|946)',
-        2 => '1(?:3873|5(?:242|39[456])|697[347]|768[347]|9467)',
+        1 => '1(?:(?:38|69)7|5(?:24|39)|768|946)',
+        2 => '1(?:3873|5(?:242|39[4-6])|(?:697|768)[347]|9467)',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

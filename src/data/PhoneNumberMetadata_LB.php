@@ -155,7 +155,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[13-6]|7(?:[2-57]|62|8[0-7]|9[04-9])|8[02-9]|9',
+        0 => '[13-69]|7(?:[2-57]|62|8[0-7]|9[04-9])|8[02-9]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -167,7 +167,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[89][01]|7(?:[01]|6[013-9]|8[89]|9[1-3])',
+        0 => '7(?:[01]|6[013-9]|8[89]|9[1-3])|[89][01]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

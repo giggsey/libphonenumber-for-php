@@ -159,8 +159,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1(?:8[2-9]|9[0-3]|[2-7])|[24-8]',
-        1 => '1(?:8[2-9]|9(?:09|[1-3])|[2-7])|[24-8]',
+        0 => '1(?:[2-7]|8[2-9]|9[0-3])|[24-8]',
+        1 => '1(?:[2-7]|8[2-9]|9(?:09|[1-3]))|[24-8]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',
@@ -200,8 +200,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1(?:8[2-9]|9[0-3]|[2-7])|[24-8]',
-        1 => '1(?:8[2-9]|9(?:09|[1-3])|[2-7])|[24-8]',
+        0 => '1(?:[2-7]|8[2-9]|9[0-3])|[24-8]',
+        1 => '1(?:[2-7]|8[2-9]|9(?:09|[1-3]))|[24-8]',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',
