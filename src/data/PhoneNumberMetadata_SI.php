@@ -162,7 +162,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[12]|3[24-8]|4[24-8]|5[2-8]|7[3-8]',
+        0 => '[12]|[34][24-8]|5[2-8]|7[3-8]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

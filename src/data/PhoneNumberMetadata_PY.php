@@ -162,7 +162,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:[26]1|3[289]|4[124678]|7[123]|8[1236])',
+        0 => '[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
@@ -174,7 +174,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:[26]1|3[289]|4[124678]|7[123]|8[1236])',
+        0 => '[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
@@ -210,7 +210,8 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '8700',
+        0 => '870',
+        1 => '8700',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

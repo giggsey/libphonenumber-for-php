@@ -153,7 +153,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:1[28]|2(?:[45]2|[0-36])|365)',
+        0 => '1[28]|2(?:[0-36]|[45]2)|365',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

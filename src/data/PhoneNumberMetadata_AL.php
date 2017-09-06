@@ -202,7 +202,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[235][16-9]|8[016-9]|[79]',
+        0 => '[235][16-9]|[79]|8[016-9]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

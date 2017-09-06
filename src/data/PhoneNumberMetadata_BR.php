@@ -169,8 +169,8 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:300|40[02])',
-        1 => '(?:300|40(?:0|20))',
+        0 => '300|40[02]',
+        1 => '300|40(?:0|20)',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -206,7 +206,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-9](?:[1-9]|0[1-9])',
+        0 => '[2-9](?:0[1-9]|[1-9])',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -218,7 +218,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '9(?:[1-9]|0[1-9])',
+        0 => '9(?:0[1-9]|[1-9])',
       ),
       'nationalPrefixFormattingRule' => '$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -257,8 +257,8 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '(?:300|40[02])',
-        1 => '(?:300|40(?:0|20))',
+        0 => '300|40[02]',
+        1 => '300|40(?:0|20)',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
