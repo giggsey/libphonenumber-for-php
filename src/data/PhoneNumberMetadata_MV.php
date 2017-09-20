@@ -104,11 +104,9 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '781\\d{4}',
-    'ExampleNumber' => '7812345',
     'PossibleLength' => 
     array (
-      0 => 7,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

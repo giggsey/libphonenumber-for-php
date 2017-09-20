@@ -28,7 +28,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2(?:[235-8]\\d{7}|4\\d{6,7})|[3-8]\\d{7,8}',
+    'NationalNumberPattern' => '(?:2(?:[235-8]\\d{3}|4\\d{2,3})|3[2-9]\\d{2}|4(?:[239]\\d|[78])\\d{2}|5[2-8]\\d{2}|6[235-79]\\d{2}|7[1-9]\\d{2}|8(?:2(?:3\\d|66)|[7-9]\\d{2}))\\d{4}',
     'ExampleNumber' => '221234567',
     'PossibleLength' => 
     array (
@@ -41,7 +41,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9\\d{8}',
+    'NationalNumberPattern' => '9[0-8]\\d{7}',
     'ExampleNumber' => '912345678',
     'PossibleLength' => 
     array (
@@ -53,7 +53,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{6}',
+    'NationalNumberPattern' => '80[0-79]\\d{6}',
     'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
@@ -88,9 +88,11 @@ return array (
   ),
   'personalNumber' => 
   array (
+    'NationalNumberPattern' => '99\\d{7}',
+    'ExampleNumber' => '990123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -120,9 +122,11 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '50[0-46-9]\\d{6}',
+    'ExampleNumber' => '500123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -171,11 +175,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(20)(\\d{3})(\\d{4})',
+      'pattern' => '([258]0)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '20[013-9]',
+        0 => '20[013-9]|50[0-46-9]|80[0-79]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -187,7 +191,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2[2-8]|[3-6]|[78][1-9]',
+        0 => '[25][2-8]|[346]|[78][1-9]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -195,11 +199,11 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '([89]\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '(9\\d{2})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '80|9',
+        0 => '9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

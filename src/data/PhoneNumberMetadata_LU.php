@@ -91,11 +91,9 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '70\\d{6}',
-    'ExampleNumber' => '70123456',
     'PossibleLength' => 
     array (
-      0 => 8,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -18,8 +18,9 @@ return array (
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 5,
-      2 => 6,
+      1 => 4,
+      2 => 5,
+      3 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -39,9 +40,11 @@ return array (
   ),
   'premiumRate' => 
   array (
+    'NationalNumberPattern' => '5[37]\\d{3}',
+    'ExampleNumber' => '53012',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -61,7 +64,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11(?:2|6(?:00[06]|1(?:11|23)))|51210|999',
+    'NationalNumberPattern' => '1(?:1(?:2|6(?:00[06]|1(?:1[17]|23))|8\\d{2})|9\\d{2})|5[0137]\\d{3}|999',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -72,9 +75,11 @@ return array (
   ),
   'standardRate' => 
   array (
+    'NationalNumberPattern' => '51\\d{3}',
+    'ExampleNumber' => '51012',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -94,7 +99,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '51210',
+    'NationalNumberPattern' => '118\\d{2}|5(?:[037]\\d{3}|1210)',
     'ExampleNumber' => '51210',
     'PossibleLength' => 
     array (
