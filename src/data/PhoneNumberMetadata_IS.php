@@ -127,7 +127,7 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => '(?:6(?:2[78]|49|8\\d)|8(?:7[0189]|80)|95[48])\\d{4}',
+    'NationalNumberPattern' => '(?:6(?:2[78]|8\\d)|8(?:7[0189]|80)|95[48])\\d{4}',
     'ExampleNumber' => '6271234',
     'PossibleLength' => 
     array (
