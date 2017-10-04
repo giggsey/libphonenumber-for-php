@@ -30,7 +30,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:(?:1[137]|2[13-68]|3[1458]|4[145]|5[1468]|6[16]|7[1467]|8[13467])(?:\\d{8}|(?:[16]|[289]\\d?)\\d{3}))|94(?:000|11[1-7]|2\\d{2}|440)\\d{5}',
+    'NationalNumberPattern' => '(?:(?:1[137]|2[13-68]|3[1458]|4[145]|5[1468]|6[16]|7[1467]|8[13467])(?:\\d{8}|(?:[16]|[289]\\d?)\\d{3}))|94(?:000\\d|11[0-7]\\d|2\\d{3}|3016|440\\d)\\d{4}',
     'ExampleNumber' => '2123456789',
     'PossibleLength' => 
     array (
@@ -44,7 +44,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9(?:0[1-3]\\d{2}|[1-3]\\d{3}|9(?:0\\d{2}|44\\d|810|9(?:00|11|9[89])))\\d{5}',
+    'NationalNumberPattern' => '9(?:0(?:[1-3]\\d{2}|44\\d)|[13]\\d{3}|2[0-2]\\d{2}|9(?:0\\d{2}|44\\d|810|9(?:00|1[13]|9[89])))\\d{5}',
     'ExampleNumber' => '9123456789',
     'PossibleLength' => 
     array (
@@ -108,11 +108,9 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '943\\d{7}',
-    'ExampleNumber' => '9432123456',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
