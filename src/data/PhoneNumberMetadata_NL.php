@@ -151,8 +151,8 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '14\\d{3,4}',
-    'ExampleNumber' => '14123',
+    'NationalNumberPattern' => '140(?:1(?:[035]|[16-8]\\d)|2(?:[0346]|[259]\\d)|3(?:[03568]|[124]\\d)|4(?:[0356]|[17-9]\\d)|5(?:[0358]|[124679]\\d)|7\\d|8[458])',
+    'ExampleNumber' => '14023',
     'PossibleLength' => 
     array (
       0 => 5,
