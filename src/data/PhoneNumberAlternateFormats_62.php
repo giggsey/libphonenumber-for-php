@@ -15,6 +15,8 @@ return array (
   'id' => '',
   'countryCode' => 62,
   'internationalPrefix' => '',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -26,7 +28,7 @@ return array (
       array (
         0 => '2[124]|[36]1',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
@@ -38,7 +40,7 @@ return array (
       array (
         0 => '2[124]|[36]1',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),

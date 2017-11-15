@@ -170,7 +170,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '0',
+        0 => '054',
+        1 => '0549',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -209,7 +210,8 @@ return array (
       'format' => '($1) $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '0',
+        0 => '054',
+        1 => '0549',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

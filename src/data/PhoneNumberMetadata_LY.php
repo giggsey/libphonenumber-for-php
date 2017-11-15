@@ -147,10 +147,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([25679]\\d)(\\d{7})',
+      'pattern' => '([25-79]\\d)(\\d{7})',
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[25-79]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
