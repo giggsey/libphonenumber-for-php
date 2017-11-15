@@ -15,6 +15,8 @@ return array (
   'id' => '',
   'countryCode' => 91,
   'internationalPrefix' => '',
+  'nationalPrefix' => '0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -26,7 +28,7 @@ return array (
       array (
         0 => '7(?:[02-8]|19|9[07-9])|8(?:0[015-9]|[13-69]|2[02-9]|7[01-69]|8[0-24-9])|9',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
@@ -38,7 +40,7 @@ return array (
       array (
         0 => '7(?:[02-8]|19|9[07-9])|8(?:0[015-9]|[13-69]|2[02-9]|7[01-69]|8[0-24-9])|9',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),

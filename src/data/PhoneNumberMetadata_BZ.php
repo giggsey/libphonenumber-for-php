@@ -164,7 +164,8 @@ return array (
       'format' => '$1-$2-$3-$4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '0',
+        0 => '080',
+        1 => '0800',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

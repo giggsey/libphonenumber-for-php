@@ -256,7 +256,7 @@ return array (
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '11',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -360,7 +360,7 @@ return array (
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1',
+        0 => '11',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

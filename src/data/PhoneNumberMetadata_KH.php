@@ -176,6 +176,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '1[89]0',
+        1 => '1[89]00',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

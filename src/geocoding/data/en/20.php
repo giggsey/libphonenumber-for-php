@@ -22,6 +22,7 @@ return array (
   2048 => 'Monufia',
   2050 => 'Mansoura',
   2055 => 'Zagazig',
+  20554 => '10th of Ramadan',
   2057 => 'Damietta',
   2062 => 'Suez',
   2064 => 'Ismailia',

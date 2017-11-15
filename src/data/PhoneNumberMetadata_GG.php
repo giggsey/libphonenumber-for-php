@@ -53,7 +53,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80(?:0(?:1111|\\d{6,7})|8\\d{7})|500\\d{6}',
+    'NationalNumberPattern' => '80(?:0(?:1111|\\d{6,7})|8\\d{7})',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
