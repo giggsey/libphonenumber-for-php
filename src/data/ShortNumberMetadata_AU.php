@@ -44,15 +44,13 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1(?:2(?:34|456)|9\\d{4,6})',
+    'NationalNumberPattern' => '1(?:2(?:34|456)|9\\d{4})',
     'ExampleNumber' => '191123',
     'PossibleLength' => 
     array (
       0 => 4,
       1 => 5,
       2 => 6,
-      3 => 7,
-      4 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -72,7 +70,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '000|1(?:06|1(?:00|2|9[46])|2(?:[23]\\d|4\\d{2,3}|5\\d{3,4}|8(?:2|[013-9]\\d))|555|9(?:[13-5]\\d{3}|[679]\\d{5}))|225|7(?:33|67)',
+    'NationalNumberPattern' => '000|1(?:06|1(?:00|2|9[46])|2(?:[23]\\d|4\\d{2,3}|5\\d{3,4}|8(?:2|[013-9]\\d))|555|9[13-5]\\d{3})|225|7(?:33|67)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
