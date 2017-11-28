@@ -19,12 +19,12 @@ return array (
     array (
       0 => 6,
       1 => 7,
-      2 => 9,
-      3 => 10,
+      2 => 8,
+      3 => 9,
+      4 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => 8,
     ),
   ),
   'fixedLine' => 
@@ -42,7 +42,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '14(?:5\\d|71)\\d{5}|4(?:[0-2]\\d|3[0-57-9]|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[12547-9]|9[017-9])\\d{6}',
+    'NationalNumberPattern' => '14(?:5\\d|71)\\d{5}|4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[12547-9]|9[017-9])\\d{6}',
     'ExampleNumber' => '412345678',
     'PossibleLength' => 
     array (
@@ -67,11 +67,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '190[0126]\\d{6}',
+    'NationalNumberPattern' => '19(?:0[0126]\\d|[679])\\d{5}',
     'ExampleNumber' => '1900123456',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => 8,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (

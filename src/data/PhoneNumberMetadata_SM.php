@@ -147,7 +147,7 @@ return array (
   'id' => 'SM',
   'countryCode' => 378,
   'internationalPrefix' => '00',
-  'nationalPrefixForParsing' => '(?:0549)?([89]\\d{5})',
+  'nationalPrefixForParsing' => '([89]\\d{5})',
   'nationalPrefixTransformRule' => '0549$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

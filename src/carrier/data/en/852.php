@@ -11,6 +11,8 @@
  */
 
 return array (
+  8524647 => 'Sun Mobile',
+  8524649 => 'CITIC',
   852510 => 'China Mobile',
   852511 => 'New World Mobility',
   852512 => 'China Mobile',
