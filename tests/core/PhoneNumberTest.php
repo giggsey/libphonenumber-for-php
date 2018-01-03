@@ -96,4 +96,12 @@ class PhoneNumberTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($numberA, $numberB);
     }
+
+    public function testUnserialize()
+    {
+        $numberA = new PhoneNumber();
+        $numberB = new PhoneNumber();
+
+        $this->assertEquals($numberA, \unserialize(\serialize($numberB)));
+    }
 }
