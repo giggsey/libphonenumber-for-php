@@ -597,6 +597,8 @@ class PhoneNumber implements \Serializable
             $this->preferredDomesticCarrierCode
         ) = $data;
 
-        $this->hasNumberOfLeadingZeros = true;
+        if ($this->numberOfLeadingZeros > 1) {
+            $this->hasNumberOfLeadingZeros = true;
+        }
     }
 }
