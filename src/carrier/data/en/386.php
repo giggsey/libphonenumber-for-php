@@ -12,14 +12,14 @@
 
 return array (
   38630 => 'Si.mobil',
-  38631 => 'Mobitel',
+  38631 => 'Telekom Slovenije',
   38640 => 'Si.mobil',
-  38641 => 'Mobitel',
-  38649 => 'Mobitel',
-  38651 => 'Mobitel',
+  38641 => 'Telekom Slovenije',
+  38649 => 'Telekom Slovenije',
+  38651 => 'Telekom Slovenije',
   38664 => 'T-2',
   386696 => 'HoT',
   386699 => 'HoT',
-  38670 => 'Tušmobil',
-  38671 => 'Mobitel',
+  38670 => 'Telemach',
+  38671 => 'Telekom Slovenije',
 );

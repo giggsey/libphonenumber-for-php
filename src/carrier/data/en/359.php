@@ -12,8 +12,10 @@
 
 return array (
   35987 => 'Vivacom',
-  35988 => 'M-Tel',
-  35989 => 'GLOBUL',
-  35998 => 'GLOBUL',
+  35988 => 'Mtel',
+  35989 => 'Telenor',
+  359988 => 'Bob',
+  359989 => 'Mtel',
+  359996 => 'Bulsatcom',
   359999 => 'MAX',
 );

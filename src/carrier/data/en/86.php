@@ -74,5 +74,6 @@ return array (
   86187 => 'China Mobile',
   86188 => 'China Mobile',
   86189 => 'China Telecom',
+  86198 => 'China Telecom',
   86199 => 'China Telecom',
 );
