@@ -21,6 +21,8 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 6,
+      1 => 7,
     ),
   ),
   'fixedLine' => 
@@ -32,6 +34,8 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 6,
+      1 => 7,
     ),
   ),
   'mobile' => 
@@ -146,6 +150,29 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(\\d{2})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
+      'pattern' => '([1-8])(\\d{2})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[1-8]',
+      ),
+      'nationalPrefixFormattingRule' => '$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    2 => 
+    array (
       'pattern' => '([29]\\d)(\\d{7})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
@@ -156,7 +183,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
+    3 => 
     array (
       'pattern' => '(800)(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',

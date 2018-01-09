@@ -92,7 +92,7 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '8(?:1[1-4679]|2[0-367]|3[02-47])\\d{5}',
+    'NationalNumberPattern' => '8(?:1[0-4679]|2[0-367]|3[02-47])\\d{5}',
     'ExampleNumber' => '81123456',
     'PossibleLength' => 
     array (

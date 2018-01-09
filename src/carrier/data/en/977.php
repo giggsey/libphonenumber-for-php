@@ -13,6 +13,7 @@
 return array (
   977960 => 'STM Telecom',
   977961 => 'Smart Telecom',
+  977962 => 'Smart Telecom',
   977963 => 'NSTPL',
   977972 => 'UTL',
   977974 => 'NDCL',
@@ -23,4 +24,5 @@ return array (
   977984 => 'Nepal Telecom',
   977985 => 'Nepal Telecom',
   977986 => 'Nepal Telecom',
+  977988 => 'Smart Telecom',
 );

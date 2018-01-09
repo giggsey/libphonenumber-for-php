@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '41\\d{4}',
+    'NationalNumberPattern' => '(?:4[1-3]|50)\\d{4}',
     'ExampleNumber' => '411234',
     'PossibleLength' => 
     array (
@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:40|55)\\d{4}',
+    'NationalNumberPattern' => '(?:4[02-4]|5[05])\\d{4}',
     'ExampleNumber' => '551234',
     'PossibleLength' => 
     array (
