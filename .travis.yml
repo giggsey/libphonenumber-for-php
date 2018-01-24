@@ -6,7 +6,7 @@ matrix:
     fast_finish: true
     include:
         # Need to use Precise for PHP 5.3
-        - php: 5.3.3
+        - php: 5.3
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
           dist: precise
         - php: 5.4
@@ -18,7 +18,6 @@ matrix:
         - php: hhvm
 
 before_install:
- - if [[ $(phpenv version-name) = "5.3.3" ]]; then composer config -g -- disable-tls true && composer config -g -- secure-http false; fi;
  - wget https://scrutinizer-ci.com/ocular.phar
  - mkdir -p build/logs
 
