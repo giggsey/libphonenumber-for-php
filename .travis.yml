@@ -18,6 +18,7 @@ matrix:
         - php: hhvm
 
 before_install:
+ - if [[ $(phpenv version-name) = "5.3.3" ]]; then composer config -g -- disable-tls true && composer config -g -- secure-http false; fi;
  - wget https://scrutinizer-ci.com/ocular.phar
  - mkdir -p build/logs
 
