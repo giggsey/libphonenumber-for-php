@@ -29,6 +29,7 @@ return array (
   989944 => 'Anarestan',
   9899810 => 'Shatel Mobile',
   9899900 => 'LOTUSTEL',
+  989991 => 'Irancell',
   9899911 => 'ApTel',
   9899914 => 'Azartel',
   9899998 => 'SamanTel',

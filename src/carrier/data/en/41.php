@@ -11,6 +11,7 @@
  */
 
 return array (
+  4175 => 'Swisscom',
   4176 => 'Sunrise',
   4177 => 'Tele4u',
   4178 => 'Salt',
