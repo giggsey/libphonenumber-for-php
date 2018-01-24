@@ -5,8 +5,8 @@ language: php
 matrix:
     fast_finish: true
     include:
-        # Need to use Trusty for PHP 5.3
-        - php: 5.3
+        # Need to use Precise for PHP 5.3
+        - php: 5.3.3
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
           dist: precise
         - php: 5.4
@@ -15,9 +15,7 @@ matrix:
         - php: 7.0
         - php: 7.1
         - php: 7.2
-        # Use the newer stack for HHVM as HHVM does not support Precise
         - php: hhvm
-          dist: trusty
 
 before_install:
  - wget https://scrutinizer-ci.com/ocular.phar
