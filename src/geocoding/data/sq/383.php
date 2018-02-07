@@ -11,9 +11,11 @@
  */
 
 return array (
-  24595 => 'Orange',
-  245965 => 'Spacetel',
-  245966 => 'Spacetel',
-  245969 => 'Spacetel',
-  245977 => 'Guinetel',
+  38328 => 'Mitrovicë',
+  383280 => 'Gjilan',
+  38329 => 'Prizren',
+  383290 => 'Ferizaj',
+  38338 => 'Prishtinë',
+  38339 => 'Pejë',
+  383390 => 'Gjakovë',
 );

@@ -14,12 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[134]\\d{2,4}',
+    'NationalNumberPattern' => '1\\d{2}',
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 4,
-      2 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -37,11 +35,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '41(?:348|851)',
-    'ExampleNumber' => '41851',
     'PossibleLength' => 
     array (
-      0 => 5,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -49,12 +45,10 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:1(?:11|77)|7)|12)',
-    'ExampleNumber' => '10111',
+    'NationalNumberPattern' => '1(?:12|9[2-4])',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => 3,
-      1 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -62,8 +56,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:1(?:11|77)|20|7)|1[12]|77(?:3[237]|[45]7|6[279]|9[26]))|[34]\\d{4}',
-    'ExampleNumber' => '10111',
+    'NationalNumberPattern' => '1(?:12|9[2-4])',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
     ),
@@ -73,11 +67,9 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '3(?:078[23]|7(?:064|567)|8126)|4(?:2699|3(?:699|94[16])|7751|8837)',
-    'ExampleNumber' => '47751',
     'PossibleLength' => 
     array (
-      0 => 5,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -85,11 +77,9 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:07|11)',
-    'ExampleNumber' => '111',
     'PossibleLength' => 
     array (
-      0 => 3,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -97,17 +87,15 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '[34]\\d{4}',
-    'ExampleNumber' => '47751',
     'PossibleLength' => 
     array (
-      0 => 5,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
     ),
   ),
-  'id' => 'ZA',
+  'id' => 'XK',
   'countryCode' => 0,
   'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
