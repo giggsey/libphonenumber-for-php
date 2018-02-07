@@ -564,6 +564,10 @@ class CountryCodeToRegionCodeMap {
   array (
     0 => 'ME',
   ),
+  383 => 
+  array (
+    0 => 'XK',
+  ),
   385 => 
   array (
     0 => 'HR',

@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:1(?:\\d{2})?|[2789]\\d{2})\\d{6}',
+    'NationalNumberPattern' => '(?:1(?:\\d{2})?|[2789]\\d{2}|31\\d)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -89,9 +89,11 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '31\\d{7}',
+    'ExampleNumber' => '310123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -176,6 +178,18 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '[17-9]',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    3 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '31',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

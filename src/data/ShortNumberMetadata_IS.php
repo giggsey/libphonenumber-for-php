@@ -39,11 +39,9 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1848',
-    'ExampleNumber' => '1848',
     'PossibleLength' => 
     array (
-      0 => 4,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -63,7 +61,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:[28]|6(?:1(?:23|16)))|4(?:00|1[145]|4[0146])|55|7(?:00|17|7[07-9])|8(?:0[08]|1[016-9]|20|48|8[018])|900)',
+    'NationalNumberPattern' => '1(?:1(?:[28]|6(?:1(?:23|16)))|4(?:00|1[145]|4[0146])|55|7(?:00|17|7[07-9])|8(?:[02]0|1[16-9]|88)|900)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -84,7 +82,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1441',
+    'NationalNumberPattern' => '14(?:00|41)',
     'ExampleNumber' => '1441',
     'PossibleLength' => 
     array (
@@ -96,7 +94,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '1(?:415|848|900)',
+    'NationalNumberPattern' => '1(?:415|900)',
     'ExampleNumber' => '1415',
     'PossibleLength' => 
     array (
