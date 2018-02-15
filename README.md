@@ -9,6 +9,23 @@
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber).
 
 
+
+ - [Installation](#installation)
+ - [Documentation](#documentation)
+ - [Online Demo](#online-demo)
+ - [Highlights of functionality](#highlights-of-functionality)
+   - [Versioning](#versioning)
+   - [Quick Examples](#quick-examples)
+     - [Geocoder](#geocoder)
+     - [ShortNumberInfo](#shortnumberinfo)
+     - [Mapping Phone Numbers to carrier](#mapping-phone-numbers-to-carrier)
+     - [Mapping Phone Numbers to TimeZones](#mapping-phone-numbers-to-timezones)
+ - [FQA](#fqa)
+   - [Problems with Invalid Numbers?](#problems-with-invalid-numbers)
+ - [Generating data](#generating-data)
+ - [Integration with frameworks](#integration-with-frameworks)
+
+
 ## Installation
 
 PHP versions 5.3 up to PHP 7.2 are currently supported. HHVM is also supported.
