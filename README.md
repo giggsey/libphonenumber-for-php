@@ -252,9 +252,11 @@ This compile process clones the [libphonenumber](https://github.com/googlei18n/l
 
 Other packages exist that integrate libphonenumber-for-php into frameworks.
 
- - Symfony: [PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)
- - Laravel: [Laravel Phone](https://github.com/Propaganistas/Laravel-Phone)
- - Yii2: [PhoneInput](https://github.com/Borales/yii2-phone-input)
- - Kohana: [PhoneNumber](https://github.com/softmediadev/kohana-phonenumber)
+| Framework | Packages      |
+| --------- |:-------------:|
+|Symfony|[PhoneNumberBundle](https://github.com/misd-service-development/phone-number-bundle)|
+|Laravel|[Laravel Phone](https://github.com/Propaganistas/Laravel-Phone)|
+|Yii2|[PhoneInput](https://github.com/Borales/yii2-phone-input)|
+|Kohana|[PhoneNumber](https://github.com/softmediadev/kohana-phonenumber)|
 
 These packages are supplied by third parties, and their quality can not be guaranteed.
