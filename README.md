@@ -20,7 +20,7 @@ A PHP library for parsing, formatting, storing and validating international phon
      - [ShortNumberInfo](#shortnumberinfo)
      - [Mapping Phone Numbers to carrier](#mapping-phone-numbers-to-carrier)
      - [Mapping Phone Numbers to TimeZones](#mapping-phone-numbers-to-timezones)
- - [FQA](#fqa)
+ - [FAQ](#faq)
    - [Problems with Invalid Numbers?](#problems-with-invalid-numbers)
  - [Generating data](#generating-data)
  - [Integration with frameworks](#integration-with-frameworks)
