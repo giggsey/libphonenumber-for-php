@@ -9,6 +9,23 @@
 A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber).
 
 
+
+ - [Installation](https://github.com/giggsey/libphonenumber-for-php/#installation)
+ - [Documentation](https://github.com/giggsey/libphonenumber-for-php/#documentation)
+ - [Online Demo](https://github.com/giggsey/libphonenumber-for-php/#online-demo)
+ - [Highlights of functionality](https://github.com/giggsey/libphonenumber-for-php/#highlights-of-functionality)
+   - [Versioning](https://github.com/giggsey/libphonenumber-for-php/#versioning)
+   - [Quick Examples](https://github.com/giggsey/libphonenumber-for-php/#quick-examples)
+     - [Geocoder](https://github.com/giggsey/libphonenumber-for-php/#geocoder)
+     - [ShortNumberInfo](https://github.com/giggsey/libphonenumber-for-php/#shortnumberinfo)
+     - [Mapping Phone Numbers to carrier](https://github.com/giggsey/libphonenumber-for-php/#mapping-phone-numbers-to-carrier)
+     - [Mapping Phone Numbers to TimeZones](https://github.com/giggsey/libphonenumber-for-php/#mapping-phone-numbers-to-timezones)
+ - [FQA](https://github.com/giggsey/libphonenumber-for-php/#fqa)
+   - [Problems with Invalid Numbers?](https://github.com/giggsey/libphonenumber-for-php/#problems-with-invalid-numbers)
+ - [Generating data](https://github.com/giggsey/libphonenumber-for-php/#generating-data)
+ - [Integration with frameworks](https://github.com/giggsey/libphonenumber-for-php/#integration-with-frameworks)
+
+
 ## Installation
 
 PHP versions 5.3 up to PHP 7.2 are currently supported. HHVM is also supported.
