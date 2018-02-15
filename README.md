@@ -157,7 +157,6 @@ echo $geocoder->getDescriptionForNumber($swissNumberProto, "de_DE");
 // Outputs "Zurigo"
 echo $geocoder->getDescriptionForNumber($swissNumberProto, "it_IT");
 
-
 // Outputs "Mountain View, CA"
 echo $geocoder->getDescriptionForNumber($usNumberProto, "en_US");
 
@@ -204,7 +203,6 @@ var_dump($shortNumberInfo->connectsToEmergencyNumber("911123", "US"));
 ### Mapping Phone Numbers to carrier
 
 ```php
-
 $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 $swissNumberProto = $phoneUtil->parse("798765432", "CH");
 
@@ -216,14 +214,12 @@ echo $carrierMapper->getNameForNumber($swissNumberProto, "en");
 ### Mapping Phone Numbers to TimeZones
 
 ```php
-
 $phoneUtil = \libphonenumber\PhoneNumberUtil::getInstance();
 $swissNumberProto = $phoneUtil->parse("798765432", "CH");
 
 $timeZoneMapper = \libphonenumber\PhoneNumberToTimeZonesMapper::getInstance();
 // returns array("Europe/Zurich")
 $timeZones = $timeZoneMapper->getTimeZonesForNumber($swissNumberProto);
-
 ```
 
 ## FAQ
