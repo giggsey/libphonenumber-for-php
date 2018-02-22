@@ -12,6 +12,7 @@
 
 return array (
   9050 => 'Turk Telekom',
+  9051616 => 'Turkcell',
   9053 => 'Turkcell',
   9053383 => 'Kuzey Kibris Turkcell',
   9053384 => 'Kuzey Kibris Turkcell',
