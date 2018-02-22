@@ -28,6 +28,13 @@ class UKTest extends \PHPUnit_Framework_TestCase
         $number->setCountryCode(44)->setNationalNumber(8001111);
 
         $timeZone = PhoneNumberToTimeZonesMapper::getInstance();
-        $this->assertEquals(array("Europe/London"), $timeZone->getTimeZonesForNumber($number));
+        $this->assertEquals(
+            array(
+                "Europe/Guernsey",
+                'Europe/Isle_of_Man',
+                'Europe/Jersey',
+                'Europe/London'
+            ),
+            $timeZone->getTimeZonesForNumber($number));
     }
 }
