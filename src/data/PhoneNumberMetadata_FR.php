@@ -58,7 +58,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '89[1-37-9]\\d{6}',
+    'NationalNumberPattern' => '89[1-357-9]\\d{6}',
     'ExampleNumber' => '891123456',
     'PossibleLength' => 
     array (
