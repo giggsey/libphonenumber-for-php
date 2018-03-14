@@ -65,7 +65,7 @@
     "pear/pear_exception": "^1.0",
     "phpunit/phpunit": "^4.8|^5.0",
     "symfony/console": "^2.8|^3.0",
-    "satooshi/php-coveralls": "^1.0"
+    "satooshi/php-coveralls": "^1.0|^2.0"
   },
   "extra": {
     "branch-alias": {
