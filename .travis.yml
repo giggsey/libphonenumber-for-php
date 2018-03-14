@@ -28,7 +28,7 @@ script:
   - ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
 
 after_success:
-  - [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
+  - "[[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls"
   - travis_retry php $COVERALLS_PATH -v --exclude-no-stmt
   - travis_retry php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 
