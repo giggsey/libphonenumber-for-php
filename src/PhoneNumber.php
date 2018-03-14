@@ -282,7 +282,7 @@ class PhoneNumber implements \Serializable
     }
 
     /**
-     * Returns the country code of this phone number.
+     * Returns the national number of this phone number.
      *
      * @return string|null The national number, or null if not set.
      */
