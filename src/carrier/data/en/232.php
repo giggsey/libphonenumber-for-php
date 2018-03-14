@@ -22,6 +22,7 @@ return array (
   23250 => 'Datatel/Cellcom',
   23255 => 'AFCOM',
   23266 => 'Onlime',
+  23275 => 'Orange',
   23276 => 'Airtel',
   23277 => 'Africell',
   23278 => 'Airtel',
