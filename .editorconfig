@@ -14,6 +14,6 @@ trim_trailing_whitespace = true
 trim_trailing_whitespace = false
 
 # composer.json or .travis.yml
-[{composer.json,.travis.yml}]
+[{*.json,*.yml}]
 indent_style = space
 indent_size = 2
