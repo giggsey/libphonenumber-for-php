@@ -117,5 +117,6 @@ return array (
   212766 => 'Maroc Telecom',
   212767 => 'Maroc Telecom',
   212770 => 'Méditel',
+  212771 => 'Méditel',
   212777 => 'Méditel',
 );

@@ -57,7 +57,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '80(?:0\\d{2}|11[01])\\d{4}',
+    'NationalNumberPattern' => '80(?:0\\d{2}|11[0-4])\\d{4}',
     'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
