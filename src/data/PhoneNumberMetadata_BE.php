@@ -50,7 +50,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{5}',
+    'NationalNumberPattern' => '800[1-9]\\d{4}',
     'ExampleNumber' => '80012345',
     'PossibleLength' => 
     array (
@@ -62,8 +62,8 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:70[2-467]|90[0-79])\\d{5}',
-    'ExampleNumber' => '90123456',
+    'NationalNumberPattern' => '(?:70(?:2[0-57]|3[0457]|44|69|7[0579])|90(?:0[0-35-8]|1[36]|2[0-3568]|3[0135689]|4[2-68]|5[1-68]|6[0-378]|7[23568]|9[34679]))\\d{4}',
+    'ExampleNumber' => '90012345',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -114,8 +114,8 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '78\\d{6}',
-    'ExampleNumber' => '78123456',
+    'NationalNumberPattern' => '78[0-7]\\d{5}',
+    'ExampleNumber' => '78102345',
     'PossibleLength' => 
     array (
       0 => 8,
