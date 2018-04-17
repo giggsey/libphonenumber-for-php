@@ -135,6 +135,10 @@ class CountryCodeToRegionCodeMapForTesting {
   array (
     0 => '001',
   ),
+  998 => 
+  array (
+    0 => 'UZ',
+  ),
 );
 
 }
