@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[027]\\d{7}',
+    'NationalNumberPattern' => '[0237]\\d{7}|900\\d{6}',
     'PossibleLength' => 
     array (
       0 => 8,
+      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -25,10 +26,11 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2[2-9]\\d{6}',
+    'NationalNumberPattern' => '[23][2-5]\\d{6}',
     'ExampleNumber' => '22171234',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -40,6 +42,7 @@ return array (
     'ExampleNumber' => '76123456',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -51,6 +54,7 @@ return array (
     'ExampleNumber' => '08001234',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,9 +62,11 @@ return array (
   ),
   'premiumRate' => 
   array (
+    'NationalNumberPattern' => '900\\d{6}',
+    'ExampleNumber' => '900012345',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -88,9 +94,11 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '70\\d{6}',
+    'ExampleNumber' => '70012345',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -132,6 +140,7 @@ return array (
     'ExampleNumber' => '08001234',
     'PossibleLength' => 
     array (
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -149,7 +158,19 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[027]',
+        0 => '[0237]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{5})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '900',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

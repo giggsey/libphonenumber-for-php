@@ -164,7 +164,7 @@ return array (
   ),
   'id' => 'CN',
   'countryCode' => 86,
-  'internationalPrefix' => '(1(?:[12]\\d{3}|79\\d{2}|9[0-7]\\d{2}))?00',
+  'internationalPrefix' => '(?:1(?:[12]\\d{3}|79\\d{2}|9[0-7]\\d{2}))?00',
   'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '(1(?:[12]\\d{3}|79\\d{2}|9[0-7]\\d{2}))|0',
