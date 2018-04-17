@@ -2380,9 +2380,9 @@ class PhoneNumberUtil
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
             } else {
-                // For non-geographical countries, Mexican and Chilean fixed line and mobile numbers, we
-                // output international format for numbers that can be dialed internationally as that always
-                // works.
+                // For non-geographical countries andMexican, Chilean and Uzbek fixed line and mobile
+                // numbers, we output international format for numbers that can be dialed internationally as
+                // that always works.
                 if (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
                         // MX fixed line and mobile numbers should always be formatted in international format,
                         // even when dialed within MX. For national format to work, a carrier code needs to be
@@ -2392,9 +2392,11 @@ class PhoneNumberUtil
                         // CL fixed line numbers need the national prefix when dialing in the national format,
                         // but don't have it when used for display. The reverse is true for mobile numbers.
                         // As a result, we output them in the international format to make it work.
-                        (($regionCode == "MX" || $regionCode == "CL") && $isFixedLineOrMobile)) && $this->canBeInternationallyDialled(
-                        $numberNoExt
-                    )
+                        (
+                            ($regionCode == 'MX' || $regionCode == 'CL' || $regionCode == 'UZ')
+                            && $isFixedLineOrMobile
+                        )
+                    ) && $this->canBeInternationallyDialled($numberNoExt)
                 ) {
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
                 } else {

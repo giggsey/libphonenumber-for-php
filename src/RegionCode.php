@@ -56,6 +56,7 @@ class RegionCode
     const SE = "SE";
     const SG = "SG";
     const US = "US";
+    const UZ = 'UZ';
     const YT = "YT";
     const ZW = "ZW";
     // Official code for the unknown region.

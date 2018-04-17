@@ -27,7 +27,6 @@ return array (
   995574 => 'Veon',
   995577 => 'Geocell',
   995579 => 'Veon',
-  995590 => 'MagtiCom',
   995591 => 'Magticom',
   995592 => 'Veon',
   995593 => 'Geocell',
@@ -36,4 +35,5 @@ return array (
   995597 => 'Veon',
   995598 => 'Magticom',
   995599 => 'Magticom',
+  995790 => 'MagtiCom',
 );

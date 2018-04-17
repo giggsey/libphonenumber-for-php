@@ -34,6 +34,8 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
     private static $usPremium = null;
     private static $usSpoof = null;
     private static $usSpoofWithRawInput = null;
+    private static $uzFixedLine = null;
+    private static $uzMobile = null;
     private static $gbMobile = null;
     private static $bsMobile = null;
     private static $gbNumber = null;
@@ -97,6 +99,10 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         self::$usSpoof->setCountryCode(1)->setNationalNumber(0);
         self::$usSpoofWithRawInput = new PhoneNumber();
         self::$usSpoofWithRawInput->setCountryCode(1)->setNationalNumber(0)->setRawInput("000-000-0000");
+        self::$uzFixedLine = new PhoneNumber();
+        self::$uzFixedLine->setCountryCode(998)->setNationalNumber(612201234);
+        self::$uzMobile = new PhoneNumber();
+        self::$uzMobile->setCountryCode(998)->setNationalNumber(950123456);
         self::$gbMobile = new PhoneNumber();
         self::$gbMobile->setCountryCode(44)->setNationalNumber(7912345678);
         self::$gbNumber = new PhoneNumber();
@@ -1139,6 +1145,16 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             "+523312345678",
             $this->phoneUtil->formatNumberForMobileDialing(self::$mxNumber1, RegionCode::US, false)
         );
+
+        // Test whether Uzbek phone numbers are returned in international format even when dialled from
+        // same region or other regions.
+        $this->assertEquals('+998612201234',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzFixedLine, RegionCode::UZ, false));
+        $this->assertEquals('+998950123456',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::UZ, false));
+        $this->assertEquals('+998950123456',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::US, false));
+
 
         // Non-geographical numbers should always be dialed in international format.
         $this->assertEquals(
