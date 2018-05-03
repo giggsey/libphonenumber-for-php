@@ -2353,6 +2353,7 @@ return array (
   1819983 => 'Saint-André-Avellin, QC',
   1819985 => 'Thurso, QC',
   1819986 => 'Gatineau, QC',
+  1820 => 'California',
   1825 => 'Alberta',
   1828 => 'North Carolina',
   1828210 => 'Asheville, NC',
