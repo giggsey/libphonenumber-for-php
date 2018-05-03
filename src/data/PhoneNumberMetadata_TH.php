@@ -147,7 +147,7 @@ return array (
   ),
   'id' => 'TH',
   'countryCode' => 66,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '00[1-9]',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,

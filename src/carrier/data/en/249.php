@@ -11,6 +11,9 @@
  */
 
 return array (
+  24910 => 'Sudatel',
+  24911 => 'Sudatel',
+  24912 => 'Sudatel',
   24990 => 'Zain',
   24991 => 'Zain',
   24992 => 'MTN',

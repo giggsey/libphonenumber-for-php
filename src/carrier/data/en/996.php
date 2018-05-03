@@ -12,6 +12,7 @@
 
 return array (
   99620 => 'Aktel',
+  99622 => 'Sky mobile',
   99650 => 'Nur Telecom',
   99651 => 'Katel',
   99654 => 'Aktel',
