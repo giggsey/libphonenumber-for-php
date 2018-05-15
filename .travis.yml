@@ -25,6 +25,7 @@ install:
  - travis_retry composer update --no-interaction $COMPOSER_FLAGS
 
 script:
+  - composer validate --strict
   - ./vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml
 
 after_success:
