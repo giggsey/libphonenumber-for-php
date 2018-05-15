@@ -3558,6 +3558,7 @@ return array (
   1337993 => 'Lafayette, LA',
   1339 => 'Massachusetts',
   1343 => 'Ontario',
+  1345 => 'Cayman Islands',
   1345949 => 'George Town',
   1346 => 'Texas',
   1347 => 'New York',

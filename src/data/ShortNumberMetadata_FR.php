@@ -44,7 +44,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '118(?:[0-68]\\d{2}|7(?:0\\d|1[1-9]|[2-9]\\d))|36665|[4-8]\\d{4}',
+    'NationalNumberPattern' => '118(?:[0-68]\\d{2}|7(?:0\\d|1[1-9]|[2-9]\\d)|918)|36665|[4-8]\\d{4}',
     'ExampleNumber' => '42000',
     'PossibleLength' => 
     array (
