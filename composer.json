@@ -44,13 +44,17 @@
   },
   "archive": {
     "exclude": [
-      "tests/",
       "build/",
-      "/.travis.yml",
-      "/build.xml",
-      "phpunit.xml.dist",
+      "docs/",
+      "tests/",
+      ".editorconfig",
+      ".gitattributes",
+      ".gitignore",
+      ".styleci.yml",
+      ".travis.yml",
+      "build.xml",
       "libphonenumber-for-php.spec",
-      "/.styleci.yml"
+      "phpunit.xml.dist"
     ]
   },
   "require": {
