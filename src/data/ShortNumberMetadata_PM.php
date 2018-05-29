@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d',
+    'NationalNumberPattern' => '1\\d|3103',
     'PossibleLength' => 
     array (
       0 => 2,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -49,6 +50,7 @@ return array (
     'ExampleNumber' => '17',
     'PossibleLength' => 
     array (
+      0 => 2,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -56,7 +58,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1[578]',
+    'NationalNumberPattern' => '1[578]|3103',
     'ExampleNumber' => '17',
     'PossibleLength' => 
     array (
@@ -77,9 +79,11 @@ return array (
   ),
   'carrierSpecific' => 
   array (
+    'NationalNumberPattern' => '3103',
+    'ExampleNumber' => '3103',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
