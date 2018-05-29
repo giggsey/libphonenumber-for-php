@@ -179,7 +179,7 @@ return array (
   ),
   'id' => 'AX',
   'countryCode' => 358,
-  'internationalPrefix' => '00|99(?:[02469]|5(?:11|33|5[59]|88|9[09]))',
+  'internationalPrefix' => '00|99(?:[01469]|5(?:11|3[23]|41|5[59]|77|88|9[09]))',
   'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
