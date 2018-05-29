@@ -2,10 +2,6 @@ sudo: false
 
 language: php
 
-env:
-  global:
-    - COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
-
 matrix:
     fast_finish: true
     include:
@@ -18,11 +14,13 @@ matrix:
         - php: 5.5
           env: COVERAGE_FLAGS=""
         - php: 5.6
+          env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: 7.0
           env: COVERAGE_FLAGS=""
         - php: 7.1
           env: COVERAGE_FLAGS=""
         - php: 7.2
+          env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: hhvm
           env: COVERAGE_FLAGS=""
 
