@@ -11,6 +11,7 @@
  */
 
 return array (
+  38039 => 'Golden Telecom',
   38050 => 'Vodafone',
   38063 => 'lifecell',
   38066 => 'Vodafone',

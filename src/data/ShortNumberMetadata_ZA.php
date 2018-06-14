@@ -49,7 +49,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:1(?:11|77)|7)|12)',
+    'NationalNumberPattern' => '1(?:0(?:1(?:11|77))|12)',
     'ExampleNumber' => '10111',
     'PossibleLength' => 
     array (
