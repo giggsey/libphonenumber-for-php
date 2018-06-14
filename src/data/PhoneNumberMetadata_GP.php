@@ -161,5 +161,5 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingZeroPossible' => false,
-  'mobileNumberPortableRegion' => false,
+  'mobileNumberPortableRegion' => true,
 );

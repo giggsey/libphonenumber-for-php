@@ -50,6 +50,7 @@ return array (
   22569 => 'Aircom',
   22571 => 'Moov',
   22572 => 'Moov',
+  22573 => 'Moov',
   22574 => 'MTN',
   22575 => 'MTN',
   22576 => 'MTN',
