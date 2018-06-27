@@ -14,7 +14,20 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-5]\\d{3}',
+    'NationalNumberPattern' => '[478]\\d{3,7}',
+    'PossibleLength' => 
+    array (
+      0 => 4,
+      1 => 7,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '[47]\\d{3}',
+    'ExampleNumber' => '7012',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -23,23 +36,13 @@ return array (
     array (
     ),
   ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '[34]\\d{3}',
-    'ExampleNumber' => '4002',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '[125]\\d{3}',
-    'ExampleNumber' => '1234',
+    'NationalNumberPattern' => '888[4-9]\\d{3}',
+    'ExampleNumber' => '8884012',
     'PossibleLength' => 
     array (
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -141,6 +144,18 @@ return array (
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '888',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
   ),
   'intlNumberFormat' => 
   array (

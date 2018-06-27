@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '9\\d{2}',
+    'NationalNumberPattern' => '[019]\\d{2}',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -56,7 +56,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '999',
+    'NationalNumberPattern' => '01[05]|101|999',
     'ExampleNumber' => '999',
     'PossibleLength' => 
     array (
@@ -77,9 +77,10 @@ return array (
   ),
   'carrierSpecific' => 
   array (
+    'NationalNumberPattern' => '010',
+    'ExampleNumber' => '010',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
