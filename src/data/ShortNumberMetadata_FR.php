@@ -49,7 +49,6 @@ return array (
     'PossibleLength' => 
     array (
       0 => 5,
-      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (

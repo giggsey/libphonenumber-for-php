@@ -18,8 +18,9 @@ return array (
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 5,
-      2 => 6,
+      1 => 4,
+      2 => 5,
+      3 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (

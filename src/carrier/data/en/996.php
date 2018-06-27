@@ -22,4 +22,6 @@ return array (
   99670 => 'Nur Telecom',
   996755 => 'ALFA Telecom',
   99677 => 'Sky mobile',
+  996996 => 'Sky mobile',
+  996999 => 'Sky mobile',
 );

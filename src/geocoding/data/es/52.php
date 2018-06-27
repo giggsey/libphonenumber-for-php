@@ -63,7 +63,7 @@ return array (
   52488 => 'San Luis Potosí',
   52489 => 'San Luis Potosí',
   52494 => 'Jerez de García Salinas, ZAC',
-  5255 => 'Cuidad de México, CDMX',
+  5255 => 'Ciudad de México, CDMX',
   52632 => 'Ímuris/Magdalena, SON',
   52641 => 'Benjamín Hill/Santa Ana, SON',
   52653 => 'Luis B. Sánchez/San Luis Río Colorado, SON',
