@@ -24,6 +24,9 @@ matrix:
         - php: hhvm
           env: COVERAGE_FLAGS=""
 
+before_script:
+  - phpenv config-rm mbstring.ini
+
 before_install:
  - travis_retry wget https://scrutinizer-ci.com/ocular.phar
  - mkdir -p build/logs
