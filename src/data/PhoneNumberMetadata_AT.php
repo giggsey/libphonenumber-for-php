@@ -124,15 +124,19 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '780\\d{6,10}',
+    'NationalNumberPattern' => '5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|7[28]0\\d{6,10}',
     'ExampleNumber' => '780123456',
     'PossibleLength' => 
     array (
-      0 => 9,
-      1 => 10,
-      2 => 11,
-      3 => 12,
-      4 => 13,
+      0 => 5,
+      1 => 6,
+      2 => 7,
+      3 => 8,
+      4 => 9,
+      5 => 10,
+      6 => 11,
+      7 => 12,
+      8 => 13,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -150,19 +154,9 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '5(?:(?:0[1-9]|17)\\d{2,10}|[79]\\d{3,11})|720\\d{6,10}',
-    'ExampleNumber' => '50123',
     'PossibleLength' => 
     array (
-      0 => 5,
-      1 => 6,
-      2 => 7,
-      3 => 8,
-      4 => 9,
-      5 => 10,
-      6 => 11,
-      7 => 12,
-      8 => 13,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -269,6 +263,18 @@ return array (
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     6 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{2})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '517',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    7 => 
     array (
       'pattern' => '(\\d{4})(\\d{3,9})',
       'format' => '$1 $2',

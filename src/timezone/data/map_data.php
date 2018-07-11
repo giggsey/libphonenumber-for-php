@@ -1822,7 +1822,7 @@ return array (
   1731 => 'America/Chicago',
   1732 => 'America/New_York',
   1734 => 'America/New_York',
-  1737 => '',
+  1737 => 'America/Chicago',
   1740 => 'America/New_York',
   1743 => 'America/New_York',
   1747 => 'America/Los_Angeles',
