@@ -28,6 +28,7 @@ return array (
   25475 => 'Airtel',
   254757 => 'Safaricom',
   254758 => 'Safaricom',
+  254759 => 'Safaricom',
   254760 => 'Mobile Pay',
   254761 => 'Airtel',
   254762 => 'Airtel',

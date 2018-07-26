@@ -14,11 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '\\d{9}',
+    'NationalNumberPattern' => '(?:[26-8]\\d|41|90)\\d{7}',
     'PossibleLength' => 
     array (
-      0 => 7,
-      1 => 9,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -41,7 +40,6 @@ return array (
     'ExampleNumber' => '621234567',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -53,7 +51,6 @@ return array (
     'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -65,7 +62,6 @@ return array (
     'ExampleNumber' => '900123456',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -77,7 +73,6 @@ return array (
     'ExampleNumber' => '840123456',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -99,7 +94,6 @@ return array (
     'ExampleNumber' => '412345678',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -138,10 +132,8 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '(?:8(?:[04]0|6[01])|90\\d)\\d{6}',
-    'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
-      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (

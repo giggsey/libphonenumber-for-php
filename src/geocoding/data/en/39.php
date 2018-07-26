@@ -85,6 +85,7 @@ return array (
   390586 => 'Livorno',
   39059 => 'Modena',
   3906 => 'Rome',
+  3906698 => 'Vatican City',
   39070 => 'Cagliari',
   39071 => 'Ancona',
   390731 => 'Ancona',

@@ -14,14 +14,15 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:0(?:878\\d{5}|6698\\d{5})|[1589]\\d{5,10}|3(?:[12457-9]\\d{8}|[36]\\d{7,9}))',
+    'NationalNumberPattern' => '0\\d{6}(?:\\d{4})?|3[0-8]\\d{9}|(?:[0138]\\d?|55)\\d{8}|[08]\\d{5}(?:\\d{2})?',
     'PossibleLength' => 
     array (
       0 => 6,
-      1 => 8,
-      2 => 9,
-      3 => 10,
-      4 => 11,
+      1 => 7,
+      2 => 8,
+      3 => 9,
+      4 => 10,
+      5 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -29,11 +30,10 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '06698\\d{5}',
+    'NationalNumberPattern' => '06698\\d{1,6}',
     'ExampleNumber' => '0669812345',
     'PossibleLength' => 
     array (
-      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -41,7 +41,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '3(?:[12457-9]\\d{8}|6\\d{7,8}|3\\d{7,9})',
+    'NationalNumberPattern' => '3(?:1\\d{8}|[245-9]\\d{7,8}|3\\d{7,9})',
     'ExampleNumber' => '3123456789',
     'PossibleLength' => 
     array (
@@ -152,7 +152,6 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '848\\d{6}',
-    'ExampleNumber' => '848123456',
     'PossibleLength' => 
     array (
       0 => 9,

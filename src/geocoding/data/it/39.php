@@ -108,6 +108,7 @@ return array (
   390587 => 'Pontedera',
   390588 => 'Volterra',
   3906 => 'Roma',
+  3906698 => 'Città del Vaticano',
   390721 => 'Pesaro',
   390722 => 'Urbino',
   390731 => 'Jesi',
