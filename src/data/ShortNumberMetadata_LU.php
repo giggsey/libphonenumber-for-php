@@ -18,8 +18,9 @@ return array (
     'PossibleLength' => 
     array (
       0 => 3,
-      1 => 5,
-      2 => 6,
+      1 => 4,
+      2 => 5,
+      3 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -61,7 +62,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:[23]|6(?:000|111))|2\\d{3})',
+    'NationalNumberPattern' => '1(?:1(?:[23]|6(?:000|111)|8\\d{2})|[25]\\d{3}|3\\d{2})',
     'ExampleNumber' => '12123',
     'PossibleLength' => 
     array (

@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[2589]\\d{9}',
+    'NationalNumberPattern' => '(?:242|[58]\\d\\d|900)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -145,8 +145,7 @@ return array (
   ),
   'id' => 'BS',
   'countryCode' => 1,
-  'internationalPrefix' => '011?',
-  'preferredInternationalPrefix' => '011',
+  'internationalPrefix' => '011',
   'nationalPrefix' => '1',
   'nationalPrefixForParsing' => '1',
   'sameMobileAndFixedLinePattern' => false,

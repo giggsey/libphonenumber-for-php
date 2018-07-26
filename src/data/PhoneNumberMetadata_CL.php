@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1230\\d{7}|[2-46-9]\\d{8,10}|5[1-3578]\\d{7}',
+    'NationalNumberPattern' => '(?:1230|[2-57-9]\\d|6\\d{1,3})\\d{7}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -140,7 +140,6 @@ return array (
   'noInternationalDialling' => 
   array (
     'NationalNumberPattern' => '600\\d{7,8}',
-    'ExampleNumber' => '6001234567',
     'PossibleLength' => 
     array (
       0 => 10,
