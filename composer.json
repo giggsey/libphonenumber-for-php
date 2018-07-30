@@ -67,6 +67,7 @@
     "pear/versioncontrol_git": "^0.5",
     "pear/pear-core-minimal": "^1.9",
     "pear/pear_exception": "^1.0",
+    "phpstan/phpstan": "^0.10",
     "phpunit/phpunit": "^4.8|^5.0",
     "symfony/console": "^2.8|^3.0",
     "php-coveralls/php-coveralls": "^1.0|^2.0"
@@ -75,5 +76,10 @@
     "branch-alias": {
       "dev-master": "8.x-dev"
     }
+  },
+  "scripts": {
+    "phpstan": [
+      "./vendor/bin/phpstan analyse --level 1 src"
+    ]
   }
 }
