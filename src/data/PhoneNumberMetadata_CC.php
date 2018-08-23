@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{5,9}|[458]\\d{8}',
+    'NationalNumberPattern' => '1\\d{5,9}|(?:[48]\\d\\d|550)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 6,
@@ -42,7 +42,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '14(?:5\\d|71)\\d{5}|4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[0-2547-9]|9[017-9])\\d{6}',
+    'NationalNumberPattern' => '4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[0-2547-9]|9[017-9])\\d{6}',
     'ExampleNumber' => '412345678',
     'PossibleLength' => 
     array (
@@ -80,12 +80,13 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '13(?:00\\d{2})?\\d{4}',
+    'NationalNumberPattern' => '13(?:00\\d{3}|45[0-4]|\\d)\\d{3}',
     'ExampleNumber' => '1300123456',
     'PossibleLength' => 
     array (
       0 => 6,
-      1 => 10,
+      1 => 8,
+      2 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -93,11 +94,9 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '500\\d{6}',
-    'ExampleNumber' => '500123456',
     'PossibleLength' => 
     array (
-      0 => 9,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -105,7 +104,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '550\\d{6}',
+    'NationalNumberPattern' => '(?:14(?:5\\d|71)|550\\d)\\d{5}',
     'ExampleNumber' => '550123456',
     'PossibleLength' => 
     array (

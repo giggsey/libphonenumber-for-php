@@ -40,10 +40,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:5(?:[013-689]\\d|7[0-36-8])|811\\d)\\d{6}',
+    'NationalNumberPattern' => '5(?:[013-689]\\d|7[0-36-8])\\d{6}',
     'ExampleNumber' => '512345678',
     'PossibleLength' => 
     array (
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -63,9 +64,11 @@ return array (
   ),
   'premiumRate' => 
   array (
+    'NationalNumberPattern' => '925\\d{6}',
+    'ExampleNumber' => '925012345',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -73,7 +76,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '92[05]\\d{6}',
+    'NationalNumberPattern' => '920\\d{6}',
     'ExampleNumber' => '920012345',
     'PossibleLength' => 
     array (
@@ -115,9 +118,10 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '811\\d{7}',
+    'ExampleNumber' => '8110123456',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

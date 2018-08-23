@@ -3353,6 +3353,23 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 , 7246433", RegionCode::US));
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse("(800) 901-3355 ext: 7246433", RegionCode::US));
 
+        // Testing Russian extension \u0434\u043E\u0431 with variants found online.
+        $ruWithExtension = new PhoneNumber();
+        $ruWithExtension->setCountryCode(7)->setNationalNumber(4232022511)->setExtension('100');
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU));
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU));
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11\xD0\xB4\xD0\xBE\xD0\xB1100", RegionCode::RU));
+        // In upper case
+        $this->assertEquals($ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
+
         // Test that if a number has two extensions specified, we ignore the second.
         $usWithTwoExtensionsNumber = new PhoneNumber();
         $usWithTwoExtensionsNumber->setCountryCode(1)->setNationalNumber(2121231234)->setExtension("508");
@@ -3534,6 +3551,9 @@ class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
             MatchType::EXACT_MATCH,
             $this->phoneUtil->isNumberMatch("+64 3 331-6005 ext. 1234", "+6433316005;1234")
         );
+        $this->assertEquals(MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch("+7 423 202-25-11 ext 100", "+7 4232022511 \xD0\xB4\xD0\xBE\xD0\xB1. 100"));
+
         // Test proto buffers.
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch(self::$nzNumber, "+6403 331 6005"));
 
