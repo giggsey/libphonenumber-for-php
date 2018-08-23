@@ -3288,6 +3288,7 @@ return array (
   1636978 => 'O\'Fallon, MO',
   1636980 => 'O\'Fallon, MO',
   1639 => 'Saskatchewan',
+  1640 => 'New Jersey',
   1641 => 'Iowa',
   1641209 => 'Fairfield, IA',
   1641228 => 'Charles City, IA',
