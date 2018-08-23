@@ -53,6 +53,7 @@ class RegionCode
     const PG = "PG";
     const PL = "PL";
     const RE = "RE";
+    const RU = "RU";
     const SE = "SE";
     const SG = "SG";
     const US = "US";

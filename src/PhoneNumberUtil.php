@@ -492,7 +492,7 @@ class PhoneNumberUtil
         // form with the combining acute accent.
         return (static::RFC3966_EXTN_PREFIX . static::$CAPTURING_EXTN_DIGITS . "|" . "[ \xC2\xA0\\t,]*" .
             "(?:e?xt(?:ensi(?:o\xCC\x81?|\xC3\xB3))?n?|(?:\xEF\xBD\x85)?\xEF\xBD\x98\xEF\xBD\x94(?:\xEF\xBD\x8E)?|" .
-            "[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
+            "доб|" . "[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
             "[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . static::$CAPTURING_EXTN_DIGITS . "\\#?|" .
             "[- ]+(" . static::DIGITS . "{1,5})\\#");
     }
