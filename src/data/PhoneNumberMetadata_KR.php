@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:00(?:0\\d|[1-9]\\d{1,4})|(?:[13-6]\\d|2)\\d?|70\\d|80)\\d{7}|1\\d{7}|[3-6]\\d{4,5}',
+    'NationalNumberPattern' => '(?:00[1-9]\\d{2,4}|[12]|5\\d{3})\\d{7}|(?:(?:00|[13-6])\\d|70)\\d{8}|(?:[1-6]\\d|80)\\d{7}|[3-6]\\d{4,5}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -104,11 +104,12 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '50\\d{8}',
+    'NationalNumberPattern' => '50\\d{8,9}',
     'ExampleNumber' => '5012345678',
     'PossibleLength' => 
     array (
       0 => 10,
+      1 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -272,6 +273,18 @@ return array (
     ),
     7 => 
     array (
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'format' => '$1-$2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '50',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '0$CC-$1',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    8 => 
+    array (
       'pattern' => '(\\d{5})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -284,7 +297,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    8 => 
+    9 => 
     array (
       'pattern' => '(\\d{5})(\\d{3,4})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -298,7 +311,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    9 => 
+    10 => 
     array (
       'pattern' => '(\\d{5})(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3 $4',
@@ -397,6 +410,18 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '[57]0',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '0$CC-$1',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    7 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{5})(\\d{4})',
+      'format' => '$1-$2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '50',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',

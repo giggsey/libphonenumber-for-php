@@ -122,7 +122,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '9(?:5\\d|7[234])\\d{6}',
+    'NationalNumberPattern' => '9(?:5\\d|7[2-4])\\d{6}',
     'ExampleNumber' => '972123456',
     'PossibleLength' => 
     array (

@@ -21,4 +21,5 @@ return array (
   675775 => 'Telikom',
   67578 => 'Telikom',
   67579 => 'Digicel',
+  67581 => 'DIGIVOIP',
 );
