@@ -6,8 +6,9 @@ use libphonenumber\MatcherAPIInterface;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberDesc;
 use libphonenumber\RegexBasedMatcher;
+use PHPUnit\Framework\TestCase;
 
-class MatcherTest extends \PHPUnit_Framework_TestCase
+class MatcherTest extends TestCase
 {
     public function testRegexBasedMatcher()
     {

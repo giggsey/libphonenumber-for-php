@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
-class Issue64Test extends \PHPUnit_Framework_TestCase
+class Issue64Test extends TestCase
 {
     public function testIssue64WithoutPhoneNumberUtil()
     {

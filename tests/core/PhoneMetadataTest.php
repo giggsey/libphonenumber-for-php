@@ -5,8 +5,9 @@ namespace libphonenumber\Tests\core;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
-class PhoneMetadataTest extends \PHPUnit_Framework_TestCase
+class PhoneMetadataTest extends TestCase
 {
     public function phoneNumberRegionList()
     {

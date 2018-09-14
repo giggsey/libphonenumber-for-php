@@ -15,8 +15,9 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
 use libphonenumber\ValidationResult;
+use PHPUnit\Framework\TestCase;
 
-class PhoneNumberUtilTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberUtilTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "../../tests/core/data/PhoneNumberMetadataForTesting";
     private static $bsNumber = null;

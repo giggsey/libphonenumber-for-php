@@ -4,11 +4,12 @@ namespace libphonenumber\Tests\core;
 
 use libphonenumber\CountryCodeSource;
 use libphonenumber\PhoneNumber;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the PhoneNumber object itself.
  */
-class PhoneNumberTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberTest extends TestCase
 {
     public function testEqualSimpleNumber()
     {

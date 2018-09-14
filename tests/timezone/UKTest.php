@@ -5,8 +5,9 @@ namespace libphonenumber\Tests\timezone;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class UKTest extends \PHPUnit_Framework_TestCase
+class UKTest extends TestCase
 {
     public function setUp()
     {

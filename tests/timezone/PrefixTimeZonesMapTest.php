@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\timezone;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\prefixmapper\PrefixTimeZonesMap;
+use PHPUnit\Framework\TestCase;
 
-class PrefixTimeZonesMapTest extends \PHPUnit_Framework_TestCase
+class PrefixTimeZonesMapTest extends TestCase
 {
     // US time zones
     const CHICAGO_TZ = "America/Chicago";

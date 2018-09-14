@@ -5,13 +5,14 @@ namespace libphonenumber\Tests\Issues;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test E164 formatted numbers with extensions
  * @see https://github.com/giggsey/libphonenumber-for-php/issues/152
  * @package libphonenumber\Tests\Issues
  */
-class Issue152Test extends \PHPUnit_Framework_TestCase
+class Issue152Test extends TestCase
 {
     public function setUp()
     {

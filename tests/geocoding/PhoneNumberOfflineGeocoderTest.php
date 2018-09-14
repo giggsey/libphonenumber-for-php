@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\geocoding;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumber;
+use PHPUnit\Framework\TestCase;
 
-class PhoneNumberOfflineGeocoderTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberOfflineGeocoderTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "/../../tests/prefixmapper/data";
     private static $KO_Number1;

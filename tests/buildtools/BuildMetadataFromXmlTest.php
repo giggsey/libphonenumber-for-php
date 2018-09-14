@@ -12,8 +12,9 @@ use libphonenumber\buildtools\MetadataFilter;
 use libphonenumber\NumberFormat;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
+use PHPUnit\Framework\TestCase;
 
-class BuildMetadataFromXmlTest extends \PHPUnit_Framework_TestCase
+class BuildMetadataFromXmlTest extends TestCase
 {
     public function testValidateRERemovesWhiteSpaces()
     {

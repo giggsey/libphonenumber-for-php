@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class Issue3Test extends \PHPUnit_Framework_TestCase
+class Issue3Test extends TestCase
 {
 
     /**

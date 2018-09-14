@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
-class Issue68Test extends \PHPUnit_Framework_TestCase
+class Issue68Test extends TestCase
 {
     public function testShortNumberInfoIsPossibleShortNumberWithRegionMissingFromCodeSet()
     {

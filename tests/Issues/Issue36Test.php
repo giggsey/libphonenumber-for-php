@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class Issue36Test extends \PHPUnit_Framework_TestCase
+class Issue36Test extends TestCase
 {
     /**
      * @var PhoneNumberOfflineGeocoder

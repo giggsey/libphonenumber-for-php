@@ -5,13 +5,14 @@ namespace libphonenumber\Tests\Issues;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test that an extra not operator is messing up timezone lookup
  * @see https://github.com/giggsey/libphonenumber-for-php/issues/159
  * @package libphonenumber\Tests\Issues
  */
-class Issue159Test extends \PHPUnit_Framework_TestCase
+class Issue159Test extends TestCase
 {
     const LOS_ANGELES_TZ = "America/Los_Angeles";
 

@@ -3,8 +3,9 @@
 namespace libphonenumber\Tests\buildtools;
 
 use libphonenumber\buildtools\GeneratePhonePrefixData;
+use PHPUnit\Framework\TestCase;
 
-class GeneratePhonePrefixDataTest extends \PHPUnit_Framework_TestCase
+class GeneratePhonePrefixDataTest extends TestCase
 {
     private static $available_data_files;
 

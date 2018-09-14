@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\prefixmapper;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\prefixmapper\PrefixFileReader;
+use PHPUnit\Framework\TestCase;
 
-class PrefixFileReaderTest extends \PHPUnit_Framework_TestCase
+class PrefixFileReaderTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "/data/";
     private static $KO_NUMBER;

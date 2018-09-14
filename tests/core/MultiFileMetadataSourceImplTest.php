@@ -5,8 +5,9 @@ namespace libphonenumber\Tests\core;
 use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class MultiFileMetadataSourceImplTest extends \PHPUnit_Framework_TestCase
+class MultiFileMetadataSourceImplTest extends TestCase
 {
     /**
      * @var MultiFileMetadataSourceImpl

@@ -6,8 +6,9 @@ use libphonenumber\buildtools\BuildMetadataFromXml;
 use libphonenumber\buildtools\MetadataFilter;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
+use PHPUnit\Framework\TestCase;
 
-class MetadataFilterTest extends \PHPUnit_Framework_TestCase
+class MetadataFilterTest extends TestCase
 {
     private static $ID = "AM";
     private static $countryCode = 374;
