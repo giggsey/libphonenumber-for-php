@@ -3,8 +3,9 @@
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class Issue76Test extends \PHPUnit_Framework_TestCase
+class Issue76Test extends TestCase
 {
     /**
      * @expectedException \libphonenumber\NumberParseException

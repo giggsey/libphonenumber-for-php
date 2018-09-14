@@ -9,8 +9,9 @@ use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
-class ShortNumberInfoTest extends \PHPUnit_Framework_TestCase
+class ShortNumberInfoTest extends TestCase
 {
     private static $plusSymbol;
     /**

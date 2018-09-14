@@ -4,8 +4,9 @@ namespace libphonenumber\Tests\core;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberMatch;
+use PHPUnit\Framework\TestCase;
 
-class PhoneNumberMatchTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberMatchTest extends TestCase
 {
     public function testValueTypeSemantics()
     {

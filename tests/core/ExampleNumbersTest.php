@@ -8,6 +8,7 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberCost;
 use libphonenumber\ShortNumberInfo;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Verifies all of the example numbers in the metadata are valid and of the correct type. If no
@@ -15,7 +16,7 @@ use libphonenumber\ShortNumberInfo;
  * relevant for all regions. Tests that check the XML schema will ensure that an exampleNumber
  * node is present for every phone number description.
  */
-class ExampleNumbersTest extends \PHPUnit_Framework_TestCase
+class ExampleNumbersTest extends TestCase
 {
 
     /**

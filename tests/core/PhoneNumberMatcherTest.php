@@ -10,8 +10,9 @@ use libphonenumber\PhoneNumberMatch;
 use libphonenumber\PhoneNumberMatcher;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\RegionCode;
+use PHPUnit\Framework\TestCase;
 
-class PhoneNumberMatcherTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberMatcherTest extends TestCase
 {
     /**
      * @var PhoneNumberUtil

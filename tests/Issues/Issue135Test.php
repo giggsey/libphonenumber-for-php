@@ -4,6 +4,7 @@ namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\Tests\core\PhoneNumberUtilTest;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test calling public static methods without an instance of PhoneNumberUtil being created
@@ -11,7 +12,7 @@ use libphonenumber\Tests\core\PhoneNumberUtilTest;
  * @package libphonenumber\Tests\Issues
  * @see https://github.com/giggsey/libphonenumber-for-php/issues/135
  */
-class Issue135Test extends \PHPUnit_Framework_TestCase
+class Issue135Test extends TestCase
 {
     public function setUp()
     {

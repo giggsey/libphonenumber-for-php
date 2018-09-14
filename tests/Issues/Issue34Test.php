@@ -2,8 +2,9 @@
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class Issue34Test extends \PHPUnit_Framework_TestCase
+class Issue34Test extends TestCase
 {
     /**
      * @var PhoneNumberUtil

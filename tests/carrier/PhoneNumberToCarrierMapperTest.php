@@ -5,8 +5,9 @@ namespace libphonenumber\Tests\carrier;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class PhoneNumberToCarrierMapperTest extends \PHPUnit_Framework_TestCase
+class PhoneNumberToCarrierMapperTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "/../tests/carrier/data/";
     private static $AO_MOBILE1;

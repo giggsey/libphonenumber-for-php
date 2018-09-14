@@ -6,8 +6,9 @@ use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\TestCase;
 
-class UKNumbersTest extends \PHPUnit_Framework_TestCase
+class UKNumbersTest extends TestCase
 {
     const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
     /**
