@@ -12,7 +12,7 @@
 
 return array (
   6792 => 'Vodafone',
-  67945 => 'Vodafone',
+  6794 => 'Vodafone',
   67950 => 'Digicel',
   67951 => 'Digicel',
   67955 => 'Digicel',

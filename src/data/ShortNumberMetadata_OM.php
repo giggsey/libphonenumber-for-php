@@ -25,9 +25,10 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '999\\d',
+    'ExampleNumber' => '9990',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -45,8 +46,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '9999',
-    'ExampleNumber' => '9999',
+    'NationalNumberPattern' => '999\\d',
+    'ExampleNumber' => '9990',
     'PossibleLength' => 
     array (
     ),

@@ -37,7 +37,7 @@ return array (
   'mobile' => 
   array (
     'NationalNumberPattern' => '(?:[2-7]\\d|8[126-9]|9[1-36-9])\\d{6}',
-    'ExampleNumber' => '20123456',
+    'ExampleNumber' => '32123456',
     'PossibleLength' => 
     array (
     ),
@@ -149,6 +149,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[2-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

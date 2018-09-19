@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:31(?:8[14-8]|9[14578])|416[145-9]|7(?:0[01]|7[07]|8\\d|9[056])\\d)\\d{3}',
+    'NationalNumberPattern' => '(?:31(?:8[14-8]|9[14578])|416[14-9]|7(?:0[01]|7[07]|8\\d|9[056])\\d)\\d{3}',
     'ExampleNumber' => '3181234',
     'PossibleLength' => 
     array (
@@ -146,6 +146,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
+  'leadingDigits' => '[347]',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

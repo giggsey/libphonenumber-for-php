@@ -11,7 +11,7 @@
  */
 
 return array (
-  2243024 => 'Fria',
+  224302 => 'Fria',
   2243031 => 'Boké',
   2243032 => 'Kamsar',
   2243041 => 'Conakry',
@@ -26,8 +26,8 @@ return array (
   22430613 => 'Télimélé',
   2243068 => 'Mamou',
   2243069 => 'Dalaba',
-  2243071 => 'Kankan',
-  2243081 => 'Faranah',
+  224307 => 'Kankan',
+  224308 => 'Faranah',
   2243091 => 'N\'Zérékoré',
   2243094 => 'Macenta',
   2243097 => 'Guéckédou',

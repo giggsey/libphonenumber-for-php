@@ -89,7 +89,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '28\\d{5}|501\\d{4}',
+    'NationalNumberPattern' => '(?:28\\d|501)\\d{4}',
     'ExampleNumber' => '5011234',
     'PossibleLength' => 
     array (
@@ -150,6 +150,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[25-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

@@ -160,12 +160,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(0)(800)(\\d{4})(\\d{3})',
+      'pattern' => '(\\d)(\\d{3})(\\d{4})(\\d{3})',
       'format' => '$1-$2-$3-$4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '080',
-        1 => '0800',
+        0 => '0',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

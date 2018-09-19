@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '38[589]\\d{6}|(?:6(?:1[1-8]|2[0-6]|3[027-9]|4[014679]|5[0159]|6[0-69]|70|8[06-8]|9\\d)|7(?:5[057]|[6-8]\\d|9[0-3])|8(?:2[0-59]|[3469]\\d|5[1-9]|8[28]))\\d{4}',
+    'NationalNumberPattern' => '(?:38[589]\\d\\d|6(?:1[1-8]|2[0-6]|3[027-9]|4[014679]|5[0159]|6[0-69]|70|8[06-8]|9\\d)|7(?:5[057]|[6-8]\\d|9[0-3])|8(?:2[0-59]|[3469]\\d|5[1-9]|8[28]))\\d{4}',
     'ExampleNumber' => '6111234',
     'PossibleLength' => 
     array (
@@ -149,7 +149,7 @@ return array (
   ),
   'id' => 'IS',
   'countryCode' => 354,
-  'internationalPrefix' => '1(?:0(?:01|10|20)|100)|00',
+  'internationalPrefix' => '00|1(?:0(?:01|[12]0)|100)',
   'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -168,7 +168,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(3\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

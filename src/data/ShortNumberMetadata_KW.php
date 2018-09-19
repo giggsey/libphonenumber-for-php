@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '112',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -59,7 +61,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '1[0-7]\\d|89887',
-    'ExampleNumber' => '177',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
     ),
@@ -79,8 +81,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '89887',
-    'ExampleNumber' => '89887',
+    'NationalNumberPattern' => '898\\d\\d',
+    'ExampleNumber' => '89800',
     'PossibleLength' => 
     array (
       0 => 5,

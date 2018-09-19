@@ -37,6 +37,7 @@ return array (
   390323 => 'Baveno',
   390324 => 'Domodossola',
   390331 => 'Busto Arsizio',
+  390332 => 'Varese',
   390343 => 'Chiavenna',
   390344 => 'Menaggio',
   390345 => 'San Pellegrino Terme',

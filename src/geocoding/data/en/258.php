@@ -21,5 +21,5 @@ return array (
   258272 => 'Pemba',
   258281 => 'Chokwe',
   258282 => 'Xai-Xai',
-  258293 => 'Inhambane',
+  25829 => 'Inhambane',
 );

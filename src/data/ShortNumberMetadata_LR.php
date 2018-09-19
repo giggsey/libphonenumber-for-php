@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '355|911',
+    'ExampleNumber' => '355',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,7 +49,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '355|911',
-    'ExampleNumber' => '911',
+    'ExampleNumber' => '355',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -59,7 +61,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '355|4040|8(?:400|933)|911',
-    'ExampleNumber' => '911',
+    'ExampleNumber' => '355',
     'PossibleLength' => 
     array (
     ),
@@ -79,8 +81,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '4040|8(?:400|933)',
-    'ExampleNumber' => '8400',
+    'NationalNumberPattern' => '(?:404|8(?:40|93))\\d',
+    'ExampleNumber' => '4040',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -91,8 +93,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '4040|8(?:400|933)',
-    'ExampleNumber' => '8400',
+    'NationalNumberPattern' => '(?:404|8(?:40|93))\\d',
+    'ExampleNumber' => '4040',
     'PossibleLength' => 
     array (
       0 => 4,

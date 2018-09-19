@@ -27,9 +27,12 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '1(?:1[37]|[37])',
+    'ExampleNumber' => '13',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 2,
+      1 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,8 +50,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1?1[37]',
-    'ExampleNumber' => '113',
+    'NationalNumberPattern' => '1(?:1[37]|[37])',
+    'ExampleNumber' => '13',
     'PossibleLength' => 
     array (
       0 => 2,
@@ -60,8 +63,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1?1[37]|8711',
-    'ExampleNumber' => '113',
+    'NationalNumberPattern' => '1(?:1[37]|[37])|8711',
+    'ExampleNumber' => '13',
     'PossibleLength' => 
     array (
     ),
@@ -81,8 +84,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '8711',
-    'ExampleNumber' => '8711',
+    'NationalNumberPattern' => '871\\d',
+    'ExampleNumber' => '8710',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -93,8 +96,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '8711',
-    'ExampleNumber' => '8711',
+    'NationalNumberPattern' => '871\\d',
+    'ExampleNumber' => '8710',
     'PossibleLength' => 
     array (
       0 => 4,

@@ -57,7 +57,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '80(?:0\\d{2}|11[0-4])\\d{4}',
+    'NationalNumberPattern' => '80(?:0\\d\\d|11[0-4])\\d{4}',
     'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
@@ -172,7 +172,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '800',
+        0 => '8',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

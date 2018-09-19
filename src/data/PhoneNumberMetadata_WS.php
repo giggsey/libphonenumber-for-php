@@ -151,7 +151,19 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{3,7})',
+      'pattern' => '(\\d{5})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[2-6]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3,7})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
@@ -161,25 +173,13 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
+    2 => 
     array (
-      'pattern' => '(7\\d)(\\d{5})',
+      'pattern' => '(\\d{2})(\\d{5})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
         0 => '7',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    2 => 
-    array (
-      'pattern' => '(\\d{5})',
-      'format' => '$1',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[2-6]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

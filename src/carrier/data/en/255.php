@@ -18,6 +18,7 @@ return array (
   25566 => 'SMILE',
   25567 => 'tiGO',
   25568 => 'Airtel',
+  25569 => 'Airtel',
   25571 => 'tiGO',
   25573 => 'Tanzania Telecom',
   25574 => 'Vodacom',

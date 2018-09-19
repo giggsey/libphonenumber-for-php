@@ -88,7 +88,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '(?:9(?:[67][0-4]|8[0-3589]|9\\d))\\d{5}',
+    'NationalNumberPattern' => '9(?:[67][0-4]|8[0-3589]|9\\d)\\d{5}',
     'ExampleNumber' => '98901234',
     'PossibleLength' => 
     array (
@@ -149,6 +149,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[2-489]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

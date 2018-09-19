@@ -138,7 +138,6 @@ return array (
   'id' => 'TM',
   'countryCode' => 993,
   'internationalPrefix' => '810',
-  'preferredInternationalPrefix' => '8~10',
   'nationalPrefix' => '8',
   'nationalPrefixForParsing' => '8',
   'sameMobileAndFixedLinePattern' => false,
@@ -174,7 +173,7 @@ return array (
       'format' => '$1 $2-$3-$4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '13|[2-5]',
+        0 => '[1-5]',
       ),
       'nationalPrefixFormattingRule' => '(8 $1)',
       'domesticCarrierCodeFormattingRule' => '',

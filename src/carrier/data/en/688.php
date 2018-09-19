@@ -11,7 +11,6 @@
  */
 
 return array (
-  68870 => 'Tuvalu Telecom',
-  68871 => 'Tuvalu Telecom',
-  68890 => 'Tuvalu Telecom',
+  6887 => 'Tuvalu Telecom',
+  6889 => 'Tuvalu Telecom',
 );

@@ -41,7 +41,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '3(?:1\\d{8}|[245-9]\\d{7,8}|3\\d{7,9})',
+    'NationalNumberPattern' => '33\\d{9}|3[1-9]\\d{8}|3[2-9]\\d{7}',
     'ExampleNumber' => '3123456789',
     'PossibleLength' => 
     array (
@@ -55,7 +55,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '80(?:0\\d{6}|3\\d{3})',
+    'NationalNumberPattern' => '80(?:0\\d{3}|3)\\d{3}',
     'ExampleNumber' => '800123456',
     'PossibleLength' => 
     array (
@@ -68,7 +68,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '0878\\d{5}|1(?:44|6[346])\\d{6}|89(?:2\\d{3}|4(?:[0-4]\\d{2}|[5-9]\\d{4})|5(?:[0-4]\\d{2}|[5-9]\\d{6})|9\\d{6})',
+    'NationalNumberPattern' => '(?:(?:0878|1(?:44|6[346])\\d)\\d\\d|89(?:2|(?:4[5-9]|(?:5[5-9]|9)\\d\\d)\\d))\\d{3}|89[45][0-4]\\d\\d',
     'ExampleNumber' => '899123456',
     'PossibleLength' => 
     array (
@@ -83,7 +83,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '84(?:[08]\\d{6}|[17]\\d{3})',
+    'NationalNumberPattern' => '84(?:[08]\\d{3}|[17])\\d{3}',
     'ExampleNumber' => '848123456',
     'PossibleLength' => 
     array (

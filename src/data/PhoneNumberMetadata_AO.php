@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2\\d(?:[26-9]\\d|\\d[26-9])\\d{5}',
+    'NationalNumberPattern' => '2\\d(?:[25-9]\\d|\\d[25-9])\\d{5}',
     'ExampleNumber' => '222123456',
     'PossibleLength' => 
     array (
