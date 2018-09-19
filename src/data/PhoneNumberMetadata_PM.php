@@ -145,7 +145,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([45]\\d)(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

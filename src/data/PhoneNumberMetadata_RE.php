@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '69(?:2\\d{2}|3(?:0[0-46]|1[013]|2[0-2]|3[0-39]|4\\d|5[05]|6[0-26]|7[0-27]|8[0-38]|9[0-479]))\\d{4}',
+    'NationalNumberPattern' => '69(?:2\\d\\d|3(?:0[0-46]|1[013]|2[0-2]|3[0-39]|4\\d|5[05]|6[0-26]|7[0-27]|8[0-38]|9[0-479]))\\d{4}',
     'ExampleNumber' => '692123456',
     'PossibleLength' => 
     array (
@@ -148,7 +148,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([268]\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -163,7 +163,6 @@ return array (
   array (
   ),
   'mainCountryForCode' => true,
-  'leadingDigits' => '262|69|8',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

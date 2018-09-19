@@ -11,19 +11,7 @@
  */
 
 return array (
-  67850 => 'Digicel',
-  67851 => 'Digicel',
-  67852 => 'Digicel',
-  67853 => 'Digicel',
-  67854 => 'Digicel',
-  67855 => 'Digicel',
-  67856 => 'Digicel',
-  678572 => 'Digicel',
-  678573 => 'Digicel',
-  678574 => 'Digicel',
-  678575 => 'Digicel',
-  67858 => 'Digicel',
-  67859 => 'Digicel',
+  6785 => 'Digicel',
   67870 => 'SMILE',
   67871 => 'SMILE',
   67873 => 'SMILE',

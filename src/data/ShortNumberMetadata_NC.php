@@ -27,12 +27,10 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '10(?:00|1[23]|3[0-2]|88)|3631|577',
-    'ExampleNumber' => '1000',
+    'NationalNumberPattern' => '1(?:0(?:00|1[23]|3[0-2]|8\\d)|[5-8])|363\\d|577',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
-      0 => 3,
-      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -62,8 +60,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:0[06]|1[02-46]|20|3[0125]|42|5[058]|77|88)|[5-8])|3631|5[6-8]\\d',
-    'ExampleNumber' => '1000',
+    'NationalNumberPattern' => '1(?:0(?:0[06]|1[02-46]|20|3[0-25]|42|5[058]|77|88)|[5-8])|3631|5[6-8]\\d',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
     ),

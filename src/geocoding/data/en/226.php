@@ -11,7 +11,7 @@
  */
 
 return array (
-  2262049 => 'Kaya',
+  226204 => 'Kaya',
   2262052 => 'Dédougou',
   2262053 => 'Boromo/Djibasso/Nouna',
   2262090 => 'Gaoua',
@@ -31,14 +31,8 @@ return array (
   2262477 => 'Fada/Diabo',
   2262479 => 'Kantchari',
   226253 => 'Ouagadougou',
+  226254 => 'Ouagadougou',
   2262540 => 'Pô/Kombissiri/Koubri',
   2262541 => 'Léo/Sapouy',
-  2262542 => 'Ouagadougou',
-  2262543 => 'Ouagadougou',
   2262544 => 'Koudougou',
-  2262545 => 'Ouagadougou',
-  2262546 => 'Ouagadougou',
-  2262547 => 'Ouagadougou',
-  2262548 => 'Ouagadougou',
-  2262549 => 'Ouagadougou',
 );

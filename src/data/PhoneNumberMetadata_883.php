@@ -86,7 +86,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '51(?:00\\d{5}(?:\\d{3})?|[13]0\\d{8})',
+    'NationalNumberPattern' => '51[013]0\\d{8}|5100\\d{5}',
     'ExampleNumber' => '510012345',
     'PossibleLength' => 
     array (
@@ -171,7 +171,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '51[13]',
+        0 => '5',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

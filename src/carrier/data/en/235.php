@@ -12,6 +12,6 @@
 
 return array (
   2356 => 'Airtel',
-  23577 => 'Sotel',
+  2357 => 'Sotel',
   2359 => 'Millicom',
 );

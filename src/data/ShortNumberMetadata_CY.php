@@ -26,11 +26,10 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '116(?:000|111)',
-    'ExampleNumber' => '116000',
+    'NationalNumberPattern' => '1(?:1(?:2|6\\d{3})|99)',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (

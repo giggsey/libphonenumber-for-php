@@ -162,11 +162,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(7\\d)(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{2})(\\d{5})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '7',
+        0 => '90',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -174,11 +174,11 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(90)(\\d{5})',
-      'format' => '$1 $2',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '90',
+        0 => '7',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

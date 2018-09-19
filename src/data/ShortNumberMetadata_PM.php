@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '1[578]',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 2,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,7 +49,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '1[578]',
-    'ExampleNumber' => '17',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
       0 => 2,
@@ -59,7 +61,7 @@ return array (
   'shortCode' => 
   array (
     'NationalNumberPattern' => '1[578]|3103',
-    'ExampleNumber' => '17',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
     ),
@@ -79,8 +81,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '3103',
-    'ExampleNumber' => '3103',
+    'NationalNumberPattern' => '310\\d',
+    'ExampleNumber' => '3100',
     'PossibleLength' => 
     array (
       0 => 4,

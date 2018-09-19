@@ -162,11 +162,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([2-9]\\d)(\\d{3})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-7]|[89]1',
+        0 => '2[12467]|3[1-4]|4[134]|5[12568]|6[12]|7(?:[15-9]|4[0248])|[89]1',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -174,11 +174,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([89]\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '8[047]|90',
+        0 => '8(?:00|4[0248]|78)|90[016]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

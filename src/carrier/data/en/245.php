@@ -12,8 +12,6 @@
 
 return array (
   24595 => 'Orange',
-  245965 => 'Spacetel',
-  245966 => 'Spacetel',
-  245969 => 'Spacetel',
-  245977 => 'Guinetel',
+  24596 => 'Spacetel',
+  24597 => 'Guinetel',
 );
