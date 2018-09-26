@@ -165,7 +165,7 @@ $phoneNumber->setCountryCode(44);
 $phoneNumber->setNationalNumber(118118);
 
 var_dump($shortNumberUtil->getExpectedCost($phoneNumber, 'GB'));
-// int(10) (ShortNumberCost::UNKNOWN_COST)
+// int(10) (\libphonenumber\ShortNumberCost::UNKNOWN_COST)
 ```
 
 ### `getExpectedCostForRegion()`
@@ -178,8 +178,8 @@ $phoneNumber->setCountryCode(44);
 $phoneNumber->setNationalNumber(118118);
 
 var_dump($shortNumberUtil->getExpectedCostForRegion($phoneNumber, 'GB'));
-// int(10) (ShortNumberCost::UNKNOWN_COST)
+// int(10) (\libphonenumber\ShortNumberCost::UNKNOWN_COST)
 
 var_dump($shortNumberUtil->getExpectedCostForRegion('24280', 'US'));
-// int(4) (ShortNumberCost::PREMIUM_RATE)
+// int(4) (\libphonenumber\ShortNumberCost::PREMIUM_RATE)
 ```

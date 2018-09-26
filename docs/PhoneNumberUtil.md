@@ -63,7 +63,7 @@ Returns a `PhoneNumberType` constant for the `PhoneNumber` object you pass.
 
 ```php
 var_dump($phoneNumberUtil->getNumberType($phoneNumberObject));
-// int(0) (PhoneNumberType::FIXED_LINE)
+// int(0) (\libphonenumber\PhoneNumberType::FIXED_LINE)
 ```
 
 ### `canBeInternationallyDialled()`
@@ -102,7 +102,7 @@ Returns a `ValidationResult` constant with the result of whether the supplied `P
 
 ```php
 var_dump($phoneNumberUtil->isPossibleNumberWithReason($phoneNumberObject));
-// int(0) (ValidationResult::IS_POSSIBLE)
+// int(0) (\libphonenumber\ValidationResult::IS_POSSIBLE)
 ```
 
 ### `isPossibleNumberForTypeWithReason()`
@@ -110,8 +110,8 @@ var_dump($phoneNumberUtil->isPossibleNumberWithReason($phoneNumberObject));
 Returns a `ValidationResult` constant with the result of whether the supplied `PhoneNumber` object is a possible number of a particular `PhoneNumberType` type.
 
 ```php
-var_dump($phoneNumberUtil->isPossibleNumberForTypeWithReason($phoneNumberObject, PhoneNumberType::FIXED_LINE));
-// int(0) (ValidationResult::IS_POSSIBLE)
+var_dump($phoneNumberUtil->isPossibleNumberForTypeWithReason($phoneNumberObject, \libphonenumber\PhoneNumberType::FIXED_LINE));
+// int(0) (\libphonenumber\ValidationResult::IS_POSSIBLE)
 ```
 
 ### `isValidNumber()`
@@ -143,16 +143,16 @@ var_dump($phoneNumberUtil->isValidNumberForRegion($phoneNumberObject, 'FR'));
 Formats the supplied `PhoneNumber` object in the `PhoneNumberFormat` constant.
 
 ```php
-var_dump($phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::E164));
+var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::E164));
 // string(13) "+441174960123"
 
-var_dump($phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::INTERNATIONAL));
+var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::INTERNATIONAL));
 // string(16) "+44 117 496 0123"
 
-var_dump($phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::NATIONAL));
+var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::NATIONAL));
 // string(13) "0117 496 0123"
 
-var_dump($phoneNumberUtil->format($phoneNumberObject, PhoneNumberFormat::RFC3966));
+var_dump($phoneNumberUtil->format($phoneNumberObject, \libphonenumber\PhoneNumberFormat::RFC3966));
 // string(20) "tel:+44-117-496-0123"
 ```
 
@@ -242,10 +242,10 @@ This also accepts the first parameter being a `PhoneNumberType`, where it will r
 for the specified number type from any country. Just leave the second parameter as null.
 
 ```php
-var_dump($phoneNumberUtil->getExampleNumberForType('GB', PhoneNumberType::MOBILE));
+var_dump($phoneNumberUtil->getExampleNumberForType('GB', \libphonenumber\PhoneNumberType::MOBILE));
 // (PhoneNumber) Country Code: 44 National Number: 7400123456 ...
 
-var_dump($phoneNumberUtil->getExampleNumberForType(PhoneNumberType::MOBILE));
+var_dump($phoneNumberUtil->getExampleNumberForType(\libphonenumber\PhoneNumberType::MOBILE));
 // (PhoneNumber) Country Code: 1 National Number: 2015555555 ...
 ```
 
