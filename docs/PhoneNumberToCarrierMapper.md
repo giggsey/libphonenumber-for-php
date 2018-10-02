@@ -1,7 +1,5 @@
 # PhoneNumberToCarrierMapper
 
-The Phone Number Carrier Mapper requires the PHP [intl](http://php.net/intl) extension.
-
 ## Getting Started
 
 As with [PhoneNumberUtil](PhoneNumberUtil.md), the Phone Number Carrier Mapper uses a singleton.
