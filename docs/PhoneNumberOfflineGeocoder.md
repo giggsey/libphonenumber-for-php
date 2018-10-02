@@ -1,7 +1,5 @@
 # PhoneNumberOfflineGeocoder
 
-The Phone Number Geocoder requires the PHP [intl](http://php.net/intl) extension.
-
 ## Getting Started
 
 As with [PhoneNumberUtil](PhoneNumberUtil.md), the Phone Number Geocoder uses a singleton.
