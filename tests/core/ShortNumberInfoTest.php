@@ -231,7 +231,7 @@ class ShortNumberInfoTest extends TestCase
 
     public function testGetExampleShortNumber()
     {
-        $this->assertEquals("8711", $this->shortInfo->getExampleShortNumber(RegionCode::AM));
+        $this->assertEquals("110", $this->shortInfo->getExampleShortNumber(RegionCode::AD));
         $this->assertEquals("1010", $this->shortInfo->getExampleShortNumber(RegionCode::FR));
         $this->assertEquals("", $this->shortInfo->getExampleShortNumber(RegionCode::UN001));
         $this->assertEquals("", $this->shortInfo->getExampleShortNumber(null));
