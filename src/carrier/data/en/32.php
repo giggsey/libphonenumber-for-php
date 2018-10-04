@@ -12,7 +12,7 @@
 
 return array (
   32455 => 'VOO',
-  32456 => 'JIM Mobile',
+  32456 => 'Mobile Vikings/JIM Mobile',
   32460 => 'Proximus',
   324618 => 'N.M.B.S.',
   324630 => 'TISMI BV',

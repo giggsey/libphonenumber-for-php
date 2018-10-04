@@ -143,7 +143,7 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => '(?:25[245]|67[3-6])\\d{9}',
+    'NationalNumberPattern' => '(?:25[245]|67[3-68])\\d{9}',
     'ExampleNumber' => '254123456789',
     'PossibleLength' => 
     array (
@@ -297,7 +297,7 @@ return array (
       'format' => '$1-$2 $3 $4 $5',
       'leadingDigitsPatterns' => 
       array (
-        0 => '25[245]|67[3-6]',
+        0 => '25[245]|67[3-68]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -432,7 +432,7 @@ return array (
       'format' => '$1 $2 $3 $4 $5',
       'leadingDigitsPatterns' => 
       array (
-        0 => '25[245]|67[3-6]',
+        0 => '25[245]|67[3-68]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

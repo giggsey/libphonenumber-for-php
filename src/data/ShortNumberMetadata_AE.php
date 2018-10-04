@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '112|99[7-9]',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -46,7 +48,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '112|99[789]',
+    'NationalNumberPattern' => '112|99[7-9]',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -58,7 +60,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112|445[16]|99[789]',
+    'NationalNumberPattern' => '112|445[16]|99[7-9]',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -89,8 +91,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '445[16]',
-    'ExampleNumber' => '4451',
+    'NationalNumberPattern' => '445\\d',
+    'ExampleNumber' => '4450',
     'PossibleLength' => 
     array (
       0 => 4,
