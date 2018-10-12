@@ -427,17 +427,23 @@ class PhoneNumberUtil
 
     protected function init()
     {
+        $supportedRegions = array(array());
+
         foreach ($this->countryCallingCodeToRegionCodeMap as $countryCode => $regionCodes) {
             // We can assume that if the country calling code maps to the non-geo entity region code then
             // that's the only region code it maps to.
-            if (count($regionCodes) == 1 && static::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCodes[0]) {
+            if (count($regionCodes) === 1 && static::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCodes[0]) {
                 // This is the subset of all country codes that map to the non-geo entity region code.
                 $this->countryCodesForNonGeographicalRegion[] = $countryCode;
             } else {
                 // The supported regions set does not include the "001" non-geo entity region code.
-                $this->supportedRegions = array_merge($this->supportedRegions, $regionCodes);
+                $supportedRegions[] = $regionCodes;
             }
         }
+
+        $this->supportedRegions = call_user_func_array('array_merge', $supportedRegions);
+
+
         // If the non-geo entity still got added to the set of supported regions it must be because
         // there are entries that list the non-geo entity alongside normal regions (which is wrong).
         // If we discover this, remove the non-geo entity from the set of supported regions and log.
