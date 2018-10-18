@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '246(?:2(?:2[78]|7[0-4])|4(?:1[024-6]|2\\d|3[2-9])|5(?:20|[34]\\d|54|7[1-3])|6(?:2\\d|38)|7(?:37|57)|9(?:1[89]|63))\\d{4}',
+    'NationalNumberPattern' => '246(?:2(?:2[78]|7[0-4])|4(?:1[024-6]|2\\d|3[2-9])|5(?:20|[34]\\d|54|7[1-3])|6(?:2\\d|38)|7[35]7|9(?:1[89]|63))\\d{4}',
     'ExampleNumber' => '2464123456',
     'PossibleLength' => 
     array (
@@ -61,7 +61,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900[2-9]\\d{6}|246976\\d{4}',
+    'NationalNumberPattern' => '(?:246976|900[2-9]\\d\\d)\\d{4}',
     'ExampleNumber' => '9002123456',
     'PossibleLength' => 
     array (

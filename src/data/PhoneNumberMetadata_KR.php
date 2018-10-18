@@ -178,7 +178,7 @@ return array (
   ),
   'id' => 'KR',
   'countryCode' => 82,
-  'internationalPrefix' => '00(?:[1259]|3(?:[46]5|91)|7(?:00|27|3|55|6[126]))',
+  'internationalPrefix' => '00(?:[125689]|3(?:[46]5|91)|7(?:00|27|3|55|6[126]))',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0(8[1-46-8]|85\\d{2})?',
   'sameMobileAndFixedLinePattern' => false,

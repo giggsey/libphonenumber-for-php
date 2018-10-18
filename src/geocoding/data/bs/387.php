@@ -21,6 +21,6 @@ return array (
   38737 => 'Unsko-sanski kanton',
   38738 => 'Bosansko-podrinjski kanton Goražde',
   38739 => 'Zapadnohercegovački kanton',
-  38749 => 'Brčko Distrikt',
+  3874 => 'Brčko Distrikt',
   38757 => 'Istočno Sarajevo',
 );

@@ -151,7 +151,7 @@ return array (
   'countryCode' => 254,
   'internationalPrefix' => '000',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '005|0',
+  'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

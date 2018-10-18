@@ -92,7 +92,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '5(?:20\\d|35)',
+    'NationalNumberPattern' => '5(?:200|35)',
     'ExampleNumber' => '535',
     'PossibleLength' => 
     array (

@@ -83,7 +83,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '14[04]\\d',
+    'NationalNumberPattern' => '14(?:0\\d|41)',
     'ExampleNumber' => '1400',
     'PossibleLength' => 
     array (
@@ -95,8 +95,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '1(?:41|90)\\d',
-    'ExampleNumber' => '1410',
+    'NationalNumberPattern' => '1(?:415|90\\d)',
+    'ExampleNumber' => '1415',
     'PossibleLength' => 
     array (
       0 => 4,
