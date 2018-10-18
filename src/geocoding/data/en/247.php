@@ -11,13 +11,9 @@
  */
 
 return array (
-  2471 => 'Georgetown',
-  2472 => 'U.S. Base',
-  2473 => 'Travellers Hill',
-  2474 => 'Two Boats',
-  2475 => 'Georgetown',
-  2476 => 'Georgetown',
-  2477 => 'Georgetown',
-  2478 => 'Georgetown',
-  2479 => 'Georgetown',
+  24762 => 'US Base',
+  24763 => 'Travellers Hill & Airhead',
+  24764 => 'Two Boats',
+  24766 => 'Georgetown',
+  24767 => 'Georgetown',
 );

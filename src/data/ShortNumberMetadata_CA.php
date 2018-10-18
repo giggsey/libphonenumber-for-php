@@ -28,8 +28,8 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '211',
-    'ExampleNumber' => '211',
+    'NationalNumberPattern' => '112|[29]11',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -51,7 +51,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '112|911',
-    'ExampleNumber' => '911',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -62,8 +62,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:12|\\d{4,5})|[25-9](?:11|\\d{4,5})|3(?:\\d{4,5}|0000\\d{3}|11)|411',
-    'ExampleNumber' => '12345',
+    'NationalNumberPattern' => '112|30000\\d{3}|[1-35-9]\\d{4,5}|[2-9]11',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
     ),
@@ -83,8 +83,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '[23567]11',
-    'ExampleNumber' => '611',
+    'NationalNumberPattern' => '[235-7]11',
+    'ExampleNumber' => '211',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -95,8 +95,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '[125-9]\\d{4,5}|3(?:\\d{4,5}|0000\\d{3})',
-    'ExampleNumber' => '30001',
+    'NationalNumberPattern' => '300\\d{5}|[1-35-9]\\d{4,5}',
+    'ExampleNumber' => '10000',
     'PossibleLength' => 
     array (
       0 => 5,
