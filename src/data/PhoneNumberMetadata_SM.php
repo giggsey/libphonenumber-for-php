@@ -213,9 +213,6 @@ return array (
         0 => '054',
         1 => '0549',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     2 => 
     array (
@@ -225,9 +222,6 @@ return array (
       array (
         0 => '[89]',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
   ),
   'mainCountryForCode' => false,

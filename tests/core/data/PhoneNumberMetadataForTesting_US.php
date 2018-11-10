@@ -159,7 +159,7 @@ return array (
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
+      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     1 => 
     array (

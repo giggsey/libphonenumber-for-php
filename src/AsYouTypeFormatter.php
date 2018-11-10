@@ -277,35 +277,43 @@ class AsYouTypeFormatter
      */
     private function getAvailableFormats($leadingDigits)
     {
-        $formatList = ($this->isCompleteNumber && $this->currentMetadata->intlNumberFormatSize() > 0)
+        // First decide whether we should use international or national number rules.
+        $isInternationalNumber = $this->isCompleteNumber && $this->extractedNationalPrefix === '';
+
+        $formatList = ($isInternationalNumber && $this->currentMetadata->intlNumberFormatSize() > 0)
             ? $this->currentMetadata->intlNumberFormats()
             : $this->currentMetadata->numberFormats();
 
-        $nationalPrefixIsUsedByCountry = $this->currentMetadata->hasNationalPrefix();
-
         foreach ($formatList as $format) {
-            if (!$nationalPrefixIsUsedByCountry
-                || $this->isCompleteNumber
-                || $format->getNationalPrefixOptionalWhenFormatting()
-                || PhoneNumberUtil::formattingRuleHasFirstGroupOnly($format->getNationalPrefixFormattingRule())
-            ) {
-                if ($this->isFormatEligible($format->getFormat())) {
-                    $this->possibleFormats[] = $format;
-                }
+            // Discard a few formats that we know are not relevant based on the presence of the national
+            // prefix.
+            if ($this->extractedNationalPrefix !== ''
+                && PhoneNumberUtil::formattingRuleHasFirstGroupOnly(
+                    $format->getNationalPrefixFormattingRule())
+                && !$format->getNationalPrefixOptionalWhenFormatting()
+                && !$format->hasDomesticCarrierCodeFormattingRule()) {
+                // If it is a national number that had a national prefix, any rules that aren't valid with a
+                // national prefix should be excluded. A rule that has a carrier-code formatting rule is
+                // kept since the national prefix might actually be an extracted carrier code - we don't
+                // distinguish between these when extracting it in the AYTF.
+                continue;
+            } elseif ($this->extractedNationalPrefix === ''
+                && !$this->isCompleteNumber
+                && !PhoneNumberUtil::formattingRuleHasFirstGroupOnly(
+                    $format->getNationalPrefixFormattingRule())
+                && !$format->getNationalPrefixOptionalWhenFormatting()) {
+                // This number was entered without a national prefix, and this formatting rule requires one,
+                // so we discard it.
+                continue;
+            }
+
+            $eligibleFormatMatcher = new Matcher(self::$eligibleFormatPattern, $format->getFormat());
+
+            if ($eligibleFormatMatcher->matches()) {
+                $this->possibleFormats[] = $format;
             }
         }
         $this->narrowDownPossibleFormats($leadingDigits);
-    }
-
-    /**
-     * @param string $format
-     * @return bool
-     */
-    private function isFormatEligible($format)
-    {
-        $eligibleFormatMatcher = new Matcher(self::$eligibleFormatPattern, $format);
-
-        return $eligibleFormatMatcher->matches();
     }
 
     /**

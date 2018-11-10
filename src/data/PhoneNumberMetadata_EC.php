@@ -203,9 +203,6 @@ return array (
       array (
         0 => '[247]|[356][2-8]',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     1 => 
     array (
