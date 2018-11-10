@@ -116,9 +116,9 @@ class Matcher
     {
         if (empty($this->groups)) {
             return null;
-        } else {
-            return count($this->groups) - 1;
         }
+
+        return count($this->groups) - 1;
     }
 
     /**

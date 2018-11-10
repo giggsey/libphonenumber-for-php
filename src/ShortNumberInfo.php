@@ -343,7 +343,9 @@ class ShortNumberInfo
     {
         if (count($regionCodes) == 0) {
             return null;
-        } elseif (count($regionCodes) == 1) {
+        }
+
+        if (count($regionCodes) == 1) {
             return $regionCodes[0];
         }
 

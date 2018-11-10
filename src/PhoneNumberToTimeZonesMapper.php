@@ -90,7 +90,9 @@ class PhoneNumberToTimeZonesMapper
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
             return $this->unknownTimeZoneList;
-        } elseif (!PhoneNumberUtil::getInstance()->isNumberGeographical($numberType, $number->getCountryCode())) {
+        }
+
+        if (!PhoneNumberUtil::getInstance()->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryLevelTimeZonesforNumber($number);
         }
 

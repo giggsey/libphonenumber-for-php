@@ -394,7 +394,9 @@ class BuildMetadataFromXml
         if ($intlFormatPattern->length > 1) {
             $countryId = strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
             throw new \RuntimeException('Invalid number of intlFormat patterns for country: ' . $countryId);
-        } elseif ($intlFormatPattern->length == 0) {
+        }
+
+        if ($intlFormatPattern->length == 0) {
             // Default to use the same as the national pattern if none is defined.
             $intlFormat->mergeFrom($nationalFormat);
         } else {
@@ -480,7 +482,9 @@ class BuildMetadataFromXml
             if (strlen($lengthSubstring) === 0) {
                 throw new \RuntimeException('Leading, trailing or adjacent commas in possible '
                     . "length string {$possibleLengthString}, these should only separate numbers or ranges.");
-            } elseif (substr($lengthSubstring, 0, 1) === '[') {
+            }
+
+            if (substr($lengthSubstring, 0, 1) === '[') {
                 if (substr($lengthSubstring, -1) !== ']') {
                     throw new \RuntimeException("Missing end of range character in possible length string {$possibleLengthString}.");
                 }

@@ -369,13 +369,13 @@ class MetadataFilter
             }
 
             return array_key_exists($parent, $this->blackList) && in_array($child, $this->blackList[$parent]);
-        } else {
-            $childlessField = $parent;
-            if (!in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
-                throw new \RuntimeException($childlessField . ' is not an excludable childless field');
-            }
-
-            return array_key_exists($childlessField, $this->blackList);
         }
+
+        $childlessField = $parent;
+        if (!in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
+            throw new \RuntimeException($childlessField . ' is not an excludable childless field');
+        }
+
+        return array_key_exists($childlessField, $this->blackList);
     }
 }

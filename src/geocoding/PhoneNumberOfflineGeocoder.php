@@ -79,7 +79,9 @@ class PhoneNumberOfflineGeocoder
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
             return '';
-        } elseif (!$this->phoneUtil->isNumberGeographical($numberType, $number->getCountryCode())) {
+        }
+
+        if (!$this->phoneUtil->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryNameForNumber($number, $locale);
         }
 
@@ -100,21 +102,21 @@ class PhoneNumberOfflineGeocoder
 
         if (count($regionCodes) === 1) {
             return $this->getRegionDisplayName($regionCodes[0], $locale);
-        } else {
-            $regionWhereNumberIsValid = 'ZZ';
-            foreach ($regionCodes as $regionCode) {
-                if ($this->phoneUtil->isValidNumberForRegion($number, $regionCode)) {
-                    // If the number has already been found valid for one region, then we don't know which
-                    // region it belongs to so we return nothing.
-                    if ($regionWhereNumberIsValid !== 'ZZ') {
-                        return '';
-                    }
-                    $regionWhereNumberIsValid = $regionCode;
-                }
-            }
-
-            return $this->getRegionDisplayName($regionWhereNumberIsValid, $locale);
         }
+
+        $regionWhereNumberIsValid = 'ZZ';
+        foreach ($regionCodes as $regionCode) {
+            if ($this->phoneUtil->isValidNumberForRegion($number, $regionCode)) {
+                // If the number has already been found valid for one region, then we don't know which
+                // region it belongs to so we return nothing.
+                if ($regionWhereNumberIsValid !== 'ZZ') {
+                    return '';
+                }
+                $regionWhereNumberIsValid = $regionCode;
+            }
+        }
+
+        return $this->getRegionDisplayName($regionWhereNumberIsValid, $locale);
     }
 
     /**

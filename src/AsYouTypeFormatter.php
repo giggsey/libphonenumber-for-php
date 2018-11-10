@@ -263,10 +263,10 @@ class AsYouTypeFormatter
                 // needs to be reset.
                 $this->lastMatchPosition = 0;
                 return true;
-            } else {
-                // Remove the current number format from $this->possibleFormats
-                unset($this->possibleFormats[$key]);
             }
+
+// Remove the current number format from $this->possibleFormats
+            unset($this->possibleFormats[$key]);
         }
         $this->ableToFormat = false;
         return false;
@@ -297,7 +297,9 @@ class AsYouTypeFormatter
                 // kept since the national prefix might actually be an extracted carrier code - we don't
                 // distinguish between these when extracting it in the AYTF.
                 continue;
-            } elseif ($this->extractedNationalPrefix === ''
+            }
+
+            if ($this->extractedNationalPrefix === ''
                 && !$this->isCompleteNumber
                 && !PhoneNumberUtil::formattingRuleHasFirstGroupOnly(
                     $format->getNationalPrefixFormattingRule())
@@ -475,7 +477,9 @@ class AsYouTypeFormatter
             // to do formatting again after extracting them.
             if ($this->inputHasFormatting) {
                 return $this->accruedInput;
-            } elseif ($this->attemptToExtractIdd()) {
+            }
+
+            if ($this->attemptToExtractIdd()) {
                 if ($this->attemptToExtractCountryCallingCode()) {
                     return $this->attemptToChoosePatternWithPrefixExtracted();
                 }
@@ -530,9 +534,9 @@ class AsYouTypeFormatter
                     return $this->ableToFormat
                         ? $this->appendNationalNumber($tempNationalNumber)
                         : $this->accruedInput;
-                } else {
-                    return $this->attemptToChooseFormattingPattern();
                 }
+
+                return $this->attemptToChooseFormattingPattern();
         }
     }
 
@@ -651,9 +655,9 @@ class AsYouTypeFormatter
             // indicates that this would normally be done, with the exception of the case where we already
             // appended a space because the NDD was surprisingly long.
             return $this->prefixBeforeNationalNumber . self::$seperatorBeforeNationalNumber . $nationalNumber;
-        } else {
-            return $this->prefixBeforeNationalNumber . $nationalNumber;
         }
+
+        return $this->prefixBeforeNationalNumber . $nationalNumber;
     }
 
     /**
@@ -673,9 +677,9 @@ class AsYouTypeFormatter
                 return $formattedNumber;
             }
             return $this->maybeCreateNewTemplate() ? $this->inputAccruedNationalNumber() : $this->accruedInput;
-        } else {
-            return $this->appendNationalNumber($this->nationalNumber);
         }
+
+        return $this->appendNationalNumber($this->nationalNumber);
     }
 
     /**
@@ -692,9 +696,9 @@ class AsYouTypeFormatter
                 $tempNationalNumber = $this->inputDigitHelper(mb_substr($this->nationalNumber, $i, 1));
             }
             return $this->ableToFormat ? $this->appendNationalNumber($tempNationalNumber) : $this->accruedInput;
-        } else {
-            return $this->prefixBeforeNationalNumber;
         }
+
+        return $this->prefixBeforeNationalNumber;
     }
 
     /**
@@ -837,14 +841,14 @@ class AsYouTypeFormatter
                     'UTF-8'), null, 'UTF-8');
             $this->lastMatchPosition = $digitMatcher->start();
             return mb_substr($this->formattingTemplate, 0, $this->lastMatchPosition + 1);
-        } else {
-            if (count($this->possibleFormats) === 1) {
-                // More digits are entered than we could handle, and there are no other valid patterns to
-                // try.
-                $this->ableToFormat = false;
-            } // else, we just reset the formatting pattern.
-            $this->currentFormattingPattern = '';
-            return $this->accruedInput;
         }
+
+        if (count($this->possibleFormats) === 1) {
+            // More digits are entered than we could handle, and there are no other valid patterns to
+            // try.
+            $this->ableToFormat = false;
+        } // else, we just reset the formatting pattern.
+        $this->currentFormattingPattern = '';
+        return $this->accruedInput;
     }
 }

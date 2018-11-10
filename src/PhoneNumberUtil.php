@@ -849,9 +849,9 @@ class PhoneNumberUtil
         $regions = $this->countryCallingCodeToRegionCodeMap[$countryCode];
         if (count($regions) == 1) {
             return $regions[0];
-        } else {
-            return $this->getRegionCodeForNumberFromRegionList($number, $regions);
         }
+
+        return $this->getRegionCodeForNumberFromRegionList($number, $regions);
     }
 
     /**
@@ -942,7 +942,9 @@ class PhoneNumberUtil
         if ($isFixedLine) {
             if ($metadata->getSameMobileAndFixedLinePattern()) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
-            } elseif ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
+            }
+
+            if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
             }
             return PhoneNumberType::FIXED_LINE;
@@ -1812,9 +1814,9 @@ class PhoneNumberUtil
             }
 
             return $number;
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -1910,7 +1912,9 @@ class PhoneNumberUtil
                 NumberParseException::INVALID_COUNTRY_CODE,
                 'Country calling code supplied was not recognised.'
             );
-        } elseif ($defaultRegionMetadata !== null) {
+        }
+
+        if ($defaultRegionMetadata !== null) {
             // Check to see if the number starts with the country calling code for the default region. If
             // so, we remove the country calling code, and do some checks on the validity of the number
             // before and after.
@@ -2008,9 +2012,9 @@ class PhoneNumberUtil
         $m = new Matcher(static::VALID_ALPHA_PHONE_PATTERN, $number);
         if ($m->matches()) {
             return static::normalizeHelper($number, static::$ALPHA_PHONE_MAPPINGS, true);
-        } else {
-            return static::normalizeDigitsOnly($number);
         }
+
+        return static::normalizeDigitsOnly($number);
     }
 
     /**
@@ -2145,26 +2149,26 @@ class PhoneNumberUtil
 
                 $number = substr($number, $prefixMatcher->end());
                 return true;
-            } else {
-                // Check that the resultant number is still viable. If not, return. Check this by copying
-                // the string and making the transformation on the copy first.
-                $transformedNumber = $number;
-                $transformedNumber = substr_replace(
-                    $transformedNumber,
-                    $prefixMatcher->replaceFirst($transformRule),
-                    0,
-                    $numberLength
-                );
-                if ($isViableOriginalNumber
-                    && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
-                    return false;
-                }
-                if ($carrierCode !== null && $numOfGroups > 1) {
-                    $carrierCode .= $prefixMatcher->group(1);
-                }
-                $number = substr_replace($number, $transformedNumber, 0, mb_strlen($number));
-                return true;
             }
+
+// Check that the resultant number is still viable. If not, return. Check this by copying
+            // the string and making the transformation on the copy first.
+            $transformedNumber = $number;
+            $transformedNumber = substr_replace(
+                $transformedNumber,
+                $prefixMatcher->replaceFirst($transformRule),
+                0,
+                $numberLength
+            );
+            if ($isViableOriginalNumber
+                && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
+                return false;
+            }
+            if ($carrierCode !== null && $numOfGroups > 1) {
+                $carrierCode .= $prefixMatcher->group(1);
+            }
+            $number = substr_replace($number, $transformedNumber, 0, mb_strlen($number));
+            return true;
         }
         return false;
     }
@@ -2216,26 +2220,26 @@ class PhoneNumberUtil
                 // The rate case has been encountered where no fixedLine data is available (true for some
                 // non-geographical entities), so we just check mobile.
                 return $this->testNumberLength($number, $metadata, PhoneNumberType::MOBILE);
-            } else {
-                $mobileDesc = $this->getNumberDescByType($metadata, PhoneNumberType::MOBILE);
-                if (static::descHasPossibleNumberData($mobileDesc)) {
-                    // Note that when adding the possible lengths from mobile, we have to again check they
-                    // aren't empty since if they are this indicates they are the same as the general desc and
-                    // should be obtained from there.
-                    $possibleLengths = array_merge($possibleLengths,
-                        (count($mobileDesc->getPossibleLength()) === 0)
-                            ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength());
+            }
 
-                    // The current list is sorted; we need to merge in the new list and re-sort (duplicates
-                    // are okay). Sorting isn't so expensive because the lists are very small.
-                    sort($possibleLengths);
+            $mobileDesc = $this->getNumberDescByType($metadata, PhoneNumberType::MOBILE);
+            if (static::descHasPossibleNumberData($mobileDesc)) {
+                // Note that when adding the possible lengths from mobile, we have to again check they
+                // aren't empty since if they are this indicates they are the same as the general desc and
+                // should be obtained from there.
+                $possibleLengths = array_merge($possibleLengths,
+                    (count($mobileDesc->getPossibleLength()) === 0)
+                        ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength());
 
-                    if (count($localLengths) === 0) {
-                        $localLengths = $mobileDesc->getPossibleLengthLocalOnly();
-                    } else {
-                        $localLengths = array_merge($localLengths, $mobileDesc->getPossibleLengthLocalOnly());
-                        sort($localLengths);
-                    }
+                // The current list is sorted; we need to merge in the new list and re-sort (duplicates
+                // are okay). Sorting isn't so expensive because the lists are very small.
+                sort($possibleLengths);
+
+                if (count($localLengths) === 0) {
+                    $localLengths = $mobileDesc->getPossibleLengthLocalOnly();
+                } else {
+                    $localLengths = array_merge($localLengths, $mobileDesc->getPossibleLengthLocalOnly());
+                    sort($localLengths);
                 }
             }
         }
@@ -2260,7 +2264,9 @@ class PhoneNumberUtil
         $minimumLength = reset($possibleLengths);
         if ($minimumLength == $actualLength) {
             return ValidationResult::IS_POSSIBLE;
-        } elseif ($minimumLength > $actualLength) {
+        }
+
+        if ($minimumLength > $actualLength) {
             return ValidationResult::TOO_SHORT;
         } elseif (isset($possibleLengths[count($possibleLengths) - 1]) && $possibleLengths[count($possibleLengths) - 1] < $actualLength) {
             return ValidationResult::TOO_LONG;
@@ -3344,13 +3350,13 @@ class PhoneNumberUtil
                                 return MatchType::NSN_MATCH;
                             }
                             return $match;
-                        } else {
-                            // If the first number didn't have a valid country calling code, then we parse the
-                            // second number without one as well.
-                            $secondNumberProto = new PhoneNumber();
-                            $this->parseHelper($secondNumberIn, null, false, false, $secondNumberProto);
-                            return $this->isNumberMatch($firstNumberIn, $secondNumberProto);
                         }
+
+// If the first number didn't have a valid country calling code, then we parse the
+                        // second number without one as well.
+                        $secondNumberProto = new PhoneNumber();
+                        $this->parseHelper($secondNumberIn, null, false, false, $secondNumberProto);
+                        return $this->isNumberMatch($firstNumberIn, $secondNumberProto);
                     } catch (NumberParseException $e2) {
                         // Fall-through to return NOT_A_NUMBER.
                     }
@@ -3376,9 +3382,10 @@ class PhoneNumberUtil
             if ($firstNumberCountryCode != 0 && $secondNumberCountryCode != 0) {
                 if ($firstNumber->equals($secondNumber)) {
                     return MatchType::EXACT_MATCH;
-                } elseif ($firstNumberCountryCode == $secondNumberCountryCode &&
-                    $this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber)
-                ) {
+                }
+
+                if ($firstNumberCountryCode == $secondNumberCountryCode &&
+                    $this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber)) {
                     // A SHORT_NSN_MATCH occurs if there is a difference because of the presence or absence of
                     // an 'Italian leading zero', the presence or absence of an extension, or one NSN being a
                     // shorter variant of the other.

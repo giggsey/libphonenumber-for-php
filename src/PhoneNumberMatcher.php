@@ -640,12 +640,12 @@ class PhoneNumberMatcher implements \Iterator
             // The country-code will have a '-' following it.
             $startIndex = mb_strpos($rfc3966Format, '-') + 1;
             return explode('-', mb_substr($rfc3966Format, $startIndex, $endIndex - $startIndex));
-        } else {
-            // We format the NSN only, and split that according to the separator.
-            $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
-            return explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
-                PhoneNumberFormat::RFC3966));
         }
+
+// We format the NSN only, and split that according to the separator.
+        $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
+        return explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
+            PhoneNumberFormat::RFC3966));
     }
 
     /**
