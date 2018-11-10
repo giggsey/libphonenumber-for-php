@@ -304,7 +304,7 @@ class ExampleNumbersTest extends TestCase
         }
         $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
         if (!$this->shortNumberInfo->isValidShortNumber($phoneNumber)) {
-            $this->fail('Failed validation for ' . (string)$phoneNumber);
+            $this->fail('Failed validation for ' . $phoneNumber);
         }
     }
 
@@ -340,7 +340,7 @@ class ExampleNumbersTest extends TestCase
             $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
             $exampleShortNumberCost = $this->shortNumberInfo->getExpectedCostForRegion($phoneNumber, $regionCode);
 
-            $this->assertEquals($cost, $exampleShortNumberCost, 'Wrong cost for ' . (string)$phoneNumber);
+            $this->assertEquals($cost, $exampleShortNumberCost, 'Wrong cost for ' . $phoneNumber);
         }
     }
 

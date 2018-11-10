@@ -3572,7 +3572,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(
             MatchType::EXACT_MATCH,
             $this->phoneUtil->isNumberMatch($nzNumber, self::$nzNumber),
-            'Number ' . (string)$nzNumber . ' did not match ' . (string)self::$nzNumber
+            'Number ' . $nzNumber . ' did not match ' . self::$nzNumber
         );
     }
 

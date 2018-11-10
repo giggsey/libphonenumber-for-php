@@ -271,10 +271,10 @@ class ShortNumberInfo
         $nationalNumber = $this->getNationalSignificantNumber($number);
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
 
-        return ($phoneMetadata !== null) && ($this->matchesPossibleNumberAndNationalNumber(
+        return ($phoneMetadata !== null) && $this->matchesPossibleNumberAndNationalNumber(
             $nationalNumber,
             $phoneMetadata->getCarrierSpecific()
-        ));
+        );
     }
 
     /**
@@ -299,7 +299,7 @@ class ShortNumberInfo
         $phoneMetadata = $this->getMetadataForRegion($regionDialingFrom);
 
         return ($phoneMetadata !== null)
-            && ($this->matchesPossibleNumberAndNationalNumber($nationalNumber, $phoneMetadata->getCarrierSpecific()));
+            && $this->matchesPossibleNumberAndNationalNumber($nationalNumber, $phoneMetadata->getCarrierSpecific());
     }
 
     /**

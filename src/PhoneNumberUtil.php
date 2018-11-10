@@ -585,10 +585,8 @@ class PhoneNumberUtil
             $character = mb_substr($number, $i, 1, 'UTF-8');
             if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
                 $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
-            } else {
-                if (!$removeNonMatches) {
-                    $normalizedNumber .= $character;
-                }
+            } else if (!$removeNonMatches) {
+                $normalizedNumber .= $character;
             }
             // If neither of the above are true, we remove this character.
         }
@@ -1345,12 +1343,10 @@ class PhoneNumberUtil
         if ($number->hasExtension() && mb_strlen($number->getExtension()) > 0) {
             if ($numberFormat === PhoneNumberFormat::RFC3966) {
                 $formattedNumber .= static::RFC3966_EXTN_PREFIX . $number->getExtension();
+            } else if (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
+                $formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
             } else {
-                if (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
-                    $formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
-                } else {
-                    $formattedNumber .= static::DEFAULT_EXTN_PREFIX . $number->getExtension();
-                }
+                $formattedNumber .= static::DEFAULT_EXTN_PREFIX . $number->getExtension();
             }
         }
     }
@@ -1758,7 +1754,8 @@ class PhoneNumberUtil
 
             $indexOfRfc3966Prefix = strpos($numberToParse, static::RFC3966_PREFIX);
             $indexOfNationalNumber = ($indexOfRfc3966Prefix !== false) ? $indexOfRfc3966Prefix + strlen(static::RFC3966_PREFIX) : 0;
-            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber, ($indexOfPhoneContext - $indexOfNationalNumber));
+            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber,
+                $indexOfPhoneContext - $indexOfNationalNumber);
         } else {
             // Extract a possible number from the string passed in (this strips leading characters that
             // could not be the start of a phone number.)
@@ -1919,7 +1916,7 @@ class PhoneNumberUtil
             // before and after.
             $defaultCountryCode = $defaultRegionMetadata->getCountryCode();
             $defaultCountryCodeString = (string)$defaultCountryCode;
-            $normalizedNumber = (string)$fullNumber;
+            $normalizedNumber = $fullNumber;
             if (strpos($normalizedNumber, $defaultCountryCodeString) === 0) {
                 $potentialNationalNumber = substr($normalizedNumber, mb_strlen($defaultCountryCodeString));
                 $generalDesc = $defaultRegionMetadata->getGeneralDesc();
@@ -2385,29 +2382,24 @@ class PhoneNumberUtil
                 } else {
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
+            } else if (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
+                    // MX fixed line and mobile numbers should always be formatted in international format,
+                    // even when dialed within MX. For national format to work, a carrier code needs to be
+                    // used, and the correct carrier code depends on if the caller and callee are from the
+                    // same local area. It is trickier to get that to work correctly than using
+                    // international format, which is tested to work fine on all carriers.
+                    // CL fixed line numbers need the national prefix when dialing in the national format,
+                    // but don't have it when used for display. The reverse is true for mobile numbers.
+                    // As a result, we output them in the international format to make it work.
+                    (
+                        ($regionCode == 'MX' || $regionCode == 'CL' || $regionCode == 'UZ')
+                        && $isFixedLineOrMobile
+                    )
+                ) && $this->canBeInternationallyDialled($numberNoExt)
+            ) {
+                $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
             } else {
-                // For non-geographical countries andMexican, Chilean and Uzbek fixed line and mobile
-                // numbers, we output international format for numbers that can be dialed internationally as
-                // that always works.
-                if (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
-                        // MX fixed line and mobile numbers should always be formatted in international format,
-                        // even when dialed within MX. For national format to work, a carrier code needs to be
-                        // used, and the correct carrier code depends on if the caller and callee are from the
-                        // same local area. It is trickier to get that to work correctly than using
-                        // international format, which is tested to work fine on all carriers.
-                        // CL fixed line numbers need the national prefix when dialing in the national format,
-                        // but don't have it when used for display. The reverse is true for mobile numbers.
-                        // As a result, we output them in the international format to make it work.
-                        (
-                            ($regionCode == 'MX' || $regionCode == 'CL' || $regionCode == 'UZ')
-                            && $isFixedLineOrMobile
-                        )
-                    ) && $this->canBeInternationallyDialled($numberNoExt)
-                ) {
-                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
-                } else {
-                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
-                }
+                $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
             }
         } elseif ($isValidNumber && $this->canBeInternationallyDialled($numberNoExt)) {
             // We assume that short numbers are not diallable from outside their region, so if a number

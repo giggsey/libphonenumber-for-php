@@ -501,7 +501,7 @@ class BuildMetadataFromXml
                     if (in_array($j, $lengthSet)) {
                         throw new \RuntimeException("Duplicate length element found ({$j}) in possibleLength string {$possibleLengthString}.");
                     }
-                    $lengthSet[] = (int)$j;
+                    $lengthSet[] = $j;
                 }
             } else {
                 $length = $lengthSubstring;

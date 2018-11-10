@@ -23,7 +23,6 @@ class UKNumbersTest extends TestCase
             self::META_DATA_FILE_PREFIX,
             CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap
         );
-        ;
     }
 
     public function testMobileNumber()

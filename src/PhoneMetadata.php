@@ -909,7 +909,7 @@ class PhoneMetadata
 
         if (isset($input['shortCode'])) {
             $desc = new PhoneNumberDesc();
-            $this->setShortCode(($desc->fromArray($input['shortCode'])));
+            $this->setShortCode($desc->fromArray($input['shortCode']));
         }
 
         if (isset($input['standardRate'])) {
