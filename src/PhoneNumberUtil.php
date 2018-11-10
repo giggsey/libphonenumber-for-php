@@ -3352,7 +3352,7 @@ class PhoneNumberUtil
                             return $match;
                         }
 
-// If the first number didn't have a valid country calling code, then we parse the
+                        // If the first number didn't have a valid country calling code, then we parse the
                         // second number without one as well.
                         $secondNumberProto = new PhoneNumber();
                         $this->parseHelper($secondNumberIn, null, false, false, $secondNumberProto);
