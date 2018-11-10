@@ -245,7 +245,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasCountryCode()
     {
-        return isset($this->countryCode);
+        return $this->countryCode !== null;
     }
 
     /**
@@ -278,7 +278,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasNationalNumber()
     {
-        return isset($this->nationalNumber);
+        return $this->nationalNumber !== null;
     }
 
     /**
@@ -311,7 +311,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasExtension()
     {
-        return isset($this->extension);
+        return $this->extension !== null;
     }
 
     /**
@@ -344,7 +344,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasItalianLeadingZero()
     {
-        return isset($this->italianLeadingZero);
+        return $this->italianLeadingZero !== null;
     }
 
     /**
@@ -411,7 +411,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasRawInput()
     {
-        return isset($this->rawInput);
+        return $this->rawInput !== null;
     }
 
     /**
@@ -477,7 +477,7 @@ class PhoneNumber implements \Serializable
      */
     public function hasPreferredDomesticCarrierCode()
     {
-        return isset($this->preferredDomesticCarrierCode);
+        return $this->preferredDomesticCarrierCode !== null;
     }
 
     /**

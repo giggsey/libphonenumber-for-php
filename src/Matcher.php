@@ -127,7 +127,7 @@ class Matcher
      */
     public function group($group = null)
     {
-        if (!isset($group) || $group === null) {
+        if ($group === null) {
             $group = 0;
         }
         return isset($this->groups[$group][0]) ? $this->groups[$group][0] : null;
@@ -139,7 +139,7 @@ class Matcher
      */
     public function end($group = null)
     {
-        if (!isset($group) || $group === null) {
+        if ($group === null) {
             $group = 0;
         }
         if (!isset($this->groups[$group])) {
@@ -150,7 +150,7 @@ class Matcher
 
     public function start($group = null)
     {
-        if (!isset($group) || $group === null) {
+        if ($group === null) {
             $group = 0;
         }
         if (!isset($this->groups[$group])) {
