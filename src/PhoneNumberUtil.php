@@ -107,7 +107,7 @@ class PhoneNumberUtil
     public static $PLUS_CHARS_PATTERN;
     protected static $SEPARATOR_PATTERN;
     protected static $CAPTURING_DIGIT_PATTERN;
-    protected static $VALID_START_CHAR_PATTERN = null;
+    protected static $VALID_START_CHAR_PATTERN;
     public static $SECOND_NUMBER_START_PATTERN = '[\\\\/] *x';
     public static $UNWANTED_END_CHAR_PATTERN = "[[\\P{N}&&\\P{L}]&&[^#]]+$";
     protected static $DIALLABLE_CHAR_MAPPINGS = array();
@@ -116,7 +116,7 @@ class PhoneNumberUtil
     /**
      * @var PhoneNumberUtil
      */
-    protected static $instance = null;
+    protected static $instance;
 
     /**
      * Only upper-case variants of alpha characters are stored.
@@ -184,7 +184,7 @@ class PhoneNumberUtil
      * For performance reasons, amalgamate both into one map.
      * @var array
      */
-    protected static $ALPHA_PHONE_MAPPINGS = null;
+    protected static $ALPHA_PHONE_MAPPINGS;
 
     /**
      * Separate map of all symbols that we wish to retain when formatting alpha numbers. This
@@ -223,8 +223,8 @@ class PhoneNumberUtil
      * @internal
      */
     public static $EXTN_PATTERNS_FOR_MATCHING;
-    protected static $EXTN_PATTERN = null;
-    protected static $VALID_PHONE_NUMBER_PATTERN = null;
+    protected static $EXTN_PATTERN;
+    protected static $VALID_PHONE_NUMBER_PATTERN;
     protected static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
     /**
      *  Regular expression of viable phone numbers. This is location independent. Checks we have at

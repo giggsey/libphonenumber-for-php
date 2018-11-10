@@ -17,7 +17,7 @@ class ShortNumberInfo
     /**
      * @var ShortNumberInfo
      */
-    protected static $instance = null;
+    protected static $instance;
     /**
      * @var MatcherAPIInterface
      */

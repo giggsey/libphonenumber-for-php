@@ -18,7 +18,7 @@ class PhoneNumberToTimeZonesMapper
     /**
      * @var PhoneNumberToTimeZonesMapper
      */
-    protected static $instance = null;
+    protected static $instance;
     protected $unknownTimeZoneList = array();
     /**
      * @var PhoneNumberUtil

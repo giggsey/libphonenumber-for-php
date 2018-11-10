@@ -12,32 +12,32 @@ class PhoneMetadata
     /**
      * @var string
      */
-    protected $id = null;
+    protected $id;
     /**
      * @var int
      */
-    protected $countryCode = null;
-    protected $leadingDigits = null;
-    protected $internationalPrefix = null;
-    protected $preferredInternationalPrefix = null;
-    protected $nationalPrefixForParsing = null;
-    protected $nationalPrefixTransformRule = null;
-    protected $nationalPrefix = null;
-    protected $preferredExtnPrefix = null;
+    protected $countryCode;
+    protected $leadingDigits;
+    protected $internationalPrefix;
+    protected $preferredInternationalPrefix;
+    protected $nationalPrefixForParsing;
+    protected $nationalPrefixTransformRule;
+    protected $nationalPrefix;
+    protected $preferredExtnPrefix;
     protected $mainCountryForCode = false;
     protected $leadingZeroPossible = false;
     protected $mobileNumberPortableRegion = false;
-    protected $generalDesc = null;
+    protected $generalDesc;
     /**
      * @var PhoneNumberDesc
      */
-    protected $mobile = null;
-    protected $premiumRate = null;
-    protected $fixedLine = null;
+    protected $mobile;
+    protected $premiumRate;
+    protected $fixedLine;
     protected $sameMobileAndFixedLinePattern = false;
     protected $numberFormat = array();
-    protected $tollFree = null;
-    protected $sharedCost = null;
+    protected $tollFree;
+    protected $sharedCost;
     protected $personalNumber;
     protected $voip;
     protected $pager;
@@ -63,7 +63,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    protected $noInternationalDialling = null;
+    protected $noInternationalDialling;
     /**
      *
      * @var NumberFormat[]

@@ -20,43 +20,43 @@ use PHPUnit\Framework\TestCase;
 class PhoneNumberUtilTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = "../../tests/core/data/PhoneNumberMetadataForTesting";
-    private static $bsNumber = null;
-    private static $internationalTollFree = null;
-    private static $sgNumber = null;
-    private static $usShortByOneNumber = null;
-    private static $usTollFree = null;
-    private static $usNumber = null;
-    private static $usLocalNumber = null;
-    private static $usLongNumber = null;
+    private static $bsNumber;
+    private static $internationalTollFree;
+    private static $sgNumber;
+    private static $usShortByOneNumber;
+    private static $usTollFree;
+    private static $usNumber;
+    private static $usLocalNumber;
+    private static $usLongNumber;
     /**
      * @var PhoneNumber
      */
-    private static $nzNumber = null;
-    private static $usPremium = null;
-    private static $usSpoof = null;
-    private static $usSpoofWithRawInput = null;
-    private static $uzFixedLine = null;
-    private static $uzMobile = null;
-    private static $gbMobile = null;
-    private static $bsMobile = null;
-    private static $gbNumber = null;
-    private static $deShortNumber = null;
-    private static $itMobile = null;
-    private static $itNumber = null;
-    private static $auNumber = null;
-    private static $arMobile = null;
-    private static $arNumber = null;
-    private static $mxMobile1 = null;
-    private static $mxNumber1 = null;
-    private static $mxMobile2 = null;
-    private static $mxNumber2 = null;
-    private static $deNumber = null;
-    private static $jpStarNumber = null;
-    private static $internationalTollFreeTooLong = null;
-    private static $universalPremiumRate = null;
-    private static $alphaNumericNumber = null;
-    private static $aeUAN = null;
-    private static $unknownCountryCodeNoRawInput = null;
+    private static $nzNumber;
+    private static $usPremium;
+    private static $usSpoof;
+    private static $usSpoofWithRawInput;
+    private static $uzFixedLine;
+    private static $uzMobile;
+    private static $gbMobile;
+    private static $bsMobile;
+    private static $gbNumber;
+    private static $deShortNumber;
+    private static $itMobile;
+    private static $itNumber;
+    private static $auNumber;
+    private static $arMobile;
+    private static $arNumber;
+    private static $mxMobile1;
+    private static $mxNumber1;
+    private static $mxMobile2;
+    private static $mxNumber2;
+    private static $deNumber;
+    private static $jpStarNumber;
+    private static $internationalTollFreeTooLong;
+    private static $universalPremiumRate;
+    private static $alphaNumericNumber;
+    private static $aeUAN;
+    private static $unknownCountryCodeNoRawInput;
     /**
      * @var PhoneNumberUtil
      */

@@ -23,7 +23,7 @@ class PhoneNumberOfflineGeocoder
     /**
      * @var PrefixFileReader
      */
-    protected $prefixFileReader = null;
+    protected $prefixFileReader;
 
     /**
      * PhoneNumberOfflineGeocoder constructor.
