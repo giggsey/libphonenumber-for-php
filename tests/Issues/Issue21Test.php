@@ -20,8 +20,8 @@ class Issue21Test extends TestCase
 
     public function testFloatNumber()
     {
-        $number = "0358112345678987";
-        $phoneNumber = $this->phoneUtil->parse($number, "DE");
+        $number = '0358112345678987';
+        $phoneNumber = $this->phoneUtil->parse($number, 'DE');
 
         $this->assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
 
@@ -36,8 +36,8 @@ class Issue21Test extends TestCase
 
     public function testLongerNumber()
     {
-        $number = "12345678901234567";
-        $phoneNumber = $this->phoneUtil->parse($number, "DE");
+        $number = '12345678901234567';
+        $phoneNumber = $this->phoneUtil->parse($number, 'DE');
 
         $this->assertEquals('+4912345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164));
         $this->assertEquals('+49 12345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL));

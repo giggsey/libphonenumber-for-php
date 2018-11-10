@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class Issue159Test extends TestCase
 {
-    const LOS_ANGELES_TZ = "America/Los_Angeles";
+    const LOS_ANGELES_TZ = 'America/Los_Angeles';
 
     public function setUp()
     {

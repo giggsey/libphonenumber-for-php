@@ -12,32 +12,32 @@ class PhoneMetadata
     /**
      * @var string
      */
-    protected $id = null;
+    protected $id;
     /**
      * @var int
      */
-    protected $countryCode = null;
-    protected $leadingDigits = null;
-    protected $internationalPrefix = null;
-    protected $preferredInternationalPrefix = null;
-    protected $nationalPrefixForParsing = null;
-    protected $nationalPrefixTransformRule = null;
-    protected $nationalPrefix = null;
-    protected $preferredExtnPrefix = null;
+    protected $countryCode;
+    protected $leadingDigits;
+    protected $internationalPrefix;
+    protected $preferredInternationalPrefix;
+    protected $nationalPrefixForParsing;
+    protected $nationalPrefixTransformRule;
+    protected $nationalPrefix;
+    protected $preferredExtnPrefix;
     protected $mainCountryForCode = false;
     protected $leadingZeroPossible = false;
     protected $mobileNumberPortableRegion = false;
-    protected $generalDesc = null;
+    protected $generalDesc;
     /**
      * @var PhoneNumberDesc
      */
-    protected $mobile = null;
-    protected $premiumRate = null;
-    protected $fixedLine = null;
+    protected $mobile;
+    protected $premiumRate;
+    protected $fixedLine;
     protected $sameMobileAndFixedLinePattern = false;
     protected $numberFormat = array();
-    protected $tollFree = null;
-    protected $sharedCost = null;
+    protected $tollFree;
+    protected $sharedCost;
     protected $personalNumber;
     protected $voip;
     protected $pager;
@@ -63,7 +63,7 @@ class PhoneMetadata
     /**
      * @var PhoneNumberDesc
      */
-    protected $noInternationalDialling = null;
+    protected $noInternationalDialling;
     /**
      *
      * @var NumberFormat[]
@@ -75,7 +75,7 @@ class PhoneMetadata
      */
     public function hasId()
     {
-        return isset($this->id);
+        return $this->id !== null;
     }
 
     /**
@@ -83,17 +83,17 @@ class PhoneMetadata
      */
     public function hasCountryCode()
     {
-        return isset($this->countryCode);
+        return $this->countryCode !== null;
     }
 
     public function hasInternationalPrefix()
     {
-        return isset($this->internationalPrefix);
+        return $this->internationalPrefix !== null;
     }
 
     public function hasMainCountryForCode()
     {
-        return isset($this->mainCountryForCode);
+        return $this->mainCountryForCode !== null;
     }
 
     public function isMainCountryForCode()
@@ -120,17 +120,17 @@ class PhoneMetadata
 
     public function hasLeadingZeroPossible()
     {
-        return isset($this->leadingZeroPossible);
+        return $this->leadingZeroPossible !== null;
     }
 
     public function hasMobileNumberPortableRegion()
     {
-        return isset($this->mobileNumberPortableRegion);
+        return $this->mobileNumberPortableRegion !== null;
     }
 
     public function hasSameMobileAndFixedLinePattern()
     {
-        return isset($this->sameMobileAndFixedLinePattern);
+        return $this->sameMobileAndFixedLinePattern !== null;
     }
 
     public function numberFormatSize()
@@ -301,7 +301,7 @@ class PhoneMetadata
 
     public function hasGeneralDesc()
     {
-        return isset($this->generalDesc);
+        return $this->generalDesc !== null;
     }
 
     /**
@@ -320,7 +320,7 @@ class PhoneMetadata
 
     public function hasFixedLine()
     {
-        return isset($this->fixedLine);
+        return $this->fixedLine !== null;
     }
 
     /**
@@ -339,7 +339,7 @@ class PhoneMetadata
 
     public function hasMobile()
     {
-        return isset($this->mobile);
+        return $this->mobile !== null;
     }
 
     /**
@@ -358,7 +358,7 @@ class PhoneMetadata
 
     public function hasTollFree()
     {
-        return isset($this->tollFree);
+        return $this->tollFree !== null;
     }
 
     /**
@@ -377,7 +377,7 @@ class PhoneMetadata
 
     public function hasPremiumRate()
     {
-        return isset($this->premiumRate);
+        return $this->premiumRate !== null;
     }
 
     /**
@@ -396,7 +396,7 @@ class PhoneMetadata
 
     public function hasSharedCost()
     {
-        return isset($this->sharedCost);
+        return $this->sharedCost !== null;
     }
 
     /**
@@ -415,7 +415,7 @@ class PhoneMetadata
 
     public function hasPersonalNumber()
     {
-        return isset($this->personalNumber);
+        return $this->personalNumber !== null;
     }
 
     /**
@@ -434,7 +434,7 @@ class PhoneMetadata
 
     public function hasVoip()
     {
-        return isset($this->voip);
+        return $this->voip !== null;
     }
 
     /**
@@ -453,7 +453,7 @@ class PhoneMetadata
 
     public function hasPager()
     {
-        return isset($this->pager);
+        return $this->pager !== null;
     }
 
     /**
@@ -472,7 +472,7 @@ class PhoneMetadata
 
     public function hasUan()
     {
-        return isset($this->uan);
+        return $this->uan !== null;
     }
 
     /**
@@ -491,7 +491,7 @@ class PhoneMetadata
 
     public function hasEmergency()
     {
-        return isset($this->emergency);
+        return $this->emergency !== null;
     }
 
     /**
@@ -510,7 +510,7 @@ class PhoneMetadata
 
     public function hasVoicemail()
     {
-        return isset($this->voicemail);
+        return $this->voicemail !== null;
     }
 
     /**
@@ -529,7 +529,7 @@ class PhoneMetadata
 
     public function hasShortCode()
     {
-        return isset($this->short_code);
+        return $this->short_code !== null;
     }
 
     public function getShortCode()
@@ -545,7 +545,7 @@ class PhoneMetadata
 
     public function hasStandardRate()
     {
-        return isset($this->standard_rate);
+        return $this->standard_rate !== null;
     }
 
     public function getStandardRate()
@@ -561,7 +561,7 @@ class PhoneMetadata
 
     public function hasCarrierSpecific()
     {
-        return isset($this->carrierSpecific);
+        return $this->carrierSpecific !== null;
     }
 
     public function getCarrierSpecific()
@@ -577,7 +577,7 @@ class PhoneMetadata
 
     public function hasSmsServices()
     {
-        return isset($this->smsServices);
+        return $this->smsServices !== null;
     }
 
     public function getSmsServices()
@@ -593,7 +593,7 @@ class PhoneMetadata
 
     public function hasNoInternationalDialling()
     {
-        return isset($this->noInternationalDialling);
+        return $this->noInternationalDialling !== null;
     }
 
     public function getNoInternationalDialling()
@@ -678,7 +678,7 @@ class PhoneMetadata
 
     public function hasNationalPrefix()
     {
-        return isset($this->nationalPrefix);
+        return $this->nationalPrefix !== null;
     }
 
     public function getNationalPrefix()
@@ -700,7 +700,7 @@ class PhoneMetadata
 
     public function hasPreferredExtnPrefix()
     {
-        return isset($this->preferredExtnPrefix);
+        return $this->preferredExtnPrefix !== null;
     }
 
     public function getPreferredExtnPrefix()
@@ -722,7 +722,7 @@ class PhoneMetadata
 
     public function hasNationalPrefixForParsing()
     {
-        return isset($this->nationalPrefixForParsing);
+        return $this->nationalPrefixForParsing !== null;
     }
 
     public function getNationalPrefixForParsing()
@@ -738,7 +738,7 @@ class PhoneMetadata
 
     public function hasNationalPrefixTransformRule()
     {
-        return isset($this->nationalPrefixTransformRule);
+        return $this->nationalPrefixTransformRule !== null;
     }
 
     public function getNationalPrefixTransformRule()
@@ -793,7 +793,7 @@ class PhoneMetadata
      */
     public function hasLeadingDigits()
     {
-        return isset($this->leadingDigits);
+        return $this->leadingDigits !== null;
     }
 
     public function getLeadingDigits()
@@ -909,7 +909,7 @@ class PhoneMetadata
 
         if (isset($input['shortCode'])) {
             $desc = new PhoneNumberDesc();
-            $this->setShortCode(($desc->fromArray($input['shortCode'])));
+            $this->setShortCode($desc->fromArray($input['shortCode']));
         }
 
         if (isset($input['standardRate'])) {

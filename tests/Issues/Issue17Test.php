@@ -28,10 +28,10 @@ class Issue17Test extends TestCase
 
     public function testIsleOfManLocale()
     {
-        $number = "447624206000";
+        $number = '447624206000';
 
         $phoneNumber = $this->phoneUtil->parse($number, 'GB');
 
-        $this->assertEquals("Isle of Man", $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        $this->assertEquals('Isle of Man', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }

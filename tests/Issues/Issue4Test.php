@@ -24,6 +24,6 @@ class Issue4Test extends TestCase
     {
         $number = $this->phoneNumberUtil->parse('0351-152-303-473', 'AR');
 
-        $this->assertEquals("+5493512303473", $this->phoneNumberUtil->format($number, PhoneNumberFormat::E164));
+        $this->assertEquals('+5493512303473', $this->phoneNumberUtil->format($number, PhoneNumberFormat::E164));
     }
 }

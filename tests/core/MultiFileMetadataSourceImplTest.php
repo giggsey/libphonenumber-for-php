@@ -29,22 +29,22 @@ class MultiFileMetadataSourceImplTest extends TestCase
         // do is make sure the exception has the file name in it.
 
         try {
-            $this->multiFileMetadataSource->loadMetadataFromFile("no/such/file", "XX", -1, new DefaultMetadataLoader());
-            $this->fail("Expected Exception");
+            $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
+            $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_XX', $e->getMessage(), "Unexpected error: " . $e->getMessage());
+            $this->assertContains('no/such/file_XX', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
         }
 
         try {
             $this->multiFileMetadataSource->loadMetadataFromFile(
-                "no/such/file",
+                'no/such/file',
                 PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY,
                 123,
                 new DefaultMetadataLoader()
             );
-            $this->fail("Expected Exception");
+            $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_123', $e->getMessage(), "Unexpected error: " . $e->getMessage());
+            $this->assertContains('no/such/file_123', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
         }
     }
 }

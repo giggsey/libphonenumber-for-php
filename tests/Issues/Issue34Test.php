@@ -19,10 +19,10 @@ class Issue34Test extends TestCase
 
     public function testIsValidNumberForRegion()
     {
-        $number = "+33 6 76 83 51 85";
-        $region = "DE";
+        $number = '+33 6 76 83 51 85';
+        $region = 'DE';
         $phoneNumber = $this->phoneUtil->parse($number, $region);
 
-        $this->assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, "DE"));
+        $this->assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, 'DE'));
     }
 }

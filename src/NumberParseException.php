@@ -42,6 +42,6 @@ class NumberParseException extends \Exception
 
     public function __toString()
     {
-        return "Error type: " . $this->errorType . ". " . $this->message;
+        return 'Error type: ' . $this->errorType . '. ' . $this->message;
     }
 }

@@ -10,14 +10,14 @@ use PHPUnit\Framework\TestCase;
 
 class MetadataFilterTest extends TestCase
 {
-    private static $ID = "AM";
+    private static $ID = 'AM';
     private static $countryCode = 374;
-    private static $internationalPrefix = "0[01]";
-    private static $preferredInternationalPrefix = "00";
+    private static $internationalPrefix = '0[01]';
+    private static $preferredInternationalPrefix = '00';
     private static $nationalNumberPattern = "\\d{8}";
     private static $possibleLengths = array(8);
     private static $possibleLengthsLocalOnly = array(5, 6);
-    private static $exampleNumber = "10123456";
+    private static $exampleNumber = '10123456';
 
     public function testForLiteBuild()
     {
@@ -204,93 +204,93 @@ class MetadataFilterTest extends TestCase
 
         // Order and whitespace don't matter
         $this->assertEquals($this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-            " nationalNumberPattern "
-            . ": uan ( exampleNumber , possibleLengthLocalOnly,     possibleLength ) "
-            . ": nationalPrefix "
-            . ": fixedLine "
-            . ": pager ( exampleNumber ) ")),
+            ' nationalNumberPattern '
+            . ': uan ( exampleNumber , possibleLengthLocalOnly,     possibleLength ) '
+            . ': nationalPrefix '
+            . ': fixedLine '
+            . ': pager ( exampleNumber ) ')),
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                "uan(possibleLength,exampleNumber,possibleLengthLocalOnly)"
-                . ":pager(exampleNumber)"
-                . ":fixedLine"
-                . ":nationalPrefix"
-                . ":nationalNumberPattern")));
+                'uan(possibleLength,exampleNumber,possibleLengthLocalOnly)'
+                . ':pager(exampleNumber)'
+                . ':fixedLine'
+                . ':nationalPrefix'
+                . ':nationalNumberPattern')));
 
         // Parent explicitly listing all possible children.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)")),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString("uan")));
+                'uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)')),
+            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan')));
 
         // All parent's children covered, some implicitly and some explicitly.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleLength,exampleNumber)"
-                . ":possibleLengthLocalOnly")),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString("uan:possibleLengthLocalOnly")));
+                'uan(nationalNumberPattern,possibleLength,exampleNumber)'
+                . ':possibleLengthLocalOnly')),
+            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan:possibleLengthLocalOnly')));
 
         // Child field covered by all parents explicitly.
         // It seems this will always be better expressed as a wildcard child, but the check is complex
         // and may not be worth it.
         $this->assertEquals(
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine(exampleNumber)"
-                . ":mobile(exampleNumber)"
-                . ":tollFree(exampleNumber)"
-                . ":premiumRate(exampleNumber)"
-                . ":sharedCost(exampleNumber)"
-                . ":personalNumber(exampleNumber)"
-                . ":voip(exampleNumber)"
-                . ":pager(exampleNumber)"
-                . ":uan(exampleNumber)"
-                . ":emergency(exampleNumber)"
-                . ":voicemail(exampleNumber)"
-                . ":shortCode(exampleNumber)"
-                . ":standardRate(exampleNumber)"
-                . ":carrierSpecific(exampleNumber)"
-                . ":smsServices(exampleNumber)"
-                . ":noInternationalDialling(exampleNumber)"),
-            MetadataFilter::parseFieldMapFromString("exampleNumber"));
+                'fixedLine(exampleNumber)'
+                . ':mobile(exampleNumber)'
+                . ':tollFree(exampleNumber)'
+                . ':premiumRate(exampleNumber)'
+                . ':sharedCost(exampleNumber)'
+                . ':personalNumber(exampleNumber)'
+                . ':voip(exampleNumber)'
+                . ':pager(exampleNumber)'
+                . ':uan(exampleNumber)'
+                . ':emergency(exampleNumber)'
+                . ':voicemail(exampleNumber)'
+                . ':shortCode(exampleNumber)'
+                . ':standardRate(exampleNumber)'
+                . ':carrierSpecific(exampleNumber)'
+                . ':smsServices(exampleNumber)'
+                . ':noInternationalDialling(exampleNumber)'),
+            MetadataFilter::parseFieldMapFromString('exampleNumber'));
 
         // Child field given as a group by itself while it's covered by all parents implicitly.
         // It seems this will always be better expressed without the wildcard child, but the check is
         // complex and may not be worth it.
         $this->assertEquals(
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine"
-                . ":mobile"
-                . ":tollFree"
-                . ":premiumRate"
-                . ":sharedCost"
-                . ":personalNumber"
-                . ":voip"
-                . ":pager"
-                . ":uan"
-                . ":emergency"
-                . ":voicemail"
-                . ":shortCode"
-                . ":standardRate"
-                . ":carrierSpecific"
-                . ":smsServices"
-                . ":noInternationalDialling"
-                . ":exampleNumber"),
+                'fixedLine'
+                . ':mobile'
+                . ':tollFree'
+                . ':premiumRate'
+                . ':sharedCost'
+                . ':personalNumber'
+                . ':voip'
+                . ':pager'
+                . ':uan'
+                . ':emergency'
+                . ':voicemail'
+                . ':shortCode'
+                . ':standardRate'
+                . ':carrierSpecific'
+                . ':smsServices'
+                . ':noInternationalDialling'
+                . ':exampleNumber'),
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine"
-                . ":mobile"
-                . ":tollFree"
-                . ":premiumRate"
-                . ":sharedCost"
-                . ":personalNumber"
-                . ":voip"
-                . ":pager"
-                . ":uan"
-                . ":emergency"
-                . ":voicemail"
-                . ":shortCode"
-                . ":standardRate"
-                . ":carrierSpecific"
-                . ":smsServices"
-                . ":noInternationalDialling"));
+                'fixedLine'
+                . ':mobile'
+                . ':tollFree'
+                . ':premiumRate'
+                . ':sharedCost'
+                . ':personalNumber'
+                . ':voip'
+                . ':pager'
+                . ':uan'
+                . ':emergency'
+                . ':voicemail'
+                . ':shortCode'
+                . ':standardRate'
+                . ':carrierSpecific'
+                . ':smsServices'
+                . ':noInternationalDialling'));
     }
 
     /**
@@ -321,7 +321,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty input.
         try {
-            MetadataFilter::parseFieldMapFromString("");
+            MetadataFilter::parseFieldMapFromString('');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -330,7 +330,7 @@ class MetadataFilterTest extends TestCase
 
         // Whitespace input.
         try {
-            MetadataFilter::parseFieldMapFromString(" ");
+            MetadataFilter::parseFieldMapFromString(' ');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -339,7 +339,7 @@ class MetadataFilterTest extends TestCase
 
         // Bad token given as only group.
         try {
-            MetadataFilter::parseFieldMapFromString("something_else");
+            MetadataFilter::parseFieldMapFromString('something_else');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -348,7 +348,7 @@ class MetadataFilterTest extends TestCase
 
         // Bad token given as last group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine:something_else");
+            MetadataFilter::parseFieldMapFromString('fixedLine:something_else');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -358,7 +358,7 @@ class MetadataFilterTest extends TestCase
         // Bad token given as middle group.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "pager:nationalPrefix:something_else:nationalNumberPattern");
+                'pager:nationalPrefix:something_else:nationalNumberPattern');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -367,7 +367,7 @@ class MetadataFilterTest extends TestCase
 
         // Childless field given as parent.
         try {
-            MetadataFilter::parseFieldMapFromString("nationalPrefix(exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('nationalPrefix(exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -376,7 +376,7 @@ class MetadataFilterTest extends TestCase
 
         // Child field given as parent.
         try {
-            MetadataFilter::parseFieldMapFromString("possibleLength(exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('possibleLength(exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -385,7 +385,7 @@ class MetadataFilterTest extends TestCase
 
         // Bad token given as parent.
         try {
-            MetadataFilter::parseFieldMapFromString("something_else(exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('something_else(exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -394,7 +394,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as only child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(uan)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(uan)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -403,7 +403,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as first child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(uan,possibleLength)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(uan,possibleLength)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -412,7 +412,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as last child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(possibleLength,uan)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,uan)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -421,7 +421,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as middle child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(possibleLength,uan,exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,uan,exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -430,7 +430,7 @@ class MetadataFilterTest extends TestCase
 
         // Childless field given as only child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(nationalPrefix)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(nationalPrefix)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -439,7 +439,7 @@ class MetadataFilterTest extends TestCase
 
         // Bad token given as only child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(something_else)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(something_else)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -448,7 +448,7 @@ class MetadataFilterTest extends TestCase
 
         // Bad token given as last child.
         try {
-            MetadataFilter::parseFieldMapFromString("uan(possibleLength,something_else)");
+            MetadataFilter::parseFieldMapFromString('uan(possibleLength,something_else)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -457,7 +457,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty parent.
         try {
-            MetadataFilter::parseFieldMapFromString("(exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('(exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -466,7 +466,7 @@ class MetadataFilterTest extends TestCase
 
         // Whitespace parent.
         try {
-            MetadataFilter::parseFieldMapFromString(" (exampleNumber)");
+            MetadataFilter::parseFieldMapFromString(' (exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -475,7 +475,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine()");
+            MetadataFilter::parseFieldMapFromString('fixedLine()');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -484,7 +484,7 @@ class MetadataFilterTest extends TestCase
 
         // Whitespace child.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine( )");
+            MetadataFilter::parseFieldMapFromString('fixedLine( )');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -493,7 +493,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty parent and child.
         try {
-            MetadataFilter::parseFieldMapFromString("()");
+            MetadataFilter::parseFieldMapFromString('()');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -502,7 +502,7 @@ class MetadataFilterTest extends TestCase
 
         // Whitespace parent and empty child.
         try {
-            MetadataFilter::parseFieldMapFromString(" ()");
+            MetadataFilter::parseFieldMapFromString(' ()');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -511,7 +511,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as a group twice.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine:uan:fixedLine");
+            MetadataFilter::parseFieldMapFromString('fixedLine:uan:fixedLine');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -520,7 +520,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as the parent of a group and as a group by itself.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber):fixedLine");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):fixedLine');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -529,7 +529,7 @@ class MetadataFilterTest extends TestCase
 
         // Parent field given as the parent of one group and then as the parent of another group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber):fixedLine(possibleLength)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):fixedLine(possibleLength)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -538,7 +538,7 @@ class MetadataFilterTest extends TestCase
 
         // Childless field given twice as a group.
         try {
-            MetadataFilter::parseFieldMapFromString("nationalPrefix:uan:nationalPrefix");
+            MetadataFilter::parseFieldMapFromString('nationalPrefix:uan:nationalPrefix');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -547,7 +547,7 @@ class MetadataFilterTest extends TestCase
 
         // Child field given twice as a group.
         try {
-            MetadataFilter::parseFieldMapFromString("exampleNumber:uan:exampleNumber");
+            MetadataFilter::parseFieldMapFromString('exampleNumber:uan:exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -556,7 +556,7 @@ class MetadataFilterTest extends TestCase
 
         // Child field given first as the only child in a group and then as a group by itself.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber):exampleNumber");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -566,9 +566,9 @@ class MetadataFilterTest extends TestCase
         // Child field given first as a child in a group and then as a group by itself.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "uan(nationalNumberPattern,possibleLength,exampleNumber)"
-                . ":possibleLengthLocalOnly"
-                . ":exampleNumber");
+                'uan(nationalNumberPattern,possibleLength,exampleNumber)'
+                . ':possibleLengthLocalOnly'
+                . ':exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -578,7 +578,7 @@ class MetadataFilterTest extends TestCase
         // Child field given twice as children of the same parent.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine(possibleLength,exampleNumber,possibleLength)");
+                'fixedLine(possibleLength,exampleNumber,possibleLength)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -588,22 +588,22 @@ class MetadataFilterTest extends TestCase
         // Child field given as a group by itself while it's covered by all parents explicitly.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine(exampleNumber)"
-                . ":mobile(exampleNumber)"
-                . ":tollFree(exampleNumber)"
-                . ":premiumRate(exampleNumber)"
-                . ":sharedCost(exampleNumber)"
-                . ":personalNumber(exampleNumber)"
-                . ":voip(exampleNumber)"
-                . ":pager(exampleNumber)"
-                . ":uan(exampleNumber)"
-                . ":emergency(exampleNumber)"
-                . ":voicemail(exampleNumber)"
-                . ":shortCode(exampleNumber)"
-                . ":standardRate(exampleNumber)"
-                . ":carrierSpecific(exampleNumber)"
-                . ":noInternationalDialling(exampleNumber)"
-                . ":exampleNumber");
+                'fixedLine(exampleNumber)'
+                . ':mobile(exampleNumber)'
+                . ':tollFree(exampleNumber)'
+                . ':premiumRate(exampleNumber)'
+                . ':sharedCost(exampleNumber)'
+                . ':personalNumber(exampleNumber)'
+                . ':voip(exampleNumber)'
+                . ':pager(exampleNumber)'
+                . ':uan(exampleNumber)'
+                . ':emergency(exampleNumber)'
+                . ':voicemail(exampleNumber)'
+                . ':shortCode(exampleNumber)'
+                . ':standardRate(exampleNumber)'
+                . ':carrierSpecific(exampleNumber)'
+                . ':noInternationalDialling(exampleNumber)'
+                . ':exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -614,23 +614,23 @@ class MetadataFilterTest extends TestCase
         // some explicitly.
         try {
             MetadataFilter::parseFieldMapFromString(
-                "fixedLine"
-                . ":mobile"
-                . ":tollFree"
-                . ":premiumRate"
-                . ":sharedCost"
-                . ":personalNumber"
-                . ":voip"
-                . ":pager(exampleNumber)"
-                . ":uan(exampleNumber)"
-                . ":emergency(exampleNumber)"
-                . ":voicemail(exampleNumber)"
-                . ":shortCode(exampleNumber)"
-                . ":standardRate(exampleNumber)"
-                . ":carrierSpecific(exampleNumber)"
-                . ":smsServices"
-                . ":noInternationalDialling(exampleNumber)"
-                . ":exampleNumber");
+                'fixedLine'
+                . ':mobile'
+                . ':tollFree'
+                . ':premiumRate'
+                . ':sharedCost'
+                . ':personalNumber'
+                . ':voip'
+                . ':pager(exampleNumber)'
+                . ':uan(exampleNumber)'
+                . ':emergency(exampleNumber)'
+                . ':voicemail(exampleNumber)'
+                . ':shortCode(exampleNumber)'
+                . ':standardRate(exampleNumber)'
+                . ':carrierSpecific(exampleNumber)'
+                . ':smsServices'
+                . ':noInternationalDialling(exampleNumber)'
+                . ':exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -639,7 +639,7 @@ class MetadataFilterTest extends TestCase
 
         // Missing right parenthesis in only group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -648,7 +648,7 @@ class MetadataFilterTest extends TestCase
 
         // Missing right parenthesis in first group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber:pager");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber:pager');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -657,7 +657,7 @@ class MetadataFilterTest extends TestCase
 
         // Missing left parenthesis in only group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLineexampleNumber)");
+            MetadataFilter::parseFieldMapFromString('fixedLineexampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -666,7 +666,7 @@ class MetadataFilterTest extends TestCase
 
         // Early right parenthesis in only group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(example_numb)er");
+            MetadataFilter::parseFieldMapFromString('fixedLine(example_numb)er');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -675,7 +675,7 @@ class MetadataFilterTest extends TestCase
 
         // Extra right parenthesis at end of only group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber))");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber))');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -684,7 +684,7 @@ class MetadataFilterTest extends TestCase
 
         // Extra right parenthesis between proper parentheses.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(example_numb)er)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(example_numb)er)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -693,7 +693,7 @@ class MetadataFilterTest extends TestCase
 
         // Extra left parenthesis in only group.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine((exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('fixedLine((exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -702,7 +702,7 @@ class MetadataFilterTest extends TestCase
 
         // Extra level of children.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber(possibleLength))");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber(possibleLength))');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -711,7 +711,7 @@ class MetadataFilterTest extends TestCase
 
         // Trailing comma in children.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(exampleNumber,)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -720,7 +720,7 @@ class MetadataFilterTest extends TestCase
 
         // Leading comma in children.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(,exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(,exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -729,7 +729,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty token between commas.
         try {
-            MetadataFilter::parseFieldMapFromString("fixedLine(possibleLength,,exampleNumber)");
+            MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,,exampleNumber)');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -738,7 +738,7 @@ class MetadataFilterTest extends TestCase
 
         // Trailing colon.
         try {
-            MetadataFilter::parseFieldMapFromString("uan:");
+            MetadataFilter::parseFieldMapFromString('uan:');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -747,7 +747,7 @@ class MetadataFilterTest extends TestCase
 
         // Leading colon.
         try {
-            MetadataFilter::parseFieldMapFromString(":uan");
+            MetadataFilter::parseFieldMapFromString(':uan');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -756,7 +756,7 @@ class MetadataFilterTest extends TestCase
 
         // Empty token between colons.
         try {
-            MetadataFilter::parseFieldMapFromString("uan::fixedLine");
+            MetadataFilter::parseFieldMapFromString('uan::fixedLine');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -765,7 +765,7 @@ class MetadataFilterTest extends TestCase
 
         // Missing colon between groups.
         try {
-            MetadataFilter::parseFieldMapFromString("uan(possibleLength)pager");
+            MetadataFilter::parseFieldMapFromString('uan(possibleLength)pager');
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.

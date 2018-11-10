@@ -8,9 +8,9 @@ namespace libphonenumber;
 class PhoneNumberDesc
 {
     protected $hasNationalNumberPattern = false;
-    protected $nationalNumberPattern = "";
+    protected $nationalNumberPattern = '';
     protected $hasExampleNumber = false;
-    protected $exampleNumber = "";
+    protected $exampleNumber = '';
     /**
      * @var array
      */
