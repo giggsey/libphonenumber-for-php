@@ -265,7 +265,7 @@ class AsYouTypeFormatter
                 return true;
             }
 
-// Remove the current number format from $this->possibleFormats
+            // Remove the current number format from $this->possibleFormats
             unset($this->possibleFormats[$key]);
         }
         $this->ableToFormat = false;

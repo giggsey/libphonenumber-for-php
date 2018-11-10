@@ -642,7 +642,7 @@ class PhoneNumberMatcher implements \Iterator
             return explode('-', mb_substr($rfc3966Format, $startIndex, $endIndex - $startIndex));
         }
 
-// We format the NSN only, and split that according to the separator.
+        // We format the NSN only, and split that according to the separator.
         $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
         return explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
             PhoneNumberFormat::RFC3966));

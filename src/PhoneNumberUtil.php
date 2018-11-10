@@ -585,7 +585,7 @@ class PhoneNumberUtil
             $character = mb_substr($number, $i, 1, 'UTF-8');
             if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
                 $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
-            } else if (!$removeNonMatches) {
+            } elseif (!$removeNonMatches) {
                 $normalizedNumber .= $character;
             }
             // If neither of the above are true, we remove this character.
@@ -1345,7 +1345,7 @@ class PhoneNumberUtil
         if ($number->hasExtension() && mb_strlen($number->getExtension()) > 0) {
             if ($numberFormat === PhoneNumberFormat::RFC3966) {
                 $formattedNumber .= static::RFC3966_EXTN_PREFIX . $number->getExtension();
-            } else if (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
+            } elseif (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
                 $formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
             } else {
                 $formattedNumber .= static::DEFAULT_EXTN_PREFIX . $number->getExtension();
@@ -2151,7 +2151,7 @@ class PhoneNumberUtil
                 return true;
             }
 
-// Check that the resultant number is still viable. If not, return. Check this by copying
+            // Check that the resultant number is still viable. If not, return. Check this by copying
             // the string and making the transformation on the copy first.
             $transformedNumber = $number;
             $transformedNumber = substr_replace(
@@ -2388,7 +2388,7 @@ class PhoneNumberUtil
                 } else {
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
-            } else if (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
+            } elseif (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
                     // MX fixed line and mobile numbers should always be formatted in international format,
                     // even when dialed within MX. For national format to work, a carrier code needs to be
                     // used, and the correct carrier code depends on if the caller and callee are from the
@@ -2398,7 +2398,7 @@ class PhoneNumberUtil
                     // but don't have it when used for display. The reverse is true for mobile numbers.
                     // As a result, we output them in the international format to make it work.
                     (
-                        ($regionCode == 'MX' || $regionCode == 'CL' || $regionCode == 'UZ')
+                        ($regionCode === 'MX' || $regionCode === 'CL' || $regionCode === 'UZ')
                         && $isFixedLineOrMobile
                     )
                 ) && $this->canBeInternationallyDialled($numberNoExt)

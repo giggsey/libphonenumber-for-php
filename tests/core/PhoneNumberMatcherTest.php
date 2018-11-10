@@ -753,9 +753,13 @@ class PhoneNumberMatcherTest extends TestCase
      * @param string $region
      * @param string $number
      */
-    protected function findMatchesInContexts($contexts, $isValid, $isPossible, $region = RegionCode::US, $number = '415-666-7777'
-    )
-    {
+    protected function findMatchesInContexts(
+        $contexts,
+        $isValid,
+        $isPossible,
+        $region = RegionCode::US,
+        $number = '415-666-7777'
+    ) {
         if ($isValid) {
             $this->doTestInContext($number, $region, $contexts, Leniency::VALID());
         } else {
