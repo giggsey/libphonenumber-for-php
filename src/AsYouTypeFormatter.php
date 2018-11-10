@@ -122,7 +122,7 @@ class AsYouTypeFormatter
      * formatting
      * @var string
      */
-    private $extractedNationalPrefix = "";
+    private $extractedNationalPrefix = '';
 
     /**
      * @var string
@@ -176,7 +176,7 @@ class AsYouTypeFormatter
      * to us that we should separate the national prefix from the numbers when formatting.
      * @var string
      */
-    private static $nationalPrefixSeparatorsPattern = "[- ]";
+    private static $nationalPrefixSeparatorsPattern = '[- ]';
 
     /**
      * This is the minimum length of national number accrued that is required to trigger the
@@ -200,10 +200,10 @@ class AsYouTypeFormatter
             self::$initialised = true;
 
             self::$emptyMetadata = new PhoneMetadata();
-            self::$emptyMetadata->setInternationalPrefix("NA");
+            self::$emptyMetadata->setInternationalPrefix('NA');
 
-            self::$eligibleFormatPattern = "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*"
-                . "(\\$\\d" . "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*)+";
+            self::$eligibleFormatPattern = '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*'
+                . "(\\$\\d" . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*)+';
         }
     }
 
@@ -358,7 +358,7 @@ class AsYouTypeFormatter
         // Replace any standalone digit (not the one in d{}) with \d
         $standAloneDigitMatcher = new Matcher(self::$standaloneDigitPattern, $numberPattern);
         $numberPattern = $standAloneDigitMatcher->replaceAll("\\\\d");
-        $this->formattingTemplate = "";
+        $this->formattingTemplate = '';
         $tempTemplate = $this->getFormattingTemplate($numberPattern, $format->getFormat());
         if (mb_strlen($tempTemplate) > 0) {
             $this->formattingTemplate .= $tempTemplate;
@@ -378,19 +378,19 @@ class AsYouTypeFormatter
     {
         // Creates a phone number consisting only of the digit 9 that matches the
         // numberPattern by applying the pattern to the longestPhoneNumber string.
-        $longestPhoneNumber = "999999999999999";
+        $longestPhoneNumber = '999999999999999';
         $m = new Matcher($numberPattern, $longestPhoneNumber);
         $m->find();
         $aPhoneNumber = $m->group();
         // No formatting template can be created if the number of digits entered entered so far
         // is longer than the maximum the current formatting rule can accommodate.
         if (mb_strlen($aPhoneNumber) < mb_strlen($this->nationalNumber)) {
-            return "";
+            return '';
         }
         // Formats the number according to $numberFormat
         $template = preg_replace('/' . $numberPattern . '/' . PhoneNumberUtil::REGEX_FLAGS, $numberFormat, $aPhoneNumber);
         // Replaces each digit with character self::$digitPlattern
-        $template = preg_replace("/9/", self::$digitPattern, $template);
+        $template = preg_replace('/9/', self::$digitPattern, $template);
         return $template;
     }
 
@@ -399,15 +399,15 @@ class AsYouTypeFormatter
      */
     public function clear()
     {
-        $this->currentOutput = "";
-        $this->accruedInput = "";
-        $this->accruedInputWithoutFormatting = "";
-        $this->formattingTemplate = "";
+        $this->currentOutput = '';
+        $this->accruedInput = '';
+        $this->accruedInputWithoutFormatting = '';
+        $this->formattingTemplate = '';
         $this->lastMatchPosition = 0;
-        $this->currentFormattingPattern = "";
-        $this->prefixBeforeNationalNumber = "";
-        $this->extractedNationalPrefix = "";
-        $this->nationalNumber = "";
+        $this->currentFormattingPattern = '';
+        $this->prefixBeforeNationalNumber = '';
+        $this->extractedNationalPrefix = '';
+        $this->nationalNumber = '';
         $this->ableToFormat = true;
         $this->inputHasFormatting = false;
         $this->positionToRemember = 0;
@@ -545,8 +545,8 @@ class AsYouTypeFormatter
         $this->isExpectingCountryCallingCode = false;
         $this->possibleFormats = array();
         $this->lastMatchPosition = 0;
-        $this->formattingTemplate = "";
-        $this->currentFormattingPattern = "";
+        $this->formattingTemplate = '';
+        $this->currentFormattingPattern = '';
         return $this->attemptToChooseFormattingPattern();
     }
 
@@ -607,7 +607,7 @@ class AsYouTypeFormatter
                 return $this->appendNationalNumber($formattedNumber);
             }
         }
-        return "";
+        return '';
     }
 
     /**
@@ -687,7 +687,7 @@ class AsYouTypeFormatter
     {
         $lengthOfNationalNumber = mb_strlen($this->nationalNumber);
         if ($lengthOfNationalNumber > 0) {
-            $tempNationalNumber = "";
+            $tempNationalNumber = '';
             for ($i = 0; $i < $lengthOfNationalNumber; $i++) {
                 $tempNationalNumber = $this->inputDigitHelper(mb_substr($this->nationalNumber, $i, 1));
             }
@@ -721,7 +721,7 @@ class AsYouTypeFormatter
         $startOfNationalNumber = 0;
         if ($this->isNanpaNumberWithNationalPrefix()) {
             $startOfNationalNumber = 1;
-            $this->prefixBeforeNationalNumber .= "1" . self::$seperatorBeforeNationalNumber;
+            $this->prefixBeforeNationalNumber .= '1' . self::$seperatorBeforeNationalNumber;
             $this->isCompleteNumber = true;
         } elseif ($this->currentMetadata->hasNationalPrefixForParsing()) {
             $m = new Matcher($this->currentMetadata->getNationalPrefixForParsing(), $this->nationalNumber);
@@ -776,7 +776,7 @@ class AsYouTypeFormatter
         if (mb_strlen($this->nationalNumber) == 0) {
             return false;
         }
-        $numberWithoutCountryCallingCode = "";
+        $numberWithoutCountryCallingCode = '';
         $countryCode = $this->phoneUtil->extractCountryCode($this->nationalNumber, $numberWithoutCountryCallingCode);
         if ($countryCode === 0) {
             return false;
@@ -792,7 +792,7 @@ class AsYouTypeFormatter
         $this->prefixBeforeNationalNumber .= $countryCodeString . self::$seperatorBeforeNationalNumber;
         // When we have successfully extracted the IDD, the previously extracted NDD should be cleared
         // because it is no longer valid.
-        $this->extractedNationalPrefix = "";
+        $this->extractedNationalPrefix = '';
         return true;
     }
 
@@ -833,7 +833,8 @@ class AsYouTypeFormatter
         $digitMatcher = new Matcher(self::$digitPattern, $this->formattingTemplate);
         if ($digitMatcher->find($this->lastMatchPosition)) {
             $tempTemplate = $digitMatcher->replaceFirst($nextChar);
-            $this->formattingTemplate = $tempTemplate . mb_substr($this->formattingTemplate, mb_strlen($tempTemplate, "UTF-8"), null, "UTF-8");
+            $this->formattingTemplate = $tempTemplate . mb_substr($this->formattingTemplate, mb_strlen($tempTemplate,
+                    'UTF-8'), null, 'UTF-8');
             $this->lastMatchPosition = $digitMatcher->start();
             return mb_substr($this->formattingTemplate, 0, $this->lastMatchPosition + 1);
         } else {
@@ -842,7 +843,7 @@ class AsYouTypeFormatter
                 // try.
                 $this->ableToFormat = false;
             } // else, we just reset the formatting pattern.
-            $this->currentFormattingPattern = "";
+            $this->currentFormattingPattern = '';
             return $this->accruedInput;
         }
     }

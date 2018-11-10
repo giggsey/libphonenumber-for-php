@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberOfflineGeocoderTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = "/../../tests/prefixmapper/data";
+    const TEST_META_DATA_FILE_PREFIX = '/../../tests/prefixmapper/data';
     private static $KO_Number1;
     private static $KO_Number2;
     private static $KO_Number3;
@@ -94,12 +94,12 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
 
         $this->assertEquals(
             pack('H*', 'e7be8e') . pack('H*', 'e59bbd'),
-            $this->geocoder->getDescriptionForNumber(self::$US_Number1, "zh_CN")
+            $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'zh_CN')
         );
-        $this->assertEquals("Bahamas", $this->geocoder->getDescriptionForNumber(self::$BS_Number1, "en_US"));
-        $this->assertEquals("Australia", $this->geocoder->getDescriptionForNumber(self::$AU_Number, "en_US"));
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$numberWithInvalidCountryCode, "en_US"));
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$internationalTollFree, "en_US"));
+        $this->assertEquals('Bahamas', $this->geocoder->getDescriptionForNumber(self::$BS_Number1, 'en_US'));
+        $this->assertEquals('Australia', $this->geocoder->getDescriptionForNumber(self::$AU_Number, 'en_US'));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$numberWithInvalidCountryCode, 'en_US'));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$internationalTollFree, 'en_US'));
     }
 
     public function testGetDescriptionForNumberWithMissingPrefix()
@@ -107,43 +107,43 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         // Test that the name of the country is returned when the number passed in is valid but not
         // covered by the geocoding data file.
 
-        $this->assertEquals("United States", $this->geocoder->getDescriptionForNumber(self::$US_Number4, "en_US"));
+        $this->assertEquals('United States', $this->geocoder->getDescriptionForNumber(self::$US_Number4, 'en_US'));
     }
 
     public function testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty()
     {
         // Test that nothing is returned when the number passed in is valid but not
         // covered by the geocoding data file and belongs to multiple countries
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$NANPA_TollFree, 'en_US'));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$NANPA_TollFree, 'en_US'));
     }
 
     public function testGetDescriptionForNumber_en_US()
     {
-        $ca = $this->geocoder->getDescriptionForNumber(self::$US_Number1, "en_US");
-        $this->assertEquals("CA", $ca);
-        $this->assertEquals("Mountain View, CA", $this->geocoder->getDescriptionForNumber(self::$US_Number2, "en_US"));
-        $this->assertEquals("New York, NY", $this->geocoder->getDescriptionForNumber(self::$US_Number3, "en_US"));
+        $ca = $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'en_US');
+        $this->assertEquals('CA', $ca);
+        $this->assertEquals('Mountain View, CA', $this->geocoder->getDescriptionForNumber(self::$US_Number2, 'en_US'));
+        $this->assertEquals('New York, NY', $this->geocoder->getDescriptionForNumber(self::$US_Number3, 'en_US'));
     }
 
     public function testGetDescriptionForKoreanNumber()
     {
-        $this->assertEquals("Seoul", $this->geocoder->getDescriptionForNumber(self::$KO_Number1, "en"));
-        $this->assertEquals("Incheon", $this->geocoder->getDescriptionForNumber(self::$KO_Number2, "en"));
-        $this->assertEquals("Jeju", $this->geocoder->getDescriptionForNumber(self::$KO_Number3, "en"));
+        $this->assertEquals('Seoul', $this->geocoder->getDescriptionForNumber(self::$KO_Number1, 'en'));
+        $this->assertEquals('Incheon', $this->geocoder->getDescriptionForNumber(self::$KO_Number2, 'en'));
+        $this->assertEquals('Jeju', $this->geocoder->getDescriptionForNumber(self::$KO_Number3, 'en'));
 
         $this->assertEquals(
             pack('H*', 'ec849c') . pack('H*', 'ec9ab8'),
-            $this->geocoder->getDescriptionForNumber(self::$KO_Number1, "ko")
+            $this->geocoder->getDescriptionForNumber(self::$KO_Number1, 'ko')
         );
         $this->assertEquals(
             pack('H*', 'ec9db8') . pack('H*', 'ecb29c'),
-            $this->geocoder->getDescriptionForNumber(self::$KO_Number2, "ko")
+            $this->geocoder->getDescriptionForNumber(self::$KO_Number2, 'ko')
         );
     }
 
     public function testGetDescriptionForArgentinianMobileNumber()
     {
-        $this->assertEquals("La Plata", $this->geocoder->getDescriptionForNumber(self::$AR_MobileNumber, "en"));
+        $this->assertEquals('La Plata', $this->geocoder->getDescriptionForNumber(self::$AR_MobileNumber, 'en'));
     }
 
     public function testGetDescriptionForFallBack()
@@ -151,18 +151,18 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         // No fallback, as the location name for the given phone number is available in the requested
         // language.
 
-        $this->assertEquals("Kalifornien", $this->geocoder->getDescriptionForNumber(self::$US_Number1, "de"));
+        $this->assertEquals('Kalifornien', $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'de'));
 
         // German falls back to English.
-        $this->assertEquals("New York, NY", $this->geocoder->getDescriptionForNumber(self::$US_Number3, "de"));
+        $this->assertEquals('New York, NY', $this->geocoder->getDescriptionForNumber(self::$US_Number3, 'de'));
 
         // Italian fals back to English.
-        $this->assertEquals("CA", $this->geocoder->getDescriptionForNumber(self::$US_Number1, "it"));
+        $this->assertEquals('CA', $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'it'));
 
         // Korean doesn't fall back to English. -
         $this->assertEquals(
             pack('H*', 'eb8c80') . pack('H*', 'ed959c') . pack('H*', 'ebafbc') . pack('H*', 'eab5ad'),
-            $this->geocoder->getDescriptionForNumber(self::$KO_Number3, "ko")
+            $this->geocoder->getDescriptionForNumber(self::$KO_Number3, 'ko')
         );
     }
 
@@ -171,36 +171,36 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         // User in Italy, American number. We should just show United States, in Spanish, and not more
         // detailed information.
         $this->assertEquals(
-            "Estados Unidos",
-            $this->geocoder->getDescriptionForNumber(self::$US_Number1, "es_ES", "IT")
+            'Estados Unidos',
+            $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'es_ES', 'IT')
         );
 
         // Unknown region - should just show country name.
         $this->assertEquals(
-            "Estados Unidos",
-            $this->geocoder->getDescriptionForNumber(self::$US_Number1, "es_ES", "ZZ")
+            'Estados Unidos',
+            $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'es_ES', 'ZZ')
         );
 
         // User in the States, language German, should show detailed data.
-        $this->assertEquals("Kalifornien", $this->geocoder->getDescriptionForNumber(self::$US_Number1, "de", "US"));
+        $this->assertEquals('Kalifornien', $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'de', 'US'));
 
         // User in the States, language French, no data for French, so we fallback to English detailed
         // data.
-        $this->assertEquals("CA", $this->geocoder->getDescriptionForNumber(self::$US_Number1, "fr", "US"));
+        $this->assertEquals('CA', $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'fr', 'US'));
 
         // Invalid number - return an empty string.
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, "en", "US"));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, 'en', 'US'));
     }
 
     public function testGetDescriptionForInvalidNumber()
     {
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$KO_InvalidNumber, "en"));
-        $this->assertEquals("", $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, "en"));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$KO_InvalidNumber, 'en'));
+        $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, 'en'));
     }
 
     public function testGetDescriptionForNonGeographicalNumberWithGeocodingPrefix()
     {
         // We have a geocoding prefix, but we shouldn't use it since this is not geographical.
-        $this->assertEquals("South Korea", $this->geocoder->getDescriptionForNumber(self::$KO_Mobile, 'en'));
+        $this->assertEquals('South Korea', $this->geocoder->getDescriptionForNumber(self::$KO_Mobile, 'en'));
     }
 }

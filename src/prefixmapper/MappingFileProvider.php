@@ -23,7 +23,7 @@ class MappingFileProvider
     public function getFileName($countryCallingCode, $language, $script, $region)
     {
         if (strlen($language) == 0) {
-            return "";
+            return '';
         }
 
         if ($language === 'zh' && ($region == 'TW' || $region == 'HK' || $region == 'MO')) {
@@ -40,7 +40,7 @@ class MappingFileProvider
             }
         }
 
-        return "";
+        return '';
     }
 
     protected function inMap($language, $countryCallingCode)

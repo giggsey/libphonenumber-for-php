@@ -113,7 +113,7 @@ class ShortNumberInfo
     {
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
         if ($phoneMetadata === null) {
-            return "";
+            return '';
         }
 
         /** @var PhoneNumberDesc $desc */
@@ -121,7 +121,7 @@ class ShortNumberInfo
         if ($desc !== null && $desc->hasExampleNumber()) {
             return $desc->getExampleNumber();
         }
-        return "";
+        return '';
     }
 
     /**
@@ -175,7 +175,7 @@ class ShortNumberInfo
     {
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
         if ($phoneMetadata === null) {
-            return "";
+            return '';
         }
 
         /** @var PhoneNumberDesc $desc */
@@ -199,7 +199,7 @@ class ShortNumberInfo
             return $desc->getExampleNumber();
         }
 
-        return "";
+        return '';
     }
 
     /**

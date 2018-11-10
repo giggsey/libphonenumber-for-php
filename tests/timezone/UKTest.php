@@ -20,7 +20,7 @@ class UKTest extends TestCase
         $number->setCountryCode(44)->setNationalNumber(1614960000);
 
         $timeZone = PhoneNumberToTimeZonesMapper::getInstance();
-        $this->assertEquals(array("Europe/London"), $timeZone->getTimeZonesForNumber($number));
+        $this->assertEquals(array('Europe/London'), $timeZone->getTimeZonesForNumber($number));
     }
 
     public function testNonGeocodableNumber()
@@ -31,7 +31,7 @@ class UKTest extends TestCase
         $timeZone = PhoneNumberToTimeZonesMapper::getInstance();
         $this->assertEquals(
             array(
-                "Europe/Guernsey",
+                'Europe/Guernsey',
                 'Europe/Isle_of_Man',
                 'Europe/Jersey',
                 'Europe/London'

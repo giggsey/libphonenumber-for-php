@@ -78,7 +78,7 @@ class PhoneNumberOfflineGeocoder
         $numberType = $this->phoneUtil->getNumberType($number);
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
-            return "";
+            return '';
         } elseif (!$this->phoneUtil->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryNameForNumber($number, $locale);
         }
@@ -107,7 +107,7 @@ class PhoneNumberOfflineGeocoder
                     // If the number has already been found valid for one region, then we don't know which
                     // region it belongs to so we return nothing.
                     if ($regionWhereNumberIsValid !== 'ZZ') {
-                        return "";
+                        return '';
                     }
                     $regionWhereNumberIsValid = $regionCode;
                 }
@@ -127,7 +127,7 @@ class PhoneNumberOfflineGeocoder
     protected function getRegionDisplayName($regionCode, $locale)
     {
         if ($regionCode === null || $regionCode == 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) {
-            return "";
+            return '';
         }
 
         return Locale::getDisplayRegion(
@@ -173,12 +173,12 @@ class PhoneNumberOfflineGeocoder
         $regionCode = $this->phoneUtil->getRegionCodeForNumber($number);
         if ($userRegion == null || $userRegion == $regionCode) {
             $languageStr = Locale::getPrimaryLanguage($locale);
-            $scriptStr = "";
+            $scriptStr = '';
             $regionStr = Locale::getRegion($locale);
 
             $mobileToken = PhoneNumberUtil::getCountryMobileToken($number->getCountryCode());
             $nationalNumber = $this->phoneUtil->getNationalSignificantNumber($number);
-            if ($mobileToken !== "" && (!strncmp($nationalNumber, $mobileToken, strlen($mobileToken)))) {
+            if ($mobileToken !== '' && (!strncmp($nationalNumber, $mobileToken, strlen($mobileToken)))) {
                 // In some countries, eg. Argentina, mobile numbers have a mobile token before the national
                 // destination code, this should be removed before geocoding.
                 $nationalNumber = substr($nationalNumber, strlen($mobileToken));

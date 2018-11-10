@@ -238,9 +238,9 @@ class ExampleNumbersTest extends TestCase
     public function testGlobalNetworkNumbers($callingCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForNonGeoEntity($callingCode);
-        $this->assertNotNull($exampleNumber, "No example phone number for calling code " . $callingCode);
+        $this->assertNotNull($exampleNumber, 'No example phone number for calling code ' . $callingCode);
         if (!$this->phoneNumberUtil->isValidNumber($exampleNumber)) {
-            $this->fail("Failed validation for " . $exampleNumber);
+            $this->fail('Failed validation for ' . $exampleNumber);
         }
     }
 
@@ -251,7 +251,7 @@ class ExampleNumbersTest extends TestCase
     public function testEveryRegionHasAnExampleNumber($regionCode)
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumber($regionCode);
-        $this->assertNotNull($exampleNumber, "No example number found for region " . $regionCode);
+        $this->assertNotNull($exampleNumber, 'No example number found for region ' . $regionCode);
 
         /*
          * Check the number is valid
@@ -304,7 +304,7 @@ class ExampleNumbersTest extends TestCase
         }
         $phoneNumber = $this->phoneNumberUtil->parse($exampleShortNumber, $regionCode);
         if (!$this->shortNumberInfo->isValidShortNumber($phoneNumber)) {
-            $this->fail("Failed validation for " . (string)$phoneNumber);
+            $this->fail('Failed validation for ' . (string)$phoneNumber);
         }
     }
 
@@ -359,13 +359,13 @@ class ExampleNumbersTest extends TestCase
                     $regionCode
                 ) || !$this->shortNumberInfo->isEmergencyNumber($exampleNumber, $regionCode)
             ) {
-                $this->fail("Emergency example number test failed for " . $regionCode);
+                $this->fail('Emergency example number test failed for ' . $regionCode);
             } elseif ($this->shortNumberInfo->getExpectedCostForRegion(
                     $phoneNumber,
                     $regionCode
                 ) !== ShortNumberCost::TOLL_FREE
             ) {
-                $this->fail("Emergency example number not toll free for " . $regionCode);
+                $this->fail('Emergency example number not toll free for ' . $regionCode);
             }
         }
     }
@@ -385,7 +385,7 @@ class ExampleNumbersTest extends TestCase
             if (!$this->shortNumberInfo->isPossibleShortNumberForRegion($carrierSpecificNumber, $regionCode)
                 || !$this->shortNumberInfo->isCarrierSpecificForRegion($carrierSpecificNumber, $regionCode)
             ) {
-                $this->fail("Carrier-specific test failed for " . $regionCode);
+                $this->fail('Carrier-specific test failed for ' . $regionCode);
             }
         }
     }

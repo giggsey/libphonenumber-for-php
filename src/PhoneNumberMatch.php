@@ -33,7 +33,7 @@ class PhoneNumberMatch
     public function __construct($start, $rawString, PhoneNumber $number)
     {
         if ($start < 0) {
-            throw new \InvalidArgumentException("Start index must be >= 0.");
+            throw new \InvalidArgumentException('Start index must be >= 0.');
         }
 
         if ($rawString === null) {

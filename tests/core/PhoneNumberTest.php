@@ -37,10 +37,10 @@ class PhoneNumberTest extends TestCase
     public function testEqualWithCountryCodeSourceSet()
     {
         $numberA = new PhoneNumber();
-        $numberA->setRawInput("+1 650 253 00 00")->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
+        $numberA->setRawInput('+1 650 253 00 00')->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         $numberB = new PhoneNumber();
-        $numberB->setRawInput("+1 650 253 00 00")->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
+        $numberB->setRawInput('+1 650 253 00 00')->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         $this->assertEquals($numberA, $numberB);
     }
@@ -62,13 +62,13 @@ class PhoneNumberTest extends TestCase
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)
             ->setNationalNumber(6502530000)
-            ->setRawInput("+1 650 253 00 00")
+            ->setRawInput('+1 650 253 00 00')
             ->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         $numberB = new PhoneNumber();
         $numberB->setCountryCode(1)
             ->setNationalNumber(6502530000)
-            ->setRawInput("+1-650-253-00-00")
+            ->setRawInput('+1-650-253-00-00')
             ->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         $this->assertNotEquals($numberA, $numberB);
@@ -78,7 +78,7 @@ class PhoneNumberTest extends TestCase
     public function testNonEqualWithPreferredDomesticCarrierCodeSetToDefault()
     {
         $numberA = new PhoneNumber();
-        $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode("");
+        $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode('');
 
         $numberB = new PhoneNumber();
         $numberB->setCountryCode(1)->setNationalNumber(6502530000);
@@ -90,10 +90,10 @@ class PhoneNumberTest extends TestCase
     public function testEqualWithPreferredDomesticCarrierCodeSetToDefault()
     {
         $numberA = new PhoneNumber();
-        $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode("");
+        $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode('');
 
         $numberB = new PhoneNumber();
-        $numberB->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode("");
+        $numberB->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode('');
 
         $this->assertEquals($numberA, $numberB);
     }

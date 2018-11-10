@@ -21,8 +21,8 @@ class Issue14Test extends TestCase
 
     public function testKWMobileNumber()
     {
-        $number = "51440519";
-        $phoneNumber = $this->phoneUtil->parse($number, "KW");
+        $number = '51440519';
+        $phoneNumber = $this->phoneUtil->parse($number, 'KW');
 
         $this->assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
         $this->assertEquals(PhoneNumberType::MOBILE, $this->phoneUtil->getNumberType($phoneNumber));

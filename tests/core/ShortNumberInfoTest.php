@@ -139,17 +139,17 @@ class ShortNumberInfoTest extends TestCase
 
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("12345", RegionCode::FR), RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('12345', RegionCode::FR), RegionCode::FR)
         );
         $unknownCostNumber = new PhoneNumber();
         $unknownCostNumber->setCountryCode(33)->setNationalNumber(12345);
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($unknownCostNumber));
 
         // Test that an invalid number may nevertheless have a cost other than UNKNOWN_COST.
-        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse("116123", RegionCode::FR), RegionCode::FR));
+        $this->assertFalse($this->shortInfo->isValidShortNumberForRegion($this->parse('116123', RegionCode::FR), RegionCode::FR));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("116123", RegionCode::FR), RegionCode::FR)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('116123', RegionCode::FR), RegionCode::FR)
         );
         $invalidNumber = new PhoneNumber();
         $invalidNumber->setCountryCode(33)->setNationalNumber(116123);
@@ -159,7 +159,7 @@ class ShortNumberInfoTest extends TestCase
         // Test a nonexistent country code.
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("911", RegionCode::US), RegionCode::ZZ)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('911', RegionCode::US), RegionCode::ZZ)
         );
         $unknownCostNumber->clear();
         $unknownCostNumber->setCountryCode(123)->setNationalNumber(911);
@@ -171,13 +171,13 @@ class ShortNumberInfoTest extends TestCase
         // Test some numbers which have different costs in countries sharing the same country calling
         // code. In Australia, 1234 is premium-rate, 1194 is standard-rate, and 733 is toll-free. These
         // are not known to be valid numbers in the Christmas Islands.
-        $ambiguousPremiumRateString = "1234";
+        $ambiguousPremiumRateString = '1234';
         $ambiguousPremiumRateNumber = new PhoneNumber();
         $ambiguousPremiumRateNumber->setCountryCode(61)->setNationalNumber(1234);
-        $ambiguousStandardRateString = "1194";
+        $ambiguousStandardRateString = '1194';
         $ambiguousStandardRateNumber = new PhoneNumber();
         $ambiguousStandardRateNumber->setCountryCode(61)->setNationalNumber(1194);
-        $ambiguousTollFreeString = "733";
+        $ambiguousTollFreeString = '733';
         $ambiguousTollFreeNumber = new PhoneNumber();
         $ambiguousTollFreeNumber->setCountryCode(61)->setNationalNumber(733);
 
@@ -231,77 +231,77 @@ class ShortNumberInfoTest extends TestCase
 
     public function testGetExampleShortNumber()
     {
-        $this->assertEquals("110", $this->shortInfo->getExampleShortNumber(RegionCode::AD));
-        $this->assertEquals("1010", $this->shortInfo->getExampleShortNumber(RegionCode::FR));
-        $this->assertEquals("", $this->shortInfo->getExampleShortNumber(RegionCode::UN001));
-        $this->assertEquals("", $this->shortInfo->getExampleShortNumber(null));
+        $this->assertEquals('110', $this->shortInfo->getExampleShortNumber(RegionCode::AD));
+        $this->assertEquals('1010', $this->shortInfo->getExampleShortNumber(RegionCode::FR));
+        $this->assertEquals('', $this->shortInfo->getExampleShortNumber(RegionCode::UN001));
+        $this->assertEquals('', $this->shortInfo->getExampleShortNumber(null));
     }
 
     public function testGetExampleShortNumberForCost()
     {
         $this->assertEquals(
-            "3010",
+            '3010',
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE)
         );
         $this->assertEquals(
-            "1023",
+            '1023',
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::STANDARD_RATE)
         );
         $this->assertEquals(
-            "42000",
+            '42000',
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::PREMIUM_RATE)
         );
         $this->assertEquals(
-            "",
+            '',
             $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::UNKNOWN_COST)
         );
     }
 
     public function testConnectsToEmergencyNumber_US()
     {
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("911", RegionCode::US));
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("112", RegionCode::US));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("999", RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('112', RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('999', RegionCode::US));
     }
 
     public function testConnectsToEmergencyNumberLongNumber_US()
     {
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("9116666666", RegionCode::US));
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("1126666666", RegionCode::US));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("9996666666", RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('9116666666', RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('1126666666', RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9996666666', RegionCode::US));
     }
 
     public function testConnectsToEmergencyNumberWithFormatting_US()
     {
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("9-1-1", RegionCode::US));
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("1-1-2", RegionCode::US));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("9-9-9", RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('9-1-1', RegionCode::US));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('1-1-2', RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9-9-9', RegionCode::US));
     }
 
     public function testConnectsToEmergencyNumberWithPlusSign_US()
     {
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("+911", RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('+911', RegionCode::US));
         $this->assertFalse(
-            $this->shortInfo->connectsToEmergencyNumber(self::$plusSymbol . "911", RegionCode::US)
+            $this->shortInfo->connectsToEmergencyNumber(self::$plusSymbol . '911', RegionCode::US)
         );
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber(" +911", RegionCode::US));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("+112", RegionCode::US));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("+999", RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber(' +911', RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('+112', RegionCode::US));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('+999', RegionCode::US));
     }
 
     public function testConnectsToEmergencyNumber_BR()
     {
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("911", RegionCode::BR));
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber("190", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("999", RegionCode::BR));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::BR));
+        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('190', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('999', RegionCode::BR));
     }
 
     public function testConnectsToEmergencyNumberLongNumber_BR()
     {
         // Brazilian emergency numbers don't work when additional digits are appended.
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("9111", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("1900", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("9996", RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9111', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('1900', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9996', RegionCode::BR));
     }
 
     public function testConnectsToEmergencyNumber_CL()
@@ -320,97 +320,97 @@ class ShortNumberInfoTest extends TestCase
     public function testConnectsToEmergencyNumber_AO()
     {
         // Angola doesn't have any metadata for emergency numbers in the test metadata.
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("911", RegionCode::AO));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("222123456", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("923123456", RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::AO));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('222123456', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('923123456', RegionCode::BR));
     }
 
     public function testConnectsToEmergencyNumber_ZW()
     {
         // Zimbabwe doesn't have any metadata in the test metadata.
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("911", RegionCode::ZW));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("01312345", RegionCode::ZW));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber("0711234567", RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('01312345', RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('0711234567', RegionCode::ZW));
     }
 
     public function testIsEmergencyNumber_US()
     {
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("911", RegionCode::US));
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("999", RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('911', RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('112', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('999', RegionCode::US));
     }
 
     public function testIsEmergencyNumberLongNumber_US()
     {
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("9116666666", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("1126666666", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("9996666666", RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('9116666666', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('1126666666', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('9996666666', RegionCode::US));
     }
 
     public function testIsEmergencyNumberWithFormatting_US()
     {
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("9-1-1", RegionCode::US));
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("*911", RegionCode::US));
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("1-1-2", RegionCode::US));
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("*112", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("9-9-9", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("*999", RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('9-1-1', RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('*911', RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('1-1-2', RegionCode::US));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('*112', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('9-9-9', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('*999', RegionCode::US));
     }
 
     public function testIsEmergencyNumberWithPlusSign_US()
     {
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("+911", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber(self::$plusSymbol . "911", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber(" +911", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("+112", RegionCode::US));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("+999", RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('+911', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber(self::$plusSymbol . '911', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber(' +911', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('+112', RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('+999', RegionCode::US));
     }
 
     public function testIsEmergencyNumber_BR()
     {
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("911", RegionCode::BR));
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("190", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("999", RegionCode::BR));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('911', RegionCode::BR));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('190', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('999', RegionCode::BR));
     }
 
     public function testIsEmergencyNumberLongNumber_BR()
     {
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("9111", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("1900", RegionCode::BR));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("9996", RegionCode::BR));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('9111', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('1900', RegionCode::BR));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('9996', RegionCode::BR));
     }
 
     public function testIsEmergencyNumber_AO()
     {
         // Angola doesn't have any metadata for emergency numbers in the test metadata.
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("911", RegionCode::AO));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("222123456", RegionCode::AO));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("923123456", RegionCode::AO));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('911', RegionCode::AO));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('222123456', RegionCode::AO));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('923123456', RegionCode::AO));
     }
 
     public function testIsEmergencyNumber_ZW()
     {
         // Zimbabwe doesn't have any metadata in the test metadata.
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("911", RegionCode::ZW));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("01312345", RegionCode::ZW));
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("0711234567", RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('911', RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('01312345', RegionCode::ZW));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('0711234567', RegionCode::ZW));
     }
 
 
     public function testEmergencyNumberForSharedCountryCallingCode()
     {
         // Test the emergency number 112, which is valid in both Australia and the Christmas Islands.
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::AU));
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse("112", RegionCode::AU), RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('112', RegionCode::AU));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse('112', RegionCode::AU), RegionCode::AU));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("112", RegionCode::AU), RegionCode::AU)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('112', RegionCode::AU), RegionCode::AU)
         );
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("112", RegionCode::CX));
-        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse("112", RegionCode::CX), RegionCode::CX));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('112', RegionCode::CX));
+        $this->assertTrue($this->shortInfo->isValidShortNumberForRegion($this->parse('112', RegionCode::CX), RegionCode::CX));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("112", RegionCode::CX), RegionCode::CX)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('112', RegionCode::CX), RegionCode::CX)
         );
         $sharedEmergencyNumber = new PhoneNumber();
         $sharedEmergencyNumber->setCountryCode(61)->setNationalNumber(112);
@@ -422,20 +422,20 @@ class ShortNumberInfoTest extends TestCase
     {
         // 211 is an emergency number in Barbados, while it is a toll-free information line in Canada
         // and the USA.
-        $this->assertTrue($this->shortInfo->isEmergencyNumber("211", RegionCode::BB));
+        $this->assertTrue($this->shortInfo->isEmergencyNumber('211', RegionCode::BB));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::BB), RegionCode::BB)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('211', RegionCode::BB), RegionCode::BB)
         );
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::US));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('211', RegionCode::US));
         $this->assertEquals(
             ShortNumberCost::UNKNOWN_COST,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::US), RegionCode::US)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('211', RegionCode::US), RegionCode::US)
         );
-        $this->assertFalse($this->shortInfo->isEmergencyNumber("211", RegionCode::CA));
+        $this->assertFalse($this->shortInfo->isEmergencyNumber('211', RegionCode::CA));
         $this->assertEquals(
             ShortNumberCost::TOLL_FREE,
-            $this->shortInfo->getExpectedCostForRegion($this->parse("211", RegionCode::CA), RegionCode::CA)
+            $this->shortInfo->getExpectedCostForRegion($this->parse('211', RegionCode::CA), RegionCode::CA)
         );
     }
 
@@ -457,7 +457,7 @@ class ShortNumberInfoTest extends TestCase
         try {
             return $this->phoneUtil->parse($number, $regionCode);
         } catch (NumberParseException $e) {
-            $this->fail("Test input data should always parse correctly: " . $number . " (" . $regionCode . ")");
+            $this->fail('Test input data should always parse correctly: ' . $number . ' (' . $regionCode . ')');
         }
     }
 }

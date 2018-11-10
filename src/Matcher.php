@@ -182,7 +182,7 @@ class Matcher
      * @param string $input
      * @return Matcher
      */
-    public function reset($input = "")
+    public function reset($input = '')
     {
         $this->subject = $input;
 
