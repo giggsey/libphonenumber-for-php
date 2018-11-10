@@ -192,8 +192,7 @@ EOT;
 
         foreach ($data as $line) {
             // Remove \n
-            $line = str_replace("\n", '', $line);
-            $line = str_replace("\r", '', $line);
+            $line = str_replace(array("\n", "\r"), '', $line);
             $line = trim($line);
 
             if (strlen($line) == 0 || substr($line, 0, 1) == '#') {

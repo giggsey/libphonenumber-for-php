@@ -3,7 +3,6 @@
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\MatcherAPIInterface;
-use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberDesc;
 use libphonenumber\RegexBasedMatcher;
 use PHPUnit\Framework\TestCase;

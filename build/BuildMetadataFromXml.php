@@ -190,8 +190,8 @@ class BuildMetadataFromXml
     {
         $nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
         // Replace $NP with national prefix and $FG with the first group ($1).
-        $nationalPrefixFormattingRule = str_replace('$NP', $nationalPrefix, $nationalPrefixFormattingRule);
-        $nationalPrefixFormattingRule = str_replace('$FG', '$1', $nationalPrefixFormattingRule);
+        $nationalPrefixFormattingRule = str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
+            $nationalPrefixFormattingRule);
         return $nationalPrefixFormattingRule;
     }
 
@@ -324,8 +324,8 @@ class BuildMetadataFromXml
     {
         $carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
         // Replace $FG with the first group ($1) and $NP with the national prefix.
-        $carrierCodeFormattingRule = str_replace('$NP', $nationalPrefix, $carrierCodeFormattingRule);
-        $carrierCodeFormattingRule = str_replace('$FG', '$1', $carrierCodeFormattingRule);
+        $carrierCodeFormattingRule = str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
+            $carrierCodeFormattingRule);
         return $carrierCodeFormattingRule;
     }
 

@@ -3064,8 +3064,8 @@ class PhoneNumberUtil
                 $nationalPrefix = $metadata->getNationalPrefix();
                 if (mb_strlen($nationalPrefix) > 0) {
                     // Replace $NP with national prefix and $FG with the first group ($1).
-                    $nationalPrefixFormattingRule = str_replace(static::NP_STRING, $nationalPrefix, $nationalPrefixFormattingRule);
-                    $nationalPrefixFormattingRule = str_replace(static::FG_STRING, '$1', $nationalPrefixFormattingRule);
+                    $nationalPrefixFormattingRule = str_replace(array(static::NP_STRING, static::FG_STRING),
+                        array($nationalPrefix, '$1'), $nationalPrefixFormattingRule);
                     $numFormatCopy->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
                 } else {
                     // We don't want to have a rule for how to format the national prefix if there isn't one.
