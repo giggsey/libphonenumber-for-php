@@ -20,8 +20,8 @@ class Issue35Test extends TestCase
 
     public function testSerializingPhoneNumber()
     {
-        $number = "+441174900000";
-        $region = "GB";
+        $number = '+441174900000';
+        $region = 'GB';
         $phoneNumber = $this->phoneUtil->parse($number, $region);
 
         $serializedString = serialize($phoneNumber);

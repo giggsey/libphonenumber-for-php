@@ -14,11 +14,11 @@ class PhoneNumberToTimeZonesMapper
 {
     const UNKNOWN_TIMEZONE = 'Etc/Unknown';
     const MAPPING_DATA_DIRECTORY = '/timezone/data/';
-    const MAPPING_DATA_FILE_NAME = "map_data.php";
+    const MAPPING_DATA_FILE_NAME = 'map_data.php';
     /**
      * @var PhoneNumberToTimeZonesMapper
      */
-    protected static $instance = null;
+    protected static $instance;
     protected $unknownTimeZoneList = array();
     /**
      * @var PhoneNumberUtil
@@ -39,7 +39,7 @@ class PhoneNumberToTimeZonesMapper
     protected static function loadPrefixTimeZonesMapFromFile($path)
     {
         if (!is_readable($path)) {
-            throw new \InvalidArgumentException("Mapping file can not be found");
+            throw new \InvalidArgumentException('Mapping file can not be found');
         }
 
         $data = require $path;
@@ -90,7 +90,9 @@ class PhoneNumberToTimeZonesMapper
 
         if ($numberType === PhoneNumberType::UNKNOWN) {
             return $this->unknownTimeZoneList;
-        } elseif (!PhoneNumberUtil::getInstance()->isNumberGeographical($numberType, $number->getCountryCode())) {
+        }
+
+        if (!PhoneNumberUtil::getInstance()->isNumberGeographical($numberType, $number->getCountryCode())) {
             return $this->getCountryLevelTimeZonesforNumber($number);
         }
 

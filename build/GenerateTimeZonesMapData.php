@@ -33,7 +33,7 @@ EOT;
         $this->inputTextFile = $inputFile;
 
         if (!is_readable($this->inputTextFile)) {
-            throw new \RuntimeException("The provided input text file does not exist.");
+            throw new \RuntimeException('The provided input text file does not exist.');
         }
 
         $data = $this->parseTextFile();
@@ -52,8 +52,7 @@ EOT;
 
         foreach ($data as $line) {
             // Remove \n
-            $line = str_replace("\n", "", $line);
-            $line = str_replace("\r", "", $line);
+            $line = str_replace(array("\n", "\r"), '', $line);
             $line = trim($line);
 
             if (strlen($line) == 0 || substr($line, 0, 1) == '#') {

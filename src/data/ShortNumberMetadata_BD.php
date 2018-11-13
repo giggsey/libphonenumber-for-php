@@ -27,8 +27,8 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '106',
-    'ExampleNumber' => '106',
+    'NationalNumberPattern' => '1(?:0[0-26]|99)|999',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -50,7 +50,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '1(?:0[0-2]|99)|999',
-    'ExampleNumber' => '999',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -61,8 +61,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:[0-39]|5(?:0\\d|[1-4])|6(\\d{2})?|7[0-4]|8[0-29])|1[16-9]|2(?:[134]|2[0-5])|3(?:1\\d?|3\\d|6[3-6])|4(?:0\\d|1\\d{2})|5[2-9]|99)|786|5012|9(?:594|99)',
-    'ExampleNumber' => '103',
+    'NationalNumberPattern' => '1(?:0(?:[0-39]|5(?:0\\d|[1-4])|6(?:\\d{2})?|7[0-4]|8[0-29])|1[16-9]|2(?:[134]|2[0-5])|3(?:[13]\\d|6[3-6])|4(?:0|1\\d)\\d|5[2-9]|99)|5012|786|9(?:594|99)|131',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
     ),
@@ -82,8 +82,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:11|2[13])|786|5012|9594',
-    'ExampleNumber' => '9594',
+    'NationalNumberPattern' => '1(?:11|2[13])|(?:501|959)\\d|786',
+    'ExampleNumber' => '111',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -95,8 +95,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '9594',
-    'ExampleNumber' => '9594',
+    'NationalNumberPattern' => '959\\d',
+    'ExampleNumber' => '9590',
     'PossibleLength' => 
     array (
       0 => 4,

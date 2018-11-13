@@ -40,7 +40,7 @@ return array (
   389732 => 'Vip',
   389733 => 'Telekom',
   389734 => 'Vip',
-  3897421 => 'Mobik',
+  38974 => 'Mobik',
   389752 => 'Vip',
   389753 => 'Vip',
   389754 => 'Vip',
@@ -75,6 +75,5 @@ return array (
   389787 => 'Vip',
   389788 => 'Vip',
   389789 => 'Vip',
-  389792 => 'Lycamobile',
-  389793 => 'Lycamobile',
+  38979 => 'Lycamobile',
 );

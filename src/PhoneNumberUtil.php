@@ -35,41 +35,41 @@ class PhoneNumberUtil
     // The maximum length of the country calling code.
     const MAX_LENGTH_COUNTRY_CODE = 3;
 
-    const REGION_CODE_FOR_NON_GEO_ENTITY = "001";
+    const REGION_CODE_FOR_NON_GEO_ENTITY = '001';
     const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
     const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
 
     // Region-code for the unknown region.
-    const UNKNOWN_REGION = "ZZ";
+    const UNKNOWN_REGION = 'ZZ';
 
     const NANPA_COUNTRY_CODE = 1;
     /*
      * The prefix that needs to be inserted in front of a Colombian landline number when dialed from
      * a mobile number in Colombia.
      */
-    const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = "3";
+    const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = '3';
     // The PLUS_SIGN signifies the international prefix.
     const PLUS_SIGN = '+';
     const PLUS_CHARS = '+＋';
     const STAR_SIGN = '*';
 
-    const RFC3966_EXTN_PREFIX = ";ext=";
-    const RFC3966_PREFIX = "tel:";
-    const RFC3966_PHONE_CONTEXT = ";phone-context=";
-    const RFC3966_ISDN_SUBADDRESS = ";isub=";
+    const RFC3966_EXTN_PREFIX = ';ext=';
+    const RFC3966_PREFIX = 'tel:';
+    const RFC3966_PHONE_CONTEXT = ';phone-context=';
+    const RFC3966_ISDN_SUBADDRESS = ';isub=';
 
     // We use this pattern to check if the phone number has at least three letters in it - if so, then
     // we treat it as a number where some phone-number digits are represented by letters.
-    const VALID_ALPHA_PHONE_PATTERN = "(?:.*?[A-Za-z]){3}.*";
+    const VALID_ALPHA_PHONE_PATTERN = '(?:.*?[A-Za-z]){3}.*';
     // We accept alpha characters in phone numbers, ASCII only, upper and lower case.
-    const VALID_ALPHA = "A-Za-z";
+    const VALID_ALPHA = 'A-Za-z';
 
 
     // Default extension prefix to use when formatting. This will be put in front of any extension
     // component of the number, after the main national number is formatted. For example, if you wish
     // the default extension formatting to be " extn: 3456", then you should specify " extn: " here
     // as the default extension prefix. This can be overridden by region-specific preferences.
-    const DEFAULT_EXTN_PREFIX = " ext. ";
+    const DEFAULT_EXTN_PREFIX = ' ext. ';
 
     // Regular expression of acceptable punctuation found in phone numbers, used to find numbers in
     // text and to decide what is a viable phone number. This excludes diallable characters.
@@ -107,7 +107,7 @@ class PhoneNumberUtil
     public static $PLUS_CHARS_PATTERN;
     protected static $SEPARATOR_PATTERN;
     protected static $CAPTURING_DIGIT_PATTERN;
-    protected static $VALID_START_CHAR_PATTERN = null;
+    protected static $VALID_START_CHAR_PATTERN;
     public static $SECOND_NUMBER_START_PATTERN = '[\\\\/] *x';
     public static $UNWANTED_END_CHAR_PATTERN = "[[\\P{N}&&\\P{L}]&&[^#]]+$";
     protected static $DIALLABLE_CHAR_MAPPINGS = array();
@@ -116,7 +116,7 @@ class PhoneNumberUtil
     /**
      * @var PhoneNumberUtil
      */
-    protected static $instance = null;
+    protected static $instance;
 
     /**
      * Only upper-case variants of alpha characters are stored.
@@ -184,7 +184,7 @@ class PhoneNumberUtil
      * For performance reasons, amalgamate both into one map.
      * @var array
      */
-    protected static $ALPHA_PHONE_MAPPINGS = null;
+    protected static $ALPHA_PHONE_MAPPINGS;
 
     /**
      * Separate map of all symbols that we wish to retain when formatting alpha numbers. This
@@ -223,8 +223,8 @@ class PhoneNumberUtil
      * @internal
      */
     public static $EXTN_PATTERNS_FOR_MATCHING;
-    protected static $EXTN_PATTERN = null;
-    protected static $VALID_PHONE_NUMBER_PATTERN = null;
+    protected static $EXTN_PATTERN;
+    protected static $VALID_PHONE_NUMBER_PATTERN;
     protected static $MIN_LENGTH_PHONE_NUMBER_PATTERN;
     /**
      *  Regular expression of viable phone numbers. This is location independent. Checks we have at
@@ -341,9 +341,9 @@ class PhoneNumberUtil
         static::initCapturingExtnDigits();
         static::initExtnPatterns();
         static::initExtnPattern();
-        static::$PLUS_CHARS_PATTERN = "[" . static::PLUS_CHARS . "]+";
-        static::$SEPARATOR_PATTERN = "[" . static::VALID_PUNCTUATION . "]+";
-        static::$CAPTURING_DIGIT_PATTERN = "(" . static::DIGITS . ")";
+        static::$PLUS_CHARS_PATTERN = '[' . static::PLUS_CHARS . ']+';
+        static::$SEPARATOR_PATTERN = '[' . static::VALID_PUNCTUATION . ']+';
+        static::$CAPTURING_DIGIT_PATTERN = '(' . static::DIGITS . ')';
         static::initValidStartCharPattern();
         static::initAlphaPhoneMappings();
         static::initDiallableCharMappings();
@@ -355,7 +355,7 @@ class PhoneNumberUtil
             static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[$c] = $c;
         }
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS += static::$asciiDigitMappings;
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["-"] = '-';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS['-'] = '-';
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8D"] = '-';
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x90"] = '-';
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x91"] = '-';
@@ -364,18 +364,18 @@ class PhoneNumberUtil
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x94"] = '-';
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x80\x95"] = '-';
         static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x88\x92"] = '-';
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["/"] = "/";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8F"] = "/";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[" "] = " ";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE3\x80\x80"] = " ";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = " ";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["."] = ".";
-        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = ".";
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS['/'] = '/';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8F"] = '/';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS[' '] = ' ';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE3\x80\x80"] = ' ';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xE2\x81\xA0"] = ' ';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS['.'] = '.';
+        static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS["\xEF\xBC\x8E"] = '.';
 
 
         static::initValidPhoneNumberPatterns();
 
-        static::$UNWANTED_END_CHAR_PATTERN = "[^" . static::DIGITS . static::VALID_ALPHA . "#]+$";
+        static::$UNWANTED_END_CHAR_PATTERN = '[^' . static::DIGITS . static::VALID_ALPHA . '#]+$';
 
         static::initMobileTokenMappings();
 
@@ -459,7 +459,7 @@ class PhoneNumberUtil
      */
     public static function initCapturingExtnDigits()
     {
-        static::$CAPTURING_EXTN_DIGITS = "(" . static::DIGITS . "{1,7})";
+        static::$CAPTURING_EXTN_DIGITS = '(' . static::DIGITS . '{1,7})';
     }
 
     /**
@@ -472,7 +472,7 @@ class PhoneNumberUtil
         // For parsing, we are slightly more lenient in our interpretation than for matching. Here we
         // allow "comma" and "semicolon" as possible extension indicators. When matching, these are
         // hardly ever used to indicate this.
-        $singleExtnSymbolsForParsing = ",;" . $singleExtnSymbolsForMatching;
+        $singleExtnSymbolsForParsing = ',;' . $singleExtnSymbolsForMatching;
 
         static::$EXTN_PATTERNS_FOR_PARSING = static::createExtnPattern($singleExtnSymbolsForParsing);
         static::$EXTN_PATTERNS_FOR_MATCHING = static::createExtnPattern($singleExtnSymbolsForMatching);
@@ -496,25 +496,25 @@ class PhoneNumberUtil
         // Canonical-equivalence doesn't seem to be an option with Android java, so we allow two options
         // for representing the accented o - the character itself, and one in the unicode decomposed
         // form with the combining acute accent.
-        return (static::RFC3966_EXTN_PREFIX . static::$CAPTURING_EXTN_DIGITS . "|" . "[ \xC2\xA0\\t,]*" .
+        return (static::RFC3966_EXTN_PREFIX . static::$CAPTURING_EXTN_DIGITS . '|' . "[ \xC2\xA0\\t,]*" .
             "(?:e?xt(?:ensi(?:o\xCC\x81?|\xC3\xB3))?n?|(?:\xEF\xBD\x85)?\xEF\xBD\x98\xEF\xBD\x94(?:\xEF\xBD\x8E)?|" .
-            "доб|" . "[" . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
+            'доб|' . '[' . $singleExtnSymbols . "]|int|\xEF\xBD\x89\xEF\xBD\x8E\xEF\xBD\x94|anexo)" .
             "[:\\.\xEF\xBC\x8E]?[ \xC2\xA0\\t,-]*" . static::$CAPTURING_EXTN_DIGITS . "\\#?|" .
-            "[- ]+(" . static::DIGITS . "{1,5})\\#");
+            '[- ]+(' . static::DIGITS . "{1,5})\\#");
     }
 
     protected static function initExtnPattern()
     {
-        static::$EXTN_PATTERN = "/(?:" . static::$EXTN_PATTERNS_FOR_PARSING . ")$/" . static::REGEX_FLAGS;
+        static::$EXTN_PATTERN = '/(?:' . static::$EXTN_PATTERNS_FOR_PARSING . ')$/' . static::REGEX_FLAGS;
     }
 
     protected static function initValidPhoneNumberPatterns()
     {
         static::initCapturingExtnDigits();
         static::initExtnPatterns();
-        static::$MIN_LENGTH_PHONE_NUMBER_PATTERN = "[" . static::DIGITS . "]{" . static::MIN_LENGTH_FOR_NSN . "}";
-        static::$VALID_PHONE_NUMBER = "[" . static::PLUS_CHARS . "]*(?:[" . static::VALID_PUNCTUATION . static::STAR_SIGN . "]*[" . static::DIGITS . "]){3,}[" . static::VALID_PUNCTUATION . static::STAR_SIGN . static::VALID_ALPHA . static::DIGITS . "]*";
-        static::$VALID_PHONE_NUMBER_PATTERN = "%^" . static::$MIN_LENGTH_PHONE_NUMBER_PATTERN . "$|^" . static::$VALID_PHONE_NUMBER . "(?:" . static::$EXTN_PATTERNS_FOR_PARSING . ")?$%" . static::REGEX_FLAGS;
+        static::$MIN_LENGTH_PHONE_NUMBER_PATTERN = '[' . static::DIGITS . ']{' . static::MIN_LENGTH_FOR_NSN . '}';
+        static::$VALID_PHONE_NUMBER = '[' . static::PLUS_CHARS . ']*(?:[' . static::VALID_PUNCTUATION . static::STAR_SIGN . ']*[' . static::DIGITS . ']){3,}[' . static::VALID_PUNCTUATION . static::STAR_SIGN . static::VALID_ALPHA . static::DIGITS . ']*';
+        static::$VALID_PHONE_NUMBER_PATTERN = '%^' . static::$MIN_LENGTH_PHONE_NUMBER_PATTERN . '$|^' . static::$VALID_PHONE_NUMBER . '(?:' . static::$EXTN_PATTERNS_FOR_PARSING . ')?$%' . static::REGEX_FLAGS;
     }
 
     protected static function initAlphaPhoneMappings()
@@ -524,14 +524,14 @@ class PhoneNumberUtil
 
     protected static function initValidStartCharPattern()
     {
-        static::$VALID_START_CHAR_PATTERN = "[" . static::PLUS_CHARS . static::DIGITS . "]";
+        static::$VALID_START_CHAR_PATTERN = '[' . static::PLUS_CHARS . static::DIGITS . ']';
     }
 
     protected static function initMobileTokenMappings()
     {
         static::$MOBILE_TOKEN_MAPPINGS = array();
-        static::$MOBILE_TOKEN_MAPPINGS['52'] = "1";
-        static::$MOBILE_TOKEN_MAPPINGS['54'] = "9";
+        static::$MOBILE_TOKEN_MAPPINGS['52'] = '1';
+        static::$MOBILE_TOKEN_MAPPINGS['54'] = '9';
     }
 
     protected static function initDiallableCharMappings()
@@ -579,16 +579,14 @@ class PhoneNumberUtil
      */
     protected static function normalizeHelper($number, array $normalizationReplacements, $removeNonMatches)
     {
-        $normalizedNumber = "";
+        $normalizedNumber = '';
         $strLength = mb_strlen($number, 'UTF-8');
         for ($i = 0; $i < $strLength; $i++) {
             $character = mb_substr($number, $i, 1, 'UTF-8');
             if (isset($normalizationReplacements[mb_strtoupper($character, 'UTF-8')])) {
                 $normalizedNumber .= $normalizationReplacements[mb_strtoupper($character, 'UTF-8')];
-            } else {
-                if (!$removeNonMatches) {
-                    $normalizedNumber .= $character;
-                }
+            } elseif (!$removeNonMatches) {
+                $normalizedNumber .= $character;
             }
             // If neither of the above are true, we remove this character.
         }
@@ -693,7 +691,7 @@ class PhoneNumberUtil
                 continue;
             }
 
-            if ($this->descHasData($this->getNumberDescByType($metadata, $type))) {
+            if (self::descHasData($this->getNumberDescByType($metadata, $type))) {
                 $types[] = $type;
             }
         }
@@ -851,9 +849,9 @@ class PhoneNumberUtil
         $regions = $this->countryCallingCodeToRegionCodeMap[$countryCode];
         if (count($regions) == 1) {
             return $regions[0];
-        } else {
-            return $this->getRegionCodeForNumberFromRegionList($number, $regions);
         }
+
+        return $this->getRegionCodeForNumberFromRegionList($number, $regions);
     }
 
     /**
@@ -944,7 +942,9 @@ class PhoneNumberUtil
         if ($isFixedLine) {
             if ($metadata->getSameMobileAndFixedLinePattern()) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
-            } elseif ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
+            }
+
+            if ($this->isNumberMatchingDesc($nationalNumber, $metadata->getMobile())) {
                 return PhoneNumberType::FIXED_LINE_OR_MOBILE;
             }
             return PhoneNumberType::FIXED_LINE;
@@ -1107,7 +1107,7 @@ class PhoneNumberUtil
             // separately from the rest of the phone number.
 
             $mobileToken = static::getCountryMobileToken($number->getCountryCode());
-            if ($mobileToken !== "") {
+            if ($mobileToken !== '') {
                 return mb_strlen($numberGroups[2]) + mb_strlen($numberGroups[3]);
             }
         }
@@ -1142,7 +1142,7 @@ class PhoneNumberUtil
             }
         }
 
-        $formattedNumber = "";
+        $formattedNumber = '';
         $countryCallingCode = $number->getCountryCode();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
 
@@ -1185,10 +1185,10 @@ class PhoneNumberUtil
                 $formattedNumber = static::PLUS_SIGN . $countryCallingCode . $formattedNumber;
                 return;
             case PhoneNumberFormat::INTERNATIONAL:
-                $formattedNumber = static::PLUS_SIGN . $countryCallingCode . " " . $formattedNumber;
+                $formattedNumber = static::PLUS_SIGN . $countryCallingCode . ' ' . $formattedNumber;
                 return;
             case PhoneNumberFormat::RFC3966:
-                $formattedNumber = static::RFC3966_PREFIX . static::PLUS_SIGN . $countryCallingCode . "-" . $formattedNumber;
+                $formattedNumber = static::RFC3966_PREFIX . static::PLUS_SIGN . $countryCallingCode . '-' . $formattedNumber;
                 return;
             case PhoneNumberFormat::NATIONAL:
             default:
@@ -1323,10 +1323,10 @@ class PhoneNumberUtil
             // Strip any leading punctuation.
             $matcher = new Matcher(static::$SEPARATOR_PATTERN, $formattedNationalNumber);
             if ($matcher->lookingAt()) {
-                $formattedNationalNumber = $matcher->replaceFirst("");
+                $formattedNationalNumber = $matcher->replaceFirst('');
             }
             // Replace the rest with a dash between each number group.
-            $formattedNationalNumber = $matcher->reset($formattedNationalNumber)->replaceAll("-");
+            $formattedNationalNumber = $matcher->reset($formattedNationalNumber)->replaceAll('-');
         }
         return $formattedNationalNumber;
     }
@@ -1345,12 +1345,10 @@ class PhoneNumberUtil
         if ($number->hasExtension() && mb_strlen($number->getExtension()) > 0) {
             if ($numberFormat === PhoneNumberFormat::RFC3966) {
                 $formattedNumber .= static::RFC3966_EXTN_PREFIX . $number->getExtension();
+            } elseif (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
+                $formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
             } else {
-                if (!empty($metadata) && $metadata->hasPreferredExtnPrefix()) {
-                    $formattedNumber .= $metadata->getPreferredExtnPrefix() . $number->getExtension();
-                } else {
-                    $formattedNumber .= static::DEFAULT_EXTN_PREFIX . $number->getExtension();
-                }
+                $formattedNumber .= static::DEFAULT_EXTN_PREFIX . $number->getExtension();
             }
         }
     }
@@ -1372,7 +1370,7 @@ class PhoneNumberUtil
         if (array_key_exists($countryCallingCode, static::$MOBILE_TOKEN_MAPPINGS)) {
             return static::$MOBILE_TOKEN_MAPPINGS[$countryCallingCode];
         }
-        return "";
+        return '';
     }
 
     /**
@@ -1448,7 +1446,7 @@ class PhoneNumberUtil
             // The numbers are captured into groups in the regular expression.
 
             for ($i = 1, $length = count($matches); $i <= $length; $i++) {
-                if ($matches[$i][0] != "") {
+                if ($matches[$i][0] != '') {
                     // We go through the capturing groups until we find one that captured some digits. If none
                     // did, then we will return the empty string.
                     $extension = $matches[$i][0];
@@ -1457,7 +1455,7 @@ class PhoneNumberUtil
                 }
             }
         }
-        return "";
+        return '';
     }
 
     /**
@@ -1551,7 +1549,7 @@ class PhoneNumberUtil
     protected function parseHelper($numberToParse, $defaultRegion, $keepRawInput, $checkRegion, PhoneNumber $phoneNumber)
     {
         if ($numberToParse === null) {
-            throw new NumberParseException(NumberParseException::NOT_A_NUMBER, "The phone number supplied was null.");
+            throw new NumberParseException(NumberParseException::NOT_A_NUMBER, 'The phone number supplied was null.');
         }
 
         $numberToParse = trim($numberToParse);
@@ -1559,7 +1557,7 @@ class PhoneNumberUtil
         if (mb_strlen($numberToParse) > static::MAX_INPUT_STRING_LENGTH) {
             throw new NumberParseException(
                 NumberParseException::TOO_LONG,
-                "The string supplied was too long to parse."
+                'The string supplied was too long to parse.'
             );
         }
 
@@ -1569,7 +1567,7 @@ class PhoneNumberUtil
         if (!static::isViablePhoneNumber($nationalNumber)) {
             throw new NumberParseException(
                 NumberParseException::NOT_A_NUMBER,
-                "The string supplied did not seem to be a phone number."
+                'The string supplied did not seem to be a phone number.'
             );
         }
 
@@ -1578,7 +1576,7 @@ class PhoneNumberUtil
         if ($checkRegion && !$this->checkRegionForParsing($nationalNumber, $defaultRegion)) {
             throw new NumberParseException(
                 NumberParseException::INVALID_COUNTRY_CODE,
-                "Missing or invalid default region."
+                'Missing or invalid default region.'
             );
         }
 
@@ -1595,7 +1593,7 @@ class PhoneNumberUtil
         $regionMetadata = $this->getMetadataForRegion($defaultRegion);
         // Check to see if the number is given in international format so we know whether this number is
         // from the default region or not.
-        $normalizedNationalNumber = "";
+        $normalizedNationalNumber = '';
         try {
             // TODO: This method should really just take in the string buffer that has already
             // been created, and just remove the prefix, rather than taking in a string and then
@@ -1621,7 +1619,7 @@ class PhoneNumberUtil
                 if ($countryCode == 0) {
                     throw new NumberParseException(
                         NumberParseException::INVALID_COUNTRY_CODE,
-                        "Could not interpret numbers after plus-sign."
+                        'Could not interpret numbers after plus-sign.'
                     );
                 }
             } else {
@@ -1649,11 +1647,11 @@ class PhoneNumberUtil
         if (mb_strlen($normalizedNationalNumber) < static::MIN_LENGTH_FOR_NSN) {
             throw new NumberParseException(
                 NumberParseException::TOO_SHORT_NSN,
-                "The string supplied is too short to be a phone number."
+                'The string supplied is too short to be a phone number.'
             );
         }
         if ($regionMetadata !== null) {
-            $carrierCode = "";
+            $carrierCode = '';
             $potentialNationalNumber = $normalizedNationalNumber;
             $this->maybeStripNationalPrefixAndCarrierCode($potentialNationalNumber, $regionMetadata, $carrierCode);
             // We require that the NSN remaining after stripping the national prefix and carrier code be
@@ -1673,13 +1671,13 @@ class PhoneNumberUtil
         if ($lengthOfNationalNumber < static::MIN_LENGTH_FOR_NSN) {
             throw new NumberParseException(
                 NumberParseException::TOO_SHORT_NSN,
-                "The string supplied is too short to be a phone number."
+                'The string supplied is too short to be a phone number.'
             );
         }
         if ($lengthOfNationalNumber > static::MAX_LENGTH_FOR_NSN) {
             throw new NumberParseException(
                 NumberParseException::TOO_LONG,
-                "The string supplied is too long to be a phone number."
+                'The string supplied is too long to be a phone number.'
             );
         }
         static::setItalianLeadingZerosForPhoneNumber($normalizedNationalNumber, $phoneNumber);
@@ -1693,7 +1691,7 @@ class PhoneNumberUtil
          * We have to remove the leading zeroes ourself though
          */
         if ((int)$normalizedNationalNumber == 0) {
-            $normalizedNationalNumber = "0";
+            $normalizedNationalNumber = '0';
         } else {
             $normalizedNationalNumber = ltrim($normalizedNationalNumber, '0');
         }
@@ -1758,7 +1756,8 @@ class PhoneNumberUtil
 
             $indexOfRfc3966Prefix = strpos($numberToParse, static::RFC3966_PREFIX);
             $indexOfNationalNumber = ($indexOfRfc3966Prefix !== false) ? $indexOfRfc3966Prefix + strlen(static::RFC3966_PREFIX) : 0;
-            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber, ($indexOfPhoneContext - $indexOfNationalNumber));
+            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber,
+                $indexOfPhoneContext - $indexOfNationalNumber);
         } else {
             // Extract a possible number from the string passed in (this strips leading characters that
             // could not be the start of a phone number.)
@@ -1815,9 +1814,9 @@ class PhoneNumberUtil
             }
 
             return $number;
-        } else {
-            return "";
         }
+
+        return '';
     }
 
     /**
@@ -1884,7 +1883,7 @@ class PhoneNumberUtil
         }
         $fullNumber = $number;
         // Set the default prefix to be something that will never match.
-        $possibleCountryIddPrefix = "NonMatch";
+        $possibleCountryIddPrefix = 'NonMatch';
         if ($defaultRegionMetadata !== null) {
             $possibleCountryIddPrefix = $defaultRegionMetadata->getInternationalPrefix();
         }
@@ -1897,7 +1896,7 @@ class PhoneNumberUtil
             if (mb_strlen($fullNumber) <= static::MIN_LENGTH_FOR_NSN) {
                 throw new NumberParseException(
                     NumberParseException::TOO_SHORT_AFTER_IDD,
-                    "Phone number had an IDD, but after this was not long enough to be a viable phone number."
+                    'Phone number had an IDD, but after this was not long enough to be a viable phone number.'
                 );
             }
             $potentialCountryCode = $this->extractCountryCode($fullNumber, $nationalNumber);
@@ -1911,15 +1910,17 @@ class PhoneNumberUtil
             // or that doesn't exist.
             throw new NumberParseException(
                 NumberParseException::INVALID_COUNTRY_CODE,
-                "Country calling code supplied was not recognised."
+                'Country calling code supplied was not recognised.'
             );
-        } elseif ($defaultRegionMetadata !== null) {
+        }
+
+        if ($defaultRegionMetadata !== null) {
             // Check to see if the number starts with the country calling code for the default region. If
             // so, we remove the country calling code, and do some checks on the validity of the number
             // before and after.
             $defaultCountryCode = $defaultRegionMetadata->getCountryCode();
             $defaultCountryCodeString = (string)$defaultCountryCode;
-            $normalizedNumber = (string)$fullNumber;
+            $normalizedNumber = $fullNumber;
             if (strpos($normalizedNumber, $defaultCountryCodeString) === 0) {
                 $potentialNationalNumber = substr($normalizedNumber, mb_strlen($defaultCountryCodeString));
                 $generalDesc = $defaultRegionMetadata->getGeneralDesc();
@@ -2011,9 +2012,9 @@ class PhoneNumberUtil
         $m = new Matcher(static::VALID_ALPHA_PHONE_PATTERN, $number);
         if ($m->matches()) {
             return static::normalizeHelper($number, static::$ALPHA_PHONE_MAPPINGS, true);
-        } else {
-            return static::normalizeDigitsOnly($number);
         }
+
+        return static::normalizeDigitsOnly($number);
     }
 
     /**
@@ -2035,7 +2036,7 @@ class PhoneNumberUtil
      */
     public static function normalizeDigits($number, $keepNonDigits)
     {
-        $normalizedDigits = "";
+        $normalizedDigits = '';
         $numberAsArray = preg_split('/(?<!^)(?!$)/u', $number);
         foreach ($numberAsArray as $character) {
             // Check if we are in the unicode number range
@@ -2067,7 +2068,7 @@ class PhoneNumberUtil
             $digitMatcher = new Matcher(static::$CAPTURING_DIGIT_PATTERN, substr($number, $matchEnd));
             if ($digitMatcher->find()) {
                 $normalizedGroup = static::normalizeDigitsOnly($digitMatcher->group(1));
-                if ($normalizedGroup == "0") {
+                if ($normalizedGroup == '0') {
                     return false;
                 }
             }
@@ -2148,26 +2149,26 @@ class PhoneNumberUtil
 
                 $number = substr($number, $prefixMatcher->end());
                 return true;
-            } else {
-                // Check that the resultant number is still viable. If not, return. Check this by copying
-                // the string and making the transformation on the copy first.
-                $transformedNumber = $number;
-                $transformedNumber = substr_replace(
-                    $transformedNumber,
-                    $prefixMatcher->replaceFirst($transformRule),
-                    0,
-                    $numberLength
-                );
-                if ($isViableOriginalNumber
-                    && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
-                    return false;
-                }
-                if ($carrierCode !== null && $numOfGroups > 1) {
-                    $carrierCode .= $prefixMatcher->group(1);
-                }
-                $number = substr_replace($number, $transformedNumber, 0, mb_strlen($number));
-                return true;
             }
+
+            // Check that the resultant number is still viable. If not, return. Check this by copying
+            // the string and making the transformation on the copy first.
+            $transformedNumber = $number;
+            $transformedNumber = substr_replace(
+                $transformedNumber,
+                $prefixMatcher->replaceFirst($transformRule),
+                0,
+                $numberLength
+            );
+            if ($isViableOriginalNumber
+                && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
+                return false;
+            }
+            if ($carrierCode !== null && $numOfGroups > 1) {
+                $carrierCode .= $prefixMatcher->group(1);
+            }
+            $number = substr_replace($number, $transformedNumber, 0, mb_strlen($number));
+            return true;
         }
         return false;
     }
@@ -2219,26 +2220,26 @@ class PhoneNumberUtil
                 // The rate case has been encountered where no fixedLine data is available (true for some
                 // non-geographical entities), so we just check mobile.
                 return $this->testNumberLength($number, $metadata, PhoneNumberType::MOBILE);
-            } else {
-                $mobileDesc = $this->getNumberDescByType($metadata, PhoneNumberType::MOBILE);
-                if (static::descHasPossibleNumberData($mobileDesc)) {
-                    // Note that when adding the possible lengths from mobile, we have to again check they
-                    // aren't empty since if they are this indicates they are the same as the general desc and
-                    // should be obtained from there.
-                    $possibleLengths = array_merge($possibleLengths,
-                        (count($mobileDesc->getPossibleLength()) === 0)
-                            ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength());
+            }
 
-                    // The current list is sorted; we need to merge in the new list and re-sort (duplicates
-                    // are okay). Sorting isn't so expensive because the lists are very small.
-                    sort($possibleLengths);
+            $mobileDesc = $this->getNumberDescByType($metadata, PhoneNumberType::MOBILE);
+            if (static::descHasPossibleNumberData($mobileDesc)) {
+                // Note that when adding the possible lengths from mobile, we have to again check they
+                // aren't empty since if they are this indicates they are the same as the general desc and
+                // should be obtained from there.
+                $possibleLengths = array_merge($possibleLengths,
+                    (count($mobileDesc->getPossibleLength()) === 0)
+                        ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength());
 
-                    if (count($localLengths) === 0) {
-                        $localLengths = $mobileDesc->getPossibleLengthLocalOnly();
-                    } else {
-                        $localLengths = array_merge($localLengths, $mobileDesc->getPossibleLengthLocalOnly());
-                        sort($localLengths);
-                    }
+                // The current list is sorted; we need to merge in the new list and re-sort (duplicates
+                // are okay). Sorting isn't so expensive because the lists are very small.
+                sort($possibleLengths);
+
+                if (count($localLengths) === 0) {
+                    $localLengths = $mobileDesc->getPossibleLengthLocalOnly();
+                } else {
+                    $localLengths = array_merge($localLengths, $mobileDesc->getPossibleLengthLocalOnly());
+                    sort($localLengths);
                 }
             }
         }
@@ -2263,7 +2264,9 @@ class PhoneNumberUtil
         $minimumLength = reset($possibleLengths);
         if ($minimumLength == $actualLength) {
             return ValidationResult::IS_POSSIBLE;
-        } elseif ($minimumLength > $actualLength) {
+        }
+
+        if ($minimumLength > $actualLength) {
             return ValidationResult::TOO_SHORT;
         } elseif (isset($possibleLengths[count($possibleLengths) - 1]) && $possibleLengths[count($possibleLengths) - 1] < $actualLength) {
             return ValidationResult::TOO_LONG;
@@ -2314,7 +2317,7 @@ class PhoneNumberUtil
     {
         $metadata = $this->getMetadataForRegion($regionCode);
         if ($metadata === null) {
-            throw new \InvalidArgumentException("Invalid region code: " . $regionCode);
+            throw new \InvalidArgumentException('Invalid region code: ' . $regionCode);
         }
         return $metadata->getCountryCode();
     }
@@ -2335,10 +2338,10 @@ class PhoneNumberUtil
     {
         $countryCallingCode = $number->getCountryCode();
         if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
-            return $number->hasRawInput() ? $number->getRawInput() : "";
+            return $number->hasRawInput() ? $number->getRawInput() : '';
         }
 
-        $formattedNumber = "";
+        $formattedNumber = '';
         // Clear the extension, as that part cannot normally be dialed together with the main number.
         $numberNoExt = new PhoneNumber();
         $numberNoExt->mergeFrom($number)->clearExtension();
@@ -2348,22 +2351,22 @@ class PhoneNumberUtil
         if ($regionCallingFrom == $regionCode) {
             $isFixedLineOrMobile = ($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) || ($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE);
             // Carrier codes may be needed in some countries. We handle this here.
-            if ($regionCode == "CO" && $numberType == PhoneNumberType::FIXED_LINE) {
+            if ($regionCode == 'CO' && $numberType == PhoneNumberType::FIXED_LINE) {
                 $formattedNumber = $this->formatNationalNumberWithCarrierCode(
                     $numberNoExt,
                     static::COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX
                 );
-            } elseif ($regionCode == "BR" && $isFixedLineOrMobile) {
+            } elseif ($regionCode == 'BR' && $isFixedLineOrMobile) {
                 // Historically, we set this to an empty string when parsing with raw input if none was
                 // found in the input string. However, this doesn't result in a number we can dial. For this
                 // reason, we treat the empty string the same as if it isn't set at all.
                 $formattedNumber = mb_strlen($numberNoExt->getPreferredDomesticCarrierCode()) > 0
-                    ? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, "")
+                    ? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, '')
                     // Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
                     // called within Brazil. Without that, most of the carriers won't connect the call.
                     // Because of that, we return an empty string here.
-                    : "";
-            } elseif ($isValidNumber && $regionCode == "HU") {
+                    : '';
+            } elseif ($isValidNumber && $regionCode == 'HU') {
                 // The national format for HU numbers doesn't contain the national prefix, because that is
                 // how numbers are normally written down. However, the national prefix is obligatory when
                 // dialing from a mobile phone, except for short numbers. As a result, we add it back here
@@ -2371,7 +2374,7 @@ class PhoneNumberUtil
                 $formattedNumber = $this->getNddPrefixForRegion(
                         $regionCode,
                         true /* strip non-digits */
-                    ) . " " . $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
+                    ) . ' ' . $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
             } elseif ($countryCallingCode === static::NANPA_COUNTRY_CODE) {
                 // For NANPA countries, we output international format for numbers that can be dialed
                 // internationally, since that always works, except for numbers which might potentially be
@@ -2385,29 +2388,24 @@ class PhoneNumberUtil
                 } else {
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
+            } elseif (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
+                    // MX fixed line and mobile numbers should always be formatted in international format,
+                    // even when dialed within MX. For national format to work, a carrier code needs to be
+                    // used, and the correct carrier code depends on if the caller and callee are from the
+                    // same local area. It is trickier to get that to work correctly than using
+                    // international format, which is tested to work fine on all carriers.
+                    // CL fixed line numbers need the national prefix when dialing in the national format,
+                    // but don't have it when used for display. The reverse is true for mobile numbers.
+                    // As a result, we output them in the international format to make it work.
+                    (
+                        ($regionCode === 'MX' || $regionCode === 'CL' || $regionCode === 'UZ')
+                        && $isFixedLineOrMobile
+                    )
+                ) && $this->canBeInternationallyDialled($numberNoExt)
+            ) {
+                $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
             } else {
-                // For non-geographical countries andMexican, Chilean and Uzbek fixed line and mobile
-                // numbers, we output international format for numbers that can be dialed internationally as
-                // that always works.
-                if (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
-                        // MX fixed line and mobile numbers should always be formatted in international format,
-                        // even when dialed within MX. For national format to work, a carrier code needs to be
-                        // used, and the correct carrier code depends on if the caller and callee are from the
-                        // same local area. It is trickier to get that to work correctly than using
-                        // international format, which is tested to work fine on all carriers.
-                        // CL fixed line numbers need the national prefix when dialing in the national format,
-                        // but don't have it when used for display. The reverse is true for mobile numbers.
-                        // As a result, we output them in the international format to make it work.
-                        (
-                            ($regionCode == 'MX' || $regionCode == 'CL' || $regionCode == 'UZ')
-                            && $isFixedLineOrMobile
-                        )
-                    ) && $this->canBeInternationallyDialled($numberNoExt)
-                ) {
-                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
-                } else {
-                    $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
-                }
+                $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
             }
         } elseif ($isValidNumber && $this->canBeInternationallyDialled($numberNoExt)) {
             // We assume that short numbers are not diallable from outside their region, so if a number
@@ -2568,7 +2566,7 @@ class PhoneNumberUtil
         // the number in raw_input with the parsed number.
         // To do this, first we normalize punctuation. We retain number grouping symbols such as " "
         // only.
-        $rawInput = $this->normalizeHelper($rawInput, static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS, true);
+        $rawInput = self::normalizeHelper($rawInput, static::$ALL_PLUS_NUMBER_GROUPING_SYMBOLS, true);
         // Now we trim everything before the first three digits in the parsed number. We choose three
         // because all valid alpha numbers have 3 digits at the start - if it does not, then we don't
         // trim anything at all. Similarly, if the national number was less than three digits, we don't
@@ -2583,7 +2581,7 @@ class PhoneNumberUtil
         $metadataForRegionCallingFrom = $this->getMetadataForRegion($regionCallingFrom);
         if ($countryCode == static::NANPA_COUNTRY_CODE) {
             if ($this->isNANPACountry($regionCallingFrom)) {
-                return $countryCode . " " . $rawInput;
+                return $countryCode . ' ' . $rawInput;
             }
         } elseif ($metadataForRegionCallingFrom !== null &&
             $countryCode == $this->getCountryCodeForValidRegion($regionCallingFrom)
@@ -2602,7 +2600,7 @@ class PhoneNumberUtil
             // The first group is the first group of digits that the user wrote together.
             $newFormat->setPattern("(\\d+)(.*)");
             // Here we just concatenate them back together after the national prefix has been fixed.
-            $newFormat->setFormat("$1$2");
+            $newFormat->setFormat('$1$2');
             // Now we format using this pattern instead of the default pattern, but with the national
             // prefix prefixed if necessary.
             // This will not work in the cases where the pattern (and not the leading digits) decide
@@ -2610,7 +2608,7 @@ class PhoneNumberUtil
             // anything, but that is not the case in the metadata to date.
             return $this->formatNsnUsingPattern($rawInput, $newFormat, PhoneNumberFormat::NATIONAL);
         }
-        $internationalPrefixForFormatting = "";
+        $internationalPrefixForFormatting = '';
         // If an unsupported region-calling-from is entered, or a country with multiple international
         // prefixes, the international format of the number is returned, unless there is a preferred
         // international prefix.
@@ -2633,7 +2631,7 @@ class PhoneNumberUtil
             $formattedNumber
         );
         if (mb_strlen($internationalPrefixForFormatting) > 0) {
-            $formattedNumber = $internationalPrefixForFormatting . " " . $countryCode . " " . $formattedNumber;
+            $formattedNumber = $internationalPrefixForFormatting . ' ' . $countryCode . ' ' . $formattedNumber;
         } else {
             // Invalid region entered as country-calling-from (so no metadata was found for it) or the
             // region chosen has multiple international dialling prefixes.
@@ -2677,7 +2675,7 @@ class PhoneNumberUtil
             if ($this->isNANPACountry($regionCallingFrom)) {
                 // For NANPA regions, return the national format for these regions but prefix it with the
                 // country calling code.
-                return $countryCallingCode . " " . $this->format($number, PhoneNumberFormat::NATIONAL);
+                return $countryCallingCode . ' ' . $this->format($number, PhoneNumberFormat::NATIONAL);
             }
         } elseif ($countryCallingCode == $this->getCountryCodeForValidRegion($regionCallingFrom)) {
             // If regions share a country calling code, the country calling code need not be dialled.
@@ -2695,7 +2693,7 @@ class PhoneNumberUtil
 
         // For regions that have multiple international prefixes, the international format of the
         // number is returned, unless there is a preferred international prefix.
-        $internationalPrefixForFormatting = "";
+        $internationalPrefixForFormatting = '';
         $uniqueInternationalPrefixMatcher = new Matcher(static::SINGLE_INTERNATIONAL_PREFIX, $internationalPrefix);
 
         if ($uniqueInternationalPrefixMatcher->matches()) {
@@ -2720,7 +2718,7 @@ class PhoneNumberUtil
             $formattedNumber
         );
         if (mb_strlen($internationalPrefixForFormatting) > 0) {
-            $formattedNumber = $internationalPrefixForFormatting . " " . $countryCallingCode . " " . $formattedNumber;
+            $formattedNumber = $internationalPrefixForFormatting . ' ' . $countryCallingCode . ' ' . $formattedNumber;
         } else {
             $this->prefixNumberWithCountryCallingCode(
                 $countryCallingCode,
@@ -2898,7 +2896,7 @@ class PhoneNumberUtil
         if ($stripNonDigits) {
             // Note: if any other non-numeric symbols are ever used in national prefixes, these would have
             // to be removed here as well.
-            $nationalPrefix = str_replace("~", "", $nationalPrefix);
+            $nationalPrefix = str_replace('~', '', $nationalPrefix);
         }
         return $nationalPrefix;
     }
@@ -3049,7 +3047,7 @@ class PhoneNumberUtil
         // Metadata cannot be null because the country calling code is valid
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
 
-        $formattedNumber = "";
+        $formattedNumber = '';
 
         $formattingPattern = $this->chooseFormattingPatternForNumber($userDefinedFormats, $nationalSignificantNumber);
         if ($formattingPattern === null) {
@@ -3066,8 +3064,8 @@ class PhoneNumberUtil
                 $nationalPrefix = $metadata->getNationalPrefix();
                 if (mb_strlen($nationalPrefix) > 0) {
                     // Replace $NP with national prefix and $FG with the first group ($1).
-                    $nationalPrefixFormattingRule = str_replace(static::NP_STRING, $nationalPrefix, $nationalPrefixFormattingRule);
-                    $nationalPrefixFormattingRule = str_replace(static::FG_STRING, '$1', $nationalPrefixFormattingRule);
+                    $nationalPrefixFormattingRule = str_replace(array(static::NP_STRING, static::FG_STRING),
+                        array($nationalPrefix, '$1'), $nationalPrefixFormattingRule);
                     $numFormatCopy->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
                 } else {
                     // We don't want to have a rule for how to format the national prefix if there isn't one.
@@ -3183,7 +3181,7 @@ class PhoneNumberUtil
                 $desc = $this->getNumberDescByType($this->getMetadataForNonGeographicalRegion($countryCallingCode), $regionCodeOrType);
                 try {
                     if ($desc->getExampleNumber() != '') {
-                        return $this->parse("+" . $countryCallingCode . $desc->getExampleNumber(), static::UNKNOWN_REGION);
+                        return $this->parse('+' . $countryCallingCode . $desc->getExampleNumber(), static::UNKNOWN_REGION);
                     }
                 } catch (NumberParseException $e) {
                     // noop
@@ -3352,13 +3350,13 @@ class PhoneNumberUtil
                                 return MatchType::NSN_MATCH;
                             }
                             return $match;
-                        } else {
-                            // If the first number didn't have a valid country calling code, then we parse the
-                            // second number without one as well.
-                            $secondNumberProto = new PhoneNumber();
-                            $this->parseHelper($secondNumberIn, null, false, false, $secondNumberProto);
-                            return $this->isNumberMatch($firstNumberIn, $secondNumberProto);
                         }
+
+                        // If the first number didn't have a valid country calling code, then we parse the
+                        // second number without one as well.
+                        $secondNumberProto = new PhoneNumber();
+                        $this->parseHelper($secondNumberIn, null, false, false, $secondNumberProto);
+                        return $this->isNumberMatch($firstNumberIn, $secondNumberProto);
                     } catch (NumberParseException $e2) {
                         // Fall-through to return NOT_A_NUMBER.
                     }
@@ -3384,9 +3382,10 @@ class PhoneNumberUtil
             if ($firstNumberCountryCode != 0 && $secondNumberCountryCode != 0) {
                 if ($firstNumber->equals($secondNumber)) {
                     return MatchType::EXACT_MATCH;
-                } elseif ($firstNumberCountryCode == $secondNumberCountryCode &&
-                    $this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber)
-                ) {
+                }
+
+                if ($firstNumberCountryCode == $secondNumberCountryCode &&
+                    $this->isNationalNumberSuffixOfTheOther($firstNumber, $secondNumber)) {
                     // A SHORT_NSN_MATCH occurs if there is a difference because of the presence or absence of
                     // an 'Italian leading zero', the presence or absence of an extension, or one NSN being a
                     // shorter variant of the other.

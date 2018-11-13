@@ -29,5 +29,5 @@ return array (
   218629 => 'Elmagrun',
   21863 => 'Benina',
   21867 => 'Elmareg',
-  21871 => 'Sebha',
+  2187 => 'Sebha',
 );

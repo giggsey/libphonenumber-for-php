@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:20|[3-4]\\d|8[19])\\d{4}',
+    'NationalNumberPattern' => '(?:20|[34]\\d|8[19])\\d{4}',
     'ExampleNumber' => '201234',
     'PossibleLength' => 
     array (
@@ -58,7 +58,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90(?:[1345][15-7]|2[125-7]|99)\\d{2}',
+    'NationalNumberPattern' => '90(?:[13-5][15-7]|2[125-7]|99)\\d\\d',
     'ExampleNumber' => '901123',
     'PossibleLength' => 
     array (
@@ -151,6 +151,7 @@ return array (
       'format' => '$1',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[2-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '$CC $1',

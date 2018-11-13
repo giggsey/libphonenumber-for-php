@@ -192,8 +192,7 @@ EOT;
 
         foreach ($data as $line) {
             // Remove \n
-            $line = str_replace("\n", "", $line);
-            $line = str_replace("\r", "", $line);
+            $line = str_replace(array("\n", "\r"), '', $line);
             $line = trim($line);
 
             if (strlen($line) == 0 || substr($line, 0, 1) == '#') {
@@ -289,12 +288,12 @@ EOT;
      */
     private function removeEmptyEnglishMappings(&$mappings, $language)
     {
-        if ($language != "en") {
+        if ($language != 'en') {
             return;
         }
 
         foreach ($mappings as $k => $v) {
-            if ($v == "") {
+            if ($v == '') {
                 unset($mappings[$k]);
             }
         }
@@ -326,7 +325,7 @@ EOT;
 
     private function getEnglishDataPath($textFile)
     {
-        return "en" . DIRECTORY_SEPARATOR . substr($textFile, 3);
+        return 'en' . DIRECTORY_SEPARATOR . substr($textFile, 3);
     }
 
     private function compressAccordingToEnglishData($englishMap, &$nonEnglishMap)
@@ -338,7 +337,7 @@ EOT;
                     if (!$this->hasOverlappingPrefix($prefix, $nonEnglishMap)) {
                         unset($nonEnglishMap[$prefix]);
                     } else {
-                        $nonEnglishMap[$prefix] = "";
+                        $nonEnglishMap[$prefix] = '';
                     }
                 }
             }

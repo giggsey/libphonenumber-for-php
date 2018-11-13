@@ -71,7 +71,7 @@ class PhoneNumberToCarrierMapper
     public function getNameForValidNumber(PhoneNumber $number, $languageCode)
     {
         $languageStr = Locale::getPrimaryLanguage($languageCode);
-        $scriptStr = "";
+        $scriptStr = '';
         $regionStr = Locale::getRegion($languageCode);
 
         return $this->prefixFileReader->getDescriptionForNumber($number, $languageStr, $scriptStr, $regionStr);
@@ -94,7 +94,7 @@ class PhoneNumberToCarrierMapper
         if ($this->isMobile($numberType)) {
             return $this->getNameForValidNumber($number, $languageCode);
         }
-        return "";
+        return '';
     }
 
     /**
@@ -110,7 +110,7 @@ class PhoneNumberToCarrierMapper
     public function getSafeDisplayName(PhoneNumber $number, $languageCode)
     {
         if ($this->phoneUtil->isMobileNumberPortableRegion($this->phoneUtil->getRegionCodeForNumber($number))) {
-            return "";
+            return '';
         }
 
         return $this->getNameForNumber($number, $languageCode);

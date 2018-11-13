@@ -11,14 +11,8 @@
  */
 
 return array (
-  2272020 => 'Niamey',
-  2272031 => 'Niamey',
-  2272032 => 'Niamey',
-  2272033 => 'Niamey',
-  2272034 => 'Niamey',
-  2272035 => 'Niamey',
-  2272036 => 'Niamey',
-  2272037 => 'Niamey',
+  227202 => 'Niamey',
+  227203 => 'Niamey',
   2272041 => 'Maradi',
   2272044 => 'Agadez',
   2272045 => 'Arlit',

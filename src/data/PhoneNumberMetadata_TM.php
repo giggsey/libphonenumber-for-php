@@ -138,6 +138,7 @@ return array (
   'id' => 'TM',
   'countryCode' => 993,
   'internationalPrefix' => '810',
+  'preferredInternationalPrefix' => '8~10',
   'nationalPrefix' => '8',
   'nationalPrefixForParsing' => '8',
   'sameMobileAndFixedLinePattern' => false,

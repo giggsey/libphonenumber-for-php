@@ -17,40 +17,40 @@ use libphonenumber\PhoneNumberDesc;
 class MetadataFilter
 {
     public static $EXCLUDABLE_PARENT_FIELDS = array(
-        "fixedLine",
-        "mobile",
-        "tollFree",
-        "premiumRate",
-        "sharedCost",
-        "personalNumber",
-        "voip",
-        "pager",
-        "uan",
-        "emergency",
-        "voicemail",
-        "shortCode",
-        "standardRate",
-        "carrierSpecific",
-        "smsServices",
-        "noInternationalDialling"
+        'fixedLine',
+        'mobile',
+        'tollFree',
+        'premiumRate',
+        'sharedCost',
+        'personalNumber',
+        'voip',
+        'pager',
+        'uan',
+        'emergency',
+        'voicemail',
+        'shortCode',
+        'standardRate',
+        'carrierSpecific',
+        'smsServices',
+        'noInternationalDialling'
     );
 
     public static $EXCLUDABLE_CHILD_FIELDS = array(
-        "nationalNumberPattern",
-        "possibleLength",
-        "possibleLengthLocalOnly",
-        "exampleNumber"
+        'nationalNumberPattern',
+        'possibleLength',
+        'possibleLengthLocalOnly',
+        'exampleNumber'
     );
 
     public static $EXCLUDABLE_CHILDLESS_FIELDS = array(
-        "preferredInternationalPrefix",
-        "nationalPrefix",
-        "preferredExtnPrefix",
-        "nationalPrefixTransformRule",
-        "sameMobileAndFixedLinePattern",
-        "mainCountryForCode",
-        "leadingZeroPossible",
-        "mobileNumberPortableRegion"
+        'preferredInternationalPrefix',
+        'nationalPrefix',
+        'preferredExtnPrefix',
+        'nationalPrefixTransformRule',
+        'sameMobileAndFixedLinePattern',
+        'mainCountryForCode',
+        'leadingZeroPossible',
+        'mobileNumberPortableRegion'
     );
 
     protected $blackList;
@@ -63,7 +63,7 @@ class MetadataFilter
     public static function forLiteBuild()
     {
         // "exampleNumber" is a blacklist.
-        return new static(self::parseFieldMapFromString("exampleNumber"));
+        return new static(self::parseFieldMapFromString('exampleNumber'));
     }
 
     /**
@@ -79,13 +79,13 @@ class MetadataFilter
     public static function parseFieldMapFromString($string)
     {
         if ($string === null) {
-            throw new \RuntimeException("Null string should not be passed to parseFieldMapFromString");
+            throw new \RuntimeException('Null string should not be passed to parseFieldMapFromString');
         }
 
         // Remove whitespace
         $string = str_replace(' ', '', $string);
         if (strlen($string) === 0) {
-            throw new \RuntimeException("Empty string should not be passed to parseFieldMapFromString");
+            throw new \RuntimeException('Empty string should not be passed to parseFieldMapFromString');
         }
 
         $fieldMap = array();
@@ -139,7 +139,7 @@ class MetadataFilter
                 }
                 $fieldMap[$parent] = $children;
             } else {
-                throw new \RuntimeException("Incorrect location of parentheses in " . $group);
+                throw new \RuntimeException('Incorrect location of parentheses in ' . $group);
             }
         }
 
@@ -174,7 +174,7 @@ class MetadataFilter
     public static function forSpecialBuild()
     {
         // "mobile" is a whitelist.
-        return new static(self::computeComplement(self::parseFieldMapFromString("mobile")));
+        return new static(self::computeComplement(self::parseFieldMapFromString('mobile')));
     }
 
     /**
@@ -369,13 +369,13 @@ class MetadataFilter
             }
 
             return array_key_exists($parent, $this->blackList) && in_array($child, $this->blackList[$parent]);
-        } else {
-            $childlessField = $parent;
-            if (!in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
-                throw new \RuntimeException($childlessField . ' is not an excludable childless field');
-            }
-
-            return array_key_exists($childlessField, $this->blackList);
         }
+
+        $childlessField = $parent;
+        if (!in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
+            throw new \RuntimeException($childlessField . ' is not an excludable childless field');
+        }
+
+        return array_key_exists($childlessField, $this->blackList);
     }
 }

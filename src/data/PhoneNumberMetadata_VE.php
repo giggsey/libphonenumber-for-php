@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2(?:12|3[457-9]|[58][1-9]|[467]\\d|9[1-6])|50[01])\\d{7}',
+    'NationalNumberPattern' => '(?:2(?:12|3[457-9]|[467]\\d|[58][1-9]|9[1-6])|50[01])\\d{7}',
     'ExampleNumber' => '2121234567',
     'PossibleLength' => 
     array (
@@ -153,6 +153,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[24589]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '$CC $1',

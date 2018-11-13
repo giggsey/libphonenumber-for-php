@@ -29,7 +29,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2[1-4]\\d{5,6}|3(?:1\\d{6}|[23]\\d{4,6})|4(?:[125]\\d{5,6}|[36]\\d{6}|[78]\\d{4,6})|7\\d{6,7}',
+    'NationalNumberPattern' => '(?:2[1-4]|7\\d)\\d{5,6}|(?:3[1-3]|4[1-35-8])\\d{6}|3[23]\\d{4,5}|4[12578]\\d{5}|4[78]\\d{4}',
     'ExampleNumber' => '71234567',
     'PossibleLength' => 
     array (
@@ -152,11 +152,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d)(\\d{6,7})',
+      'pattern' => '(\\d{2})(\\d{4,6})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '7',
+        0 => '[2-4]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
@@ -164,11 +164,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{2})(\\d{4,6})',
+      'pattern' => '(\\d)(\\d{6,7})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-4]',
+        0 => '7',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

@@ -70,5 +70,5 @@ return array (
   9923554 => 'Murgab',
   9923555 => 'Roshtkala',
   9923556 => 'Rushan',
-  992372 => 'Dushanbe',
+  99237 => 'Dushanbe',
 );

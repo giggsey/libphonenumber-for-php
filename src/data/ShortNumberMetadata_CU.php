@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '10[4-6]',
+    'ExampleNumber' => '104',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -46,8 +48,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '10[456]',
-    'ExampleNumber' => '106',
+    'NationalNumberPattern' => '10[4-6]',
+    'ExampleNumber' => '104',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -58,8 +60,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0[456]|1(?:6111|8)|40)',
-    'ExampleNumber' => '140',
+    'NationalNumberPattern' => '1(?:0[4-6]|1(?:6111|8)|40)',
+    'ExampleNumber' => '104',
     'PossibleLength' => 
     array (
     ),

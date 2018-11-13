@@ -151,6 +151,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[2-9]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

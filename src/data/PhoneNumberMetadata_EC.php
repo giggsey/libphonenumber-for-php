@@ -157,17 +157,29 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(\\d{3})(\\d{4})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[2-7]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
       'pattern' => '(\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[247]|[356][2-8]',
+        0 => '[2-7]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
+    2 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
@@ -179,16 +191,15 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    2 => 
+    3 => 
     array (
-      'pattern' => '(1800)(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{4})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '180',
-        1 => '1800',
+        0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
@@ -201,11 +212,8 @@ return array (
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[247]|[356][2-8]',
+        0 => '[2-7]',
       ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     1 => 
     array (
@@ -221,14 +229,13 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(1800)(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{4})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '180',
-        1 => '1800',
+        0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),

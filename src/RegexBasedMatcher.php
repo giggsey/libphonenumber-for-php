@@ -49,8 +49,8 @@ class RegexBasedMatcher implements MatcherAPIInterface
 
         if (!$matcher->lookingAt()) {
             return false;
-        } else {
-            return ($matcher->matches()) ? true : $allowPrefixMatch;
         }
+
+        return $matcher->matches() ? true : $allowPrefixMatch;
     }
 }

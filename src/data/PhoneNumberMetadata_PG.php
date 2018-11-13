@@ -26,11 +26,10 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:3[0-2]\\d|4[257]\\d|5[34]\\d|64[1-9]|77(?:[0-24]\\d|30)|85[02-46-9]|9[78]\\d)\\d{4}',
+    'NationalNumberPattern' => '(?:(?:3[0-2]|4[257]|5[34]|9[78])\\d|64[1-9]|77(?:[0-24]\\d|30)|85[02-46-9])\\d{4}',
     'ExampleNumber' => '3123456',
     'PossibleLength' => 
     array (
-      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -144,7 +143,7 @@ return array (
   ),
   'id' => 'PG',
   'countryCode' => 675,
-  'internationalPrefix' => '140[1-3]|00',
+  'internationalPrefix' => '00|140[1-3]',
   'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -155,7 +154,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[13-689]|27',
+        0 => '18|[2-69]|85',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -167,7 +166,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '20|[78]',
+        0 => '[78]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

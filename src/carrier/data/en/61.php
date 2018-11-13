@@ -90,9 +90,5 @@ return array (
   61488 => 'Telstra',
   614888 => 'My Number',
   6148984 => 'Victorian Rail Track',
-  61490 => 'Telstra',
-  61491 => 'Telstra',
-  61497 => 'Telstra',
-  61498 => 'Telstra',
-  61499 => 'Telstra',
+  6149 => 'Telstra',
 );

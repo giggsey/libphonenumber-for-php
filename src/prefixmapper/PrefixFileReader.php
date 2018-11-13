@@ -34,7 +34,7 @@ class PrefixFileReader
 
     protected function loadMappingFileProvider()
     {
-        $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . "Map.php";
+        $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . 'Map.php';
         if (!file_exists($mapPath)) {
             throw new \InvalidArgumentException("Invalid data directory: $mapPath");
         }
@@ -70,7 +70,7 @@ class PrefixFileReader
     {
         $path = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . $fileName;
         if (!file_exists($path)) {
-            throw new \InvalidArgumentException("Data does not exist");
+            throw new \InvalidArgumentException('Data does not exist');
         }
 
         $map = require $path;
@@ -108,13 +108,13 @@ class PrefixFileReader
         $description = ($phonePrefixDescriptions !== null) ? $phonePrefixDescriptions->lookup($number) : null;
         // When a location is not available in the requested language, fall back to English.
         if (($description === null || strlen($description) === 0) && $this->mayFallBackToEnglish($language)) {
-            $defaultMap = $this->getPhonePrefixDescriptions($phonePrefix, "en", "", "");
+            $defaultMap = $this->getPhonePrefixDescriptions($phonePrefix, 'en', '', '');
             if ($defaultMap === null) {
-                return "";
+                return '';
             }
             $description = $defaultMap->lookup($number);
         }
 
-        return ($description !== null) ? $description : "";
+        return ($description !== null) ? $description : '';
     }
 }

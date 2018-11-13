@@ -11,7 +11,7 @@
  */
 
 return array (
-  58212 => 'Caracas/Miranda/Vargas',
+  5821 => 'Caracas/Miranda/Vargas',
   58234 => 'Miranda',
   58235 => 'Anzoátegui/Bolívar/Guárico',
   58237 => 'Federal Dependencies',
@@ -35,14 +35,8 @@ return array (
   58257 => 'Portuguesa',
   58258 => 'Cojedes',
   58259 => 'Falcón',
+  5826 => 'Zulia',
   58260 => 'Colombia',
-  58261 => 'Zulia',
-  58262 => 'Zulia',
-  58263 => 'Zulia',
-  58264 => 'Zulia',
-  58265 => 'Zulia',
-  58266 => 'Zulia',
-  58267 => 'Zulia',
   58268 => 'Falcón',
   58269 => 'Falcón',
   58270 => 'Colombia',

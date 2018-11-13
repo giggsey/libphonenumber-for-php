@@ -11,7 +11,7 @@
  */
 
 return array (
-  25420 => 'Nairobi',
+  2542 => 'Nairobi',
   25440 => 'Kwale/Ukunda/Msambweni/Lungalunga',
   25441 => 'Mombasa/Mariakani/Kilifi',
   25442 => 'Malindi/Lamu/Garsen',

@@ -9,16 +9,16 @@ use PHPUnit\Framework\TestCase;
 class PrefixTimeZonesMapTest extends TestCase
 {
     // US time zones
-    const CHICAGO_TZ = "America/Chicago";
-    const DENVER_TZ = "America/Denver";
-    const LOS_ANGELES_TZ = "America/Los_Angeles";
-    const NEW_YORK_TZ = "America/New_York";
+    const CHICAGO_TZ = 'America/Chicago';
+    const DENVER_TZ = 'America/Denver';
+    const LOS_ANGELES_TZ = 'America/Los_Angeles';
+    const NEW_YORK_TZ = 'America/New_York';
 
     // Russian time zones
-    const IRKUTSK_TZ = "Asia/Irkutsk";
-    const MOSCOW_TZ = "Europe/Moscow";
-    const VLADIVOSTOK_TZ = "Asia/Vladivostok";
-    const YEKATERINBURG_TZ = "Asia/Yekaterinburg";
+    const IRKUTSK_TZ = 'Asia/Irkutsk';
+    const MOSCOW_TZ = 'Europe/Moscow';
+    const VLADIVOSTOK_TZ = 'Asia/Vladivostok';
+    const YEKATERINBURG_TZ = 'Asia/Yekaterinburg';
     /**
      * @var PrefixTimeZonesMap
      */
@@ -31,7 +31,7 @@ class PrefixTimeZonesMapTest extends TestCase
     public static function setUpBeforeClass()
     {
         $sortedMapForUS = array();
-        $sortedMapForUS[1] = self::NEW_YORK_TZ . "&" . self::CHICAGO_TZ . "&" . self::LOS_ANGELES_TZ . "&" . self::DENVER_TZ;
+        $sortedMapForUS[1] = self::NEW_YORK_TZ . '&' . self::CHICAGO_TZ . '&' . self::LOS_ANGELES_TZ . '&' . self::DENVER_TZ;
         $sortedMapForUS[1201] = self::NEW_YORK_TZ;
         $sortedMapForUS[1205] = self::CHICAGO_TZ;
         $sortedMapForUS[1208292] = self::LOS_ANGELES_TZ;

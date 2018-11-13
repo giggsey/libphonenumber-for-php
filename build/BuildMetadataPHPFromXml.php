@@ -69,7 +69,7 @@ EOT;
                 . self::GENERATION_COMMENT . PHP_EOL
                 . 'return ' . var_export($metadata->toArray(), true) . ';' . PHP_EOL;
 
-            file_put_contents($filePrefix . "_" . $regionCode . '.php', $data);
+            file_put_contents($filePrefix . '_' . $regionCode . '.php', $data);
         }
     }
 
@@ -91,7 +91,7 @@ EOT;
 
         $data = '<?php' . PHP_EOL .
             self::GENERATION_COMMENT . PHP_EOL .
-            "namespace libphonenumber;" . PHP_EOL .
+            'namespace libphonenumber;' . PHP_EOL .
             "class {$mappingClass} {" . PHP_EOL .
             PHP_EOL;
 
@@ -100,23 +100,23 @@ EOT;
             $data .= "   public static \${$variableName} = " . var_export(
                     $countryCodeToRegionCodeMap,
                     true
-                ) . ";" . PHP_EOL;
+                ) . ';' . PHP_EOL;
         } elseif ($hasCountryCodes) {
             $data .= self::COUNTRY_CODE_SET_COMMENT . PHP_EOL;
             $data .= "   public static \${$variableName} = " . var_export(
                     array_keys($countryCodeToRegionCodeMap),
                     true
-                ) . ";" . PHP_EOL;
+                ) . ';' . PHP_EOL;
         } else {
             $data .= self::REGION_CODE_SET_COMMENT . PHP_EOL;
             $data .= "   public static \${$variableName} = " . var_export(
                     $countryCodeToRegionCodeMap[0],
                     true
-                ) . ";" . PHP_EOL;
+                ) . ';' . PHP_EOL;
         }
 
         $data .= PHP_EOL .
-            "}" . PHP_EOL;
+            '}' . PHP_EOL;
 
         file_put_contents($outputDir . $mappingClass . '.php', $data);
     }

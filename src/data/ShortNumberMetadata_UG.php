@@ -25,9 +25,10 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '999',
+    'ExampleNumber' => '999',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
