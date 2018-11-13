@@ -11,7 +11,7 @@
  */
 
 return array (
-  38220 => 'Danilovgad/Kolasin/Podgorica',
+  3822 => 'Danilovgad/Kolasin/Podgorica',
   38230 => 'Bar/Ulcinj',
   38231 => 'Herceg Novi',
   38232 => 'Kotor/Tivat',

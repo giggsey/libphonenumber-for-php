@@ -26,9 +26,11 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '1(?:2[23]|80)',
+    'ExampleNumber' => '122',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -79,7 +81,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '34400',
+    'NationalNumberPattern' => '344\\d\\d',
     'ExampleNumber' => '34400',
     'PossibleLength' => 
     array (
@@ -91,7 +93,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '34400',
+    'NationalNumberPattern' => '344\\d\\d',
     'ExampleNumber' => '34400',
     'PossibleLength' => 
     array (

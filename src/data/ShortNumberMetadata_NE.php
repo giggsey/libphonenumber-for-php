@@ -27,9 +27,12 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '1[578]|723\\d{3}',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 2,
+      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,8 +50,8 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '1[578]|723141',
-    'ExampleNumber' => '17',
+    'NationalNumberPattern' => '1[578]|723\\d{3}',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
       0 => 2,
@@ -60,8 +63,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0[01]|1[12]|2[034]|3[013]|40|55?|60|7|8)|222|333|555|723141|888',
-    'ExampleNumber' => '112',
+    'NationalNumberPattern' => '1(?:0[01]|1[12]|2[034]|3[013]|[46]0|55?|[78])|222|333|555|723141|888',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
     ),
@@ -81,7 +84,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:0[01]|1[12]|2[034]|3[013]|40|55|60)|222|333|555|888',
+    'NationalNumberPattern' => '1(?:0[01]|1[12]|2[034]|3[013]|[46]0|55)|222|333|555|888',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (

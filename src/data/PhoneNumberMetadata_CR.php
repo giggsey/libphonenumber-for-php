@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2(?:[024-7]\\d{2}|1(?:0[7-9]|[1-9]\\d))\\d{4}',
+    'NationalNumberPattern' => '2(?:[024-7]\\d\\d|1(?:0[7-9]|[1-9]\\d))\\d{4}',
     'ExampleNumber' => '22123456',
     'PossibleLength' => 
     array (
@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5(?:0[01]|7[0-3])\\d{5}|6(?:[0-4]\\d{3}|500[01])\\d{3}|(?:7[0-3]|8[3-9])\\d{6}',
+    'NationalNumberPattern' => '(?:(?:5(?:0[01]|7[0-3])|(?:7[0-3]|8[3-9])\\d)\\d\\d|6(?:[0-4]\\d{3}|500[01]))\\d{3}',
     'ExampleNumber' => '83123456',
     'PossibleLength' => 
     array (
@@ -94,7 +94,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '210[0-6]\\d{4}|4\\d{7}|5100\\d{4}',
+    'NationalNumberPattern' => '(?:210[0-6]|4\\d{3}|5100)\\d{4}',
     'ExampleNumber' => '40001234',
     'PossibleLength' => 
     array (
@@ -147,7 +147,7 @@ return array (
   'id' => 'CR',
   'countryCode' => 506,
   'internationalPrefix' => '00',
-  'nationalPrefixForParsing' => '(19(?:0[012468]|1[09]|20|66|77|99))',
+  'nationalPrefixForParsing' => '(19(?:0[0-2468]|1[09]|20|66|77|99))',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -169,7 +169,7 @@ return array (
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[89]0',
+        0 => '[89]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '$CC $1',

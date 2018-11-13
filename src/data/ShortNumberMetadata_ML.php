@@ -28,12 +28,13 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '35200|67(?:00|77)|74(?:02|44)|8000[12]',
-    'ExampleNumber' => '35200',
+    'NationalNumberPattern' => '1[578]|35200|67(?:00|7\\d)|74(?:02|4\\d)|8000\\d',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
-      0 => 4,
-      1 => 5,
+      0 => 2,
+      1 => 4,
+      2 => 5,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -41,8 +42,8 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '122[13]|3(?:52(?:11|2[02]|3[04-6]|99)|7574)|8002[12]',
-    'ExampleNumber' => '35211',
+    'NationalNumberPattern' => '(?:12|800)2\\d|3(?:52(?:11|2[02]|3[04-6]|99)|7574)',
+    'ExampleNumber' => '1220',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -55,7 +56,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '1[578]',
-    'ExampleNumber' => '17',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
       0 => 2,
@@ -66,8 +67,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:2|[013-9]\\d)|2(?:1[02-469]|2[13])|[578])|3(?:5(?:0(?:35|57)|2\\d{2})|[67]\\d{3})|67(?:0[09]|59|77|8[89]|99)|74(?:0[02]|44|55)|800[012][12]',
-    'ExampleNumber' => '1210',
+    'NationalNumberPattern' => '1(?:1(?:[013-9]\\d|2)|2(?:1[02-469]|2[13])|[578])|3(?:5(?:0(?:35|57)|2\\d\\d)|[67]\\d{3})|67(?:0[09]|[59]9|77|8[89])|74(?:0[02]|44|55)|800[0-2][12]',
+    'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
     ),
@@ -77,7 +78,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '37(?:433|575)|7400|8001[12]',
+    'NationalNumberPattern' => '37(?:433|575)|7400|8001\\d',
     'ExampleNumber' => '7400',
     'PossibleLength' => 
     array (
@@ -90,8 +91,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '3(?:5035|[67]\\d{3})|800[012][12]',
-    'ExampleNumber' => '35035',
+    'NationalNumberPattern' => '(?:3(?:503|[67]\\d\\d)|800\\d)\\d',
+    'ExampleNumber' => '35030',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -102,8 +103,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '3(?:6\\d{3}|7(?:4(?:0[24-9]|[1-9]\\d)|5\\d{2}))|7400',
-    'ExampleNumber' => '37575',
+    'NationalNumberPattern' => '3(?:6\\d{3}|7(?:4(?:0[24-9]|[1-9]\\d)|5\\d\\d))|7400',
+    'ExampleNumber' => '7400',
     'PossibleLength' => 
     array (
       0 => 4,

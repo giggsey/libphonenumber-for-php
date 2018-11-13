@@ -120,7 +120,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '0\\d{4}|81(?:0(?:0[7-9]|1\\d)|5\\d{2})\\d{3}',
+    'NationalNumberPattern' => '(?:0\\d|81(?:0(?:0[7-9]|1\\d)|5\\d\\d))\\d{3}',
     'ExampleNumber' => '01234',
     'PossibleLength' => 
     array (
@@ -159,11 +159,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([489]\\d{2})(\\d{2})(\\d{3})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[489]',
+        0 => '[235-7]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -171,11 +171,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([235-7]\\d)(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{3})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[235-7]',
+        0 => '[489]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -186,6 +186,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => true,
+  'leadingDigits' => '[02-689]|7[0-8]',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

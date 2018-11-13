@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2[1345]|5[1347]|6[123479]|71)\\d{7}',
+    'NationalNumberPattern' => '(?:2[13-5]|5[1347]|6[1-479]|71)\\d{7}',
     'ExampleNumber' => '212345678',
     'PossibleLength' => 
     array (
@@ -147,7 +147,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([25-79]\\d)(\\d{7})',
+      'pattern' => '(\\d{2})(\\d{7})',
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (

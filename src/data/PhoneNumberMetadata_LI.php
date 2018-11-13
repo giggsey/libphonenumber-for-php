@@ -149,7 +149,7 @@ return array (
   'countryCode' => 423,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|10(?:01|20|66)',
+  'nationalPrefixForParsing' => '0|(10(?:01|20|66))',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -162,7 +162,7 @@ return array (
         0 => '[237-9]',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     1 => 
@@ -174,7 +174,7 @@ return array (
         0 => '6[56]',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     2 => 
@@ -186,7 +186,7 @@ return array (
         0 => '697',
       ),
       'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC $1',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
   ),

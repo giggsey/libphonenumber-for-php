@@ -120,7 +120,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '0\\d{4}|81(?:0(?:0[7-9]|1\\d)|5\\d{2})\\d{3}',
+    'NationalNumberPattern' => '(?:0\\d|81(?:0(?:0[7-9]|1\\d)|5\\d\\d))\\d{3}',
     'ExampleNumber' => '01234',
     'PossibleLength' => 
     array (
@@ -162,6 +162,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
+  'leadingDigits' => '79',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

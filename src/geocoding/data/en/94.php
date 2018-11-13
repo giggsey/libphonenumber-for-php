@@ -38,6 +38,6 @@ return array (
   9465 => 'Batticaloa',
   9466 => 'Matale',
   9467 => 'Kalmunai, Ampara',
-  9481 => 'Kandy',
-  9491 => 'Galle',
+  948 => 'Kandy',
+  949 => 'Galle',
 );

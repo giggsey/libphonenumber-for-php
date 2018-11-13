@@ -29,7 +29,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '8(?:51(?:0(?:01|30|59)|117)|91(?:00[6-9]|1(?:21|49|78|81)|2(?:09|63)|3(?:12|26|75)|4(?:56|97)|64\\d|7(?:0[01]|1[0-2])|958))\\d{3}',
+    'NationalNumberPattern' => '8(?:51(?:0(?:01|30|59)|117)|91(?:00[6-9]|1(?:[28]1|49|78)|2(?:09|63)|3(?:12|26|75)|4(?:56|97)|64\\d|7(?:0[01]|1[0-2])|958))\\d{3}',
     'ExampleNumber' => '891641234',
     'PossibleLength' => 
     array (
@@ -42,7 +42,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[0-2547-9]|9[017-9])\\d{6}',
+    'NationalNumberPattern' => '4(?:[0-3]\\d|4[047-9]|5[0-25-9]|6[6-9]|7[02-9]|8[0-2457-9]|9[017-9])\\d{6}',
     'ExampleNumber' => '412345678',
     'PossibleLength' => 
     array (
@@ -67,12 +67,11 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '19(?:0[0126]\\d|[679])\\d{5}',
+    'NationalNumberPattern' => '190[0-26]\\d{6}',
     'ExampleNumber' => '1900123456',
     'PossibleLength' => 
     array (
-      0 => 8,
-      1 => 10,
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -80,7 +79,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '13(?:00\\d{3}|45[0-4]|\\d)\\d{3}',
+    'NationalNumberPattern' => '13(?:00\\d{3}|45[0-4])\\d{3}|13\\d{4}',
     'ExampleNumber' => '1300123456',
     'PossibleLength' => 
     array (
@@ -156,7 +155,7 @@ return array (
   ),
   'id' => 'CX',
   'countryCode' => 61,
-  'internationalPrefix' => '(?:14(?:1[14]|34|4[17]|[56]6|7[47]|88))?001[14-689]',
+  'internationalPrefix' => '001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011',
   'preferredInternationalPrefix' => '0011',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',

@@ -63,7 +63,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '332(?:02|[2-5]\\d)\\d{4}',
+    'NationalNumberPattern' => '332(?:02|[34]\\d)\\d{4}',
     'ExampleNumber' => '332021234',
     'PossibleLength' => 
     array (

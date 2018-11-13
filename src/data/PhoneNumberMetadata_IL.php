@@ -30,7 +30,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:153\\d{1,2}|[2-489])\\d{7}',
+    'NationalNumberPattern' => '(?:153\\d\\d?|[2-489])\\d{7}',
     'ExampleNumber' => '21234567',
     'PossibleLength' => 
     array (
@@ -45,7 +45,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5(?:[0-489][2-9]\\d|5(?:01|2[2-5]|3[23]|4[45]|5[05689]|6[6-8]|7[0-267]|8[7-9]|9[1-9])|6\\d{2})\\d{5}',
+    'NationalNumberPattern' => '5(?:(?:[0-489][2-9]|6\\d)\\d|5(?:01|2[2-5]|3[23]|4[45]|5[05689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\\d{5}',
     'ExampleNumber' => '502345678',
     'PossibleLength' => 
     array (
@@ -57,7 +57,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:80[019]\\d{3}|255)\\d{3}',
+    'NationalNumberPattern' => '1(?:255|80[019]\\d{3})\\d{3}',
     'ExampleNumber' => '1800123456',
     'PossibleLength' => 
     array (
@@ -70,13 +70,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1(?:212|(?:9(?:0[01]|19)|200)\\d{2})\\d{4}',
+    'NationalNumberPattern' => '1(?:2(?:00\\d\\d|12)|9(?:0[01]|19)\\d\\d)\\d{4}',
     'ExampleNumber' => '1919123456',
     'PossibleLength' => 
     array (
       0 => 8,
-      1 => 9,
-      2 => 10,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -106,7 +105,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '7(?:18\\d|2[23]\\d|3[237]\\d|47\\d|6[58]\\d|7\\d{2}|8(?:2\\d|33|55|77|81)|9[2357-9]\\d)\\d{5}',
+    'NationalNumberPattern' => '7(?:(?:18|2[23]|3[237]|47|6[58]|7\\d|9[2357-9])\\d|8(?:2\\d|33|55|77|81))\\d{5}',
     'ExampleNumber' => '771234567',
     'PossibleLength' => 
     array (
@@ -172,7 +171,19 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([2-489])(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{3})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '125',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d)(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
@@ -182,9 +193,21 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
+    2 => 
     array (
-      'pattern' => '([57]\\d)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{2})(\\d{2})',
+      'format' => '$1-$2-$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '121',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    3 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
@@ -194,21 +217,33 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    2 => 
+    4 => 
     array (
-      'pattern' => '(153)(\\d{1,2})(\\d{3})(\\d{4})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
+      'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '153',
+        0 => '12',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    3 => 
+    5 => 
     array (
-      'pattern' => '(1)([7-9]\\d{2})(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{4})(\\d{6})',
+      'format' => '$1-$2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '159',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    6 => 
+    array (
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1-$2-$3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -218,65 +253,13 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    4 => 
-    array (
-      'pattern' => '(1255)(\\d{3})',
-      'format' => '$1-$2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '125',
-        1 => '1255',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    5 => 
-    array (
-      'pattern' => '(1200)(\\d{3})(\\d{3})',
-      'format' => '$1-$2-$3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '120',
-        1 => '1200',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    6 => 
-    array (
-      'pattern' => '(1212)(\\d{2})(\\d{2})',
-      'format' => '$1-$2-$3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '121',
-        1 => '1212',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
     7 => 
     array (
-      'pattern' => '(1599)(\\d{6})',
-      'format' => '$1-$2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '159',
-        1 => '1599',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    8 => 
-    array (
-      'pattern' => '(151)(\\d{1,2})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{1,2})(\\d{3})(\\d{4})',
       'format' => '$1-$2 $3-$4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '151',
+        0 => '1',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

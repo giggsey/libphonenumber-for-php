@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '2\\d{7}|4[2-7]\\d{6}',
+    'NationalNumberPattern' => '(?:2\\d|4[2-7])\\d{6}',
     'ExampleNumber' => '21231234',
     'PossibleLength' => 
     array (
@@ -145,7 +145,7 @@ return array (
   ),
   'id' => 'UY',
   'countryCode' => 598,
-  'internationalPrefix' => '0(?:1[3-9]\\d|0)',
+  'internationalPrefix' => '0(?:0|1[3-9]\\d)',
   'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
   'preferredExtnPrefix' => ' int. ',
@@ -154,6 +154,18 @@ return array (
   'numberFormat' => 
   array (
     0 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{4})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '8|90',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
     array (
       'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1 $2',
@@ -165,25 +177,13 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
+    2 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '9[1-9]',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    2 => 
-    array (
-      'pattern' => '(\\d{3})(\\d{4})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[89]0',
+        0 => '9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

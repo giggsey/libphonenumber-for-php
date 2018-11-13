@@ -154,7 +154,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(1)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -166,7 +166,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([2-6]\\d)(\\d{3})(\\d{3,4})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -178,7 +178,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(7\\d{2})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

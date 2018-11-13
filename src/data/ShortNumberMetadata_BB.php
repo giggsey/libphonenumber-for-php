@@ -78,9 +78,10 @@ return array (
   ),
   'carrierSpecific' => 
   array (
+    'NationalNumberPattern' => '[468]11',
+    'ExampleNumber' => '411',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

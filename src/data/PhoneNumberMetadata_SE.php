@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[26]\\d\\d|9)\\d{9}|[1-9]\\d{8}|[1-689]\\d{7}|[1-4689]\\d{6}|[27]\\d{5}',
+    'NationalNumberPattern' => '(?:[26]\\d\\d|9)\\d{9}|[1-9]\\d{8}|[1-689]\\d{7}|[1-4689]\\d{6}|2\\d{5}',
     'PossibleLength' => 
     array (
       0 => 6,
@@ -86,12 +86,11 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '77(?:0\\d{3}(?:\\d{3})?|[1-7]\\d{6})',
+    'NationalNumberPattern' => '77[0-7]\\d{6}',
     'ExampleNumber' => '771234567',
     'PossibleLength' => 
     array (
-      0 => 6,
-      1 => 9,
+      0 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -257,18 +256,6 @@ return array (
     ),
     7 => 
     array (
-      'pattern' => '(77)(\\d{2})(\\d{2})',
-      'format' => '$1-$2$3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '77',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    8 => 
-    array (
       'pattern' => '(20)(\\d{2,3})(\\d{2})',
       'format' => '$1-$2 $3',
       'leadingDigitsPatterns' => 
@@ -279,7 +266,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    9 => 
+    8 => 
     array (
       'pattern' => '(9[034]\\d)(\\d{2})(\\d{2})(\\d{3})',
       'format' => '$1-$2 $3 $4',
@@ -291,7 +278,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    10 => 
+    9 => 
     array (
       'pattern' => '(\\d{3})(\\d{2})(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1-$2 $3 $4 $5',
@@ -371,15 +358,6 @@ return array (
     ),
     7 => 
     array (
-      'pattern' => '(77)(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '77',
-      ),
-    ),
-    8 => 
-    array (
       'pattern' => '(20)(\\d{2,3})(\\d{2})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -387,7 +365,7 @@ return array (
         0 => '20',
       ),
     ),
-    9 => 
+    8 => 
     array (
       'pattern' => '(9[034]\\d)(\\d{2})(\\d{2})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -396,7 +374,7 @@ return array (
         0 => '9[034]',
       ),
     ),
-    10 => 
+    9 => 
     array (
       'pattern' => '(\\d{3})(\\d{2})(\\d{3})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4 $5',

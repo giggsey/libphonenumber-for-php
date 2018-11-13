@@ -169,7 +169,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '3(?:1[36]|[2-9])',
+        0 => '3',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -177,7 +177,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d)(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d)(\\d{2,3})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (

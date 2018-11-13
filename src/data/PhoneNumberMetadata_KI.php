@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:[24]\\d|3[1-9]|50|8[0-5])\\d{3}|(?:65(?:02[12]|12[56]|22[89]|[3-5]00)|7(?:27\\d{2}|3100|5(?:02[12]|12[56]|22[89]|[34](?:00|81)|500)))\\d{3}',
+    'NationalNumberPattern' => '(?:[24]\\d|3[1-9]|50|65(?:02[12]|12[56]|22[89]|[3-5]00)|7(?:27\\d\\d|3100|5(?:02[12]|12[56]|22[89]|[34](?:00|81)|500))|8[0-5])\\d{3}',
     'ExampleNumber' => '31234',
     'PossibleLength' => 
     array (
@@ -89,7 +89,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '30(?:0[01]\\d{2}|12(?:11|20))\\d{2}',
+    'NationalNumberPattern' => '30(?:0[01]\\d\\d|12(?:11|20))\\d\\d',
     'ExampleNumber' => '30010000',
     'PossibleLength' => 
     array (
@@ -142,6 +142,7 @@ return array (
   'id' => 'KI',
   'countryCode' => 686,
   'internationalPrefix' => '00',
+  'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

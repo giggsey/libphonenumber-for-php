@@ -68,7 +68,6 @@ return array (
   2333624 => 'Kete-Krachi',
   2333625 => 'Denu/Aflao',
   2333626 => 'Keta/Akatsi',
-  2333627 => 'Hohoe',
   233367 => 'Volta Region',
   233368 => 'Volta Region',
   2333720 => 'Tamale',
@@ -85,7 +84,7 @@ return array (
   2333822 => 'Bawku',
   233387 => 'Upper East Region',
   233388 => 'Upper East Region',
-  2333920 => 'Wa',
+  233392 => 'Wa',
   233397 => 'Upper West Region',
   233398 => 'Upper West Region',
 );

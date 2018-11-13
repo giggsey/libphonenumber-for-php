@@ -30,8 +30,8 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:258885|555)|733',
-    'ExampleNumber' => '733',
+    'NationalNumberPattern' => '000|1(?:06|12|258885|55\\d)|733',
+    'ExampleNumber' => '000',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -44,13 +44,15 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1(?:2(?:34|456)|9\\d{4})',
-    'ExampleNumber' => '191123',
+    'NationalNumberPattern' => '1(?:2(?:34|456)|9\\d{4,6})',
+    'ExampleNumber' => '1234',
     'PossibleLength' => 
     array (
       0 => 4,
       1 => 5,
       2 => 6,
+      3 => 7,
+      4 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -59,7 +61,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '000|1(?:06|12)',
-    'ExampleNumber' => '112',
+    'ExampleNumber' => '000',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -70,8 +72,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '000|1(?:06|1(?:00|2|9[46])|2(?:[23]\\d|4\\d{2,3}|5\\d{3,4}|8(?:2|[013-9]\\d))|555|9\\d{4,6})|225|7(?:33|67)',
-    'ExampleNumber' => '112',
+    'NationalNumberPattern' => '000|1(?:06|1(?:00|2|9[46])|2(?:[23]\\d|(?:4|5\\d)\\d{2,3}|8(?:[013-9]\\d|2))|555|9\\d{4,6})|225|7(?:33|67)',
+    'ExampleNumber' => '000',
     'PossibleLength' => 
     array (
     ),
@@ -81,7 +83,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '1(?:1\\d{2}|24733)|225|767',
+    'NationalNumberPattern' => '1(?:1[09]\\d|24733)|225|767',
     'ExampleNumber' => '225',
     'PossibleLength' => 
     array (
@@ -95,8 +97,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:258885|555)',
-    'ExampleNumber' => '1555',
+    'NationalNumberPattern' => '1(?:258885|55\\d)',
+    'ExampleNumber' => '1550',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -109,7 +111,7 @@ return array (
   'smsServices' => 
   array (
     'NationalNumberPattern' => '19\\d{4,6}',
-    'ExampleNumber' => '191123',
+    'ExampleNumber' => '190000',
     'PossibleLength' => 
     array (
       0 => 6,
