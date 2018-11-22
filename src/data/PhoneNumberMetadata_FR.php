@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:6\\d{2}|7(?:00|[3-9]\\d))\\d{6}',
+    'NationalNumberPattern' => '(?:6\\d\\d|7(?:00|[3-9]\\d))\\d{6}',
     'ExampleNumber' => '612345678',
     'PossibleLength' => 
     array (
@@ -150,7 +150,19 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([1-79])(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{3})',
+      'format' => '$1 $2',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '11',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
+      'pattern' => '(\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4 $5',
       'leadingDigitsPatterns' => 
       array (
@@ -160,21 +172,9 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
-    1 => 
-    array (
-      'pattern' => '(1\\d{2})(\\d{3})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '11',
-      ),
-      'nationalPrefixFormattingRule' => '$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
     2 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -189,7 +189,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([1-79])(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4 $5',
       'leadingDigitsPatterns' => 
       array (
@@ -201,7 +201,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(8\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (

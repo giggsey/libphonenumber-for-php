@@ -11,7 +11,7 @@
  */
 
 return array (
-  26076 => 'MTN',
+  2607 => 'MTN',
   26095 => 'ZAMTEL',
   26096 => 'MTN',
   26097 => 'Airtel',

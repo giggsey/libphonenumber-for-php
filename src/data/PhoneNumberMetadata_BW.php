@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7(?:[1-6]\\d|7[014-8])\\d{5}',
+    'NationalNumberPattern' => '7(?:[1-6]\\d{3}|7(?:[014-8]\\d\\d|200))\\d{3}',
     'ExampleNumber' => '71123456',
     'PossibleLength' => 
     array (
@@ -92,7 +92,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '79[12][01]\\d{4}',
+    'NationalNumberPattern' => '79(?:1(?:[01]\\d|20)|2[0-2]\\d)\\d{3}',
     'ExampleNumber' => '79101234',
     'PossibleLength' => 
     array (

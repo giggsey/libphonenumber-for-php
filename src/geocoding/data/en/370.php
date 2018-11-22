@@ -56,6 +56,6 @@ return array (
   37046 => 'Klaipėda',
   370460 => 'Palanga',
   370469 => 'Neringa',
-  3705 => 'Vilnius',
+  37052 => 'Vilnius',
   370528 => 'Elektrėnai/Trakai',
 );

@@ -28,11 +28,13 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '116\\d{3}',
-    'ExampleNumber' => '116000',
+    'NationalNumberPattern' => '11(?:2|6\\d{3})|900\\d\\d',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => 6,
+      0 => 3,
+      1 => 5,
+      2 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -41,7 +43,7 @@ return array (
   'premiumRate' => 
   array (
     'NationalNumberPattern' => '11811[89]|72\\d{3}',
-    'ExampleNumber' => '118118',
+    'ExampleNumber' => '72000',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -66,8 +68,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11(?:[25]|313|4\\d{2}|6(?:00[06]|11[17]|123)|7[0-8]|8(?:1(?:[02-9]\\d|1[013-9])|[02-46-9]\\d{2}))|2(?:2[02358]|33|4[01]|50|6[1-4])|32[13]|7\\d{4}|8(?:22|88)|9(?:0(?:000|1(?:[02-9]\\d|1[013-9])|[2-4]\\d{2}|510)|12)',
-    'ExampleNumber' => '11313',
+    'NationalNumberPattern' => '11(?:[25]|313|4\\d\\d|6(?:00[06]|1(?:1[17]|23))|7[0-8]|8(?:[02-46-9]\\d\\d|1(?:[02-9]\\d|1[013-9])))|2(?:2[02358]|33|4[01]|50|6[1-4])|32[13]|7\\d{4}|8(?:22|88)|9(?:0(?:(?:00|51)0|1(?:[02-9]\\d|1[013-9])|[2-4]\\d\\d)|12)',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
     ),
@@ -88,7 +90,7 @@ return array (
   'carrierSpecific' => 
   array (
     'NationalNumberPattern' => '2(?:2[02358]|33|4[01]|50|6[1-4])|32[13]|8(?:22|88)|912',
-    'ExampleNumber' => '222',
+    'ExampleNumber' => '220',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -100,7 +102,7 @@ return array (
   'smsServices' => 
   array (
     'NationalNumberPattern' => '7\\d{4}',
-    'ExampleNumber' => '72123',
+    'ExampleNumber' => '70000',
     'PossibleLength' => 
     array (
       0 => 5,
