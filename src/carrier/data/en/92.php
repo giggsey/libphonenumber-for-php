@@ -11,25 +11,9 @@
  */
 
 return array (
-  92300 => 'Mobilink',
-  92301 => 'Mobilink',
-  92302 => 'Mobilink',
-  92303 => 'Mobilink',
-  92304 => 'Mobilink',
-  92305 => 'Mobilink',
-  92306 => 'Mobilink',
-  92307 => 'Mobilink',
-  92308 => 'Mobilink',
-  92309 => 'Mobilink',
+  9230 => 'Mobilink',
   9231 => 'Zong',
   9232 => 'Warid',
-  92330 => 'Ufone',
-  92331 => 'Ufone',
-  92332 => 'Ufone',
-  92333 => 'Ufone',
-  92334 => 'Ufone',
-  92335 => 'Ufone',
-  92336 => 'Ufone',
-  92337 => 'Ufone',
+  9233 => 'Ufone',
   9234 => 'Telenor',
 );

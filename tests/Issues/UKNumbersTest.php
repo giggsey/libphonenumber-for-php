@@ -61,24 +61,6 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('01234 512345', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testSharedCost()
-    {
-        $number = '08451234568';
-        $phoneObject = $this->phoneUtil->parse($number, 'GB');
-
-        $valid = $this->phoneUtil->isValidNumber($phoneObject);
-        $this->assertTrue($valid, 'Checking phone number is valid');
-
-        $type = $this->phoneUtil->getNumberType($phoneObject);
-        $this->assertEquals(PhoneNumberType::SHARED_COST, $type, 'Checking phone number is detected as shared cost');
-
-        $formattedE164 = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::E164);
-        $this->assertEquals('+448451234568', $formattedE164, 'Checking E164 format is correct');
-
-        $formattedNational = $this->phoneUtil->format($phoneObject, PhoneNumberFormat::NATIONAL);
-        $this->assertEquals('0845 123 4568', $formattedNational, 'Checking National format is correct');
-    }
-
     public function testPersonalNumber()
     {
         $number = '07010020249';

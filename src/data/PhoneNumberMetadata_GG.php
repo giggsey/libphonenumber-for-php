@@ -64,11 +64,12 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:87[1-3]|9(?:[01]\\d|8[0-3]))\\d{7}',
+    'NationalNumberPattern' => '(?:8(?:4[2-5]|7[0-3])|9(?:[01]\\d|8[0-3]))\\d{7}|845464\\d',
     'ExampleNumber' => '9012345678',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => 7,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -76,12 +77,9 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '8(?:4[2-5]|70)\\d{7}|845464\\d',
-    'ExampleNumber' => '8431234567',
     'PossibleLength' => 
     array (
-      0 => 7,
-      1 => 10,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -159,7 +157,8 @@ return array (
   'countryCode' => 44,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'nationalPrefixForParsing' => '0|([25-9]\\d{5})$',
+  'nationalPrefixTransformRule' => '1481$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

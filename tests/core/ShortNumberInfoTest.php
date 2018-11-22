@@ -229,32 +229,12 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($ambiguousTollFreeNumber));
     }
 
-    public function testGetExampleShortNumber()
+    public function testExampleShortNumberPresence()
     {
-        $this->assertEquals('110', $this->shortInfo->getExampleShortNumber(RegionCode::AD));
-        $this->assertEquals('1010', $this->shortInfo->getExampleShortNumber(RegionCode::FR));
-        $this->assertEquals('', $this->shortInfo->getExampleShortNumber(RegionCode::UN001));
-        $this->assertEquals('', $this->shortInfo->getExampleShortNumber(null));
-    }
-
-    public function testGetExampleShortNumberForCost()
-    {
-        $this->assertEquals(
-            '3010',
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::TOLL_FREE)
-        );
-        $this->assertEquals(
-            '1023',
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::STANDARD_RATE)
-        );
-        $this->assertEquals(
-            '42000',
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::PREMIUM_RATE)
-        );
-        $this->assertEquals(
-            '',
-            $this->shortInfo->getExampleShortNumberForCost(RegionCode::FR, ShortNumberCost::UNKNOWN_COST)
-        );
+        $this->assertNotEmpty($this->shortInfo->getExampleShortNumber(RegionCode::AD));
+        $this->assertNotEmpty($this->shortInfo->getExampleShortNumber(RegionCode::FR));
+        $this->assertEmpty($this->shortInfo->getExampleShortNumber(RegionCode::UN001));
+        $this->assertEmpty($this->shortInfo->getExampleShortNumber(null));
     }
 
     public function testConnectsToEmergencyNumber_US()

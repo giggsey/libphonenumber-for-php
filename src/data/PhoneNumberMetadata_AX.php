@@ -128,7 +128,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '10\\d{4,8}|2(?:0(?:[016-8]\\d{3,7}|[2-59]\\d{2,7})|9\\d{4,8})|3[09]\\d{4,8}|60(?:[12]\\d{5,6}|6\\d{7})|7(?:1\\d{7}|3\\d{8}|5[03-9]\\d{3,7})',
+    'NationalNumberPattern' => '(?:10|[23][09])\\d{4,8}|60(?:[12]\\d{5,6}|6\\d{7})|7(?:(?:1|3\\d)\\d{7}|5[03-9]\\d{3,7})|20[2-59]\\d\\d',
     'ExampleNumber' => '10112345',
     'PossibleLength' => 
     array (
@@ -149,9 +149,9 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '[13]00\\d{3,7}|2(?:0(?:0\\d{3,7}|2[023]\\d{1,6}|9[89]\\d{1,6}))|60(?:[12]\\d{5,6}|6\\d{7})|7(?:1\\d{7}|3\\d{8}|5[03-9]\\d{3,7})',
     'PossibleLength' => 
     array (
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -159,7 +159,7 @@ return array (
   ),
   'id' => 'AX',
   'countryCode' => 358,
-  'internationalPrefix' => '00|99(?:[01469]|5(?:11|3[23]|41|5[59]|77|88|9[09]))',
+  'internationalPrefix' => '00|99(?:[01469]|5(?:[14]1|3[23]|5[59]|77|88|9[09]))',
   'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
@@ -171,6 +171,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
+  'leadingDigits' => '18',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

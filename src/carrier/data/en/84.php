@@ -11,19 +11,6 @@
  */
 
 return array (
-  84120 => 'MobiFone',
-  84121 => 'MobiFone',
-  84122 => 'MobiFone',
-  84123 => 'Vinaphone',
-  84124 => 'Vinaphone',
-  84125 => 'Vinaphone',
-  84126 => 'MobiFone',
-  84127 => 'Vinaphone',
-  84128 => 'MobiFone',
-  84129 => 'Vinaphone',
-  8416 => 'Viettel Mobile',
-  84186 => 'Vietnamobile',
-  84188 => 'Vietnamobile',
   84199 => 'G-Mobile',
   843 => 'Viettel Mobile',
   8452 => 'Vietnamobile',
