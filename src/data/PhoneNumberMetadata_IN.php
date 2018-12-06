@@ -243,18 +243,6 @@ return array (
     ),
     6 => 
     array (
-      'pattern' => '(\\d{4})(\\d{2})(\\d{4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '16',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
-    ),
-    7 => 
-    array (
       'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
@@ -265,33 +253,20 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
-    8 => 
+    7 => 
     array (
       'pattern' => '(\\d{4})(\\d{2,4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '180',
-        1 => '1800',
+        0 => '1(?:6|8[06])',
+        1 => '1(?:6|8[06]0)',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
-    9 => 
-    array (
-      'pattern' => '(\\d{4})(\\d{3,4})(\\d{4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '186',
-        1 => '1860',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
-    ),
-    10 => 
+    8 => 
     array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{4})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -303,7 +278,7 @@ return array (
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
-    11 => 
+    9 => 
     array (
       'pattern' => '(\\d{4})(\\d{3})(\\d{3})(\\d{3})',
       'format' => '$1 $2 $3 $4',
@@ -415,8 +390,8 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '180',
-        1 => '1800',
+        0 => '1(?:6|8[06])',
+        1 => '1(?:6|8[06]0)',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

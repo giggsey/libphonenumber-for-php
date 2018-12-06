@@ -177,7 +177,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([3589]00)(\\d{2,3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{2,3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -265,7 +265,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([3589]00)(\\d{2,3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{2,3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

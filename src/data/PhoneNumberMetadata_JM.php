@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[58]\\d\\d|900)\\d{7}',
+    'NationalNumberPattern' => '(?:[58]\\d\\d|658|900)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '876(?:5(?:0[12]|1[0-468]|2[35]|63)|6(?:0[1-3579]|1[0237-9]|[23]\\d|40|5[06]|6[2-589]|7[05]|8[04]|9[4-9])|7(?:0[2-689]|[1-6]\\d|8[056]|9[45])|9(?:0[1-8]|1[02378]|[2-8]\\d|9[2-468]))\\d{4}',
+    'NationalNumberPattern' => '(?:658[2-9]\\d\\d|876(?:5(?:0[12]|1[0-468]|2[35]|63)|6(?:0[1-3579]|1[0237-9]|[23]\\d|40|5[06]|6[2-589]|7[05]|8[04]|9[4-9])|7(?:0[2-689]|[1-6]\\d|8[056]|9[45])|9(?:0[1-8]|1[02378]|[2-8]\\d|9[2-468])))\\d{4}',
     'ExampleNumber' => '8765230123',
     'PossibleLength' => 
     array (
@@ -154,7 +154,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingDigits' => '876',
+  'leadingDigits' => '658|876',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

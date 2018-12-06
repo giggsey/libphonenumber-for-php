@@ -172,7 +172,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([48]00)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -236,7 +236,7 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '(21)(\\d{4})(\\d{4,6})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4,6})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -248,7 +248,7 @@ return array (
     ),
     6 => 
     array (
-      'pattern' => '([12]\\d)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -311,7 +311,7 @@ return array (
     ),
     11 => 
     array (
-      'pattern' => '(10800)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{5})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -340,7 +340,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([48]00)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -380,7 +380,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(21)(\\d{4})(\\d{4,6})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4,6})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -392,7 +392,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '([12]\\d)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -455,7 +455,7 @@ return array (
     ),
     9 => 
     array (
-      'pattern' => '(10800)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{5})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

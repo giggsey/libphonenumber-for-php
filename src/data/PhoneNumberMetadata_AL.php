@@ -166,8 +166,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '80[08]|900',
-        1 => '80(?:0|8[1-9])|900[1-9]',
+        0 => '80|9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

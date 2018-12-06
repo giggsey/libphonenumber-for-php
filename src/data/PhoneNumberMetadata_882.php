@@ -40,13 +40,14 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '3(?:(?:2\\d|37)\\d\\d|4(?:2|7\\d{3}))\\d{4}',
+    'NationalNumberPattern' => '3(?:(?:(?:2|7\\d{3})\\d|37)\\d\\d|4(?:2|7\\d{3}))\\d{4}',
     'ExampleNumber' => '3421234',
     'PossibleLength' => 
     array (
       0 => 7,
       1 => 9,
       2 => 10,
+      3 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:1(?:1[2-57]\\d|973)|(?:2[13-7]|3[1-8]|4[157]|5[12457]|6[35-7]|[89]1)[2-57]\\d)\\d{5}',
+    'NationalNumberPattern' => '(?:[189]1|2[13-7]|3[1-8]|4[157]|5[12457]|6[35-7])[2-57]\\d{6}',
     'ExampleNumber' => '112345678',
     'PossibleLength' => 
     array (
@@ -109,9 +109,10 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '1973\\d{5}',
+    'ExampleNumber' => '197312345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
