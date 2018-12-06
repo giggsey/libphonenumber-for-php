@@ -12,6 +12,7 @@
 
 return array (
   96871 => 'Omantel',
+  96872 => 'Omantel',
   96879 => 'Ooredoo',
   968901 => 'Omantel',
   968902 => 'Omantel',

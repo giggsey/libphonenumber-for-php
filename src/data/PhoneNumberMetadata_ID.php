@@ -188,7 +188,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{2})(\\d{5,8})',
+      'pattern' => '(\\d{2})(\\d{5,9})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
@@ -216,7 +216,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-579]|6[2-5]',
+        0 => '[2-79]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

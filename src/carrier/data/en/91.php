@@ -2605,6 +2605,7 @@ return array (
   919138 => 'Airtel',
   919139 => 'Aircel',
   919140 => 'Reliance Jio',
+  919141 => 'BSNL MOBILE',
   919144 => 'Idea',
   919145 => 'Vodafone',
   919146 => 'Idea',

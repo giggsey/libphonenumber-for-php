@@ -28,8 +28,8 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:1\\d|[25][2-8]|[34][24-8]|7[3-8])\\d{6}',
-    'ExampleNumber' => '11234567',
+    'NationalNumberPattern' => '(?:[1-357][2-8]|4[24-8])\\d{6}',
+    'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -41,7 +41,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:(?:[37][01]|4[0139]|51)\\d|6(?:[48]\\d|5[15-7]|9[69]))\\d{5}',
+    'NationalNumberPattern' => '(?:(?:[37][01]|4[0139]|51)\\d\\d|6(?:[48]\\d\\d|5(?:1\\d|55|[67]0)|9(?:10|[69]\\d)))\\d{4}',
     'ExampleNumber' => '31234567',
     'PossibleLength' => 
     array (
@@ -98,7 +98,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '(?:59|8[1-3])\\d{6}',
+    'NationalNumberPattern' => '(?:59\\d\\d|8(?:1(?:[67]\\d|8[01389])|2(?:0\\d|2[0378]|8[0-2489])|3[389]\\d))\\d{4}',
     'ExampleNumber' => '59012345',
     'PossibleLength' => 
     array (
@@ -150,7 +150,8 @@ return array (
   ),
   'id' => 'SI',
   'countryCode' => 386,
-  'internationalPrefix' => '00',
+  'internationalPrefix' => '00|10(?:22|66|88|99)',
+  'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -174,7 +175,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[12]|[34][24-8]|5[2-8]|7[3-8]',
+        0 => '[12]|[357][2-8]|4[24-8]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',

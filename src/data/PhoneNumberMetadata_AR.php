@@ -44,7 +44,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '675\\d{7}|9(?:11[2-9]\\d{7}|(?:2(?:2[013]|3[067]|49|6[01346]|80|9[147-9])|3(?:36|4[12358]|5[138]|6[24]|7[069]|8[013578]))[2-9]\\d{6}|\\d{4}[2-9]\\d{5})',
+    'NationalNumberPattern' => '675\\d{7}|9(?:11[2-9]\\d{7}|(?:2(?:2[013]|3[067]|49|6[01346]|80|9[147-9])|3(?:36|4[1-358]|5[138]|6[24]|7[069]|8[013578]))[2-9]\\d{6}|(?:2(?:2(?:02|2[13-79]|4[1-6]|5[2457]|6[124-8]|7[1-4]|8[13-6]|9[1267])|3(?:02|1[467]|2[03-6]|3[13-8]|[49][2-6]|5[2-8])|47[3-578]|6(?:2[24-6]|4[6-8]|5[15-8])|9(?:0[1-3]|2\\d|3[1-6]|4[02568]|5[2-4]|6[2-46]|72|8[23]))|3(?:3(?:2[79]|8[2578])|4(?:0[0-24-9]|4[24-7]|6[02-9]|7[126]|9[1-36-8])|5(?:2[1245]|3[237]|4[1-46-9]|6[2-4]|7[1-6]|8[2-5])|7(?:1[1568]|2[15]|3[145]|4[13]|5[14-8]|7[2-57]|8[126])|8(?:2[15-7]|3[2578]|4[13-6]|5[4-8]|6[1-357-9]|9[124])))[2-9]\\d{5})',
     'ExampleNumber' => '91123456789',
     'PossibleLength' => 
     array (
@@ -164,7 +164,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([68]\\d{2})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
@@ -212,7 +212,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(9)(11)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$2 15-$3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -224,7 +224,7 @@ return array (
     ),
     5 => 
     array (
-      'pattern' => '(9)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$2 15-$3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -239,7 +239,7 @@ return array (
     ),
     6 => 
     array (
-      'pattern' => '(9)(\\d{4})(\\d{2})(\\d{4})',
+      'pattern' => '(\\d)(\\d{4})(\\d{2})(\\d{4})',
       'format' => '$2 15-$3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -251,7 +251,7 @@ return array (
     ),
     7 => 
     array (
-      'pattern' => '(11)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (
@@ -304,7 +304,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([68]\\d{2})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
@@ -316,7 +316,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(9)(11)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -325,7 +325,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(9)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -337,7 +337,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(9)(\\d{4})(\\d{2})(\\d{4})',
+      'pattern' => '(\\d)(\\d{4})(\\d{2})(\\d{4})',
       'format' => '$1 $2 $3-$4',
       'leadingDigitsPatterns' => 
       array (
@@ -346,7 +346,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(11)(\\d{4})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2-$3',
       'leadingDigitsPatterns' => 
       array (

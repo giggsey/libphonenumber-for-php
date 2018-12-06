@@ -12,10 +12,8 @@
 
 return array (
   2612022 => 'Antananarivo',
-  2612042 => 'Ambatolampy',
   2612044 => 'Antsirabe',
   2612047 => 'Ambositra',
-  2612048 => 'Mid-West Madagascar',
   2612053 => 'Toamasina',
   2612054 => 'Ambatondrazaka',
   2612056 => 'Moramanga',
