@@ -165,7 +165,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{1})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
