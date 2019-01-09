@@ -145,23 +145,6 @@ class AsYouTypeFormatter
     private static $emptyMetadata;
 
     /**
-     * A pattern that is used to match character classes in regular expressions. An example of a
-     * character class is [1-4]
-     * @var string
-     */
-    private static $characterClassPattern = "\\[([^\\[\\]])*\\]";
-
-    /**
-     * Any digit in a regular expression that actually denotes a digit. For example, in the regular
-     * expression 800[0-2]\d{6,10}, the first 2 digits (8 and 0) are standalone digits, but the rest
-     * are not.
-     * Two look-aheads are needed before the number following \\d could be a two-digit number, since
-     * the phone number can be a long as 15 digits.
-     * @var string
-     */
-    private static $standaloneDigitPattern = "\\d(?=[^,}][^,}])";
-
-    /**
      * A pattern that is used to determine if a numberFormat under availableFormats is eligible
      * to be used by the AYTF. It is eligible when the format element under numberFormat contains
      * groups of the dollar sign followed by a single digit, separated by valid phone number punctuation.
@@ -347,22 +330,9 @@ class AsYouTypeFormatter
     {
         $numberPattern = $format->getPattern();
 
-        // The formatter doesn't format numbers when numberPattern contains "|", e.g.
-        // (20|3)\d{4}. In those cases we quickly return.
-        if (mb_stripos('|', $numberPattern) !== false) {
-            return false;
-        }
-
-        // replace anything in the form of [..] with \d
-        $characterClassMatcher = new Matcher(self::$characterClassPattern, $numberPattern);
-        $numberPattern = $characterClassMatcher->replaceAll("\\\\d");
-
-        // Replace any standalone digit (not the one in d{}) with \d
-        $standAloneDigitMatcher = new Matcher(self::$standaloneDigitPattern, $numberPattern);
-        $numberPattern = $standAloneDigitMatcher->replaceAll("\\\\d");
         $this->formattingTemplate = '';
         $tempTemplate = $this->getFormattingTemplate($numberPattern, $format->getFormat());
-        if (mb_strlen($tempTemplate) > 0) {
+        if ($tempTemplate !== '') {
             $this->formattingTemplate .= $tempTemplate;
             return true;
         }

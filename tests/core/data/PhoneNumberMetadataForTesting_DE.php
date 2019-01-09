@@ -187,7 +187,7 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '([4-9]\\d)(\\d{2})',
+      'pattern' => '(\\d{2})(\\d{2})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
@@ -200,7 +200,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '([4-9]\\d{3})(\\d{2,7})',
+      'pattern' => '(\\d{4})(\\d{2,7})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (

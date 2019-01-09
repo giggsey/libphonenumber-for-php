@@ -278,8 +278,8 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('0(?:(11|343|3715)15)?', $metadata->getNationalPrefixForParsing());
         $this->assertEquals('9$1', $metadata->getNationalPrefixTransformRule());
         $this->assertEquals('$2 15 $3-$4', $metadata->getNumberFormat(2)->getFormat());
-        $this->assertEquals("(9)(\\d{4})(\\d{2})(\\d{4})", $metadata->getNumberFormat(3)->getPattern());
-        $this->assertEquals("(9)(\\d{4})(\\d{2})(\\d{4})", $metadata->getIntlNumberFormat(3)->getPattern());
+        $this->assertEquals("(\\d)(\\d{4})(\\d{2})(\\d{4})", $metadata->getNumberFormat(3)->getPattern());
+        $this->assertEquals("(\\d)(\\d{4})(\\d{2})(\\d{4})", $metadata->getIntlNumberFormat(3)->getPattern());
         $this->assertEquals('$1 $2 $3 $4', $metadata->getIntlNumberFormat(3)->getFormat());
     }
 

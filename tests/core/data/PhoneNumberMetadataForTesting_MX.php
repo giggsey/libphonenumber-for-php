@@ -191,7 +191,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(1)(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '045 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -203,7 +203,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(1)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '045 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -254,7 +254,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(1)(\\d{2})(\\d{4})(\\d{4})',
+      'pattern' => '(\\d)(\\d{2})(\\d{4})(\\d{4})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
@@ -263,7 +263,7 @@ return array (
     ),
     4 => 
     array (
-      'pattern' => '(1)(\\d{3})(\\d{3})(\\d{4})',
+      'pattern' => '(\\d)(\\d{3})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
