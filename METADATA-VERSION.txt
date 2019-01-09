@@ -2,4 +2,4 @@
 # It can be a commit, branch or tag of the https://github.com/googlei18n/libphonenumber project
 #
 # For more information, look at the phing tasks in build.xml
-a395b4fef3caf57c4bc5f082e1152a4d2bd0ba4c
+v8.10.3
