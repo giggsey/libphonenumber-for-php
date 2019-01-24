@@ -147,8 +147,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '3(?:20|[357])|9',
-        1 => '3(?:20[1-9]|[357])|9',
+        0 => '[39]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
