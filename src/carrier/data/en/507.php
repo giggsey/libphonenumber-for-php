@@ -17,6 +17,7 @@ return array (
   507219 => 'Telefónica Móviles',
   50760 => 'Digicel',
   50761 => 'Digicel',
+  507616 => 'Telefónica Móviles',
   50762 => 'Claro',
   507630 => 'Claro',
   507631 => 'Claro',
