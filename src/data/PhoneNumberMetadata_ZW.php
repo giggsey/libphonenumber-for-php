@@ -160,11 +160,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d)(\\d{3})(\\d{2,4})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{3})(\\d{3,5})',
+      'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[49]',
+        0 => '2(?:0[45]|2[278]|[49]8|[78])|3(?:[09]8|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78]|75)',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -172,11 +172,11 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3,5})',
-      'format' => '$1 $2',
+      'pattern' => '(\\d)(\\d{3})(\\d{2,4})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2(?:0[45]|2[278]|[49]8|[78])|3(?:[09]8|17|3[78]|[78])|5[15][78]|6(?:[29]8|37|[68][78]|75)',
+        0 => '[49]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -250,7 +250,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[16]|2(?:[0-256]|9[0-79])|3(?:[09][0-79]|1[0-689]|[24-6]|3[0-69])|5[0-35-9]',
+        0 => '1|2(?:0[0-36-9]|12|29|[56]|9[0-79])|3(?:[09][0-79]|1[0-689]|[24-6]|3[0-69])|5(?:[0236-9]|1[2-4]|5[0-69])|6(?:[013-59]|2[0-79]|[68][0-69]|7[0-46-9])',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -262,7 +262,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '29|[35]',
+        0 => '29[013-9]|39|54',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -274,7 +274,8 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[25]',
+        0 => '(?:25|54)8',
+        1 => '258|5483',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

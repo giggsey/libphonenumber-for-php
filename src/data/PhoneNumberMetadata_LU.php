@@ -266,7 +266,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2[2-9]|[3-57-9]',
+        0 => '2[2-9]|[3-57]|8(?:0[2-9]|[13-9])|9(?:0[89]|[2-579])',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '$CC $1',
