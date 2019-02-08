@@ -141,6 +141,8 @@ return array (
   'id' => 'NF',
   'countryCode' => 672,
   'internationalPrefix' => '00',
+  'nationalPrefixForParsing' => '([0-258]\\d{4})$',
+  'nationalPrefixTransformRule' => '3$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

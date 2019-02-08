@@ -145,7 +145,8 @@ return array (
   'countryCode' => 1,
   'internationalPrefix' => '011',
   'nationalPrefix' => '1',
-  'nationalPrefixForParsing' => '1',
+  'nationalPrefixForParsing' => '1|([267]\\d{6})$',
+  'nationalPrefixTransformRule' => '684$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

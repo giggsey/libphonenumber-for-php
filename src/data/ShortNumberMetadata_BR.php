@@ -28,8 +28,8 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:00|[89]\\d)|4(?:57|828)',
-    'ExampleNumber' => '181',
+    'NationalNumberPattern' => '1(?:00|12|28|8[015]|9[0-47-9])|4(?:57|82\\d)|911',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -52,7 +52,7 @@ return array (
   'emergency' => 
   array (
     'NationalNumberPattern' => '1(?:12|28|9[023])|911',
-    'ExampleNumber' => '190',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -63,8 +63,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:[02]|3(?:1[2-579]|2[13-9]|3[124-9]|4[1-3578]|5[1-468]|6[139]|8[149]|9[168])|5[0-35-9]|6(?:0|1[0-35-8]?|2[0145]|3[0137]?|4[37-9]?|5[0-35]|6[016]?|7[137]?|8[5-8]|9[1359]))|1[25-8]|2[35789]|3(?:[024568]|3[12])|4[12568]|5\\d|6[0-8]|8[015]|9[0-4789])|2(?:7(?:330|878)|85959?)|4(?:0404?|11[12]|57|828)|55555|6(?:0\\d{4}|10000)|911',
-    'ExampleNumber' => '168',
+    'NationalNumberPattern' => '1(?:0(?:[02]|3(?:1[2-579]|2[13-9]|3[124-9]|4[1-3578]|5[1-468]|6[139]|8[149]|9[168])|5[0-35-9]|6(?:0|1[0-35-8]?|2[0145]|3[0137]?|4[37-9]?|5[0-35]|6[016]?|7[137]?|8[5-8]|9[1359]))|1[25-8]|2[357-9]|3(?:[024-68]|3[12])|4[12568]|5\\d|6[0-8]|8[015]|9[0-47-9])|2(?:7(?:330|878)|85959?)|4(?:0404?|11[12]|57|828)|55555|6(?:0\\d{4}|10000)|911',
+    'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
     ),
@@ -74,8 +74,8 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '102|27330',
-    'ExampleNumber' => '27330',
+    'NationalNumberPattern' => '102|273\\d\\d',
+    'ExampleNumber' => '102',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -87,8 +87,8 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '151|27878|4(?:0404?|11[12]|57)|55555',
-    'ExampleNumber' => '27878',
+    'NationalNumberPattern' => '151|(?:278|555)\\d\\d|4(?:04\\d\\d?|11\\d|57)',
+    'ExampleNumber' => '151',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -101,8 +101,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '2(?:7(?:330|878)|85959?)|4(?:0404|828)|6(?:0\\d{4}|10000)',
-    'ExampleNumber' => '27878',
+    'NationalNumberPattern' => '2(?:7[38]\\d\\d|85\\d{2,3})|4(?:0404|82\\d)|6(?:0\\d|10)\\d{3}',
+    'ExampleNumber' => '4820',
     'PossibleLength' => 
     array (
       0 => 4,

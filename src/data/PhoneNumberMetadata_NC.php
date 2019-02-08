@@ -144,11 +144,23 @@ return array (
   array (
     0 => 
     array (
+      'pattern' => '(\\d{3})',
+      'format' => '$1',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '5[6-8]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    1 => 
+    array (
       'pattern' => '(\\d{2})(\\d{2})(\\d{2})',
       'format' => '$1.$2.$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-47-9]|5[0-4]',
+        0 => '[2-57-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -157,6 +169,18 @@ return array (
   ),
   'intlNumberFormat' => 
   array (
+    0 => 
+    array (
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1.$2.$3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[2-57-9]',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
   ),
   'mainCountryForCode' => false,
   'leadingZeroPossible' => false,
