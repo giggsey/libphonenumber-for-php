@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:(?:[249]\\d|64)\\d\\d|8000)\\d{3}',
+    'NationalNumberPattern' => '8000\\d{3}|(?:[249]\\d|64)\\d{5}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -88,7 +88,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '(?:64\\d|9(?:5\\d|71))\\d{4}',
+    'NationalNumberPattern' => '971\\d{4}|(?:64|95)\\d{5}',
     'ExampleNumber' => '6412345',
     'PossibleLength' => 
     array (
@@ -139,7 +139,7 @@ return array (
   ),
   'id' => 'SC',
   'countryCode' => 248,
-  'internationalPrefix' => '0(?:[02]|10?)',
+  'internationalPrefix' => '010|0[0-2]',
   'preferredInternationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

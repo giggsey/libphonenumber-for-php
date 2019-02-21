@@ -58,7 +58,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '8(?:0[013]|20\\d)\\d{7}|800\\d{3,6}',
+    'NationalNumberPattern' => '800\\d{3,7}|8(?:0[13]|20\\d)\\d{7}',
     'ExampleNumber' => '8011234567',
     'PossibleLength' => 
     array (
@@ -143,7 +143,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '(?:8(?:0[013]|10|20\\d)|902)\\d{7}|800\\d{3,6}',
+    'NationalNumberPattern' => '800\\d{3,7}|(?:8(?:0[13]|10|20\\d)|902)\\d{7}',
     'PossibleLength' => 
     array (
     ),

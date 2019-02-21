@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:(?:[2378]|6\\d\\d)\\d|90)\\d{5}',
+    'NationalNumberPattern' => '90\\d{5}|(?:[2378]|6\\d\\d)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2(?:01|1[27]|3\\d|6[02-578]|96)|3(?:7[0135-7]|8[048]|9[0269]))\\d{4}',
+    'NationalNumberPattern' => '(?:2(?:01|1[27]|22|3\\d|6[02-578]|96)|3(?:33|40|7[0135-7]|8[048]|9[0269]))\\d{4}',
     'ExampleNumber' => '2345678',
     'PossibleLength' => 
     array (
@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:6(?:5(?:09|1\\d|20)|6(?:0[0-6]|10|2[06-9]|39))\\d|7(?:[37-9]\\d|42|56))\\d{4}',
+    'NationalNumberPattern' => '756\\d{4}|(?:6(?:499|5[0-3]\\d|6(?:0[0-7]|10|2[06-9]|39))|7[37-9])\\d{5}',
     'ExampleNumber' => '660234567',
     'PossibleLength' => 
     array (
@@ -125,7 +125,7 @@ return array (
   ),
   'voicemail' => 
   array (
-    'NationalNumberPattern' => '697(?:42|56|[78]\\d)\\d{4}',
+    'NationalNumberPattern' => '697(?:56|[78]\\d)\\d{4}',
     'ExampleNumber' => '697861234',
     'PossibleLength' => 
     array (

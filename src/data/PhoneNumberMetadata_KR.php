@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:00[1-9]\\d{2,4}|[12]|5\\d{3})\\d{7}|(?:(?:00|[13-6])\\d|70)\\d{8}|(?:[1-6]\\d|80)\\d{7}|[3-6]\\d{4,5}',
+    'NationalNumberPattern' => '00[1-9]\\d{8,11}|(?:[12]|5\\d{3})\\d{7}|[13-6]\\d{9}|(?:[1-6]\\d|80)\\d{7}|[3-6]\\d{4,5}|(?:00|7)0\\d{8}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -68,7 +68,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '(?:00(?:3(?:08|68\\d)|798\\d{1,3})|80\\d)\\d{6}',
+    'NationalNumberPattern' => '00(?:308\\d{6,7}|798\\d{7,9})|(?:00368|80)\\d{7}',
     'ExampleNumber' => '801234567',
     'PossibleLength' => 
     array (
@@ -166,7 +166,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '00(?:3(?:08|68\\d)|798\\d{1,3})\\d{6}',
+    'NationalNumberPattern' => '00(?:3(?:08\\d{6,7}|68\\d{7})|798\\d{7,9})',
     'PossibleLength' => 
     array (
       0 => 11,
