@@ -29,7 +29,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:07|13)|1(?:[02459]|6\\d{3})|[578]|9[167])|224|3(?:[01]\\d\\d|3700)|740',
+    'NationalNumberPattern' => '1(?:0(?:07|13)|1[02459]|[578]|9[167])|224|(?:3370|74)0|(?:116\\d|3[01])\\d\\d',
     'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
@@ -77,7 +77,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '10(?:[13]4|2[23]|6[14]|99)|202\\d|3(?:646|9[07]0)|6(?:1[14]|34)|70[06]',
+    'NationalNumberPattern' => '10(?:[13]4|2[23]|99)|202\\d|3(?:646|9[07]0)|634|70[06]|(?:106|61)[14]',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (
@@ -90,7 +90,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '118777|2(?:0(?:0\\d|2)\\d|24)|6(?:1[14]|34)|7(?:0[06]|22|40)',
+    'NationalNumberPattern' => '118777|224|6(?:1[14]|34)|7(?:0[06]|22|40)|20(?:0\\d|2)\\d',
     'ExampleNumber' => '224',
     'PossibleLength' => 
     array (

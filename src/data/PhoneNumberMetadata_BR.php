@@ -41,7 +41,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:[14689][1-9]9\\d|2[12478](?:7|9\\d)|(?:3[1-578]|5[13-5]|7[13-579])(?:[6-8]|9\\d?))\\d{7}|(?:[189][1-9]7|[46][1-9][6-9])\\d{7}',
+    'NationalNumberPattern' => '(?:[189][1-9]|2[12478])(?:7|9\\d)\\d{7}|(?:3[1-578]|[46][1-9]|5[13-5]|7[13-579])(?:[6-8]\\d{7}|9\\d{7,8})',
     'ExampleNumber' => '11961234567',
     'PossibleLength' => 
     array (
@@ -69,7 +69,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:300|[59]00\\d?)\\d{6}',
+    'NationalNumberPattern' => '300\\d{6}|[59]00\\d{6,7}',
     'ExampleNumber' => '300123456',
     'PossibleLength' => 
     array (
@@ -82,7 +82,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '(?:300\\d(?:\\d{2})?|4(?:0(?:0\\d|20)|370))\\d{4}',
+    'NationalNumberPattern' => '300\\d{7}|[34]00\\d{5}|4(?:02|37)0\\d{4}',
     'ExampleNumber' => '40041234',
     'PossibleLength' => 
     array (
@@ -145,7 +145,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '(?:300\\d|40(?:0\\d|20))\\d{4}',
+    'NationalNumberPattern' => '4020\\d{4}|[34]00\\d{5}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -182,7 +182,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '300|4(?:0[02]|37)',
-        1 => '300|4(?:0(?:0|20)|370)',
+        1 => '4(?:02|37)0|[34]00',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -259,7 +259,7 @@ return array (
       'leadingDigitsPatterns' => 
       array (
         0 => '300|4(?:0[02]|37)',
-        1 => '300|4(?:0(?:0|20)|370)',
+        1 => '4(?:02|37)0|[34]00',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

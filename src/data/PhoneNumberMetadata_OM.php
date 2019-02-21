@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[279]\\d{3}|500|8007\\d?)\\d{4}',
+    'NationalNumberPattern' => '(?:[279]\\d{3}|500)\\d{4}|8007\\d{4,5}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -39,7 +39,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:7[129]\\d|9(?:0[1-9]|[1-9]\\d))\\d{5}',
+    'NationalNumberPattern' => '90[1-9]\\d{5}|(?:7[129]|9[1-9])\\d{6}',
     'ExampleNumber' => '92123456',
     'PossibleLength' => 
     array (
@@ -51,7 +51,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '(?:500|8007\\d?)\\d{4}',
+    'NationalNumberPattern' => '500\\d{4}|8007\\d{4,5}',
     'ExampleNumber' => '80071234',
     'PossibleLength' => 
     array (

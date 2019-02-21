@@ -65,7 +65,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:2|6(?:00[06]|1(?:1[17]|23))|8\\d\\d)|9\\d\\d)|5[0137]\\d{3}|999',
+    'NationalNumberPattern' => '11(?:2|6(?:00[06]|1(?:1[17]|23)))|999|(?:1(?:18|9)|5[0137]\\d)\\d\\d',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -100,7 +100,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '118\\d\\d|5(?:[037]\\d{3}|1210)',
+    'NationalNumberPattern' => '51210|(?:118|5[037]\\d)\\d\\d',
     'ExampleNumber' => '11800',
     'PossibleLength' => 
     array (

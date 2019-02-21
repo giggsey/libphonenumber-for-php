@@ -14,13 +14,15 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:33622|(?:7\\d|80)\\d{3})\\d{5}',
+    'NationalNumberPattern' => '33622\\d{5}|(?:7\\d|80)\\d{8}',
     'PossibleLength' => 
     array (
       0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 5,
+      1 => 6,
     ),
   ),
   'fixedLine' => 
@@ -32,6 +34,8 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 5,
+      1 => 6,
     ),
   ),
   'mobile' => 

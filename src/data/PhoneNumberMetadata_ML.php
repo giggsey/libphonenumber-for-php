@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2(?:0(?:2\\d|7[0-8])|1(?:2[67]|[4-689]\\d))|4(?:0[0-4]|4[1-39])\\d)\\d{4}',
+    'NationalNumberPattern' => '2(?:07[0-8]|12[67])\\d{4}|(?:2(?:02|1[4-689])|4(?:0[0-4]|4[1-39]))\\d{5}',
     'ExampleNumber' => '20212345',
     'PossibleLength' => 
     array (
@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:2(?:079|17\\d)|(?:50|[679]\\d|8[239])\\d\\d)\\d{4}',
+    'NationalNumberPattern' => '2(?:079|17\\d)\\d{4}|(?:50|[679]\\d|8[239])\\d{6}',
     'ExampleNumber' => '65012345',
     'PossibleLength' => 
     array (

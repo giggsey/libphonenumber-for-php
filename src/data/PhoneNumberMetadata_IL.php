@@ -30,7 +30,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:153\\d\\d?|[2-489])\\d{7}',
+    'NationalNumberPattern' => '153\\d{8,9}|[2-489]\\d{7}',
     'ExampleNumber' => '21234567',
     'PossibleLength' => 
     array (
@@ -70,7 +70,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1(?:2(?:00\\d\\d|12)|9(?:0[01]|19)\\d\\d)\\d{4}',
+    'NationalNumberPattern' => '1212\\d{4}|1(?:200|9(?:0[01]|19))\\d{6}',
     'ExampleNumber' => '1919123456',
     'PossibleLength' => 
     array (
@@ -105,7 +105,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '7(?:(?:18|2[23]|3[237]|47|6[58]|7\\d|9[2357-9])\\d|8(?:2\\d|33|55|77|81))\\d{5}',
+    'NationalNumberPattern' => '78(?:33|55|77|81)\\d{5}|7(?:18|2[23]|3[237]|47|6[58]|7\\d|82|9[2357-9])\\d{6}',
     'ExampleNumber' => '771234567',
     'PossibleLength' => 
     array (

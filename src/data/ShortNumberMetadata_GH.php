@@ -82,7 +82,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '(?:404\\d|(?:54|83)0)\\d',
+    'NationalNumberPattern' => '404\\d\\d|(?:54|83)0\\d',
     'ExampleNumber' => '5400',
     'PossibleLength' => 
     array (
@@ -95,7 +95,7 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '(?:404\\d|(?:54|83)0)\\d',
+    'NationalNumberPattern' => '404\\d\\d|(?:54|83)0\\d',
     'ExampleNumber' => '5400',
     'PossibleLength' => 
     array (

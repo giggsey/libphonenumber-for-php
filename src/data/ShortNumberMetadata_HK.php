@@ -84,7 +84,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:8\\d|9)|85\\d\\d)',
+    'NationalNumberPattern' => '109|1(?:08|85\\d)\\d',
     'ExampleNumber' => '109',
     'PossibleLength' => 
     array (
