@@ -36,6 +36,7 @@ return array (
   90384 => 'Nevşehir',
   90386 => 'Kırşehir',
   90388 => 'Niğde',
+  9039 => 'Kuzey Kıbrıs',
   90412 => 'Diyarbakır',
   90414 => 'Şanlıurfa',
   90416 => 'Adıyaman',

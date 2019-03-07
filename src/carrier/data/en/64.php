@@ -15,7 +15,7 @@ return array (
   6421 => 'Vodafone',
   6422 => '2degrees',
   6426 => 'Vodafone',
-  6427 => 'Telecom',
+  6427 => 'Spark',
   6428 => 'Vodafone',
   6429 => 'TelstraClear',
 );
