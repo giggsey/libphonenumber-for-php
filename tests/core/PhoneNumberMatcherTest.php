@@ -533,6 +533,8 @@ class PhoneNumberMatcherTest extends TestCase
             array('03 0 -3 2 23 12 34', RegionCode::DE),
             array('(0)3 0 -3 2 23 12 34', RegionCode::DE),
             array('0 3 0 -3 2 23 12 34', RegionCode::DE),
+            // Fits an alternate pattern, but the leading digits don't match
+            array('+52 332 123 23 23', RegionCode::MX),
         );
     }
 

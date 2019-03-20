@@ -104,7 +104,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '1471\\d{5}|(?:145|550)\\d{6}',
+    'NationalNumberPattern' => '(?:14(?:5(?:1[0458]|[23][458])|71\\d)|550\\d\\d)\\d{4}',
     'ExampleNumber' => '550123456',
     'PossibleLength' => 
     array (

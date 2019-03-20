@@ -20,11 +20,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(9)(\\d{4})(\\d{5})',
+      'pattern' => '(\\d)(\\d{4})(\\d{5})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '925',
+        0 => '92',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

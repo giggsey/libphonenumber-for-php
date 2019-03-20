@@ -20,7 +20,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([67]\\d)(\\d{3})(\\d{4})',
+      'pattern' => '(\\d{2})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
@@ -32,7 +32,7 @@ return array (
     ),
     1 => 
     array (
-      'pattern' => '([67]\\d)(\\d{4})(\\d{3})',
+      'pattern' => '(\\d{2})(\\d{4})(\\d{3})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

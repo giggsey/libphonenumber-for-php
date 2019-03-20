@@ -168,10 +168,10 @@ return array (
   ),
   'id' => 'CN',
   'countryCode' => 86,
-  'internationalPrefix' => '00|1(?:[12]\\d|79|9[0-7])\\d\\d00',
+  'internationalPrefix' => '00|1(?:[12]\\d|79|9[0235-7])\\d\\d00',
   'preferredInternationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|(1(?:[12]\\d|79|9[0-7])\\d\\d)',
+  'nationalPrefixForParsing' => '0|(1(?:[12]\\d|79|9[0235-7])\\d\\d)',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

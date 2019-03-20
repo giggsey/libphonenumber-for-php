@@ -642,7 +642,7 @@ class PhoneNumberMatcher implements \Iterator
             return explode('-', mb_substr($rfc3966Format, $startIndex, $endIndex - $startIndex));
         }
 
-        // We format the NSN only, and split that according to the separator.
+        // If a format is provided, we format the NSN only, and split that according to the separator.
         $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
         return explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
             PhoneNumberFormat::RFC3966));
@@ -661,19 +661,29 @@ class PhoneNumberMatcher implements \Iterator
         PhoneNumberUtil $util,
         \Closure $checker
     ) {
-        // TODO: Evaluate how this works for other locales (testing has been limited to NANPA regions)
-        // and optimise if necessary.
         $normalizedCandidate = PhoneNumberUtil::normalizeDigits($candidate, true /* keep non-digits */);
-        $formattedNumberGroups = static::getNationalNumberGroups($util, $number, null);
+        $formattedNumberGroups = static::getNationalNumberGroups($util, $number);
         if ($checker($util, $number, $normalizedCandidate, $formattedNumberGroups)) {
             return true;
         }
 
-        // If this didn't pass, see if there are any alternative formats, and try them instead.
+        // If this didn't pass, see if there are any alternative formats that match, and try them instead.
         $alternateFormats = static::getAlternateFormatsForCountry($number->getCountryCode());
 
+        $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
         if ($alternateFormats !== null) {
             foreach ($alternateFormats->numberFormats() as $alternateFormat) {
+                if ($alternateFormat->leadingDigitsPatternSize() > 0) {
+                    // There is only one leading digits pattern for alternate formats.
+                    $pattern = $alternateFormat->getLeadingDigitsPattern(0);
+
+                    $nationalSignificantNumberMatcher = new Matcher($pattern, $nationalSignificantNumber);
+                    if (!$nationalSignificantNumberMatcher->lookingAt()) {
+                        // Leading digits don't match; try another one.
+                        continue;
+                    }
+                }
+
                 $formattedNumberGroups = static::getNationalNumberGroups($util, $number, $alternateFormat);
                 if ($checker($util, $number, $normalizedCandidate, $formattedNumberGroups)) {
                     return true;
