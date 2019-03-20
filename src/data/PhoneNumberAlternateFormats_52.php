@@ -20,11 +20,11 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '([358]\\d)(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})',
+      'format' => '$1 $2 $3 $4 $5',
       'leadingDigitsPatterns' => 
       array (
-        0 => '33|55|81',
+        0 => '33|5[56]|81',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -33,10 +33,10 @@ return array (
     1 => 
     array (
       'pattern' => '(\\d{3})(\\d{3})(\\d{2})(\\d{2})',
-      'format' => '$1 $2 $3',
+      'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2467]|3[0-2457-9]|5[089]|8[02-9]|9[0-35-9]',
+        0 => '[24679]|3[0-2457-9]|5[089]|8[02-46-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

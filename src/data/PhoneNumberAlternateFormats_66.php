@@ -20,7 +20,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(2\\d{3})(\\d{4})',
+      'pattern' => '(\\d{4})(\\d{4})',
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (

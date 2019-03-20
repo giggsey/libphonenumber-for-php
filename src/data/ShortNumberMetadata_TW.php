@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d\\d',
+    'NationalNumberPattern' => '1\\d{2,3}',
     'PossibleLength' => 
     array (
       0 => 3,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -25,7 +26,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '11[029]',
+    'NationalNumberPattern' => '1(?:1[0289]|92\\d)',
     'ExampleNumber' => '110',
     'PossibleLength' => 
     array (
@@ -36,9 +37,11 @@ return array (
   ),
   'premiumRate' => 
   array (
+    'NationalNumberPattern' => '10[56]',
+    'ExampleNumber' => '105',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -50,6 +53,7 @@ return array (
     'ExampleNumber' => '110',
     'PossibleLength' => 
     array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -57,8 +61,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '11[029]',
-    'ExampleNumber' => '110',
+    'NationalNumberPattern' => '1(?:0[4-6]|1[02389]|6[5-8]|9(?:1[0-29]|22|5[057]|68|8[05]|9[15689]))',
+    'ExampleNumber' => '104',
     'PossibleLength' => 
     array (
     ),
@@ -68,9 +72,10 @@ return array (
   ),
   'standardRate' => 
   array (
+    'NationalNumberPattern' => '1(?:65|9(?:19|50|85|98))',
+    'ExampleNumber' => '165',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
