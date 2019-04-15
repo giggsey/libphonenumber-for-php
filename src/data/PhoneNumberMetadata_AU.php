@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d{4,9}|(?:[2-478]\\d\\d|550)\\d{6}',
+    'NationalNumberPattern' => '1(?:[0-79]\\d{7,8}|8[0-24-9]\\d{7})|(?:[2-478]\\d\\d|550)\\d{6}|1\\d{4,7}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -169,7 +169,7 @@ return array (
   'internationalPrefix' => '001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011',
   'preferredInternationalPrefix' => '0011',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'nationalPrefixForParsing' => '0|(183[12])',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -267,7 +267,7 @@ return array (
         0 => '[2378]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC ($1)',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     8 => 
@@ -330,7 +330,7 @@ return array (
         0 => '[2378]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
-      'domesticCarrierCodeFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '$CC ($1)',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     4 => 

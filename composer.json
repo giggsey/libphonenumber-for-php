@@ -60,7 +60,7 @@
   "require": {
     "php": ">=5.3.2",
     "ext-mbstring": "*",
-    "giggsey/locale": "^1.2"
+    "giggsey/locale": "^1.7"
   },
   "require-dev": {
     "phing/phing": "^2.7",

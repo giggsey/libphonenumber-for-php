@@ -30,6 +30,7 @@ return array (
   5939628 => 'Movistar',
   5939629 => 'Movistar',
   593963 => 'Movistar',
+  593964 => 'Movistar',
   593967 => 'Claro',
   593968 => 'Claro',
   593969 => 'Claro',

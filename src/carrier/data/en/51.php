@@ -36,7 +36,6 @@ return array (
   511987 => 'Claro',
   511988 => 'Movistar',
   511989 => 'Claro',
-  511990 => 'Movistar',
   511991 => 'Claro',
   511992 => 'Claro',
   511993 => 'Claro',
