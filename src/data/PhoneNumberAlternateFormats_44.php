@@ -60,7 +60,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1(?:[2-69][02-9]|[78])|7(?:[1-57-9]|624)',
+        0 => '1(?:[2-69][02-9]|[78])|3|7(?:[1-57-9]|624)',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
