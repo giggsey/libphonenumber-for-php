@@ -29,7 +29,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:3[23]|4[78])\\d{4,6}|(?:31|4[36])\\d{6}|(?:2[1-4]|4[125]|7\\d)\\d{5,6}',
+    'NationalNumberPattern' => '(?:3[23]|48)\\d{4,6}|(?:31|4[36])\\d{6}|(?:2[1-4]|4[1257]|7\\d)\\d{5,6}',
     'ExampleNumber' => '71234567',
     'PossibleLength' => 
     array (
@@ -156,7 +156,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-4]',
+        0 => '2[1-4]|[34]',
       ),
       'nationalPrefixFormattingRule' => '(0$1)',
       'domesticCarrierCodeFormattingRule' => '',
