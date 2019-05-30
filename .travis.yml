@@ -1,6 +1,11 @@
 sudo: false
 
+dist: trusty
+
 language: php
+
+env:
+  - COVERAGE_FLAGS=""
 
 matrix:
     fast_finish: true
@@ -10,19 +15,14 @@ matrix:
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE_FLAGS=""
           dist: precise
         - php: 5.4
-          env: COVERAGE_FLAGS=""
         - php: 5.5
-          env: COVERAGE_FLAGS=""
         - php: 5.6
           env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: 7.0
-          env: COVERAGE_FLAGS=""
         - php: 7.1
-          env: COVERAGE_FLAGS=""
         - php: 7.2
           env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: 7.3
-          env: COVERAGE_FLAGS=""
 
 before_install:
  - travis_retry wget https://scrutinizer-ci.com/ocular.phar
