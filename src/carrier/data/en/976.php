@@ -19,6 +19,7 @@ return array (
   97689 => 'Unitel',
   97690 => 'Skytel',
   97691 => 'Skytel',
+  97692 => 'Skytel',
   97693 => 'G-Mobile',
   97694 => 'Mobicom',
   97695 => 'Mobicom',

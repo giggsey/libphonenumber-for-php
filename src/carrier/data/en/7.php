@@ -15,6 +15,7 @@ return array (
   7701 => 'Kcell/Activ',
   7702 => 'Kcell/Activ',
   7705 => 'Beeline',
+  7706 => 'Beeline',
   7707 => 'Tele2',
   7708 => 'Altel',
   774 => 'Tele2',
