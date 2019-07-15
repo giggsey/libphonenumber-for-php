@@ -11,23 +11,16 @@
  */
 
 return array (
-  23221 => 'Sierratel',
   23225 => 'Sierratel',
   23230 => 'Africell',
   23231 => 'QCELL',
-  23233 => 'Comium',
+  23233 => 'Africell',
   23234 => 'QCELL',
-  23235 => 'IPTEL',
-  23240 => 'Datatel/Cellcom',
-  23244 => 'Intergroup',
-  23250 => 'Datatel/Cellcom',
-  23255 => 'AFCOM',
-  2326 => 'Onlime',
   23275 => 'Orange',
-  23276 => 'Airtel',
+  23276 => 'Orange',
   23277 => 'Africell',
-  23278 => 'Airtel',
-  23279 => 'Airtel',
+  23278 => 'Orange',
+  23279 => 'Orange',
   2328 => 'Africell',
   2329 => 'Africell',
 );

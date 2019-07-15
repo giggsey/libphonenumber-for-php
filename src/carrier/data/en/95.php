@@ -22,6 +22,7 @@ return array (
   95947 => 'MPT',
   95949 => 'MPT',
   9595 => 'MPT',
+  95967 => 'Mytel',
   95968 => 'Mytel',
   95969 => 'MNTC',
   95973 => 'MPT',

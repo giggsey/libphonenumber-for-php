@@ -83,9 +83,11 @@ return array (
   ),
   'sharedCost' => 
   array (
+    'NationalNumberPattern' => '700\\d{5}',
+    'ExampleNumber' => '70012345',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -93,11 +95,9 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '700\\d{5}',
-    'ExampleNumber' => '70012345',
     'PossibleLength' => 
     array (
-      0 => 8,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
