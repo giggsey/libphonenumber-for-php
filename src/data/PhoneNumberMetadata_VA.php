@@ -14,7 +14,25 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '0\\d{6,10}|55\\d{8}|[08]\\d{5}|(?:3[0-8]|8)\\d{7,9}|(?:1\\d|39)\\d{7,8}',
+    'NationalNumberPattern' => '0\\d{5,10}|3[0-8]\\d{7,10}|55\\d{8}|8\\d{5}(?:\\d{2,4})?|(?:1\\d|39)\\d{7,8}',
+    'PossibleLength' => 
+    array (
+      0 => 6,
+      1 => 7,
+      2 => 8,
+      3 => 9,
+      4 => 10,
+      5 => 11,
+      6 => 12,
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'fixedLine' => 
+  array (
+    'NationalNumberPattern' => '06698\\d{1,6}',
+    'ExampleNumber' => '0669812345',
     'PossibleLength' => 
     array (
       0 => 6,
@@ -28,26 +46,14 @@ return array (
     array (
     ),
   ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '06698\\d{1,6}',
-    'ExampleNumber' => '0669812345',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '33\\d{9}|3[1-9]\\d{8}|3[2-9]\\d{7}',
+    'NationalNumberPattern' => '3[1-9]\\d{8}|3[2-9]\\d{7}',
     'ExampleNumber' => '3123456789',
     'PossibleLength' => 
     array (
       0 => 9,
       1 => 10,
-      2 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -141,9 +147,12 @@ return array (
   ),
   'voicemail' => 
   array (
+    'NationalNumberPattern' => '3[2-8]\\d{9,10}',
+    'ExampleNumber' => '33101234501',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 11,
+      1 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
