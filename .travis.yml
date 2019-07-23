@@ -23,6 +23,7 @@ matrix:
         - php: 7.2
           env: COVERAGE_FLAGS=" --coverage-text --coverage-clover build/logs/clover.xml"
         - php: 7.3
+        - php: 7.4snapshot
 
 before_install:
  - travis_retry wget https://scrutinizer-ci.com/ocular.phar
