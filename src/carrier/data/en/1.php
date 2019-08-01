@@ -414,6 +414,7 @@ return array (
   180997 => 'Orange',
   180998 => 'Orange',
   180999 => 'Tricom',
+  186824 => 'Digicel',
   186826 => 'bmobile',
   186827 => 'bmobile',
   186828 => 'bmobile',

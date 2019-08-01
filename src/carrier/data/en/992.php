@@ -22,5 +22,6 @@ return array (
   992919 => 'Tacom',
   99292 => 'Tcell',
   99293 => 'Tcell',
+  99294 => 'Babilon-M',
   99298 => 'Babilon-M',
 );
