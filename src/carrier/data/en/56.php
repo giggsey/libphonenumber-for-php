@@ -17,6 +17,7 @@ return array (
   5623233 => 'Entel',
   5623234 => 'Entel',
   5623235 => 'Entel',
+  56233 => 'Movistar',
   56941 => 'Movistar',
   56942 => 'Entel',
   569430 => 'Telestar',
