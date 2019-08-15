@@ -578,7 +578,20 @@ class AsYouTypeFormatter
                 $nationalPrefixSeparatorsMatcher = new Matcher(self::$nationalPrefixSeparatorsPattern, $numberFormat->getNationalPrefixFormattingRule());
                 $this->shouldAddSpaceAfterNationalPrefix = $nationalPrefixSeparatorsMatcher->find();
                 $formattedNumber = $m->replaceAll($numberFormat->getFormat());
-                return $this->appendNationalNumber($formattedNumber);
+                // Check that we did not remove nor add any extra digits when we matched
+                // this formatting pattern. This usually happens after we entered the last
+                // digit during AYTF. Eg: In case of MX, we swallow mobile token (1) when
+                // formatted but AYTF should retain all the number entered and not change
+                // in order to match a format (of same leading digits and length) display
+                // in that way.
+                $fullOutput = $this->appendNationalNumber($formattedNumber);
+                $formattedNumberDigitsOnly = PhoneNumberUtil::normalizeDiallableCharsOnly($fullOutput);
+
+                if ($formattedNumberDigitsOnly === $this->accruedInputWithoutFormatting) {
+                    // If it's the same (i.e entered number and format is same), then it's
+                    // safe to return this in formatted number as nothing is lost / added.
+                    return $fullOutput;
+                }
             }
         }
         return '';

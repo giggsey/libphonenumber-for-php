@@ -6,7 +6,7 @@
 [![License](http://img.shields.io/badge/license-Apache%202.0-red.svg?style=flat-square)](https://packagist.org/packages/giggsey/libphonenumber-for-php)
 
 ## What is it?
-A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/googlei18n/libphonenumber).
+A PHP library for parsing, formatting, storing and validating international phone numbers. This library is based on Google's [libphonenumber](https://github.com/google/libphonenumber).
 
 
 
@@ -72,7 +72,7 @@ This library will try to follow the same version numbers as Google. There could 
 This does mean that this project may not follow [Semantic Versioning](http://semver.org/), but instead Google's version policy. As a result, jumps in major versions may not actually contain any backwards
 incompatible changes. Please read the release notes for such releases.
 
-Google try to release their versions according to Semantic Versioning, as laid out of in their [Versioning Guide](https://github.com/googlei18n/libphonenumber#versioning-and-announcements).
+Google try to release their versions according to Semantic Versioning, as laid out of in their [Versioning Guide](https://github.com/google/libphonenumber#versioning-and-announcements).
 
 ## Quick Examples
 Let's say you have a string representing a phone number from Switzerland. This is how you parse/normalize it into a PhoneNumber object:
@@ -226,9 +226,9 @@ $timeZones = $timeZoneMapper->getTimeZonesForNumber($swissNumberProto);
 
 #### Problems with Invalid Numbers?
 
-This library uses phone number metadata from Google's [libphonenumber](https://github.com/googlei18n/libphonenumber). If this library is working as intended, it should provide the same result as the Java version of Google's project.
+This library uses phone number metadata from Google's [libphonenumber](https://github.com/google/libphonenumber). If this library is working as intended, it should provide the same result as the Java version of Google's project.
 
-If you believe that a phone number is returning an incorrect result, first test it with [libphonenumber](https://github.com/googlei18n/libphonenumber) via their [Online Demo](https://libphonenumber.appspot.com/). If that returns the same result as this project, and you feel it is in error, raise it as an Issue with the libphonenumber project.
+If you believe that a phone number is returning an incorrect result, first test it with [libphonenumber](https://github.com/google/libphonenumber) via their [Online Demo](https://libphonenumber.appspot.com/). If that returns the same result as this project, and you feel it is in error, raise it as an Issue with the libphonenumber project.
 
 If Google's [Online Demo](https://libphonenumber.appspot.com/) gives a different result to the [libphonenumber-for-php demo](http://giggsey.com/libphonenumber/), then please raise an Issue here.
 
@@ -242,7 +242,7 @@ If you do need to generate the data, the commands are provided by [Phing](https:
 $ vendor/bin/phing compile
 ```
 
-This compile process clones the [libphonenumber](https://github.com/googlei18n/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).
+This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).
 
 ## Integration with frameworks
 

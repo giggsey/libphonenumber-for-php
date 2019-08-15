@@ -38,8 +38,8 @@ class Issue135Test extends TestCase
      */
     public function testGetCountryMobileToken()
     {
-        // MX
-        $this->assertEquals('1', PhoneNumberUtil::getCountryMobileToken(52));
+        // AR
+        $this->assertEquals('9', PhoneNumberUtil::getCountryMobileToken(54));
 
         // Country calling code for Sweden, which has no mobile token.
         $this->assertEquals('', PhoneNumberUtil::getCountryMobileToken(46));

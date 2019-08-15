@@ -3,7 +3,7 @@
 
     <property name="build.script" value="build/build.php"/>
 
-    <property name="git.url" value="https://github.com/googlei18n/libphonenumber.git"/>
+    <property name="git.url" value="https://github.com/google/libphonenumber.git"/>
     <property name="git.path" value="libphonenumber-data-dir"/>
 
     <loadfile property="metadata.version" file="METADATA-VERSION.txt">
