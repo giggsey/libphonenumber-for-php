@@ -397,8 +397,8 @@ class PhoneNumberUtilTest extends TestCase
     public function testGetCountryMobileToken()
     {
         $this->assertEquals(
-            '1',
-            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::MX))
+            '9',
+            PhoneNumberUtil::getCountryMobileToken($this->phoneUtil->getCountryCodeForRegion(RegionCode::AR))
         );
 
         // Country calling code for Sweden, which has no mobile token.

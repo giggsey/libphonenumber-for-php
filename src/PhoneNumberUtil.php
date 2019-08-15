@@ -530,7 +530,6 @@ class PhoneNumberUtil
     protected static function initMobileTokenMappings()
     {
         static::$MOBILE_TOKEN_MAPPINGS = array();
-        static::$MOBILE_TOKEN_MAPPINGS['52'] = '1';
         static::$MOBILE_TOKEN_MAPPINGS['54'] = '9';
     }
 
