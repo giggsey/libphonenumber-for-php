@@ -17,7 +17,7 @@ use libphonenumber\Leniency\AbstractLeniency;
  * http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
  *
  * @author Shaopeng Jia
- * @see https://github.com/googlei18n/libphonenumber
+ * @see https://github.com/google/libphonenumber
  */
 class PhoneNumberUtil
 {
