@@ -167,7 +167,7 @@ return array (
       array (
         0 => '1',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '(06 $1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
@@ -179,7 +179,7 @@ return array (
       array (
         0 => '[2-9]',
       ),
-      'nationalPrefixFormattingRule' => '($1)',
+      'nationalPrefixFormattingRule' => '06 $1',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
