@@ -1177,26 +1177,6 @@ class PhoneNumberUtilTest extends TestCase
         );
         $this->assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($deShortNumber, RegionCode::IT, false));
 
-        // Test the special logic for Hungary, where the national prefix must be added before dialing
-        // from a mobile phone for regular length numbers, but not for short numbers.
-        $huRegularNumber = new PhoneNumber();
-        $huRegularNumber->setCountryCode(36)->setNationalNumber(301234567);
-        $this->assertEquals(
-            '06301234567',
-            $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::HU, false)
-        );
-        $this->assertEquals(
-            '+36301234567',
-            $this->phoneUtil->formatNumberForMobileDialing($huRegularNumber, RegionCode::JP, false)
-        );
-        $huShortNumber = new PhoneNumber();
-        $huShortNumber->setCountryCode(36)->setNationalNumber(104);
-        $this->assertEquals(
-            '104',
-            $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::HU, false)
-        );
-        $this->assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($huShortNumber, RegionCode::JP, false));
-
         // Test the special logic for NANPA countries, for which regular length phone numbers are always
         // output in international format, but short numbers are in national format.
         $this->assertEquals(
