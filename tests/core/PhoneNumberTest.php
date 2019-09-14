@@ -87,6 +87,28 @@ class PhoneNumberTest extends TestCase
         $this->assertFalse($numberA->equals($numberB));
     }
 
+    public function testEqualWithSameExtension()
+    {
+        $numberA = new PhoneNumber();
+        $numberA->setNationalNumber(6502530000)->setExtension('123');
+
+        $numberB = new PhoneNumber();
+        $numberB->setNationalNumber(6502530000)->setExtension('123');
+
+        $this->assertTrue($numberA->equals($numberB));
+    }
+
+    public function testNonEqualWithDifferentExtension()
+    {
+        $numberA = new PhoneNumber();
+        $numberA->setNationalNumber(6502530000)->setExtension('123');
+
+        $numberB = new PhoneNumber();
+        $numberB->setNationalNumber(6502530000)->setExtension('321');
+
+        $this->assertFalse($numberA->equals($numberB));
+    }
+
     public function testEqualWithPreferredDomesticCarrierCodeSetToDefault()
     {
         $numberA = new PhoneNumber();

@@ -518,7 +518,7 @@ class PhoneNumber implements \Serializable
         $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() &&
             (!$this->hasNationalNumber() || $this->getNationalNumber() == $other->getNationalNumber());
         $sameExt = $this->hasExtension() == $other->hasExtension() &&
-            (!$this->hasExtension() || $this->hasExtension() == $other->hasExtension());
+            (!$this->hasExtension() || $this->getExtension() == $other->getExtension());
         $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() &&
             (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
         $sameZeros = $this->getNumberOfLeadingZeros() == $other->getNumberOfLeadingZeros();
