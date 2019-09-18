@@ -80,8 +80,8 @@ return array (
   ),
   'personalNumber' => 
   array (
-    'NationalNumberPattern' => '70\\d{8}',
-    'ExampleNumber' => '7012345678',
+    'NationalNumberPattern' => '70(?:0[3-8]0|707)\\d{5}',
+    'ExampleNumber' => '7003000123',
     'PossibleLength' => 
     array (
     ),

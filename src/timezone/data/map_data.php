@@ -1180,6 +1180,7 @@ return array (
   1681 => 'America/New_York',
   1682 => 'America/Chicago',
   1684 => 'Pacific/Pago_Pago',
+  1689 => 'America/Chicago',
   1701 => 'America/Denver&America/North_Dakota/Center',
   1701200 => 'America/Chicago',
   1701205 => 'America/Chicago',

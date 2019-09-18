@@ -89,7 +89,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '5924[01]\\d{4}',
+    'NationalNumberPattern' => '5924[0-2]\\d{4}',
     'ExampleNumber' => '592401234',
     'PossibleLength' => 
     array (
