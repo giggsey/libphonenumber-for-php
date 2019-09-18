@@ -173,11 +173,23 @@ return array (
     ),
     1 => 
     array (
+      'pattern' => '(\\d{2})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '[27][2-9]|3[2-7]|4[24-9]|5[2-79]|6|8[2-57-9]|9[2-69]',
+      ),
+      'nationalPrefixFormattingRule' => '(06 $1)',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    2 => 
+    array (
       'pattern' => '(\\d{2})(\\d{3})(\\d{3,4})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[2-9]',
+        0 => '[2-57-9]',
       ),
       'nationalPrefixFormattingRule' => '06 $1',
       'domesticCarrierCodeFormattingRule' => '',
