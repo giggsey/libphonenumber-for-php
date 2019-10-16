@@ -64,4 +64,6 @@ return array (
   22587 => 'Orange',
   22588 => 'Orange',
   22589 => 'Orange',
+  22595 => 'MTN',
+  22597 => 'Orange',
 );
