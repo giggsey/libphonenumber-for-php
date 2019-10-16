@@ -11,6 +11,7 @@
  */
 
 return array (
+  9920 => 'Megafon',
   99241 => 'Megafon',
   99250 => 'Tcell',
   99255 => 'Megafon',

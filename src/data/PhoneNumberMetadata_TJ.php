@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[3-59]\\d|77|88)\\d{7}',
+    'NationalNumberPattern' => '(?:00|[3-59]\\d|77|88)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -44,7 +44,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '41[18]\\d{6}|(?:5[05]|77|88|9\\d)\\d{7}',
+    'NationalNumberPattern' => '41[18]\\d{6}|(?:00|5[05]|77|88|9\\d)\\d{7}',
     'ExampleNumber' => '917123456',
     'PossibleLength' => 
     array (
@@ -195,7 +195,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[457-9]',
+        0 => '[0457-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

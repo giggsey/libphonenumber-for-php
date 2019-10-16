@@ -331,7 +331,7 @@ return array (
   52862 => 'Coahuila',
   52864 => 'Coahuila',
   52866 => 'Castanos/Monclova, COAH',
-  52867 => 'Nuevo Leon/Tamaulipas',
+  52867 => 'Nuevo Laredo/Tamaulipas',
   52868 => 'Tamaulipas',
   52869 => 'Cuatro Cienegas/San Buenaventura, COAH',
   52871 => 'Coahuila',
