@@ -32,5 +32,6 @@ return array (
   3834713 => 'mts d.o.o.',
   3834714 => 'mts d.o.o.',
   3834715 => 'mts d.o.o.',
+  38348 => 'IPKO',
   38349 => 'IPKO',
 );
