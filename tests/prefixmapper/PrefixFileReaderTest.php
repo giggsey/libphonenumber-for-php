@@ -47,7 +47,7 @@ class PrefixFileReaderTest extends TestCase
         $this->assertEquals('Kalifornien', $this->reader->getDescriptionForNumber(self::$US_NUMBER1, 'de', '', 'CH'));
         $this->assertEquals('CA', $this->reader->getDescriptionForNumber(self::$US_NUMBER1, 'en', '', 'AU'));
         $this->assertEquals(
-            pack('H*', 'ec849c') . pack('H*', 'ec9ab8'),
+            \pack('H*', 'ec849c') . \pack('H*', 'ec9ab8'),
             $this->reader->getDescriptionForNumber(self::$KO_NUMBER, 'ko', '', '')
         );
         $this->assertEquals('Seoul', $this->reader->getDescriptionForNumber(self::$KO_NUMBER, 'en', '', ''));

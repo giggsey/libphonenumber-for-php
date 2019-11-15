@@ -150,14 +150,14 @@ class PhoneNumberUtilTest extends TestCase
 
     public function testGetSupportedRegions()
     {
-        $this->assertGreaterThan(0, count($this->phoneUtil->getSupportedRegions()));
+        $this->assertGreaterThan(0, \count($this->phoneUtil->getSupportedRegions()));
     }
 
     public function testGetSupportedGlobalNetworkCallingCodes()
     {
         $globalNetworkCallingCodes = $this->phoneUtil->getSupportedGlobalNetworkCallingCodes();
 
-        $this->assertGreaterThan(0, count($globalNetworkCallingCodes));
+        $this->assertGreaterThan(0, \count($globalNetworkCallingCodes));
 
         foreach ($globalNetworkCallingCodes as $callingCode) {
             $this->assertGreaterThan(0, $callingCode);
@@ -169,7 +169,7 @@ class PhoneNumberUtilTest extends TestCase
     {
         $callingCodes = $this->phoneUtil->getSupportedCallingCodes();
 
-        $this->assertGreaterThan(0, count($callingCodes));
+        $this->assertGreaterThan(0, \count($callingCodes));
 
         foreach ($callingCodes as $callingCode) {
             $this->assertGreaterThan(0, $callingCode);
@@ -177,7 +177,7 @@ class PhoneNumberUtilTest extends TestCase
         }
 
         // There should be more than just the global network calling codes in this set.
-        $this->assertGreaterThan(count($this->phoneUtil->getSupportedGlobalNetworkCallingCodes()), count($callingCodes));
+        $this->assertGreaterThan(\count($this->phoneUtil->getSupportedGlobalNetworkCallingCodes()), \count($callingCodes));
         // But they should be includes. Tested one of them
         $this->assertContains(979, $callingCodes);
     }
@@ -484,7 +484,7 @@ class PhoneNumberUtilTest extends TestCase
 
     public function testNormaliseRemovePunctuation()
     {
-        $inputNumber = '034-56&+#2' . pack('H*', 'c2ad') . '34';
+        $inputNumber = '034-56&+#2' . \pack('H*', 'c2ad') . '34';
         $expectedOutput = '03456234';
         $this->assertEquals(
             $expectedOutput,
@@ -2212,17 +2212,17 @@ class PhoneNumberUtilTest extends TestCase
     public function testIsViablePhoneNumberNonAscii()
     {
         // Only one or two digits before possible punctuation followed by more digits.
-        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber('1' . pack('H*', 'e38080') . '34'));
-        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('1' . pack('H*', 'e38080') . '3+4'));
+        $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber('1' . \pack('H*', 'e38080') . '34'));
+        $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('1' . \pack('H*', 'e38080') . '3+4'));
         // Unicode variants of possible starting character and other allowed punctuation/digits.
         $this->assertTrue(
             PhoneNumberUtil::isViablePhoneNumber(
-                pack('H*', 'efbc88') . '1' . pack('H*', 'efbc89') . pack('H*', 'e38080') . '3456789'
+                \pack('H*', 'efbc88') . '1' . \pack('H*', 'efbc89') . \pack('H*', 'e38080') . '3456789'
             )
         );
         // Testing a leading + is okay.
         $this->assertTrue(
-            PhoneNumberUtil::isViablePhoneNumber('+1' . pack('H*', 'efbc89') . pack('H*', 'e38080') . '3456789')
+            PhoneNumberUtil::isViablePhoneNumber('+1' . \pack('H*', 'efbc89') . \pack('H*', 'e38080') . '3456789')
         );
     }
 
@@ -2235,14 +2235,14 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('+800-345-600', PhoneNumberUtil::extractPossibleNumber('Tel:+800-345-600'));
         // Should recognise wide digits as possible start values.
         $this->assertEquals(
-            pack('H*', 'efbc90') . pack('H*', 'efbc92') . pack('H*', 'efbc93'),
-            PhoneNumberUtil::extractPossibleNumber(pack('H*', 'efbc90') . pack('H*', 'efbc92') . pack('H*', 'efbc93'))
+            \pack('H*', 'efbc90') . \pack('H*', 'efbc92') . \pack('H*', 'efbc93'),
+            PhoneNumberUtil::extractPossibleNumber(\pack('H*', 'efbc90') . \pack('H*', 'efbc92') . \pack('H*', 'efbc93'))
         );
         // Dashes are not possible start values and should be removed.
         $this->assertEquals(
-            pack('H*', 'efbc91') . pack('H*', 'efbc92') . pack('H*', 'efbc93'),
+            \pack('H*', 'efbc91') . \pack('H*', 'efbc92') . \pack('H*', 'efbc93'),
             PhoneNumberUtil::extractPossibleNumber(
-                'Num-' . pack('H*', 'efbc91') . pack('H*', 'efbc92') . pack('H*', 'efbc93')
+                'Num-' . \pack('H*', 'efbc91') . \pack('H*', 'efbc92') . \pack('H*', 'efbc93')
             )
         );
         // If not possible number present, return empty string.
@@ -2256,7 +2256,7 @@ class PhoneNumberUtilTest extends TestCase
         // This case has a trailing RTL char.
         $this->assertEquals(
             '650) 253-0000',
-            PhoneNumberUtil::extractPossibleNumber('(650) 253-0000' . pack('H*', 'e2808f'))
+            PhoneNumberUtil::extractPossibleNumber('(650) 253-0000' . \pack('H*', 'e2808f'))
         );
     }
 
@@ -2710,7 +2710,7 @@ class PhoneNumberUtilTest extends TestCase
     public function testParseMaliciousInput()
     {
         // Lots of leading + signs before the possible number.
-        $maliciousNumber = str_repeat('+', 6000);
+        $maliciousNumber = \str_repeat('+', 6000);
         $maliciousNumber .= '12222-33-244 extensioB 343+';
 
         try {
@@ -2725,7 +2725,7 @@ class PhoneNumberUtilTest extends TestCase
             );
         }
 
-        $maliciousNumberWithAlmostExt = str_repeat('200', 350);
+        $maliciousNumberWithAlmostExt = \str_repeat('200', 350);
         $maliciousNumberWithAlmostExt .= ' extensiOB 345';
         try {
             $this->phoneUtil->parse($maliciousNumberWithAlmostExt, RegionCode::US);
@@ -2763,27 +2763,27 @@ class PhoneNumberUtilTest extends TestCase
         // Using a full-width plus sign.
         $this->assertEquals(
             self::$usNumber,
-            $this->phoneUtil->parse(pack('H*', 'efbc8b') . '1 (650) 253-0000', RegionCode::SG)
+            $this->phoneUtil->parse(\pack('H*', 'efbc8b') . '1 (650) 253-0000', RegionCode::SG)
         );
         // Using a soft hyphen U+00AD.
         $this->assertEquals(
             self::$usNumber,
-            $this->phoneUtil->parse('1 (650) 253' . pack('H*', 'c2ad') . '-0000', RegionCode::US)
+            $this->phoneUtil->parse('1 (650) 253' . \pack('H*', 'c2ad') . '-0000', RegionCode::US)
         );
         // The whole number, including punctuation, is here represented in full-width form.
         $this->assertEquals(
             self::$usNumber,
             $this->phoneUtil->parse(
-                pack('H*', 'efbc8b') . pack('H*', 'efbc91') . pack('H*', 'e38080') .
-                pack('H*', 'efbc88') . pack('H*', 'efbc96') . pack('H*', 'efbc95') . pack('H*', 'efbc90') . pack(
+                \pack('H*', 'efbc8b') . \pack('H*', 'efbc91') . \pack('H*', 'e38080') .
+                \pack('H*', 'efbc88') . \pack('H*', 'efbc96') . \pack('H*', 'efbc95') . \pack('H*', 'efbc90') . \pack(
                     'H*',
                     'efbc89'
                 ) .
-                pack('H*', 'e38080') . pack('H*', 'efbc92') . pack('H*', 'efbc95') . pack('H*', 'efbc93') . pack(
+                \pack('H*', 'e38080') . \pack('H*', 'efbc92') . \pack('H*', 'efbc95') . \pack('H*', 'efbc93') . \pack(
                     'H*',
                     'efbc8d'
                 ) .
-                pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90'),
+                \pack('H*', 'efbc90') . \pack('H*', 'efbc90') . \pack('H*', 'efbc90') . \pack('H*', 'efbc90'),
                 RegionCode::SG
             )
         );
@@ -2791,16 +2791,16 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(
             self::$usNumber,
             $this->phoneUtil->parse(
-                pack('H*', 'efbc8b') . pack('H*', 'efbc91') . pack('H*', 'e38080') .
-                pack('H*', 'efbc88') . pack('H*', 'efbc96') . pack('H*', 'efbc95') . pack('H*', 'efbc90') . pack(
+                \pack('H*', 'efbc8b') . \pack('H*', 'efbc91') . \pack('H*', 'e38080') .
+                \pack('H*', 'efbc88') . \pack('H*', 'efbc96') . \pack('H*', 'efbc95') . \pack('H*', 'efbc90') . \pack(
                     'H*',
                     'efbc89'
                 ) .
-                pack('H*', 'e38080') . pack('H*', 'efbc92') . pack('H*', 'efbc95') . pack('H*', 'efbc93') . pack(
+                \pack('H*', 'e38080') . \pack('H*', 'efbc92') . \pack('H*', 'efbc95') . \pack('H*', 'efbc93') . \pack(
                     'H*',
                     'e383bc'
                 ) .
-                pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90'),
+                \pack('H*', 'efbc90') . \pack('H*', 'efbc90') . \pack('H*', 'efbc90') . \pack('H*', 'efbc90'),
                 RegionCode::SG
             )
         );
@@ -2808,10 +2808,10 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(
             self::$usNumber,
             $this->phoneUtil->parse(
-                pack('H*', 'e1a091') . ' '
-                . pack('H*', 'e1a096') . pack('H*', 'e1a095') . pack('H*', 'e1a090') . ' '
-                . pack('H*', 'e1a092') . pack('H*', 'e1a095') . pack('H*', 'e1a093') . ' '
-                . pack('H*', 'e1a090') . pack('H*', 'e1a090') . pack('H*', 'e1a090') . pack('H*', 'e1a090'),
+                \pack('H*', 'e1a091') . ' '
+                . \pack('H*', 'e1a096') . \pack('H*', 'e1a095') . \pack('H*', 'e1a090') . ' '
+                . \pack('H*', 'e1a092') . \pack('H*', 'e1a095') . \pack('H*', 'e1a093') . ' '
+                . \pack('H*', 'e1a090') . \pack('H*', 'e1a090') . \pack('H*', 'e1a090') . \pack('H*', 'e1a090'),
                 RegionCode::US
             )
         );
@@ -3324,12 +3324,12 @@ class PhoneNumberUtilTest extends TestCase
         );
         $this->assertEquals(
             $usWithExtension,
-            $this->phoneUtil->parse('(800) 901-3355 ,extensi' . pack('H*', 'c3b3') . 'n 7246433', RegionCode::US)
+            $this->phoneUtil->parse('(800) 901-3355 ,extensi' . \pack('H*', 'c3b3') . 'n 7246433', RegionCode::US)
         );
         // Repeat with the small letter o with acute accent created by combining characters.
         $this->assertEquals(
             $usWithExtension,
-            $this->phoneUtil->parse('(800) 901-3355 ,extensio' . pack('H*', 'cc81') . 'n 7246433', RegionCode::US)
+            $this->phoneUtil->parse('(800) 901-3355 ,extensio' . \pack('H*', 'cc81') . 'n 7246433', RegionCode::US)
         );
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('(800) 901-3355 , 7246433', RegionCode::US));
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('(800) 901-3355 ext: 7246433', RegionCode::US));

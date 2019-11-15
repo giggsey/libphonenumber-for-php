@@ -856,11 +856,11 @@ class PhoneNumberMatcherTest extends TestCase
     public function testMaxMatches()
     {
         // Set up text with 100 valid phone numbers.
-        $numbers = str_repeat('My info: 415-666-7777,', 100);
+        $numbers = \str_repeat('My info: 415-666-7777,', 100);
 
         // Matches all 100. Max only applies to failed cases.
         $number = $this->phoneUtil->parse('+14156667777', null);
-        $expected = array_fill(0, 100, $number);
+        $expected = \array_fill(0, 100, $number);
 
         $iterable = $this->phoneUtil->findNumbers($numbers, RegionCode::US, Leniency::VALID(), 10);
         $actual = array();
@@ -897,7 +897,7 @@ class PhoneNumberMatcherTest extends TestCase
 
         // Only matches the first 10 despite there being 100 numbers due to max matches
         $number = $this->phoneUtil->parse('+14156667777', null);
-        $expected = array_fill(0, 10, $number);
+        $expected = \array_fill(0, 10, $number);
 
         $iterable = $this->phoneUtil->findNumbers($numbers, RegionCode::US, Leniency::VALID(), 10);
 
@@ -984,7 +984,7 @@ class PhoneNumberMatcherTest extends TestCase
      */
     protected function assertEqualRange($text, $index, $start, $end)
     {
-        $sub = mb_substr($text, $index, mb_strlen($text) - $index);
+        $sub = \mb_substr($text, $index, \mb_strlen($text) - $index);
         $matches = $this->phoneUtil->findNumbers($sub, RegionCode::NZ, Leniency::POSSIBLE(), PHP_INT_MAX);
 
         $matches->next();
@@ -994,7 +994,7 @@ class PhoneNumberMatcherTest extends TestCase
 
         $this->assertEquals($start - $index, $match->start());
         $this->assertEquals($end - $index, $match->end());
-        $this->assertEquals(mb_substr($sub, $match->start(), $match->end() - $match->start()), $match->rawString());
+        $this->assertEquals(\mb_substr($sub, $match->start(), $match->end() - $match->start()), $match->rawString());
     }
 
     /**
@@ -1083,8 +1083,8 @@ class PhoneNumberMatcherTest extends TestCase
             $prefix = $context[0];
             $text = $prefix . $number . $context[1];
 
-            $start = mb_strlen($prefix);
-            $end = $start + mb_strlen($number);
+            $start = \mb_strlen($prefix);
+            $end = $start + \mb_strlen($number);
 
             $iterator = $this->phoneUtil->findNumbers($text, $defaultCountry, $leniency, PHP_INT_MAX);
 
@@ -1092,7 +1092,7 @@ class PhoneNumberMatcherTest extends TestCase
             $match = $iterator->current();
             $this->assertNotNull($match, "Did not find number in '{$text}'; expected '{$number}'");
 
-            $extracted = mb_substr($text, $match->start(), $match->end() - $match->start());
+            $extracted = \mb_substr($text, $match->start(), $match->end() - $match->start());
             $this->assertEquals($start, $match->start(), "Unexpected phone region in '{$text}'; extracted '{$extracted}'");
             $this->assertEquals($end, $match->end(), "Unexpected phone region in '{$text}'; extracted '{$extracted}'");
             $this->assertEquals($number, $extracted);
@@ -1104,9 +1104,9 @@ class PhoneNumberMatcherTest extends TestCase
 
     protected function ensureTermination($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
     {
-        $textLength = mb_strlen($text);
+        $textLength = \mb_strlen($text);
         for ($index = 0; $index <= $textLength; $index++) {
-            $sub = mb_substr($text, $index);
+            $sub = \mb_substr($text, $index);
             $matches = '';
             // Iterates over all matches.
             foreach ($this->phoneUtil->findNumbers($sub, $defaultCountry, $leniency, PHP_INT_MAX) as $match) {

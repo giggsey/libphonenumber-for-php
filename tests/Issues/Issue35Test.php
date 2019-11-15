@@ -24,9 +24,9 @@ class Issue35Test extends TestCase
         $region = 'GB';
         $phoneNumber = $this->phoneUtil->parse($number, $region);
 
-        $serializedString = serialize($phoneNumber);
+        $serializedString = \serialize($phoneNumber);
 
-        $phoneObject2 = unserialize($serializedString);
+        $phoneObject2 = \unserialize($serializedString);
 
         $this->assertTrue($phoneObject2->equals($phoneNumber));
     }
@@ -43,8 +43,8 @@ class Issue35Test extends TestCase
         $phoneNumber->setCountryCodeSource(1);
         $phoneNumber->setPreferredDomesticCarrierCode(1);
 
-        $serializedString = serialize($phoneNumber);
-        $phoneObject2 = unserialize($serializedString);
+        $serializedString = \serialize($phoneNumber);
+        $phoneObject2 = \unserialize($serializedString);
 
         $this->assertTrue($phoneObject2->equals($phoneNumber));
     }

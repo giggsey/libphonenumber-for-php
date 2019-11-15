@@ -301,11 +301,11 @@ class MetadataFilterTest extends TestCase
     private function recursive_ksort($array)
     {
         foreach ($array as &$value) {
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $this->recursive_ksort($value);
             }
         }
-        return ksort($array);
+        return \ksort($array);
     }
 
     public function testParseFieldMapFromString_RuntimeExceptionCases()
@@ -1025,23 +1025,23 @@ class MetadataFilterTest extends TestCase
 
     public function testIntegrityOfFieldSets()
     {
-        $union = array_merge(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS, MetadataFilter::$EXCLUDABLE_CHILD_FIELDS,
+        $union = \array_merge(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS, MetadataFilter::$EXCLUDABLE_CHILD_FIELDS,
             MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS);
-        $union = array_unique($union);
+        $union = \array_unique($union);
 
         // Mutually exclusive sets
-        $this->assertEquals(count($union),
-            count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
+        $this->assertEquals(\count($union),
+            \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
 
         // Non empty sets
-        $this->assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS));
-        $this->assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS));
-        $this->assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
+        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS));
+        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS));
+        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
 
         // Nonempty and canonical field names.
         foreach ($union as $field) {
-            $this->assertGreaterThan(0, strlen($field));
-            $this->assertEquals($field, trim($field));
+            $this->assertGreaterThan(0, \strlen($field));
+            $this->assertEquals($field, \trim($field));
         }
     }
 }

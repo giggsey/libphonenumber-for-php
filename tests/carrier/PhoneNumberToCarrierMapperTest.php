@@ -84,7 +84,7 @@ class PhoneNumberToCarrierMapperTest extends TestCase
     public function testGetNameForMobilePortableRegion()
     {
         $this->assertEquals('British carrier', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1, 'en'));
-        $this->assertEquals('Brittisk operat' . pack('H*', 'c3b6') . 'r', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1,
+        $this->assertEquals('Brittisk operat' . \pack('H*', 'c3b6') . 'r', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1,
             'sv_SE'));
         $this->assertEquals('British carrier', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1, 'fr'));
         // Returns an empty string because the UK implements mobile number portability.

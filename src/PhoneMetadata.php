@@ -135,7 +135,7 @@ class PhoneMetadata
 
     public function numberFormatSize()
     {
-        return count($this->numberFormat);
+        return \count($this->numberFormat);
     }
 
     /**
@@ -149,7 +149,7 @@ class PhoneMetadata
 
     public function intlNumberFormatSize()
     {
-        return count($this->intlNumberFormat);
+        return \count($this->intlNumberFormat);
     }
 
     public function getIntlNumberFormat($index)

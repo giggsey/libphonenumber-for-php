@@ -46,7 +46,7 @@ EOT;
 
         $countryCodeToRegionCodeMap = BuildMetadataFromXml::buildCountryCodeToRegionCodeMap($metadataCollection);
         // Sort $countryCodeToRegionCodeMap just to have the regions in order
-        ksort($countryCodeToRegionCodeMap);
+        \ksort($countryCodeToRegionCodeMap);
         $this->writeCountryCallingCodeMappingToFile($countryCodeToRegionCodeMap, $mappingClassLocation, $mappingClass);
     }
 
@@ -67,9 +67,9 @@ EOT;
 
             $data = '<?php' . PHP_EOL
                 . self::GENERATION_COMMENT . PHP_EOL
-                . 'return ' . var_export($metadata->toArray(), true) . ';' . PHP_EOL;
+                . 'return ' . \var_export($metadata->toArray(), true) . ';' . PHP_EOL;
 
-            file_put_contents($filePrefix . '_' . $regionCode . '.php', $data);
+            \file_put_contents($filePrefix . '_' . $regionCode . '.php', $data);
         }
     }
 
@@ -79,15 +79,15 @@ EOT;
         // calling codes listed in it.
         $hasRegionCodes = false;
         foreach ($countryCodeToRegionCodeMap as $key => $listWithRegionCode) {
-            if (count($listWithRegionCode) > 0) {
+            if (\count($listWithRegionCode) > 0) {
                 $hasRegionCodes = true;
                 break;
             }
         }
 
-        $hasCountryCodes = (count($countryCodeToRegionCodeMap) > 1);
+        $hasCountryCodes = (\count($countryCodeToRegionCodeMap) > 1);
 
-        $variableName = lcfirst($mappingClass);
+        $variableName = \lcfirst($mappingClass);
 
         $data = '<?php' . PHP_EOL .
             self::GENERATION_COMMENT . PHP_EOL .
@@ -97,19 +97,19 @@ EOT;
 
         if ($hasRegionCodes && $hasCountryCodes) {
             $data .= self::MAP_COMMENT . PHP_EOL;
-            $data .= "   public static \${$variableName} = " . var_export(
+            $data .= "   public static \${$variableName} = " . \var_export(
                     $countryCodeToRegionCodeMap,
                     true
                 ) . ';' . PHP_EOL;
         } elseif ($hasCountryCodes) {
             $data .= self::COUNTRY_CODE_SET_COMMENT . PHP_EOL;
-            $data .= "   public static \${$variableName} = " . var_export(
-                    array_keys($countryCodeToRegionCodeMap),
+            $data .= "   public static \${$variableName} = " . \var_export(
+                    \array_keys($countryCodeToRegionCodeMap),
                     true
                 ) . ';' . PHP_EOL;
         } else {
             $data .= self::REGION_CODE_SET_COMMENT . PHP_EOL;
-            $data .= "   public static \${$variableName} = " . var_export(
+            $data .= "   public static \${$variableName} = " . \var_export(
                     $countryCodeToRegionCodeMap[0],
                     true
                 ) . ';' . PHP_EOL;
@@ -118,6 +118,6 @@ EOT;
         $data .= PHP_EOL .
             '}' . PHP_EOL;
 
-        file_put_contents($outputDir . $mappingClass . '.php', $data);
+        \file_put_contents($outputDir . $mappingClass . '.php', $data);
     }
 }

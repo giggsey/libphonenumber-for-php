@@ -100,7 +100,7 @@ class PhoneNumberOfflineGeocoder
     {
         $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
 
-        if (count($regionCodes) === 1) {
+        if (\count($regionCodes) === 1) {
             return $this->getRegionDisplayName($regionCodes[0], $locale);
         }
 
@@ -180,10 +180,10 @@ class PhoneNumberOfflineGeocoder
 
             $mobileToken = PhoneNumberUtil::getCountryMobileToken($number->getCountryCode());
             $nationalNumber = $this->phoneUtil->getNationalSignificantNumber($number);
-            if ($mobileToken !== '' && (!strncmp($nationalNumber, $mobileToken, strlen($mobileToken)))) {
+            if ($mobileToken !== '' && (!\strncmp($nationalNumber, $mobileToken, \strlen($mobileToken)))) {
                 // In some countries, eg. Argentina, mobile numbers have a mobile token before the national
                 // destination code, this should be removed before geocoding.
-                $nationalNumber = substr($nationalNumber, strlen($mobileToken));
+                $nationalNumber = \substr($nationalNumber, \strlen($mobileToken));
                 $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
                 try {
                     $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
@@ -196,7 +196,7 @@ class PhoneNumberOfflineGeocoder
                 $areaDescription = $this->prefixFileReader->getDescriptionForNumber($number, $languageStr, $scriptStr, $regionStr);
             }
 
-            return (strlen($areaDescription) > 0) ? $areaDescription : $this->getCountryNameForNumber($number, $locale);
+            return (\strlen($areaDescription) > 0) ? $areaDescription : $this->getCountryNameForNumber($number, $locale);
         }
         // Otherwise, we just show the region(country) name for now.
         return $this->getRegionDisplayName($regionCode, $locale);

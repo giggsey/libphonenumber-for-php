@@ -42,7 +42,7 @@ class LocaleTest extends TestCase
      */
     public function testLocales($regionCode, $countryName)
     {
-        if (!in_array($regionCode, $this->phoneUtil->getSupportedRegions())) {
+        if (!\in_array($regionCode, $this->phoneUtil->getSupportedRegions())) {
             $this->markTestSkipped("{$regionCode} is not supported");
         }
 
