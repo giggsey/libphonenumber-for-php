@@ -83,56 +83,56 @@ class MetadataFilter
         }
 
         // Remove whitespace
-        $string = str_replace(' ', '', $string);
-        if (strlen($string) === 0) {
+        $string = \str_replace(' ', '', $string);
+        if (\strlen($string) === 0) {
             throw new \RuntimeException('Empty string should not be passed to parseFieldMapFromString');
         }
 
         $fieldMap = array();
         $wildCardChildren = array();
 
-        $groups = explode(':', $string);
+        $groups = \explode(':', $string);
         foreach ($groups as $group) {
-            $leftParenIndex = strpos($group, '(');
-            $rightParenIndex = strpos($group, ')');
+            $leftParenIndex = \strpos($group, '(');
+            $rightParenIndex = \strpos($group, ')');
 
             if ($leftParenIndex === false && $rightParenIndex === false) {
-                if (in_array($group, self::$EXCLUDABLE_PARENT_FIELDS)) {
-                    if (array_key_exists($group, $fieldMap)) {
+                if (\in_array($group, self::$EXCLUDABLE_PARENT_FIELDS)) {
+                    if (\array_key_exists($group, $fieldMap)) {
                         throw new \RuntimeException($group . ' given more than once in ' . $string);
                     }
                     $fieldMap[$group] = self::$EXCLUDABLE_CHILD_FIELDS;
-                } elseif (in_array($group, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
-                    if (array_key_exists($group, $fieldMap)) {
+                } elseif (\in_array($group, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
+                    if (\array_key_exists($group, $fieldMap)) {
                         throw new \RuntimeException($group . ' given more than once in ' . $string);
                     }
                     $fieldMap[$group] = array();
-                } elseif (in_array($group, self::$EXCLUDABLE_CHILD_FIELDS)) {
-                    if (in_array($group, $wildCardChildren)) {
+                } elseif (\in_array($group, self::$EXCLUDABLE_CHILD_FIELDS)) {
+                    if (\in_array($group, $wildCardChildren)) {
                         throw new \RuntimeException($group . ' given more than once in ' . $string);
                     }
                     $wildCardChildren[] = $group;
                 } else {
                     throw new \RuntimeException($group . ' is not a valid token');
                 }
-            } elseif ($leftParenIndex > 0 && $rightParenIndex == strlen($group) - 1) {
+            } elseif ($leftParenIndex > 0 && $rightParenIndex == \strlen($group) - 1) {
                 // We don't check for duplicate parentheses or illegal characters since these will be caught
                 // as not being part of valid field tokens.
-                $parent = substr($group, 0, $leftParenIndex);
-                if (!in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {
+                $parent = \substr($group, 0, $leftParenIndex);
+                if (!\in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {
                     throw new \RuntimeException($parent . ' is not a valid parent token');
                 }
 
-                if (array_key_exists($parent, $fieldMap)) {
+                if (\array_key_exists($parent, $fieldMap)) {
                     throw new \RuntimeException($parent . ' given more than once in ' . $string);
                 }
                 $children = array();
-                $childSearch = explode(',', substr($group, $leftParenIndex + 1, $rightParenIndex - $leftParenIndex - 1));
+                $childSearch = \explode(',', \substr($group, $leftParenIndex + 1, $rightParenIndex - $leftParenIndex - 1));
                 foreach ($childSearch as $child) {
-                    if (!in_array($child, self::$EXCLUDABLE_CHILD_FIELDS)) {
+                    if (!\in_array($child, self::$EXCLUDABLE_CHILD_FIELDS)) {
                         throw new \RuntimeException($child . ' is not a valid child token');
                     }
-                    if (in_array($child, $children)) {
+                    if (\in_array($child, $children)) {
                         throw new \RuntimeException($child . ' given more than once in ' . $group);
                     }
                     $children[] = $child;
@@ -145,14 +145,14 @@ class MetadataFilter
 
         foreach ($wildCardChildren as $wildCardChild) {
             foreach (self::$EXCLUDABLE_PARENT_FIELDS as $parent) {
-                if (!array_key_exists($parent, $fieldMap)) {
+                if (!\array_key_exists($parent, $fieldMap)) {
                     $fieldMap[$parent] = array();
                 }
 
                 $children = $fieldMap[$parent];
 
-                if (in_array($wildCardChild, $children)
-                    && count($fieldMap[$parent]) != count(self::$EXCLUDABLE_CHILD_FIELDS)
+                if (\in_array($wildCardChild, $children)
+                    && \count($fieldMap[$parent]) != \count(self::$EXCLUDABLE_CHILD_FIELDS)
                 ) {
                     // The map already contains parent -> wildcardChild but not all possible children.
                     // So wildcardChild was given explicitly as a child of parent, which is a duplication
@@ -160,7 +160,7 @@ class MetadataFilter
                     throw new \RuntimeException($wildCardChild . ' is present by itself so remove it from ' . $parent . '\'s group');
                 }
 
-                if (!in_array($wildCardChild, $children)) {
+                if (!\in_array($wildCardChild, $children)) {
                     // We don't have an add() that fails if it's a duplicate
                     $children[] = $wildCardChild;
                 }
@@ -188,16 +188,16 @@ class MetadataFilter
     {
         $complement = array();
         foreach (self::$EXCLUDABLE_PARENT_FIELDS as $parent) {
-            if (!array_key_exists($parent, $fieldMap)) {
+            if (!\array_key_exists($parent, $fieldMap)) {
                 $complement[$parent] = self::$EXCLUDABLE_CHILD_FIELDS;
             } else {
                 $otherChildren = $fieldMap[$parent];
                 // If the other map has all the children for this parent then we don't want to include the
                 // parent as a key.
-                if (count($otherChildren) != count(self::$EXCLUDABLE_CHILD_FIELDS)) {
+                if (\count($otherChildren) != \count(self::$EXCLUDABLE_CHILD_FIELDS)) {
                     $children = array();
                     foreach (self::$EXCLUDABLE_CHILD_FIELDS as $child) {
-                        if (!in_array($child, $otherChildren)) {
+                        if (!\in_array($child, $otherChildren)) {
                             $children[] = $child;
                         }
                     }
@@ -206,7 +206,7 @@ class MetadataFilter
             }
         }
         foreach (self::$EXCLUDABLE_CHILDLESS_FIELDS as $childlessField) {
-            if (!array_key_exists($childlessField, $fieldMap)) {
+            if (!\array_key_exists($childlessField, $fieldMap)) {
                 $complement[$childlessField] = array();
             }
         }
@@ -360,22 +360,22 @@ class MetadataFilter
     public function shouldDrop($parent, $child = null)
     {
         if ($child !== null) {
-            if (!in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {
+            if (!\in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {
                 throw new RuntimeException($parent . ' is not an excludable parent field');
             }
 
-            if (!in_array($child, self::$EXCLUDABLE_CHILD_FIELDS)) {
+            if (!\in_array($child, self::$EXCLUDABLE_CHILD_FIELDS)) {
                 throw new RuntimeException($parent . ' is not an excludable child field');
             }
 
-            return array_key_exists($parent, $this->blackList) && in_array($child, $this->blackList[$parent]);
+            return \array_key_exists($parent, $this->blackList) && \in_array($child, $this->blackList[$parent]);
         }
 
         $childlessField = $parent;
-        if (!in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
+        if (!\in_array($childlessField, self::$EXCLUDABLE_CHILDLESS_FIELDS)) {
             throw new \RuntimeException($childlessField . ' is not an excludable childless field');
         }
 
-        return array_key_exists($childlessField, $this->blackList);
+        return \array_key_exists($childlessField, $this->blackList);
     }
 }

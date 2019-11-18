@@ -67,14 +67,14 @@ class BuildMetadataFromXml
      */
     public static function validateRE($regex, $removeWhitespace = false)
     {
-        $compressedRegex = $removeWhitespace ? preg_replace('/\\s/', '', $regex) : $regex;
+        $compressedRegex = $removeWhitespace ? \preg_replace('/\\s/', '', $regex) : $regex;
         // Match regex against an empty string to check the regex is valid
-        if (preg_match('/' . $compressedRegex . '/', '') === false) {
-            throw new \RuntimeException('Regex error: ' . preg_last_error());
+        if (\preg_match('/' . $compressedRegex . '/', '') === false) {
+            throw new \RuntimeException('Regex error: ' . \preg_last_error());
         }
         // We don't ever expect to see | followed by a ) in our metadata - this would be an indication
         // of a bug. If one wants to make something optional, we prefer ? to using an empty group.
-        $errorIndex = strpos($compressedRegex, '|)');
+        $errorIndex = \strpos($compressedRegex, '|)');
         if ($errorIndex !== false) {
             throw new \RuntimeException('| followed by )');
         }
@@ -100,8 +100,8 @@ class BuildMetadataFromXml
             $document->load($inputXmlFile);
             $document->normalizeDocument();
 
-            $isShortNumberMetadata = strpos($inputXmlFile, 'ShortNumberMetadata');
-            $isAlternateFormatsMetadata = strpos($inputXmlFile, 'PhoneNumberAlternateFormats');
+            $isShortNumberMetadata = \strpos($inputXmlFile, 'ShortNumberMetadata');
+            $isAlternateFormatsMetadata = \strpos($inputXmlFile, 'PhoneNumberAlternateFormats');
         }
 
         $territories = $document->getElementsByTagName('territory');
@@ -190,7 +190,7 @@ class BuildMetadataFromXml
     {
         $nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
         // Replace $NP with national prefix and $FG with the first group ($1).
-        $nationalPrefixFormattingRule = str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
+        $nationalPrefixFormattingRule = \str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
             $nationalPrefixFormattingRule);
         return $nationalPrefixFormattingRule;
     }
@@ -324,7 +324,7 @@ class BuildMetadataFromXml
     {
         $carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
         // Replace $FG with the first group ($1) and $NP with the national prefix.
-        $carrierCodeFormattingRule = str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
+        $carrierCodeFormattingRule = \str_replace(array('$NP', '$FG'), array($nationalPrefix, '$1'),
             $carrierCodeFormattingRule);
         return $carrierCodeFormattingRule;
     }
@@ -348,7 +348,7 @@ class BuildMetadataFromXml
 
         $formatPattern = $numberFormatElement->getElementsByTagName(self::FORMAT);
         if ($formatPattern->length != 1) {
-            $countryId = strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
+            $countryId = \strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
             throw new \RuntimeException('Invalid number of format patterns for country: ' . $countryId);
         }
         $nationalFormat = $formatPattern->item(0)->firstChild->nodeValue;
@@ -392,7 +392,7 @@ class BuildMetadataFromXml
         $hasExplicitIntlFormatDefined = false;
 
         if ($intlFormatPattern->length > 1) {
-            $countryId = strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
+            $countryId = \strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
             throw new \RuntimeException('Invalid number of intlFormat patterns for country: ' . $countryId);
         }
 
@@ -468,30 +468,30 @@ class BuildMetadataFromXml
      */
     private static function parsePossibleLengthStringToSet($possibleLengthString)
     {
-        if (strlen($possibleLengthString) === 0) {
+        if (\strlen($possibleLengthString) === 0) {
             throw new \RuntimeException('Empty possibleLength string found.');
         }
 
-        $lengths = explode(',', $possibleLengthString);
+        $lengths = \explode(',', $possibleLengthString);
         $lengthSet = array();
 
 
-        $lengthLength = count($lengths);
+        $lengthLength = \count($lengths);
         for ($i = 0; $i < $lengthLength; $i++) {
             $lengthSubstring = $lengths[$i];
-            if (strlen($lengthSubstring) === 0) {
+            if (\strlen($lengthSubstring) === 0) {
                 throw new \RuntimeException('Leading, trailing or adjacent commas in possible '
                     . "length string {$possibleLengthString}, these should only separate numbers or ranges.");
             }
 
-            if (substr($lengthSubstring, 0, 1) === '[') {
-                if (substr($lengthSubstring, -1) !== ']') {
+            if (\substr($lengthSubstring, 0, 1) === '[') {
+                if (\substr($lengthSubstring, -1) !== ']') {
                     throw new \RuntimeException("Missing end of range character in possible length string {$possibleLengthString}.");
                 }
 
                 // Strip the leading and trailing [], and split on the -.
-                $minMax = explode('-', substr($lengthSubstring, 1, -1));
-                if (count($minMax) !== 2) {
+                $minMax = \explode('-', \substr($lengthSubstring, 1, -1));
+                if (\count($minMax) !== 2) {
                     throw new \RuntimeException("Ranges must have exactly one - character: missing for {$possibleLengthString}.");
                 }
                 $min = (int)$minMax[0];
@@ -502,17 +502,17 @@ class BuildMetadataFromXml
                     throw new \RuntimeException("The first number in a range should be two or more digits lower than the second. Culprit possibleLength string: {$possibleLengthString}.");
                 }
                 for ($j = $min; $j <= $max; $j++) {
-                    if (in_array($j, $lengthSet)) {
+                    if (\in_array($j, $lengthSet)) {
                         throw new \RuntimeException("Duplicate length element found ({$j}) in possibleLength string {$possibleLengthString}.");
                     }
                     $lengthSet[] = $j;
                 }
             } else {
                 $length = $lengthSubstring;
-                if (in_array($length, $lengthSet)) {
+                if (\in_array($length, $lengthSet)) {
                     throw new \RuntimeException("Duplicate length element found ({$length}) in possibleLength string {$possibleLengthString}.");
                 }
-                if (!is_numeric($length)) {
+                if (!\is_numeric($length)) {
                     throw new \RuntimeException("For input string \"{$length}\"");
                 }
                 $lengthSet[] = (int)$length;
@@ -546,22 +546,22 @@ class BuildMetadataFromXml
             if ($element->hasAttribute(self::LOCAL_ONLY)) {
                 $localLengths = $element->getAttribute(self::LOCAL_ONLY);
                 $thisElementLocalOnlyLengths = self::parsePossibleLengthStringToSet($localLengths);
-                $intersection = array_intersect($thisElementLengths, $thisElementLocalOnlyLengths);
-                if (count($intersection) > 0) {
-                    throw new \RuntimeException('Possible length(s) found specified as a normal and local-only length: [' . implode(',', $intersection) . '].');
+                $intersection = \array_intersect($thisElementLengths, $thisElementLocalOnlyLengths);
+                if (\count($intersection) > 0) {
+                    throw new \RuntimeException('Possible length(s) found specified as a normal and local-only length: [' . \implode(',', $intersection) . '].');
                 }
                 // We check again when we set these lengths on the metadata itself in setPossibleLengths
                 // that the elements in localOnly are not also in lengths. For e.g. the generalDesc, it
                 // might have a local-only length for one type that is a normal length for another type. We
                 // don't consider this an error, but we do want to remove the local-only lengths.
-                $localOnlyLengths = array_merge($localOnlyLengths, $thisElementLocalOnlyLengths);
-                sort($localOnlyLengths);
+                $localOnlyLengths = \array_merge($localOnlyLengths, $thisElementLocalOnlyLengths);
+                \sort($localOnlyLengths);
             }
             // It is okay if at this time we have duplicates, because the same length might be possible
             // for e.g. fixed-line and for mobile numbers, and this method operates potentially on
             // multiple phoneNumberDesc XML elements.
-            $lengths = array_merge($lengths, $thisElementLengths);
-            sort($lengths);
+            $lengths = \array_merge($lengths, $thisElementLengths);
+            \sort($lengths);
         }
     }
 
@@ -586,7 +586,7 @@ class BuildMetadataFromXml
         if ($generalDescNodes->length > 0) {
             $generalDescNode = $generalDescNodes->item(0);
             self::populatePossibleLengthSets($generalDescNode, $lengths, $localOnlyLengths);
-            if (count($lengths) > 0 || count($localOnlyLengths) > 0) {
+            if (\count($lengths) > 0 || \count($localOnlyLengths) > 0) {
                 // We shouldn't have anything specified at the "general desc" level: we are going to
                 // calculate this ourselves from child elements.
                 throw new \RuntimeException("Found possible lengths specified at general desc: this should be derived from child elements. Affected country: {$metadataId}");
@@ -612,11 +612,11 @@ class BuildMetadataFromXml
             // codes. The other lengths will be checked later to see that they are a sub-set of these
             // possible lengths.
             $shortCodeDescList = $data->getElementsByTagName(self::SHORT_CODE);
-            if (count($shortCodeDescList) > 0) {
+            if (\count($shortCodeDescList) > 0) {
                 $shortCodeDesc = $shortCodeDescList->item(0);
                 self::populatePossibleLengthSets($shortCodeDesc, $lengths, $localOnlyLengths);
             }
-            if (count($localOnlyLengths) > 0) {
+            if (\count($localOnlyLengths) > 0) {
                 throw new \RuntimeException('Found local-only lengths in short-number metadata');
             }
         }
@@ -644,14 +644,14 @@ class BuildMetadataFromXml
         // lengths in the general desc (for metadata size reasons).
         if ($parentDesc === null || !self::arePossibleLengthsEqual($lengths, $parentDesc)) {
             foreach ($lengths as $length) {
-                if ($parentDesc === null || in_array($length, $parentDesc->getPossibleLength())) {
+                if ($parentDesc === null || \in_array($length, $parentDesc->getPossibleLength())) {
                     $desc->addPossibleLength($length);
                 } else {
                     // We shouldn't have possible lengths defined in a child element that are not covered by
                     // the general description. We check this here even though the general description is
                     // derived from child elements because it is only derived from a subset, and we need to
                     // ensure *all* child elements have a valid possible length.
-                    throw new \RuntimeException("Out-of-range possible length found ({$length}), parent lengths " . implode(',', $parentDesc->getPossibleLength()));
+                    throw new \RuntimeException("Out-of-range possible length found ({$length}), parent lengths " . \implode(',', $parentDesc->getPossibleLength()));
                 }
             }
         }
@@ -659,14 +659,14 @@ class BuildMetadataFromXml
         // the general-desc, since within elements such as fixed-line we would throw an exception if we
         // saw this) before adding it to the collection of possible local-only lengths.
         foreach ($localOnlyLengths as $length) {
-            if (!in_array($length, $lengths)) {
+            if (!\in_array($length, $lengths)) {
                 // We check it is covered by either of the possible length sets of the parent
                 // PhoneNumberDesc, because for example 7 might be a valid localOnly length for mobile, but
                 // a valid national length for fixedLine, so the generalDesc would have the 7 removed from
                 // localOnly.
                 if ($parentDesc === null
-                    || in_array($length, $parentDesc->getPossibleLength())
-                    || in_array($length, $parentDesc->getPossibleLengthLocalOnly())
+                    || \in_array($length, $parentDesc->getPossibleLength())
+                    || \in_array($length, $parentDesc->getPossibleLengthLocalOnly())
                 ) {
                     $desc->addPossibleLengthLocalOnly($length);
                 } else {
@@ -755,7 +755,7 @@ class BuildMetadataFromXml
     private static function arePossibleLengthsEqual($possibleLengths, PhoneNumberDesc $desc)
     {
         $descPossibleLength = $desc->getPossibleLength();
-        if (count($possibleLengths) != count($descPossibleLength)) {
+        if (\count($possibleLengths) != \count($descPossibleLength)) {
             return false;
         }
 
@@ -781,9 +781,9 @@ class BuildMetadataFromXml
         foreach ($metadataCollection as $metadata) {
             $regionCode = $metadata->getId();
             $countryCode = $metadata->getCountryCode();
-            if (array_key_exists($countryCode, $countryCodeToRegionCodeMap)) {
+            if (\array_key_exists($countryCode, $countryCodeToRegionCodeMap)) {
                 if ($metadata->getMainCountryForCode()) {
-                    array_unshift($countryCodeToRegionCodeMap[$countryCode], $regionCode);
+                    \array_unshift($countryCodeToRegionCodeMap[$countryCode], $regionCode);
                 } else {
                     $countryCodeToRegionCodeMap[$countryCode][] = $regionCode;
                 }

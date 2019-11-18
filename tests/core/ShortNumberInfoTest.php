@@ -25,7 +25,7 @@ class ShortNumberInfoTest extends TestCase
 
     public function setUp()
     {
-        self::$plusSymbol = pack('H*', 'efbc8b');
+        self::$plusSymbol = \pack('H*', 'efbc8b');
 
         PhoneNumberUtil::resetInstance();
         ShortNumberInfo::resetInstance();

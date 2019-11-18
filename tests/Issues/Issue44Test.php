@@ -31,9 +31,9 @@ class Issue44Test extends TestCase
     {
         $number = $this->phoneUtil->parse('86-157-9662-1289', 'CN');
 
-        $startMemory = memory_get_usage();
+        $startMemory = \memory_get_usage();
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
-        $endMemory = memory_get_usage();
+        $endMemory = \memory_get_usage();
 
         $this->assertEquals('China', $location);
 
@@ -46,9 +46,9 @@ class Issue44Test extends TestCase
     {
         $number = $this->phoneUtil->parse('86-131-2270-1411', 'CN');
 
-        $startMemory = memory_get_usage();
+        $startMemory = \memory_get_usage();
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
-        $endMemory = memory_get_usage();
+        $endMemory = \memory_get_usage();
 
         $this->assertEquals('Shanghai', $location);
 

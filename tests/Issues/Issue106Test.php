@@ -31,12 +31,12 @@ class Issue106Test extends TestCase
         $this->assertEquals('Taipei', $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'en'));
 
         $this->assertEquals(
-            pack('H*', 'e58fb0') . pack('H*', 'e58c97'),
+            \pack('H*', 'e58fb0') . \pack('H*', 'e58c97'),
             $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'zh_CN')
         );
 
         $this->assertEquals(
-            pack('H*', 'e887ba') . pack('H*', 'e58c97'),
+            \pack('H*', 'e887ba') . \pack('H*', 'e58c97'),
             $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'zh_TW')
         );
     }

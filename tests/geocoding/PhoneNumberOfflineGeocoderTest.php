@@ -93,7 +93,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         // a result, the country name of United States in simplified Chinese is returned.
 
         $this->assertEquals(
-            pack('H*', 'e7be8e') . pack('H*', 'e59bbd'),
+            \pack('H*', 'e7be8e') . \pack('H*', 'e59bbd'),
             $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'zh_CN')
         );
         $this->assertEquals('Bahamas', $this->geocoder->getDescriptionForNumber(self::$BS_Number1, 'en_US'));
@@ -132,11 +132,11 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->assertEquals('Jeju', $this->geocoder->getDescriptionForNumber(self::$KO_Number3, 'en'));
 
         $this->assertEquals(
-            pack('H*', 'ec849c') . pack('H*', 'ec9ab8'),
+            \pack('H*', 'ec849c') . \pack('H*', 'ec9ab8'),
             $this->geocoder->getDescriptionForNumber(self::$KO_Number1, 'ko')
         );
         $this->assertEquals(
-            pack('H*', 'ec9db8') . pack('H*', 'ecb29c'),
+            \pack('H*', 'ec9db8') . \pack('H*', 'ecb29c'),
             $this->geocoder->getDescriptionForNumber(self::$KO_Number2, 'ko')
         );
     }
@@ -161,7 +161,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
 
         // Korean doesn't fall back to English. -
         $this->assertEquals(
-            pack('H*', 'eb8c80') . pack('H*', 'ed959c') . pack('H*', 'ebafbc') . pack('H*', 'eab5ad'),
+            \pack('H*', 'eb8c80') . \pack('H*', 'ed959c') . \pack('H*', 'ebafbc') . \pack('H*', 'eab5ad'),
             $this->geocoder->getDescriptionForNumber(self::$KO_Number3, 'ko')
         );
     }

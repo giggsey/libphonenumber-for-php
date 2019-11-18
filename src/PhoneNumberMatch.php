@@ -69,7 +69,7 @@ class PhoneNumberMatch
      */
     public function end()
     {
-        return $this->start + mb_strlen($this->rawString);
+        return $this->start + \mb_strlen($this->rawString);
     }
 
     /**

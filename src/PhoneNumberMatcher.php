@@ -103,7 +103,7 @@ class PhoneNumberMatcher implements \Iterator
 
     protected static function init()
     {
-        static::$alternateFormatsFilePrefix = dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
+        static::$alternateFormatsFilePrefix = \dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
 
         static::$innerMatches = array(
             // Breaks on the slash - e.g. "651-234-2345/332-445-1234"
@@ -303,7 +303,7 @@ class PhoneNumberMatcher implements \Iterator
         while (($this->maxTries > 0) && $matcher->find($index)) {
             $start = $matcher->start();
             $cutLength = $matcher->end() - $start;
-            $candidate = mb_substr($this->text, $start, $cutLength);
+            $candidate = \mb_substr($this->text, $start, $cutLength);
 
             // Check for extra numbers at the end.
             // TODO: This is the place to start when trying to support extraction of multiple phone number
@@ -315,7 +315,7 @@ class PhoneNumberMatcher implements \Iterator
                 return $match;
             }
 
-            $index = $start + mb_strlen($candidate);
+            $index = $start + \mb_strlen($candidate);
             $this->maxTries--;
         }
 
@@ -335,7 +335,7 @@ class PhoneNumberMatcher implements \Iterator
         $trailingCharsMatcher = new Matcher($pattern, $candidate);
         if ($trailingCharsMatcher->find()) {
             $startChar = $trailingCharsMatcher->start();
-            $candidate = mb_substr($candidate, 0, $startChar);
+            $candidate = \mb_substr($candidate, 0, $startChar);
         }
         return $candidate;
     }
@@ -352,12 +352,12 @@ class PhoneNumberMatcher implements \Iterator
     public static function isLatinLetter($letter)
     {
         // Combining marks are a subset of non-spacing-mark.
-        if (preg_match('/\p{L}/u', $letter) !== 1 && preg_match('/\p{Mn}/u', $letter) !== 1) {
+        if (\preg_match('/\p{L}/u', $letter) !== 1 && \preg_match('/\p{Mn}/u', $letter) !== 1) {
             return false;
         }
 
-        return (preg_match('/\p{Latin}/u', $letter) === 1)
-        || (preg_match('/\pM+/u', $letter) === 1);
+        return (\preg_match('/\p{Latin}/u', $letter) === 1)
+        || (\preg_match('/\pM+/u', $letter) === 1);
     }
 
     /**
@@ -366,7 +366,7 @@ class PhoneNumberMatcher implements \Iterator
      */
     protected static function isInvalidPunctuationSymbol($character)
     {
-        return $character == '%' || preg_match('/\p{Sc}/u', $character);
+        return $character == '%' || \preg_match('/\p{Sc}/u', $character);
     }
 
     /**
@@ -387,7 +387,7 @@ class PhoneNumberMatcher implements \Iterator
         // Skip potential time-stamps.
         $timeStampMatcher = new Matcher(static::$timeStamps, $candidate);
         if ($timeStampMatcher->find()) {
-            $followingText = mb_substr($this->text, $offset + mb_strlen($candidate));
+            $followingText = \mb_substr($this->text, $offset + \mb_strlen($candidate));
             $timeStampSuffixMatcher = new Matcher(static::$timeStampsSuffix, $followingText);
             if ($timeStampSuffixMatcher->lookingAt()) {
                 return null;
@@ -423,7 +423,7 @@ class PhoneNumberMatcher implements \Iterator
                 if ($isFirstMatch) {
                     // We should handle any group before this one too.
                     $group = static::trimAfterFirstMatch(PhoneNumberUtil::$UNWANTED_END_CHAR_PATTERN,
-                        mb_substr($candidate, 0, $groupMatcher->start()));
+                        \mb_substr($candidate, 0, $groupMatcher->start()));
 
                     $match = $this->parseAndVerify($group, $offset);
                     if ($match !== null) {
@@ -471,15 +471,15 @@ class PhoneNumberMatcher implements \Iterator
                 // punctuation, check the previous character.
                 $leadClassMatcher = new Matcher(static::$leadClass, $candidate);
                 if ($offset > 0 && !$leadClassMatcher->lookingAt()) {
-                    $previousChar = mb_substr($this->text, $offset - 1, 1);
+                    $previousChar = \mb_substr($this->text, $offset - 1, 1);
                     // We return null if it is a latin letter or an invalid punctuation symbol.
                     if (static::isInvalidPunctuationSymbol($previousChar) || static::isLatinLetter($previousChar)) {
                         return null;
                     }
                 }
-                $lastCharIndex = $offset + mb_strlen($candidate);
-                if ($lastCharIndex < mb_strlen($this->text)) {
-                    $nextChar = mb_substr($this->text, $lastCharIndex, 1);
+                $lastCharIndex = $offset + \mb_strlen($candidate);
+                if ($lastCharIndex < \mb_strlen($this->text)) {
+                    $nextChar = \mb_substr($this->text, $lastCharIndex, 1);
                     if (static::isInvalidPunctuationSymbol($nextChar) || static::isLatinLetter($nextChar)) {
                         return null;
                     }
@@ -520,23 +520,23 @@ class PhoneNumberMatcher implements \Iterator
         if ($number->getCountryCodeSource() !== CountryCodeSource::FROM_DEFAULT_COUNTRY) {
             // First skip the country code if the normalized candidate contained it.
             $countryCode = $number->getCountryCode();
-            $fromIndex = mb_strpos($normalizedCandidate, $countryCode) + mb_strlen($countryCode);
+            $fromIndex = \mb_strpos($normalizedCandidate, $countryCode) + \mb_strlen($countryCode);
         }
 
         // Check each group of consecutive digits are not broken into separate groupings in the
         // $normalizedCandidate string.
-        $formattedNumberGroupsLength = count($formattedNumberGroups);
+        $formattedNumberGroupsLength = \count($formattedNumberGroups);
         for ($i = 0; $i < $formattedNumberGroupsLength; $i++) {
             // Fails if the substring of $normalizedCandidate starting from $fromIndex
             // doesn't contain the consecutive digits in $formattedNumberGroups[$i].
-            $fromIndex = mb_strpos($normalizedCandidate, $formattedNumberGroups[$i], $fromIndex);
+            $fromIndex = \mb_strpos($normalizedCandidate, $formattedNumberGroups[$i], $fromIndex);
             if ($fromIndex === false) {
                 return false;
             }
 
             // Moves $fromIndex forward.
-            $fromIndex += mb_strlen($formattedNumberGroups[$i]);
-            if ($i === 0 && $fromIndex < mb_strlen($normalizedCandidate)) {
+            $fromIndex += \mb_strlen($formattedNumberGroups[$i]);
+            if ($i === 0 && $fromIndex < \mb_strlen($normalizedCandidate)) {
                 // We are at the position right after the NDC. We get the region used for formatting
                 // information based on the country code in the phone number, rather than the number itself,
                 // as we do not need to distinguish between different countries with the same country
@@ -544,15 +544,15 @@ class PhoneNumberMatcher implements \Iterator
                 $region = $util->getRegionCodeForCountryCode($number->getCountryCode());
 
                 if ($util->getNddPrefixForRegion($region, true) !== null
-                    && is_int(mb_substr($normalizedCandidate, $fromIndex, 1))
+                    && \is_int(\mb_substr($normalizedCandidate, $fromIndex, 1))
                 ) {
                     // This means there is no formatting symbol after the NDC. In this case, we only
                     // accept the number if there is no formatting symbol at all in the number, except
                     // for extensions. This is only important for countries with national prefixes.
                     $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
-                    return mb_substr(
-                        mb_substr($normalizedCandidate, $fromIndex - mb_strlen($formattedNumberGroups[$i])),
-                        mb_strlen($nationalSignificantNumber)
+                    return \mb_substr(
+                        \mb_substr($normalizedCandidate, $fromIndex - \mb_strlen($formattedNumberGroups[$i])),
+                        \mb_strlen($nationalSignificantNumber)
                     ) === $nationalSignificantNumber;
                 }
             }
@@ -562,7 +562,7 @@ class PhoneNumberMatcher implements \Iterator
         // formatting in-between digits
 
         if ($number->hasExtension()) {
-            return mb_strpos(mb_substr($normalizedCandidate, $fromIndex), $number->getExtension()) !== false;
+            return \mb_strpos(\mb_substr($normalizedCandidate, $fromIndex), $number->getExtension()) !== false;
         }
 
         return true;
@@ -581,16 +581,16 @@ class PhoneNumberMatcher implements \Iterator
         $normalizedCandidate,
         $formattedNumberGroups
     ) {
-        $candidateGroups = preg_split(PhoneNumberUtil::NON_DIGITS_PATTERN, $normalizedCandidate);
+        $candidateGroups = \preg_split(PhoneNumberUtil::NON_DIGITS_PATTERN, $normalizedCandidate);
 
         // Set this to the last group, skipping it if the number has an extension.
-        $candidateNumberGroupIndex = $number->hasExtension() ? count($candidateGroups) - 2 : count($candidateGroups) - 1;
+        $candidateNumberGroupIndex = $number->hasExtension() ? \count($candidateGroups) - 2 : \count($candidateGroups) - 1;
 
         // First we check if the national significant number is formatted as a block.
         // We use contains and not equals, since the national significant number may be present with
         // a prefix such as a national number prefix, or the country code itself.
-        if (count($candidateGroups) == 1
-            || mb_strpos($candidateGroups[$candidateNumberGroupIndex],
+        if (\count($candidateGroups) == 1
+            || \mb_strpos($candidateGroups[$candidateNumberGroupIndex],
                 $util->getNationalSignificantNumber($number)) !== false
         ) {
             return true;
@@ -598,7 +598,7 @@ class PhoneNumberMatcher implements \Iterator
 
         // Starting from the end, go through in reverse, excluding the first group, and check the
         // candidate and number groups are the same.
-        for ($formattedNumberGroupIndex = (count($formattedNumberGroups) - 1);
+        for ($formattedNumberGroupIndex = (\count($formattedNumberGroups) - 1);
              $formattedNumberGroupIndex > 0 && $candidateNumberGroupIndex >= 0;
              $formattedNumberGroupIndex--, $candidateNumberGroupIndex--) {
             if ($candidateGroups[$candidateNumberGroupIndex] != $formattedNumberGroups[$formattedNumberGroupIndex]) {
@@ -609,8 +609,8 @@ class PhoneNumberMatcher implements \Iterator
         // Now check the first group. There may be a national prefix at the start, so we only check
         // that the candidate group ends with the formatted number group.
         return ($candidateNumberGroupIndex >= 0
-            && mb_substr($candidateGroups[$candidateNumberGroupIndex],
-                -mb_strlen($formattedNumberGroups[0])) == $formattedNumberGroups[0]);
+            && \mb_substr($candidateGroups[$candidateNumberGroupIndex],
+                -\mb_strlen($formattedNumberGroups[0])) == $formattedNumberGroups[0]);
     }
 
     /**
@@ -632,19 +632,19 @@ class PhoneNumberMatcher implements \Iterator
             $rfc3966Format = $util->format($number, PhoneNumberFormat::RFC3966);
             // We remove the extension part from the formatted string before splitting it into different
             // groups.
-            $endIndex = mb_strpos($rfc3966Format, ';');
+            $endIndex = \mb_strpos($rfc3966Format, ';');
             if ($endIndex === false) {
-                $endIndex = mb_strlen($rfc3966Format);
+                $endIndex = \mb_strlen($rfc3966Format);
             }
 
             // The country-code will have a '-' following it.
-            $startIndex = mb_strpos($rfc3966Format, '-') + 1;
-            return explode('-', mb_substr($rfc3966Format, $startIndex, $endIndex - $startIndex));
+            $startIndex = \mb_strpos($rfc3966Format, '-') + 1;
+            return \explode('-', \mb_substr($rfc3966Format, $startIndex, $endIndex - $startIndex));
         }
 
         // If a format is provided, we format the NSN only, and split that according to the separator.
         $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
-        return explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
+        return \explode('-', $util->formatNsnUsingPattern($nationalSignificantNumber, $formattingPattern,
             PhoneNumberFormat::RFC3966));
     }
 
@@ -700,14 +700,14 @@ class PhoneNumberMatcher implements \Iterator
      */
     public static function containsMoreThanOneSlashInNationalNumber(PhoneNumber $number, $candidate)
     {
-        $firstSlashInBodyIndex = mb_strpos($candidate, '/');
+        $firstSlashInBodyIndex = \mb_strpos($candidate, '/');
         if ($firstSlashInBodyIndex === false) {
             // No slashes, this is okay
             return false;
         }
 
         // Now look for a second one.
-        $secondSlashInBodyIndex = mb_strpos($candidate, '/', $firstSlashInBodyIndex + 1);
+        $secondSlashInBodyIndex = \mb_strpos($candidate, '/', $firstSlashInBodyIndex + 1);
         if ($secondSlashInBodyIndex === false) {
             // Only one slash, this is okay
             return false;
@@ -719,11 +719,11 @@ class PhoneNumberMatcher implements \Iterator
 
         if ($candidateHasCountryCode
             && PhoneNumberUtil::normalizeDigitsOnly(
-                mb_substr($candidate, 0, $firstSlashInBodyIndex)
+                \mb_substr($candidate, 0, $firstSlashInBodyIndex)
             ) == $number->getCountryCode()
         ) {
             // Any more slashes and this is illegal
-            return (mb_strpos(mb_substr($candidate, $secondSlashInBodyIndex + 1), '/') !== false);
+            return (\mb_strpos(\mb_substr($candidate, $secondSlashInBodyIndex + 1), '/') !== false);
         }
 
         return true;
@@ -742,21 +742,21 @@ class PhoneNumberMatcher implements \Iterator
         // extension number. We assume a carrier code is more than 1 digit, so the first case has to
         // have more than 1 consecutive 'x' or 'X', whereas the second case can only have exactly 1 'x'
         // or 'X'. We ignore the character if it appears as the last character of the string.
-        $candidateLength = mb_strlen($candidate);
+        $candidateLength = \mb_strlen($candidate);
 
         for ($index = 0; $index < $candidateLength - 1; $index++) {
-            $charAtIndex = mb_substr($candidate, $index, 1);
+            $charAtIndex = \mb_substr($candidate, $index, 1);
             if ($charAtIndex == 'x' || $charAtIndex == 'X') {
-                $charAtNextIndex = mb_substr($candidate, $index + 1, 1);
+                $charAtNextIndex = \mb_substr($candidate, $index + 1, 1);
                 if ($charAtNextIndex == 'x' || $charAtNextIndex == 'X') {
                     // This is the carrier code case, in which the 'X's always precede the national
                     // significant number.
                     $index++;
 
-                    if ($util->isNumberMatch($number, mb_substr($candidate, $index)) != MatchType::NSN_MATCH) {
+                    if ($util->isNumberMatch($number, \mb_substr($candidate, $index)) != MatchType::NSN_MATCH) {
                         return false;
                     }
-                } elseif (!PhoneNumberUtil::normalizeDigitsOnly(mb_substr($candidate,
+                } elseif (!PhoneNumberUtil::normalizeDigitsOnly(\mb_substr($candidate,
                         $index)) == $number->getExtension()
                 ) {
                     // This is the extension sign case, in which the 'x' or 'X' should always precede the
@@ -792,7 +792,7 @@ class PhoneNumberMatcher implements \Iterator
         $formatRule = $util->chooseFormattingPatternForNumber($metadata->numberFormats(), $nationalNumber);
         // To do this, we check that a national prefix formatting rule was present and that it wasn't
         // just the first-group symbol ($1) with punctuation.
-        if (($formatRule !== null) && mb_strlen($formatRule->getNationalPrefixFormattingRule()) > 0) {
+        if (($formatRule !== null) && \mb_strlen($formatRule->getNationalPrefixFormattingRule()) > 0) {
             if ($formatRule->getNationalPrefixOptionalWhenFormatting()) {
                 // The national-prefix is optional in these cases, so we don't need to check if it was
                 // present.
@@ -830,7 +830,7 @@ class PhoneNumberMatcher implements \Iterator
     {
         $countryCodeSet = AlternateFormatsCountryCodeSet::$alternateFormatsCountryCodeSet;
 
-        if (!in_array($countryCallingCode, $countryCodeSet)) {
+        if (!\in_array($countryCallingCode, $countryCodeSet)) {
             return null;
         }
 
@@ -849,7 +849,7 @@ class PhoneNumberMatcher implements \Iterator
     {
         $fileName = static::$alternateFormatsFilePrefix . '_' . $countryCallingCode . '.php';
 
-        if (!is_readable($fileName)) {
+        if (!\is_readable($fileName)) {
             throw new \Exception('missing metadata: ' . $fileName);
         }
 

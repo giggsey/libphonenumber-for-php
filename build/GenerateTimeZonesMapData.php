@@ -32,7 +32,7 @@ EOT;
     {
         $this->inputTextFile = $inputFile;
 
-        if (!is_readable($this->inputTextFile)) {
+        if (!\is_readable($this->inputTextFile)) {
             throw new \RuntimeException('The provided input text file does not exist.');
         }
 
@@ -46,21 +46,21 @@ EOT;
      */
     private function parseTextFile()
     {
-        $data = file($this->inputTextFile);
+        $data = \file($this->inputTextFile);
 
         $timeZoneMap = array();
 
         foreach ($data as $line) {
             // Remove \n
-            $line = str_replace(array("\n", "\r"), '', $line);
-            $line = trim($line);
+            $line = \str_replace(array("\n", "\r"), '', $line);
+            $line = \trim($line);
 
-            if (strlen($line) == 0 || substr($line, 0, 1) == '#') {
+            if (\strlen($line) == 0 || \substr($line, 0, 1) == '#') {
                 continue;
             }
-            if (strpos($line, '|')) {
+            if (\strpos($line, '|')) {
                 // Valid line
-                $parts = explode('|', $line);
+                $parts = \explode('|', $line);
 
 
                 $prefix = $parts[0];
@@ -77,11 +77,11 @@ EOT;
     {
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
-            . 'return ' . var_export($data, true) . ';'
+            . 'return ' . \var_export($data, true) . ';'
             . PHP_EOL;
 
         $outputPath = $outputFile . DIRECTORY_SEPARATOR . PhoneNumberToTimeZonesMapper::MAPPING_DATA_FILE_NAME;
 
-        file_put_contents($outputPath, $phpSource);
+        \file_put_contents($outputPath, $phpSource);
     }
 }

@@ -54,7 +54,7 @@ EOT;
         $inputOutputMappings = $this->createInputOutputMappings($expandCountries);
         $availableDataFiles = array();
 
-        $progress = new ProgressBar($consoleOutput, count($inputOutputMappings));
+        $progress = new ProgressBar($consoleOutput, \count($inputOutputMappings));
 
         $progress->start();
         foreach ($inputOutputMappings as $textFile => $outputFiles) {
@@ -79,24 +79,24 @@ EOT;
 
     private function createInputOutputMappings($expandCountries)
     {
-        $topLevel = scandir($this->inputDir);
+        $topLevel = \scandir($this->inputDir);
 
         $mappings = array();
 
         foreach ($topLevel as $languageDirectory) {
-            if (in_array($languageDirectory, $this->filesToIgnore)) {
+            if (\in_array($languageDirectory, $this->filesToIgnore)) {
                 continue;
             }
 
             $fileLocation = $this->inputDir . DIRECTORY_SEPARATOR . $languageDirectory;
 
-            if (is_dir($fileLocation)) {
+            if (\is_dir($fileLocation)) {
                 // Will contain files
 
-                $countryCodeFiles = scandir($fileLocation);
+                $countryCodeFiles = \scandir($fileLocation);
 
                 foreach ($countryCodeFiles as $countryCodeFileName) {
-                    if (in_array($countryCodeFileName, $this->filesToIgnore)) {
+                    if (\in_array($countryCodeFileName, $this->filesToIgnore)) {
                         continue;
                     }
 
@@ -149,7 +149,7 @@ EOT;
         $this->parseTextFile(
             $this->getFilePathFromLanguageAndCountryCode($language, $countryCode),
             function ($prefix, $location) use (&$phonePrefixes, $prefixesToExpand, $countryCode) {
-                $length = strlen($countryCode);
+                $length = \strlen($countryCode);
                 foreach ($prefixesToExpand as $p => $l) {
                     if (GeneratePhonePrefixData::startsWith($prefix, $p)) {
                         // Allow later entries to overwrite initial ones
@@ -157,8 +157,8 @@ EOT;
                     }
                 }
 
-                $shortPrefix = substr($prefix, 0, $length);
-                if (!in_array($shortPrefix, $phonePrefixes)) {
+                $shortPrefix = \substr($prefix, 0, $length);
+                if (!\in_array($shortPrefix, $phonePrefixes)) {
                     $phonePrefixes[] = $shortPrefix;
                 }
             }
@@ -182,25 +182,25 @@ EOT;
      */
     private function parseTextFile($filePath, \Closure $handler)
     {
-        if (!file_exists($filePath) || !is_readable($filePath)) {
+        if (!\file_exists($filePath) || !\is_readable($filePath)) {
             throw new \InvalidArgumentException("File '{$filePath}' does not exist");
         }
 
-        $data = file($filePath);
+        $data = \file($filePath);
 
         $countryData = array();
 
         foreach ($data as $line) {
             // Remove \n
-            $line = str_replace(array("\n", "\r"), '', $line);
-            $line = trim($line);
+            $line = \str_replace(array("\n", "\r"), '', $line);
+            $line = \trim($line);
 
-            if (strlen($line) == 0 || substr($line, 0, 1) == '#') {
+            if (\strlen($line) == 0 || \substr($line, 0, 1) == '#') {
                 continue;
             }
-            if (strpos($line, '|')) {
+            if (\strpos($line, '|')) {
                 // Valid line
-                $parts = explode('|', $line);
+                $parts = \explode('|', $line);
 
 
                 $prefix = $parts[0];
@@ -250,7 +250,7 @@ EOT;
      */
     private function getCountryCodeFromTextFileName($countryCodeFileName)
     {
-        return str_replace(self::DATA_FILE_EXTENSION, '', $countryCodeFileName);
+        return \str_replace(self::DATA_FILE_EXTENSION, '', $countryCodeFileName);
     }
 
     /**
@@ -277,7 +277,7 @@ EOT;
      */
     private function getLanguageFromTextFile($textFile)
     {
-        $parts = explode(DIRECTORY_SEPARATOR, $textFile);
+        $parts = \explode(DIRECTORY_SEPARATOR, $textFile);
 
         return $parts[0];
     }
@@ -308,13 +308,13 @@ EOT;
     {
         $englishPath = $this->getEnglishDataPath($textFile);
 
-        if ($textFile == $englishPath || !file_exists($this->getFilePath($englishPath))) {
+        if ($textFile == $englishPath || !\file_exists($this->getFilePath($englishPath))) {
             return;
         }
 
-        $countryCode = substr($textFile, 3, 2);
+        $countryCode = \substr($textFile, 3, 2);
 
-        if (!array_key_exists($countryCode, $this->englishMaps)) {
+        if (!\array_key_exists($countryCode, $this->englishMaps)) {
             $englishMap = $this->readMappingsFromFile($englishPath);
 
             $this->englishMaps[$countryCode] = $englishMap;
@@ -325,13 +325,13 @@ EOT;
 
     private function getEnglishDataPath($textFile)
     {
-        return 'en' . DIRECTORY_SEPARATOR . substr($textFile, 3);
+        return 'en' . DIRECTORY_SEPARATOR . \substr($textFile, 3);
     }
 
     private function compressAccordingToEnglishData($englishMap, &$nonEnglishMap)
     {
         foreach ($nonEnglishMap as $prefix => $value) {
-            if (array_key_exists($prefix, $englishMap)) {
+            if (\array_key_exists($prefix, $englishMap)) {
                 $englishDescription = $englishMap[$prefix];
                 if ($englishDescription == $value) {
                     if (!$this->hasOverlappingPrefix($prefix, $nonEnglishMap)) {
@@ -346,10 +346,10 @@ EOT;
 
     private function hasOverlappingPrefix($number, $mappings)
     {
-        while (strlen($number) > 0) {
-            $number = substr($number, 0, -1);
+        while (\strlen($number) > 0) {
+            $number = \substr($number, 0, -1);
 
-            if (array_key_exists($number, $mappings)) {
+            if (\array_key_exists($number, $mappings)) {
                 return true;
             }
         }
@@ -372,7 +372,7 @@ EOT;
                 }
             }
 
-            if (!array_key_exists($targetFile, $mappingForFiles)) {
+            if (!\array_key_exists($targetFile, $mappingForFiles)) {
                 $mappingForFiles[$targetFile] = array();
             }
             $mappingForFiles[$targetFile][$prefix] = $location;
@@ -386,7 +386,7 @@ EOT;
      */
     private function getPhonePrefixLanguagePairFromFilename($outputFile)
     {
-        $parts = explode(DIRECTORY_SEPARATOR, $outputFile);
+        $parts = \explode(DIRECTORY_SEPARATOR, $outputFile);
 
         $returnObj = new \stdClass();
         $returnObj->language = $parts[0];
@@ -405,28 +405,28 @@ EOT;
      */
     private static function startsWith($haystack, $needle)
     {
-        return !strncmp($haystack, $needle, strlen($needle));
+        return !\strncmp($haystack, $needle, \strlen($needle));
     }
 
     private function writeMappingFile($language, $outputFile, $data)
     {
-        if (!file_exists($this->outputDir . $language)) {
-            mkdir($this->outputDir . $language);
+        if (!\file_exists($this->outputDir . $language)) {
+            \mkdir($this->outputDir . $language);
         }
 
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
-            . 'return ' . var_export($data, true) . ';'
+            . 'return ' . \var_export($data, true) . ';'
             . PHP_EOL;
 
         $outputPath = $this->outputDir . $language . DIRECTORY_SEPARATOR . $outputFile . '.php';
 
-        file_put_contents($outputPath, $phpSource);
+        \file_put_contents($outputPath, $phpSource);
     }
 
     public function addConfigurationMapping(&$availableDataFiles, $language, $prefix)
     {
-        if (!array_key_exists($language, $availableDataFiles)) {
+        if (!\array_key_exists($language, $availableDataFiles)) {
             $availableDataFiles[$language] = array();
         }
 
@@ -437,11 +437,11 @@ EOT;
     {
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT
-            . 'return ' . var_export($availableDataFiles, true) . ';'
+            . 'return ' . \var_export($availableDataFiles, true) . ';'
             . PHP_EOL;
 
         $outputPath = $this->outputDir . 'Map.php';
 
-        file_put_contents($outputPath, $phpSource);
+        \file_put_contents($outputPath, $phpSource);
     }
 }

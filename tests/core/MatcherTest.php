@@ -53,7 +53,7 @@ class MatcherTest extends TestCase
     private function createDesc($nationalNumberPattern)
     {
         $desc = new PhoneNumberDesc();
-        if (strlen($nationalNumberPattern) > 0) {
+        if (\strlen($nationalNumberPattern) > 0) {
             $desc->setNationalNumberPattern($nationalNumberPattern);
         }
 
