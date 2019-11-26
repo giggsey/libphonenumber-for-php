@@ -58,7 +58,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '8[129]\\d{7}',
+    'NationalNumberPattern' => '8(?:1[2-9]|2[2-47-9]|9\\d)\\d{6}',
     'ExampleNumber' => '891123456',
     'PossibleLength' => 
     array (
@@ -69,7 +69,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '884\\d{6}',
+    'NationalNumberPattern' => '8(?:1[01]|2[0156]|84)\\d{6}',
     'ExampleNumber' => '884012345',
     'PossibleLength' => 
     array (

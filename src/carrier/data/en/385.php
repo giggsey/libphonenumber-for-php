@@ -12,8 +12,8 @@
 
 return array (
   38590 => 'Tele2',
-  38591 => 'Vip',
-  38592 => 'Vip',
+  38591 => 'A1 Telekom',
+  38592 => 'A1 Telekom',
   38595 => 'Tele2',
   385970 => 'Hrvatski Telekom',
   385975 => 'Telefocus',

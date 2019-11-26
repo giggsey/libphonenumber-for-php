@@ -27,4 +27,5 @@ return array (
   233558 => 'MTN',
   23356 => 'Airtel',
   23357 => 'tiGO',
+  23359 => 'MTN',
 );

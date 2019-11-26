@@ -27,7 +27,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '6[1-9]\\d{6}',
+    'NationalNumberPattern' => '662[0-24-9]\\d{4}|6(?:[1-578]\\d|6[013-57-9]|9[0-35-9])\\d{5}',
     'ExampleNumber' => '61234567',
     'PossibleLength' => 
     array (
@@ -96,7 +96,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '3[12]\\d{6}',
+    'NationalNumberPattern' => '(?:3[12]\\d\\d|6666)\\d{4}',
     'ExampleNumber' => '31234567',
     'PossibleLength' => 
     array (
@@ -160,7 +160,8 @@ return array (
       'format' => '$1',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[0135-7]|77',
+        0 => '1[013-9]|77',
+        1 => '1(?:[013-8]|9(?:0[1-9]|[1-9]))|77',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

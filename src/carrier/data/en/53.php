@@ -11,5 +11,5 @@
  */
 
 return array (
-  535 => 'CUBACEL',
+  535 => 'etecsa',
 );

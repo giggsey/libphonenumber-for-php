@@ -20,4 +20,5 @@ return array (
   21676 => 'Gafsa/Sidi Bouzid/Tozeur',
   21677 => 'Haffouz/Kairouan/Kasserine',
   21678 => 'Beja/Jendouba/Kef/La Kef/Siliana/Tabarka',
+  21679 => 'Ariana/Ben Arous/Manouba/Tunis',
 );

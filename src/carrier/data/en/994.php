@@ -19,4 +19,5 @@ return array (
   99455 => 'Bakcell',
   9946 => 'Nakhtel',
   9947 => 'Nar Mobile',
+  99499 => 'Bakcell',
 );

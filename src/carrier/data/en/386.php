@@ -27,5 +27,5 @@ return array (
   38669 => 'A1',
   3866910 => 'Compatel',
   38670 => 'Telemach',
-  38671 => 'Telekom Slovenije',
+  38671 => 'Telemach',
 );

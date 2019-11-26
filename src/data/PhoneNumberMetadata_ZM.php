@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '800\\d{6}|(?:21|[79]\\d)\\d{7}',
+    'NationalNumberPattern' => '(?:63|80)0\\d{6}|(?:21|[79]\\d)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -90,9 +90,10 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '630\\d{6}',
+    'ExampleNumber' => '630012345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

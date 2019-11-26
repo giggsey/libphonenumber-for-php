@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:596|69\\d)\\d{6}',
+    'NationalNumberPattern' => '69\\d{7}|(?:59|97)6\\d{6}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -87,9 +87,10 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '976(?:6[1-9]|7[0-367])\\d{4}',
+    'ExampleNumber' => '976612345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -149,7 +150,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[56]',
+        0 => '[569]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
