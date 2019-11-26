@@ -11,10 +11,9 @@
  */
 
 return array (
-  354421 => 'Keflavík',
-  354462 => 'Akureyri',
-  354551 => 'Reykjavík/Vesturbær/Miðbærinn',
-  354552 => 'Reykjavík/Vesturbær/Miðbærinn',
-  354561 => 'Reykjavík/Vesturbær/Miðbærinn',
-  354562 => 'Reykjavík/Vesturbær/Miðbærinn',
+  35442 => 'Keflavík',
+  35446 => 'Akureyri',
+  3545 => 'Reykjavík',
+  35455 => 'Reykjavík/Vesturbær/Miðbærinn',
+  35456 => 'Reykjavík/Vesturbær/Miðbærinn',
 );

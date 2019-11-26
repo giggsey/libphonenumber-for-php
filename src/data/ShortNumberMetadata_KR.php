@@ -62,7 +62,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:[016-9]114|3(?:2|3[039]|45|66|88|9[18]))|1(?:0[01]|1[0247-9]|2[01389]|82)',
+    'NationalNumberPattern' => '1(?:[016-9]114|3(?:0[01]|2|3[0-35-9]|45?|5[057]|6[569]|7[79]|8[2589]|9[0189]))|1(?:0[015]|1\\d|2[01357-9]|41|8[28])',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (
@@ -83,7 +83,7 @@ return array (
   ),
   'carrierSpecific' => 
   array (
-    'NationalNumberPattern' => '1[016-9]1\\d\\d|1(?:0[01]|14)',
+    'NationalNumberPattern' => '1(?:0[01]|1[4-6]|41)|1(?:[06-9]1\\d|111)\\d',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (

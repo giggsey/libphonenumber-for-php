@@ -27,5 +27,6 @@ return array (
   2414 => 'Airtel',
   2415 => 'Moov',
   2416 => 'Libertis',
+  24165 => 'Moov',
   2417 => 'Airtel',
 );

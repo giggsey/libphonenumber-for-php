@@ -12,7 +12,7 @@
 
 return array (
   42364 => 'Soracom',
-  423650 => 'Soracom',
+  423650 => 'Telecom Liechtenstein',
   423651 => 'Cubic',
   423652 => 'Cubic',
   423653 => 'Cubic',
@@ -25,6 +25,7 @@ return array (
   4236629 => 'Datamobile',
   423663 => 'Emnify',
   42373 => 'Telecom Liechtenstein',
+  42374 => 'First Mobile',
   42377 => 'Swisscom',
   42378 => 'Salt',
   42379 => 'Telecom Liechtenstein',

@@ -61,7 +61,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:00\\d\\d|1[09]|20)|95\\d{3,4}',
+    'NationalNumberPattern' => '1(?:00\\d\\d|1[029]|20)|95\\d{3,4}',
     'ExampleNumber' => '110',
     'PossibleLength' => 
     array (
@@ -72,12 +72,10 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '100\\d\\d|95\\d{3,4}',
-    'ExampleNumber' => '10000',
+    'NationalNumberPattern' => '1(?:00\\d\\d|12)|95\\d{3,4}',
+    'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
-      0 => 5,
-      1 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (

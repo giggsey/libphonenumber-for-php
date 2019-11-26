@@ -21,6 +21,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 4,
     ),
   ),
   'fixedLine' => 
@@ -32,6 +33,7 @@ return array (
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 4,
     ),
   ),
   'mobile' => 

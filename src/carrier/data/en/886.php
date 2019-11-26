@@ -11,6 +11,7 @@
  */
 
 return array (
+  8864000 => 'Chunghwa Telecom',
   886900 => 'FarEasTone',
   8869006 => 'Chunghwa Telecom',
   8869007 => 'Chunghwa Telecom',
@@ -39,6 +40,9 @@ return array (
   886911 => 'Chunghwa Telecom',
   886912 => 'Chunghwa Telecom',
   886913 => 'FarEasTone',
+  8869140 => 'Taiwan Mobile',
+  8869141 => 'Taiwan Mobile',
+  8869142 => 'Taiwan Mobile',
   886915 => 'FarEasTone',
   886916 => 'FarEasTone',
   886917 => 'FarEasTone',
@@ -139,8 +143,8 @@ return array (
   8869718 => 'T Star',
   886972 => 'Chunghwa Telecom',
   886973 => 'T Star',
-  8869740 => 'T Star',
-  8869741 => 'T Star',
+  8869740 => 'Chunghwa Telecom',
+  8869741 => 'Chunghwa Telecom',
   8869742 => 'FarEasTone',
   8869743 => 'FarEasTone',
   8869744 => 'Taiwan Mobile',

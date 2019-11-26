@@ -11,5 +11,7 @@
  */
 
 return array (
-  4631 => 'Göteborg',
+  6825 => 'Bluesky',
+  6827 => 'Bluesky',
+  6828 => 'Bluesky',
 );

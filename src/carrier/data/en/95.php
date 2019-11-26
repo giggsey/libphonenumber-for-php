@@ -22,6 +22,9 @@ return array (
   95947 => 'MPT',
   95949 => 'MPT',
   9595 => 'MPT',
+  959660 => 'Mytel',
+  959661 => 'Mytel',
+  959662 => 'Mytel',
   95967 => 'Mytel',
   95968 => 'Mytel',
   95969 => 'MNTC',
@@ -48,4 +51,5 @@ return array (
   95995 => 'Ooredoo',
   95996 => 'Ooredoo',
   95997 => 'Ooredoo',
+  95998 => 'Ooredoo',
 );

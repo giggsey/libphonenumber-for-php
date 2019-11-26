@@ -28,7 +28,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '11(?:2|6\\d{3})|90[1-3]',
+    'NationalNumberPattern' => '11(?:2|6(?:000|1(?:11|2\\d)))|90[1-3]',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -63,7 +63,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1(?:2|6(?:000|1(?:11|23))|8\\d\\d?|99)|90[04-9])|90[1-3]|1(?:4\\d\\d|6[0-389]|9[1-4])\\d',
+    'NationalNumberPattern' => '1(?:1(?:2|6(?:00[06]|1(?:1[17]|23))|8\\d\\d?|99)|90[04-9])|90[1-3]|1(?:4\\d\\d|6[0-389]|9[1-4])\\d',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (

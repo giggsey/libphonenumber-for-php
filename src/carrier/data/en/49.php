@@ -23,6 +23,7 @@ return array (
   491526 => 'Vodafone',
   491529 => 'Vodafone/Truphone',
   4915555 => 'Tismi BV',
+  4915566 => 'Drillisch Online',
   4915630 => 'Multiconnect',
   4915678 => 'Argon Networks',
   491570 => 'Eplus/Telogic',
