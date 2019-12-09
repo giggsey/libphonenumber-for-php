@@ -3151,7 +3151,7 @@ class PhoneNumberUtil
      *
      * @param string|int $regionCodeOrType the region for which an example number is needed
      * @param int $type the PhoneNumberType of number that is needed
-     * @return PhoneNumber a valid number for the specified region and type. Returns null when the metadata
+     * @return PhoneNumber|null a valid number for the specified region and type. Returns null when the metadata
      *     does not contain such information or if an invalid region or region 001 was entered.
      *     For 001 (representing non-geographical numbers), call
      *     {@link #getExampleNumberForNonGeoEntity} instead.
