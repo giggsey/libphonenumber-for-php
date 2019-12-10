@@ -11,6 +11,18 @@
  */
 
 return array (
+  3324190 => 'Cheviré-le-Rouge',
+  3324191 => 'Brissac-Quincé',
+  3324192 => 'Segré',
+  3324193 => 'Saint-Barthélemy-d\'Anjou',
+  3324301 => 'Évron',
+  3329636 => 'Plouguernével',
+  3329692 => 'Tréguier',
+  3329705 => 'Quéven',
+  3329728 => 'Séglien',
+  3329780 => 'Quéven',
+  3329937 => 'Châteaugiron',
+  3332784 => 'Le Cateau Cambrésis',
   3332820 => 'Dunkerque',
   3332824 => 'Dunkerque',
   3332825 => 'Dunkerque',
@@ -25,13 +37,4 @@ return array (
   3332866 => 'Dunkerque',
   3332869 => 'Dunkerque',
   3336138 => 'Dunkerque',
-  3355612 => 'Mérignac',
-  3355613 => 'Mérignac',
-  3355618 => 'Mérignac',
-  3355634 => 'Mérignac',
-  3355647 => 'Mérignac',
-  3355655 => 'Mérignac',
-  3355697 => 'Mérignac',
-  3355729 => 'Mérignac',
-  3355792 => 'Mérignac',
 );
