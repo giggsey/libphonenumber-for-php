@@ -77,7 +77,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '10(?:[134]4|2[23]|99)|202\\d|3(?:646|9[07]0)|634|70[06]|(?:106|61)[14]',
+    'NationalNumberPattern' => '10(?:[134]4|2[23]|5\\d|99)|202\\d|3(?:646|9[07]0)|634|70[06]|(?:106|61)[14]',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (
