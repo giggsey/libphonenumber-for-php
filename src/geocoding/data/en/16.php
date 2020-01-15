@@ -3359,6 +3359,7 @@ return array (
   1667 => 'Maryland',
   1669 => 'California',
   1671646 => 'Tamuning',
+  1672 => 'British Columbia',
   1678 => 'Georgia',
   1678208 => 'Cumming, GA',
   1678225 => 'Lawrenceville, GA',

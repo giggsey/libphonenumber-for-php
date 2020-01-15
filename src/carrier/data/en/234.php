@@ -246,6 +246,7 @@ return array (
   234901 => 'Airtel',
   234902 => 'Airtel',
   234903 => 'MTN',
+  234904 => 'Airtel',
   234905 => 'Glo',
   234906 => 'MTN',
   234907 => 'Airtel',
