@@ -33,6 +33,7 @@ return array (
   2204488 => 'Sibanor',
   2204489 => 'Bwiam',
   220449 => 'Bakau',
+  220553 => 'Soma',
   2205540 => 'Kaiaf',
   2205541 => 'Kwenella',
   2205542 => 'Nyorojattaba',

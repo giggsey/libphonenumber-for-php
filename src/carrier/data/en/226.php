@@ -12,6 +12,7 @@
 
 return array (
   22601 => 'Onatel',
+  22602 => 'Onatel',
   22607 => 'Orange',
   22651 => 'Telmob',
   22652 => 'Telmob',
