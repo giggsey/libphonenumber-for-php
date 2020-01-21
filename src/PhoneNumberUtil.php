@@ -3475,7 +3475,7 @@ class PhoneNumberUtil
      */
     public function isPossibleNumber($number, $regionDialingFrom = null)
     {
-        if ($regionDialingFrom !== null && is_string($number)) {
+        if (is_string($number)) {
             try {
                 return $this->isPossibleNumber($this->parse($number, $regionDialingFrom));
             } catch (NumberParseException $e) {
