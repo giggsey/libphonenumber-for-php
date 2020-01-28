@@ -119,7 +119,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '76(?:0[0-2]|2[356]|4[0134]|5[49]|6[0-369]|77|81|9[39])\\d{6}',
+    'NationalNumberPattern' => '76(?:0[0-2]|2[356]|34|4[0134]|5[49]|6[0-369]|77|81|9[39])\\d{6}',
     'ExampleNumber' => '7640123456',
     'PossibleLength' => 
     array (
@@ -245,8 +245,8 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[25]|7(?:0|6[024-9])',
-        1 => '[25]|7(?:0|6(?:[04-9]|2[356]))',
+        0 => '[25]|7(?:0|6[02-9])',
+        1 => '[25]|7(?:0|6(?:[03-9]|2[356]))',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
