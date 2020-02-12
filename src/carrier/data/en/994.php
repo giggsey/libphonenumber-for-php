@@ -11,6 +11,7 @@
  */
 
 return array (
+  99410 => 'Azercell',
   99436554 => 'Nakhtel',
   99440 => 'FONEX',
   99444 => 'Aztelekom',
