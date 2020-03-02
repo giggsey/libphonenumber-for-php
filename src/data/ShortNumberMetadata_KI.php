@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[17]\\d{2,3}',
+    'NationalNumberPattern' => '[179]\\d{2,3}',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -26,7 +26,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '19[2-5]',
+    'NationalNumberPattern' => '19[2-5]|99[2-4]',
     'ExampleNumber' => '192',
     'PossibleLength' => 
     array (
@@ -48,7 +48,7 @@ return array (
   ),
   'emergency' => 
   array (
-    'NationalNumberPattern' => '19[2-5]',
+    'NationalNumberPattern' => '19[2-5]|99[2-4]',
     'ExampleNumber' => '192',
     'PossibleLength' => 
     array (
@@ -60,7 +60,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:05[0-259]|88|9[2-5])|777|10[0-8]',
+    'NationalNumberPattern' => '1(?:05[0-259]|88|9[2-5])|777|99[2-4]|10[0-8]',
     'ExampleNumber' => '100',
     'PossibleLength' => 
     array (

@@ -22,7 +22,7 @@ return array (
   22967 => 'MTN',
   22968 => 'Moov',
   22969 => 'MTN',
-  22990 => 'Libercom',
+  22990 => 'Moov',
   22991 => 'Moov',
   22993 => 'BLK',
   22994 => 'Moov',

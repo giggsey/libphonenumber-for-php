@@ -37,7 +37,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7120\\d{5}|7(?:[02-7]\\d|1[01]|8[03-8]|9[09])\\d{6}',
+    'NationalNumberPattern' => '7[01]20\\d{5}|7(?:0[013-9]|1[01]|[2-7]\\d|8[03-8]|9[09])\\d{6}',
     'ExampleNumber' => '712034567',
     'PossibleLength' => 
     array (
@@ -61,7 +61,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '90[036]\\d{6}',
+    'NationalNumberPattern' => '90[0136]\\d{6}',
     'ExampleNumber' => '900123456',
     'PossibleLength' => 
     array (
@@ -115,7 +115,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '37\\d{7}',
+    'NationalNumberPattern' => '(?:37\\d|80[578])\\d{6}',
     'ExampleNumber' => '372123456',
     'PossibleLength' => 
     array (

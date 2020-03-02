@@ -11,14 +11,14 @@
  */
 
 return array (
-  5993181 => 'Eutel',
-  5993184 => 'Eutel',
-  5993185 => 'Eutel',
-  5993186 => 'Eutel',
-  5993187 => 'Eutel',
-  5993188 => 'Eutel',
+  5993181 => 'Telcell',
+  5993184 => 'Telcell',
+  5993185 => 'Telcell',
+  5993186 => 'Telcell',
+  5993187 => 'Telcell',
+  5993188 => 'Telcell',
   599319 => 'WIC',
-  5994161 => 'Satel',
+  5994161 => 'Telcell',
   5994164 => 'WIC',
   5994165 => 'WIC',
   5994166 => 'WIC',
@@ -34,6 +34,6 @@ return array (
   599953 => 'Chippie',
   599954 => 'Chippie',
   599956 => 'Chippie',
-  599957 => 'Chippie',
+  599957 => 'Antelecom',
   59996 => 'Digicel',
 );

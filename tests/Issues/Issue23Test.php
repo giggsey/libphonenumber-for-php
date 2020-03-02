@@ -34,6 +34,6 @@ class Issue23Test extends TestCase
 
         $this->assertEquals('TK', $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 
-        $this->assertEquals('Tokelau', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        $this->assertEquals('Fakaofo Atoll', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }

@@ -16,6 +16,8 @@ return array (
   23231 => 'QCELL',
   23233 => 'Africell',
   23234 => 'QCELL',
+  23235 => 'IPTEL',
+  2326 => 'Onlime',
   23275 => 'Orange',
   23276 => 'Orange',
   23277 => 'Africell',
