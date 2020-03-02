@@ -11,6 +11,7 @@
  */
 
 return array (
+  22723 => 'Orange',
   22780 => 'Orange',
   22781 => 'Orange',
   22788 => 'Airtel',
@@ -18,6 +19,7 @@ return array (
   22790 => 'Orange',
   22791 => 'Orange',
   22792 => 'Orange',
+  22793 => 'SahelCom',
   22794 => 'Moov',
   22795 => 'Moov',
   22796 => 'Airtel',

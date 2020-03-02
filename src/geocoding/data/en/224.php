@@ -15,7 +15,7 @@ return array (
   2243031 => 'Boké',
   2243032 => 'Kamsar',
   2243041 => 'Conakry',
-  2243042 => 'Conakry',
+  2243042 => 'Sangoya',
   2243043 => 'Conakry',
   2243045 => 'Conakry',
   2243046 => 'Boussoura',

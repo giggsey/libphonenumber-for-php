@@ -19,8 +19,8 @@ return array (
   407017 => 'Lycamobile',
   407018 => 'Lycamobile',
   407019 => 'Lycamobile',
-  407020 => 'Lycamobile',
-  407050 => 'Iristel',
+  40702 => 'Lycamobile',
+  40705 => 'Iristel',
   40711 => 'Telekom',
   40712 => '2K Telecom',
   4072 => 'Vodafone',
@@ -35,6 +35,7 @@ return array (
   40774 => 'Digi Mobil',
   40775 => 'Digi Mobil',
   40776 => 'Digi Mobil',
+  40777 => 'Digi Mobil',
   4078 => 'Telekom',
   4079 => 'Vodafone',
 );

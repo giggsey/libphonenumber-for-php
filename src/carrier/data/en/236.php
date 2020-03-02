@@ -11,8 +11,8 @@
  */
 
 return array (
-  23670 => 'TC',
+  23670 => 'A-Cell',
   23672 => 'Orange',
-  23675 => 'CTP',
+  23675 => 'Telecel',
   23677 => 'Nationlink',
 );

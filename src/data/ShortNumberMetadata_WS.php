@@ -57,7 +57,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:1[12]|2[0-6])|9(?:11|9[4-79])',
+    'NationalNumberPattern' => '1(?:1[12]|2[0-6]|[39]0)|9(?:11|9[4-79])',
     'ExampleNumber' => '111',
     'PossibleLength' => 
     array (

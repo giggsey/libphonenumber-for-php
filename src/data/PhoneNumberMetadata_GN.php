@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:30|6\\d\\d|722)\\d{6}',
+    'NationalNumberPattern' => '722\\d{6}|(?:3|6\\d)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '30(?:24|3[12]|4[1-35-7]|5[13]|6[189]|[78]1|9[1478])\\d{4}',
+    'NationalNumberPattern' => '3(?:0(?:24|3[12]|4[1-35-7]|5[13]|6[189]|[78]1|9[1478])|1\\d\\d)\\d{4}',
     'ExampleNumber' => '30241234',
     'PossibleLength' => 
     array (

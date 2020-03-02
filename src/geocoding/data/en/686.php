@@ -20,7 +20,6 @@ return array (
   68627 => 'Tarawa',
   68628 => 'Bikenibeu',
   68629 => 'Bikenibeu',
-  68630 => 'Tarawa',
   68631 => 'North Tarawa',
   68632 => 'North Tarawa',
   68633 => 'Abaiang',

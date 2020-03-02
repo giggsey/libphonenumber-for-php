@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[89]00\\d{7}|(?:[24]\\d|50)\\d{8}',
+    'NationalNumberPattern' => '[68]00\\d{7}|(?:[24]\\d|[59]0)\\d{8}',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -26,7 +26,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2(?:12|3[457-9]|[467]\\d|[58][1-9]|9[1-6])|50[01])\\d{7}',
+    'NationalNumberPattern' => '(?:2(?:12|3[457-9]|[467]\\d|[58][1-9]|9[1-6])|[4-6]00)\\d{7}',
     'ExampleNumber' => '2121234567',
     'PossibleLength' => 
     array (
@@ -60,7 +60,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '900\\d{7}',
+    'NationalNumberPattern' => '90[01]\\d{7}',
     'ExampleNumber' => '9001234567',
     'PossibleLength' => 
     array (
@@ -111,12 +111,14 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '501\\d{7}',
+    'ExampleNumber' => '5010123456',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'voicemail' => 
@@ -153,7 +155,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[24589]',
+        0 => '[24-689]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '$CC $1',

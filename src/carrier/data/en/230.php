@@ -33,6 +33,7 @@ return array (
   2305876 => 'Cellplus',
   2305877 => 'Cellplus',
   2305878 => 'Cellplus',
+  230588 => 'MTML',
   230589 => 'MTML',
   230590 => 'Cellplus',
   230591 => 'Cellplus',
