@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '\\d{8}',
+    'NationalNumberPattern' => '[1-9]\\d{7}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -65,7 +65,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '\\d{8}',
+    'NationalNumberPattern' => '[1-9]\\d{7}',
     'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
@@ -146,6 +146,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
+        0 => '[1-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
