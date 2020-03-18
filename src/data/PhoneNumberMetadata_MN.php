@@ -30,7 +30,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '[12](?:3[2-8]|4[2-68]|5[1-4689])\\d{6,7}|(?:11(?:3\\d|4[568])|(?:(?:21|5[0568])\\d|70[0-5])\\d)\\d{4}|[12]2(?:[1-3]\\d{5,6}|7\\d{6})',
+    'NationalNumberPattern' => '[12]2[1-3]\\d{5,6}|70[0-5]\\d{5}|(?:[12](?:1|27)|5[03568])\\d{6}|[12](?:3[2-8]|4[2-68]|5[1-4689])\\d{6,7}',
     'ExampleNumber' => '50123456',
     'PossibleLength' => 
     array (
@@ -44,7 +44,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:8(?:[05689]\\d|3[01])|9(?:[014-9]\\d|20|3[0-4]))\\d{5}',
+    'NationalNumberPattern' => '(?:8(?:[05689]\\d|3[01])|9(?:[013-9]\\d|20))\\d{5}',
     'ExampleNumber' => '88123456',
     'PossibleLength' => 
     array (
@@ -96,8 +96,8 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '7(?:100|5(?:0[0579]|1[015]|[389]5|[57][57])|(?:6[0167]|7\\d|8[01])\\d)\\d{4}',
-    'ExampleNumber' => '75153456',
+    'NationalNumberPattern' => '7[15-8]\\d{6}',
+    'ExampleNumber' => '75123456',
     'PossibleLength' => 
     array (
       0 => 8,

@@ -19,6 +19,8 @@ return array (
   9927 => 'Tcell',
   9928 => 'Megafon',
   99290 => 'Megafon',
+  992911 => 'Tacom',
+  992915 => 'Tacom',
   992917 => 'Tacom',
   992918 => 'Babilon-M',
   992919 => 'Tacom',

@@ -11,19 +11,12 @@
  */
 
 return array (
-  38970 => 'T-Mobile',
-  38971 => 'T-Mobile',
-  38972 => 'T-Mobile',
-  389732 => 'Vip',
-  389733 => 'ALO Telecom',
-  389734 => 'Vip',
-  389742 => 'T-Mobile',
-  3897421 => 'Mobik',
-  389746 => 'T-Mobile',
-  389747 => 'T-Mobile',
-  38975 => 'Vip',
-  38976 => 'Vip',
-  38977 => 'Vip',
-  38978 => 'Vip',
-  38979 => 'Lycamobile',
+  8810 => 'ico satellite',
+  8811 => 'ico satellite',
+  8812 => 'ellipso satellite',
+  8813 => 'ellipso satellite',
+  8816 => 'iridium satellite',
+  8817 => 'iridium satellite',
+  8818 => 'globalstar',
+  8819 => 'globalstar',
 );

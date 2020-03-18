@@ -19,6 +19,8 @@ return array (
   5623235 => 'Entel',
   562330 => 'Movistar',
   562332 => 'Gtd Manquehue',
+  562333 => 'Claro',
+  562334 => 'Entel',
   56941 => 'Movistar',
   56942 => 'Entel',
   569430 => 'Telestar',
