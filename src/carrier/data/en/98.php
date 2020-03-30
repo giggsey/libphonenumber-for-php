@@ -20,7 +20,7 @@ return array (
   98934 => 'TeleKish',
   98990 => 'IR-MCI',
   98991 => 'IR-MCI',
-  98994 => 'Anarestan',
+  989944 => 'Anarestan',
   989981 => 'Shatel Mobile',
   9899900 => 'LOTUSTEL',
   9899910 => 'Irancell',

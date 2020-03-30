@@ -23,6 +23,7 @@ return array (
     array (
       0 => 5,
       1 => 6,
+      2 => 7,
     ),
   ),
   'fixedLine' => 
@@ -36,6 +37,7 @@ return array (
     array (
       0 => 5,
       1 => 6,
+      2 => 7,
     ),
   ),
   'mobile' => 

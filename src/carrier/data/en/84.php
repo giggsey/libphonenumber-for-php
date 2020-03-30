@@ -11,13 +11,11 @@
  */
 
 return array (
-  84199 => 'G-Mobile',
   843 => 'Viettel Mobile',
   8452 => 'Vietnamobile',
   8456 => 'Vietnamobile',
   8458 => 'Vietnamobile',
   8459 => 'G-Mobile',
-  8467 => 'VSAT',
   847 => 'MobiFone',
   8481 => 'Vinaphone',
   8482 => 'Vinaphone',
@@ -25,7 +23,7 @@ return array (
   8484 => 'Vinaphone',
   8485 => 'Vinaphone',
   8486 => 'Viettel Mobile',
-  8487 => 'I-Telecom',
+  8487 => 'Vinaphone',
   8488 => 'Vinaphone',
   8489 => 'MobiFone',
   8490 => 'MobiFone',

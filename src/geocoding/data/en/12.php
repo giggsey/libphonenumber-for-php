@@ -2471,7 +2471,6 @@ return array (
   1240686 => 'Germantown, MD',
   1240777 => 'Rockville, MD',
   1240857 => 'Joint Base Andrews Naval Air Facility, MD',
-  12422 => 'New Providence',
   1242302 => 'New Providence',
   124232 => 'New Providence',
   1242329 => 'Andros',
