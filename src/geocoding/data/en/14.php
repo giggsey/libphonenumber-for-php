@@ -3119,8 +3119,6 @@ return array (
   1440993 => 'Ashtabula, OH',
   1440997 => 'Ashtabula, OH',
   1440998 => 'Ashtabula, OH',
-  1441292 => 'Hamilton',
-  1441295 => 'Hamilton',
   1442 => 'California',
   1443 => 'Maryland',
   1443394 => 'Owings Mills, MD',

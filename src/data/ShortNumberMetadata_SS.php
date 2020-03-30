@@ -14,32 +14,10 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[19]\\d{8}',
+    'NationalNumberPattern' => '9\\d\\d',
     'PossibleLength' => 
     array (
-      0 => 9,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '1[89]\\d{7}',
-    'ExampleNumber' => '181234567',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '(?:12|9[12579])\\d{7}',
-    'ExampleNumber' => '977123456',
-    'PossibleLength' => 
-    array (
+      0 => 3,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -47,9 +25,10 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '999',
+    'ExampleNumber' => '999',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -65,7 +44,29 @@ return array (
     array (
     ),
   ),
-  'sharedCost' => 
+  'emergency' => 
+  array (
+    'NationalNumberPattern' => '999',
+    'ExampleNumber' => '999',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'shortCode' => 
+  array (
+    'NationalNumberPattern' => '999',
+    'ExampleNumber' => '999',
+    'PossibleLength' => 
+    array (
+    ),
+    'PossibleLengthLocalOnly' => 
+    array (
+    ),
+  ),
+  'standardRate' => 
   array (
     'PossibleLength' => 
     array (
@@ -75,7 +76,7 @@ return array (
     array (
     ),
   ),
-  'personalNumber' => 
+  'carrierSpecific' => 
   array (
     'PossibleLength' => 
     array (
@@ -85,47 +86,7 @@ return array (
     array (
     ),
   ),
-  'voip' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'pager' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'uan' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voicemail' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'noInternationalDialling' => 
+  'smsServices' => 
   array (
     'PossibleLength' => 
     array (
@@ -136,25 +97,11 @@ return array (
     ),
   ),
   'id' => 'SS',
-  'countryCode' => 211,
-  'internationalPrefix' => '00',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
+  'countryCode' => 0,
+  'internationalPrefix' => '',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
-    0 => 
-    array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[19]',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
   ),
   'intlNumberFormat' => 
   array (

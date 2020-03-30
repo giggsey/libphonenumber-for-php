@@ -25,6 +25,7 @@ return array (
   9725525 => 'Telzar',
   9725526 => 'Telzar',
   9725527 => 'Telzar',
+  9725528 => 'Telzar',
   972553 => 'Free Telecom',
   972554 => 'Cellran Cellular Communications',
   9725550 => 'Annatel',
