@@ -29,7 +29,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:1[0-8]|2[1-378]|3[1-69]|4\\d|5[1346-8])\\d{7}',
+    'NationalNumberPattern' => '(?:2(?:0330|4302)|52087)0\\d{3}|(?:1[0-8]|2[1-378]|3[1-69]|4\\d|5[1346-8])\\d{7}',
     'ExampleNumber' => '101234567',
     'PossibleLength' => 
     array (

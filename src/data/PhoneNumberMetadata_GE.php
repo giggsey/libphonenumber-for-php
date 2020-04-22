@@ -40,7 +40,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '5(?:0555[5-9]|757(?:7[7-9]|8[01]))\\d{3}|5(?:000\\d|(?:52|75)00|8(?:58[89]|888))\\d{4}|5(?:0050|1111|2222|3333)[0-4]\\d{3}|(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}',
+    'NationalNumberPattern' => '5(?:0(?:0(?:0\\d|50)\\d|555[5-9])|(?:111\\d|8(?:58[89]|888))\\d|(?:2222|3333)[0-4]|52(?:00\\d|22[0-4])|75(?:00\\d|7(?:7[7-9]|8[01])))\\d{3}|(?:5(?:[14]4|5[0157-9]|68|7[0147-9]|9[1-35-9])|790)\\d{6}',
     'ExampleNumber' => '555123456',
     'PossibleLength' => 
     array (
@@ -92,7 +92,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '706\\d{6}',
+    'NationalNumberPattern' => '70[67]\\d{6}',
     'ExampleNumber' => '706123456',
     'PossibleLength' => 
     array (
@@ -133,7 +133,7 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '706\\d{6}',
+    'NationalNumberPattern' => '70[67]\\d{6}',
     'PossibleLength' => 
     array (
     ),
