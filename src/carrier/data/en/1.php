@@ -500,6 +500,8 @@ return array (
   1869765 => 'Digicel',
   1869766 => 'Digicel',
   1876210 => 'Cable & Wireless',
+  187622 => 'Cable & Wireless',
+  187623 => 'Cable & Wireless',
   187624 => 'Digicel',
   187625 => 'Digicel',
   187626 => 'Digicel',
