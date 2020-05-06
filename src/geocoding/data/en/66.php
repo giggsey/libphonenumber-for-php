@@ -11,6 +11,10 @@
  */
 
 return array (
+  6610 => 'Bangkok/Nonthaburi/Pathum Thani/Samut Prakan',
+  6616 => 'Bangkok/Nonthaburi/Pathum Thani/Samut Prakan',
+  6618 => 'Bangkok/Nonthaburi/Pathum Thani/Samut Prakan',
+  6619 => 'Bangkok/Nonthaburi/Pathum Thani/Samut Prakan',
   662 => 'Bangkok/Nonthaburi/Pathum Thani/Samut Prakan',
   6632 => 'Phetchaburi/Prachuap Khiri Khan/Ratchaburi',
   6633 => 'Chachoengsao/Chon Buri/Rayong',
