@@ -259,6 +259,7 @@ return array (
   6011701 => 'U Mobile',
   6011702 => 'U Mobile',
   601171 => 'DiGi',
+  601172 => 'Maxis',
   6012 => 'Maxis',
   60131 => 'Celcom',
   60132 => 'Celcom',

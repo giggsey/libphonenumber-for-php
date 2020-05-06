@@ -69,7 +69,7 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '8(?:0[16]|12|25)\\d{7}',
+    'NationalNumberPattern' => '8(?:0[16]|12|[27]5|50)\\d{7}',
     'ExampleNumber' => '8011234567',
     'PossibleLength' => 
     array (
