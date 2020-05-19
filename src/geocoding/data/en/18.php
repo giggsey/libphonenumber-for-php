@@ -3780,7 +3780,7 @@ return array (
   1867 => 'Northwest Territories/Nunavut/Yukon',
   1867393 => 'Whitehorse, YT',
   1867456 => 'Whitehorse, YT',
-  1867536 => 'Watson Lake Hospital',
+  1867536 => 'Watson Lake',
   1867633 => 'Whitehorse, YT',
   1867645 => 'Rankin Inlet, NU',
   1867667 => 'Whitehorse, YT',

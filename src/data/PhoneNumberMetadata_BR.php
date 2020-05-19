@@ -158,7 +158,7 @@ return array (
   'countryCode' => 55,
   'internationalPrefix' => '00(?:1[245]|2[1-35]|31|4[13]|[56]5|99)',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
+  'nationalPrefixForParsing' => '(?:0|90)(?:(1[245]|2[1-35]|31|4[13]|[56]5|99)(\\d{10,11}))?',
   'nationalPrefixTransformRule' => '$2',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

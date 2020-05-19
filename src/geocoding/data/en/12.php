@@ -2511,7 +2511,6 @@ return array (
   1242369 => 'Andros',
   1242373 => 'Grand Bahama',
   1242374 => 'Grand Bahama',
-  1242376 => 'Grand Bahama',
   1242377 => 'New Providence',
   124238 => 'New Providence',
   1242392 => 'New Providence',
