@@ -9,5 +9,6 @@ tests/ export-ignore
 build.xml export-ignore
 libphonenumber-for-php.spec export-ignore
 phpunit.xml.dist export-ignore
+.github/ export-ignore
 
 * text=auto

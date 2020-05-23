@@ -1,0 +1,99 @@
+name: "Continuous Integration"
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+
+env:
+  COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --no-suggest --prefer-dist"
+  COVERAGE_FLAGS: "--coverage-text --coverage-clover build/logs/clover.xml"
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version:
+          - "5.3"
+          - "5.4"
+          - "5.5"
+          - "5.6"
+          - "7.0"
+          - "7.1"
+          - "7.2"
+          - "7.3"
+          - "7.4"
+        include:
+          - php-version: 5.3
+            dependencies: lowest
+          - php-version: 7.4
+            coverage: coverage
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, dom
+          coverage: xdebug
+        env:
+          update: true
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup Problem Matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ matrix.php-version }}-composer-
+      - name: Install Composer dependencies (highest)
+        if: "matrix.dependencies != 'lowest'"
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: composer update ${{ env.COMPOSER_FLAGS }}
+      - name: Install Composer dependencies (lowest)
+        if: "matrix.dependencies == 'lowest'"
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: composer update ${{ env.COMPOSER_FLAGS }} --prefer-lowest --prefer-stable
+      - name: composer validate
+        run: composer validate --strict
+      - name: Test with phpunit (with coverage)
+        id: phpunit-coverage
+        if: "matrix.coverage == 'coverage'"
+        run: vendor/bin/phpunit ${{ env.COVERAGE_FLAGS }}
+      - name: Test with phpunit (without coverage)
+        if: "matrix.coverage != 'coverage'"
+        run: vendor/bin/phpunit
+      - name: Upload code coverage to Scrutinize
+        if: steps.phpunit-coverage.outcome == 'success'
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            wget -q https://scrutinizer-ci.com/ocular.phar
+            php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml
+      - name: Submit Coveralls
+        if: steps.phpunit-coverage.outcome == 'success'
+        run: |
+          [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
+          php $COVERALLS_PATH -v --exclude-no-stmt
+        env:
+          COVERALLS_RUN_LOCALLY: 1
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
