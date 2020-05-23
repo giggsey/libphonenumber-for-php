@@ -47,6 +47,7 @@
       "build/",
       "docs/",
       "tests/",
+      ".github/",
       ".editorconfig",
       ".gitattributes",
       ".gitignore",
