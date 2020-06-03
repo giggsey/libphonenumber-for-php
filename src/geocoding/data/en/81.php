@@ -1121,7 +1121,7 @@ return array (
   819556 => 'Karatsu, Saga',
   819557 => 'Karatsu, Saga',
   819558 => 'Karatsu, Saga',
-  81956 => 'Sasebo, Japan',
+  81956 => 'Sasebo, Nagasaki',
   819572 => 'Isahaya, Nagasaki',
   819573 => 'Isahaya, Nagasaki',
   819574 => 'Isahaya, Nagasaki',
