@@ -11,6 +11,8 @@
  */
 
 return array (
+  345901 => 'Movistar',
+  345906 => 'Vodafone',
   34600 => 'Vodafone',
   34601 => 'Vodafone',
   346016 => 'Orange',
