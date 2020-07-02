@@ -98,9 +98,11 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '850\\d{7}',
+    'ExampleNumber' => '8500123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -120,12 +122,11 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '(?:444|850\\d{3})\\d{4}',
+    'NationalNumberPattern' => '444\\d{4}',
     'ExampleNumber' => '4441444',
     'PossibleLength' => 
     array (
       0 => 7,
-      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
