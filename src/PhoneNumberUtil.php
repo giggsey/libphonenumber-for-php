@@ -1572,7 +1572,7 @@ class PhoneNumberUtil
         if (!static::isViablePhoneNumber($nationalNumber)) {
             throw new NumberParseException(
                 NumberParseException::NOT_A_NUMBER,
-                'The string supplied did not seem to be a phone number.'
+                sprintf('The string (%s) supplied did not seem to be a phone number.', $numberToParse)
             );
         }
 

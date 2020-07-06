@@ -10,7 +10,7 @@ class Issue76Test extends TestCase
     /**
      * @expectedException \libphonenumber\NumberParseException
      * @expectedExceptionCode 1
-     * @expectedExceptionMessage The string supplied did not seem to be a phone number.
+     * @expectedExceptionMessage The string (Abc811@hotmail.com) supplied did not seem to be a phone number.
      */
     public function testIssue76()
     {
