@@ -2327,6 +2327,7 @@ return array (
   1832912 => 'Houston, TX',
   1832934 => 'Magnolia, TX',
   1838 => 'New York',
+  1839 => 'South Carolina',
   1843 => 'South Carolina',
   1843207 => 'North Charleston, SC',
   1843208 => 'Hardeeville, SC',

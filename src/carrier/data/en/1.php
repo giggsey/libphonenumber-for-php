@@ -483,7 +483,6 @@ return array (
   18687 => 'bmobile',
   186948 => 'Cable & Wireless',
   186955 => 'CariGlobe St. Kitts',
-  186956 => 'The Cable St. Kitts',
   1869660 => 'Cable & Wireless',
   1869661 => 'Cable & Wireless',
   1869662 => 'Cable & Wireless',
