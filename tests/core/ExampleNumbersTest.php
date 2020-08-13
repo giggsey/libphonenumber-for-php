@@ -355,15 +355,15 @@ class ExampleNumbersTest extends TestCase
             $phoneNumber = $this->phoneNumberUtil->parse($exampleNumber, $regionCode);
 
             if (!$this->shortNumberInfo->isPossibleShortNumberForRegion(
-                    $phoneNumber,
-                    $regionCode
-                ) || !$this->shortNumberInfo->isEmergencyNumber($exampleNumber, $regionCode)
+                $phoneNumber,
+                $regionCode
+            ) || !$this->shortNumberInfo->isEmergencyNumber($exampleNumber, $regionCode)
             ) {
                 $this->fail('Emergency example number test failed for ' . $regionCode);
             } elseif ($this->shortNumberInfo->getExpectedCostForRegion(
-                    $phoneNumber,
-                    $regionCode
-                ) !== ShortNumberCost::TOLL_FREE
+                $phoneNumber,
+                $regionCode
+            ) !== ShortNumberCost::TOLL_FREE
             ) {
                 $this->fail('Emergency example number not toll free for ' . $regionCode);
             }

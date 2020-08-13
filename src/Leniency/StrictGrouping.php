@@ -38,11 +38,17 @@ class StrictGrouping extends AbstractLeniency
         }
 
         return PhoneNumberMatcher::checkNumberGroupingIsValid(
-            $number, $candidate, $util,
+            $number,
+            $candidate,
+            $util,
             function (PhoneNumberUtil $util, PhoneNumber $number, $normalizedCandidate, $expectedNumberGroups) {
                 return PhoneNumberMatcher::allNumberGroupsRemainGrouped(
-                    $util, $number, $normalizedCandidate, $expectedNumberGroups
+                    $util,
+                    $number,
+                    $normalizedCandidate,
+                    $expectedNumberGroups
                 );
-            });
+            }
+        );
     }
 }

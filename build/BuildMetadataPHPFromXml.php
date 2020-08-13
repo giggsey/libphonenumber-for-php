@@ -98,21 +98,21 @@ EOT;
         if ($hasRegionCodes && $hasCountryCodes) {
             $data .= self::MAP_COMMENT . PHP_EOL;
             $data .= "   public static \${$variableName} = " . \var_export(
-                    $countryCodeToRegionCodeMap,
-                    true
-                ) . ';' . PHP_EOL;
+                $countryCodeToRegionCodeMap,
+                true
+            ) . ';' . PHP_EOL;
         } elseif ($hasCountryCodes) {
             $data .= self::COUNTRY_CODE_SET_COMMENT . PHP_EOL;
             $data .= "   public static \${$variableName} = " . \var_export(
-                    \array_keys($countryCodeToRegionCodeMap),
-                    true
-                ) . ';' . PHP_EOL;
+                \array_keys($countryCodeToRegionCodeMap),
+                true
+            ) . ';' . PHP_EOL;
         } else {
             $data .= self::REGION_CODE_SET_COMMENT . PHP_EOL;
             $data .= "   public static \${$variableName} = " . \var_export(
-                    $countryCodeToRegionCodeMap[0],
-                    true
-                ) . ';' . PHP_EOL;
+                $countryCodeToRegionCodeMap[0],
+                true
+            ) . ';' . PHP_EOL;
         }
 
         $data .= PHP_EOL .

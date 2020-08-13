@@ -328,8 +328,11 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public function testIsLatinLetter($letter, $expectedResult)
     {
-        $this->assertEquals($expectedResult, PhoneNumberMatcher::isLatinLetter($letter),
-            "{$letter} should return {$expectedResult}");
+        $this->assertEquals(
+            $expectedResult,
+            PhoneNumberMatcher::isLatinLetter($letter),
+            "{$letter} should return {$expectedResult}"
+        );
     }
 
     public function testMatchesWithSurroundingLatinChars()
@@ -767,8 +770,10 @@ class PhoneNumberMatcherTest extends TestCase
         } else {
             foreach ($contexts as $context) {
                 $text = $context[0] . $number . $context[1];
-                $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers($text, $region)),
-                    "Should not have found a number in {$text}");
+                $this->assertTrue(
+                    $this->hasNoMatches($this->phoneUtil->findNumbers($text, $region)),
+                    "Should not have found a number in {$text}"
+                );
             }
         }
 
@@ -777,8 +782,10 @@ class PhoneNumberMatcherTest extends TestCase
         } else {
             foreach ($contexts as $context) {
                 $text = $context[0] . $number . $context[1];
-                $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers($text, $region)),
-                    "Should not have found a number in {$text}");
+                $this->assertTrue(
+                    $this->hasNoMatches($this->phoneUtil->findNumbers($text, $region)),
+                    "Should not have found a number in {$text}"
+                );
             }
         }
     }
@@ -788,26 +795,36 @@ class PhoneNumberMatcherTest extends TestCase
         // The digits up to the ", " form a valid US number, but it shouldn't be matched as one since
         // there was a non-matching bracket present.
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            '80.585 [79.964, 81.191]', RegionCode::US)));
+            '80.585 [79.964, 81.191]',
+            RegionCode::US
+        )));
 
         // The trailing "]" is thrown away before parsing, so the resultant number, while a valid US
         // number, does not have matching brackets.
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            '80.585 [79.964]', RegionCode::US)));
+            '80.585 [79.964]',
+            RegionCode::US
+        )));
 
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            '80.585 ((79.964)', RegionCode::US)));
+            '80.585 ((79.964)',
+            RegionCode::US
+        )));
 
         // This case has too many sets of brackets to be valid.
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            '(80).(585) (79).(9)64', RegionCode::US)));
+            '(80).(585) (79).(9)64',
+            RegionCode::US
+        )));
     }
 
     public function testNoMatchIfRegionIsNull()
     {
         // Fail on non-international prefix if region code is null.
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            'Random text body - number is 0331 6005, see you there', null)));
+            'Random text body - number is 0331 6005, see you there',
+            null
+        )));
     }
 
     public function testNoMatchInEmptyString()
@@ -819,7 +836,9 @@ class PhoneNumberMatcherTest extends TestCase
     public function testNoMatchIfNoNumber()
     {
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
-            'Random text body - number is foobar, see you there', RegionCode::US)));
+            'Random text body - number is foobar, see you there',
+            RegionCode::US
+        )));
     }
 
     public function testSequences()
