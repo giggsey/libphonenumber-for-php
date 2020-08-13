@@ -86,7 +86,10 @@ class Issue135Test extends TestCase
     {
         $inputNumber = '03*4-56&+a#234';
         $expectedOutput = '03*456+#234';
-        $this->assertEquals($expectedOutput, PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
-            'Conversion did not correctly remove non-diallable characters');
+        $this->assertEquals(
+            $expectedOutput,
+            PhoneNumberUtil::normalizeDiallableCharsOnly($inputNumber),
+            'Conversion did not correctly remove non-diallable characters'
+        );
     }
 }

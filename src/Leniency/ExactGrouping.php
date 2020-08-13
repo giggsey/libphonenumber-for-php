@@ -36,11 +36,18 @@ class ExactGrouping extends AbstractLeniency
             return false;
         }
 
-        return PhoneNumberMatcher::checkNumberGroupingIsValid($number, $candidate, $util,
+        return PhoneNumberMatcher::checkNumberGroupingIsValid(
+            $number,
+            $candidate,
+            $util,
             function (PhoneNumberUtil $util, PhoneNumber $number, $normalizedCandidate, $expectedNumberGroups) {
                 return PhoneNumberMatcher::allNumberGroupsAreExactlyPresent(
-                    $util, $number, $normalizedCandidate, $expectedNumberGroups
+                    $util,
+                    $number,
+                    $normalizedCandidate,
+                    $expectedNumberGroups
                 );
-            });
+            }
+        );
     }
 }

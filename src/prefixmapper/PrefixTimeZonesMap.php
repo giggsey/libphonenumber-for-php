@@ -30,8 +30,8 @@ class PrefixTimeZonesMap
     public function lookupTimeZonesForNumber(PhoneNumber $number)
     {
         $phonePrefix = $number->getCountryCode() . PhoneNumberUtil::getInstance()->getNationalSignificantNumber(
-                $number
-            );
+            $number
+        );
 
         return $this->lookupTimeZonesForNumberKey($phonePrefix);
     }

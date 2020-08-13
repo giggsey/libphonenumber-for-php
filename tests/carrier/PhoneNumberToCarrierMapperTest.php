@@ -84,8 +84,10 @@ class PhoneNumberToCarrierMapperTest extends TestCase
     public function testGetNameForMobilePortableRegion()
     {
         $this->assertEquals('British carrier', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1, 'en'));
-        $this->assertEquals('Brittisk operat' . \pack('H*', 'c3b6') . 'r', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1,
-            'sv_SE'));
+        $this->assertEquals('Brittisk operat' . \pack('H*', 'c3b6') . 'r', $this->carrierMapper->getNameForNumber(
+            self::$UK_MOBILE1,
+            'sv_SE'
+        ));
         $this->assertEquals('British carrier', $this->carrierMapper->getNameForNumber(self::$UK_MOBILE1, 'fr'));
         // Returns an empty string because the UK implements mobile number portability.
         $this->assertEquals('', $this->carrierMapper->getSafeDisplayName(self::$UK_MOBILE1, 'en'));
@@ -103,8 +105,10 @@ class PhoneNumberToCarrierMapperTest extends TestCase
         $this->assertEquals('', $this->carrierMapper->getNameForNumber(self::$UK_FIXED1, 'en'));
         // If the carrier information is present in the files and the method that assumes a valid
         // number is used, a carrier is returned
-        $this->assertEquals('Angolan fixed line carrier', $this->carrierMapper->getNameForValidNumber(self::$AO_FIXED2,
-            'en'));
+        $this->assertEquals('Angolan fixed line carrier', $this->carrierMapper->getNameForValidNumber(
+            self::$AO_FIXED2,
+            'en'
+        ));
         $this->assertEquals('', $this->carrierMapper->getNameForValidNumber(self::$UK_FIXED2, 'en'));
     }
 
@@ -123,8 +127,10 @@ class PhoneNumberToCarrierMapperTest extends TestCase
         $this->assertEquals('', $this->carrierMapper->getNameForNumber(self::$NUMBER_WITH_INVALID_COUNTRY_CODE, 'en'));
         $this->assertEquals('', $this->carrierMapper->getNameForNumber(self::$INTERNATIONAL_TOLL_FREE, 'en'));
 
-        $this->assertEquals('', $this->carrierMapper->getNameForValidNumber(self::$NUMBER_WITH_INVALID_COUNTRY_CODE,
-            'en'));
+        $this->assertEquals('', $this->carrierMapper->getNameForValidNumber(
+            self::$NUMBER_WITH_INVALID_COUNTRY_CODE,
+            'en'
+        ));
         $this->assertEquals('', $this->carrierMapper->getNameForValidNumber(self::$INTERNATIONAL_TOLL_FREE, 'en'));
     }
 

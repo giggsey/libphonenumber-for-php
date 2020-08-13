@@ -290,8 +290,10 @@ class MetadataFilter
         }
 
         if ($metadata->hasNoInternationalDialling()) {
-            $metadata->setNoInternationalDialling($this->getFiltered('noInternationalDialling',
-                $metadata->getNoInternationalDialling()));
+            $metadata->setNoInternationalDialling($this->getFiltered(
+                'noInternationalDialling',
+                $metadata->getNoInternationalDialling()
+            ));
         }
 
         if ($this->shouldDrop('preferredInternationalPrefix')) {

@@ -1149,12 +1149,18 @@ class PhoneNumberUtilTest extends TestCase
 
         // Test whether Uzbek phone numbers are returned in international format even when dialled from
         // same region or other regions.
-        $this->assertEquals('+998612201234',
-            $this->phoneUtil->formatNumberForMobileDialing(self::$uzFixedLine, RegionCode::UZ, false));
-        $this->assertEquals('+998950123456',
-            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::UZ, false));
-        $this->assertEquals('+998950123456',
-            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::US, false));
+        $this->assertEquals(
+            '+998612201234',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzFixedLine, RegionCode::UZ, false)
+        );
+        $this->assertEquals(
+            '+998950123456',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::UZ, false)
+        );
+        $this->assertEquals(
+            '+998950123456',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$uzMobile, RegionCode::US, false)
+        );
 
 
         // Non-geographical numbers should always be dialed in international format.
@@ -1939,57 +1945,93 @@ class PhoneNumberUtilTest extends TestCase
         $number = new PhoneNumber();
         $number->setCountryCode(54)->setNationalNumber(12345);
         // Too short for any Argentinian number.
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
 
         // 6-digit numbers are okay for fixed-line.
         $number->setNationalNumber(123456);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
         // But too short for mobile.
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
         // And too short for toll-free.
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE)
+        );
 
         // The same applies to 9-digit numbers.
         $number->setNationalNumber(123456789);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE)
+        );
 
         // 10-digit numbers are universally possible.
         $number->setNationalNumber(1234567890);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE)
+        );
 
         // 11-digit numbers are only possible for mobile numbers. Note we don't require the leading 9,
         // which all mobile numbers start with, and would be required for a valid mobile number.
         $number->setNationalNumber(12345678901);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE)
+        );
     }
 
     public function testIsPossibleNumberForTypeWithReason_LocalOnly()
@@ -1997,13 +2039,19 @@ class PhoneNumberUtilTest extends TestCase
         $number = new PhoneNumber();
         // Here we test a number length which matches a local-only length.
         $number->setCountryCode(49)->setNationalNumber(12);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
         // Mobile numbers must be 10 or 11 digits, and there are no local-only lengths.
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
     }
 
     public function testIsPossibleNumberForTypeWithReason_DataMissingForSizeReasons()
@@ -2013,17 +2061,25 @@ class PhoneNumberUtilTest extends TestCase
         // as a whole, and hence aren't present in the binary for size reasons - this should still work.
         // Local-only number.
         $number->setCountryCode(55)->setNationalNumber(12345678);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
 
         // Normal-length number.
         $number->setNationalNumber(1234567890);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
     }
 
     public function testIsPossibleNumberForTypeWithReason_NumberTypeNotSupportedForRegion()
@@ -2031,40 +2087,64 @@ class PhoneNumberUtilTest extends TestCase
         $number = new PhoneNumber();
         // There are *no* mobile numbers for this region at all, so we return INVALID_LENGTH.
         $number->setCountryCode(55)->setNationalNumber(12345678);
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
         // This matches a fixed-line length though.
-        $this->assertEquals(ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE_LOCAL_ONLY,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
         // This is too short for fixed-line, and no mobile numbers exist.
         $number->setCountryCode(55)->setNationalNumber(1234567);
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
 
         // This is too short for mobile, and no fixed-line numbers exist.
         $number->setCountryCode(882)->setNationalNumber(1234567);
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
 
         // There are *no* fixed-line OR mobile numbers for this country calling code at all, so we
         // return INVALID_LENGTH.
         $number->setCountryCode(979)->setNationalNumber(123456789);
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::PREMIUM_RATE));
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::PREMIUM_RATE)
+        );
     }
 
     public function testIsPossibleNumberForTypeWithReason_FixedLineOrMobile()
@@ -2073,43 +2153,71 @@ class PhoneNumberUtilTest extends TestCase
         // For FIXED_LINE_OR_MOBILE, a number should be considered valid if it matches the possible
         // lengths for mobile *or* fixed-line numbers.
         $number->setCountryCode(290)->setNationalNumber(1234);
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
 
         $number->setNationalNumber(12345);
-        $this->assertEquals(ValidationResult::TOO_SHORT,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::INVALID_LENGTH,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::TOO_SHORT,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::INVALID_LENGTH,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
 
         $number->setNationalNumber(123456);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
 
         $number->setNationalNumber(1234567);
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::MOBILE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
 
         // 8-digit numbers are possible for toll-free and premium-rate numbers only.
         $number->setNationalNumber(12345678);
-        $this->assertEquals(ValidationResult::IS_POSSIBLE,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE));
-        $this->assertEquals(ValidationResult::TOO_LONG,
-            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE));
+        $this->assertEquals(
+            ValidationResult::IS_POSSIBLE,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::TOLL_FREE)
+        );
+        $this->assertEquals(
+            ValidationResult::TOO_LONG,
+            $this->phoneUtil->isPossibleNumberForTypeWithReason($number, PhoneNumberType::FIXED_LINE_OR_MOBILE)
+        );
     }
 
     public function testIsNotPossibleNumber()
@@ -3337,19 +3445,31 @@ class PhoneNumberUtilTest extends TestCase
         // Testing Russian extension \u0434\u043E\u0431 with variants found online.
         $ruWithExtension = new PhoneNumber();
         $ruWithExtension->setCountryCode(7)->setNationalNumber(4232022511)->setExtension('100');
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU));
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU));
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11\xD0\xB4\xD0\xBE\xD0\xB1100", RegionCode::RU));
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU)
+        );
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU)
+        );
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU)
+        );
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11 \xD0\xB4\xD0\xBE\xD0\xB1 100", RegionCode::RU)
+        );
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11\xD0\xB4\xD0\xBE\xD0\xB1100", RegionCode::RU)
+        );
         // In upper case
-        $this->assertEquals($ruWithExtension,
-            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU));
+        $this->assertEquals(
+            $ruWithExtension,
+            $this->phoneUtil->parse("8 (423) 202-25-11, \xD0\xB4\xD0\xBE\xD0\xB1. 100", RegionCode::RU)
+        );
 
         // Test that if a number has two extensions specified, we ignore the second.
         $usWithTwoExtensionsNumber = new PhoneNumber();
@@ -3532,8 +3652,10 @@ class PhoneNumberUtilTest extends TestCase
             MatchType::EXACT_MATCH,
             $this->phoneUtil->isNumberMatch('+64 3 331-6005 ext. 1234', '+6433316005;1234')
         );
-        $this->assertEquals(MatchType::EXACT_MATCH,
-            $this->phoneUtil->isNumberMatch('+7 423 202-25-11 ext 100', "+7 4232022511 \xD0\xB4\xD0\xBE\xD0\xB1. 100"));
+        $this->assertEquals(
+            MatchType::EXACT_MATCH,
+            $this->phoneUtil->isNumberMatch('+7 423 202-25-11 ext 100', "+7 4232022511 \xD0\xB4\xD0\xBE\xD0\xB1. 100")
+        );
 
         // Test proto buffers.
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch(self::$nzNumber, '+6403 331 6005'));
