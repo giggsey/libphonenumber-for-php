@@ -98,7 +98,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '(?:59\\d\\d|8(?:1(?:[67]\\d|8[01389])|2(?:0\\d|2[0378]|8[0-2489])|3[389]\\d))\\d{4}',
+    'NationalNumberPattern' => '(?:59\\d\\d|8(?:1(?:[67]\\d|8[0-489])|2(?:0\\d|2[0-37-9]|8[0-2489])|3[389]\\d))\\d{4}',
     'ExampleNumber' => '59012345',
     'PossibleLength' => 
     array (
