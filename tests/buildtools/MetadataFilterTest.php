@@ -211,12 +211,12 @@ class MetadataFilterTest extends TestCase
         // Order and whitespace don't matter
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-            ' nationalNumberPattern '
+                ' nationalNumberPattern '
             . ': uan ( exampleNumber , possibleLengthLocalOnly,     possibleLength ) '
             . ': nationalPrefix '
             . ': fixedLine '
             . ': pager ( exampleNumber ) '
-        )),
+            )),
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
                 'uan(possibleLength,exampleNumber,possibleLengthLocalOnly)'
                 . ':pager(exampleNumber)'
