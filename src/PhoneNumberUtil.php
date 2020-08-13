@@ -600,8 +600,10 @@ class PhoneNumberUtil
      */
     public static function formattingRuleHasFirstGroupOnly($nationalPrefixFormattingRule)
     {
-        $firstGroupOnlyPrefixPatternMatcher = new Matcher(static::FIRST_GROUP_ONLY_PREFIX_PATTERN,
-            $nationalPrefixFormattingRule);
+        $firstGroupOnlyPrefixPatternMatcher = new Matcher(
+            static::FIRST_GROUP_ONLY_PREFIX_PATTERN,
+            $nationalPrefixFormattingRule
+        );
 
         return mb_strlen($nationalPrefixFormattingRule) === 0
             || $firstGroupOnlyPrefixPatternMatcher->matches();
@@ -1761,8 +1763,11 @@ class PhoneNumberUtil
 
             $indexOfRfc3966Prefix = strpos($numberToParse, static::RFC3966_PREFIX);
             $indexOfNationalNumber = ($indexOfRfc3966Prefix !== false) ? $indexOfRfc3966Prefix + strlen(static::RFC3966_PREFIX) : 0;
-            $nationalNumber .= substr($numberToParse, $indexOfNationalNumber,
-                $indexOfPhoneContext - $indexOfNationalNumber);
+            $nationalNumber .= substr(
+                $numberToParse,
+                $indexOfNationalNumber,
+                $indexOfPhoneContext - $indexOfNationalNumber
+            );
         } else {
             // Extract a possible number from the string passed in (this strips leading characters that
             // could not be the start of a phone number.)
@@ -2145,7 +2150,10 @@ class PhoneNumberUtil
                 // If the original number was viable, and the resultant number is not, we return.
                 if ($isViableOriginalNumber &&
                     !$this->matcherAPI->matchNationalNumber(
-                        substr($number, $prefixMatcher->end()), $generalDesc, false)) {
+                        substr($number, $prefixMatcher->end()),
+                        $generalDesc,
+                        false
+                    )) {
                     return false;
                 }
                 if ($carrierCode !== null && $numOfGroups > 0 && $prefixMatcher->group($numOfGroups) !== null) {
@@ -2232,9 +2240,11 @@ class PhoneNumberUtil
                 // Note that when adding the possible lengths from mobile, we have to again check they
                 // aren't empty since if they are this indicates they are the same as the general desc and
                 // should be obtained from there.
-                $possibleLengths = array_merge($possibleLengths,
+                $possibleLengths = array_merge(
+                    $possibleLengths,
                     (count($mobileDesc->getPossibleLength()) === 0)
-                        ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength());
+                        ? $metadata->getGeneralDesc()->getPossibleLength() : $mobileDesc->getPossibleLength()
+                );
 
                 // The current list is sorted; we need to merge in the new list and re-sort (duplicates
                 // are okay). Sorting isn't so expensive because the lists are very small.
@@ -2384,7 +2394,8 @@ class PhoneNumberUtil
                 } else {
                     $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::NATIONAL);
                 }
-            } elseif (($regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
+            } elseif ((
+                $regionCode == static::REGION_CODE_FOR_NON_GEO_ENTITY ||
                     // MX fixed line and mobile numbers should always be formatted in international format,
                     // even when dialed within MX. For national format to work, a carrier code needs to be
                     // used, and the correct carrier code depends on if the caller and callee are from the
@@ -2397,7 +2408,7 @@ class PhoneNumberUtil
                         ($regionCode === 'MX' || $regionCode === 'CL' || $regionCode === 'UZ')
                         && $isFixedLineOrMobile
                     )
-                ) && $this->canBeInternationallyDialled($numberNoExt)
+            ) && $this->canBeInternationallyDialled($numberNoExt)
             ) {
                 $formattedNumber = $this->format($numberNoExt, PhoneNumberFormat::INTERNATIONAL);
             } else {
@@ -3060,8 +3071,11 @@ class PhoneNumberUtil
                 $nationalPrefix = $metadata->getNationalPrefix();
                 if (mb_strlen($nationalPrefix) > 0) {
                     // Replace $NP with national prefix and $FG with the first group ($1).
-                    $nationalPrefixFormattingRule = str_replace(array(static::NP_STRING, static::FG_STRING),
-                        array($nationalPrefix, '$1'), $nationalPrefixFormattingRule);
+                    $nationalPrefixFormattingRule = str_replace(
+                        array(static::NP_STRING, static::FG_STRING),
+                        array($nationalPrefix, '$1'),
+                        $nationalPrefixFormattingRule
+                    );
                     $numFormatCopy->setNationalPrefixFormattingRule($nationalPrefixFormattingRule);
                 } else {
                     // We don't want to have a rule for how to format the national prefix if there isn't one.

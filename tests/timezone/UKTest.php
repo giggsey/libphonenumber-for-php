@@ -36,6 +36,7 @@ class UKTest extends TestCase
                 'Europe/Jersey',
                 'Europe/London'
             ),
-            $timeZone->getTimeZonesForNumber($number));
+            $timeZone->getTimeZonesForNumber($number)
+        );
     }
 }

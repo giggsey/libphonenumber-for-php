@@ -134,8 +134,10 @@ class MetadataFilterTest extends TestCase
         $fieldMap = array();
         $fieldMap['fixedLine'] = array('exampleNumber', 'possibleLength');
 
-        $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,possibleLength)'),
-            $fieldMap);
+        $this->assertEquals(
+            MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,possibleLength)'),
+            $fieldMap
+        );
     }
 
     public function testParseFieldMapFromString_mixOfGroups()
@@ -180,7 +182,8 @@ class MetadataFilterTest extends TestCase
     {
         // Listing all excludable parent fields is equivalent to listing all excludable child field.s
         $this->assertEquals(
-            MetadataFilter::parseFieldMapFromString('fixedLine'
+            MetadataFilter::parseFieldMapFromString(
+                'fixedLine'
                 . ':mobile'
                 . ':tollFree'
                 . ':premiumRate'
@@ -196,38 +199,49 @@ class MetadataFilterTest extends TestCase
                 . ':carrierSpecific'
                 . ':smsServices'
                 . ':noInternationalDialling'
-            ), MetadataFilter::parseFieldMapFromString('nationalNumberPattern'
+            ),
+            MetadataFilter::parseFieldMapFromString(
+                'nationalNumberPattern'
             . ':possibleLength'
             . ':possibleLengthLocalOnly'
             . ':exampleNumber'
-        ));
+            )
+        );
 
         // Order and whitespace don't matter
-        $this->assertEquals($this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-            ' nationalNumberPattern '
+        $this->assertEquals(
+            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
+                ' nationalNumberPattern '
             . ': uan ( exampleNumber , possibleLengthLocalOnly,     possibleLength ) '
             . ': nationalPrefix '
             . ': fixedLine '
-            . ': pager ( exampleNumber ) ')),
+            . ': pager ( exampleNumber ) '
+            )),
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
                 'uan(possibleLength,exampleNumber,possibleLengthLocalOnly)'
                 . ':pager(exampleNumber)'
                 . ':fixedLine'
                 . ':nationalPrefix'
-                . ':nationalNumberPattern')));
+                . ':nationalNumberPattern'
+            ))
+        );
 
         // Parent explicitly listing all possible children.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
-                'uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)')),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan')));
+                'uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)'
+            )),
+            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan'))
+        );
 
         // All parent's children covered, some implicitly and some explicitly.
         $this->assertEquals(
             $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
                 'uan(nationalNumberPattern,possibleLength,exampleNumber)'
-                . ':possibleLengthLocalOnly')),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan:possibleLengthLocalOnly')));
+                . ':possibleLengthLocalOnly'
+            )),
+            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan:possibleLengthLocalOnly'))
+        );
 
         // Child field covered by all parents explicitly.
         // It seems this will always be better expressed as a wildcard child, but the check is complex
@@ -249,8 +263,10 @@ class MetadataFilterTest extends TestCase
                 . ':standardRate(exampleNumber)'
                 . ':carrierSpecific(exampleNumber)'
                 . ':smsServices(exampleNumber)'
-                . ':noInternationalDialling(exampleNumber)'),
-            MetadataFilter::parseFieldMapFromString('exampleNumber'));
+                . ':noInternationalDialling(exampleNumber)'
+            ),
+            MetadataFilter::parseFieldMapFromString('exampleNumber')
+        );
 
         // Child field given as a group by itself while it's covered by all parents implicitly.
         // It seems this will always be better expressed without the wildcard child, but the check is
@@ -273,7 +289,8 @@ class MetadataFilterTest extends TestCase
                 . ':carrierSpecific'
                 . ':smsServices'
                 . ':noInternationalDialling'
-                . ':exampleNumber'),
+                . ':exampleNumber'
+            ),
             MetadataFilter::parseFieldMapFromString(
                 'fixedLine'
                 . ':mobile'
@@ -290,7 +307,9 @@ class MetadataFilterTest extends TestCase
                 . ':standardRate'
                 . ':carrierSpecific'
                 . ':smsServices'
-                . ':noInternationalDialling'));
+                . ':noInternationalDialling'
+            )
+        );
     }
 
     /**
@@ -358,7 +377,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as middle group.
         try {
             MetadataFilter::parseFieldMapFromString(
-                'pager:nationalPrefix:something_else:nationalNumberPattern');
+                'pager:nationalPrefix:something_else:nationalNumberPattern'
+            );
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -568,7 +588,8 @@ class MetadataFilterTest extends TestCase
             MetadataFilter::parseFieldMapFromString(
                 'uan(nationalNumberPattern,possibleLength,exampleNumber)'
                 . ':possibleLengthLocalOnly'
-                . ':exampleNumber');
+                . ':exampleNumber'
+            );
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -578,7 +599,8 @@ class MetadataFilterTest extends TestCase
         // Child field given twice as children of the same parent.
         try {
             MetadataFilter::parseFieldMapFromString(
-                'fixedLine(possibleLength,exampleNumber,possibleLength)');
+                'fixedLine(possibleLength,exampleNumber,possibleLength)'
+            );
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -603,7 +625,8 @@ class MetadataFilterTest extends TestCase
                 . ':standardRate(exampleNumber)'
                 . ':carrierSpecific(exampleNumber)'
                 . ':noInternationalDialling(exampleNumber)'
-                . ':exampleNumber');
+                . ':exampleNumber'
+            );
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -630,7 +653,8 @@ class MetadataFilterTest extends TestCase
                 . ':carrierSpecific(exampleNumber)'
                 . ':smsServices'
                 . ':noInternationalDialling(exampleNumber)'
-                . ':exampleNumber');
+                . ':exampleNumber'
+            );
             $this->fail();
         } catch (\RuntimeException $e) {
             // Test passed.
@@ -879,8 +903,10 @@ class MetadataFilterTest extends TestCase
         $this->assertTrue($filter->shouldDrop('smsServices', 'nationalNumberPattern'));
 
         // Integration tests starting with flag values
-        $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop('fixedLine',
-            'exampleNumber'));
+        $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop(
+            'fixedLine',
+            'exampleNumber'
+        ));
 
         // Integration tests starting with blacklist strings.
         $metadataFilter = new MetadataFilter(MetadataFilter::parseFieldMapFromString('fixedLine'));
@@ -1025,13 +1051,18 @@ class MetadataFilterTest extends TestCase
 
     public function testIntegrityOfFieldSets()
     {
-        $union = \array_merge(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS, MetadataFilter::$EXCLUDABLE_CHILD_FIELDS,
-            MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS);
+        $union = \array_merge(
+            MetadataFilter::$EXCLUDABLE_PARENT_FIELDS,
+            MetadataFilter::$EXCLUDABLE_CHILD_FIELDS,
+            MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS
+        );
         $union = \array_unique($union);
 
         // Mutually exclusive sets
-        $this->assertEquals(\count($union),
-            \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
+        $this->assertEquals(
+            \count($union),
+            \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS)
+        );
 
         // Non empty sets
         $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS));
