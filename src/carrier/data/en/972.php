@@ -25,6 +25,7 @@ return array (
   972553 => 'Free Telecom',
   972554 => 'Cellran Cellular Communications',
   9725550 => 'Annatel',
+  9725551 => 'Annatel',
   9725555 => 'Rami Levy',
   972556 => 'Rami Levy',
   9725570 => 'Cellact',
