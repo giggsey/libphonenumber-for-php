@@ -55,4 +55,5 @@ return array (
   234907 => 'Airtel',
   234908 => '9mobile',
   234909 => '9mobile',
+  234915 => 'Glo',
 );
