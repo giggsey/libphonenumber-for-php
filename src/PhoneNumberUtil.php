@@ -493,7 +493,7 @@ class PhoneNumberUtil
     /**
      * Helper initialiser method to create the regular-expression pattern to match extensions,
      * allowing the one-char extension symbols provided by {@code singleExtnSymbols}.
-     
+     *
      * @param string $singleExtnSymbols
      * @return string
      */
@@ -565,7 +565,7 @@ class PhoneNumberUtil
     /**
      * Converts all alpha characters in a number to their respective digits on a keypad, but retains
      * existing formatting.
-     
+     *
      * @param string $number
      * @return string
      */
@@ -924,7 +924,7 @@ class PhoneNumberUtil
     }
 
     /**
-     * Returns the type of number passed in i.e Toll free, premium. 
+     * Returns the type of number passed in i.e Toll free, premium.
      *
      * @param string $nationalNumber
      * @param PhoneMetadata $metadata
@@ -3460,7 +3460,7 @@ class PhoneNumberUtil
      * Returns true if a string ends with a given substring, false otherwise.
      *
      * @param string $hayStack
-     * @param string $needle 
+     * @param string $needle
      * @return bool
      */
     protected function stringEndsWithString($hayStack, $needle)
@@ -3610,7 +3610,7 @@ class PhoneNumberUtil
      * Attempts to extract a valid number from a phone number that is too long to be valid, and resets
      * the PhoneNumber object passed in to that valid version. If no valid number could be extracted,
      * the PhoneNumber object passed in will not be modified.
-     
+     *
      * @param PhoneNumber $number a PhoneNumber object which contains a number that is too long to be valid.
      * @return boolean true if a valid phone number can be successfully extracted.
      */
