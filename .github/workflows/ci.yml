@@ -29,6 +29,7 @@ jobs:
           - "7.2"
           - "7.3"
           - "7.4"
+          - "8.0"
         include:
           - php-version: 5.3
             dependencies: lowest
@@ -93,7 +94,7 @@ jobs:
         if: steps.phpunit-coverage.outcome == 'success'
         run: |
           [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
-          php $COVERALLS_PATH -v --exclude-no-stmt
+          [[ -n $COVERALLS_REPO_TOKEN ]] && php $COVERALLS_PATH -v --exclude-no-stmt
         env:
           COVERALLS_RUN_LOCALLY: 1
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
