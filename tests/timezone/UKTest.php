@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class UKTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
     }

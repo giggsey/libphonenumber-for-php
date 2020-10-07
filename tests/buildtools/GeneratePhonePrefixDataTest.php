@@ -9,7 +9,7 @@ class GeneratePhonePrefixDataTest extends TestCase
 {
     private static $available_data_files;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $temporaryMap = array();
 

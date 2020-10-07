@@ -19,7 +19,7 @@ class PrefixFileReaderTest extends TestCase
      */
     protected $reader;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$KO_NUMBER = new PhoneNumber();
         self::$KO_NUMBER->setCountryCode(82)->setNationalNumber(22123456);
@@ -37,7 +37,7 @@ class PrefixFileReaderTest extends TestCase
         self::$SE_NUMBER->setCountryCode(46)->setNationalNumber(81234567);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->reader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . self::TEST_META_DATA_FILE_PREFIX);
     }

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  */
 class Issue135Test extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         // Reset instance each time
         PhoneNumberUtil::resetInstance();

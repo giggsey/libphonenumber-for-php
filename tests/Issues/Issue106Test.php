@@ -14,13 +14,13 @@ class Issue106Test extends TestCase
      */
     protected $geocoder;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$TW_Number1 = new PhoneNumber();
         self::$TW_Number1->setCountryCode(886)->setNationalNumber(223113731);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberOfflineGeocoder::resetInstance();
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();

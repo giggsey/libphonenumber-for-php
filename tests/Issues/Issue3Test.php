@@ -14,7 +14,7 @@ class Issue3Test extends TestCase
      */
     public $phoneNumberUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();

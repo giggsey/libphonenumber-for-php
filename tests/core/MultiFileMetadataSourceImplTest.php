@@ -14,7 +14,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
      */
     private $multiFileMetadataSource;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
             new DefaultMetadataLoader(),
@@ -32,7 +32,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
             $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
             $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_XX', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+            $this->assertStringContainsString('no/such/file_XX', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
         }
 
         try {
@@ -44,7 +44,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
             );
             $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_123', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+            $this->assertStringContainsString('no/such/file_123', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
         }
     }
 }

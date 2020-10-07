@@ -30,7 +30,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
      */
     protected $geocoder;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$KO_Number1 = new PhoneNumber();
         self::$KO_Number1->setCountryCode(82)->setNationalNumber(22123456);
@@ -81,7 +81,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         self::$internationalTollFree->setCountryCode(800)->setNationalNumber(12345678);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberOfflineGeocoder::resetInstance();
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance(self::TEST_META_DATA_FILE_PREFIX);
