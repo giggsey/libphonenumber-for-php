@@ -6,6 +6,7 @@ use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class MultiFileMetadataSourceImplTest extends TestCase
 {
@@ -31,8 +32,8 @@ class MultiFileMetadataSourceImplTest extends TestCase
         try {
             $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
             $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->assertStringContainsString('no/such/file_XX', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+        } catch (RuntimeException $e) {
+            $this->assertTrue(strpos($e->getMessage(), 'no/such/file_XX') !== false, 'Unexpected error: ' . $e->getMessage());
         }
 
         try {
@@ -43,8 +44,8 @@ class MultiFileMetadataSourceImplTest extends TestCase
                 new DefaultMetadataLoader()
             );
             $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->assertStringContainsString('no/such/file_123', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+        } catch (RuntimeException $e) {
+            $this->assertTrue(strpos($e->getMessage(), 'no/such/file_123') !== false, 'Unexpected error: ' . $e->getMessage());
         }
     }
 }
