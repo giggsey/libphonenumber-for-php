@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:6|8\\d\\d)\\d{7}|[1-57-9]\\d{6}',
+    'NationalNumberPattern' => '8\\d{9}|[68]\\d{7}|[1-57-9]\\d{6}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -52,12 +52,10 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{4}(?:\\d{3})?',
+    'NationalNumberPattern' => '800\\d{4}(?:\\d(?:\\d{2})?)?',
     'ExampleNumber' => '8001234',
     'PossibleLength' => 
     array (
-      0 => 7,
-      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -169,7 +167,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '6',
+        0 => '[68]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

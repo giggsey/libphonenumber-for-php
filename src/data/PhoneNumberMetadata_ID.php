@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:(?:007803|8\\d{4})\\d|[1-36])\\d{6}|[1-9]\\d{8,10}|[2-9]\\d{7}',
+    'NationalNumberPattern' => '(?:(?:00[1-9]|8\\d)\\d{4}|[1-36])\\d{6}|00\\d{10}|[1-9]\\d{8,10}|[2-9]\\d{7}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -66,7 +66,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '007803\\d{7}|(?:177\\d|800)\\d{5,7}',
+    'NationalNumberPattern' => '00[17]803\\d{7}|(?:177\\d|800)\\d{5,7}|001803\\d{6}',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
@@ -74,7 +74,8 @@ return array (
       1 => 9,
       2 => 10,
       3 => 11,
-      4 => 13,
+      4 => 12,
+      5 => 13,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -159,11 +160,12 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '(?:007803\\d|8071)\\d{6}',
+    'NationalNumberPattern' => '001803\\d{6,7}|(?:007803\\d|8071)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 10,
-      1 => 13,
+      1 => 12,
+      2 => 13,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -171,7 +173,7 @@ return array (
   ),
   'id' => 'ID',
   'countryCode' => 62,
-  'internationalPrefix' => '00[189]',
+  'internationalPrefix' => '00[89]',
   'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0',
   'sameMobileAndFixedLinePattern' => false,
@@ -286,6 +288,18 @@ return array (
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     9 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3 $4',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '001',
+      ),
+      'nationalPrefixFormattingRule' => '',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    10 => 
     array (
       'pattern' => '(\\d{2})(\\d{4})(\\d{3})(\\d{4})',
       'format' => '$1 $2 $3 $4',
