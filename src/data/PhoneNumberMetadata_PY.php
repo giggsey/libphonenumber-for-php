@@ -14,14 +14,15 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '9\\d{10}|(?:[2-46-9]\\d|5[0-8])\\d{7}|[2-9]\\d{5,7}',
+    'NationalNumberPattern' => '59\\d{4,6}|9\\d{5,10}|(?:[2-46-8]\\d|5[0-8])\\d{4,7}',
     'PossibleLength' => 
     array (
       0 => 6,
       1 => 7,
       2 => 8,
       3 => 9,
-      4 => 11,
+      4 => 10,
+      5 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -58,11 +59,13 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '9800\\d{7}',
+    'NationalNumberPattern' => '9800\\d{5,7}',
     'ExampleNumber' => '98000123456',
     'PossibleLength' => 
     array (
-      0 => 11,
+      0 => 9,
+      1 => 10,
+      2 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
