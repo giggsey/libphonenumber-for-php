@@ -35,7 +35,6 @@ jobs:
           - php-version: 7.4
             coverage: coverage
           - php-version: 8.0
-            coverage: coverage
             ignore-platform-deps: yes
     steps:
       - name: Checkout
