@@ -34,6 +34,8 @@ jobs:
             dependencies: lowest
           - php-version: 7.4
             coverage: coverage
+          - php-version: 8.0
+            ignore-platform-deps: yes
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -58,19 +60,26 @@ jobs:
           key: ${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ matrix.php-version }}-composer-
       - name: Install Composer dependencies (highest)
-        if: "matrix.dependencies != 'lowest'"
+        if: "matrix.dependencies != 'lowest' && matrix.ignore-platform-deps != 'yes'"
         uses: nick-invision/retry@v1
         with:
           timeout_minutes: 10
           max_attempts: 3
           command: composer update ${{ env.COMPOSER_FLAGS }}
       - name: Install Composer dependencies (lowest)
-        if: "matrix.dependencies == 'lowest'"
+        if: "matrix.dependencies == 'lowest' && matrix.ignore-platform-deps != 'yes'"
         uses: nick-invision/retry@v1
         with:
           timeout_minutes: 10
           max_attempts: 3
           command: composer update ${{ env.COMPOSER_FLAGS }} --prefer-lowest --prefer-stable
+      - name: Install Composer dependencies (ignore platform reqs)
+        if: "matrix.ignore-platform-deps == 'yes'"
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: composer update ${{ env.COMPOSER_FLAGS }} --ignore-platform-reqs
       - name: composer validate
         run: composer validate --strict
       - name: Test with phpunit (with coverage)
@@ -91,9 +100,13 @@ jobs:
             php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml
       - name: Submit Coveralls
         if: steps.phpunit-coverage.outcome == 'success'
-        run: |
-          [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
-          php $COVERALLS_PATH -v --exclude-no-stmt
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: |
+            [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
+            [[ -n $COVERALLS_REPO_TOKEN ]] && php $COVERALLS_PATH -v --exclude-no-stmt || true
         env:
           COVERALLS_RUN_LOCALLY: 1
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
