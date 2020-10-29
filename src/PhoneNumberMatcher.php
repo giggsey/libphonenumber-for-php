@@ -178,9 +178,7 @@ class PhoneNumberMatcher implements \Iterator
         static::$leadClass = $leadClass;
 
         // Init extension patterns from PhoneNumberUtil
-        PhoneNumberUtil::initCapturingExtnDigits();
         PhoneNumberUtil::initExtnPatterns();
-
 
         // Phone number pattern allowing optional punctuation.
         static::$pattern = '(?:' . $leadClass . $punctuation . ')' . $leadLimit
