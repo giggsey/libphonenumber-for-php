@@ -25,6 +25,7 @@ return array (
   966576 => 'Lebara',
   966577 => 'Lebara',
   966578 => 'Lebara',
+  966579 => 'Mobily',
   96658 => 'Zain',
   96659 => 'Zain',
 );
