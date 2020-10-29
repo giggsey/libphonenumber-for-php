@@ -3442,7 +3442,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('(800) 901-3355 , 7246433', RegionCode::US));
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('(800) 901-3355 ext: 7246433', RegionCode::US));
 
-        // Testing Russian extension \u0434\u043E\u0431 with variants found online.
+        // Testing Russian extension \xB0\xB4\u043E\u0431 with variants found online.
         $ruWithExtension = new PhoneNumber();
         $ruWithExtension->setCountryCode(7)->setNationalNumber(4232022511)->setExtension('100');
         $this->assertEquals(
@@ -3494,6 +3494,173 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('+1 (645) 123 1234-910#', RegionCode::US));
         // Retry with the same number in a slightly different format.
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('+1 (645) 123 1234 ext. 910#', RegionCode::US));
+    }
+
+    public function testParseHandlesLongExtensionsWithExplicitLabels()
+    {
+        // Test lower and upper limits of extension lengths for each type of label.
+        $nzNumber = new PhoneNumber();
+        $nzNumber
+            ->setCountryCode(64)
+            ->setNationalNumber(33316005);
+
+        // Firstly, when in RFC format: PhoneNumberUtil.extLimitAfterExplicitLabel
+        $nzNumber->setExtension('0');
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('tel:+6433316005;ext=0', RegionCode::NZ));
+        $nzNumber->setExtension('01234567890123456789');
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse('tel:+6433316005;ext=01234567890123456789', RegionCode::NZ)
+        );
+
+        // Extension too long
+        try {
+            $this->phoneUtil->parse("tel:+6433316005;ext=012345678901234567890", RegionCode::NZ);
+            $this->fail(
+                'This should not parse length as lenght of extension is higher than allowed: '
+                . 'tel:+6433316005;ext=012345678901234567890'
+            );
+        } catch (NumberParseException $e) {
+            // Expect this exception.
+            $this->assertEquals(NumberParseException::NOT_A_NUMBER, $e->getErrorType());
+        }
+
+        // Explicit extension label: PhoneNumberUtil.extLimitAfterExplicitLabel
+        $nzNumber->setExtension("1");
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005ext:1", RegionCode::NZ));
+
+        $nzNumber->setExtension("12345678901234567890");
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 xtn:12345678901234567890", RegionCode::NZ));
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse("03 3316005 extension\t12345678901234567890", RegionCode::NZ)
+        );
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse("03 3316005 xtensio:12345678901234567890", RegionCode::NZ)
+        );
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse("03 3316005 xtensi\xC3\xB3n, 12345678901234567890#", RegionCode::NZ)
+        );
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse("03 3316005extension.12345678901234567890", RegionCode::NZ)
+        );
+        $this->assertEquals(
+            $nzNumber,
+            $this->phoneUtil->parse(
+                "03 3316005 \xD0\xB4\xD0\xBE\xD0\xB1:12345678901234567890",
+                RegionCode::NZ
+            )
+        );
+
+        // Extension too long.
+        try {
+            $this->phoneUtil->parse("03 3316005 extension 123456789012345678901", RegionCode::NZ);
+            $this->fail(
+                'This should not parse as length of extension is higher than allowed: '
+                . '03 3316005 extension 123456789012345678901'
+            );
+        } catch (NumberParseException $e) {
+            // Expected this exception.
+            $this->assertEquals(NumberParseException::TOO_LONG, $e->getErrorType());
+        }
+    }
+
+    public function testParseHandlesLongExtensionsWithAutoDiallingLabels()
+    {
+        // Secondly, cases of auto-dialling and other standard extension labels,
+        // PhoneNumberUtil $extLimitAfterLikelyLabel
+        $usNumberUserInput = new PhoneNumber();
+        $usNumberUserInput
+            ->setCountryCode(1)
+            ->setNationalNumber(2679000000);
+
+        $usNumberUserInput->setExtension("123456789012345");
+        $this->assertEquals(
+            $usNumberUserInput,
+            $this->phoneUtil->parse("+12679000000,,123456789012345#", RegionCode::US)
+        );
+        $this->assertEquals(
+            $usNumberUserInput,
+            $this->phoneUtil->parse("+12679000000;123456789012345#", RegionCode::US)
+        );
+
+        $ukNumberUserInput = new PhoneNumber();
+        $ukNumberUserInput
+            ->setCountryCode(44)
+            ->setNationalNumber(2034000000)
+            ->setExtension("123456789");
+
+        $this->assertEquals($ukNumberUserInput, $this->phoneUtil->parse("+442034000000,,123456789#", RegionCode::GB));
+        // Extension too long.
+        try {
+            $this->phoneUtil->parse("+12679000000,,1234567890123456#", RegionCode::US);
+            $this->fail(
+                'This should not parse as length of extension is higher than allowed: '
+                . '+12679000000,,1234567890123456#'
+            );
+        } catch (NumberParseException $e) {
+            // Expected this exception.
+            $this->assertEquals(NumberParseException::NOT_A_NUMBER, $e->getErrorType());
+        }
+    }
+
+    public function testParseHandlesShortExtensionsWithAmbiguousChar()
+    {
+        $nzNumber = new PhoneNumber();
+        $nzNumber
+            ->setCountryCode(64)
+            ->setNationalNumber(33316005);
+
+        // Thirdly, for single and non-standard cases:
+        // PhoneNumberUtil $extLimitAfterAmbiguousChar
+        $nzNumber->setExtension("123456789");
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 x 123456789", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 x. 123456789", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 #123456789#", RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 ~ 123456789", RegionCode::NZ));
+
+        // Extension too long.
+        try {
+            $this->phoneUtil->parse("03 3316005 ~ 1234567890", RegionCode::NZ);
+            $this->fail(
+                'This should not parse as length of extension is higher than allowed: '
+                . '03 3316005 ~ 1234567890'
+            );
+        } catch (NumberParseException $e) {
+            // Expected this exception.
+            $this->assertEquals(NumberParseException::TOO_LONG, $e->getErrorType());
+        }
+    }
+
+    public function testParseHandlesShortExtensionsWhenNotSureOfLabel()
+    {
+        // Lastly, when no explicit extension label present, but denoted by tailing #:
+        // PhoneNumberUtil $extLimitWhenNotSure
+        $usNumber = new PhoneNumber();
+        $usNumber
+            ->setCountryCode(1)
+            ->setNationalNumber(1234567890)
+            ->setExtension("666666");
+
+        $this->assertEquals($usNumber, $this->phoneUtil->parse("+1123-456-7890 666666#", RegionCode::US));
+
+        $usNumber->setExtension("6");
+        $this->assertEquals($usNumber, $this->phoneUtil->parse("+11234567890-6#", RegionCode::US));
+
+        // Extension too long.
+        try {
+            $this->phoneUtil->parse("+1123-456-7890 7777777#", RegionCode::US);
+            $this->fail(
+                'This should not parse as length of extension is higher than allowed: '
+                . '+1123-456-7890 7777777#'
+            );
+        } catch (NumberParseException $e) {
+            // Expected this exception.
+            $this->assertEquals(NumberParseException::NOT_A_NUMBER, $e->getErrorType());
+        }
     }
 
     public function testParseAndKeepRaw()

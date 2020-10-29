@@ -61,11 +61,12 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{5}',
+    'NationalNumberPattern' => '800\\d{5}(?:\\d{3})?',
     'ExampleNumber' => '80012345',
     'PossibleLength' => 
     array (
       0 => 8,
+      1 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -168,7 +169,7 @@ return array (
   array (
     0 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{2})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{2,7})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
