@@ -3565,7 +3565,6 @@ class PhoneNumberUtilTest extends TestCase
         } catch (NumberParseException $e) {
             // Expected this exception.
             $this->assertEquals(NumberParseException::TOO_LONG, $e->getErrorType());
-
         }
     }
 
