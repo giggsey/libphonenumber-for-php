@@ -67,10 +67,10 @@ jobs:
       - name: Test with phpunit (with coverage)
         id: phpunit-coverage
         if: "matrix.coverage == 'coverage'"
-        run: phpunit --verbose ${{ env.COVERAGE_FLAGS }}
+        run: ./phpunit --verbose ${{ env.COVERAGE_FLAGS }}
       - name: Test with phpunit (without coverage)
         if: "matrix.coverage != 'coverage'"
-        run: phpunit --verbose
+        run: ./phpunit --verbose
       - name: Upload code coverage to Scrutinize
         if: steps.phpunit-coverage.outcome == 'success'
         uses: nick-invision/retry@v1
