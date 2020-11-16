@@ -32,7 +32,11 @@ class MultiFileMetadataSourceImplTest extends TestCase
             $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
             $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_XX', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+            $this->doAssertStringContainsString(
+                'no/such/file_XX',
+                $e->getMessage(),
+                'Unexpected error: ' . $e->getMessage()
+            );
         }
 
         try {
@@ -44,7 +48,27 @@ class MultiFileMetadataSourceImplTest extends TestCase
             );
             $this->fail('Expected Exception');
         } catch (\RuntimeException $e) {
-            $this->assertContains('no/such/file_123', $e->getMessage(), 'Unexpected error: ' . $e->getMessage());
+            $this->doAssertStringContainsString(
+                'no/such/file_123',
+                $e->getMessage(),
+                'Unexpected error: ' . $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * Provide PHPUnit compatibility
+     *
+     * @param $needle
+     * @param $haystack
+     * @param $message
+     */
+    private function doAssertStringContainsString($needle, $haystack, $message)
+    {
+        if (method_exists($this, 'assertStringContainsString')) {
+            $this->assertStringContainsString($needle, $haystack, $message);
+        } else {
+            $this->assertContains($needle, $haystack, $message);
         }
     }
 }

@@ -176,11 +176,10 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertEquals($intlFormat, $metadata->getIntlNumberFormat(0)->getFormat());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testLoadInternationalFormatExpectsOnlyOnePattern()
     {
+        $this->doExpectException('\RuntimeException');
+
         $xmlInput = '<numberFormat><intlFormat/><intlFormat/></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
@@ -234,11 +233,10 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertEquals($nationalFormat, $numberFormat->getFormat());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testLoadNationalFormatRequiresFormat()
     {
+        $this->doExpectException('\RuntimeException');
+
         $xmlInput = '<numberFormat></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
@@ -247,11 +245,10 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::loadNationalFormat($metadata, $numberFormatElement, $numberFormat);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     */
     public function testLoadNationalFormatExpectsExactlyOneFormat()
     {
+        $this->doExpectException('\RuntimeException');
+
         $xmlInput = '<numberFormat><format/><format/></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
         $metadata = new PhoneMetadata();
@@ -684,12 +681,10 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertEquals("\\d{6}", $metadata->getSmsServices()->getNationalNumberPattern());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Multiple elements with type fixedLine found.
-     */
     public function testSetRelevantDescPatternsThrowsErrorIfTypePresentMultipleTimes()
     {
+        $this->doExpectException('\RuntimeException', "Multiple elements with type fixedLine found.");
+
         $xmlInput = '<territory countryCode="33">'
             . "  <fixedLine><nationalNumberPattern>\\d{6}</nationalNumberPattern></fixedLine>"
             . "  <fixedLine><nationalNumberPattern>\\d{6}</nationalNumberPattern></fixedLine>"
@@ -882,12 +877,10 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertEquals(13, $possibleLength[1]);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Found local-only lengths in short-number metadata
-     */
     public function testSetPossibleLengthsGeneralDesc_ShortNumberMetadataErrorsOnLocalLengths()
     {
+        $this->doExpectException('\RuntimeException', "Found local-only lengths in short-number metadata");
+
         $territoryElement = $this->parseXMLString('<territory>'
             . '<shortCode>'
             . '  <possibleLengths national="13" localOnly="6"/>'
@@ -903,12 +896,13 @@ class BuildMetadataFromXmlTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Duplicate length element found (6) in possibleLength string 6,6
-     */
     public function testProcessPhoneNumberDescElement_ErrorDuplicates()
     {
+        $this->doExpectException(
+            '\RuntimeException',
+            "Duplicate length element found (6) in possibleLength string 6,6"
+        );
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(6));
 
@@ -921,12 +915,13 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Possible length(s) found specified as a normal and local-only length: [6]
-     */
     public function testProcessPhoneNumberDescElement_ErrorDuplicatesOneLocal()
     {
+        $this->doExpectException(
+            '\RuntimeException',
+            "Possible length(s) found specified as a normal and local-only length: [6]"
+        );
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(6));
 
@@ -939,12 +934,10 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'mobile');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Out-of-range possible length
-     */
     public function testProcessPhoneNumberDescElement_ErrorUncoveredLengths()
     {
+        $this->doExpectException('\RuntimeException', "Out-of-range possible length");
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
 
@@ -984,12 +977,10 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertCount(1, $phoneNumberDesc->getPossibleLengthLocalOnly());
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage For input string "4d"
-     */
     public function testProcessPhoneNumberDescElement_InvalidNumber()
     {
+        $this->doExpectException('\RuntimeException', 'For input string "4d"');
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
         $territoryElement = $this->parseXMLString('<territory>'
@@ -1001,12 +992,13 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Found possible lengths specified at general desc: this should be derived from child elements. Affected country: FR
-     */
     public function testLoadCountryMetadata_GeneralDescHasNumberLengthsSet()
     {
+        $this->doExpectException(
+            '\RuntimeException',
+            "Found possible lengths specified at general desc: this should be derived from child elements. Affected country: FR"
+        );
+
         $territoryElement = $this->parseXMLString('<territory>'
             . '<generalDesc>'
             // This shouldn't be set, the possible lengths should be derived for generalDesc.
@@ -1025,12 +1017,10 @@ class BuildMetadataFromXmlTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Empty possibleLength string found.
-     */
     public function testProcessPhoneNumberDescElement_ErrorEmptyPossibleLengthStringAttribute()
     {
+        $this->doExpectException('\RuntimeException', "Empty possibleLength string found.");
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
         $territoryElement = $this->parseXMLString('<territory>'
@@ -1042,12 +1032,13 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Missing end of range character in possible length string [4,7].
-     */
     public function testProcessPhoneNumberDescElement_ErrorRangeSpecifiedWithComma()
     {
+        $this->doExpectException(
+            '\RuntimeException',
+            "Missing end of range character in possible length string [4,7]."
+        );
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
         $territoryElement = $this->parseXMLString('<territory>'
@@ -1059,12 +1050,10 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Missing end of range character in possible length string [4-.
-     */
     public function testProcessPhoneNumberDescElement_ErrorIncompleteRange()
     {
+        $this->doExpectException('\RuntimeException', "Missing end of range character in possible length string [4-.");
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
 
@@ -1077,12 +1066,10 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Ranges must have exactly one - character: missing for [4:10].
-     */
     public function testProcessPhoneNumberDescElement_ErrorNoDashInRange()
     {
+        $this->doExpectException('\RuntimeException', "Ranges must have exactly one - character: missing for [4:10].");
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
         $territoryElement = $this->parseXMLString('<territory>'
@@ -1094,12 +1081,13 @@ class BuildMetadataFromXmlTest extends TestCase
         BuildMetadataFromXml::processPhoneNumberDescElement($generalDesc, $territoryElement, 'fixedLine');
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage The first number in a range should be two or more digits lower than the second. Culprit possibleLength string: [10-10]
-     */
     public function testProcessPhoneNumberDescElement_ErrorRangeIsNotFromMinToMax()
     {
+        $this->doExpectException(
+            '\RuntimeException',
+            "The first number in a range should be two or more digits lower than the second. Culprit possibleLength string: [10-10]"
+        );
+
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
         $territoryElement = $this->parseXMLString('<territory>'
@@ -1122,6 +1110,23 @@ class BuildMetadataFromXmlTest extends TestCase
             $this->fail('getMetadataFilter should fail when liteBuild and specialBuild are both set');
         } catch (\RuntimeException $e) {
             $this->assertEquals('liteBuild and specialBuild may not both be set', $e->getMessage());
+        }
+    }
+
+    /**
+     * Helper function to support older PHPUnit versions
+     * @param $class
+     * @param null $message
+     */
+    private function doExpectException($class, $message = null)
+    {
+        if (method_exists($this, 'expectException') && method_exists($this, 'expectExceptionMessage')) {
+            $this->expectException($class);
+            if ($message) {
+                $this->expectExceptionMessage($message);
+            }
+        } else {
+            $this->setExpectedException($class, $message);
         }
     }
 }

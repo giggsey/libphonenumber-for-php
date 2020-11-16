@@ -11,13 +11,13 @@ on:
 env:
   COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --no-suggest --prefer-dist"
   COVERAGE_FLAGS: "--coverage-text --coverage-clover build/logs/clover.xml"
+  SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT: "1"
 
 jobs:
   tests:
     name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
         php-version:
           - "5.3"
@@ -29,13 +29,10 @@ jobs:
           - "7.2"
           - "7.3"
           - "7.4"
+          - "8.0"
         include:
-          - php-version: 5.3
-            dependencies: lowest
           - php-version: 7.4
             coverage: coverage
-          - php-version: 8.0
-            ignore-platform-deps: yes
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -59,36 +56,21 @@ jobs:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ matrix.php-version }}-composer-
-      - name: Install Composer dependencies (highest)
-        if: "matrix.dependencies != 'lowest' && matrix.ignore-platform-deps != 'yes'"
+      - name: Install Composer
         uses: nick-invision/retry@v1
         with:
           timeout_minutes: 10
           max_attempts: 3
           command: composer update ${{ env.COMPOSER_FLAGS }}
-      - name: Install Composer dependencies (lowest)
-        if: "matrix.dependencies == 'lowest' && matrix.ignore-platform-deps != 'yes'"
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: composer update ${{ env.COMPOSER_FLAGS }} --prefer-lowest --prefer-stable
-      - name: Install Composer dependencies (ignore platform reqs)
-        if: "matrix.ignore-platform-deps == 'yes'"
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: composer update ${{ env.COMPOSER_FLAGS }} --ignore-platform-reqs
       - name: composer validate
         run: composer validate --strict
       - name: Test with phpunit (with coverage)
         id: phpunit-coverage
         if: "matrix.coverage == 'coverage'"
-        run: vendor/bin/phpunit ${{ env.COVERAGE_FLAGS }}
+        run: ./phpunit --verbose ${{ env.COVERAGE_FLAGS }}
       - name: Test with phpunit (without coverage)
         if: "matrix.coverage != 'coverage'"
-        run: vendor/bin/phpunit
+        run: ./phpunit --verbose
       - name: Upload code coverage to Scrutinize
         if: steps.phpunit-coverage.outcome == 'success'
         uses: nick-invision/retry@v1
