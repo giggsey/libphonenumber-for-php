@@ -178,7 +178,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testLoadInternationalFormatExpectsOnlyOnePattern()
     {
-        $this->expectException('\RuntimeException');
+        $this->doExpectException('\RuntimeException');
 
         $xmlInput = '<numberFormat><intlFormat/><intlFormat/></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
@@ -235,7 +235,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testLoadNationalFormatRequiresFormat()
     {
-        $this->expectException('\RuntimeException');
+        $this->doExpectException('\RuntimeException');
 
         $xmlInput = '<numberFormat></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
@@ -247,7 +247,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testLoadNationalFormatExpectsExactlyOneFormat()
     {
-        $this->expectException('\RuntimeException');
+        $this->doExpectException('\RuntimeException');
 
         $xmlInput = '<numberFormat><format/><format/></numberFormat>';
         $numberFormatElement = $this->parseXMLString($xmlInput);
@@ -683,8 +683,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testSetRelevantDescPatternsThrowsErrorIfTypePresentMultipleTimes()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Multiple elements with type fixedLine found.");
+        $this->doExpectException('\RuntimeException', "Multiple elements with type fixedLine found.");
 
         $xmlInput = '<territory countryCode="33">'
             . "  <fixedLine><nationalNumberPattern>\\d{6}</nationalNumberPattern></fixedLine>"
@@ -880,8 +879,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testSetPossibleLengthsGeneralDesc_ShortNumberMetadataErrorsOnLocalLengths()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Found local-only lengths in short-number metadata");
+        $this->doExpectException('\RuntimeException', "Found local-only lengths in short-number metadata");
 
         $territoryElement = $this->parseXMLString('<territory>'
             . '<shortCode>'
@@ -900,8 +898,10 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorDuplicates()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Duplicate length element found (6) in possibleLength string 6,6");
+        $this->doExpectException(
+            '\RuntimeException',
+            "Duplicate length element found (6) in possibleLength string 6,6"
+        );
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(6));
@@ -917,8 +917,10 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorDuplicatesOneLocal()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Possible length(s) found specified as a normal and local-only length: [6]");
+        $this->doExpectException(
+            '\RuntimeException',
+            "Possible length(s) found specified as a normal and local-only length: [6]"
+        );
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(6));
@@ -934,8 +936,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorUncoveredLengths()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Out-of-range possible length");
+        $this->doExpectException('\RuntimeException', "Out-of-range possible length");
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -978,8 +979,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_InvalidNumber()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage('For input string "4d"');
+        $this->doExpectException('\RuntimeException', 'For input string "4d"');
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -994,11 +994,10 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testLoadCountryMetadata_GeneralDescHasNumberLengthsSet()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage(
+        $this->doExpectException(
+            '\RuntimeException',
             "Found possible lengths specified at general desc: this should be derived from child elements. Affected country: FR"
         );
-
 
         $territoryElement = $this->parseXMLString('<territory>'
             . '<generalDesc>'
@@ -1020,8 +1019,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorEmptyPossibleLengthStringAttribute()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Empty possibleLength string found.");
+        $this->doExpectException('\RuntimeException', "Empty possibleLength string found.");
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -1036,8 +1034,10 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorRangeSpecifiedWithComma()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Missing end of range character in possible length string [4,7].");
+        $this->doExpectException(
+            '\RuntimeException',
+            "Missing end of range character in possible length string [4,7]."
+        );
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -1052,8 +1052,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorIncompleteRange()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Missing end of range character in possible length string [4-.");
+        $this->doExpectException('\RuntimeException', "Missing end of range character in possible length string [4-.");
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -1069,8 +1068,7 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorNoDashInRange()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage("Ranges must have exactly one - character: missing for [4:10].");
+        $this->doExpectException('\RuntimeException', "Ranges must have exactly one - character: missing for [4:10].");
 
         $generalDesc = new PhoneNumberDesc();
         $generalDesc->setPossibleLength(array(4));
@@ -1085,8 +1083,8 @@ class BuildMetadataFromXmlTest extends TestCase
 
     public function testProcessPhoneNumberDescElement_ErrorRangeIsNotFromMinToMax()
     {
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage(
+        $this->doExpectException(
+            '\RuntimeException',
             "The first number in a range should be two or more digits lower than the second. Culprit possibleLength string: [10-10]"
         );
 
@@ -1112,6 +1110,23 @@ class BuildMetadataFromXmlTest extends TestCase
             $this->fail('getMetadataFilter should fail when liteBuild and specialBuild are both set');
         } catch (\RuntimeException $e) {
             $this->assertEquals('liteBuild and specialBuild may not both be set', $e->getMessage());
+        }
+    }
+
+    /**
+     * Helper function to support older PHPUnit versions
+     * @param $class
+     * @param null $message
+     */
+    private function doExpectException($class, $message = null)
+    {
+        if (method_exists($this, 'expectException') && method_exists($this, 'expectExceptionMessage')) {
+            $this->expectException($class);
+            if ($message) {
+                $this->expectExceptionMessage($message);
+            }
+        } else {
+            $this->setExpectedException($class, $message);
         }
     }
 }

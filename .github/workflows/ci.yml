@@ -36,15 +36,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      - name: "Choose PHPUnit version"
-        run: |
-          if [ "${{ matrix.php-version }}" = "7.4" ]; then
-            echo "SYMFONY_PHPUNIT_VERSION=7.5" >> $GITHUB_ENV;
-          elif [ "${{ matrix.php-version }}" = "8.0" ]; then
-            echo "SYMFONY_PHPUNIT_VERSION=9.4" >> $GITHUB_ENV;
-          fi
-
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
@@ -76,10 +67,10 @@ jobs:
       - name: Test with phpunit (with coverage)
         id: phpunit-coverage
         if: "matrix.coverage == 'coverage'"
-        run: vendor/bin/simple-phpunit --verbose ${{ env.COVERAGE_FLAGS }}
+        run: phpunit --verbose ${{ env.COVERAGE_FLAGS }}
       - name: Test with phpunit (without coverage)
         if: "matrix.coverage != 'coverage'"
-        run: vendor/bin/simple-phpunit --verbose
+        run: phpunit --verbose
       - name: Upload code coverage to Scrutinize
         if: steps.phpunit-coverage.outcome == 'success'
         uses: nick-invision/retry@v1
