@@ -65,7 +65,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
      */
     private function doAssertStringContainsString($needle, $haystack, $message)
     {
-        if (method_exists($this, 'sssertStringContainsString')) {
+        if (method_exists($this, 'assertStringContainsString')) {
             $this->assertStringContainsString($needle, $haystack, $message);
         } else {
             $this->assertContains($needle, $haystack, $message);
