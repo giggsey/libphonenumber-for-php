@@ -18,7 +18,6 @@ jobs:
     name: PHP ${{ matrix.php-version }}
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: true
       matrix:
         php-version:
           - "5.3"
