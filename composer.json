@@ -77,5 +77,8 @@
     "branch-alias": {
       "dev-master": "8.x-dev"
     }
+  },
+  "scripts": {
+    "test": "./phpunit"
   }
 }
