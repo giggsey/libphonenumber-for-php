@@ -13,6 +13,7 @@
 return array (
   25410 => 'Airtel',
   25411 => 'Safaricom',
+  25412 => 'Telkom',
   25470 => 'Safaricom',
   25471 => 'Safaricom',
   25472 => 'Safaricom',
