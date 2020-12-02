@@ -295,6 +295,7 @@ return array (
   467276 => 'Lycamobile Sweden',
   467277 => 'Lycamobile Sweden',
   467278 => 'Lycamobile Sweden',
+  467279 => 'Telenor Sverige',
   46728100 => 'Voice Integrate',
   46728101 => 'Beepsend',
   46728198 => 'Telavox AB',

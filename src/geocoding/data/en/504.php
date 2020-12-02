@@ -13,6 +13,7 @@
 return array (
   5042200 => 'Polo Paz',
   5042201 => 'Polo Paz',
+  5042202 => 'Tegucigalpa',
   5042203 => 'Polo Paz',
   5042209 => 'Res. Centro América, Tegucigalpa',
   5042211 => 'El Picacho',
