@@ -18,6 +18,7 @@ return array (
   230529 => 'MTML',
   23054 => 'Emtel',
   2305471 => 'Cellplus',
+  23055 => 'Emtel',
   23057 => 'Cellplus',
   230571 => 'Emtel',
   230572 => 'Emtel',
