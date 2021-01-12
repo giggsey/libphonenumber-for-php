@@ -50,7 +50,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '8(?:00|33|44|55|66|77|88)[2-9]\\d{6}',
+    'NationalNumberPattern' => '8(?:00(?:14|[2-9]\\d)|(?:33|44|55|66|77|88)[2-9]\\d)\\d{5}',
     'ExampleNumber' => '8002123456',
     'PossibleLength' => 
     array (
@@ -154,7 +154,7 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingDigits' => '8[024]9',
+  'leadingDigits' => '8001|8[024]9',
   'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

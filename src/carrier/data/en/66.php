@@ -123,6 +123,7 @@ return array (
   66659 => 'AIS',
   6665998 => 'DTAC',
   6666 => 'DTAC',
+  6667 => 'AIS',
   66800 => 'AIS',
   66801 => 'AIS',
   66802 => 'True Move',
