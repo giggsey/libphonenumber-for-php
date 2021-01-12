@@ -12,7 +12,12 @@
 
 return array (
   44113 => 'Leeds',
-  44114 => 'Sheffield',
+  441140 => 'Sheffield',
+  441141 => 'Sheffield',
+  441142 => 'Sheffield',
+  441143 => 'Sheffield',
+  441144 => 'Sheffield',
+  441145 => 'Sheffield',
   44115 => 'Nottingham',
   44116 => 'Leicester',
   44117 => 'Bristol',

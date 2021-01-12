@@ -12,6 +12,7 @@
 
 return array (
   852460 => 'China Unicom',
+  8524607 => 'Multibyte',
   8524610 => 'Sun Mobile',
   8524611 => 'Sun Mobile',
   8524612 => 'Sun Mobile',
