@@ -52,7 +52,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7}(?:\\d{2,3})?',
+    'NationalNumberPattern' => '8(?:00\\d{7}(?:\\d{2,3})?|11\\d{7})',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
@@ -146,10 +146,11 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '444\\d{4}',
+    'NationalNumberPattern' => '(?:444|811\\d{3})\\d{4}',
     'PossibleLength' => 
     array (
       0 => 7,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -181,7 +182,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '512|8[0589]|90',
+        0 => '512|8[01589]|90',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -234,7 +235,7 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '512|8[0589]|90',
+        0 => '512|8[01589]|90',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
