@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[23]\\d|[48]8)\\d{3}|(?:[57]\\d|90)\\d{5}',
+    'NationalNumberPattern' => '[48]8\\d{3}|(?:[23]|[579]\\d\\d)\\d{4}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -90,7 +90,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '90[1-9]\\d{4}',
+    'NationalNumberPattern' => '9(?:0[1-9]|1[01])\\d{4}',
     'ExampleNumber' => '9010123',
     'PossibleLength' => 
     array (
