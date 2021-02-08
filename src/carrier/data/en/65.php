@@ -25,6 +25,8 @@ return array (
   658033 => 'TPG',
   658034 => 'TPG',
   658035 => 'TPG',
+  658036 => 'SingTel',
+  658037 => 'SingTel',
   6581 => 'StarHub',
   65810 => 'M1',
   65812 => 'SingTel',

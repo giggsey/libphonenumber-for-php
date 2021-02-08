@@ -26,4 +26,5 @@ return array (
   67687 => 'Digicel',
   67688 => 'Digicel',
   67689 => 'Digicel',
+  6769 => 'Digicel',
 );
