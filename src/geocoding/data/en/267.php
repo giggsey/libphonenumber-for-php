@@ -38,6 +38,7 @@ return array (
   26749 => 'Palapye',
   267530 => 'Lobatse',
   267533 => 'Lobatse',
+  267534 => 'Lobatse',
   267538 => 'Ramotswa',
   267539 => 'Ramotswa',
   26754 => 'Barolong/Ngwaketse',

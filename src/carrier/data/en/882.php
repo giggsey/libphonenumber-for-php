@@ -16,4 +16,5 @@ return array (
   882342 => 'BebbiCell AG',
   882347 => 'BebbiCell AG',
   88237 => 'AT&T Cingular Wireless Network',
+  8824 => 'Monaco Telecom',
 );
