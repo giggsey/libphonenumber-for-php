@@ -59,6 +59,7 @@ return array (
   417840 => 'UPC Switzerland',
   417841 => 'UPC Switzerland',
   417842 => 'UPC Switzerland',
+  4178480 => 'Nexphone',
   4178490 => 'Telecom26 AG',
   41785 => 'Salt',
   41786 => 'Salt',

@@ -3088,6 +3088,7 @@ return array (
   194195 => 'Sarasota, FL',
   1941964 => 'Boca Grande, FL',
   1941979 => 'Port Charlotte, FL',
+  1945 => 'Texas',
   1947 => 'Michigan',
   1949 => 'California',
   1949221 => 'Irvine, CA',

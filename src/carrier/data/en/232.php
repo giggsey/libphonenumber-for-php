@@ -14,6 +14,7 @@ return array (
   23225 => 'Sierratel',
   23230 => 'Africell',
   23231 => 'QCELL',
+  23232 => 'QCELL',
   23233 => 'Africell',
   23234 => 'QCELL',
   23235 => 'IPTEL',

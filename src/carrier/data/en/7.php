@@ -20,6 +20,7 @@ return array (
   7708 => 'Altel',
   774 => 'Tele2',
   7760 => 'Kulan',
+  7761 => 'Tele2',
   7762 => 'Nursat',
   7763 => 'Arna',
   7764 => '2Day Telecom',
