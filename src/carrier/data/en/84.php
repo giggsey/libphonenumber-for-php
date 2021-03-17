@@ -13,6 +13,7 @@
 return array (
   843 => 'Viettel Mobile',
   8452 => 'Vietnamobile',
+  8455 => 'Reddi',
   8456 => 'Vietnamobile',
   8458 => 'Vietnamobile',
   8459 => 'G-Mobile',

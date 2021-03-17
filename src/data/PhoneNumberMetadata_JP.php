@@ -115,7 +115,7 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '20[1-9]\\d{7}',
+    'NationalNumberPattern' => '20\\d{8}',
     'ExampleNumber' => '2012345678',
     'PossibleLength' => 
     array (
