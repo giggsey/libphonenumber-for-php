@@ -261,6 +261,7 @@ return array (
   601171 => 'Celecom',
   6011710 => 'DiGi',
   6011711 => 'DiGi',
+  6011721 => 'Celecom',
   6011722 => 'Maxis',
   6011723 => 'Maxis',
   6011724 => 'Maxis',
