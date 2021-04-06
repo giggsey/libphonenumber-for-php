@@ -79,6 +79,7 @@
     }
   },
   "scripts": {
-    "test": "./phpunit"
+    "test": "./phpunit",
+    "metadata": "vendor/bin/phing compile"
   }
 }
