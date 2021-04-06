@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:590|69\\d|976)\\d{6}',
+    'NationalNumberPattern' => '(?:590|(?:69|80)\\d|976)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -47,9 +47,10 @@ return array (
   ),
   'tollFree' => 
   array (
+    'NationalNumberPattern' => '80[0-5]\\d{6}',
+    'ExampleNumber' => '800012345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (
