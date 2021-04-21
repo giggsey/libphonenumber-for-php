@@ -70,7 +70,7 @@
     "pear/pear-core-minimal": "^1.9",
     "pear/pear_exception": "^1.0",
     "symfony/phpunit-bridge": "^4.2 || ^5",
-    "symfony/console": "^2.8|^3.0",
+    "symfony/console": "^2.8|^3.0|^v4.4|^v5.2",
     "php-coveralls/php-coveralls": "^1.0|^2.0"
   },
   "extra": {
