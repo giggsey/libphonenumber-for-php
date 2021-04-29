@@ -55,7 +55,6 @@ return array (
   498807 => 'Dießen am Ammersee',
   4989 => 'München',
   49911 => 'Nürnberg',
-  499135 => 'Heßdorf Mittelfrankenanken',
   499141 => 'Weißenburg in Bayern',
   499242 => 'Gößweinstein',
   499567 => 'Seßlach-Gemünda',

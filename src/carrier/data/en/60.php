@@ -273,6 +273,7 @@ return array (
   601173 => 'YTL',
   601174 => 'YTL',
   601175 => 'YTL',
+  60118 => 'U Mobile',
   6012 => 'Maxis',
   60131 => 'Celcom',
   60132 => 'Celcom',

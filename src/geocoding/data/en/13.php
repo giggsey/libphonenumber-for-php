@@ -3632,6 +3632,7 @@ return array (
   1364 => 'Kentucky',
   1365 => 'Ontario',
   1367 => 'Quebec',
+  1368 => 'Alberta',
   1380 => 'Ohio',
   1385 => 'Utah',
   1386 => 'Florida',
