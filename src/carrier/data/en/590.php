@@ -54,6 +54,7 @@ return array (
   59069088 => 'Dauphin Telecom',
   59069089 => 'SFR/Rife',
   5906909 => 'SFR/Rife',
+  5906912 => 'Free Caraïbe',
   59069122 => 'Dauphin Telecom',
   59069129 => 'Digicel',
   59069130 => 'Digicel',

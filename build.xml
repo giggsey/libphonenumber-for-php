@@ -27,7 +27,7 @@
 
 
     <target name="test" description="Run unit tests" depends="compile-test-data">
-        <exec passthru="true" command="vendor/bin/phpunit"/>
+        <exec passthru="true" command="phpunit"/>
     </target>
 
     <target name="compile-test-data" description="Build Test Data"
