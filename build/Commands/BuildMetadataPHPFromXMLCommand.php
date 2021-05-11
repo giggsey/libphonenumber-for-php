@@ -37,5 +37,7 @@ class BuildMetadataPHPFromXMLCommand extends Command
             $input->getArgument('MappingClassLocation'),
             ($input->getArgument('LiteBuild') == 'true') ? true : false
         );
+
+        return 0;
     }
 }
