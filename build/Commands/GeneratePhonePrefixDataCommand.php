@@ -33,5 +33,7 @@ class GeneratePhonePrefixDataCommand extends Command
             $output,
             $input->getOption('expandCountries')
         );
+
+        return 0;
     }
 }

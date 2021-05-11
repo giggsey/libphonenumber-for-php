@@ -25,5 +25,7 @@ class GenerateTimeZonesMapDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         new GenerateTimeZonesMapData($input->getArgument('InputFile'), $input->getArgument('OutputDirectory'));
+
+        return 0;
     }
 }
