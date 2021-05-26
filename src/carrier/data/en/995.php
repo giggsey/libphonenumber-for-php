@@ -13,6 +13,7 @@
 return array (
   9955000 => 'Mobilaive',
   9955005 => 'MagtiCom',
+  9955007 => 'MyPhone',
   995505 => 'MagtiCom',
   995511 => 'MagtiCom',
   995514 => 'Geocell',
@@ -45,7 +46,8 @@ return array (
   995577 => 'Geocell',
   995579 => 'Veon',
   995585 => 'MagtiCom',
-  995588 => 'Geocell',
+  9955885 => 'Silknet',
+  9955888 => 'Geocell',
   995591 => 'MagtiCom',
   995592 => 'Veon',
   995593 => 'Geocell',

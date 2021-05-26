@@ -57,5 +57,6 @@ return array (
   3584579 => 'DNA',
   358458 => 'Elisa',
   35846 => 'Elisa',
+  35849 => 'Elisa',
   35850 => 'Elisa',
 );

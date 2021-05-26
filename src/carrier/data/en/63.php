@@ -12,6 +12,7 @@
 
 return array (
   63813 => 'Smart',
+  6389 => 'Dito',
   63905 => 'Globe',
   63906 => 'Globe',
   63907 => 'Smart',
