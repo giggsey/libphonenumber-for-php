@@ -829,6 +829,10 @@ class PhoneNumberUtilTest extends TestCase
             '0011 39 02 3661 8300',
             $this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::AU)
         );
+
+        // Testing preferred international prefixes with ~ are supported (designates waiting).
+        $this->assertEquals('8~10 39 02 3661 8300',
+            $this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::UZ));
     }
 
     public function testFormatOutOfCountryKeepingAlphaChars()

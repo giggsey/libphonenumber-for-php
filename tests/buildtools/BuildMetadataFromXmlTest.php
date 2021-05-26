@@ -97,7 +97,7 @@ class BuildMetadataFromXmlTest extends TestCase
     {
         $xmlInput = '<territory'
             . "  countryCode='33' leadingDigits='2' internationalPrefix='00'"
-            . "  preferredInternationalPrefix='0011' nationalPrefixForParsing='0'"
+            . "  preferredInternationalPrefix='00~11' nationalPrefixForParsing='0'"
             . "  nationalPrefixTransformRule='9$1'"  // nationalPrefix manually injected.
             . "  preferredExtnPrefix=' x' mainCountryForCode='true'"
             . "  leadingZeroPossible='true' mobileNumberPortableRegion='true'>"
@@ -107,7 +107,7 @@ class BuildMetadataFromXmlTest extends TestCase
         $this->assertEquals(33, $phoneMetadata->getCountryCode());
         $this->assertEquals('2', $phoneMetadata->getLeadingDigits());
         $this->assertEquals('00', $phoneMetadata->getInternationalPrefix());
-        $this->assertEquals('0011', $phoneMetadata->getPreferredInternationalPrefix());
+        $this->assertEquals('00~11', $phoneMetadata->getPreferredInternationalPrefix());
         $this->assertEquals('0', $phoneMetadata->getNationalPrefixForParsing());
         $this->assertEquals('9$1', $phoneMetadata->getNationalPrefixTransformRule());
         $this->assertEquals('0', $phoneMetadata->getNationalPrefix());

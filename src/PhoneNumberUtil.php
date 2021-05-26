@@ -502,8 +502,8 @@ class PhoneNumberUtil
         $extLimitAfterLikelyLabel = 15;
         $extLimitAfterAmbiguousChar = 9;
         $extLimitWhenNotSure = 6;
-        
-        
+
+
 
         $possibleSeparatorsBetweenNumberAndExtLabel = "[ \xC2\xA0\\t,]*";
         // Optional full stop (.) or colon, followed by zero or more spaces/tabs/commas.
@@ -2769,23 +2769,28 @@ class PhoneNumberUtil
             return $this->format($number, PhoneNumberFormat::NATIONAL);
         }
         // Metadata cannot be null because we checked 'isValidRegionCode()' above.
+        /** @var PhoneMetadata $metadataForRegionCallingFrom */
         $metadataForRegionCallingFrom = $this->getMetadataForRegion($regionCallingFrom);
 
         $internationalPrefix = $metadataForRegionCallingFrom->getInternationalPrefix();
 
-        // For regions that have multiple international prefixes, the international format of the
-        // number is returned, unless there is a preferred international prefix.
+        // In general, if there is a preferred international prefix, use that. Otherwise, for regions
+        // that have multiple international prefixes, the international format of the number is
+        // returned since we would not know which one to use.
         $internationalPrefixForFormatting = '';
-        $uniqueInternationalPrefixMatcher = new Matcher(static::SINGLE_INTERNATIONAL_PREFIX, $internationalPrefix);
-
-        if ($uniqueInternationalPrefixMatcher->matches()) {
-            $internationalPrefixForFormatting = $internationalPrefix;
-        } elseif ($metadataForRegionCallingFrom->hasPreferredInternationalPrefix()) {
+        if ($metadataForRegionCallingFrom->hasPreferredInternationalPrefix()) {
             $internationalPrefixForFormatting = $metadataForRegionCallingFrom->getPreferredInternationalPrefix();
+        } else {
+            $uniqueInternationalPrefixMatcher = new Matcher(static::SINGLE_INTERNATIONAL_PREFIX, $internationalPrefix);
+
+            if ($uniqueInternationalPrefixMatcher->matches()) {
+                $internationalPrefixForFormatting = $internationalPrefix;
+            }
         }
 
         $regionCode = $this->getRegionCodeForCountryCode($countryCallingCode);
         // Metadata cannot be null because the country calling code is valid.
+        /** @var PhoneMetadata $metadataForRegion */
         $metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
         $formattedNationalNumber = $this->formatNsn(
             $nationalSignificantNumber,
