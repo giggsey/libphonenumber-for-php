@@ -915,6 +915,7 @@ return array (
   1443 => 'America/New_York',
   1445 => 'America/New_York',
   1447 => 'America/Chicago',
+  1448 => 'America/New_York',
   1450 => 'America/Toronto',
   1458 => 'America/Los_Angeles',
   1463 => 'America/New_York',
