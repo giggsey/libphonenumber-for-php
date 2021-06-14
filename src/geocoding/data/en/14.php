@@ -3140,6 +3140,7 @@ return array (
   1443977 => 'Baltimore, MD',
   1445 => 'Philadelphia',
   1447 => 'Illinois',
+  1448 => 'Florida',
   1450 => 'Quebec',
   1450218 => 'Vaudreuil-Dorion, QC',
   1450224 => 'Prévost, QC',
