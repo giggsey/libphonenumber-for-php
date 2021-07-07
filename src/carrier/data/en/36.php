@@ -62,5 +62,7 @@ return array (
   3631790 => 'UPC',
   36501 => 'DIGI',
   36502 => 'DIGI',
+  36508 => 'MVM Net',
+  36509 => 'MVM Net',
   3670 => 'Vodafone',
 );
