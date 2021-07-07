@@ -11,6 +11,7 @@
  */
 
 return array (
+  4821 => 'Polska Spoka Gazownictwa Sp',
   48450 => 'Play',
   484590 => 'Play',
   4845910 => 'Play',
