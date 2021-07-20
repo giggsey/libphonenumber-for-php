@@ -14,10 +14,11 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '33622\\d{5}|(?:7\\d|80)\\d{8}',
+    'NationalNumberPattern' => '(?:33622|8\\d{8})\\d{5}|[78]\\d{9}',
     'PossibleLength' => 
     array (
       0 => 10,
+      1 => 14,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -32,6 +33,7 @@ return array (
     'ExampleNumber' => '7123456789',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -46,6 +48,7 @@ return array (
     'ExampleNumber' => '7710009998',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -53,7 +56,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7}',
+    'NationalNumberPattern' => '8(?:00|108\\d{3})\\d{7}',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
@@ -68,6 +71,7 @@ return array (
     'ExampleNumber' => '8091234567',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -89,6 +93,7 @@ return array (
     'ExampleNumber' => '8081234567',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -100,6 +105,7 @@ return array (
     'ExampleNumber' => '7511234567',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -140,6 +146,7 @@ return array (
     'NationalNumberPattern' => '751\\d{7}',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (

@@ -374,6 +374,7 @@ return array (
   52986 => 'Yucatan',
   52987 => 'Cozumel, QRO',
   52988 => 'Yucatan',
+  52990 => 'Merida',
   52991 => 'Yucatan',
   52992 => 'Chiapas',
   52993 => 'Tabasco',
