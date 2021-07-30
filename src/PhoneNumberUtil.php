@@ -3092,7 +3092,7 @@ class PhoneNumberUtil
      *                          of the default region supplied. If the number is guaranteed to
      *                          start with a '+' followed by the country calling code, then
      *                          "ZZ" or null can be supplied.
-     * @param PhoneNumber|null $phoneNumber
+     * @param PhoneNumber $phoneNumber
      * @param bool $keepRawInput
      * @return PhoneNumber a phone number proto buffer filled with the parsed number
      * @throws NumberParseException  if the string is not considered to be a viable phone number (e.g.
