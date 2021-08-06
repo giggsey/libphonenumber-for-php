@@ -7,6 +7,7 @@ if (!file_exists(__DIR__.'/vendor/symfony/phpunit-bridge/bin/simple-phpunit')) {
 }
 
 putenv('SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT=1');
+putenv("SYMFONY_DEPRECATIONS_HELPER='disabled=1'");
 
 if (!getenv('SYMFONY_PHPUNIT_VERSION')) {
     if (\PHP_VERSION_ID > 80000) {
