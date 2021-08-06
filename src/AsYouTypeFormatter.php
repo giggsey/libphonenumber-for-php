@@ -110,7 +110,7 @@ class AsYouTypeFormatter
      * and/or NDD, etc.
      * @var string
      */
-    private $prefixBeforeNationalNumber;
+    private $prefixBeforeNationalNumber = '';
 
     /**
      * @var bool

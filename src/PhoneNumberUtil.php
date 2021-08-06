@@ -672,7 +672,7 @@ class PhoneNumberUtil
             $nationalPrefixFormattingRule
         );
 
-        return mb_strlen($nationalPrefixFormattingRule) === 0
+        return $nationalPrefixFormattingRule === ''
             || $firstGroupOnlyPrefixPatternMatcher->matches();
     }
 
@@ -1375,8 +1375,8 @@ class PhoneNumberUtil
         $numberFormatRule = $formattingPattern->getFormat();
         $m = new Matcher($formattingPattern->getPattern(), $nationalNumber);
         if ($numberFormat === PhoneNumberFormat::NATIONAL &&
-            $carrierCode !== null && mb_strlen($carrierCode) > 0 &&
-            mb_strlen($formattingPattern->getDomesticCarrierCodeFormattingRule()) > 0
+            $carrierCode !== null && $carrierCode !== '' &&
+            $formattingPattern->getDomesticCarrierCodeFormattingRule() !== ''
         ) {
             // Replace the $CC in the formatting rule with the desired carrier code.
             $carrierCodeFormattingRule = $formattingPattern->getDomesticCarrierCodeFormattingRule();
@@ -1794,7 +1794,7 @@ class PhoneNumberUtil
         $phoneNumber = new PhoneNumber();
         $phoneNumber->setCountryCode($phoneNumberIn->getCountryCode());
         $phoneNumber->setNationalNumber($phoneNumberIn->getNationalNumber());
-        if (mb_strlen($phoneNumberIn->getExtension()) > 0) {
+        if ($phoneNumberIn->getExtension() != '') {
             $phoneNumber->setExtension($phoneNumberIn->getExtension());
         }
         if ($phoneNumberIn->isItalianLeadingZero()) {
@@ -3147,9 +3147,9 @@ class PhoneNumberUtil
             // appropriate national prefix.
             $numFormatCopy->mergeFrom($formattingPattern);
             $nationalPrefixFormattingRule = $formattingPattern->getNationalPrefixFormattingRule();
-            if (mb_strlen($nationalPrefixFormattingRule) > 0) {
+            if ($nationalPrefixFormattingRule !== '') {
                 $nationalPrefix = $metadata->getNationalPrefix();
-                if (mb_strlen($nationalPrefix) > 0) {
+                if ($nationalPrefix != '') {
                     // Replace $NP with national prefix and $FG with the first group ($1).
                     $nationalPrefixFormattingRule = str_replace(
                         array(static::NP_STRING, static::FG_STRING),

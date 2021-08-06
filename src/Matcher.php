@@ -21,7 +21,7 @@ class Matcher
     /**
      * @var string
      */
-    protected $subject;
+    protected $subject = '';
 
     /**
      * @var array
@@ -57,7 +57,9 @@ class Matcher
         }
         $final_pattern = '/' . $final_pattern . '/ui';
 
-        $search = mb_substr($this->subject, $offset);
+        $subject = ($this->subject === null) ? '' : $this->subject;
+
+        $search = mb_substr($subject, $offset);
 
         $result = preg_match($final_pattern, $search, $groups, PREG_OFFSET_CAPTURE);
 

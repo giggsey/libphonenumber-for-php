@@ -30,6 +30,7 @@ jobs:
           - "7.3"
           - "7.4"
           - "8.0"
+          - "8.1"
         include:
           - php-version: 7.4
             coverage: coverage

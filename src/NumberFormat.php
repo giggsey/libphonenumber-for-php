@@ -53,7 +53,7 @@ class NumberFormat
     /**
      * @var string
      */
-    protected $domesticCarrierCodeFormattingRule;
+    protected $domesticCarrierCodeFormattingRule = '';
 
     /**
      * @var bool
