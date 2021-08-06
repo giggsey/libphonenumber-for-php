@@ -45,6 +45,7 @@ return array (
   9955757 => 'MagtiCom',
   995577 => 'Geocell',
   995579 => 'Veon',
+  995580 => 'Silknet',
   995585 => 'MagtiCom',
   9955885 => 'Silknet',
   9955888 => 'Geocell',

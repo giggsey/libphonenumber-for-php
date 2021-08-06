@@ -47,7 +47,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9(?:(?:0(?:[0-35]\\d|4[4-6])|(?:[13]\\d|2[0-3])\\d)\\d|9(?:(?:[0-2]\\d|3[01]|4[0145])\\d|5[15]0|8(?:1\\d|88)|9(?:0[013]|[19]\\d|21|77|8[7-9])))\\d{5}',
+    'NationalNumberPattern' => '9(?:(?:0(?:[0-35]\\d|4[4-6])|(?:[13]\\d|2[0-3])\\d)\\d|9(?:(?:[0-3]\\d|4[0145])\\d|5[15]0|8(?:1\\d|88)|9(?:0[013]|[19]\\d|21|77|8[7-9])))\\d{5}',
     'ExampleNumber' => '9123456789',
     'PossibleLength' => 
     array (
@@ -99,11 +99,9 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '993[2-9]\\d{6}',
-    'ExampleNumber' => '9932123456',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

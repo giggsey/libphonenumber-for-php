@@ -149,7 +149,8 @@ class AsYouTypeFormatter
      * to be used by the AYTF. It is eligible when the format element under numberFormat contains
      * groups of the dollar sign followed by a single digit, separated by valid phone number punctuation.
      * This prevents invalid punctuation (such as the star sign in Israeli star numbers) getting
-     * into the output of the AYTF.
+     * into the output of the AYTF. We require that the first group is present in the output pattern to ensure
+     * no data is lost while formatting; when we format as you type, this should always be the case.
      * @var string
      */
     private static $eligibleFormatPattern;
@@ -186,7 +187,8 @@ class AsYouTypeFormatter
             self::$emptyMetadata->setInternationalPrefix('NA');
 
             self::$eligibleFormatPattern = '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*'
-                . "(\\$\\d" . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*)+';
+                . "\\$1" . "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*(\\$\\d"
+                . "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*)*";
         }
     }
 
