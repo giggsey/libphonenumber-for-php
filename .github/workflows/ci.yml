@@ -34,8 +34,6 @@ jobs:
         include:
           - php-version: 7.4
             coverage: coverage
-          - php-version: 8.0
-            coverage: coverage
     steps:
       - name: Checkout
         uses: actions/checkout@v2
