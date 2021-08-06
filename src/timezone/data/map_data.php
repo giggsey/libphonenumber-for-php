@@ -2305,6 +2305,7 @@ return array (
   52652 => 'America/Mazatlan',
   52653 => 'America/Mazatlan',
   52656 => 'America/Hermosillo',
+  52657 => 'America/Mazatlan',
   52658 => 'America/Tijuana',
   52659 => 'America/Mazatlan',
   52661 => 'America/Tijuana',

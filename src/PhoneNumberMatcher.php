@@ -877,6 +877,7 @@ class PhoneNumberMatcher implements \Iterator
      * @link http://php.net/manual/en/iterator.current.php
      * @return PhoneNumberMatch|null
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->lastMatch;
