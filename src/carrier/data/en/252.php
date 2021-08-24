@@ -20,6 +20,7 @@ return array (
   252605 => 'Golis Telecom',
   252606 => 'Golis Telecom',
   252607 => 'Golis Telecom',
+  25261 => 'Hormuud',
   25262 => 'Somtel',
   25263 => 'Telesom',
   25264 => 'Somali Networks',
