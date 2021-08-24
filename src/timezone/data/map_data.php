@@ -1420,6 +1420,7 @@ return array (
   1767 => 'America/Dominica',
   1769 => 'America/Chicago',
   1770 => 'America/New_York',
+  1771 => 'America/New_York',
   1772 => 'America/New_York',
   1773 => 'America/Chicago',
   1774 => 'America/New_York',
