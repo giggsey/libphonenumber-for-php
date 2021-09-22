@@ -14,11 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '5005000\\d{3}|8\\d{9,10}|(?:[269]\\d|70)\\d{8}',
+    'NationalNumberPattern' => '5005000\\d{3}|8\\d{9,11}|(?:[269]\\d|70)\\d{8}',
     'PossibleLength' => 
     array (
       0 => 10,
       1 => 11,
+      2 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -50,7 +51,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800\\d{7,8}',
+    'NationalNumberPattern' => '800\\d{7,9}',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
@@ -191,7 +192,7 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{5})',
+      'pattern' => '(\\d{3})(\\d{3,4})(\\d{5})',
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (

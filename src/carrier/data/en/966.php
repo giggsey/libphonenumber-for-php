@@ -11,12 +11,12 @@
  */
 
 return array (
-  96650 => 'Mofawtar (STC)',
-  9665153 => 'Mofawtar (STC)',
-  9665154 => 'Mofawtar (STC)',
-  96653 => 'Mofawtar (STC)',
+  96650 => 'STC',
+  9665153 => 'STC',
+  9665154 => 'STC',
+  96653 => 'STC',
   96654 => 'Mobily',
-  96655 => 'Mofawtar (STC)',
+  96655 => 'STC',
   96656 => 'Mobily',
   966570 => 'Virgin',
   966571 => 'Virgin',
