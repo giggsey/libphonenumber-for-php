@@ -61,7 +61,7 @@
   },
   "require": {
     "php": ">=5.3.2",
-    "giggsey/locale": "^1.7",
+    "giggsey/locale": "^1.7|^2.0",
     "symfony/polyfill-mbstring": "^1.17"
   },
   "require-dev": {

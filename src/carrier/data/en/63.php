@@ -56,6 +56,7 @@ return array (
   63978 => 'Globe',
   63981 => 'Smart',
   63983 => 'Globe',
+  63985 => 'Smart',
   63986 => 'Globe',
   63987 => 'Globe',
   63988 => 'Smart',

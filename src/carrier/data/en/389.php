@@ -11,7 +11,7 @@
  */
 
 return array (
-  3897 => 'Vip',
+  3897 => 'A1',
   38970 => 'T-Mobile',
   38971 => 'T-Mobile',
   38972 => 'T-Mobile',

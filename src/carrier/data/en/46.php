@@ -304,6 +304,7 @@ return array (
   467279 => 'Telenor Sverige',
   46728100 => 'Voice Integrate',
   46728101 => 'Beepsend',
+  46728197 => 'Telenor Sverige',
   46728198 => 'Telavox AB',
   467282 => 'Telecom3 Networks',
   467283 => 'Tele2 Sverige',
