@@ -36,8 +36,8 @@ class Matcher
      */
     public function __construct($pattern, $subject)
     {
-        $this->pattern = str_replace('/', '\/', $pattern);
-        $this->subject = $subject;
+        $this->pattern = str_replace('/', '\/', (string)$pattern);
+        $this->subject = (string)$subject;
     }
 
     protected function doMatch($type = 'find', $offset = 0)
@@ -57,9 +57,7 @@ class Matcher
         }
         $final_pattern = '/' . $final_pattern . '/ui';
 
-        $subject = ($this->subject === null) ? '' : $this->subject;
-
-        $search = mb_substr($subject, $offset);
+        $search = mb_substr($this->subject, $offset);
 
         $result = preg_match($final_pattern, $search, $groups, PREG_OFFSET_CAPTURE);
 
