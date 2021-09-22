@@ -803,7 +803,7 @@ class PhoneNumberMatcher implements \Iterator
         $formatRule = $util->chooseFormattingPatternForNumber($metadata->numberFormats(), $nationalNumber);
         // To do this, we check that a national prefix formatting rule was present and that it wasn't
         // just the first-group symbol ($1) with punctuation.
-        if (($formatRule !== null) && \mb_strlen($formatRule->getNationalPrefixFormattingRule()) > 0) {
+        if (($formatRule !== null) && $formatRule->getNationalPrefixFormattingRule() !== '') {
             if ($formatRule->getNationalPrefixOptionalWhenFormatting()) {
                 // The national-prefix is optional in these cases, so we don't need to check if it was
                 // present.
@@ -888,6 +888,7 @@ class PhoneNumberMatcher implements \Iterator
      * @link http://php.net/manual/en/iterator.next.php
      * @return void Any returned value is ignored.
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->lastMatch = $this->find($this->searchIndex);
@@ -908,6 +909,7 @@ class PhoneNumberMatcher implements \Iterator
      * @return mixed scalar on success, or null on failure.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->searchIndex;
@@ -920,6 +922,7 @@ class PhoneNumberMatcher implements \Iterator
      * Returns true on success or false on failure.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->state === 'READY';
@@ -931,6 +934,7 @@ class PhoneNumberMatcher implements \Iterator
      * @return void Any returned value is ignored.
      * @since 5.0.0
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->searchIndex = 0;

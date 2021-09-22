@@ -34,7 +34,7 @@ class NumberFormat
     /**
      * @var string
      */
-    protected $nationalPrefixFormattingRule;
+    protected $nationalPrefixFormattingRule = '';
 
     /**
      * @var bool
@@ -53,7 +53,7 @@ class NumberFormat
     /**
      * @var string
      */
-    protected $domesticCarrierCodeFormattingRule;
+    protected $domesticCarrierCodeFormattingRule = '';
 
     /**
      * @var bool
@@ -79,13 +79,13 @@ class NumberFormat
         $this->leadingDigitsPattern = array();
 
         $this->hasNationalPrefixFormattingRule = false;
-        $this->nationalPrefixFormattingRule = null;
+        $this->nationalPrefixFormattingRule = '';
 
         $this->hasNationalPrefixOptionalWhenFormatting = false;
         $this->nationalPrefixOptionalWhenFormatting = false;
 
         $this->hasDomesticCarrierCodeFormattingRule = false;
-        $this->domesticCarrierCodeFormattingRule = null;
+        $this->domesticCarrierCodeFormattingRule = '';
 
         return $this;
     }
@@ -230,7 +230,7 @@ class NumberFormat
     public function setNationalPrefixFormattingRule($value)
     {
         $this->hasNationalPrefixFormattingRule = true;
-        $this->nationalPrefixFormattingRule = $value;
+        $this->nationalPrefixFormattingRule = (string)$value;
 
         return $this;
     }
@@ -240,7 +240,7 @@ class NumberFormat
      */
     public function clearNationalPrefixFormattingRule()
     {
-        $this->nationalPrefixFormattingRule = null;
+        $this->nationalPrefixFormattingRule = '';
 
         return $this;
     }
@@ -268,7 +268,7 @@ class NumberFormat
     public function setDomesticCarrierCodeFormattingRule($value)
     {
         $this->hasDomesticCarrierCodeFormattingRule = true;
-        $this->domesticCarrierCodeFormattingRule = $value;
+        $this->domesticCarrierCodeFormattingRule = (string)$value;
 
         return $this;
     }

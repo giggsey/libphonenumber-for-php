@@ -21,7 +21,7 @@ class Matcher
     /**
      * @var string
      */
-    protected $subject;
+    protected $subject = '';
 
     /**
      * @var array
@@ -36,8 +36,8 @@ class Matcher
      */
     public function __construct($pattern, $subject)
     {
-        $this->pattern = str_replace('/', '\/', $pattern);
-        $this->subject = $subject;
+        $this->pattern = str_replace('/', '\/', (string)$pattern);
+        $this->subject = (string)$subject;
     }
 
     protected function doMatch($type = 'find', $offset = 0)
