@@ -354,7 +354,7 @@ class BuildMetadataFromXml
 
         $formatPattern = $numberFormatElement->getElementsByTagName(self::FORMAT);
         if ($formatPattern->length != 1) {
-            $countryId = \strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
+            $countryId = $metadata->getId() != '' ? $metadata->getId() : $metadata->getCountryCode();
             throw new \RuntimeException('Invalid number of format patterns for country: ' . $countryId);
         }
         $nationalFormat = $formatPattern->item(0)->firstChild->nodeValue;
@@ -398,11 +398,11 @@ class BuildMetadataFromXml
         $hasExplicitIntlFormatDefined = false;
 
         if ($intlFormatPattern->length > 1) {
-            $countryId = \strlen($metadata->getId()) > 0 ? $metadata->getId() : $metadata->getCountryCode();
+            $countryId = $metadata->getId() != '' ? $metadata->getId() : $metadata->getCountryCode();
             throw new \RuntimeException('Invalid number of intlFormat patterns for country: ' . $countryId);
         }
 
-        if ($intlFormatPattern->length == 0) {
+        if ($intlFormatPattern->length === 0) {
             // Default to use the same as the national pattern if none is defined.
             $intlFormat->mergeFrom($nationalFormat);
         } else {

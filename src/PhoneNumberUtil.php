@@ -2565,7 +2565,7 @@ class PhoneNumberUtil
             // Historically, we set this to an empty string when parsing with raw input if none was
             // found in the input string. However, this doesn't result in a number we can dial. For this
             // reason, we treat the empty string the same as if it isn't set at all.
-            mb_strlen($number->getPreferredDomesticCarrierCode()) > 0
+            $number->getPreferredDomesticCarrierCode() != ''
                 ? $number->getPreferredDomesticCarrierCode()
                 : $fallbackCarrierCode
         );
@@ -2637,7 +2637,7 @@ class PhoneNumberUtil
         $rawInput = $number->getRawInput();
         // If there is no raw input, then we can't keep alpha characters because there aren't any.
         // In this case, we return formatOutOfCountryCallingNumber.
-        if (mb_strlen($rawInput) == 0) {
+        if ($rawInput === null || $rawInput === '') {
             return $this->formatOutOfCountryCallingNumber($number, $regionCallingFrom);
         }
         $countryCode = $number->getCountryCode();
@@ -2712,7 +2712,7 @@ class PhoneNumberUtil
             PhoneNumberFormat::INTERNATIONAL,
             $formattedNumber
         );
-        if (mb_strlen($internationalPrefixForFormatting) > 0) {
+        if ($internationalPrefixForFormatting !== '') {
             $formattedNumber = $internationalPrefixForFormatting . ' ' . $countryCode . ' ' . $formattedNumber;
         } else {
             // Invalid region entered as country-calling-from (so no metadata was found for it) or the
@@ -2977,7 +2977,7 @@ class PhoneNumberUtil
         }
         $nationalPrefix = $metadata->getNationalPrefix();
         // If no national prefix was found, we return null.
-        if (mb_strlen($nationalPrefix) == 0) {
+        if ($nationalPrefix == '') {
             return null;
         }
         if ($stripNonDigits) {

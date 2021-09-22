@@ -2,6 +2,7 @@
 
 namespace libphonenumber\Tests\Issues;
 
+use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
 
@@ -23,6 +24,9 @@ class CodeCoverageTest extends TestCase
         try {
             $this->phoneUtil->parse(null, null);
         } catch (\Exception $e) {
+            if (!$e instanceof NumberParseException) {
+                throw $e;
+            }
             $this->assertEquals("libphonenumber\\NumberParseException", \get_class($e));
             $this->assertEquals('The phone number supplied was null.', $e->getMessage());
 
