@@ -175,7 +175,7 @@ return array (
         0 => '6',
       ),
       'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '0$CC $1',
+      'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     2 => 
@@ -226,7 +226,7 @@ return array (
         0 => '6',
       ),
       'nationalPrefixFormattingRule' => '($1)',
-      'domesticCarrierCodeFormattingRule' => '0$CC $1',
+      'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
     2 => 
