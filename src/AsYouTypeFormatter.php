@@ -767,7 +767,7 @@ class AsYouTypeFormatter
      */
     private function attemptToExtractCountryCallingCode()
     {
-        if (\mb_strlen($this->nationalNumber) == 0) {
+        if ($this->nationalNumber === '') {
             return false;
         }
         $numberWithoutCountryCallingCode = '';
