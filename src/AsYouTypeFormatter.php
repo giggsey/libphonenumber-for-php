@@ -500,7 +500,7 @@ class AsYouTypeFormatter
                     // See if the accrued digits can be formatted properly already. If not, use the results
                     // from inputDigitHelper, which does formatting based on the formatting pattern chosen.
                     $formattedNumber = $this->attemptToFormatAccruedDigits();
-                    if (\mb_strlen($formattedNumber) > 0) {
+                    if ($formattedNumber !== '') {
                         return $formattedNumber;
                     }
                     $this->narrowDownPossibleFormats($this->nationalNumber);
@@ -663,7 +663,7 @@ class AsYouTypeFormatter
             $this->getAvailableFormats($this->nationalNumber);
             // See if the accrued digits can be formatted properly already.
             $formattedNumber = $this->attemptToFormatAccruedDigits();
-            if (\mb_strlen($formattedNumber) > 0) {
+            if ($formattedNumber !== '') {
                 return $formattedNumber;
             }
             return $this->maybeCreateNewTemplate() ? $this->inputAccruedNationalNumber() : $this->accruedInput;

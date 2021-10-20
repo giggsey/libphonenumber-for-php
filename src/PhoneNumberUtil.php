@@ -1219,7 +1219,7 @@ class PhoneNumberUtil
             // TODO: Consider removing the 'if' above so that unparseable
             // strings without raw input format to the empty string instead of "+00"
             $rawInput = $number->getRawInput();
-            if (mb_strlen($rawInput) > 0) {
+            if ($rawInput !== '') {
                 return $rawInput;
             }
         }
@@ -1668,7 +1668,7 @@ class PhoneNumberUtil
         // Attempt to parse extension first, since it doesn't require region-specific data and we want
         // to have the non-normalised number here.
         $extension = $this->maybeStripExtension($nationalNumber);
-        if (mb_strlen($extension) > 0) {
+        if ($extension !== '') {
             $phoneNumber->setExtension($extension);
         }
 
@@ -1744,7 +1744,7 @@ class PhoneNumberUtil
                 && $validationResult !== ValidationResult::IS_POSSIBLE_LOCAL_ONLY
                 && $validationResult !== ValidationResult::INVALID_LENGTH) {
                 $normalizedNationalNumber = $potentialNationalNumber;
-                if ($keepRawInput && mb_strlen($carrierCode) > 0) {
+                if ($keepRawInput && $carrierCode !== '') {
                     $phoneNumber->setPreferredDomesticCarrierCode($carrierCode);
                 }
             }
@@ -2450,7 +2450,7 @@ class PhoneNumberUtil
                 // Historically, we set this to an empty string when parsing with raw input if none was
                 // found in the input string. However, this doesn't result in a number we can dial. For this
                 // reason, we treat the empty string the same as if it isn't set at all.
-                $formattedNumber = mb_strlen($numberNoExt->getPreferredDomesticCarrierCode()) > 0
+                $formattedNumber = $numberNoExt->getPreferredDomesticCarrierCode() !== ''
                     ? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, '')
                     // Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
                     // called within Brazil. Without that, most of the carriers won't connect the call.
@@ -2804,7 +2804,7 @@ class PhoneNumberUtil
             PhoneNumberFormat::INTERNATIONAL,
             $formattedNumber
         );
-        if (mb_strlen($internationalPrefixForFormatting) > 0) {
+        if ($internationalPrefixForFormatting !== '') {
             $formattedNumber = $internationalPrefixForFormatting . ' ' . $countryCallingCode . ' ' . $formattedNumber;
         } else {
             $this->prefixNumberWithCountryCallingCode(
