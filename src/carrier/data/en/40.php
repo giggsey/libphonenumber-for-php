@@ -23,6 +23,7 @@ return array (
   40705 => 'Iristel',
   40711 => 'Telekom',
   40712 => 'Orange',
+  40713 => 'Orange',
   4072 => 'Vodafone',
   4073 => 'Vodafone',
   4074 => 'Orange',

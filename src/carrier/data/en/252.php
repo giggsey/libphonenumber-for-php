@@ -27,7 +27,7 @@ return array (
   25265 => 'Somtel',
   25266 => 'Somtel',
   25267 => 'Nationlink',
-  25268 => 'Nationlink',
+  25268 => 'SomNet',
   25269 => 'Nationlink',
   25271 => 'Amtel',
   25279 => 'Somtel',

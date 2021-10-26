@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:0[2-7]|6[256]|7[47])\\d{6}|[2-7]\\d{6}',
+    'NationalNumberPattern' => '(?:(?:0[2-7]\\d|6(?:0[0-4]|10|[256]\\d))\\d|7(?:[47]\\d\\d|658))\\d{4}|[2-7]\\d{6}',
     'ExampleNumber' => '06031234',
     'PossibleLength' => 
     array (
@@ -140,7 +140,7 @@ return array (
   'id' => 'GA',
   'countryCode' => 241,
   'internationalPrefix' => '00',
-  'nationalPrefixForParsing' => '0(11\\d{6}|6[256]\\d{6}|7[47]\\d{6})',
+  'nationalPrefixForParsing' => '0(11\\d{6}|60\\d{6}|61\\d{6}|6[256]\\d{6}|7[47]\\d{6}|76\\d{6})',
   'nationalPrefixTransformRule' => '$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

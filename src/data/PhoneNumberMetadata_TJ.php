@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:00|11|[2-57-9]\\d)\\d{7}',
+    'NationalNumberPattern' => '(?:00|[1-57-9]\\d)\\d{7}',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -44,7 +44,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '41[18]\\d{6}|(?:[034]0|11|2[02]|5[05]|7[07]|8[08]|9\\d)\\d{7}',
+    'NationalNumberPattern' => '41[18]\\d{6}|(?:[034]0|1[01]|2[02]|5[05]|7[07]|8[08]|9\\d)\\d{7}',
     'ExampleNumber' => '917123456',
     'PossibleLength' => 
     array (
@@ -147,8 +147,6 @@ return array (
   'countryCode' => 992,
   'internationalPrefix' => '810',
   'preferredInternationalPrefix' => '8~10',
-  'nationalPrefix' => '8',
-  'nationalPrefixForParsing' => '8',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -163,7 +161,7 @@ return array (
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
+      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     1 => 
     array (
@@ -175,7 +173,7 @@ return array (
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
+      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     2 => 
     array (
@@ -187,7 +185,7 @@ return array (
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
+      'nationalPrefixOptionalWhenFormatting' => false,
     ),
     3 => 
     array (
@@ -195,11 +193,11 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[02-57-9]|11',
+        0 => '[0-57-9]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => true,
+      'nationalPrefixOptionalWhenFormatting' => false,
     ),
   ),
   'intlNumberFormat' => 
