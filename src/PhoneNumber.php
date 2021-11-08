@@ -587,6 +587,11 @@ class PhoneNumber implements \Serializable
      */
     public function unserialize($serialized)
     {
+        if (is_string($serialized) && $serialized[0] === 'C') {
+            $this->__unserialize($serialized);
+            return;
+        }
+
         $this->__unserialize(unserialize($serialized));
     }
 
