@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1(?:[0-79]\\d|8[0-24-9])\\d{7}|[148]\\d{8}|1\\d{5,7}',
+    'NationalNumberPattern' => '1(?:[0-79]\\d{8}(?:\\d{2})?|8[0-24-9]\\d{7})|[148]\\d{8}|1\\d{5,7}',
     'PossibleLength' => 
     array (
       0 => 6,
@@ -22,6 +22,7 @@ return array (
       2 => 8,
       3 => 9,
       4 => 10,
+      5 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -79,13 +80,14 @@ return array (
   ),
   'sharedCost' => 
   array (
-    'NationalNumberPattern' => '13(?:00\\d{3}|45[0-4])\\d{3}|13\\d{4}',
+    'NationalNumberPattern' => '13(?:00\\d{6}(?:\\d{2})?|45[0-4]\\d{3})|13\\d{4}',
     'ExampleNumber' => '1300123456',
     'PossibleLength' => 
     array (
       0 => 6,
       1 => 8,
       2 => 10,
+      3 => 12,
     ),
     'PossibleLengthLocalOnly' => 
     array (
