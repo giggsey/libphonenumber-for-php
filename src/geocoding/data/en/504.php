@@ -88,7 +88,7 @@ return array (
   5042564 => 'San Pedro Sula, Cortés',
   5042565 => 'Chamelecón',
   5042566 => 'Jardines Del Valle',
-  504257 => 'Búfalo',
+  5042574 => 'Búfalo',
   504261 => 'Choloma, Cortés',
   5042640 => 'C. Comunitarios',
   5042641 => 'C. Comunitarios',

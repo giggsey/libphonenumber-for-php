@@ -31,6 +31,7 @@ return array (
   5191925 => 'Claro',
   5191926 => 'Claro',
   5191927 => 'Claro',
+  519198 => 'Entel',
   51920 => 'Movistar',
   51921 => 'Claro',
   51922 => 'Entel',
