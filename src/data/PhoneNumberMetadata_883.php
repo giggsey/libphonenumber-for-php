@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '210\\d{7}|51\\d{7}(?:\\d{3})?',
+    'NationalNumberPattern' => '(?:210|370\\d\\d)\\d{7}|51\\d{7}(?:\\d{3})?',
     'PossibleLength' => 
     array (
       0 => 9,
@@ -87,7 +87,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '(?:210|51[013]0\\d)\\d{7}|5100\\d{5}',
+    'NationalNumberPattern' => '(?:210|(?:370[1-9]|51[013]0)\\d)\\d{7}|5100\\d{5}',
     'ExampleNumber' => '510012345',
     'PossibleLength' => 
     array (
@@ -168,11 +168,11 @@ return array (
     ),
     2 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3 $4',
+      'pattern' => '(\\d{4})(\\d{4})(\\d{4})',
+      'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '510',
+        0 => '51[13]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -180,11 +180,11 @@ return array (
     ),
     3 => 
     array (
-      'pattern' => '(\\d{4})(\\d{4})(\\d{4})',
-      'format' => '$1 $2 $3',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})(\\d{3})',
+      'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '5',
+        0 => '[35]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
