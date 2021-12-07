@@ -54,6 +54,7 @@ return array (
   817055 => 'Softbank',
   817056 => 'Softbank',
   8170581 => 'Softbank',
+  817059 => 'KDDI',
   817061 => 'Softbank',
   817062 => 'Softbank',
   8170630 => 'Softbank',
