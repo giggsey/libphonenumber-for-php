@@ -33,4 +33,6 @@ return array (
   59267 => 'Digicel Guyana',
   59268 => 'Digicel Guyana',
   59269 => 'Digicel Guyana',
+  592700 => 'Digicel Guyana',
+  592701 => 'Digicel Guyana',
 );

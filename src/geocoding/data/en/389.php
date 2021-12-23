@@ -36,6 +36,7 @@ return array (
   3894767 => 'Bitola/Demir Hisar/Resen',
   3894768 => 'Bitola/Demir Hisar/Resen',
   3894769 => 'Bitola/Demir Hisar/Resen',
+  389477 => 'Bitola/Demir Hisar/Resen',
   389478 => 'Bitola/Demir Hisar/Resen',
   389484 => 'Prilep/Krusevo',
   389485 => 'Prilep/Krusevo',
