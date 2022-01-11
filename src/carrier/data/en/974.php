@@ -23,6 +23,7 @@ return array (
   97433 => 'ooredoo',
   974399 => 'ooredoo',
   97450 => 'ooredoo',
+  974520 => 'ooredoo',
   97455 => 'ooredoo',
   974599 => 'ooredoo',
   974600 => 'ooredoo',
