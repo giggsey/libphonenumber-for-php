@@ -70,7 +70,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '1212\\d{4}|1(?:200|9(?:0[01]|19))\\d{6}',
+    'NationalNumberPattern' => '1212\\d{4}|1(?:200|9(?:0[0-2]|19))\\d{6}',
     'ExampleNumber' => '1919123456',
     'PossibleLength' => 
     array (

@@ -183,6 +183,7 @@ return array (
   4207945 => 'O2',
   4207946 => 'O2',
   4207947 => 'O2',
+  4207948 => 'O2',
   4207950 => 'Vectone Distribution Czech Republic s.r.o(Mundio)',
   42079750 => 'Dial Telecom',
   4207976 => 'T-Mobile',
