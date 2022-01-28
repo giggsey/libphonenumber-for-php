@@ -25,7 +25,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '112|911',
+    'NationalNumberPattern' => '112|9(?:11|88)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -57,7 +57,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112|911',
+    'NationalNumberPattern' => '112|9(?:11|88)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (

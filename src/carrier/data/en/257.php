@@ -12,7 +12,6 @@
 
 return array (
   25729 => 'Leo',
-  2573 => 'Viettel',
   2576 => 'Viettel',
   25771 => 'Leo',
   25772 => 'Leo',

@@ -17,4 +17,5 @@ return array (
   50844 => 'Globaltel',
   50850 => 'Keyyo',
   50855 => 'SPM Telecom',
+  50856 => 'Kav El International',
 );
