@@ -14,6 +14,7 @@ return array (
   9920 => 'Megafon',
   99210 => 'O-Mobile',
   99211 => 'Tcell',
+  99217 => 'Babilon-M',
   9922 => 'O-Mobile',
   99230 => 'O-Mobile',
   99240 => 'Tacom',
