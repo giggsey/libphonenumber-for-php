@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '9\\d\\d',
+    'NationalNumberPattern' => '[29]\\d\\d',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -57,8 +57,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '9(?:11|88|99)',
-    'ExampleNumber' => '911',
+    'NationalNumberPattern' => '211|9(?:11|88|99)',
+    'ExampleNumber' => '211',
     'PossibleLength' => 
     array (
     ),

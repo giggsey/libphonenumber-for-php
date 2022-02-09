@@ -18,6 +18,7 @@ return array (
   35462 => 'Vodafone',
   354630 => 'IMC',
   354632 => 'Tismi',
+  354636 => 'Öryggisfjarskipti',
   354637 => 'Öryggisfjarskipti',
   354638 => 'Öryggisfjarskipti',
   354639 => 'Öryggisfjarskipti',
