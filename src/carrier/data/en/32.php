@@ -51,6 +51,7 @@ return array (
   324689 => 'Febo Telecom',
   32469 => 'Telenet',
   3247 => 'Proximus',
+  324802 => 'TISMI BV',
   324805 => 'Voyacom SPRL',
   324807 => 'MessageBird BV',
   324809 => 'Ericsson NV',
