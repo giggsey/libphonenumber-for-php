@@ -3117,7 +3117,6 @@ return array (
   13457 => 'Cayman Islands',
   134580 => 'Cayman Islands',
   134581 => 'Cayman Islands',
-  134582 => 'Cayman Islands',
   1345848 => 'Cayman Islands',
   134588 => 'Cayman Islands',
   1345914 => 'Cayman Islands',
