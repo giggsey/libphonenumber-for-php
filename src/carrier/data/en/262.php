@@ -101,6 +101,7 @@ return array (
   26269362 => 'ZEOP Mobile',
   26269363 => 'ZEOP Mobile',
   26269364 => 'ZEOP Mobile',
+  26269365 => 'ZEOP Mobile',
   26269366 => 'Orange',
   26269370 => 'Only',
   26269371 => 'Only',
