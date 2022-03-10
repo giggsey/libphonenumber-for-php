@@ -104,6 +104,7 @@ return array (
   134554 => 'Digicel',
   134555 => 'Digicel',
   1345649 => 'Digicel',
+  134582 => 'Logic',
   1345919 => 'Cable & Wireless',
   1345930 => 'LIME',
   1345936 => 'Cable & Wireless',

@@ -71,7 +71,7 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '649\\d{6}|9(?:00|39|44)[1-8]\\d{3,6}',
+    'NationalNumberPattern' => '649\\d{6}|9(?:(?:00|39|44)[1-8]\\d{3,6}|9[1-59]\\d{4})',
     'ExampleNumber' => '9001234567',
     'PossibleLength' => 
     array (
@@ -190,7 +190,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '9(?:00|39|44)',
+        0 => '9(?:00|39|44|9)',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -334,7 +334,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '9(?:00|39|44)',
+        0 => '9(?:00|39|44|9)',
       ),
     ),
     2 => 
