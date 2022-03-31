@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[25689]\\d{7}',
+    'NationalNumberPattern' => '(?:[25689]\\d|40)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -36,7 +36,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:5[1-8]|6\\d|9[013-9])\\d{6}',
+    'NationalNumberPattern' => '(?:40|5[1-8]|6\\d|9[013-9])\\d{6}',
     'ExampleNumber' => '90011234',
     'PossibleLength' => 
     array (
@@ -149,7 +149,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[25689]',
+        0 => '[24-689]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',

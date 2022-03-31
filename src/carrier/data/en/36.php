@@ -11,7 +11,7 @@
  */
 
 return array (
-  3620 => 'Telenor',
+  3620 => 'Yettel Hungary',
   3630 => 'Magyar Telekom',
   36312000 => 'Netfone Telecom',
   36312001 => 'Netfone Telecom',
