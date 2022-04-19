@@ -47,7 +47,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '800[3467]\\d{4}',
+    'NationalNumberPattern' => '800(?:02|[3467]\\d)\\d{3}',
     'ExampleNumber' => '80071234',
     'PossibleLength' => 
     array (
