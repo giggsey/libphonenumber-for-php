@@ -3945,6 +3945,7 @@ return array (
   1580994 => 'Mooreland, OK',
   1581 => 'Quebec',
   1582 => 'Pennsylvania',
+  1584 => 'Manitoba',
   1585 => 'New York',
   1585218 => 'Pittsford, NY',
   1585223 => 'Fairport, NY',

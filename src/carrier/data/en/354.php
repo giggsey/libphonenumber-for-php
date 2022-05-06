@@ -52,6 +52,7 @@ return array (
   35485 => 'Síminn',
   35486 => 'Síminn',
   354882 => 'Síminn',
+  354883 => 'Síminn',
   354888 => 'Síminn',
   35489 => 'Síminn',
 );

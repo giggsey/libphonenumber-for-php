@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '594(?:[023]\\d|1[01]|4[03-9]|5[6-9]|6[0-3]|80|9[0-6])\\d{4}',
+    'NationalNumberPattern' => '594(?:[023]\\d|1[01]|4[03-9]|5[6-9]|6[0-3]|80|9[0-8])\\d{4}',
     'ExampleNumber' => '594101234',
     'PossibleLength' => 
     array (

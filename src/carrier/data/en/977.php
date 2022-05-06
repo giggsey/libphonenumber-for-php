@@ -18,6 +18,7 @@ return array (
   977972 => 'UTL',
   977974 => 'NDCL',
   977975 => 'NDCL',
+  977976 => 'Nepal Telecom',
   977980 => 'NCell',
   977981 => 'NCell',
   977982 => 'NCell',

@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[124-7]\\d\\d|3(?:[02-9]\\d|1[0-8]))\\d{6}|[89]\\d{6,9}|1\\d{4,5}',
+    'NationalNumberPattern' => '(?:[124-7]\\d\\d|3(?:[02-9]\\d|1[0-8]))\\d{6}|8\\d{6,9}|9\\d{6,10}|1\\d{4,5}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -23,6 +23,7 @@ return array (
       3 => 8,
       4 => 9,
       5 => 10,
+      6 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,11 +43,12 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '6[1-58]\\d{7}',
+    'NationalNumberPattern' => '(?:6[1-58]|970\\d)\\d{7}',
     'ExampleNumber' => '612345678',
     'PossibleLength' => 
     array (
       0 => 9,
+      1 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -260,7 +262,19 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[1-57-9]',
+        0 => '[1-578]|91',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    8 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{5})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -323,7 +337,19 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[1-57-9]',
+        0 => '[1-578]|91',
+      ),
+      'nationalPrefixFormattingRule' => '0$1',
+      'domesticCarrierCodeFormattingRule' => '',
+      'nationalPrefixOptionalWhenFormatting' => false,
+    ),
+    5 => 
+    array (
+      'pattern' => '(\\d{3})(\\d{3})(\\d{5})',
+      'format' => '$1 $2 $3',
+      'leadingDigitsPatterns' => 
+      array (
+        0 => '9',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',

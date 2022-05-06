@@ -11,7 +11,8 @@
  */
 
 return array (
-  96392 => 'Syriatel',
+  96391 => 'Wafa Telecom',
+  96392 => 'Wafa Telecom',
   96393 => 'Syriatel',
   96394 => 'MTN',
   963950 => 'MTN',
