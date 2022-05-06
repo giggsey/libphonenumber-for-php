@@ -96,7 +96,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '712[0-79]\\d{4}|7(?:1[013-9]|[5-8]\\d)\\d{5}',
+    'NationalNumberPattern' => '712[0-79]\\d{4}|7(?:1[013-9]|[25-8]\\d)\\d{5}',
     'ExampleNumber' => '75123456',
     'PossibleLength' => 
     array (
