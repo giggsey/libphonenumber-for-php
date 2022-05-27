@@ -14,14 +14,14 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[2-8]\\d|90)\\d{8}',
+    'NationalNumberPattern' => '(?:[2-8]\\d|90)\\d{8}|3\\d{6}',
     'PossibleLength' => 
     array (
-      0 => 10,
+      0 => 7,
+      1 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
-      0 => 7,
     ),
   ),
   'fixedLine' => 
@@ -30,6 +30,7 @@ return array (
     'ExampleNumber' => '5062345678',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -42,6 +43,7 @@ return array (
     'ExampleNumber' => '5062345678',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -54,6 +56,7 @@ return array (
     'ExampleNumber' => '8002123456',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -65,6 +68,7 @@ return array (
     'ExampleNumber' => '9002123456',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -86,6 +90,7 @@ return array (
     'ExampleNumber' => '5002345678',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -97,6 +102,7 @@ return array (
     'ExampleNumber' => '6002012345',
     'PossibleLength' => 
     array (
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -114,9 +120,11 @@ return array (
   ),
   'uan' => 
   array (
+    'NationalNumberPattern' => '310\\d{4}',
+    'ExampleNumber' => '3101234',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 7,
     ),
     'PossibleLengthLocalOnly' => 
     array (
