@@ -29,7 +29,7 @@ return array (
   2125366 => 'Oujda/Figuig',
   2125367 => 'Oujda/Bouarfa',
   2125380 => 'Rabat et alentours',
-  21253880 => 'Tanger et alentours',
+  2125388 => 'Tanger et alentours',
   21253890 => 'Fès/Maknès et alentours',
   2125393 => 'Tanger',
   2125399 => 'Tanger/Larache/Al Hoceima',
