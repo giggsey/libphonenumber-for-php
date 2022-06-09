@@ -11,7 +11,8 @@
  */
 
 return array (
-  85244 => 'China Mobile',
+  852440 => 'China Mobile',
+  852444 => 'HKT',
   852460 => 'China Unicom',
   8524607 => 'Multibyte',
   8524610 => 'Sun Mobile',
@@ -339,6 +340,7 @@ return array (
   852956 => 'China Unicom',
   852957 => '3',
   852958 => 'China Mobile',
+  852959 => 'HKT',
   852960 => 'China Mobile',
   852961 => 'HKT',
   852962 => 'HKT',
