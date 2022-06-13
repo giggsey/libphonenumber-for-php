@@ -28,7 +28,6 @@ class PhoneNumberMatch
      * @param int $start The start index into the target text
      * @param string $rawString The matched substring of the target text
      * @param PhoneNumber $number The matched phone number
-     * @throws \NullPointerException
      */
     public function __construct($start, $rawString, PhoneNumber $number)
     {
@@ -37,7 +36,7 @@ class PhoneNumberMatch
         }
 
         if ($rawString === null) {
-            throw new \NullPointerException;
+            throw new \InvalidArgumentException('$rawString must be a string');
         }
 
         $this->start = $start;
