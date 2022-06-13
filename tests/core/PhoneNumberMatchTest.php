@@ -36,7 +36,7 @@ class PhoneNumberMatchTest extends TestCase
         try {
             new PhoneNumberMatch(10, null, new PhoneNumber());
             $this->fail();
-        } catch (\NullPointerException $e) {
+        } catch (\InvalidArgumentException $e) {
             $this->addToAssertionCount(1);
         }
     }
