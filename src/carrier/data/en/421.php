@@ -48,5 +48,6 @@ return array (
   421949 => 'Telefonica O2',
   421950 => '4ka of SWAN',
   421951 => '4ka of SWAN',
+  421952 => '4ka of SWAN',
   4219598 => 'Slovak Republic Railways (GSM-R)',
 );

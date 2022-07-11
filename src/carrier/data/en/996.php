@@ -31,5 +31,5 @@ return array (
   996996 => 'Sky mobile',
   996997 => 'ALFA Telecom',
   996998 => 'ALFA Telecom',
-  996999 => 'Sky mobile',
+  996999 => 'ALFA Telecom',
 );

@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:005|[1-9]\\d\\d)\\d{5}',
+    'NationalNumberPattern' => '(?:00|[1-9]\\d)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -45,7 +45,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '(?:005|[1-9]\\d\\d)\\d{5}',
+    'NationalNumberPattern' => '(?:00|[1-9]\\d)\\d{6}',
     'ExampleNumber' => '12345678',
     'PossibleLength' => 
     array (
