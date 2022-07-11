@@ -21,6 +21,7 @@ class PhoneNumberUtilTest extends TestCase
 {
     const TEST_META_DATA_FILE_PREFIX = '../../tests/core/data/PhoneNumberMetadataForTesting';
     private static $bsNumber;
+    private static $coFixedLine;
     private static $internationalTollFree;
     private static $sgNumber;
     private static $usShortByOneNumber;
@@ -71,6 +72,8 @@ class PhoneNumberUtilTest extends TestCase
     {
         self::$bsNumber = new PhoneNumber();
         self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
+        self::$coFixedLine = new PhoneNumber();
+        self::$coFixedLine->setCountryCode(57)->setNationalNumber(6012345678);
         self::$bsMobile = new PhoneNumber();
         self::$bsMobile->setCountryCode(1)->setNationalNumber(2423591234);
         self::$internationalTollFree = new PhoneNumber();
@@ -1034,6 +1037,10 @@ class PhoneNumberUtilTest extends TestCase
     {
         // Numbers are normally dialed in national format in-country, and international format from
         // outside the country.
+        $this->assertEquals(
+            '6012345678',
+            $this->phoneUtil->formatNumberForMobileDialing(self::$coFixedLine, RegionCode::CO, false)
+        );
         $this->assertEquals(
             '030123456',
             $this->phoneUtil->formatNumberForMobileDialing(self::$deNumber, RegionCode::DE, false)

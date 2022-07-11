@@ -16,6 +16,7 @@ return array (
   254120 => 'Telkom',
   254121 => 'Infura',
   254124 => 'Finserve',
+  25413 => 'NRG Media Limited',
   25470 => 'Safaricom',
   25471 => 'Safaricom',
   25472 => 'Safaricom',

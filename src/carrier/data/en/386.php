@@ -21,7 +21,7 @@ return array (
   38664 => 'T-2',
   386651 => 'SŽ - Infrastruktura',
   386655 => 'Telekom Slovenije',
-  386656 => 'Telekom Slovenije',
+  386656 => 'SoftNet',
   386657 => 'Novatel',
   38668 => 'A1',
   38669 => 'A1',
