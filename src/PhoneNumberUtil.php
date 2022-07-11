@@ -43,11 +43,6 @@ class PhoneNumberUtil
     const UNKNOWN_REGION = 'ZZ';
 
     const NANPA_COUNTRY_CODE = 1;
-    /*
-     * The prefix that needs to be inserted in front of a Colombian landline number when dialed from
-     * a mobile number in Colombia.
-     */
-    const COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX = '3';
     // The PLUS_SIGN signifies the international prefix.
     const PLUS_SIGN = '+';
     const PLUS_CHARS = '+＋';
@@ -2441,12 +2436,7 @@ class PhoneNumberUtil
         if ($regionCallingFrom == $regionCode) {
             $isFixedLineOrMobile = ($numberType == PhoneNumberType::FIXED_LINE) || ($numberType == PhoneNumberType::MOBILE) || ($numberType == PhoneNumberType::FIXED_LINE_OR_MOBILE);
             // Carrier codes may be needed in some countries. We handle this here.
-            if ($regionCode == 'CO' && $numberType == PhoneNumberType::FIXED_LINE) {
-                $formattedNumber = $this->formatNationalNumberWithCarrierCode(
-                    $numberNoExt,
-                    static::COLOMBIA_MOBILE_TO_FIXED_LINE_PREFIX
-                );
-            } elseif ($regionCode == 'BR' && $isFixedLineOrMobile) {
+            if ($regionCode === 'BR' && $isFixedLineOrMobile) {
                 // Historically, we set this to an empty string when parsing with raw input if none was
                 // found in the input string. However, this doesn't result in a number we can dial. For this
                 // reason, we treat the empty string the same as if it isn't set at all.
