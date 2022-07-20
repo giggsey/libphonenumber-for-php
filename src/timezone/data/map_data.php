@@ -3269,6 +3269,7 @@ return array (
   97625 => 'Asia/Ulaanbaatar',
   976258 => 'Asia/Choibalsan',
   9765 => 'Asia/Ulaanbaatar',
+  9766 => 'Asia/Ulaanbaatar',
   9767 => 'Asia/Ulaanbaatar',
   9768 => 'Asia/Ulaanbaatar',
   9769 => 'Asia/Ulaanbaatar',
