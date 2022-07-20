@@ -43,7 +43,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '9(?:6[0-3]|7[24-6]|8[0-24-68])\\d{7}',
+    'NationalNumberPattern' => '9(?:6[0-3]|7[024-6]|8[0-24-68])\\d{7}',
     'ExampleNumber' => '9841234567',
     'PossibleLength' => 
     array (
@@ -171,7 +171,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[01]|[2-8]|9(?:[1-579]|6[2-6])',
+        0 => '1[01]|[2-8]|9(?:[1-59]|[67][2-6])',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
@@ -222,7 +222,7 @@ return array (
       'format' => '$1-$2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1[01]|[2-8]|9(?:[1-579]|6[2-6])',
+        0 => '1[01]|[2-8]|9(?:[1-59]|[67][2-6])',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
