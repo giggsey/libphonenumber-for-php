@@ -91,6 +91,7 @@ return array (
   346230 => 'Yoigo',
   346231 => 'Yoigo',
   346236 => 'Altecom',
+  34624 => 'DigiMobil',
   34625 => 'Orange',
   3462529 => 'Yoigo',
   34626 => 'Movistar',

@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '1\\d\\d(?:\\d{3})?',
+    'NationalNumberPattern' => '[168]\\d\\d(?:\\d{3})?',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -59,7 +59,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '116(?:00[06]|1(?:17|23))|1(?:[12]2|33|44)',
+    'NationalNumberPattern' => '116(?:00[06]|1(?:17|23))|(?:61|8108[1-3])0|1(?:[12]2|33|44)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -80,9 +80,10 @@ return array (
   ),
   'carrierSpecific' => 
   array (
+    'NationalNumberPattern' => '610|810\\d{3}',
+    'ExampleNumber' => '610',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

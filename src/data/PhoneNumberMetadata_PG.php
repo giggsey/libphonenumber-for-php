@@ -92,7 +92,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '2(?:0[0-47]|7[568])\\d{4}',
+    'NationalNumberPattern' => '2(?:0[0-57]|7[568])\\d{4}',
     'ExampleNumber' => '2751234',
     'PossibleLength' => 
     array (
