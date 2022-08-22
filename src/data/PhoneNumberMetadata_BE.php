@@ -116,7 +116,7 @@ return array (
   ),
   'uan' => 
   array (
-    'NationalNumberPattern' => '78(?:0[57]|1[0458]|2[25]|3[15-8]|48|[56]0|7[06-8]|9\\d)\\d{4}',
+    'NationalNumberPattern' => '78(?:0[57]|1[014-8]|2[25]|3[15-8]|48|[56]0|7[06-8]|9\\d)\\d{4}',
     'ExampleNumber' => '78102345',
     'PossibleLength' => 
     array (

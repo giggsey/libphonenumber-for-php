@@ -33,6 +33,7 @@ return array (
   351254 => 'Peso da Régua',
   351255 => 'Penafiel',
   351256 => 'S. João da Madeira',
+  351257 => 'Braga',
   351258 => 'Viana do Castelo',
   351259 => 'Vila Real',
   351261 => 'Torres Vedras',
