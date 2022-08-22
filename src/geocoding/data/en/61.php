@@ -8599,7 +8599,7 @@ return array (
   612594209 => 'Humula',
   612594210 => 'Ivanhoe',
   612594211 => 'Junee',
-  612594212 => 'Junee Reefs',
+  612594212 => 'Griffith',
   612594213 => 'Kikoira',
   612594214 => 'Kyeamba',
   612594215 => 'Lachlan',
