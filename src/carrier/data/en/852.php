@@ -12,6 +12,7 @@
 
 return array (
   852440 => 'China Mobile',
+  852441 => 'HKT',
   852444 => 'HKT',
   852460 => 'China Unicom',
   8524607 => 'Multibyte',
@@ -165,6 +166,7 @@ return array (
   8525768 => 'Lycamobile',
   8525769 => 'Lycamobile',
   852577 => 'China Mobile',
+  852578 => 'HKT',
   852579 => 'HKT',
   852590 => 'HKT',
   8525906 => '21Vianet',
