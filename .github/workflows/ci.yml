@@ -75,9 +75,6 @@ jobs:
       - name: Test with phpunit (without coverage)
         if: "matrix.coverage != 'coverage'"
         run: ./phpunit --verbose
-      - name: Upload code coverage to Scrutinize
-        if: steps.phpunit-coverage.outcome == 'success'
-        uses: sudo-bot/action-scrutinizer@latest
       - name: Submit Coveralls
         if: steps.phpunit-coverage.outcome == 'success'
         uses: nick-invision/retry@v1
