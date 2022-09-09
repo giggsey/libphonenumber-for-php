@@ -38,7 +38,7 @@ return array (
   9725577 => '019mobile',
   972558 => 'Pelephone',
   972559 => '019mobile',
-  97256 => 'Wataniya',
+  97256 => 'Ooredoo',
   97258 => 'Golan Telecom',
   97259 => 'Jawwal',
 );
