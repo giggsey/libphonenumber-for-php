@@ -11,6 +11,7 @@
  */
 
 return array (
+  576010 => 'Cundinamarca',
   576012 => 'Bogotá',
   576013 => 'Bogotá',
   576014 => 'Bogotá',
