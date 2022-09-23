@@ -17,6 +17,7 @@ return array (
   38595 => 'Tele2',
   385970 => 'Hrvatski Telekom',
   3859751 => 'Telefocus',
+  3859757 => 'Mobile One',
   38597596 => 'Altavox',
   38597597 => 'INNOVAC',
   385976 => 'Hrvatski Telekom',
