@@ -894,7 +894,7 @@ class PhoneNumberUtil
      */
     protected function isValidRegionCode($regionCode)
     {
-        return $regionCode !== null && in_array($regionCode, $this->supportedRegions);
+        return $regionCode !== null && !is_numeric($regionCode) && in_array(strtoupper($regionCode), $this->supportedRegions);
     }
 
     /**
