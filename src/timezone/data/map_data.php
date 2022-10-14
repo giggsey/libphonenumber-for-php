@@ -2169,7 +2169,7 @@ return array (
   376 => 'Europe/Andorra',
   377 => 'Europe/Monaco',
   378 => 'Europe/San_Marino',
-  380 => 'Europe/Bucharest',
+  380 => 'Europe/Kyiv',
   381 => 'Europe/Belgrade',
   382 => 'Europe/Podgorica',
   383 => 'Europe/Belgrade',

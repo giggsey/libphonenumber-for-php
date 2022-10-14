@@ -29,6 +29,7 @@ return array (
   25267 => 'Nationlink',
   25268 => 'SomNet',
   25269 => 'Nationlink',
+  25270 => 'Golis Telecom',
   25271 => 'Amtel',
   25279 => 'Somtel',
   25280 => 'Somali Networks',
