@@ -157,6 +157,5 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingDigits' => '74576|(?:16|7[56])24',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

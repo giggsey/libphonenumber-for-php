@@ -180,6 +180,5 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingDigits' => '06698',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

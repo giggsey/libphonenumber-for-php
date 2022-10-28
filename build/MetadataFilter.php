@@ -49,7 +49,6 @@ class MetadataFilter
         'nationalPrefixTransformRule',
         'sameMobileAndFixedLinePattern',
         'mainCountryForCode',
-        'leadingZeroPossible',
         'mobileNumberPortableRegion'
     );
 
@@ -314,10 +313,6 @@ class MetadataFilter
 
         if ($this->shouldDrop('mainCountryForCode')) {
             $metadata->clearMainCountryForCode();
-        }
-
-        if ($this->shouldDrop('leadingZeroPossible')) {
-            $metadata->clearLeadingZeroPossible();
         }
 
         if ($this->shouldDrop('mobileNumberPortableRegion')) {

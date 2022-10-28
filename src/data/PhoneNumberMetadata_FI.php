@@ -295,6 +295,5 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingDigits' => '1[03-79]|[2-9]',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

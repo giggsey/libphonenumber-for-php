@@ -25,7 +25,6 @@ class PhoneMetadata
     protected $nationalPrefix;
     protected $preferredExtnPrefix;
     protected $mainCountryForCode = false;
-    protected $leadingZeroPossible = false;
     protected $mobileNumberPortableRegion = false;
     protected $generalDesc;
     /**
@@ -116,11 +115,6 @@ class PhoneMetadata
     {
         $this->mainCountryForCode = false;
         return $this;
-    }
-
-    public function hasLeadingZeroPossible()
-    {
-        return $this->leadingZeroPossible !== null;
     }
 
     public function hasMobileNumberPortableRegion()
@@ -286,10 +280,6 @@ class PhoneMetadata
 
         if ($this->hasLeadingDigits()) {
             $output['leadingDigits'] = $this->getLeadingDigits();
-        }
-
-        if ($this->hasLeadingZeroPossible()) {
-            $output['leadingZeroPossible'] = $this->isLeadingZeroPossible();
         }
 
         if ($this->hasMobileNumberPortableRegion()) {
@@ -807,23 +797,6 @@ class PhoneMetadata
         return $this;
     }
 
-    public function isLeadingZeroPossible()
-    {
-        return $this->leadingZeroPossible;
-    }
-
-    public function setLeadingZeroPossible($value)
-    {
-        $this->leadingZeroPossible = $value;
-        return $this;
-    }
-
-    public function clearLeadingZeroPossible()
-    {
-        $this->leadingZeroPossible = false;
-        return $this;
-    }
-
     public function isMobileNumberPortableRegion()
     {
         return $this->mobileNumberPortableRegion;
@@ -974,10 +947,6 @@ class PhoneMetadata
 
         if (isset($input['leadingDigits'])) {
             $this->setLeadingDigits($input['leadingDigits']);
-        }
-
-        if (isset($input['leadingZeroPossible'])) {
-            $this->setLeadingZeroPossible($input['leadingZeroPossible']);
         }
 
         if (isset($input['mobileNumberPortableRegion'])) {

@@ -130,7 +130,7 @@ class ShortNumberInfo
      */
     public function getMetadataForRegion($regionCode)
     {
-        $regionCode = strtoupper($regionCode);
+        $regionCode = strtoupper((string)$regionCode);
 
         if (!in_array($regionCode, ShortNumbersRegionCodeSet::$shortNumbersRegionCodeSet)) {
             return null;

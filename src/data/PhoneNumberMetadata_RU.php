@@ -300,6 +300,5 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingDigits' => '3[04-689]|[489]',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );

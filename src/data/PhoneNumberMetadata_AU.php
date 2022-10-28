@@ -362,6 +362,5 @@ return array (
     ),
   ),
   'mainCountryForCode' => true,
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

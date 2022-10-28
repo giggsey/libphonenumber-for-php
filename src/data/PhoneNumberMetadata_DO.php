@@ -155,6 +155,5 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingDigits' => '8001|8[024]9',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

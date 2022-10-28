@@ -2813,7 +2813,7 @@ class PhoneNumberUtil
      */
     public function isNANPACountry($regionCode)
     {
-        return in_array(strtoupper($regionCode), $this->nanpaRegions);
+        return in_array(strtoupper((string)$regionCode), $this->nanpaRegions);
     }
 
     /**
