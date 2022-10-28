@@ -202,7 +202,7 @@ class AsYouTypeFormatter
 
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->defaultCountry = $regionCode;
+        $this->defaultCountry = strtoupper($regionCode);
         $this->currentMetadata = $this->getMetadataForRegion($this->defaultCountry);
         $this->defaultMetadata = $this->currentMetadata;
     }
