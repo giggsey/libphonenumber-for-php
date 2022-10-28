@@ -13,7 +13,6 @@
   "homepage": "https://github.com/giggsey/libphonenumber-for-php",
   "license": "Apache-2.0",
   "support": {
-    "irc": "irc://irc.appliedirc.com/lobby",
     "source": "https://github.com/giggsey/libphonenumber-for-php",
     "issues": "https://github.com/giggsey/libphonenumber-for-php/issues"
   },
