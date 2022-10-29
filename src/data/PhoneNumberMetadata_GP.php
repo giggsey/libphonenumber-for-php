@@ -174,6 +174,5 @@ return array (
   array (
   ),
   'mainCountryForCode' => true,
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

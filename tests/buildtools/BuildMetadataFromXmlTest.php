@@ -100,7 +100,7 @@ class BuildMetadataFromXmlTest extends TestCase
             . "  preferredInternationalPrefix='00~11' nationalPrefixForParsing='0'"
             . "  nationalPrefixTransformRule='9$1'"  // nationalPrefix manually injected.
             . "  preferredExtnPrefix=' x' mainCountryForCode='true'"
-            . "  leadingZeroPossible='true' mobileNumberPortableRegion='true'>"
+            . "  mobileNumberPortableRegion='true'>"
             . '</territory>';
         $territoryElement = $this->parseXMLString($xmlInput);
         $phoneMetadata = BuildMetadataFromXml::loadTerritoryTagMetadata('33', $territoryElement, '0');
@@ -141,6 +141,7 @@ class BuildMetadataFromXmlTest extends TestCase
         $territoryElement = $this->parseXMLString($xmlInput);
         // Should not throw any exception
         BuildMetadataFromXml::loadTerritoryTagMetadata('33', $territoryElement, '');
+        $this->addToAssertionCount(1);
     }
 
     public function testLoadInternationalFormat()

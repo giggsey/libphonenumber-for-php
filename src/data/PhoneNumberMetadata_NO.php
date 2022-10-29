@@ -187,6 +187,5 @@ return array (
   ),
   'mainCountryForCode' => true,
   'leadingDigits' => '[02-689]|7[0-8]',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

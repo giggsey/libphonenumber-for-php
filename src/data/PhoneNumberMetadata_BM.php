@@ -156,6 +156,5 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingDigits' => '441',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => true,
 );

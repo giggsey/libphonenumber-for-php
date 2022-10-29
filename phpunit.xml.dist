@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./tests/bootstrap.php"
          beStrictAboutTestsThatDoNotTestAnything="false"
+         convertWarningsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertErrorsToExceptions="true"
+         convertDeprecationsToExceptions="true"
          colors="true">
 
     <testsuites>

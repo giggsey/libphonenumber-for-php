@@ -66,7 +66,6 @@ class MetadataFilterTest extends TestCase
         $blackList['nationalPrefixTransformRule'] = array();
         $blackList['sameMobileAndFixedLinePattern'] = array();
         $blackList['mainCountryForCode'] = array();
-        $blackList['leadingZeroPossible'] = array();
         $blackList['mobileNumberPortableRegion'] = array();
 
         $this->assertEquals(MetadataFilter::forSpecialBuild(), new MetadataFilter($blackList));
@@ -822,7 +821,6 @@ class MetadataFilterTest extends TestCase
         $map1['nationalPrefixTransformRule'] = array();
         $map1['sameMobileAndFixedLinePattern'] = array();
         $map1['mainCountryForCode'] = array();
-        $map1['leadingZeroPossible'] = array();
         $map1['mobileNumberPortableRegion'] = array();
 
         $map2 = array();
@@ -848,7 +846,6 @@ class MetadataFilterTest extends TestCase
         $map1['nationalPrefixTransformRule'] = array();
         $map1['sameMobileAndFixedLinePattern'] = array();
         $map1['mainCountryForCode'] = array();
-        $map1['leadingZeroPossible'] = array();
         $map1['mobileNumberPortableRegion'] = array();
 
         $map2 = array();
@@ -890,7 +887,6 @@ class MetadataFilterTest extends TestCase
         $blacklist['nationalPrefixTransformRule'] = array();
         $blacklist['sameMobileAndFixedLinePattern'] = array();
         $blacklist['mainCountryForCode'] = array();
-        $blacklist['leadingZeroPossible'] = array();
         $blacklist['mobileNumberPortableRegion'] = array();
 
         $filter = new MetadataFilter($blacklist);

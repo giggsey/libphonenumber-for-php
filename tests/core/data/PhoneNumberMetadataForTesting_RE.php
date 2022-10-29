@@ -162,6 +162,5 @@ return array (
   ),
   'mainCountryForCode' => false,
   'leadingDigits' => '262|6(?:9[23]|47)|8',
-  'leadingZeroPossible' => false,
   'mobileNumberPortableRegion' => false,
 );
