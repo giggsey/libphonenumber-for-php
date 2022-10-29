@@ -13,6 +13,7 @@
 return array (
   9607 => 'Dhiraagu',
   96091 => 'Ooredoo',
+  96092 => 'Ooredoo',
   96093 => 'Ooredoo',
   96094 => 'Ooredoo',
   96095 => 'Ooredoo',
