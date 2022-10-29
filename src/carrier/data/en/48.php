@@ -17,6 +17,7 @@ return array (
   482115 => 'Plus',
   48212 => 'Orange',
   48450 => 'Play',
+  48454 => 'Orange',
   484590 => 'Play',
   4845910 => 'Play',
   4845911 => 'Play',
