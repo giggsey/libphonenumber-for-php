@@ -92,6 +92,10 @@ class ShortNumberInfo
      */
     protected function regionDialingFromMatchesNumber(PhoneNumber $number, $regionDialingFrom)
     {
+        if ($regionDialingFrom === null || $regionDialingFrom === '') {
+            return false;
+        }
+
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
 
         return in_array(strtoupper($regionDialingFrom), $regionCodes);

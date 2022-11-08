@@ -440,4 +440,10 @@ class ShortNumberInfoTest extends TestCase
             $this->fail('Test input data should always parse correctly: ' . $number . ' (' . $regionCode . ')');
         }
     }
+
+    public function testThatANullRegionCodeDoesNotCauseDeprecationWarning()
+    {
+        $validRegularNumber = $this->parse('01234 567 890', 'GB');
+        $this->assertFalse($this->shortInfo->isValidShortNumber($validRegularNumber));
+    }
 }
