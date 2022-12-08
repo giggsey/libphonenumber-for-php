@@ -48,4 +48,5 @@ return array (
   230596 => 'MTML',
   230597 => 'Emtel',
   230598 => 'Emtel',
+  2307 => 'Emtel',
 );

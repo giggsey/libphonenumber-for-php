@@ -118,7 +118,6 @@ return array (
   2772 => 'Vodacom',
   2773 => 'MTN',
   2774 => 'Cell C',
-  27741 => 'Virgin Mobile',
   2776 => 'Vodacom',
   2778 => 'MTN',
   2779 => 'Vodacom',

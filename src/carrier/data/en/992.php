@@ -24,7 +24,9 @@ return array (
   99270 => 'Tcell',
   99271 => 'Babilon-M',
   99277 => 'Tcell',
+  99278 => 'Megafon',
   99280 => 'Tacom',
+  99287 => 'Megafon',
   99288 => 'Megafon',
   99290 => 'Megafon',
   99291 => 'Tacom',
@@ -32,6 +34,7 @@ return array (
   99292 => 'Tcell',
   99293 => 'Tcell',
   99294 => 'Babilon-M',
+  99297 => 'Megafon',
   99298 => 'Babilon-M',
   99299 => 'Tcell',
 );
