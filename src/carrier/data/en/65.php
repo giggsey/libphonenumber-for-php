@@ -43,6 +43,7 @@ return array (
   658056 => 'Simba',
   658057 => 'Simba',
   658058 => 'Simba',
+  658059 => 'M1',
   65806 => 'Simba',
   6581 => 'StarHub',
   65810 => 'M1',

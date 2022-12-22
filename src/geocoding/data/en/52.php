@@ -11,6 +11,7 @@
  */
 
 return array (
+  52220 => 'Puebla',
   52221 => 'Puebla',
   52222 => 'Puebla',
   52223 => 'Puebla',
@@ -248,6 +249,7 @@ return array (
   52717 => 'Estado de Mexico',
   52718 => 'Estado de Mexico',
   52719 => 'San Francisco Xonacatlan/Temoaya, MEX',
+  52720 => 'Toluca',
   52721 => 'Ixtapan de la Sal, MEX',
   52722 => 'Estado de Mexico',
   52723 => 'Coatepec Harinas, MEX',
