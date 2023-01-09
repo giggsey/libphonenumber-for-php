@@ -251,7 +251,7 @@ return array (
   45458 => 'telenor',
   45459 => 'telenor',
   45461 => 'telenor',
-  45462 => 'telenor',
+  454626 => 'Lancelot Telecom',
   45463 => 'telenor',
   45464 => 'telenor',
   45465 => 'telenor',

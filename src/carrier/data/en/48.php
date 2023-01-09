@@ -242,6 +242,7 @@ return array (
   487864 => 'Orange',
   487865 => 'Orange',
   487866 => 'Orange',
+  4878670 => 'Lancelot Telecom',
   4878671 => 'Plus',
   4878672 => 'Plus',
   4878673 => 'Plus',
