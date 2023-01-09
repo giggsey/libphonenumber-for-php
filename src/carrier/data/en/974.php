@@ -11,8 +11,6 @@
  */
 
 return array (
-  97428 => 'ooredoo',
-  97429 => 'Vodafone',
   97430 => 'Vodafone',
   974310 => 'Vodafone',
   974311 => 'Vodafone',
