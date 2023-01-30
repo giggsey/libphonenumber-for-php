@@ -13,7 +13,9 @@
 return array (
   97650 => 'Unitel',
   97655 => 'Unitel',
-  9766 => 'ONDO',
+  97660 => 'ONDO',
+  97666 => 'ONDO',
+  97669 => 'Skytel',
   97680 => 'Unitel',
   97681 => 'ONDO',
   97683 => 'G-Mobile',
