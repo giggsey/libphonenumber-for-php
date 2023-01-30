@@ -26,7 +26,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
-PHP versions 5.3 up to PHP 8.1 are currently supported.
+PHP versions 5.3 to PHP 8.2 are currently supported.
 
 The PECL [mbstring](http://php.net/mbstring) extension is required.
 
