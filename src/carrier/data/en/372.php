@@ -48,6 +48,7 @@ return array (
   37281 => 'Telia Eesti AS',
   3728110 => 'Tele 2',
   3728111 => 'Elisa',
+  3728123 => 'Elisa',
   37282 => 'Elisa',
   3728200 => 'Telia Eesti AS',
   3728203 => 'Telia Eesti AS',
