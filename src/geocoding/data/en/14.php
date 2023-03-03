@@ -3324,6 +3324,8 @@ return array (
   1469916 => 'Dallas, TX',
   1469952 => 'McKinney, TX',
   1470 => 'Georgia',
+  1472200 => 'Pembroke, NC',
+  1472201 => 'Acme, NC',
   1474 => 'Saskatchewan',
   1475 => 'Connecticut',
   1478 => 'Georgia',

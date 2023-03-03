@@ -12,6 +12,7 @@
 
 return array (
   22870 => 'TOGOCEL',
+  22871 => 'TOGOCEL',
   22879 => 'Moov',
   22890 => 'TOGOCEL',
   22891 => 'TOGOCEL',
