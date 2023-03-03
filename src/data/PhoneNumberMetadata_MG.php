@@ -142,7 +142,7 @@ return array (
   'countryCode' => 261,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|([24-9]\\d{6})$',
+  'nationalPrefixForParsing' => '([24-9]\\d{6})$|0',
   'nationalPrefixTransformRule' => '20$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

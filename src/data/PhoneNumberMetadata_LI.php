@@ -148,7 +148,7 @@ return array (
   'countryCode' => 423,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|(1001)',
+  'nationalPrefixForParsing' => '(1001)|0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

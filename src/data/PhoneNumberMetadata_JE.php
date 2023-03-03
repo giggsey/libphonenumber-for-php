@@ -147,7 +147,7 @@ return array (
   'countryCode' => 44,
   'internationalPrefix' => '00',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|([0-24-8]\\d{5})$',
+  'nationalPrefixForParsing' => '([0-24-8]\\d{5})$|0',
   'nationalPrefixTransformRule' => '1534$1',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 

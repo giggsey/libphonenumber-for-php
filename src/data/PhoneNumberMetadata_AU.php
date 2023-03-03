@@ -172,7 +172,7 @@ return array (
   'internationalPrefix' => '001[14-689]|14(?:1[14]|34|4[17]|[56]6|7[47]|88)0011',
   'preferredInternationalPrefix' => '0011',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0|(183[12])',
+  'nationalPrefixForParsing' => '(183[12])|0',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

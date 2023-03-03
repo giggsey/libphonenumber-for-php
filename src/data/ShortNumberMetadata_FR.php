@@ -40,12 +40,13 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '(?:118|[4-8]\\d)\\d{3}|36665',
-    'ExampleNumber' => '36665',
+    'NationalNumberPattern' => '366\\d\\d|3[2-9]\\d\\d|(?:118|[4-8]\\d)\\d{3}',
+    'ExampleNumber' => '3200',
     'PossibleLength' => 
     array (
-      0 => 5,
-      1 => 6,
+      0 => 4,
+      1 => 5,
+      2 => 6,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -77,7 +78,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '10(?:[134]4|2[23]|5\\d|99)|202\\d|3(?:646|9[07]0)|634|70[06]|(?:106|61)[14]',
+    'NationalNumberPattern' => '10(?:[134]4|2[23]|5\\d|99)|202\\d|634|70[06]|(?:106|61)[14]',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (
