@@ -528,7 +528,7 @@ class PhoneNumber implements \Serializable
             (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
         $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() &&
             (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode(
-                ) == $other->getPreferredDomesticCarrierCode());
+            ) == $other->getPreferredDomesticCarrierCode());
         return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
     }
 
@@ -601,7 +601,7 @@ class PhoneNumber implements \Serializable
             $this->rawInput,
             $this->countryCodeSource,
             $this->preferredDomesticCarrierCode
-            ) = $data;
+        ) = $data;
 
         if ($this->numberOfLeadingZeros > 1) {
             $this->hasNumberOfLeadingZeros = true;

@@ -476,7 +476,7 @@ class AsYouTypeFormatter
             case 1:
             case 2:
                 return $this->accruedInput;
-            /** @noinspection PhpMissingBreakStatementInspection */
+                /** @noinspection PhpMissingBreakStatementInspection */
             case 3:
                 if ($this->attemptToExtractIdd()) {
                     $this->isExpectingCountryCallingCode = true;
@@ -485,8 +485,8 @@ class AsYouTypeFormatter
                     $this->extractedNationalPrefix = $this->removeNationalPrefixFromNationalNumber();
                     return $this->attemptToChooseFormattingPattern();
                 }
-            // fall through
-            // no break
+                // fall through
+                // no break
             default:
                 if ($this->isExpectingCountryCallingCode) {
                     if ($this->attemptToExtractCountryCallingCode()) {

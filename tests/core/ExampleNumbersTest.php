@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ExampleNumbersTest extends TestCase
 {
-
     /**
      * @var PhoneNumberUtil
      */

@@ -2771,12 +2771,6 @@ class PhoneNumberUtilTest extends TestCase
             self::$usLocalNumber,
             $this->phoneUtil->parse('tel:253-0000;isub=12345;phone-context=www.google.com', RegionCode::US)
         );
-        // This is invalid because no "+" sign is present as part of phone-context. The phone context
-        // is simply ignored in this case just as if it contains a domain.
-        $this->assertEquals(
-            self::$usLocalNumber,
-            $this->phoneUtil->parse('tel:2530000;isub=12345;phone-context=1-650', RegionCode::US)
-        );
         $this->assertEquals(
             self::$usLocalNumber,
             $this->phoneUtil->parse('tel:2530000;isub=12345;phone-context=1234.com', RegionCode::US)
@@ -3304,11 +3298,11 @@ class PhoneNumberUtilTest extends TestCase
             // succeed in being parsed.
             $invalidRfcPhoneContext = 'tel:555-1234;phone-context=1-331';
             $this->phoneUtil->parse($invalidRfcPhoneContext, RegionCode::ZZ);
-            $this->fail("'Unknown' region code not allowed: should fail.");
+            $this->fail("phone-context is missing '+' sign: should fail.");
         } catch (NumberParseException $e) {
             // Expected this exception.
             $this->assertEquals(
-                NumberParseException::INVALID_COUNTRY_CODE,
+                NumberParseException::NOT_A_NUMBER,
                 $e->getErrorType(),
                 'Wrong error type stored in exception.'
             );
@@ -3318,7 +3312,7 @@ class PhoneNumberUtilTest extends TestCase
             // Only the phone-context symbol is present, but no data.
             $invalidRfcPhoneContext = ';phone-context=';
             $this->phoneUtil->parse($invalidRfcPhoneContext, RegionCode::ZZ);
-            $this->fail('No number is present: should fail.');
+            $this->fail("phone-context can't be empty: should fail.");
         } catch (NumberParseException $e) {
             // Expected this exception.
             $this->assertEquals(
@@ -3756,6 +3750,75 @@ class PhoneNumberUtilTest extends TestCase
         $threeZeros = new PhoneNumber();
         $threeZeros->setCountryCode(61)->setNationalNumber(0)->setItalianLeadingZero(true)->setNumberOfLeadingZeros(3);
         $this->assertEquals($threeZeros, $this->phoneUtil->parse('0000', RegionCode::AU));
+    }
+
+    public function testParseWithPhoneContext()
+    {
+        // context    = ";phone-context=" descriptor
+        // descriptor = domainname / global-number-digits
+
+        // Valid global-phone-digits
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=+64", RegionCode::ZZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=+64;{this isn't part of phone-context anymore!}", RegionCode::ZZ));
+
+        $nzFromPhoneContext = new PhoneNumber();
+        $nzFromPhoneContext->setCountryCode(64);
+        $nzFromPhoneContext->setNationalNumber('3033316005');
+
+        $this->assertEquals($nzFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+64-3", RegionCode::ZZ));
+
+        $brFromPhoneContext = new PhoneNumber();
+        $brFromPhoneContext->setCountryCode(55);
+        $brFromPhoneContext->setNationalNumber('5033316005');
+
+        $this->assertEquals($brFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+(555)", RegionCode::ZZ));
+
+        $usFromPhoneContext = new PhoneNumber();
+        $usFromPhoneContext->setCountryCode(1);
+        $usFromPhoneContext->setNationalNumber('23033316005');
+
+        $this->assertEquals($usFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+-1-2.3()", RegionCode::ZZ));
+
+        // Valid domainname
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=abc.nz", RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=www.PHONE-numb3r.com", RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=a", RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=3phone.J.", RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=a--z", RegionCode::NZ));
+    }
+
+    public function dataForInvalidPhoneContext()
+    {
+        return array(
+            array("tel:033316005;phone-context="),
+            array("tel:033316005;phone-context=+"),
+            array("tel:033316005;phone-context=64"),
+            array("tel:033316005;phone-context=++64"),
+            array("tel:033316005;phone-context=+abc"),
+            array("tel:033316005;phone-context=."),
+            array("tel:033316005;phone-context=3phone"),
+            array("tel:033316005;phone-context=a-.nz"),
+            array("tel:033316005;phone-context=a{b}c"),
+        );
+    }
+
+    /**
+     * @dataProvider dataForInvalidPhoneContext
+     * @param string $numberToParse
+     */
+    public function testThrowForInvalidPhoneContext($numberToParse)
+    {
+        try {
+            $this->phoneUtil->parse($numberToParse, RegionCode::ZZ);
+            $this->fail('Should have thrown an exception');
+        } catch (NumberParseException $e) {
+            // Expected.
+            $this->assertEquals(
+                NumberParseException::NOT_A_NUMBER,
+                $e->getErrorType(),
+                'Wrong error type stored in exception.'
+            );
+        }
     }
 
     public function testParseHasDefaultNullRegion()
