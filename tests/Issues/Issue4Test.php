@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class Issue4Test extends TestCase
 {
-
     /**
      * @var PhoneNumberUtil
      */
