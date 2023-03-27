@@ -1849,16 +1849,8 @@ class PhoneNumberUtil
             return false;
         }
 
-        $numberDigitsPattern = new Matcher(static::$RFC3966_GLOBAL_NUMBER_DIGITS, $phoneContext);
-        $domainNamePattern = new Matcher(static::$RFC3966_DOMAINNAME, $phoneContext);
-
         $numberDigitsPattern = '/' . static::$RFC3966_GLOBAL_NUMBER_DIGITS . '/' . static::REGEX_FLAGS;
         $domainNamePattern = '/' . static::$RFC3966_DOMAINNAME . '/' . static::REGEX_FLAGS;
-
-        $match1 = preg_match($numberDigitsPattern, $phoneContext);
-        $match2 = preg_match($domainNamePattern, $phoneContext);
-
-        return $match1 || $match2;
 
         // Does phone-context value match pattern of global-number-digits or domainname
         return preg_match($numberDigitsPattern, $phoneContext) || preg_match($domainNamePattern, $phoneContext);
