@@ -602,8 +602,8 @@ class PhoneNumberMatcher implements \Iterator
         // Starting from the end, go through in reverse, excluding the first group, and check the
         // candidate and number groups are the same.
         for ($formattedNumberGroupIndex = (\count($formattedNumberGroups) - 1);
-             $formattedNumberGroupIndex > 0 && $candidateNumberGroupIndex >= 0;
-             $formattedNumberGroupIndex--, $candidateNumberGroupIndex--) {
+            $formattedNumberGroupIndex > 0 && $candidateNumberGroupIndex >= 0;
+            $formattedNumberGroupIndex--, $candidateNumberGroupIndex--) {
             if ($candidateGroups[$candidateNumberGroupIndex] != $formattedNumberGroups[$formattedNumberGroupIndex]) {
                 return false;
             }
