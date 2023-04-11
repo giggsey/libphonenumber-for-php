@@ -17,5 +17,6 @@ return array (
   35056 => 'GibTel',
   35057 => 'GibTel',
   35058 => 'GibTel',
-  3506 => 'GibTel',
+  350601 => 'Melmasti',
+  350606 => 'GibTel',
 );
