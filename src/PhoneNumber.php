@@ -512,24 +512,18 @@ class PhoneNumber implements \Serializable
      */
     public function equals(PhoneNumber $other)
     {
-        $sameType = get_class($other) == get_class($this);
-        $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() &&
-            (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
-        $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() &&
-            (!$this->hasNationalNumber() || $this->getNationalNumber() == $other->getNationalNumber());
-        $sameExt = $this->hasExtension() == $other->hasExtension() &&
-            (!$this->hasExtension() || $this->getExtension() == $other->getExtension());
-        $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() &&
-            (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
-        $sameZeros = $this->getNumberOfLeadingZeros() == $other->getNumberOfLeadingZeros();
-        $sameRaw = $this->hasRawInput() == $other->hasRawInput() &&
-            (!$this->hasRawInput() || $this->getRawInput() == $other->getRawInput());
-        $sameCountrySource = $this->hasCountryCodeSource() == $other->hasCountryCodeSource() &&
-            (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
-        $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() &&
-            (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode(
-            ) == $other->getPreferredDomesticCarrierCode());
-        return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
+        if ($this === $other) {
+            return true;
+        }
+
+        return $this->countryCode === $other->countryCode
+            && $this->nationalNumber === $other->nationalNumber
+            && $this->extension === $other->extension
+            && $this->italianLeadingZero === $other->italianLeadingZero
+            && $this->numberOfLeadingZeros === $other->numberOfLeadingZeros
+            && $this->rawInput === $other->rawInput
+            && $this->countryCodeSource = $other->countryCodeSource
+            && $this->preferredDomesticCarrierCode === $other->preferredDomesticCarrierCode;
     }
 
     /**
