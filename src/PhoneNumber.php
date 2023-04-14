@@ -516,7 +516,6 @@ class PhoneNumber implements \Serializable
             return true;
         }
 
-        $sameType = get_class($other) == get_class($this);
         $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() &&
             (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
         $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() &&
@@ -533,7 +532,7 @@ class PhoneNumber implements \Serializable
         $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() &&
             (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode(
             ) == $other->getPreferredDomesticCarrierCode());
-        return $sameType && $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
+        return $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
     }
 
     /**
