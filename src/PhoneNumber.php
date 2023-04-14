@@ -512,6 +512,10 @@ class PhoneNumber implements \Serializable
      */
     public function equals(PhoneNumber $other)
     {
+        if ($this === $other) {
+            return true;
+        }
+
         $sameType = get_class($other) == get_class($this);
         $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() &&
             (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
