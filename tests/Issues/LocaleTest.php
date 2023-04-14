@@ -288,7 +288,6 @@ class LocaleTest extends TestCase
             'TO' => 'Tonga',
             'TT' => 'Trinidad & Tobago',
             'TN' => 'Tunisia',
-            'TR' => 'Turkey',
             'TM' => 'Turkmenistan',
             'TC' => 'Turks & Caicos Islands',
             'TV' => 'Tuvalu',
