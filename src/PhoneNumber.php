@@ -516,23 +516,14 @@ class PhoneNumber implements \Serializable
             return true;
         }
 
-        $sameCountry = $this->hasCountryCode() == $other->hasCountryCode() &&
-            (!$this->hasCountryCode() || $this->getCountryCode() == $other->getCountryCode());
-        $sameNational = $this->hasNationalNumber() == $other->hasNationalNumber() &&
-            (!$this->hasNationalNumber() || $this->getNationalNumber() == $other->getNationalNumber());
-        $sameExt = $this->hasExtension() == $other->hasExtension() &&
-            (!$this->hasExtension() || $this->getExtension() == $other->getExtension());
-        $sameLead = $this->hasItalianLeadingZero() == $other->hasItalianLeadingZero() &&
-            (!$this->hasItalianLeadingZero() || $this->isItalianLeadingZero() == $other->isItalianLeadingZero());
-        $sameZeros = $this->getNumberOfLeadingZeros() == $other->getNumberOfLeadingZeros();
-        $sameRaw = $this->hasRawInput() == $other->hasRawInput() &&
-            (!$this->hasRawInput() || $this->getRawInput() == $other->getRawInput());
-        $sameCountrySource = $this->hasCountryCodeSource() == $other->hasCountryCodeSource() &&
-            (!$this->hasCountryCodeSource() || $this->getCountryCodeSource() == $other->getCountryCodeSource());
-        $samePrefCar = $this->hasPreferredDomesticCarrierCode() == $other->hasPreferredDomesticCarrierCode() &&
-            (!$this->hasPreferredDomesticCarrierCode() || $this->getPreferredDomesticCarrierCode(
-            ) == $other->getPreferredDomesticCarrierCode());
-        return $sameCountry && $sameNational && $sameExt && $sameLead && $sameZeros && $sameRaw && $sameCountrySource && $samePrefCar;
+        return $this->countryCode === $other->countryCode
+            && $this->nationalNumber === $other->nationalNumber
+            && $this->extension === $other->extension
+            && $this->italianLeadingZero === $other->italianLeadingZero
+            && $this->numberOfLeadingZeros === $other->numberOfLeadingZeros
+            && $this->rawInput === $other->rawInput
+            && $this->countryCodeSource = $other->countryCodeSource
+            && $this->preferredDomesticCarrierCode === $other->preferredDomesticCarrierCode;
     }
 
     /**
