@@ -169,6 +169,7 @@ return array (
   3366 => 'Bouygues',
   3367 => 'Orange France',
   3368 => 'Orange France',
+  33695 => 'Free Mobile',
   33698 => 'Bouygues',
   33699 => 'Bouygues',
   337500 => 'Euroinformation Telecom',

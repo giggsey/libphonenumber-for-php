@@ -11,7 +11,7 @@
  */
 
 return array (
-  9983 => 'Uzbektelecom',
+  9983 => 'HUMANS',
   99850 => 'Ucell',
   99861220 => 'MobiUZ',
   99861221 => 'MobiUZ',

@@ -17,6 +17,7 @@ return array (
   90510221 => 'Netgsm',
   90510222 => 'Netgsm',
   90510223 => 'Netgsm',
+  90510227 => 'Netgsm',
   90510232 => 'Foniv Telecommunications Services',
   90510244 => 'Nida Telekomunikasyon',
   90510255 => 'TTM',

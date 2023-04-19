@@ -17,6 +17,7 @@ return array (
   417509 => 'Swisscom',
   417519 => 'Swisscom',
   41752 => 'Swisscom',
+  41753 => 'Swisscom',
   41754 => 'Swisscom',
   417550 => 'Swisscom',
   417551 => 'Swisscom',
