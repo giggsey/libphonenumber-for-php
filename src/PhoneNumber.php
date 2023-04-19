@@ -522,7 +522,7 @@ class PhoneNumber implements \Serializable
             && $this->italianLeadingZero === $other->italianLeadingZero
             && $this->numberOfLeadingZeros === $other->numberOfLeadingZeros
             && $this->rawInput === $other->rawInput
-            && $this->countryCodeSource = $other->countryCodeSource
+            && $this->countryCodeSource === $other->countryCodeSource
             && $this->preferredDomesticCarrierCode === $other->preferredDomesticCarrierCode;
     }
 
