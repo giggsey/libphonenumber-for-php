@@ -11,8 +11,8 @@
  */
 
 return array (
-  38160 => 'VIP',
-  38161 => 'VIP',
+  38160 => 'A1',
+  38161 => 'A1',
   38162 => 'Telenor',
   38163 => 'Telenor',
   38164 => 'Telekom Srbija a.d.',
@@ -21,6 +21,6 @@ return array (
   381676 => 'GLOBALTEL',
   381677 => 'GLOBALTEL',
   381678 => 'Vectone Mobile',
-  38168 => 'VIP',
+  38168 => 'A1',
   38169 => 'Telenor',
 );
