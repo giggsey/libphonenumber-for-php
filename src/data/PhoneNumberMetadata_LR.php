@@ -27,12 +27,11 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '(?:2\\d{3}|33333)\\d{4}',
+    'NationalNumberPattern' => '2\\d{7}',
     'ExampleNumber' => '21234567',
     'PossibleLength' => 
     array (
       0 => 8,
-      1 => 9,
     ),
     'PossibleLengthLocalOnly' => 
     array (
