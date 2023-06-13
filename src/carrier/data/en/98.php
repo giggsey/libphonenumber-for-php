@@ -23,6 +23,7 @@ return array (
   98994 => 'IR-MCI',
   98996 => 'IR-MCI',
   989981 => 'Shatel Mobile',
+  989982 => 'Shatel Mobile',
   9899900 => 'LOTUSTEL',
   9899902 => 'IR-MCI',
   989991 => 'Irancell',
