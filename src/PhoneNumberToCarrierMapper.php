@@ -19,7 +19,7 @@ class PhoneNumberToCarrierMapper
      */
     protected static $instance = array();
 
-    const MAPPING_DATA_DIRECTORY = '/carrier/data/';
+    const MAPPING_DATA_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . '/carrier/data/';
 
     /**
      * @var PhoneNumberUtil
@@ -32,7 +32,7 @@ class PhoneNumberToCarrierMapper
 
     protected function __construct($phonePrefixDataDirectory)
     {
-        $this->prefixFileReader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . $phonePrefixDataDirectory);
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 

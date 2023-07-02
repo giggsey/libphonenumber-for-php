@@ -36,8 +36,8 @@ class PhoneNumberUtil
     const MAX_LENGTH_COUNTRY_CODE = 3;
 
     const REGION_CODE_FOR_NON_GEO_ENTITY = '001';
-    const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
-    const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
+    const META_DATA_FILE_PREFIX = __DIR__ . '/data/' .'PhoneNumberMetadata';
+    //const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
 
     // Region-code for the unknown region.
     const UNKNOWN_REGION = 'ZZ';
@@ -437,7 +437,7 @@ class PhoneNumberUtil
             }
 
             if ($metadataSource === null) {
-                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, __DIR__ . '/data/' . $baseFileLocation);
+                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, $baseFileLocation);
             }
 
             static::$instance = new static($metadataSource, $countryCallingCodeToRegionCodeMap);

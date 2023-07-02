@@ -11,7 +11,7 @@ use libphonenumber\prefixmapper\PrefixFileReader;
 
 class PhoneNumberOfflineGeocoder
 {
-    const MAPPING_DATA_DIRECTORY = '/data';
+    const MAPPING_DATA_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . '/data';
     /**
      * @var PhoneNumberOfflineGeocoder
      */
@@ -33,7 +33,7 @@ class PhoneNumberOfflineGeocoder
     {
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->prefixFileReader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . $phonePrefixDataDirectory);
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
     }
 
     /**
