@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 class PrefixFileReaderTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = '/data/';
     private static $KO_NUMBER;
     private static $US_NUMBER1;
     private static $US_NUMBER2;
@@ -39,7 +38,7 @@ class PrefixFileReaderTest extends TestCase
 
     public function setUp()
     {
-        $this->reader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . self::TEST_META_DATA_FILE_PREFIX);
+        $this->reader = new PrefixFileReader(__DIR__ . '/data/');
     }
 
     public function testGetDescriptionForNumberWithMapping()

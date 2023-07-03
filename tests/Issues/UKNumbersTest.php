@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class UKNumbersTest extends TestCase
 {
-    const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
     /**
      * @var \libphonenumber\PhoneNumberUtil
      */
@@ -19,10 +18,7 @@ class UKNumbersTest extends TestCase
     public function setUp()
     {
         PhoneNumberUtil::resetInstance();
-        $this->phoneUtil = PhoneNumberUtil::getInstance(
-            self::META_DATA_FILE_PREFIX,
-            CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap
-        );
+        $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
     public function testMobileNumber()

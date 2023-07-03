@@ -11,7 +11,6 @@ use libphonenumber\prefixmapper\PrefixFileReader;
 
 class PhoneNumberOfflineGeocoder
 {
-    const MAPPING_DATA_DIRECTORY = '/data';
     /**
      * @var PhoneNumberOfflineGeocoder
      */
@@ -27,13 +26,17 @@ class PhoneNumberOfflineGeocoder
 
     /**
      * PhoneNumberOfflineGeocoder constructor.
-     * @param string $phonePrefixDataDirectory
+     * @param string|null $phonePrefixDataDirectory
      */
     protected function __construct($phonePrefixDataDirectory)
     {
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        $this->prefixFileReader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . $phonePrefixDataDirectory);
+        if ($phonePrefixDataDirectory === null) {
+            $phonePrefixDataDirectory = __DIR__ . '/data/';
+        }
+
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
     }
 
     /**
@@ -42,10 +45,10 @@ class PhoneNumberOfflineGeocoder
      * <p>The PhoneNumberOfflineGeocoder is implemented as a singleton. Therefore, calling this method
      * multiple times will only result in one instance being created.
      *
-     * @param string $mappingDir (Optional) Mapping Data Directory
+     * @param string|null $mappingDir (Optional) Mapping Data Directory
      * @return PhoneNumberOfflineGeocoder
      */
-    public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
+    public static function getInstance($mappingDir = null)
     {
         if (static::$instance === null) {
             static::$instance = new static($mappingDir);

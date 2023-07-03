@@ -18,7 +18,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
             new DefaultMetadataLoader(),
-            PhoneNumberUtilTest::TEST_META_DATA_FILE_PREFIX
+            __DIR__ . '/data/PhoneNumberMetadataForTesting'
         );
     }
 

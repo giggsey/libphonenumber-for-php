@@ -9,10 +9,11 @@
 
 namespace libphonenumber;
 
+/**
+ * @internal
+ */
 class MultiFileMetadataSourceImpl implements MetadataSourceInterface
 {
-    protected static $metaDataFilePrefix = PhoneNumberUtil::META_DATA_FILE_PREFIX;
-
     /**
      * A mapping from a region code to the PhoneMetadata for that region.
      * @var PhoneMetadata[]
@@ -47,7 +48,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
     public function __construct(MetadataLoaderInterface $metadataLoader, $currentFilePrefix = null)
     {
         if ($currentFilePrefix === null) {
-            $currentFilePrefix = static::$metaDataFilePrefix;
+            $currentFilePrefix = __DIR__ . '/data/PhoneNumberMetadata';
         }
 
         $this->currentFilePrefix = $currentFilePrefix;
