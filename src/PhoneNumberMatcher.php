@@ -99,11 +99,10 @@ class PhoneNumberMatcher implements \Iterator
      * @var string
      */
     protected static $alternateFormatsFilePrefix;
-    const META_DATA_FILE_PREFIX = 'PhoneNumberAlternateFormats';
 
     protected static function init()
     {
-        static::$alternateFormatsFilePrefix = \dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
+        static::$alternateFormatsFilePrefix = __DIR__ . '/data/PhoneNumberAlternateFormats';
 
         static::$innerMatches = array(
             // Breaks on the slash - e.g. "651-234-2345/332-445-1234"

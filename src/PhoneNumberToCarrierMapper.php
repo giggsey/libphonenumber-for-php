@@ -19,8 +19,6 @@ class PhoneNumberToCarrierMapper
      */
     protected static $instance = array();
 
-    const MAPPING_DATA_DIRECTORY = '/carrier/data/';
-
     /**
      * @var PhoneNumberUtil
      */
@@ -30,9 +28,16 @@ class PhoneNumberToCarrierMapper
      */
     protected $prefixFileReader;
 
+    /**
+     * @param string|null $phonePrefixDataDirectory
+     */
     protected function __construct($phonePrefixDataDirectory)
     {
-        $this->prefixFileReader = new PrefixFileReader(__DIR__ . DIRECTORY_SEPARATOR . $phonePrefixDataDirectory);
+        if ($phonePrefixDataDirectory === null) {
+            $phonePrefixDataDirectory = __DIR__ . '/carrier/data/';
+        }
+
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
@@ -42,10 +47,10 @@ class PhoneNumberToCarrierMapper
      * <p> The {@link PhoneNumberToCarrierMapper} is implemented as a singleton. Therefore, calling
      * this method multiple times will only result in one instance being created.
      *
-     * @param string $mappingDir
+     * @param string|null $mappingDir
      * @return PhoneNumberToCarrierMapper
      */
-    public static function getInstance($mappingDir = self::MAPPING_DATA_DIRECTORY)
+    public static function getInstance($mappingDir = null)
     {
         if (!array_key_exists($mappingDir, static::$instance)) {
             static::$instance[$mappingDir] = new static($mappingDir);

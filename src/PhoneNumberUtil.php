@@ -36,8 +36,6 @@ class PhoneNumberUtil
     const MAX_LENGTH_COUNTRY_CODE = 3;
 
     const REGION_CODE_FOR_NON_GEO_ENTITY = '001';
-    const META_DATA_FILE_PREFIX = 'PhoneNumberMetadata';
-    const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
 
     // Region-code for the unknown region.
     const UNKNOWN_REGION = 'ZZ';
@@ -419,13 +417,13 @@ class PhoneNumberUtil
      * <p>The {@link PhoneNumberUtil} is implemented as a singleton. Therefore calling getInstance
      * multiple times will only result in one instance being created.
      *
-     * @param string $baseFileLocation
+     * @param string|null $baseFileLocation
      * @param array|null $countryCallingCodeToRegionCodeMap
      * @param MetadataLoaderInterface|null $metadataLoader
      * @param MetadataSourceInterface|null $metadataSource
      * @return PhoneNumberUtil instance
      */
-    public static function getInstance($baseFileLocation = self::META_DATA_FILE_PREFIX, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null, MetadataSourceInterface $metadataSource = null)
+    public static function getInstance($baseFileLocation = null, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null, MetadataSourceInterface $metadataSource = null)
     {
         if (static::$instance === null) {
             if ($countryCallingCodeToRegionCodeMap === null) {
@@ -437,7 +435,11 @@ class PhoneNumberUtil
             }
 
             if ($metadataSource === null) {
-                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, __DIR__ . '/data/' . $baseFileLocation);
+                if ($baseFileLocation === null) {
+                    $baseFileLocation = __DIR__ . '/data/PhoneNumberMetadata';
+                }
+
+                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, $baseFileLocation);
             }
 
             static::$instance = new static($metadataSource, $countryCallingCodeToRegionCodeMap);

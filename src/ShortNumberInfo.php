@@ -13,7 +13,6 @@ namespace libphonenumber;
 
 class ShortNumberInfo
 {
-    const META_DATA_FILE_PREFIX = 'ShortNumberMetadata';
     /**
      * @var ShortNumberInfo
      */
@@ -39,7 +38,7 @@ class ShortNumberInfo
         // TODO: Create ShortNumberInfo for a given map
         $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
 
-        $this->currentFilePrefix = dirname(__FILE__) . '/data/' . static::META_DATA_FILE_PREFIX;
+        $this->currentFilePrefix = __DIR__ . '/data/ShortNumberMetadata';
 
         // Initialise PhoneNumberUtil to make sure regex's are setup correctly
         PhoneNumberUtil::getInstance();

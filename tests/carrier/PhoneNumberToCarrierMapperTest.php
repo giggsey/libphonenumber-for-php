@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberToCarrierMapperTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = '/../tests/carrier/data/';
     private static $AO_MOBILE1;
     private static $AO_MOBILE2;
     private static $AO_FIXED1;
@@ -78,7 +77,7 @@ class PhoneNumberToCarrierMapperTest extends TestCase
 
     public function setUp()
     {
-        $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(self::TEST_META_DATA_FILE_PREFIX);
+        $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(__DIR__ . '/../carrier/data/');
     }
 
     public function testGetNameForMobilePortableRegion()

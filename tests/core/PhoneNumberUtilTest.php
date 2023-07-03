@@ -19,7 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberUtilTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = '../../tests/core/data/PhoneNumberMetadataForTesting';
     private static $bsNumber;
     private static $coFixedLine;
     private static $internationalTollFree;
@@ -146,7 +145,7 @@ class PhoneNumberUtilTest extends TestCase
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
-            self::TEST_META_DATA_FILE_PREFIX,
+            __DIR__ . '/data/PhoneNumberMetadataForTesting',
             CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
         );
     }
