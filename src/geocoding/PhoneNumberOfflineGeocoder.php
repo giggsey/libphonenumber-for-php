@@ -9,9 +9,11 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
+define('mapping_data_directory', __DIR__ . DIRECTORY_SEPARATOR . '/data');
+
 class PhoneNumberOfflineGeocoder
 {
-    const MAPPING_DATA_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . '/data';
+    const MAPPING_DATA_DIRECTORY = mapping_data_directory;
     /**
      * @var PhoneNumberOfflineGeocoder
      */

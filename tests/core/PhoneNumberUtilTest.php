@@ -17,9 +17,11 @@ use libphonenumber\RegionCode;
 use libphonenumber\ValidationResult;
 use PHPUnit\Framework\TestCase;
 
+define('test_meta_data_file_prefix', __DIR__ . DIRECTORY_SEPARATOR . 'data/PhoneNumberMetadataForTesting');
+
 class PhoneNumberUtilTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = __DIR__ . DIRECTORY_SEPARATOR . 'data/PhoneNumberMetadataForTesting';
+    const TEST_META_DATA_FILE_PREFIX = test_meta_data_file_prefix;
     private static $bsNumber;
     private static $coFixedLine;
     private static $internationalTollFree;

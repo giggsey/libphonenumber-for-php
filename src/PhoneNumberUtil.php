@@ -19,6 +19,9 @@ use libphonenumber\Leniency\AbstractLeniency;
  * @author Shaopeng Jia
  * @see https://github.com/google/libphonenumber
  */
+
+define('meta_data_file_prefix', __DIR__ . '/data/' .'PhoneNumberMetadata');
+
 class PhoneNumberUtil
 {
     /** Flags to use when compiling regular expressions for phone numbers */
@@ -36,7 +39,7 @@ class PhoneNumberUtil
     const MAX_LENGTH_COUNTRY_CODE = 3;
 
     const REGION_CODE_FOR_NON_GEO_ENTITY = '001';
-    const META_DATA_FILE_PREFIX = __DIR__ . '/data/' .'PhoneNumberMetadata';
+    const META_DATA_FILE_PREFIX = meta_data_file_prefix;
     //const TEST_META_DATA_FILE_PREFIX = 'PhoneNumberMetadataForTesting';
 
     // Region-code for the unknown region.

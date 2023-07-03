@@ -12,6 +12,8 @@ namespace libphonenumber;
 use Giggsey\Locale\Locale;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
+define('mapping_data_directory', __DIR__ . DIRECTORY_SEPARATOR . '/carrier/data/');
+
 class PhoneNumberToCarrierMapper
 {
     /**
@@ -19,7 +21,7 @@ class PhoneNumberToCarrierMapper
      */
     protected static $instance = array();
 
-    const MAPPING_DATA_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . '/carrier/data/';
+    const MAPPING_DATA_DIRECTORY = mapping_data_directory;
 
     /**
      * @var PhoneNumberUtil

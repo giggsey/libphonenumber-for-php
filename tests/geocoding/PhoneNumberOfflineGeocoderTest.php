@@ -6,9 +6,11 @@ use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumber;
 use PHPUnit\Framework\TestCase;
 
+define('test_meta_data_file_prefix', __DIR__ . DIRECTORY_SEPARATOR . '../prefixmapper/data');
+
 class PhoneNumberOfflineGeocoderTest extends TestCase
 {
-    const TEST_META_DATA_FILE_PREFIX = __DIR__ . DIRECTORY_SEPARATOR . '../prefixmapper/data';
+    const TEST_META_DATA_FILE_PREFIX = test_meta_data_file_prefix;
     private static $KO_Number1;
     private static $KO_Number2;
     private static $KO_Number3;

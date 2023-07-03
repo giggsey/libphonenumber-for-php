@@ -7,9 +7,11 @@ use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
 
+define('test_mapping_data_directory', __DIR__ . DIRECTORY_SEPARATOR . 'data/');
+
 class PhoneNumberToCarrierMapperTest extends TestCase
 {
-    const TEST_MAPPING_DATA_DIRECTORY = __DIR__ . DIRECTORY_SEPARATOR . 'data/';
+    const TEST_MAPPING_DATA_DIRECTORY = test_mapping_data_directory;
     private static $AO_MOBILE1;
     private static $AO_MOBILE2;
     private static $AO_FIXED1;
