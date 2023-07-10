@@ -26,6 +26,7 @@ return array (
   26736 => 'Gaborone',
   267370 => 'Gaborone',
   267371 => 'Gaborone',
+  26738 => 'Gaborone',
   267390 => 'Gaborone',
   267391 => 'Gaborone',
   267392 => 'Gaborone',
