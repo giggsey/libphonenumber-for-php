@@ -55,7 +55,8 @@
       "build.xml",
       "libphonenumber-for-php.spec",
       "phpunit.xml.dist",
-      "phpunit"
+      "phpunit",
+      "src/CountryCodeToRegionCodeMapForTesting.php"
     ]
   },
   "require": {
