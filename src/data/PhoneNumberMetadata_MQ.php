@@ -25,7 +25,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '596(?:[03-7]\\d|10|2[7-9]|8[09]|9[4-9])\\d{4}',
+    'NationalNumberPattern' => '596(?:[03-7]\\d|10|2[7-9]|8[0-39]|9[4-9])\\d{4}',
     'ExampleNumber' => '596301234',
     'PossibleLength' => 
     array (
@@ -88,7 +88,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '9(?:397[01]|477[0-2]|76(?:6\\d|7[0-367]))\\d{4}',
+    'NationalNumberPattern' => '9(?:397[0-2]|477[0-5]|76(?:6\\d|7[0-367]))\\d{4}',
     'ExampleNumber' => '976612345',
     'PossibleLength' => 
     array (

@@ -25,5 +25,6 @@ return array (
   5346 => 'Isle of Youth',
   5347 => 'Mayabeque and Artemisa',
   5348 => 'Pinar del Río Province',
+  5349 => 'Artemisa Province',
   537 => 'Havana City',
 );
