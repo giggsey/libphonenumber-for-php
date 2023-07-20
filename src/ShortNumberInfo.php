@@ -64,7 +64,7 @@ class ShortNumberInfo
     }
 
     /**
-     * Returns a list with teh region codes that match the specific country calling code. For
+     * Returns a list with the region codes that match the specific country calling code. For
      * non-geographical country calling codes, the region code 001 is returned. Also, in the case
      * of no region code being found, an empty list is returned.
      *

@@ -826,7 +826,7 @@ class PhoneNumberUtilTest extends TestCase
     public function testFormatOutOfCountryWithPreferredIntlPrefix()
     {
         // This should use 0011, since that is the preferred international prefix (both 0011 and 0012
-        // are accepted as possible international prefixes in our test metadta.)
+        // are accepted as possible international prefixes in our test metadata.)
         $this->assertEquals(
             '0011 39 02 3661 8300',
             $this->phoneUtil->formatOutOfCountryCallingNumber(self::$itNumber, RegionCode::AU)
@@ -3523,7 +3523,7 @@ class PhoneNumberUtilTest extends TestCase
         try {
             $this->phoneUtil->parse("tel:+6433316005;ext=012345678901234567890", RegionCode::NZ);
             $this->fail(
-                'This should not parse length as lenght of extension is higher than allowed: '
+                'This should not parse length as length of extension is higher than allowed: '
                 . 'tel:+6433316005;ext=012345678901234567890'
             );
         } catch (NumberParseException $e) {
