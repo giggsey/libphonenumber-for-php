@@ -11,6 +11,7 @@
  */
 
 return array (
+  82100 => 'LG U+',
   821020 => 'SKTellink',
   821021 => 'SKTellink',
   821022 => 'LG U+',
