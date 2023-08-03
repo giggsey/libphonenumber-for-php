@@ -8,7 +8,7 @@ namespace libphonenumber;
  *
  * An AsYouTypeFormatter instance can be created by invoking PhoneNumberUtil::getAsYouTypeFormatter().
  * After that, digits can be added by invoking inputDigit() on the formatter instance, and the partially
- * formatted phone number will be returned each time a digit is added. clear() can be invokved before
+ * formatted phone number will be returned each time a digit is added. clear() can be invoked before
  * formatting a new number.
  */
 class AsYouTypeFormatter
@@ -138,7 +138,7 @@ class AsYouTypeFormatter
      * calling code, from the national number.
      * @var string
      */
-    private static $seperatorBeforeNationalNumber = ' ';
+    private static $separatorBeforeNationalNumber = ' ';
     /**
      * @var PhoneMetadata
      */
@@ -221,7 +221,7 @@ class AsYouTypeFormatter
         if ($metadata !== null) {
             return $metadata;
         }
-        // Set to a default instance of teh metadata. This allows us to function with an incorrect
+        // Set to a default instance of the metadata. This allows us to function with an incorrect
         // region code, even if the formatting only works for numbers specified with "+".
         return self::$emptyMetadata;
     }
@@ -463,7 +463,7 @@ class AsYouTypeFormatter
                 // Add an additional space to separate long NDD and national significant number for
                 // readability. We don't set shouldAddSpaceAfterNationalPrefix to true, since we don't want
                 // this to change later when we choose formatting templates.
-                $this->prefixBeforeNationalNumber .= self::$seperatorBeforeNationalNumber;
+                $this->prefixBeforeNationalNumber .= self::$separatorBeforeNationalNumber;
                 return $this->attemptToChoosePatternWithPrefixExtracted();
             }
             return $this->accruedInput;
@@ -639,12 +639,12 @@ class AsYouTypeFormatter
         $prefixBeforeNationalNumberLength = \mb_strlen($this->prefixBeforeNationalNumber);
         if ($this->shouldAddSpaceAfterNationalPrefix && $prefixBeforeNationalNumberLength > 0
             && \mb_substr($this->prefixBeforeNationalNumber, $prefixBeforeNationalNumberLength - 1, 1)
-            != self::$seperatorBeforeNationalNumber
+            != self::$separatorBeforeNationalNumber
         ) {
             // We want to add a space after the national prefix if the national prefix formatting rule
             // indicates that this would normally be done, with the exception of the case where we already
             // appended a space because the NDD was surprisingly long.
-            return $this->prefixBeforeNationalNumber . self::$seperatorBeforeNationalNumber . $nationalNumber;
+            return $this->prefixBeforeNationalNumber . self::$separatorBeforeNationalNumber . $nationalNumber;
         }
 
         return $this->prefixBeforeNationalNumber . $nationalNumber;
@@ -715,7 +715,7 @@ class AsYouTypeFormatter
         $startOfNationalNumber = 0;
         if ($this->isNanpaNumberWithNationalPrefix()) {
             $startOfNationalNumber = 1;
-            $this->prefixBeforeNationalNumber .= '1' . self::$seperatorBeforeNationalNumber;
+            $this->prefixBeforeNationalNumber .= '1' . self::$separatorBeforeNationalNumber;
             $this->isCompleteNumber = true;
         } elseif ($this->currentMetadata->hasNationalPrefixForParsing()) {
             $m = new Matcher($this->currentMetadata->getNationalPrefixForParsing(), $this->nationalNumber);
@@ -752,7 +752,7 @@ class AsYouTypeFormatter
             $this->nationalNumber = \mb_substr($this->accruedInputWithoutFormatting, $startOfCountryCallingCode);
             $this->prefixBeforeNationalNumber = \mb_substr($this->accruedInputWithoutFormatting, 0, $startOfCountryCallingCode);
             if (\mb_substr($this->accruedInputWithoutFormatting, 0, 1) != PhoneNumberUtil::PLUS_SIGN) {
-                $this->prefixBeforeNationalNumber .= self::$seperatorBeforeNationalNumber;
+                $this->prefixBeforeNationalNumber .= self::$separatorBeforeNationalNumber;
             }
             return true;
         }
@@ -783,7 +783,7 @@ class AsYouTypeFormatter
             $this->currentMetadata = $this->getMetadataForRegion($newRegionCode);
         }
         $countryCodeString = (string)$countryCode;
-        $this->prefixBeforeNationalNumber .= $countryCodeString . self::$seperatorBeforeNationalNumber;
+        $this->prefixBeforeNationalNumber .= $countryCodeString . self::$separatorBeforeNationalNumber;
         // When we have successfully extracted the IDD, the previously extracted NDD should be cleared
         // because it is no longer valid.
         $this->extractedNationalPrefix = '';
