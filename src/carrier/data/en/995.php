@@ -11,14 +11,9 @@
  */
 
 return array (
-  9955000 => 'Silknet',
-  9955004 => 'Silknet',
+  995500 => 'Silknet',
   99550050 => 'MagtiCom',
-  99550055 => 'Silknet',
   99550070 => 'MyPhone',
-  99550077 => 'Silknet',
-  9955008 => 'Silknet',
-  9955009 => 'Silknet',
   9955050 => 'Silknet',
   9955055 => 'MagtiCom',
   995510 => 'Silknet',

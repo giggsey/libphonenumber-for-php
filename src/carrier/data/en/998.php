@@ -11,6 +11,7 @@
  */
 
 return array (
+  9982 => 'Beeline',
   9983 => 'HUMANS',
   99850 => 'Ucell',
   99861220 => 'MobiUZ',
