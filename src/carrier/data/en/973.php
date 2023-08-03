@@ -11,6 +11,7 @@
  */
 
 return array (
+  97330 => 'Telecommunications Regulatory Authority',
   97331 => 'Royal Court',
   97332 => 'Batelco',
   97333 => 'VIVA',
@@ -19,8 +20,10 @@ return array (
   97336 => 'zain BH',
   97337 => 'zain BH',
   97338 => 'Batelco',
+  973385 => 'Telecommunications Regulatory Authority',
   97339 => 'Batelco',
   97363 => 'VIVA',
+  97364 => 'Batelco',
   9736630 => 'zain BH',
   9736633 => 'zain BH',
   9736634 => 'zain BH',

@@ -43,7 +43,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '2[0-27-9]\\d{7,8}|2(?:1\\d|75)\\d{5}',
+    'NationalNumberPattern' => '2(?:[0-27-9]\\d|6)\\d{6,7}|2(?:1\\d|75)\\d{5}',
     'ExampleNumber' => '211234567',
     'PossibleLength' => 
     array (
@@ -118,8 +118,8 @@ return array (
   ),
   'pager' => 
   array (
-    'NationalNumberPattern' => '[28]6\\d{6,7}',
-    'ExampleNumber' => '26123456',
+    'NationalNumberPattern' => '86\\d{6,7}',
+    'ExampleNumber' => '86123456',
     'PossibleLength' => 
     array (
       0 => 8,

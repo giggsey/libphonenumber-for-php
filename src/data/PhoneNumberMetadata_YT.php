@@ -88,7 +88,7 @@ return array (
   ),
   'voip' => 
   array (
-    'NationalNumberPattern' => '9(?:39|47)8[01]\\d{4}',
+    'NationalNumberPattern' => '9(?:(?:39|47)8[01]|769\\d)\\d{4}',
     'ExampleNumber' => '939801234',
     'PossibleLength' => 
     array (
@@ -150,6 +150,5 @@ return array (
   array (
   ),
   'mainCountryForCode' => false,
-  'leadingDigits' => '269|63|9(?:39|47)8',
   'mobileNumberPortableRegion' => false,
 );

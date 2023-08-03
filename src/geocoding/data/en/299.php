@@ -17,6 +17,7 @@ return array (
   29934 => 'Nuuk',
   29935 => 'Nuuk',
   29936 => 'Nuuk',
+  29937 => 'Nuuk',
   29961 => 'Nanortalik',
   29964 => 'Qaqortoq',
   29966 => 'Narsaq',
