@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '0\\d{4}|(?:[489]\\d|[57]9)\\d{6}',
+    'NationalNumberPattern' => '0\\d{4}|(?:[489]\\d|79)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 5,
@@ -38,7 +38,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:4[015-8]|59|9\\d)\\d{6}',
+    'NationalNumberPattern' => '(?:4[015-8]|9\\d)\\d{6}',
     'ExampleNumber' => '41234567',
     'PossibleLength' => 
     array (
