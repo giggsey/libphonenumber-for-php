@@ -57,8 +57,8 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112',
-    'ExampleNumber' => '112',
+    'NationalNumberPattern' => '1[1-8]\\d',
+    'ExampleNumber' => '110',
     'PossibleLength' => 
     array (
     ),

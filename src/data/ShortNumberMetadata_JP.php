@@ -91,8 +91,8 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '000\\d{7}',
-    'ExampleNumber' => '0005000000',
+    'NationalNumberPattern' => '000[259]\\d{6}',
+    'ExampleNumber' => '0002000000',
     'PossibleLength' => 
     array (
       0 => 10,

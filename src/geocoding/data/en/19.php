@@ -4337,6 +4337,7 @@ return array (
   1980343 => 'Charlotte, NC',
   1980487 => 'Shelby, NC',
   1980819 => 'Charlotte, NC',
+  1983 => 'Colorado',
   1984 => 'North Carolina',
   1985 => 'Louisiana',
   1985223 => 'Houma, LA',
