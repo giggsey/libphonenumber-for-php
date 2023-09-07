@@ -37,7 +37,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '7[2389]\\d{7}',
+    'NationalNumberPattern' => '7[237-9]\\d{7}',
     'ExampleNumber' => '720123456',
     'PossibleLength' => 
     array (
@@ -167,9 +167,9 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[7-9]',
+        0 => '2',
       ),
-      'nationalPrefixFormattingRule' => '0$1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
@@ -179,9 +179,9 @@ return array (
       'format' => '$1 $2 $3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '2',
+        0 => '[7-9]',
       ),
-      'nationalPrefixFormattingRule' => '',
+      'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
