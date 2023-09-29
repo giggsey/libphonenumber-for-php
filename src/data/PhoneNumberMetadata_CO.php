@@ -27,7 +27,7 @@ return array (
   ),
   'fixedLine' => 
   array (
-    'NationalNumberPattern' => '601055(?:[0-4]\\d|50)\\d\\d|6010(?:[0-4]\\d|5[0-4])\\d{4}|60[124-8][2-9]\\d{6}',
+    'NationalNumberPattern' => '601055(?:[0-4]\\d|50)\\d\\d|6010(?:[0-4]\\d|5[0-4])\\d{4}|60(?:[124-7][2-9]|8[1-9])\\d{6}',
     'ExampleNumber' => '6012345678',
     'PossibleLength' => 
     array (
@@ -40,7 +40,7 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '3333(?:0(?:0\\d|1[0-5])|[4-9]\\d\\d)\\d{3}|(?:3(?:24[1-9]|3(?:00|3[0-24-9]))|9101)\\d{6}|3(?:0[0-5]|1\\d|2[0-3]|5[01]|70)\\d{7}',
+    'NationalNumberPattern' => '333301[0-5]\\d{3}|3333(?:00|2[5-9]|[3-9]\\d)\\d{4}|(?:3(?:24[1-9]|3(?:00|3[0-24-9]))|9101)\\d{6}|3(?:0[0-5]|1\\d|2[0-3]|5[01]|70)\\d{7}',
     'ExampleNumber' => '3211234567',
     'PossibleLength' => 
     array (
@@ -148,7 +148,7 @@ return array (
   'countryCode' => 57,
   'internationalPrefix' => '00(?:4(?:[14]4|56)|[579])',
   'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0(4(?:[14]4|56)|[579])?',
+  'nationalPrefixForParsing' => '0([3579]|4(?:[14]4|56))?',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (

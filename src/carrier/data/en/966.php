@@ -24,6 +24,7 @@ return array (
   966571 => 'Virgin',
   966572 => 'Virgin',
   966573 => 'Virgin',
+  966574 => 'Red Bull Mobile',
   966575 => 'Red Bull Mobile',
   966576 => 'Lebara',
   966577 => 'Lebara',
