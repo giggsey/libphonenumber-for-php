@@ -18,6 +18,8 @@ return array (
   97254 => 'Orange',
   972550 => 'Beezz',
   972552 => '019mobile',
+  9725520 => 'BITIT',
+  9725521 => 'BITIT',
   9725522 => 'Home Cellular',
   9725523 => 'Home Cellular',
   9725530 => '019mobile',
