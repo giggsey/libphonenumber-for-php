@@ -52,6 +52,7 @@ return array (
   230700 => 'Cellplus',
   230701 => 'Emtel',
   230702 => 'MTML',
+  230703 => 'Emtel',
   230730 => 'Emtel',
   230731 => 'MTML',
   230733 => 'Cellplus',
