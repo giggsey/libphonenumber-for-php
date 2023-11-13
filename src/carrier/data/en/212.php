@@ -85,6 +85,7 @@ return array (
   21270 => 'Inwi',
   21271 => 'Inwi',
   21272 => 'Inwi',
+  21275 => 'Maroc Telecom',
   21276 => 'Maroc Telecom',
   21277 => 'Méditel',
   21278 => 'Méditel',

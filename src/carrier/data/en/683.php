@@ -11,5 +11,7 @@
  */
 
 return array (
+  6835 => 'Telecom Niue',
+  6836 => 'Telecom Niue',
   6838 => 'Telecom Niue',
 );
