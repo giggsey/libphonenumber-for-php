@@ -18,4 +18,5 @@ return array (
   9234 => 'Telenor',
   9235 => 'Special Communications Organization',
   9236 => 'Instaphone',
+  9237 => 'Zong',
 );

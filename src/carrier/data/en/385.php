@@ -20,6 +20,7 @@ return array (
   3859751 => 'Telefocus',
   3859754 => 'Lancelot Telecom',
   3859757 => 'Mobile One',
+  38597595 => 'YATECO',
   38597596 => 'Altavox',
   38597597 => 'INNOVAC',
   385976 => 'Hrvatski Telekom',
