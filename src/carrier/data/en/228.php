@@ -11,13 +11,13 @@
  */
 
 return array (
-  22870 => 'TOGOCEL',
-  22871 => 'TOGOCEL',
+  22870 => 'Togo Telecom',
+  22871 => 'Togo Telecom',
   22879 => 'Moov',
-  22890 => 'TOGOCEL',
-  22891 => 'TOGOCEL',
-  22892 => 'TOGOCEL',
-  22893 => 'TOGOCEL',
+  22890 => 'Togo Telecom',
+  22891 => 'Togo Telecom',
+  22892 => 'Togo Telecom',
+  22893 => 'Togo Telecom',
   22896 => 'Moov',
   22897 => 'TOGOCEL',
   22898 => 'Moov',
