@@ -20,6 +20,7 @@ return array (
   3584323 => 'Top Connect OU',
   3584324 => 'Nord Connect SIA',
   3584325 => 'NETTIA',
+  3584326 => 'Lancelot',
   358436 => 'DNA',
   358438 => 'DNA',
   35844 => 'DNA',

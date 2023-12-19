@@ -58,4 +58,5 @@ return array (
   35887 => 'Uleåborg',
   35888 => 'Uleåborg',
   3589 => 'Helsingfors',
+  35890 => 'Nyland',
 );
