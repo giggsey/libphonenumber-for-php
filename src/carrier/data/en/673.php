@@ -16,6 +16,7 @@ return array (
   67371 => 'DSTCom',
   67372 => 'DSTCom',
   67373 => 'DSTCom',
+  67374 => 'Imagine',
   67377 => 'DSTCom',
   67381 => 'Progresif Cellular',
   67382 => 'Progresif Cellular',

@@ -40,5 +40,7 @@ return array (
   9736674 => 'Batelco',
   9736675 => 'Batelco',
   9736676 => 'Batelco',
+  9736678 => 'Batelco',
+  9736679 => 'Batelco',
   973669 => 'zain BH',
 );

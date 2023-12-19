@@ -58,4 +58,5 @@ return array (
   35887 => 'Oulu',
   35888 => 'Oulu',
   3589 => 'Helsinki',
+  35890 => 'Uusimaa',
 );

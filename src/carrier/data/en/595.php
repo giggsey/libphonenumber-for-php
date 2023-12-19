@@ -20,5 +20,6 @@ return array (
   595984 => 'Tigo',
   595985 => 'Tigo',
   595986 => 'Tigo',
+  595987 => 'Tigo',
   59599 => 'Claro',
 );
