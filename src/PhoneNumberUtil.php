@@ -1948,7 +1948,7 @@ class PhoneNumberUtil
      * (530) 583-6985 x302 and (530) 583-6985 x2303. We remove the second extension so that the first
      * number is parsed correctly.
      *
-     * @param int $number the string that might contain a phone number
+     * @param string $number the string that might contain a phone number
      * @return string the number, stripped of any non-phone-number prefix (such as "Tel:") or an empty
      *                string if no character used to start phone numbers (such as + or any digit) is
      *                found in the number
