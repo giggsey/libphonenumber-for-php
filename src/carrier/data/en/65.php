@@ -50,6 +50,7 @@ return array (
   658070 => 'SingTel',
   658071 => 'SingTel',
   65808 => 'Simba',
+  658082 => 'SingTel',
   658083 => 'M1',
   658084 => 'SingTel',
   6581 => 'StarHub',
