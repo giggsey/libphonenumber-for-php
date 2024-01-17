@@ -11,12 +11,8 @@
  */
 
 return array (
-  22940 => 'Celtiis',
-  22941 => 'Celtiis',
+  2294 => 'Celtiis',
   22942 => 'MTN',
-  22943 => 'Celtiis',
-  22944 => 'Celtiis',
-  22945 => 'Celtiis',
   22946 => 'MTN',
   2295 => 'MTN',
   22955 => 'Moov',
