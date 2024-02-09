@@ -21,6 +21,7 @@ return array (
   423659 => 'Telecom Liechtenstein',
   42366 => 'Telecom Liechtenstein',
   423661 => 'Dimoco',
+  423666 => 'Datamobile AG',
   42373 => 'Telecom Liechtenstein',
   42374 => 'First Mobile',
   42377 => 'Swisscom',
