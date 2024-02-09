@@ -11,7 +11,7 @@
  */
 
 return array (
-  843 => 'Viettel Mobile',
+  843 => 'Viettel',
   8430 => 'MobiFone',
   8451 => 'MobiFone',
   8452 => 'Vietnamobile',
@@ -25,7 +25,7 @@ return array (
   8483 => 'Vinaphone',
   8484 => 'Vinaphone',
   8485 => 'Vinaphone',
-  8486 => 'Viettel Mobile',
+  8486 => 'Viettel',
   8487 => 'Vinaphone',
   8488 => 'Vinaphone',
   8489 => 'MobiFone',
