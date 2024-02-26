@@ -11,6 +11,7 @@
  */
 
 return array (
+  67654 => 'Toko Wireless',
   676554 => 'Toko Wireless',
   676555 => 'Toko Wireless',
   676556 => 'Toko Wireless',

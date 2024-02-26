@@ -50,5 +50,6 @@ return array (
   592709 => 'GTT',
   59271 => 'E-Networks',
   59272 => 'GTT',
+  59273 => 'E-Networks',
   59274 => 'GTT',
 );
