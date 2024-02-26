@@ -25,6 +25,7 @@ return array (
   234704 => 'MTN',
   234705 => 'Glo',
   234706 => 'MTN',
+  234707 => 'MTN',
   234708 => 'Airtel',
   234709 => 'Multilinks',
   234801 => 'MAFAB',
