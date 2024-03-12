@@ -3237,7 +3237,7 @@ return array (
   79 => 'Europe/Moscow',
   81 => 'Asia/Tokyo',
   82 => 'Asia/Seoul',
-  84 => 'Asia/Bangkok',
+  84 => 'Asia/Ho_Chi_Minh',
   850 => 'Asia/Seoul',
   852 => 'Asia/Hong_Kong',
   853 => 'Asia/Shanghai',
