@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[134]\\d{2,4}',
+    'NationalNumberPattern' => '[1-4]\\d{2,4}',
     'PossibleLength' => 
     array (
       0 => 3,
@@ -27,11 +27,12 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:0[1-3]|12)',
+    'NationalNumberPattern' => '1(?:0[1-3]|12)|212\\d',
     'ExampleNumber' => '101',
     'PossibleLength' => 
     array (
       0 => 3,
+      1 => 4,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -61,7 +62,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '1(?:0[1-4]|12)|(?:3040|404)0',
+    'NationalNumberPattern' => '1(?:0[1-4]|12)|2121|(?:3040|404)0',
     'ExampleNumber' => '101',
     'PossibleLength' => 
     array (
