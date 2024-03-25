@@ -11,7 +11,7 @@
  */
 
 return array (
-  35567 => 'ALBtelecom',
-  35568 => 'Telekom',
+  35567 => 'One',
+  35568 => 'One',
   35569 => 'Vodafone',
 );

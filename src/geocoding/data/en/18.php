@@ -3940,4 +3940,5 @@ return array (
   1873 => 'Quebec',
   1876957 => 'Negril',
   1878 => 'Pennsylvania',
+  1879 => 'Newfoundland and Labrador',
 );

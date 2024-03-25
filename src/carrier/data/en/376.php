@@ -11,7 +11,7 @@
  */
 
 return array (
-  3763 => 'Mobiland',
-  3765 => 'Mobiland',
-  3766 => 'Mobiland',
+  3763 => 'Andorra Telecom',
+  3765 => 'Andorra Telecom',
+  3766 => 'Andorra Telecom',
 );
