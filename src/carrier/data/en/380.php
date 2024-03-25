@@ -18,6 +18,8 @@ return array (
   38067 => 'Kyivstar',
   38068 => 'Kyivstar',
   38073 => 'lifecell',
+  38075 => 'Vodafone',
+  38077 => 'Kyivstar',
   38091 => 'TriMob',
   38092 => 'PEOPLEnet',
   38093 => 'lifecell',

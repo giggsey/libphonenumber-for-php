@@ -18,7 +18,7 @@ return array (
   256726 => 'Tangerine',
   256728 => 'Talkio',
   25673 => 'Hamilton Telecom',
-  25674 => 'Sure Telecom',
+  25674 => 'Airtel',
   25675 => 'Airtel',
   25676 => 'MTN',
   25677 => 'MTN',

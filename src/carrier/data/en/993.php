@@ -20,4 +20,5 @@ return array (
   99367 => 'MTS (BARASH Communication)',
   99368 => 'MTS (BARASH Communication)',
   99369 => 'MTS (BARASH Communication)',
+  9937 => 'TM-Cell',
 );

@@ -144,7 +144,7 @@ return array (
   'id' => 'LT',
   'countryCode' => 370,
   'internationalPrefix' => '00',
-  'nationalPrefix' => '8',
+  'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '[08]',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
@@ -157,7 +157,7 @@ return array (
       array (
         0 => '52[0-7]',
       ),
-      'nationalPrefixFormattingRule' => '(8-$1)',
+      'nationalPrefixFormattingRule' => '(0-$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
@@ -169,7 +169,7 @@ return array (
       array (
         0 => '[7-9]',
       ),
-      'nationalPrefixFormattingRule' => '8 $1',
+      'nationalPrefixFormattingRule' => '0 $1',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
@@ -181,7 +181,7 @@ return array (
       array (
         0 => '37|4(?:[15]|6[1-8])',
       ),
-      'nationalPrefixFormattingRule' => '(8-$1)',
+      'nationalPrefixFormattingRule' => '(0-$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
@@ -193,7 +193,7 @@ return array (
       array (
         0 => '[3-6]',
       ),
-      'nationalPrefixFormattingRule' => '(8-$1)',
+      'nationalPrefixFormattingRule' => '(0-$1)',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => true,
     ),
