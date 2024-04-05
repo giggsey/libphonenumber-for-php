@@ -136,6 +136,8 @@ return array (
   1473402 => 'Affordable Island Communications',
   147341 => 'Digicel Grenada',
   147342 => 'Digicel Grenada',
+  1473449 => 'C&W',
+  1473456 => 'C&W',
   147352 => 'Affordable Island Communications',
   147353 => 'AWS Grenada',
   147390 => 'Affordable Island Communications',
