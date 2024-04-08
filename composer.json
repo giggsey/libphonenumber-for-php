@@ -73,6 +73,9 @@
     "symfony/console": "^2.8|^3.0|^v4.4|^v5.2",
     "php-coveralls/php-coveralls": "^1.0|^2.0"
   },
+  "replace": {
+    "giggsey/libphonenumber-for-php-lite": "self.version"
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "8.x-dev"
