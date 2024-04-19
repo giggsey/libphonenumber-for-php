@@ -39,6 +39,7 @@ return array (
   9955055 => 'MagtiCom',
   995510 => 'Silknet',
   99551100 => 'MagtiCom',
+  99551101 => 'Silknet',
   99551107 => 'Silknet',
   9955111 => 'MagtiCom',
   9955112 => 'MagtiCom',

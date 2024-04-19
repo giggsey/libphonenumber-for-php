@@ -49,7 +49,10 @@ return array (
   592708 => 'GTT',
   592709 => 'GTT',
   59271 => 'E-Networks',
-  59272 => 'GTT',
+  592721 => 'GTT',
+  592722 => 'Digicel Guyana',
+  592725 => 'GTT',
+  592726 => 'GTT',
   59273 => 'E-Networks',
   59274 => 'GTT',
 );
