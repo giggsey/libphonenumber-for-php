@@ -328,7 +328,7 @@ return array (
   492623 => 'Ransbach-Baumbach',
   492624 => 'Höhr-Grenzhausen',
   492625 => 'Ochtendung',
-  492626 => 'Selters Westferwald',
+  492626 => 'Selters Westerwald',
   492627 => 'Braubach',
   492628 => 'Rhens',
   492630 => 'Mülheim-Kärlich',

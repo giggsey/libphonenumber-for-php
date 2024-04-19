@@ -11,6 +11,7 @@
  */
 
 return array (
+  4060 => 'Telekom',
   4062 => 'Vodafone',
   4064 => 'Orange',
   407000 => 'Enigma-System',
