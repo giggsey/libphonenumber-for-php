@@ -11,6 +11,8 @@
  */
 
 return array (
+  67768 => 'Satsol',
+  67769 => 'Satsol',
   6777 => 'Solomon Telekom',
   6778 => 'BMobile',
   6779 => 'Smile',
