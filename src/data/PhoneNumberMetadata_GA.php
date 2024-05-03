@@ -140,6 +140,7 @@ return array (
   'id' => 'GA',
   'countryCode' => 241,
   'internationalPrefix' => '00',
+  'nationalPrefix' => '0',
   'nationalPrefixForParsing' => '0(11\\d{6}|60\\d{6}|61\\d{6}|6[256]\\d{6}|7[467]\\d{6})',
   'nationalPrefixTransformRule' => '$1',
   'sameMobileAndFixedLinePattern' => false,
@@ -175,7 +176,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '11|[67]',
+        0 => '[167]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
