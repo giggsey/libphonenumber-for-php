@@ -1255,8 +1255,6 @@ class PhoneNumberUtil
             // Early exit for E164 case (even if the country calling code is invalid) since no formatting
             // of the national number needs to be applied. Extensions are not formatted.
             $formattedNumber .= $nationalSignificantNumber;
-            $this->prefixNumberWithCountryCallingCode($countryCallingCode, PhoneNumberFormat::E164, $formattedNumber);
-            return $formattedNumber;
         }
 
         if (!$this->hasValidCountryCallingCode($countryCallingCode)) {
@@ -1271,7 +1269,9 @@ class PhoneNumberUtil
         // Metadata cannot be null because the country calling code is valid (which means that the
         // region code cannot be ZZ and must be one of our supported region codes).
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCallingCode, $regionCode);
-        $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+        if ($numberFormat !== PhoneNumberFormat::E164) {
+            $formattedNumber .= $this->formatNsn($nationalSignificantNumber, $metadata, $numberFormat);
+        }
         $this->maybeAppendFormattedExtension($number, $metadata, $numberFormat, $formattedNumber);
         $this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
         return $formattedNumber;
