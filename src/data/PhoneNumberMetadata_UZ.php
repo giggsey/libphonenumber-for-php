@@ -137,10 +137,7 @@ return array (
   ),
   'id' => 'UZ',
   'countryCode' => 998,
-  'internationalPrefix' => '810',
-  'preferredInternationalPrefix' => '8~10',
-  'nationalPrefix' => '8',
-  'nationalPrefixForParsing' => '8',
+  'internationalPrefix' => '00',
   'sameMobileAndFixedLinePattern' => false,
   'numberFormat' => 
   array (
@@ -152,7 +149,7 @@ return array (
       array (
         0 => '[235-9]',
       ),
-      'nationalPrefixFormattingRule' => '8 $1',
+      'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
       'nationalPrefixOptionalWhenFormatting' => false,
     ),
