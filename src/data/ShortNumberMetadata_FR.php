@@ -29,7 +29,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '1(?:0(?:07|[13]3)|1[02459]|[578]|9[167])|224|(?:3370|74)0|(?:116\\d|3[01])\\d\\d',
+    'NationalNumberPattern' => '1(?:1[02459]|[578]|9[167])|224|(?:3370|74)0|(?:116\\d|3[01])\\d\\d',
     'ExampleNumber' => '15',
     'PossibleLength' => 
     array (
@@ -40,8 +40,8 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '366\\d\\d|3[2-9]\\d\\d|(?:118|[4-8]\\d)\\d{3}',
-    'ExampleNumber' => '3200',
+    'NationalNumberPattern' => '(?:1(?:0|18\\d)|366|[4-8]\\d\\d)\\d\\d|3[2-9]\\d\\d',
+    'ExampleNumber' => '1000',
     'PossibleLength' => 
     array (
       0 => 4,
@@ -78,7 +78,7 @@ return array (
   ),
   'standardRate' => 
   array (
-    'NationalNumberPattern' => '10(?:[134]4|2[23]|5\\d|99)|202\\d|634|70[06]|(?:106|61)[14]',
+    'NationalNumberPattern' => '202\\d|6(?:1[14]|34)|70[06]',
     'ExampleNumber' => '611',
     'PossibleLength' => 
     array (
