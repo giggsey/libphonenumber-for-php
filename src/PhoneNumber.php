@@ -584,7 +584,7 @@ class PhoneNumber implements \Serializable
         $this->__unserialize(unserialize($serialized));
     }
 
-    public function __unserialize($data)
+    public function __unserialize(array $data)
     {
         list(
             $this->countryCode,
