@@ -69,6 +69,7 @@ return array (
   52632 => 'Ímuris/Magdalena, SON',
   52641 => 'Benjamín Hill/Santa Ana, SON',
   52653 => 'Luis B. Sánchez/San Luis Río Colorado, SON',
+  52660 => 'Culiacán',
   52711 => 'México/Michoacán',
   52712 => 'Estado de México',
   52714 => 'Estado de México',
