@@ -165,6 +165,13 @@ class PhoneNumberUtil
     protected static $GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES;
 
     /**
+     * Set of country codes that doesn't have national prefix, but it has area codes.
+     *
+     * @var array
+     */
+    protected static $COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES;
+
+    /**
      * Set of country calling codes that have geographically assigned mobile numbers. This may not be
      * complete; we add calling codes case by case, as we find geographical mobile numbers or hear
      * from user reports. Note that countries like the US, where we can't distinguish between
@@ -399,6 +406,9 @@ class PhoneNumberUtil
 
         static::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES = array();
         static::$GEO_MOBILE_COUNTRIES_WITHOUT_MOBILE_AREA_CODES[] = 86; // China
+
+        static::$COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES = array();
+        static::$COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES[] = 52; // Mexico
 
         static::$GEO_MOBILE_COUNTRIES = array();
         static::$GEO_MOBILE_COUNTRIES[] = 52; // Mexico
@@ -873,14 +883,18 @@ class PhoneNumberUtil
         if ($metadata === null) {
             return 0;
         }
+
+        $countryCallingCode = $number->getCountryCode();
+
         // If a country doesn't use a national prefix, and this number doesn't have an Italian leading
         // zero, we assume it is a closed dialling plan with no area codes.
-        if (!$metadata->hasNationalPrefix() && !$number->isItalianLeadingZero()) {
+        // Note:this is our general assumption, but there are exceptions which are tracked in
+        // COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES.
+        if (!$metadata->hasNationalPrefix() && !$number->isItalianLeadingZero() && !in_array($countryCallingCode, self::$COUNTRIES_WITHOUT_NATIONAL_PREFIX_WITH_AREA_CODES)) {
             return 0;
         }
 
         $type = $this->getNumberType($number);
-        $countryCallingCode = $number->getCountryCode();
 
         if ($type === PhoneNumberType::MOBILE
             // Note this is a rough heuristic; it doesn't cover Indonesia well, for example, where area
