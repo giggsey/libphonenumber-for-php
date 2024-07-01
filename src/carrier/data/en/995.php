@@ -37,6 +37,7 @@ return array (
   99550090 => 'Cellfie',
   99550099 => 'Silknet',
   995501 => 'Cellfie',
+  995502 => 'Silknet',
   9955050 => 'Silknet',
   9955055 => 'MagtiCom',
   995507 => 'Globalcell',
