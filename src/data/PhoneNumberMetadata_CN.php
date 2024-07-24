@@ -181,9 +181,9 @@ return array (
       'format' => '$1',
       'leadingDigitsPatterns' => 
       array (
-        0 => '1(?:00|2[13])|95',
-        1 => '1(?:00|2(?:11|39))|95',
-        2 => '1(?:00|2(?:110|395))|95',
+        0 => '1(?:00|2[13])|9[56]',
+        1 => '1(?:00|2(?:1|39))|9[56]',
+        2 => '1(?:00|2(?:1|395))|9[56]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
@@ -195,7 +195,7 @@ return array (
       'format' => '$1',
       'leadingDigitsPatterns' => 
       array (
-        0 => '10|96',
+        0 => '10',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '',
