@@ -41,12 +41,11 @@ return array (
   ),
   'mobile' => 
   array (
-    'NationalNumberPattern' => '(?:20(?:[23579]\\d|88)|30(?:2\\d|4))\\d{6}',
+    'NationalNumberPattern' => '208[78]\\d{6}|(?:20[23579]|30[24])\\d{7}',
     'ExampleNumber' => '2023123456',
     'PossibleLength' => 
     array (
-      0 => 9,
-      1 => 10,
+      0 => 10,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -170,7 +169,7 @@ return array (
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
-        0 => '30[013-9]',
+        0 => '30[0135-9]',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '',
