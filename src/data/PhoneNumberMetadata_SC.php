@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '800\\d{4}|(?:[249]\\d|64)\\d{5}',
+    'NationalNumberPattern' => '(?:[2489]\\d|64)\\d{5}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -58,9 +58,10 @@ return array (
   ),
   'premiumRate' => 
   array (
+    'NationalNumberPattern' => '85\\d{5}',
+    'ExampleNumber' => '8512345',
     'PossibleLength' => 
     array (
-      0 => -1,
     ),
     'PossibleLengthLocalOnly' => 
     array (

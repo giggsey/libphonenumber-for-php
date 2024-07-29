@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:[2-467]\\d\\d|8001)\\d{5}',
+    'NationalNumberPattern' => '8001\\d{5}|(?:[2-467]\\d|50)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 8,
@@ -94,12 +94,15 @@ return array (
   ),
   'voip' => 
   array (
+    'NationalNumberPattern' => '50\\d{6}',
+    'ExampleNumber' => '50123456',
     'PossibleLength' => 
     array (
-      0 => -1,
+      0 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
+      0 => 7,
     ),
   ),
   'pager' => 
@@ -157,7 +160,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '[23]|4[46]',
+        0 => '[235]|4[46]',
       ),
       'nationalPrefixFormattingRule' => '',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',

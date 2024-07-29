@@ -68,7 +68,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '00(?:308\\d{6,7}|798\\d{7,9})|(?:00368|80)\\d{7}',
+    'NationalNumberPattern' => '00(?:308\\d{6,7}|798\\d{7,9})|(?:00368|[38]0)\\d{7}',
     'ExampleNumber' => '801234567',
     'PossibleLength' => 
     array (
@@ -242,7 +242,7 @@ return array (
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '60|8',
+        0 => '[36]0|8',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
@@ -366,7 +366,7 @@ return array (
       'format' => '$1-$2-$3',
       'leadingDigitsPatterns' => 
       array (
-        0 => '60|8',
+        0 => '[36]0|8',
       ),
       'nationalPrefixFormattingRule' => '0$1',
       'domesticCarrierCodeFormattingRule' => '0$CC-$1',
