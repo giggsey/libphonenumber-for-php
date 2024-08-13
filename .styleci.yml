@@ -1,5 +1,7 @@
 preset: psr12
 
+version: 5.3
+
 finder:
   not-path:
     - "src/data/"
