@@ -16,6 +16,7 @@ return array (
   24493 => 'UNITEL',
   24494 => 'UNITEL',
   24495 => 'Africell',
+  24496 => 'Africell',
   24497 => 'UNITEL',
   24499 => 'Movicel',
 );
