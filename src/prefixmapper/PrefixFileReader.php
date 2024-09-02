@@ -9,6 +9,7 @@ use libphonenumber\PhoneNumberUtil;
  * A helper class doing file handling and lookup of phone number prefix mappings.
  *
  * @package libphonenumber\prefixmapper
+ * @internal
  */
 class PrefixFileReader
 {
