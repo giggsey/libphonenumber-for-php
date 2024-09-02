@@ -11,7 +11,8 @@
  */
 
 return array (
-  3245001 => 'Gateway Communications',
+  3245001 => 'GATEWAY COMMUNICATIONS S.A.',
+  324510 => 'DIGI Communications',
   32455 => 'VOO',
   32456 => 'Mobile Vikings/JIM Mobile',
   32460 => 'Proximus',

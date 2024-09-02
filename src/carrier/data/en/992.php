@@ -11,15 +11,11 @@
  */
 
 return array (
+  9920 => 'ZET-MOBILE',
   99200 => 'Megafon',
   99201 => 'Megafon',
   99202 => 'Megafon',
-  99203 => 'ZET-MOBILE',
-  99204 => 'ZET-MOBILE',
-  99205 => 'ZET-MOBILE',
   99207 => 'Megafon',
-  99208 => 'ZET-MOBILE',
-  99209 => 'ZET-MOBILE',
   99210 => 'O-Mobile',
   99211 => 'Tcell',
   99217 => 'Babilon-M',
