@@ -14,13 +14,12 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '[1-9]\\d\\d(?:\\d\\d(?:\\d(?:\\d{2})?)?)?',
+    'NationalNumberPattern' => '[1-9]\\d\\d(?:\\d{2,3})?',
     'PossibleLength' => 
     array (
       0 => 3,
       1 => 5,
       2 => 6,
-      3 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -62,7 +61,7 @@ return array (
   ),
   'shortCode' => 
   array (
-    'NationalNumberPattern' => '112|30000\\d{3}|[1-35-9]\\d{4,5}|[2-8]11|9(?:11|88)',
+    'NationalNumberPattern' => '[1-35-9]\\d{4,5}|112|[2-8]11|9(?:11|88)',
     'ExampleNumber' => '112',
     'PossibleLength' => 
     array (
@@ -95,13 +94,12 @@ return array (
   ),
   'smsServices' => 
   array (
-    'NationalNumberPattern' => '300\\d{5}|[1-35-9]\\d{4,5}',
+    'NationalNumberPattern' => '[1-35-9]\\d{4,5}',
     'ExampleNumber' => '10000',
     'PossibleLength' => 
     array (
       0 => 5,
       1 => 6,
-      2 => 8,
     ),
     'PossibleLengthLocalOnly' => 
     array (
