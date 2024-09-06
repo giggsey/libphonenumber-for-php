@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:(?:00[1-9]|8\\d)\\d{4}|[1-36])\\d{6}|00\\d{10}|[1-9]\\d{8,10}|[2-9]\\d{7}',
+    'NationalNumberPattern' => '00[1-9]\\d{9,14}|(?:[1-36]|8\\d{5})\\d{6}|00\\d{9}|[1-9]\\d{8,10}|[2-9]\\d{7}',
     'PossibleLength' => 
     array (
       0 => 7,
@@ -24,6 +24,10 @@ return array (
       4 => 11,
       5 => 12,
       6 => 13,
+      7 => 14,
+      8 => 15,
+      9 => 16,
+      10 => 17,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -66,7 +70,7 @@ return array (
   ),
   'tollFree' => 
   array (
-    'NationalNumberPattern' => '00[17]803\\d{7}|(?:177\\d|800)\\d{5,7}|001803\\d{6}',
+    'NationalNumberPattern' => '00(?:1803\\d{5,11}|7803\\d{7})|(?:177\\d|800)\\d{5,7}',
     'ExampleNumber' => '8001234567',
     'PossibleLength' => 
     array (
@@ -76,6 +80,10 @@ return array (
       3 => 11,
       4 => 12,
       5 => 13,
+      6 => 14,
+      7 => 15,
+      8 => 16,
+      9 => 17,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -160,12 +168,17 @@ return array (
   ),
   'noInternationalDialling' => 
   array (
-    'NationalNumberPattern' => '001803\\d{6,7}|(?:007803\\d|8071)\\d{6}',
+    'NationalNumberPattern' => '001803\\d{5,11}|(?:007803\\d|8071)\\d{6}',
     'PossibleLength' => 
     array (
       0 => 10,
-      1 => 12,
-      2 => 13,
+      1 => 11,
+      2 => 12,
+      3 => 13,
+      4 => 14,
+      5 => 15,
+      6 => 16,
+      7 => 17,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -289,7 +302,7 @@ return array (
     ),
     9 => 
     array (
-      'pattern' => '(\\d{3})(\\d{3})(\\d{3})(\\d{3})',
+      'pattern' => '(\\d{3})(\\d{3})(\\d{3})(\\d{2,8})',
       'format' => '$1 $2 $3 $4',
       'leadingDigitsPatterns' => 
       array (
