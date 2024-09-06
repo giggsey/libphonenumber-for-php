@@ -139,6 +139,7 @@ return array (
   52447 => 'Contepec/Maravatio, MICH',
   52448 => 'Queretaro',
   52449 => 'Aguascalientes/Jesus Maria, AGS',
+  52450 => 'Morelia',
   52451 => 'Michoacan',
   52452 => 'Nuevo San Juan Parangaricutiro/Uruapan, MICH',
   52453 => 'Apatzingan, MICH',
