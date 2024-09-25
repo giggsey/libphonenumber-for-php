@@ -14,7 +14,7 @@
 return array (
   'generalDesc' => 
   array (
-    'NationalNumberPattern' => '(?:60\\d\\d|9101)\\d{6}|(?:1\\d|3)\\d{9}',
+    'NationalNumberPattern' => '60\\d{8}|(?:1\\d|[39])\\d{9}',
     'PossibleLength' => 
     array (
       0 => 10,
@@ -64,11 +64,10 @@ return array (
   ),
   'premiumRate' => 
   array (
-    'NationalNumberPattern' => '19(?:0[01]|4[78])\\d{7}',
+    'NationalNumberPattern' => '(?:19(?:0[01]|4[78])|901)\\d{7}',
     'ExampleNumber' => '19001234567',
     'PossibleLength' => 
     array (
-      0 => 11,
     ),
     'PossibleLengthLocalOnly' => 
     array (
@@ -158,7 +157,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '6',
+        0 => '6|90',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',
@@ -197,7 +196,7 @@ return array (
       'format' => '$1 $2',
       'leadingDigitsPatterns' => 
       array (
-        0 => '6',
+        0 => '6|90',
       ),
       'nationalPrefixFormattingRule' => '($1)',
       'domesticCarrierCodeFormattingRule' => '0$CC $1',

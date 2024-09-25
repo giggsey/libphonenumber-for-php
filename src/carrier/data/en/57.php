@@ -288,5 +288,5 @@ return array (
   573507 => 'Avantel',
   573508 => 'Avantel',
   57351 => 'Avantel',
-  579 => 'Movistar',
+  5791 => 'Movistar',
 );

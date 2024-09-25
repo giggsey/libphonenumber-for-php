@@ -32,6 +32,7 @@ return array (
   9725544 => 'Cellran Cellular Communications',
   97255440 => 'Merkaziya',
   97255442 => 'Xphone',
+  97255443 => 'Yossi',
   9725550 => 'Annatel',
   9725551 => 'Annatel',
   9725552 => 'Annatel',
