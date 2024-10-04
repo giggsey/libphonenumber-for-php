@@ -28,7 +28,7 @@ class PrefixTimeZonesMapTest extends TestCase
      */
     private static $prefixTimeZonesMapForRU;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $sortedMapForUS = array();
         $sortedMapForUS[1] = self::NEW_YORK_TZ . '&' . self::CHICAGO_TZ . '&' . self::LOS_ANGELES_TZ . '&' . self::DENVER_TZ;

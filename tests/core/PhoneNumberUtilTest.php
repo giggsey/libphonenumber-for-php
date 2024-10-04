@@ -62,7 +62,7 @@ class PhoneNumberUtilTest extends TestCase
      */
     protected $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->phoneUtil = self::initializePhoneUtilForTesting();
     }

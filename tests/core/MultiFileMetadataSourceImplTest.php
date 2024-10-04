@@ -14,7 +14,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
      */
     private $multiFileMetadataSource;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
             new DefaultMetadataLoader(),

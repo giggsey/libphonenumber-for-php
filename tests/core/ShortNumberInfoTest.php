@@ -23,7 +23,7 @@ class ShortNumberInfoTest extends TestCase
      */
     private $shortInfo;
 
-    public function setUp()
+    public function setUp(): void
     {
         self::$plusSymbol = \pack('H*', 'efbc8b');
 

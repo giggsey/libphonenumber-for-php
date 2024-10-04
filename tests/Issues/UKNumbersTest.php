@@ -15,7 +15,7 @@ class UKNumbersTest extends TestCase
      */
     protected $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();

@@ -16,7 +16,7 @@ class Issue159Test extends TestCase
 {
     const LOS_ANGELES_TZ = 'America/Los_Angeles';
 
-    public function setUp()
+    public function setUp(): void
     {
         // Reset instance each time
         PhoneNumberUtil::resetInstance();

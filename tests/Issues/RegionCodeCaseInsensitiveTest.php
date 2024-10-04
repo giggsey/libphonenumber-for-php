@@ -19,7 +19,7 @@ class RegionCodeCaseInsensitiveTest extends TestCase
      */
     private $shortInfo;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();

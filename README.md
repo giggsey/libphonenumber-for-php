@@ -26,14 +26,14 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
-PHP versions 5.3 to PHP 8.3 are currently supported.
+PHP versions 7.4 to PHP 8.4 are currently supported.
 
 The PECL [mbstring](http://php.net/mbstring) extension is required.
 
 It is recommended to use [composer](https://getcomposer.org) to install the library.
 
 ```bash
-$ composer require giggsey/libphonenumber-for-php
+composer require giggsey/libphonenumber-for-php
 ```
 
 You can also use any other [PSR-4](http://www.php-fig.org/psr/psr-4/) compliant autoloader.
@@ -241,7 +241,7 @@ Generating the data is not normally needed, as this repository will generally al
 If you do need to generate the data, the commands are provided by [Phing](https://www.phing.info). Ensure you have all the dev composer dependencies installed, then run
 
 ```bash
-$ vendor/bin/phing compile
+vendor/bin/phing compile
 ```
 
 This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).

@@ -27,14 +27,14 @@ class ExampleNumbersTest extends TestCase
      */
     private $shortNumberInfo;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         PhoneNumberUtil::resetInstance();
         PhoneNumberUtil::getInstance();
         ShortNumberInfo::resetInstance();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
         $this->shortNumberInfo = ShortNumberInfo::getInstance();
