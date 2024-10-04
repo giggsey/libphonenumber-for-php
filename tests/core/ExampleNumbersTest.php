@@ -42,12 +42,12 @@ class ExampleNumbersTest extends TestCase
 
     public function regionList()
     {
-        $returnList = array();
+        $returnList = [];
 
         PhoneNumberUtil::resetInstance();
         $phoneUtil = PhoneNumberUtil::getInstance();
         foreach ($phoneUtil->getSupportedRegions() as $regionCode) {
-            $returnList[] = array($regionCode);
+            $returnList[] = [$regionCode];
         }
 
         return $returnList;
@@ -55,19 +55,19 @@ class ExampleNumbersTest extends TestCase
 
     public function numberTypes()
     {
-        return array(
-            array(PhoneNumberType::FIXED_LINE),
-            array(PhoneNumberType::MOBILE),
-            array(PhoneNumberType::FIXED_LINE_OR_MOBILE),
-            array(PhoneNumberType::TOLL_FREE),
-            array(PhoneNumberType::PREMIUM_RATE),
-            array(PhoneNumberType::SHARED_COST),
-            array(PhoneNumberType::VOIP),
-            array(PhoneNumberType::PERSONAL_NUMBER),
-            array(PhoneNumberType::PAGER),
-            array(PhoneNumberType::UAN),
-            array(PhoneNumberType::VOICEMAIL),
-        );
+        return [
+            [PhoneNumberType::FIXED_LINE],
+            [PhoneNumberType::MOBILE],
+            [PhoneNumberType::FIXED_LINE_OR_MOBILE],
+            [PhoneNumberType::TOLL_FREE],
+            [PhoneNumberType::PREMIUM_RATE],
+            [PhoneNumberType::SHARED_COST],
+            [PhoneNumberType::VOIP],
+            [PhoneNumberType::PERSONAL_NUMBER],
+            [PhoneNumberType::PAGER],
+            [PhoneNumberType::UAN],
+            [PhoneNumberType::VOICEMAIL],
+        ];
     }
 
     /**
@@ -75,7 +75,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testFixedLine($region)
     {
-        $fixedLineTypes = array(PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE);
+        $fixedLineTypes = [PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::FIXED_LINE, $fixedLineTypes, $region);
     }
 
@@ -84,7 +84,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testFixedLineOrMobile($region)
     {
-        $numberTypes = array(PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE);
+        $numberTypes = [PhoneNumberType::FIXED_LINE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::FIXED_LINE_OR_MOBILE, $numberTypes, $region);
     }
 
@@ -108,7 +108,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testMobile($region)
     {
-        $mobileTypes = array(PhoneNumberType::MOBILE, PhoneNumberType::FIXED_LINE_OR_MOBILE);
+        $mobileTypes = [PhoneNumberType::MOBILE, PhoneNumberType::FIXED_LINE_OR_MOBILE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::MOBILE, $mobileTypes, $region);
     }
 
@@ -117,7 +117,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testTollFree($region)
     {
-        $tollFreeTypes = array(PhoneNumberType::TOLL_FREE);
+        $tollFreeTypes = [PhoneNumberType::TOLL_FREE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::TOLL_FREE, $tollFreeTypes, $region);
     }
 
@@ -126,7 +126,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testPremiumRate($region)
     {
-        $premiumRateTypes = array(PhoneNumberType::PREMIUM_RATE);
+        $premiumRateTypes = [PhoneNumberType::PREMIUM_RATE];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PREMIUM_RATE, $premiumRateTypes, $region);
     }
 
@@ -135,7 +135,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testVoip($region)
     {
-        $voipTypes = array(PhoneNumberType::VOIP);
+        $voipTypes = [PhoneNumberType::VOIP];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::VOIP, $voipTypes, $region);
     }
 
@@ -144,7 +144,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testPager($region)
     {
-        $pagerTypes = array(PhoneNumberType::PAGER);
+        $pagerTypes = [PhoneNumberType::PAGER];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PAGER, $pagerTypes, $region);
     }
 
@@ -153,7 +153,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testUan($region)
     {
-        $uanTypes = array(PhoneNumberType::UAN);
+        $uanTypes = [PhoneNumberType::UAN];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::UAN, $uanTypes, $region);
     }
 
@@ -162,7 +162,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testVoicemail($region)
     {
-        $voicemailTypes = array(PhoneNumberType::VOICEMAIL);
+        $voicemailTypes = [PhoneNumberType::VOICEMAIL];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::VOICEMAIL, $voicemailTypes, $region);
     }
 
@@ -171,7 +171,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testPersonalNumber($region)
     {
-        $numberTypes = array(PhoneNumberType::PERSONAL_NUMBER);
+        $numberTypes = [PhoneNumberType::PERSONAL_NUMBER];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::PERSONAL_NUMBER, $numberTypes, $region);
     }
 
@@ -180,7 +180,7 @@ class ExampleNumbersTest extends TestCase
      */
     public function testSharedCost($region)
     {
-        $sharedCostTypes = array(PhoneNumberType::SHARED_COST);
+        $sharedCostTypes = [PhoneNumberType::SHARED_COST];
         $this->checkNumbersValidAndCorrectType(PhoneNumberType::SHARED_COST, $sharedCostTypes, $region);
     }
 
@@ -206,13 +206,13 @@ class ExampleNumbersTest extends TestCase
 
     public function shortNumberRegionList()
     {
-        $returnList = array();
+        $returnList = [];
 
         PhoneNumberUtil::resetInstance();
         ShortNumberInfo::resetInstance();
         $shortNumberInfo = ShortNumberInfo::getInstance();
         foreach ($shortNumberInfo->getSupportedRegions() as $regionCode) {
-            $returnList[] = array($regionCode);
+            $returnList[] = [$regionCode];
         }
 
         return $returnList;
@@ -220,12 +220,12 @@ class ExampleNumbersTest extends TestCase
 
     public function supportedGlobalNetworkCallingCodes()
     {
-        $returnList = array();
+        $returnList = [];
 
         PhoneNumberUtil::resetInstance();
         $phoneUtil = PhoneNumberUtil::getInstance();
         foreach ($phoneUtil->getSupportedGlobalNetworkCallingCodes() as $callingCode) {
-            $returnList[] = array($callingCode);
+            $returnList[] = [$callingCode];
         }
 
         return $returnList;
@@ -309,18 +309,18 @@ class ExampleNumbersTest extends TestCase
 
     public function shortRegionListAndNumberCost()
     {
-        $costArray = array(
+        $costArray = [
             ShortNumberCost::PREMIUM_RATE,
             ShortNumberCost::STANDARD_RATE,
             ShortNumberCost::TOLL_FREE,
-            ShortNumberCost::UNKNOWN_COST
-        );
+            ShortNumberCost::UNKNOWN_COST,
+        ];
 
-        $output = array();
+        $output = [];
 
         foreach ($this->shortNumberRegionList() as $region) {
             foreach ($costArray as $cost) {
-                $output[] = array($region[0], $cost);
+                $output[] = [$region[0], $cost];
             }
         }
 
@@ -329,8 +329,6 @@ class ExampleNumbersTest extends TestCase
 
     /**
      * @dataProvider shortRegionListAndNumberCost
-     * @param $regionCode
-     * @param $cost
      */
     public function testShortNumberHasCorrectCost($regionCode, $cost)
     {

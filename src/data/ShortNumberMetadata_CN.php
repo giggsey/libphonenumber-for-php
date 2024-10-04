@@ -11,110 +11,110 @@
  */
 
 
-return array (
-  'generalDesc' => 
-  array (
-    'NationalNumberPattern' => '[19]\\d{2,5}',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-      1 => 4,
-      2 => 5,
-      3 => 6,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'tollFree' => 
-  array (
-    'NationalNumberPattern' => '1(?:1[09]|2(?:[02]|1\\d\\d|395))',
-    'ExampleNumber' => '110',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-      1 => 5,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'premiumRate' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'emergency' => 
-  array (
-    'NationalNumberPattern' => '1(?:1[09]|20)',
-    'ExampleNumber' => '110',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'shortCode' => 
-  array (
-    'NationalNumberPattern' => '1(?:00|1[0249]|2395|6[08])|9[56]\\d{3,4}|12[023]|1(?:0(?:[0-26]\\d|8)|21\\d)\\d',
-    'ExampleNumber' => '100',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'standardRate' => 
-  array (
-    'NationalNumberPattern' => '1(?:0(?:[0-26]\\d|8)\\d|1[24]|23|6[08])|9[56]\\d{3,4}|100',
-    'ExampleNumber' => '100',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'carrierSpecific' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'smsServices' => 
-  array (
-    'NationalNumberPattern' => '12110',
-    'ExampleNumber' => '12110',
-    'PossibleLength' => 
-    array (
-      0 => 5,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'CN',
-  'countryCode' => 0,
-  'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'generalDesc' =>
+     [
+         'NationalNumberPattern' => '[19]\\d{2,5}',
+         'PossibleLength' =>
+          [
+              0 => 3,
+              1 => 4,
+              2 => 5,
+              3 => 6,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'tollFree' =>
+     [
+         'NationalNumberPattern' => '1(?:1[09]|2(?:[02]|1\\d\\d|395))',
+         'ExampleNumber' => '110',
+         'PossibleLength' =>
+          [
+              0 => 3,
+              1 => 5,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'premiumRate' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'emergency' =>
+     [
+         'NationalNumberPattern' => '1(?:1[09]|20)',
+         'ExampleNumber' => '110',
+         'PossibleLength' =>
+          [
+              0 => 3,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'shortCode' =>
+     [
+         'NationalNumberPattern' => '1(?:00|1[0249]|2395|6[08])|9[56]\\d{3,4}|12[023]|1(?:0(?:[0-26]\\d|8)|21\\d)\\d',
+         'ExampleNumber' => '100',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'standardRate' =>
+     [
+         'NationalNumberPattern' => '1(?:0(?:[0-26]\\d|8)\\d|1[24]|23|6[08])|9[56]\\d{3,4}|100',
+         'ExampleNumber' => '100',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'carrierSpecific' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'smsServices' =>
+     [
+         'NationalNumberPattern' => '12110',
+         'ExampleNumber' => '12110',
+         'PossibleLength' =>
+          [
+              0 => 5,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'id' => 'CN',
+    'countryCode' => 0,
+    'internationalPrefix' => '',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

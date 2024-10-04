@@ -10,18 +10,18 @@
  * Do not modify this file directly!
  */
 
-return array (
-  25670 => 'Airtel',
-  25671 => 'UTL',
-  256720 => 'Smile',
-  256724 => 'Hamilton Telecom',
-  256726 => 'Tangerine',
-  256728 => 'Talkio',
-  25673 => 'Hamilton Telecom',
-  25674 => 'Airtel',
-  25675 => 'Airtel',
-  25676 => 'MTN',
-  25677 => 'MTN',
-  25678 => 'MTN',
-  25679 => 'Africell',
-);
+return  [
+    25670 => 'Airtel',
+    25671 => 'UTL',
+    256720 => 'Smile',
+    256724 => 'Hamilton Telecom',
+    256726 => 'Tangerine',
+    256728 => 'Talkio',
+    25673 => 'Hamilton Telecom',
+    25674 => 'Airtel',
+    25675 => 'Airtel',
+    25676 => 'MTN',
+    25677 => 'MTN',
+    25678 => 'MTN',
+    25679 => 'Africell',
+];

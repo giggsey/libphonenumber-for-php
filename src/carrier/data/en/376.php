@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  3763 => 'Andorra Telecom',
-  3765 => 'Andorra Telecom',
-  3766 => 'Andorra Telecom',
-);
+return  [
+    3763 => 'Andorra Telecom',
+    3765 => 'Andorra Telecom',
+    3766 => 'Andorra Telecom',
+];

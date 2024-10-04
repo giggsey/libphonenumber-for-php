@@ -11,174 +11,174 @@
  */
 
 
-return array (
-  'generalDesc' => 
-  array (
-    'NationalNumberPattern' => '[1-578]\\d{4,14}',
-    'PossibleLength' => 
-    array (
-      0 => 9,
-      1 => 10,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '[2378]\\d{8}',
-    'ExampleNumber' => '212345678',
-    'PossibleLength' => 
-    array (
-      0 => 9,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '4\\d{8}',
-    'ExampleNumber' => '412345678',
-    'PossibleLength' => 
-    array (
-      0 => 9,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'tollFree' => 
-  array (
-    'NationalNumberPattern' => '1800\\d{6}',
-    'ExampleNumber' => '1800123456',
-    'PossibleLength' => 
-    array (
-      0 => 10,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '190[0126]\\d{6}',
-    'ExampleNumber' => '1900123456',
-    'PossibleLength' => 
-    array (
-      0 => 10,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'sharedCost' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'personalNumber' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voip' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'pager' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'uan' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voicemail' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'noInternationalDialling' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'AU',
-  'countryCode' => 61,
-  'internationalPrefix' => '001[12]',
-  'preferredInternationalPrefix' => '0011',
-  'nationalPrefix' => '0',
-  'nationalPrefixForParsing' => '0',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-    0 => 
-    array (
-      'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '1',
-      ),
-      'nationalPrefixFormattingRule' => '$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    1 => 
-    array (
-      'pattern' => '(\\d)(\\d{4})(\\d{4})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[2-478]',
-      ),
-      'nationalPrefixFormattingRule' => '0$1',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'generalDesc' =>
+     [
+         'NationalNumberPattern' => '[1-578]\\d{4,14}',
+         'PossibleLength' =>
+          [
+              0 => 9,
+              1 => 10,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'fixedLine' =>
+     [
+         'NationalNumberPattern' => '[2378]\\d{8}',
+         'ExampleNumber' => '212345678',
+         'PossibleLength' =>
+          [
+              0 => 9,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'mobile' =>
+     [
+         'NationalNumberPattern' => '4\\d{8}',
+         'ExampleNumber' => '412345678',
+         'PossibleLength' =>
+          [
+              0 => 9,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'tollFree' =>
+     [
+         'NationalNumberPattern' => '1800\\d{6}',
+         'ExampleNumber' => '1800123456',
+         'PossibleLength' =>
+          [
+              0 => 10,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'premiumRate' =>
+     [
+         'NationalNumberPattern' => '190[0126]\\d{6}',
+         'ExampleNumber' => '1900123456',
+         'PossibleLength' =>
+          [
+              0 => 10,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'sharedCost' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'personalNumber' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'voip' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'pager' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'uan' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'voicemail' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'noInternationalDialling' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'id' => 'AU',
+    'countryCode' => 61,
+    'internationalPrefix' => '001[12]',
+    'preferredInternationalPrefix' => '0011',
+    'nationalPrefix' => '0',
+    'nationalPrefixForParsing' => '0',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+         0 =>
+          [
+              'pattern' => '(\\d{4})(\\d{3})(\\d{3})',
+              'format' => '$1 $2 $3',
+              'leadingDigitsPatterns' =>
+               [
+                   0 => '1',
+               ],
+              'nationalPrefixFormattingRule' => '$1',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+         1 =>
+          [
+              'pattern' => '(\\d)(\\d{4})(\\d{4})',
+              'format' => '$1 $2 $3',
+              'leadingDigitsPatterns' =>
+               [
+                   0 => '[2-478]',
+               ],
+              'nationalPrefixFormattingRule' => '0$1',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

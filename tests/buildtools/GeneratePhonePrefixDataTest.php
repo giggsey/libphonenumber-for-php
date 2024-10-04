@@ -11,7 +11,7 @@ class GeneratePhonePrefixDataTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        $temporaryMap = array();
+        $temporaryMap = [];
 
         $phonePrefixData = new GeneratePhonePrefixData();
 

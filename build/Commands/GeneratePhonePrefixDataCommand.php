@@ -16,11 +16,11 @@ class GeneratePhonePrefixDataCommand extends Command
         $this->setName('GeneratePhonePrefixData');
         $this->setDescription('Generate phone prefix data files');
         $this->setDefinition(
-            array(
+            [
                 new InputArgument('InputDirectory', InputArgument::REQUIRED, 'The input directory containing the locale/region.txt files'),
                 new InputArgument('OutputDirectory', InputArgument::REQUIRED, 'The output source directory'),
                 new InputOption('expandCountries', null, InputOption::VALUE_NONE, 'Should we expand certain countries into separate files'),
-            )
+            ]
         );
     }
 

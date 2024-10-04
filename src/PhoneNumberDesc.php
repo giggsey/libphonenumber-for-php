@@ -63,7 +63,7 @@ class PhoneNumberDesc
 
     public function clearPossibleLength()
     {
-        $this->possibleLength = array();
+        $this->possibleLength = [];
     }
 
     /**
@@ -91,7 +91,7 @@ class PhoneNumberDesc
 
     public function clearPossibleLengthLocalOnly()
     {
-        $this->possibleLengthLocalOnly = array();
+        $this->possibleLengthLocalOnly = [];
     }
 
     /**
@@ -172,7 +172,6 @@ class PhoneNumberDesc
     }
 
     /**
-     * @param PhoneNumberDesc $other
      * @return PhoneNumberDesc
      */
     public function mergeFrom(PhoneNumberDesc $other)
@@ -190,7 +189,6 @@ class PhoneNumberDesc
     }
 
     /**
-     * @param PhoneNumberDesc $other
      * @return boolean
      */
     public function exactlySameAs(PhoneNumberDesc $other)
@@ -204,7 +202,7 @@ class PhoneNumberDesc
      */
     public function toArray()
     {
-        $data = array();
+        $data = [];
         if ($this->hasNationalNumberPattern()) {
             $data['NationalNumberPattern'] = $this->getNationalNumberPattern();
         }
@@ -219,7 +217,6 @@ class PhoneNumberDesc
     }
 
     /**
-     * @param array $input
      * @return PhoneNumberDesc
      */
     public function fromArray(array $input)

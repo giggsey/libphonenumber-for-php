@@ -11,108 +11,108 @@
  */
 
 
-return array (
-  'generalDesc' => 
-  array (
-    'NationalNumberPattern' => '[146]\\d\\d(?:\\d{2})?',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-      1 => 5,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'tollFree' => 
-  array (
-    'NationalNumberPattern' => '11[7-9]|666',
-    'ExampleNumber' => '117',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'premiumRate' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'emergency' => 
-  array (
-    'NationalNumberPattern' => '11[7-9]|666',
-    'ExampleNumber' => '117',
-    'PossibleLength' => 
-    array (
-      0 => 3,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'shortCode' => 
-  array (
-    'NationalNumberPattern' => '11[7-9]|40404|666',
-    'ExampleNumber' => '117',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'standardRate' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'carrierSpecific' => 
-  array (
-    'NationalNumberPattern' => '404\\d\\d',
-    'ExampleNumber' => '40400',
-    'PossibleLength' => 
-    array (
-      0 => 5,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'smsServices' => 
-  array (
-    'NationalNumberPattern' => '404\\d\\d',
-    'ExampleNumber' => '40400',
-    'PossibleLength' => 
-    array (
-      0 => 5,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'KH',
-  'countryCode' => 0,
-  'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'generalDesc' =>
+     [
+         'NationalNumberPattern' => '[146]\\d\\d(?:\\d{2})?',
+         'PossibleLength' =>
+          [
+              0 => 3,
+              1 => 5,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'tollFree' =>
+     [
+         'NationalNumberPattern' => '11[7-9]|666',
+         'ExampleNumber' => '117',
+         'PossibleLength' =>
+          [
+              0 => 3,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'premiumRate' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'emergency' =>
+     [
+         'NationalNumberPattern' => '11[7-9]|666',
+         'ExampleNumber' => '117',
+         'PossibleLength' =>
+          [
+              0 => 3,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'shortCode' =>
+     [
+         'NationalNumberPattern' => '11[7-9]|40404|666',
+         'ExampleNumber' => '117',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'standardRate' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'carrierSpecific' =>
+     [
+         'NationalNumberPattern' => '404\\d\\d',
+         'ExampleNumber' => '40400',
+         'PossibleLength' =>
+          [
+              0 => 5,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'smsServices' =>
+     [
+         'NationalNumberPattern' => '404\\d\\d',
+         'ExampleNumber' => '40400',
+         'PossibleLength' =>
+          [
+              0 => 5,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'id' => 'KH',
+    'countryCode' => 0,
+    'internationalPrefix' => '',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

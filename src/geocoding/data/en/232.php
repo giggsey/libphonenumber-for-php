@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  23222 => 'Freetown',
-);
+return  [
+    23222 => 'Freetown',
+];

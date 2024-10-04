@@ -11,101 +11,101 @@
  */
 
 
-return array (
-  'generalDesc' => 
-  array (
-    'NationalNumberPattern' => '1\\d',
-    'PossibleLength' => 
-    array (
-      0 => 2,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'tollFree' => 
-  array (
-    'NationalNumberPattern' => '1[578]',
-    'ExampleNumber' => '15',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'premiumRate' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'emergency' => 
-  array (
-    'NationalNumberPattern' => '1[578]',
-    'ExampleNumber' => '15',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'shortCode' => 
-  array (
-    'NationalNumberPattern' => '1[578]',
-    'ExampleNumber' => '15',
-    'PossibleLength' => 
-    array (
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'standardRate' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'carrierSpecific' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'smsServices' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'WF',
-  'countryCode' => 0,
-  'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'generalDesc' =>
+     [
+         'NationalNumberPattern' => '1\\d',
+         'PossibleLength' =>
+          [
+              0 => 2,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'tollFree' =>
+     [
+         'NationalNumberPattern' => '1[578]',
+         'ExampleNumber' => '15',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'premiumRate' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'emergency' =>
+     [
+         'NationalNumberPattern' => '1[578]',
+         'ExampleNumber' => '15',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'shortCode' =>
+     [
+         'NationalNumberPattern' => '1[578]',
+         'ExampleNumber' => '15',
+         'PossibleLength' =>
+          [
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'standardRate' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'carrierSpecific' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'smsServices' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'id' => 'WF',
+    'countryCode' => 0,
+    'internationalPrefix' => '',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

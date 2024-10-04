@@ -11,174 +11,174 @@
  */
 
 
-return array (
-  'generalDesc' => 
-  array (
-    'NationalNumberPattern' => '0800\\d{4}|(?:[237]\\d|900)\\d{6}',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-      1 => 9,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'fixedLine' => 
-  array (
-    'NationalNumberPattern' => '[23][2-5]\\d{6}',
-    'ExampleNumber' => '22171234',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'mobile' => 
-  array (
-    'NationalNumberPattern' => '7[6-9]\\d{6}',
-    'ExampleNumber' => '76123456',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'tollFree' => 
-  array (
-    'NationalNumberPattern' => '0800\\d{4}',
-    'ExampleNumber' => '08001234',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'premiumRate' => 
-  array (
-    'NationalNumberPattern' => '900\\d{6}',
-    'ExampleNumber' => '900012345',
-    'PossibleLength' => 
-    array (
-      0 => 9,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'sharedCost' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'personalNumber' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voip' => 
-  array (
-    'NationalNumberPattern' => '70\\d{6}',
-    'ExampleNumber' => '70012345',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'pager' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'uan' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'voicemail' => 
-  array (
-    'PossibleLength' => 
-    array (
-      0 => -1,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'noInternationalDialling' => 
-  array (
-    'NationalNumberPattern' => '0800\\d{4}',
-    'PossibleLength' => 
-    array (
-      0 => 8,
-    ),
-    'PossibleLengthLocalOnly' => 
-    array (
-    ),
-  ),
-  'id' => 'SZ',
-  'countryCode' => 268,
-  'internationalPrefix' => '00',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-    0 => 
-    array (
-      'pattern' => '(\\d{4})(\\d{4})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '[0237]',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    1 => 
-    array (
-      'pattern' => '(\\d{5})(\\d{4})',
-      'format' => '$1 $2',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '9',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'generalDesc' =>
+     [
+         'NationalNumberPattern' => '0800\\d{4}|(?:[237]\\d|900)\\d{6}',
+         'PossibleLength' =>
+          [
+              0 => 8,
+              1 => 9,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'fixedLine' =>
+     [
+         'NationalNumberPattern' => '[23][2-5]\\d{6}',
+         'ExampleNumber' => '22171234',
+         'PossibleLength' =>
+          [
+              0 => 8,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'mobile' =>
+     [
+         'NationalNumberPattern' => '7[6-9]\\d{6}',
+         'ExampleNumber' => '76123456',
+         'PossibleLength' =>
+          [
+              0 => 8,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'tollFree' =>
+     [
+         'NationalNumberPattern' => '0800\\d{4}',
+         'ExampleNumber' => '08001234',
+         'PossibleLength' =>
+          [
+              0 => 8,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'premiumRate' =>
+     [
+         'NationalNumberPattern' => '900\\d{6}',
+         'ExampleNumber' => '900012345',
+         'PossibleLength' =>
+          [
+              0 => 9,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'sharedCost' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'personalNumber' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'voip' =>
+     [
+         'NationalNumberPattern' => '70\\d{6}',
+         'ExampleNumber' => '70012345',
+         'PossibleLength' =>
+          [
+              0 => 8,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'pager' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'uan' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'voicemail' =>
+     [
+         'PossibleLength' =>
+          [
+              0 => -1,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'noInternationalDialling' =>
+     [
+         'NationalNumberPattern' => '0800\\d{4}',
+         'PossibleLength' =>
+          [
+              0 => 8,
+          ],
+         'PossibleLengthLocalOnly' =>
+          [
+          ],
+     ],
+    'id' => 'SZ',
+    'countryCode' => 268,
+    'internationalPrefix' => '00',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+         0 =>
+          [
+              'pattern' => '(\\d{4})(\\d{4})',
+              'format' => '$1 $2',
+              'leadingDigitsPatterns' =>
+               [
+                   0 => '[0237]',
+               ],
+              'nationalPrefixFormattingRule' => '',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+         1 =>
+          [
+              'pattern' => '(\\d{5})(\\d{4})',
+              'format' => '$1 $2',
+              'leadingDigitsPatterns' =>
+               [
+                   0 => '9',
+               ],
+              'nationalPrefixFormattingRule' => '',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

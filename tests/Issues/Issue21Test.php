@@ -1,4 +1,5 @@
 <?php
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;

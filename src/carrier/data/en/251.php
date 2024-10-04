@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2517 => 'Safaricom',
-  2519 => 'Ethio Telecom',
-);
+return  [
+    2517 => 'Safaricom',
+    2519 => 'Ethio Telecom',
+];

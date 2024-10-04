@@ -45,7 +45,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    protected static $pubPages = "\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}";
+    protected static $pubPages = '\\d{1,5}-+\\d{1,5}\\s{0,4}\\(\\d{1,4}';
 
     /**
      * Matches strings that look like dates using "/" as a separator. Examples 3/10/2011, 31/10/2011 or
@@ -53,7 +53,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    protected static $slashSeparatedDates = "(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}";
+    protected static $slashSeparatedDates = '(?:(?:[0-3]?\\d/[01]?\\d)|(?:[01]?\\d/[0-3]?\\d))/(?:[12]\\d)?\\d{2}';
 
     /**
      * Matches timestamps. Examples: "2012-01-02 08:00". Note that the reg-ex does not include the
@@ -61,8 +61,8 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string
      */
-    protected static $timeStamps = "[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d +[0-2]\\d$";
-    protected static $timeStampsSuffix = ":[0-5]\\d";
+    protected static $timeStamps = '[12]\\d{3}[-/]?[01]\\d[-/]?[0-3]\\d +[0-2]\\d$';
+    protected static $timeStampsSuffix = ':[0-5]\\d';
 
     /**
      * Pattern to check that brackets match. Opening brackets should be closed within a phone number.
@@ -85,7 +85,7 @@ class PhoneNumberMatcher implements \Iterator
      *
      * @var string[]
      */
-    protected static $innerMatches = array();
+    protected static $innerMatches = [];
 
     /**
      * Punctuation that may be at the start of a phone number - brackets and plus signs.
@@ -104,24 +104,24 @@ class PhoneNumberMatcher implements \Iterator
     {
         static::$alternateFormatsFilePrefix = __DIR__ . '/data/PhoneNumberAlternateFormats';
 
-        static::$innerMatches = array(
+        static::$innerMatches = [
             // Breaks on the slash - e.g. "651-234-2345/332-445-1234"
             '/+(.*)',
             // Note that the bracket here is inside the capturing group, since we consider it part of the
             // phone number. Will match a pattern like "(650) 223 3345 (754) 223 3321".
-            "(\\([^(]*)",
+            '(\\([^(]*)',
             // Breaks on a hyphen - e.g. "12345 - 332-445-1234 is my number."
             // We require a space on either side of the hyphen for it to be considered a separator.
-            "(?:\\p{Z}-|-\\p{Z})\\p{Z}*(.+)",
+            '(?:\\p{Z}-|-\\p{Z})\\p{Z}*(.+)',
             // Various types of wide hyphens. Note we have decided not to enforce a space here, since it's
             // possible that it's supposed to be used to break two numbers without spaces, and we haven't
             // seen many instances of it used within a number.
-            "[‒-―－]\\p{Z}*(.+)",
+            '[‒-―－]\\p{Z}*(.+)',
             // Breaks on a full stop - e.g. "12345. 332-445-1234 is my number."
-            "\\.+\\p{Z}*([^.]+)",
+            '\\.+\\p{Z}*([^.]+)',
             // Breaks on space - e.g. "3324451234 8002341234"
-            "\\p{Z}+(\\P{Z}+)"
-        );
+            '\\p{Z}+(\\P{Z}+)',
+        ];
 
         /*
          * Builds the matchingBrackets and pattern regular expressions. The building blocks exist
@@ -169,7 +169,7 @@ class PhoneNumberMatcher implements \Iterator
         $punctuation = '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']' . $punctuationLimit;
 
         // A digits block without punctuation.
-        $digitSequence = "\\p{Nd}" . static::limit(1, $digitBlockLimit);
+        $digitSequence = '\\p{Nd}' . static::limit(1, $digitBlockLimit);
 
 
         $leadClassChars = $openingParens . PhoneNumberUtil::PLUS_CHARS;
@@ -504,8 +504,6 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumberUtil $util
-     * @param PhoneNumber $number
      * @param string $normalizedCandidate
      * @param string[] $formattedNumberGroups
      * @return bool
@@ -569,8 +567,6 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumberUtil $util
-     * @param PhoneNumber $number
      * @param string $normalizedCandidate
      * @param string[] $formattedNumberGroups
      * @return bool
@@ -621,9 +617,6 @@ class PhoneNumberMatcher implements \Iterator
      * Helper method to get the national-number part of a number, formatted without any national
      * prefix, and return it as a set of digit blocks that would be formatted together.
      *
-     * @param PhoneNumberUtil $util
-     * @param PhoneNumber $number
-     * @param NumberFormat $formattingPattern
      * @return string[]
      */
     protected static function getNationalNumberGroups(
@@ -656,10 +649,7 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumber $number
      * @param string $candidate
-     * @param PhoneNumberUtil $util
-     * @param \Closure $checker
      * @return bool
      */
     public static function checkNumberGroupingIsValid(
@@ -701,7 +691,6 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumber $number
      * @param string $candidate
      * @return bool
      */
@@ -737,9 +726,7 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumber $number
      * @param string $candidate
-     * @param PhoneNumberUtil $util
      * @return bool
      */
     public static function containsOnlyValidXChars(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
@@ -778,8 +765,6 @@ class PhoneNumberMatcher implements \Iterator
     }
 
     /**
-     * @param PhoneNumber $number
-     * @param PhoneNumberUtil $util
      * @return bool
      */
     public static function isNationalPrefixPresentIfRequired(PhoneNumber $number, PhoneNumberUtil $util)
@@ -829,10 +814,9 @@ class PhoneNumberMatcher implements \Iterator
      * Storage for Alternate Formats
      * @var PhoneMetadata[]
      */
-    protected static $callingCodeToAlternateFormatsMap = array();
+    protected static $callingCodeToAlternateFormatsMap = [];
 
     /**
-     * @param $countryCallingCode
      * @return PhoneMetadata|null
      */
     protected static function getAlternateFormatsForCountry($countryCallingCode)

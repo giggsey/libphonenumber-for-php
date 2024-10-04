@@ -15,9 +15,7 @@ class Valid extends AbstractLeniency
      * Numbers written in national format must have their national-prefix present if it is usually written
      * for a number of this type.
      *
-     * @param PhoneNumber $number
      * @param string $candidate
-     * @param PhoneNumberUtil $util
      * @return bool
      */
     public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)

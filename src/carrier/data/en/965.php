@@ -10,9 +10,9 @@
  * Do not modify this file directly!
  */
 
-return array (
-  9654 => 'Virgin mobile',
-  9655 => 'VIVA',
-  9656 => 'Ooredoo',
-  9659 => 'Zain',
-);
+return  [
+    9654 => 'Virgin mobile',
+    9655 => 'VIVA',
+    9656 => 'Ooredoo',
+    9659 => 'Zain',
+];

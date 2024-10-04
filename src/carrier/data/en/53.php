@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  535 => 'etecsa',
-  536 => 'etecsa',
-);
+return  [
+    535 => 'etecsa',
+    536 => 'etecsa',
+];

@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  258281 => 'Chokwé',
-);
+return  [
+    258281 => 'Chokwé',
+];

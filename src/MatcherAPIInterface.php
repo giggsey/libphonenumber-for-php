@@ -18,7 +18,6 @@ interface MatcherAPIInterface
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
      *
      * @param string $number
-     * @param PhoneNumberDesc $numberDesc
      * @param boolean $allowPrefixMatch
      * @return boolean
      */

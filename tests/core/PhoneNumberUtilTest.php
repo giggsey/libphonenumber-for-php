@@ -227,17 +227,17 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('011', $metadata->getInternationalPrefix());
         $this->assertTrue($metadata->hasNationalPrefix());
         $this->assertEquals(2, $metadata->numberFormatSize());
-        $this->assertEquals("(\\d{3})(\\d{3})(\\d{4})", $metadata->getNumberFormat(1)->getPattern());
+        $this->assertEquals('(\\d{3})(\\d{3})(\\d{4})', $metadata->getNumberFormat(1)->getPattern());
         $this->assertEquals('$1 $2 $3', $metadata->getNumberFormat(1)->getFormat());
-        $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getGeneralDesc()->getNationalNumberPattern());
-        $this->assertEquals("[13-689]\\d{9}|2[0-35-9]\\d{8}", $metadata->getFixedLine()->getNationalNumberPattern());
+        $this->assertEquals('[13-689]\\d{9}|2[0-35-9]\\d{8}', $metadata->getGeneralDesc()->getNationalNumberPattern());
+        $this->assertEquals('[13-689]\\d{9}|2[0-35-9]\\d{8}', $metadata->getFixedLine()->getNationalNumberPattern());
         $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $possibleLength = $metadata->getGeneralDesc()->getPossibleLength();
         $this->assertEquals(10, $possibleLength[0]);
         // Possible lengths are the same as the general description, so aren't stored separately in the
         // toll free element as well.
         $this->assertCount(0, $metadata->getTollFree()->getPossibleLength());
-        $this->assertEquals("900\\d{7}", $metadata->getPremiumRate()->getNationalNumberPattern());
+        $this->assertEquals('900\\d{7}', $metadata->getPremiumRate()->getNationalNumberPattern());
         // No shared-cost data is available, so its national number data should not be set.
         $this->assertFalse($metadata->getSharedCost()->hasNationalNumberPattern());
     }
@@ -252,7 +252,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(6, $metadata->numberFormatSize());
         $this->assertEquals(1, $metadata->getNumberFormat(5)->leadingDigitsPatternSize());
         $this->assertEquals('900', $metadata->getNumberFormat(5)->getLeadingDigitsPattern(0));
-        $this->assertEquals("(\\d{3})(\\d{3,4})(\\d{4})", $metadata->getNumberFormat(5)->getPattern());
+        $this->assertEquals('(\\d{3})(\\d{3,4})(\\d{4})', $metadata->getNumberFormat(5)->getPattern());
         $this->assertEquals('$1 $2 $3', $metadata->getNumberFormat(5)->getFormat());
         $this->assertCount(2, $metadata->getGeneralDesc()->getPossibleLengthLocalOnly());
         $this->assertCount(8, $metadata->getGeneralDesc()->getPossibleLength());
@@ -262,12 +262,12 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertCount(2, $metadata->getMobile()->getPossibleLength());
 
         $this->assertEquals(
-            "(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}",
+            '(?:[24-6]\\d{2}|3[03-9]\\d|[789](?:0[2-9]|[1-9]\\d))\\d{1,8}',
             $metadata->getFixedLine()->getNationalNumberPattern()
         );
         $this->assertEquals('30123456', $metadata->getFixedLine()->getExampleNumber());
         $this->assertContains(10, $metadata->getTollFree()->getPossibleLength());
-        $this->assertEquals("900([135]\\d{6}|9\\d{7})", $metadata->getPremiumRate()->getNationalNumberPattern());
+        $this->assertEquals('900([135]\\d{6}|9\\d{7})', $metadata->getPremiumRate()->getNationalNumberPattern());
     }
 
     public function testGetInstanceLoadARMetadata()
@@ -280,8 +280,8 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('0(?:(11|343|3715)15)?', $metadata->getNationalPrefixForParsing());
         $this->assertEquals('9$1', $metadata->getNationalPrefixTransformRule());
         $this->assertEquals('$2 15 $3-$4', $metadata->getNumberFormat(2)->getFormat());
-        $this->assertEquals("(\\d)(\\d{4})(\\d{2})(\\d{4})", $metadata->getNumberFormat(3)->getPattern());
-        $this->assertEquals("(\\d)(\\d{4})(\\d{2})(\\d{4})", $metadata->getIntlNumberFormat(3)->getPattern());
+        $this->assertEquals('(\\d)(\\d{4})(\\d{2})(\\d{4})', $metadata->getNumberFormat(3)->getPattern());
+        $this->assertEquals('(\\d)(\\d{4})(\\d{2})(\\d{4})', $metadata->getIntlNumberFormat(3)->getPattern());
         $this->assertEquals('$1 $2 $3 $4', $metadata->getIntlNumberFormat(3)->getFormat());
     }
 
@@ -291,7 +291,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('001', $metadata->getId());
         $this->assertEquals(800, $metadata->getCountryCode());
         $this->assertEquals('$1 $2', $metadata->getNumberFormat(0)->getFormat());
-        $this->assertEquals("(\\d{4})(\\d{4})", $metadata->getNumberFormat(0)->getPattern());
+        $this->assertEquals('(\\d{4})(\\d{4})', $metadata->getNumberFormat(0)->getPattern());
         $this->assertCount(0, $metadata->getGeneralDesc()->getPossibleLengthLocalOnly());
         $this->assertCount(1, $metadata->getGeneralDesc()->getPossibleLength());
         $this->assertEquals('12345678', $metadata->getTollFree()->getExampleNumber());
@@ -393,7 +393,7 @@ class PhoneNumberUtilTest extends TestCase
 
         // A mobile number from China is geographical, but does not have an area code: however it still
         // can be considered to have a national destination code.
-        $cnMobile= new PhoneNumber();
+        $cnMobile = new PhoneNumber();
         $cnMobile->setCountryCode(86)->setNationalNumber('18912341234');
 
         $this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode($cnMobile));
@@ -1231,9 +1231,9 @@ class PhoneNumberUtilTest extends TestCase
     public function testFormatByPattern()
     {
         $newNumFormat = new NumberFormat();
-        $newNumFormat->setPattern("(\\d{3})(\\d{3})(\\d{4})");
+        $newNumFormat->setPattern('(\\d{3})(\\d{3})(\\d{4})');
         $newNumFormat->setFormat('($1) $2-$3');
-        $newNumberFormats = array();
+        $newNumberFormats = [];
         $newNumberFormats[] = $newNumFormat;
 
         $this->assertEquals(
@@ -1282,7 +1282,7 @@ class PhoneNumberUtilTest extends TestCase
             )
         );
 
-        $newNumFormat->setPattern("(\\d{2})(\\d{5})(\\d{3})");
+        $newNumFormat->setPattern('(\\d{2})(\\d{5})(\\d{3})');
         $newNumFormat->setFormat('$1-$2 $3');
         $newNumberFormats[0] = $newNumFormat;
 
@@ -1304,7 +1304,7 @@ class PhoneNumberUtilTest extends TestCase
         );
 
         $newNumFormat->setNationalPrefixFormattingRule('$NP$FG');
-        $newNumFormat->setPattern("(\\d{2})(\\d{4})(\\d{4})");
+        $newNumFormat->setPattern('(\\d{2})(\\d{4})(\\d{4})');
         $newNumFormat->setFormat('$1 $2 $3');
         $newNumberFormats[0] = $newNumFormat;
         $this->assertEquals(
@@ -2388,7 +2388,7 @@ class PhoneNumberUtilTest extends TestCase
         $metadata = new PhoneMetadata();
         $metadata->setNationalPrefixForParsing('34');
         $phoneNumberDesc = new PhoneNumberDesc();
-        $phoneNumberDesc->setNationalNumberPattern("\\d{4,8}");
+        $phoneNumberDesc->setNationalNumberPattern('\\d{4,8}');
         $metadata->setGeneralDesc($phoneNumberDesc);
 
         $numberToStrip = '34356778';
@@ -2448,7 +2448,7 @@ class PhoneNumberUtilTest extends TestCase
         // If there was a transform rule, check it was applied.
         $metadata->setNationalPrefixTransformRule('5${1}5');
         // Note that a capturing group is present here.
-        $metadata->setNationalPrefixForParsing("0(\\d{2})");
+        $metadata->setNationalPrefixForParsing('0(\\d{2})');
         $numberToStrip = '031123';
         $transformedNumber = '5315123';
         $carrierCode = null;
@@ -3493,7 +3493,7 @@ class PhoneNumberUtilTest extends TestCase
         );
         $this->assertEquals(
             $usWithTwoExtensionsNumber,
-            $this->phoneUtil->parse("(212)123-1234 x508\\x1234", RegionCode::US)
+            $this->phoneUtil->parse('(212)123-1234 x508\\x1234', RegionCode::US)
         );
 
         // Test parsing numbers in the form (645) 123-1234-910# works, where the last 3 digits before
@@ -3524,7 +3524,7 @@ class PhoneNumberUtilTest extends TestCase
 
         // Extension too long
         try {
-            $this->phoneUtil->parse("tel:+6433316005;ext=012345678901234567890", RegionCode::NZ);
+            $this->phoneUtil->parse('tel:+6433316005;ext=012345678901234567890', RegionCode::NZ);
             $this->fail(
                 'This should not parse length as length of extension is higher than allowed: '
                 . 'tel:+6433316005;ext=012345678901234567890'
@@ -3535,18 +3535,18 @@ class PhoneNumberUtilTest extends TestCase
         }
 
         // Explicit extension label: PhoneNumberUtil.extLimitAfterExplicitLabel
-        $nzNumber->setExtension("1");
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005ext:1", RegionCode::NZ));
+        $nzNumber->setExtension('1');
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005ext:1', RegionCode::NZ));
 
-        $nzNumber->setExtension("12345678901234567890");
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 xtn:12345678901234567890", RegionCode::NZ));
+        $nzNumber->setExtension('12345678901234567890');
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005 xtn:12345678901234567890', RegionCode::NZ));
         $this->assertEquals(
             $nzNumber,
             $this->phoneUtil->parse("03 3316005 extension\t12345678901234567890", RegionCode::NZ)
         );
         $this->assertEquals(
             $nzNumber,
-            $this->phoneUtil->parse("03 3316005 xtensio:12345678901234567890", RegionCode::NZ)
+            $this->phoneUtil->parse('03 3316005 xtensio:12345678901234567890', RegionCode::NZ)
         );
         $this->assertEquals(
             $nzNumber,
@@ -3554,7 +3554,7 @@ class PhoneNumberUtilTest extends TestCase
         );
         $this->assertEquals(
             $nzNumber,
-            $this->phoneUtil->parse("03 3316005extension.12345678901234567890", RegionCode::NZ)
+            $this->phoneUtil->parse('03 3316005extension.12345678901234567890', RegionCode::NZ)
         );
         $this->assertEquals(
             $nzNumber,
@@ -3566,7 +3566,7 @@ class PhoneNumberUtilTest extends TestCase
 
         // Extension too long.
         try {
-            $this->phoneUtil->parse("03 3316005 extension 123456789012345678901", RegionCode::NZ);
+            $this->phoneUtil->parse('03 3316005 extension 123456789012345678901', RegionCode::NZ);
             $this->fail(
                 'This should not parse as length of extension is higher than allowed: '
                 . '03 3316005 extension 123456789012345678901'
@@ -3586,26 +3586,26 @@ class PhoneNumberUtilTest extends TestCase
             ->setCountryCode(1)
             ->setNationalNumber(2679000000);
 
-        $usNumberUserInput->setExtension("123456789012345");
+        $usNumberUserInput->setExtension('123456789012345');
         $this->assertEquals(
             $usNumberUserInput,
-            $this->phoneUtil->parse("+12679000000,,123456789012345#", RegionCode::US)
+            $this->phoneUtil->parse('+12679000000,,123456789012345#', RegionCode::US)
         );
         $this->assertEquals(
             $usNumberUserInput,
-            $this->phoneUtil->parse("+12679000000;123456789012345#", RegionCode::US)
+            $this->phoneUtil->parse('+12679000000;123456789012345#', RegionCode::US)
         );
 
         $ukNumberUserInput = new PhoneNumber();
         $ukNumberUserInput
             ->setCountryCode(44)
             ->setNationalNumber(2034000000)
-            ->setExtension("123456789");
+            ->setExtension('123456789');
 
-        $this->assertEquals($ukNumberUserInput, $this->phoneUtil->parse("+442034000000,,123456789#", RegionCode::GB));
+        $this->assertEquals($ukNumberUserInput, $this->phoneUtil->parse('+442034000000,,123456789#', RegionCode::GB));
         // Extension too long.
         try {
-            $this->phoneUtil->parse("+12679000000,,1234567890123456#", RegionCode::US);
+            $this->phoneUtil->parse('+12679000000,,1234567890123456#', RegionCode::US);
             $this->fail(
                 'This should not parse as length of extension is higher than allowed: '
                 . '+12679000000,,1234567890123456#'
@@ -3625,15 +3625,15 @@ class PhoneNumberUtilTest extends TestCase
 
         // Thirdly, for single and non-standard cases:
         // PhoneNumberUtil $extLimitAfterAmbiguousChar
-        $nzNumber->setExtension("123456789");
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 x 123456789", RegionCode::NZ));
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 x. 123456789", RegionCode::NZ));
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 #123456789#", RegionCode::NZ));
-        $this->assertEquals($nzNumber, $this->phoneUtil->parse("03 3316005 ~ 123456789", RegionCode::NZ));
+        $nzNumber->setExtension('123456789');
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005 x 123456789', RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005 x. 123456789', RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005 #123456789#', RegionCode::NZ));
+        $this->assertEquals($nzNumber, $this->phoneUtil->parse('03 3316005 ~ 123456789', RegionCode::NZ));
 
         // Extension too long.
         try {
-            $this->phoneUtil->parse("03 3316005 ~ 1234567890", RegionCode::NZ);
+            $this->phoneUtil->parse('03 3316005 ~ 1234567890', RegionCode::NZ);
             $this->fail(
                 'This should not parse as length of extension is higher than allowed: '
                 . '03 3316005 ~ 1234567890'
@@ -3652,16 +3652,16 @@ class PhoneNumberUtilTest extends TestCase
         $usNumber
             ->setCountryCode(1)
             ->setNationalNumber(1234567890)
-            ->setExtension("666666");
+            ->setExtension('666666');
 
-        $this->assertEquals($usNumber, $this->phoneUtil->parse("+1123-456-7890 666666#", RegionCode::US));
+        $this->assertEquals($usNumber, $this->phoneUtil->parse('+1123-456-7890 666666#', RegionCode::US));
 
-        $usNumber->setExtension("6");
-        $this->assertEquals($usNumber, $this->phoneUtil->parse("+11234567890-6#", RegionCode::US));
+        $usNumber->setExtension('6');
+        $this->assertEquals($usNumber, $this->phoneUtil->parse('+11234567890-6#', RegionCode::US));
 
         // Extension too long.
         try {
-            $this->phoneUtil->parse("+1123-456-7890 7777777#", RegionCode::US);
+            $this->phoneUtil->parse('+1123-456-7890 7777777#', RegionCode::US);
             $this->fail(
                 'This should not parse as length of extension is higher than allowed: '
                 . '+1123-456-7890 7777777#'
@@ -3760,48 +3760,48 @@ class PhoneNumberUtilTest extends TestCase
         // descriptor = domainname / global-number-digits
 
         // Valid global-phone-digits
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=+64", RegionCode::ZZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=+64', RegionCode::ZZ));
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=+64;{this isn't part of phone-context anymore!}", RegionCode::ZZ));
 
         $nzFromPhoneContext = new PhoneNumber();
         $nzFromPhoneContext->setCountryCode(64);
         $nzFromPhoneContext->setNationalNumber('3033316005');
 
-        $this->assertEquals($nzFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+64-3", RegionCode::ZZ));
+        $this->assertEquals($nzFromPhoneContext, $this->phoneUtil->parse('tel:033316005;phone-context=+64-3', RegionCode::ZZ));
 
         $brFromPhoneContext = new PhoneNumber();
         $brFromPhoneContext->setCountryCode(55);
         $brFromPhoneContext->setNationalNumber('5033316005');
 
-        $this->assertEquals($brFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+(555)", RegionCode::ZZ));
+        $this->assertEquals($brFromPhoneContext, $this->phoneUtil->parse('tel:033316005;phone-context=+(555)', RegionCode::ZZ));
 
         $usFromPhoneContext = new PhoneNumber();
         $usFromPhoneContext->setCountryCode(1);
         $usFromPhoneContext->setNationalNumber('23033316005');
 
-        $this->assertEquals($usFromPhoneContext, $this->phoneUtil->parse("tel:033316005;phone-context=+-1-2.3()", RegionCode::ZZ));
+        $this->assertEquals($usFromPhoneContext, $this->phoneUtil->parse('tel:033316005;phone-context=+-1-2.3()', RegionCode::ZZ));
 
         // Valid domainname
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=abc.nz", RegionCode::NZ));
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=www.PHONE-numb3r.com", RegionCode::NZ));
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=a", RegionCode::NZ));
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=3phone.J.", RegionCode::NZ));
-        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse("tel:033316005;phone-context=a--z", RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=abc.nz', RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=www.PHONE-numb3r.com', RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=a', RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=3phone.J.', RegionCode::NZ));
+        $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=a--z', RegionCode::NZ));
     }
 
     public function dataForInvalidPhoneContext()
     {
-        return array(
-            array("tel:033316005;phone-context="),
-            array("tel:033316005;phone-context=+"),
-            array("tel:033316005;phone-context=64"),
-            array("tel:033316005;phone-context=++64"),
-            array("tel:033316005;phone-context=+abc"),
-            array("tel:033316005;phone-context=."),
-            array("tel:033316005;phone-context=3phone"),
-            array("tel:033316005;phone-context=a-.nz"),
-            array("tel:033316005;phone-context=a{b}c"),
-        );
+        return [
+            ['tel:033316005;phone-context='],
+            ['tel:033316005;phone-context=+'],
+            ['tel:033316005;phone-context=64'],
+            ['tel:033316005;phone-context=++64'],
+            ['tel:033316005;phone-context=+abc'],
+            ['tel:033316005;phone-context=.'],
+            ['tel:033316005;phone-context=3phone'],
+            ['tel:033316005;phone-context=a-.nz'],
+            ['tel:033316005;phone-context=a{b}c'],
+        ];
     }
 
     /**

@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  6907 => 'Teletok telecommunications',
-);
+return  [
+    6907 => 'Teletok telecommunications',
+];

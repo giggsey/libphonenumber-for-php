@@ -11,12 +11,12 @@ class PhoneMetadataTest extends TestCase
 {
     public function phoneNumberRegionList()
     {
-        $returnList = array();
+        $returnList = [];
 
         PhoneNumberUtil::resetInstance();
         $phoneUtil = PhoneNumberUtil::getInstance();
         foreach ($phoneUtil->getSupportedRegions() as $regionCode) {
-            $returnList[] = array($regionCode);
+            $returnList[] = [$regionCode];
         }
 
         return $returnList;
@@ -24,19 +24,18 @@ class PhoneMetadataTest extends TestCase
 
     public function shortNumberRegionList()
     {
-        $returnList = array();
+        $returnList = [];
 
         ShortNumberInfo::resetInstance();
         $shortNumber = ShortNumberInfo::getInstance();
         foreach ($shortNumber->getSupportedRegions() as $regionCode) {
-            $returnList[] = array($regionCode);
+            $returnList[] = [$regionCode];
         }
 
         return $returnList;
     }
 
     /**
-     * @param $region
      * @dataProvider phoneNumberRegionList
      */
     public function testPhoneNumberMetadataToAndFromArray($region)
@@ -57,7 +56,6 @@ class PhoneMetadataTest extends TestCase
     }
 
     /**
-     * @param $region
      * @dataProvider shortNumberRegionList
      */
     public function testShortCodeMetadataToAndFromArray($region)

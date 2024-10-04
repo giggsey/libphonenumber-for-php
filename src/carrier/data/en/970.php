@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  97056 => 'Ooredoo Group',
-  97059 => 'Palestine Cellular Communications',
-);
+return  [
+    97056 => 'Ooredoo Group',
+    97059 => 'Palestine Cellular Communications',
+];

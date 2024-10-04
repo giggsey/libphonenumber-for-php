@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  542214 => 'La Plata',
-);
+return  [
+    542214 => 'La Plata',
+];

@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  5005 => 'Sure South Atlantic Limited',
-  5006 => 'Sure South Atlantic Limited',
-);
+return  [
+    5005 => 'Sure South Atlantic Limited',
+    5006 => 'Sure South Atlantic Limited',
+];

@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  1650212 => 'US carrier',
-  1650213 => 'US carrier2',
-);
+return  [
+    1650212 => 'US carrier',
+    1650213 => 'US carrier2',
+];

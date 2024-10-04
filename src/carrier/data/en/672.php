@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  67214 => 'REACH',
-  67235 => 'Norfolk Telecom',
-  67238 => 'Norfolk Telecom',
-);
+return  [
+    67214 => 'REACH',
+    67235 => 'Norfolk Telecom',
+    67238 => 'Norfolk Telecom',
+];

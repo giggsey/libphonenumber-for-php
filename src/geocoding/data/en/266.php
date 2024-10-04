@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  26622 => 'Maseru',
-);
+return  [
+    26622 => 'Maseru',
+];

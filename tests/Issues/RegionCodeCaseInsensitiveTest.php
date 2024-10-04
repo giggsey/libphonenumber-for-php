@@ -62,16 +62,16 @@ class RegionCodeCaseInsensitiveTest extends TestCase
     public function testExampleNumber()
     {
         $this->assertSame(
-            (string)$this->phoneUtil->parse('+441212345678'),
-            (string)$this->phoneUtil->getExampleNumber('gb')
+            (string) $this->phoneUtil->parse('+441212345678'),
+            (string) $this->phoneUtil->getExampleNumber('gb')
         );
         $this->assertSame(
-            (string)$this->phoneUtil->parse('+44121234567'),
-            (string)$this->phoneUtil->getInvalidExampleNumber('gb')
+            (string) $this->phoneUtil->parse('+44121234567'),
+            (string) $this->phoneUtil->getInvalidExampleNumber('gb')
         );
         $this->assertSame(
-            (string)$this->phoneUtil->parse('+447400123456'),
-            (string)$this->phoneUtil->getExampleNumberForType('gb', PhoneNumberType::MOBILE)
+            (string) $this->phoneUtil->parse('+447400123456'),
+            (string) $this->phoneUtil->getExampleNumberForType('gb', PhoneNumberType::MOBILE)
         );
     }
 

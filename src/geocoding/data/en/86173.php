@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  86173 => 'Beijing',
-);
+return  [
+    86173 => 'Beijing',
+];

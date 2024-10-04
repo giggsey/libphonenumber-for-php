@@ -14,37 +14,37 @@ class MetadataFilterTest extends TestCase
     private static $countryCode = 374;
     private static $internationalPrefix = '0[01]';
     private static $preferredInternationalPrefix = '00';
-    private static $nationalNumberPattern = "\\d{8}";
-    private static $possibleLengths = array(8);
-    private static $possibleLengthsLocalOnly = array(5, 6);
+    private static $nationalNumberPattern = '\\d{8}';
+    private static $possibleLengths = [8];
+    private static $possibleLengthsLocalOnly = [5, 6];
     private static $exampleNumber = '10123456';
 
     public function testForLiteBuild()
     {
-        $blackList = array();
-        $blackList['fixedLine'] = array('exampleNumber');
-        $blackList['mobile'] = array('exampleNumber');
-        $blackList['tollFree'] = array('exampleNumber');
-        $blackList['premiumRate'] = array('exampleNumber');
-        $blackList['sharedCost'] = array('exampleNumber');
-        $blackList['personalNumber'] = array('exampleNumber');
-        $blackList['voip'] = array('exampleNumber');
-        $blackList['pager'] = array('exampleNumber');
-        $blackList['uan'] = array('exampleNumber');
-        $blackList['emergency'] = array('exampleNumber');
-        $blackList['voicemail'] = array('exampleNumber');
-        $blackList['shortCode'] = array('exampleNumber');
-        $blackList['standardRate'] = array('exampleNumber');
-        $blackList['carrierSpecific'] = array('exampleNumber');
-        $blackList['smsServices'] = array('exampleNumber');
-        $blackList['noInternationalDialling'] = array('exampleNumber');
+        $blackList = [];
+        $blackList['fixedLine'] = ['exampleNumber'];
+        $blackList['mobile'] = ['exampleNumber'];
+        $blackList['tollFree'] = ['exampleNumber'];
+        $blackList['premiumRate'] = ['exampleNumber'];
+        $blackList['sharedCost'] = ['exampleNumber'];
+        $blackList['personalNumber'] = ['exampleNumber'];
+        $blackList['voip'] = ['exampleNumber'];
+        $blackList['pager'] = ['exampleNumber'];
+        $blackList['uan'] = ['exampleNumber'];
+        $blackList['emergency'] = ['exampleNumber'];
+        $blackList['voicemail'] = ['exampleNumber'];
+        $blackList['shortCode'] = ['exampleNumber'];
+        $blackList['standardRate'] = ['exampleNumber'];
+        $blackList['carrierSpecific'] = ['exampleNumber'];
+        $blackList['smsServices'] = ['exampleNumber'];
+        $blackList['noInternationalDialling'] = ['exampleNumber'];
 
         $this->assertEquals(MetadataFilter::forLiteBuild(), new MetadataFilter($blackList));
     }
 
     public function testForSpecialBuild()
     {
-        $blackList = array();
+        $blackList = [];
         $blackList['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -60,78 +60,78 @@ class MetadataFilterTest extends TestCase
         $blackList['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blackList['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $blackList['preferredInternationalPrefix'] = array();
-        $blackList['nationalPrefix'] = array();
-        $blackList['preferredExtnPrefix'] = array();
-        $blackList['nationalPrefixTransformRule'] = array();
-        $blackList['sameMobileAndFixedLinePattern'] = array();
-        $blackList['mainCountryForCode'] = array();
-        $blackList['mobileNumberPortableRegion'] = array();
+        $blackList['preferredInternationalPrefix'] = [];
+        $blackList['nationalPrefix'] = [];
+        $blackList['preferredExtnPrefix'] = [];
+        $blackList['nationalPrefixTransformRule'] = [];
+        $blackList['sameMobileAndFixedLinePattern'] = [];
+        $blackList['mainCountryForCode'] = [];
+        $blackList['mobileNumberPortableRegion'] = [];
 
         $this->assertEquals(MetadataFilter::forSpecialBuild(), new MetadataFilter($blackList));
     }
 
     public function testEmptyFilter()
     {
-        $this->assertEquals(MetadataFilter::emptyFilter(), new MetadataFilter(array()));
+        $this->assertEquals(MetadataFilter::emptyFilter(), new MetadataFilter([]));
     }
 
     public function testParseFieldMapFromString_parentAsGroup()
     {
-        $fieldMap = array();
-        $fieldMap['fixedLine'] = array(
+        $fieldMap = [];
+        $fieldMap['fixedLine'] = [
             'nationalNumberPattern',
             'possibleLength',
             'possibleLengthLocalOnly',
-            'exampleNumber'
-        );
+            'exampleNumber',
+        ];
 
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_childAsGroup()
     {
-        $fieldMap = array();
-        $fieldMap['fixedLine'] = array('exampleNumber');
-        $fieldMap['mobile'] = array('exampleNumber');
-        $fieldMap['tollFree'] = array('exampleNumber');
-        $fieldMap['premiumRate'] = array('exampleNumber');
-        $fieldMap['sharedCost'] = array('exampleNumber');
-        $fieldMap['personalNumber'] = array('exampleNumber');
-        $fieldMap['voip'] = array('exampleNumber');
-        $fieldMap['pager'] = array('exampleNumber');
-        $fieldMap['uan'] = array('exampleNumber');
-        $fieldMap['emergency'] = array('exampleNumber');
-        $fieldMap['voicemail'] = array('exampleNumber');
-        $fieldMap['shortCode'] = array('exampleNumber');
-        $fieldMap['standardRate'] = array('exampleNumber');
-        $fieldMap['carrierSpecific'] = array('exampleNumber');
-        $fieldMap['smsServices'] = array('exampleNumber');
-        $fieldMap['noInternationalDialling'] = array('exampleNumber');
+        $fieldMap = [];
+        $fieldMap['fixedLine'] = ['exampleNumber'];
+        $fieldMap['mobile'] = ['exampleNumber'];
+        $fieldMap['tollFree'] = ['exampleNumber'];
+        $fieldMap['premiumRate'] = ['exampleNumber'];
+        $fieldMap['sharedCost'] = ['exampleNumber'];
+        $fieldMap['personalNumber'] = ['exampleNumber'];
+        $fieldMap['voip'] = ['exampleNumber'];
+        $fieldMap['pager'] = ['exampleNumber'];
+        $fieldMap['uan'] = ['exampleNumber'];
+        $fieldMap['emergency'] = ['exampleNumber'];
+        $fieldMap['voicemail'] = ['exampleNumber'];
+        $fieldMap['shortCode'] = ['exampleNumber'];
+        $fieldMap['standardRate'] = ['exampleNumber'];
+        $fieldMap['carrierSpecific'] = ['exampleNumber'];
+        $fieldMap['smsServices'] = ['exampleNumber'];
+        $fieldMap['noInternationalDialling'] = ['exampleNumber'];
 
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_childlessFieldAsGroup()
     {
-        $fieldMap = array();
-        $fieldMap['nationalPrefix'] = array();
+        $fieldMap = [];
+        $fieldMap['nationalPrefix'] = [];
 
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('nationalPrefix'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_parentWithOneChildAsGroup()
     {
-        $fieldMap = array();
-        $fieldMap['fixedLine'] = array('exampleNumber');
+        $fieldMap = [];
+        $fieldMap['fixedLine'] = ['exampleNumber'];
 
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber)'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_parentWithTwoChildrenAsGroup()
     {
-        $fieldMap = array();
-        $fieldMap['fixedLine'] = array('exampleNumber', 'possibleLength');
+        $fieldMap = [];
+        $fieldMap['fixedLine'] = ['exampleNumber', 'possibleLength'];
 
         $this->assertEquals(
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,possibleLength)'),
@@ -141,29 +141,29 @@ class MetadataFilterTest extends TestCase
 
     public function testParseFieldMapFromString_mixOfGroups()
     {
-        $fieldMap = array();
-        $fieldMap['uan'] = array('possibleLength', 'exampleNumber', 'possibleLengthLocalOnly', 'nationalNumberPattern');
-        $fieldMap['pager'] = array('exampleNumber', 'nationalNumberPattern');
-        $fieldMap['fixedLine'] = array(
+        $fieldMap = [];
+        $fieldMap['uan'] = ['possibleLength', 'exampleNumber', 'possibleLengthLocalOnly', 'nationalNumberPattern'];
+        $fieldMap['pager'] = ['exampleNumber', 'nationalNumberPattern'];
+        $fieldMap['fixedLine'] = [
             'nationalNumberPattern',
             'possibleLength',
             'possibleLengthLocalOnly',
-            'exampleNumber'
-        );
-        $fieldMap['nationalPrefix'] = array();
-        $fieldMap['mobile'] = array('nationalNumberPattern');
-        $fieldMap['tollFree'] = array('nationalNumberPattern');
-        $fieldMap['premiumRate'] = array('nationalNumberPattern');
-        $fieldMap['sharedCost'] = array('nationalNumberPattern');
-        $fieldMap['personalNumber'] = array('nationalNumberPattern');
-        $fieldMap['voip'] = array('nationalNumberPattern');
-        $fieldMap['emergency'] = array('nationalNumberPattern');
-        $fieldMap['voicemail'] = array('nationalNumberPattern');
-        $fieldMap['shortCode'] = array('nationalNumberPattern');
-        $fieldMap['standardRate'] = array('nationalNumberPattern');
-        $fieldMap['carrierSpecific'] = array('nationalNumberPattern');
-        $fieldMap['smsServices'] = array('nationalNumberPattern');
-        $fieldMap['noInternationalDialling'] = array('nationalNumberPattern');
+            'exampleNumber',
+        ];
+        $fieldMap['nationalPrefix'] = [];
+        $fieldMap['mobile'] = ['nationalNumberPattern'];
+        $fieldMap['tollFree'] = ['nationalNumberPattern'];
+        $fieldMap['premiumRate'] = ['nationalNumberPattern'];
+        $fieldMap['sharedCost'] = ['nationalNumberPattern'];
+        $fieldMap['personalNumber'] = ['nationalNumberPattern'];
+        $fieldMap['voip'] = ['nationalNumberPattern'];
+        $fieldMap['emergency'] = ['nationalNumberPattern'];
+        $fieldMap['voicemail'] = ['nationalNumberPattern'];
+        $fieldMap['shortCode'] = ['nationalNumberPattern'];
+        $fieldMap['standardRate'] = ['nationalNumberPattern'];
+        $fieldMap['carrierSpecific'] = ['nationalNumberPattern'];
+        $fieldMap['smsServices'] = ['nationalNumberPattern'];
+        $fieldMap['noInternationalDialling'] = ['nationalNumberPattern'];
 
         $this->assertEquals(
             $fieldMap,
@@ -313,7 +313,6 @@ class MetadataFilterTest extends TestCase
 
     /**
      * Need to sort some of the results, as PHP arrays are ordered by when they were added
-     * @param $array
      * @return bool
      */
     private function recursive_ksort($array)
@@ -798,7 +797,7 @@ class MetadataFilterTest extends TestCase
 
     public function testComputeComplement_allAndNothing()
     {
-        $map1 = array();
+        $map1 = [];
         $map1['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['mobile'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -815,15 +814,15 @@ class MetadataFilterTest extends TestCase
         $map1['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['preferredInternationalPrefix'] = array();
-        $map1['nationalPrefix'] = array();
-        $map1['preferredExtnPrefix'] = array();
-        $map1['nationalPrefixTransformRule'] = array();
-        $map1['sameMobileAndFixedLinePattern'] = array();
-        $map1['mainCountryForCode'] = array();
-        $map1['mobileNumberPortableRegion'] = array();
+        $map1['preferredInternationalPrefix'] = [];
+        $map1['nationalPrefix'] = [];
+        $map1['preferredExtnPrefix'] = [];
+        $map1['nationalPrefixTransformRule'] = [];
+        $map1['sameMobileAndFixedLinePattern'] = [];
+        $map1['mainCountryForCode'] = [];
+        $map1['mobileNumberPortableRegion'] = [];
 
-        $map2 = array();
+        $map2 = [];
 
         $this->assertEquals(MetadataFilter::computeComplement($map1), $map2);
         $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
@@ -831,40 +830,40 @@ class MetadataFilterTest extends TestCase
 
     public function testComputeComplement_inBetween()
     {
-        $map1 = array();
+        $map1 = [];
         $map1['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['mobile'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['emergency'] = array('nationalNumberPattern');
-        $map1['voicemail'] = array('possibleLength', 'exampleNumber');
-        $map1['shortCode'] = array('exampleNumber');
+        $map1['emergency'] = ['nationalNumberPattern'];
+        $map1['voicemail'] = ['possibleLength', 'exampleNumber'];
+        $map1['shortCode'] = ['exampleNumber'];
         $map1['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['smsServices'] = array('nationalNumberPattern');
+        $map1['smsServices'] = ['nationalNumberPattern'];
         $map1['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['nationalPrefixTransformRule'] = array();
-        $map1['sameMobileAndFixedLinePattern'] = array();
-        $map1['mainCountryForCode'] = array();
-        $map1['mobileNumberPortableRegion'] = array();
+        $map1['nationalPrefixTransformRule'] = [];
+        $map1['sameMobileAndFixedLinePattern'] = [];
+        $map1['mainCountryForCode'] = [];
+        $map1['mobileNumberPortableRegion'] = [];
 
-        $map2 = array();
+        $map2 = [];
         $map2['sharedCost'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['personalNumber'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['voip'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['pager'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map2['uan'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map2['emergency'] = array('possibleLength', 'possibleLengthLocalOnly', 'exampleNumber');
-        $map2['smsServices'] = array('possibleLength', 'possibleLengthLocalOnly', 'exampleNumber');
-        $map2['voicemail'] = array('nationalNumberPattern', 'possibleLengthLocalOnly');
-        $map2['shortCode'] = array(
+        $map2['emergency'] = ['possibleLength', 'possibleLengthLocalOnly', 'exampleNumber'];
+        $map2['smsServices'] = ['possibleLength', 'possibleLengthLocalOnly', 'exampleNumber'];
+        $map2['voicemail'] = ['nationalNumberPattern', 'possibleLengthLocalOnly'];
+        $map2['shortCode'] = [
             'nationalNumberPattern',
             'possibleLength',
-            'possibleLengthLocalOnly'
-        );
-        $map2['preferredInternationalPrefix'] = array();
-        $map2['nationalPrefix'] = array();
-        $map2['preferredExtnPrefix'] = array();
+            'possibleLengthLocalOnly',
+        ];
+        $map2['preferredInternationalPrefix'] = [];
+        $map2['nationalPrefix'] = [];
+        $map2['preferredExtnPrefix'] = [];
 
         $this->assertEquals(MetadataFilter::computeComplement($map1), $map2);
         $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
@@ -872,22 +871,22 @@ class MetadataFilterTest extends TestCase
 
     public function testShouldDrop()
     {
-        $blacklist = array();
+        $blacklist = [];
         $blacklist['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['mobile'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $blacklist['emergency'] = array('nationalNumberPattern');
-        $blacklist['voicemail'] = array('possibleLength', 'exampleNumber');
-        $blacklist['shortCode'] = array('exampleNumber');
+        $blacklist['emergency'] = ['nationalNumberPattern'];
+        $blacklist['voicemail'] = ['possibleLength', 'exampleNumber'];
+        $blacklist['shortCode'] = ['exampleNumber'];
         $blacklist['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['smsServices'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $blacklist['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $blacklist['nationalPrefixTransformRule'] = array();
-        $blacklist['sameMobileAndFixedLinePattern'] = array();
-        $blacklist['mainCountryForCode'] = array();
-        $blacklist['mobileNumberPortableRegion'] = array();
+        $blacklist['nationalPrefixTransformRule'] = [];
+        $blacklist['sameMobileAndFixedLinePattern'] = [];
+        $blacklist['mainCountryForCode'] = [];
+        $blacklist['mobileNumberPortableRegion'] = [];
 
         $filter = new MetadataFilter($blacklist);
         $this->assertTrue($filter->shouldDrop('fixedLine', 'exampleNumber'));
@@ -934,12 +933,12 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
-        $combinedDesc = array(
+        $combinedDesc = [
             $metadata->getGeneralDesc(),
             $metadata->getFixedLine(),
             $metadata->getMobile(),
-            $metadata->getTollFree()
-        );
+            $metadata->getTollFree(),
+        ];
         foreach ($combinedDesc as $desc) {
             $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
             $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
@@ -999,14 +998,14 @@ class MetadataFilterTest extends TestCase
         $this->assertFalse($metadata->hasPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
-        $combinedDesc = array($metadata->getGeneralDesc(), $metadata->getMobile());
+        $combinedDesc = [$metadata->getGeneralDesc(), $metadata->getMobile()];
         foreach ($combinedDesc as $desc) {
             $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
             $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
             $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
         }
 
-        $combinedDesc = array($metadata->getFixedLine(), $metadata->getTollFree());
+        $combinedDesc = [$metadata->getFixedLine(), $metadata->getTollFree()];
         foreach ($combinedDesc as $desc) {
             $this->assertFalse($desc->hasNationalNumberPattern());
             $this->assertCount(0, $desc->getPossibleLength());
@@ -1027,12 +1026,12 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
-        $combinedDesc = array(
+        $combinedDesc = [
             $metadata->getGeneralDesc(),
             $metadata->getFixedLine(),
             $metadata->getMobile(),
-            $metadata->getTollFree()
-        );
+            $metadata->getTollFree(),
+        ];
         foreach ($combinedDesc as $desc) {
             $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
             $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());

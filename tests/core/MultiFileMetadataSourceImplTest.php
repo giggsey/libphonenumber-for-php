@@ -58,10 +58,6 @@ class MultiFileMetadataSourceImplTest extends TestCase
 
     /**
      * Provide PHPUnit compatibility
-     *
-     * @param $needle
-     * @param $haystack
-     * @param $message
      */
     private function doAssertStringContainsString($needle, $haystack, $message)
     {

@@ -1,0 +1,42 @@
+name: PHP CS Fixer
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    paths:
+      - '**.php'
+
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php-cs-fixer:
+    name: "PHP CS Fixer"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+
+      - uses: "ramsey/composer-install@v3"
+        with:
+          dependency-versions: highest
+
+      - name: Run PHP CS Fixer
+        run: "composer run-script cs"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: ":art: Fix code styling"

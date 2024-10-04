@@ -15,49 +15,49 @@ use libphonenumber\PhoneNumberDesc;
 class BuildMetadataFromXml
 {
     // String constants used to fetch the XML nodes and attributes.
-    const CARRIER_CODE_FORMATTING_RULE = 'carrierCodeFormattingRule';
-    const COUNTRY_CODE = 'countryCode';
-    const EMERGENCY = 'emergency';
-    const EXAMPLE_NUMBER = 'exampleNumber';
-    const FIXED_LINE = 'fixedLine';
-    const FORMAT = 'format';
-    const GENERAL_DESC = 'generalDesc';
-    const INTERNATIONAL_PREFIX = 'internationalPrefix';
-    const INTL_FORMAT = 'intlFormat';
-    const LEADING_DIGITS = 'leadingDigits';
-    const MOBILE_NUMBER_PORTABLE_REGION = 'mobileNumberPortableRegion';
-    const MAIN_COUNTRY_FOR_CODE = 'mainCountryForCode';
-    const MOBILE = 'mobile';
-    const NATIONAL_NUMBER_PATTERN = 'nationalNumberPattern';
-    const NATIONAL_PREFIX = 'nationalPrefix';
-    const NATIONAL_PREFIX_FORMATTING_RULE = 'nationalPrefixFormattingRule';
-    const NATIONAL_PREFIX_OPTIONAL_WHEN_FORMATTING = 'nationalPrefixOptionalWhenFormatting';
-    const NATIONAL_PREFIX_FOR_PARSING = 'nationalPrefixForParsing';
-    const NATIONAL_PREFIX_TRANSFORM_RULE = 'nationalPrefixTransformRule';
-    const NO_INTERNATIONAL_DIALLING = 'noInternationalDialling';
-    const NUMBER_FORMAT = 'numberFormat';
-    const PAGER = 'pager';
-    const CARRIER_SPECIFIC = 'carrierSpecific';
-    const PATTERN = 'pattern';
-    const PERSONAL_NUMBER = 'personalNumber';
-    const POSSIBLE_LENGTHS = 'possibleLengths';
-    const NATIONAL = 'national';
-    const LOCAL_ONLY = 'localOnly';
-    const PREFERRED_EXTN_PREFIX = 'preferredExtnPrefix';
-    const PREFERRED_INTERNATIONAL_PREFIX = 'preferredInternationalPrefix';
-    const PREMIUM_RATE = 'premiumRate';
-    const SHARED_COST = 'sharedCost';
-    const SHORT_CODE = 'shortCode';
-    const SMS_SERVICES = 'smsServices';
-    const STANDARD_RATE = 'standardRate';
-    const TOLL_FREE = 'tollFree';
-    const UAN = 'uan';
-    const VOICEMAIL = 'voicemail';
-    const VOIP = 'voip';
+    public const CARRIER_CODE_FORMATTING_RULE = 'carrierCodeFormattingRule';
+    public const COUNTRY_CODE = 'countryCode';
+    public const EMERGENCY = 'emergency';
+    public const EXAMPLE_NUMBER = 'exampleNumber';
+    public const FIXED_LINE = 'fixedLine';
+    public const FORMAT = 'format';
+    public const GENERAL_DESC = 'generalDesc';
+    public const INTERNATIONAL_PREFIX = 'internationalPrefix';
+    public const INTL_FORMAT = 'intlFormat';
+    public const LEADING_DIGITS = 'leadingDigits';
+    public const MOBILE_NUMBER_PORTABLE_REGION = 'mobileNumberPortableRegion';
+    public const MAIN_COUNTRY_FOR_CODE = 'mainCountryForCode';
+    public const MOBILE = 'mobile';
+    public const NATIONAL_NUMBER_PATTERN = 'nationalNumberPattern';
+    public const NATIONAL_PREFIX = 'nationalPrefix';
+    public const NATIONAL_PREFIX_FORMATTING_RULE = 'nationalPrefixFormattingRule';
+    public const NATIONAL_PREFIX_OPTIONAL_WHEN_FORMATTING = 'nationalPrefixOptionalWhenFormatting';
+    public const NATIONAL_PREFIX_FOR_PARSING = 'nationalPrefixForParsing';
+    public const NATIONAL_PREFIX_TRANSFORM_RULE = 'nationalPrefixTransformRule';
+    public const NO_INTERNATIONAL_DIALLING = 'noInternationalDialling';
+    public const NUMBER_FORMAT = 'numberFormat';
+    public const PAGER = 'pager';
+    public const CARRIER_SPECIFIC = 'carrierSpecific';
+    public const PATTERN = 'pattern';
+    public const PERSONAL_NUMBER = 'personalNumber';
+    public const POSSIBLE_LENGTHS = 'possibleLengths';
+    public const NATIONAL = 'national';
+    public const LOCAL_ONLY = 'localOnly';
+    public const PREFERRED_EXTN_PREFIX = 'preferredExtnPrefix';
+    public const PREFERRED_INTERNATIONAL_PREFIX = 'preferredInternationalPrefix';
+    public const PREMIUM_RATE = 'premiumRate';
+    public const SHARED_COST = 'sharedCost';
+    public const SHORT_CODE = 'shortCode';
+    public const SMS_SERVICES = 'smsServices';
+    public const STANDARD_RATE = 'standardRate';
+    public const TOLL_FREE = 'tollFree';
+    public const UAN = 'uan';
+    public const VOICEMAIL = 'voicemail';
+    public const VOIP = 'voip';
 
-    private static $phoneNumberDescsWithoutMatchingTypes = array(
-        self::NO_INTERNATIONAL_DIALLING
-    );
+    private static $phoneNumberDescsWithoutMatchingTypes = [
+        self::NO_INTERNATIONAL_DIALLING,
+    ];
 
     /**
      * @internal
@@ -83,7 +83,6 @@ class BuildMetadataFromXml
     }
 
     /**
-     *
      * @param string $inputXmlFile
      * @param boolean $liteBuild
      * @param boolean $specialBuild
@@ -105,7 +104,7 @@ class BuildMetadataFromXml
         }
 
         $territories = $document->getElementsByTagName('territory');
-        $metadataCollection = array();
+        $metadataCollection = [];
 
         $metadataFilter = self::getMetadataFilter($liteBuild, $specialBuild);
 
@@ -127,7 +126,6 @@ class BuildMetadataFromXml
 
     /**
      * @param string $regionCode
-     * @param \DOMElement $element
      * @param string $isShortNumberMetadata
      * @param string $isAlternateFormatsMetadata
      * @return PhoneMetadata
@@ -171,7 +169,6 @@ class BuildMetadataFromXml
     /**
      * Returns the national prefix of the provided country element.
      * @internal
-     * @param \DOMElement $element
      * @return string
      */
     public static function getNationalPrefix(\DOMElement $element)
@@ -180,9 +177,7 @@ class BuildMetadataFromXml
     }
 
     /**
-     *
      * @internal
-     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @return string
      */
@@ -191,18 +186,16 @@ class BuildMetadataFromXml
         $nationalPrefixFormattingRule = $element->getAttribute(self::NATIONAL_PREFIX_FORMATTING_RULE);
         // Replace $NP with national prefix and $FG with the first group ($1).
         $nationalPrefixFormattingRule = \str_replace(
-            array('$NP', '$FG'),
-            array($nationalPrefix, '$1'),
+            ['$NP', '$FG'],
+            [$nationalPrefix, '$1'],
             $nationalPrefixFormattingRule
         );
         return $nationalPrefixFormattingRule;
     }
 
     /**
-     *
      * @internal
      * @param string $regionCode
-     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @return PhoneMetadata
      */
@@ -213,7 +206,7 @@ class BuildMetadataFromXml
     ) {
         $metadata = new PhoneMetadata();
         $metadata->setId($regionCode);
-        $metadata->setCountryCode((int)$element->getAttribute(self::COUNTRY_CODE));
+        $metadata->setCountryCode((int) $element->getAttribute(self::COUNTRY_CODE));
         if ($element->hasAttribute(self::LEADING_DIGITS)) {
             $metadata->setLeadingDigits(self::validateRE($element->getAttribute(self::LEADING_DIGITS)));
         }
@@ -254,8 +247,6 @@ class BuildMetadataFromXml
      * nationalPrefixOptionalWhenFormatting. The nationalPrefix, nationalPrefixFormattingRule and
      * nationalPrefixOptionalWhenFormatting values are provided from the parent (territory) element.
      * @internal
-     * @param PhoneMetadata $metadata
-     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @param string $nationalPrefixFormattingRule
      * @param bool $nationalPrefixOptionalWhenFormatting
@@ -319,7 +310,6 @@ class BuildMetadataFromXml
 
     /**
      * @internal
-     * @param \DOMElement $element
      * @param string $nationalPrefix
      * @return string
      */
@@ -328,8 +318,8 @@ class BuildMetadataFromXml
         $carrierCodeFormattingRule = $element->getAttribute(self::CARRIER_CODE_FORMATTING_RULE);
         // Replace $FG with the first group ($1) and $NP with the national prefix.
         $carrierCodeFormattingRule = \str_replace(
-            array('$NP', '$FG'),
-            array($nationalPrefix, '$1'),
+            ['$NP', '$FG'],
+            [$nationalPrefix, '$1'],
             $carrierCodeFormattingRule
         );
         return $carrierCodeFormattingRule;
@@ -339,9 +329,6 @@ class BuildMetadataFromXml
      * Extracts the pattern for the national format.
      *
      * @internal
-     * @param PhoneMetadata $metadata
-     * @param \DOMElement $numberFormatElement
-     * @param NumberFormat $format
      * @throws \RuntimeException if multiple or no formats have been encountered.
      */
     public static function loadNationalFormat(
@@ -363,8 +350,6 @@ class BuildMetadataFromXml
 
     /**
      * @internal
-     * @param \DOMElement $numberFormatElement
-     * @param NumberFormat $format
      */
     public static function setLeadingDigitsPatterns(\DOMElement $numberFormatElement, NumberFormat $format)
     {
@@ -382,9 +367,6 @@ class BuildMetadataFromXml
      * national format. If the intlFormat is set to "NA" the intlFormat should be ignored.
      *
      * @internal
-     * @param PhoneMetadata $metadata
-     * @param \DOMElement $numberFormatElement
-     * @param NumberFormat $nationalFormat
      * @throws \RuntimeException if multiple intlFormats have been encountered.
      * @return bool whether an international number format is defined.
      */
@@ -423,8 +405,6 @@ class BuildMetadataFromXml
 
     /**
      * @internal
-     * @param PhoneMetadata $metadata
-     * @param \DOMElement $element
      * @param bool $isShortNumberMetadata
      */
     public static function setRelevantDescPatterns(PhoneMetadata $metadata, \DOMElement $element, $isShortNumberMetadata)
@@ -479,7 +459,7 @@ class BuildMetadataFromXml
         }
 
         $lengths = \explode(',', $possibleLengthString);
-        $lengthSet = array();
+        $lengthSet = [];
 
 
         $lengthLength = \count($lengths);
@@ -500,8 +480,8 @@ class BuildMetadataFromXml
                 if (\count($minMax) !== 2) {
                     throw new \RuntimeException("Ranges must have exactly one - character: missing for {$possibleLengthString}.");
                 }
-                $min = (int)$minMax[0];
-                $max = (int)$minMax[1];
+                $min = (int) $minMax[0];
+                $max = (int) $minMax[1];
                 // We don't even accept [6-7] since we prefer the shorter 6,7 variant; for a range to be in
                 // use the hyphen needs to replace at least one digit.
                 if ($max - $min < 2) {
@@ -521,7 +501,7 @@ class BuildMetadataFromXml
                 if (!\is_numeric($length)) {
                     throw new \RuntimeException("For input string \"{$length}\"");
                 }
-                $lengthSet[] = (int)$length;
+                $lengthSet[] = (int) $length;
             }
         }
         return $lengthSet;
@@ -575,15 +555,13 @@ class BuildMetadataFromXml
      * Sets possible lengths in the general description, derived from certain child elements
      *
      * @internal
-     * @param PhoneNumberDesc $generalDesc
      * @param string $metadataId
-     * @param \DOMElement $data
      * @param bool $isShortNumberMetadata
      */
     public static function setPossibleLengthsGeneralDesc(PhoneNumberDesc $generalDesc, $metadataId, \DOMElement $data, $isShortNumberMetadata)
     {
-        $lengths = array();
-        $localOnlyLengths = array();
+        $lengths = [];
+        $localOnlyLengths = [];
         // The general description node should *always* be present if metadata for other types is
         // present, aside from in some unit tests.
         // (However, for e.g. formatting metadata in PhoneNumberAlternateFormats, no PhoneNumberDesc
@@ -636,8 +614,6 @@ class BuildMetadataFromXml
      *
      * @param array $lengths
      * @param array $localOnlyLengths
-     * @param PhoneNumberDesc $parentDesc
-     * @param PhoneNumberDesc $desc
      */
     private static function setPossibleLengths($lengths, $localOnlyLengths, PhoneNumberDesc $parentDesc = null, PhoneNumberDesc $desc)
     {
@@ -713,7 +689,7 @@ class BuildMetadataFromXml
             // -1 will never match a possible phone number length, so is safe to use to ensure this never
             // matches. We don't leave it empty, since for compression reasons, we use the empty list to
             // mean that the generalDesc possible lengths apply.
-            $numberDesc->setPossibleLength(array(-1));
+            $numberDesc->setPossibleLength([-1]);
             return $numberDesc;
         }
 
@@ -739,8 +715,8 @@ class BuildMetadataFromXml
                 // description, since these tags won't be present; instead we will calculate its values
                 // based on the values for all the other number type descriptions (see
                 // setPossibleLengthsGeneralDesc).
-                $lengths = array();
-                $localOnlyLengths = array();
+                $lengths = [];
+                $localOnlyLengths = [];
                 self::populatePossibleLengthSets($element, $lengths, $localOnlyLengths);
                 self::setPossibleLengths($lengths, $localOnlyLengths, $parentDesc, $numberDesc);
             }
@@ -782,7 +758,7 @@ class BuildMetadataFromXml
      */
     public static function buildCountryCodeToRegionCodeMap($metadataCollection)
     {
-        $countryCodeToRegionCodeMap = array();
+        $countryCodeToRegionCodeMap = [];
 
         foreach ($metadataCollection as $metadata) {
             $regionCode = $metadata->getId();
@@ -795,7 +771,7 @@ class BuildMetadataFromXml
                 }
             } else {
                 // For most countries, there will be only one region code for the country calling code.
-                $listWithRegionCode = array();
+                $listWithRegionCode = [];
                 if ($regionCode != '') { // For alternate formats, there are no region codes at all.
                     $listWithRegionCode[] = $regionCode;
                 }

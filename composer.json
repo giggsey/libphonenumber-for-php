@@ -71,7 +71,8 @@
     "pear/pear_exception": "^1.0",
     "phpunit/phpunit": "^9.0",
     "symfony/console": "^v5.2",
-    "php-coveralls/php-coveralls": "^2.0"
+    "php-coveralls/php-coveralls": "^2.0",
+    "friendsofphp/php-cs-fixer": "^3.64"
   },
   "replace": {
     "giggsey/libphonenumber-for-php-lite": "self.version"
@@ -82,6 +83,7 @@
     }
   },
   "scripts": {
+    "cs": "vendor/bin/php-cs-fixer fix",
     "test": "vendor/bin/phpunit",
     "metadata": "vendor/bin/phing compile"
   }

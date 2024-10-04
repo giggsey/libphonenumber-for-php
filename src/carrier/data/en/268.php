@@ -10,9 +10,9 @@
  * Do not modify this file directly!
  */
 
-return array (
-  26876 => 'Swazi MTN',
-  26877 => 'SPTC',
-  26878 => 'Swazi MTN',
-  26879 => 'Swazi Mobile Ltd',
-);
+return  [
+    26876 => 'Swazi MTN',
+    26877 => 'SPTC',
+    26878 => 'Swazi MTN',
+    26879 => 'Swazi Mobile Ltd',
+];

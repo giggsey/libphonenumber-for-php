@@ -11,40 +11,40 @@
  */
 
 
-return array (
-  'id' => '',
-  'countryCode' => 36,
-  'internationalPrefix' => '',
-  'sameMobileAndFixedLinePattern' => false,
-  'numberFormat' => 
-  array (
-    0 => 
-    array (
-      'pattern' => '(\\d)(\\d{4})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-        0 => '1',
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-    1 => 
-    array (
-      'pattern' => '(\\d{2})(\\d{4})(\\d{3})',
-      'format' => '$1 $2 $3',
-      'leadingDigitsPatterns' => 
-      array (
-      ),
-      'nationalPrefixFormattingRule' => '',
-      'domesticCarrierCodeFormattingRule' => '',
-      'nationalPrefixOptionalWhenFormatting' => false,
-    ),
-  ),
-  'intlNumberFormat' => 
-  array (
-  ),
-  'mainCountryForCode' => false,
-  'mobileNumberPortableRegion' => false,
-);
+return  [
+    'id' => '',
+    'countryCode' => 36,
+    'internationalPrefix' => '',
+    'sameMobileAndFixedLinePattern' => false,
+    'numberFormat' =>
+     [
+         0 =>
+          [
+              'pattern' => '(\\d)(\\d{4})(\\d{3})',
+              'format' => '$1 $2 $3',
+              'leadingDigitsPatterns' =>
+               [
+                   0 => '1',
+               ],
+              'nationalPrefixFormattingRule' => '',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+         1 =>
+          [
+              'pattern' => '(\\d{2})(\\d{4})(\\d{3})',
+              'format' => '$1 $2 $3',
+              'leadingDigitsPatterns' =>
+               [
+               ],
+              'nationalPrefixFormattingRule' => '',
+              'domesticCarrierCodeFormattingRule' => '',
+              'nationalPrefixOptionalWhenFormatting' => false,
+          ],
+     ],
+    'intlNumberFormat' =>
+     [
+     ],
+    'mainCountryForCode' => false,
+    'mobileNumberPortableRegion' => false,
+];

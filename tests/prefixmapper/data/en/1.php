@@ -10,12 +10,12 @@
  * Do not modify this file directly!
  */
 
-return array (
-  1201 => 'NJ',
-  1212 => 'NY',
-  1212812 => 'New York, NY',
-  1617423 => 'Boston, MA',
-  1650 => 'CA',
-  1650960 => 'Mountain View, CA',
-  1989 => 'MA',
-);
+return  [
+    1201 => 'NJ',
+    1212 => 'NY',
+    1212812 => 'New York, NY',
+    1617423 => 'Boston, MA',
+    1650 => 'CA',
+    1650960 => 'Mountain View, CA',
+    1989 => 'MA',
+];

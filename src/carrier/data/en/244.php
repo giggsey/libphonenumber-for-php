@@ -10,13 +10,13 @@
  * Do not modify this file directly!
  */
 
-return array (
-  24491 => 'Movicel',
-  24492 => 'UNITEL',
-  24493 => 'UNITEL',
-  24494 => 'UNITEL',
-  24495 => 'Africell',
-  24496 => 'Africell',
-  24497 => 'UNITEL',
-  24499 => 'Movicel',
-);
+return  [
+    24491 => 'Movicel',
+    24492 => 'UNITEL',
+    24493 => 'UNITEL',
+    24494 => 'UNITEL',
+    24495 => 'Africell',
+    24496 => 'Africell',
+    24497 => 'UNITEL',
+    24499 => 'Movicel',
+];

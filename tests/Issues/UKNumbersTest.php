@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;

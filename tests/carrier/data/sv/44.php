@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  4473 => 'Brittisk operatör',
-);
+return  [
+    4473 => 'Brittisk operatör',
+];

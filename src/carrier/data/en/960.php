@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  9607 => 'Dhiraagu',
-  9609 => 'Ooredoo',
-);
+return  [
+    9607 => 'Dhiraagu',
+    9609 => 'Ooredoo',
+];
