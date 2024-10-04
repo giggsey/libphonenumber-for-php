@@ -35,7 +35,7 @@
     </target>
 
     <target name="compile" description="Build all Data"
-            depends="cleanup-data,compile-test-data,build-phone-metadata,build-short-metadata,build-alternate-metadata,build-carrier-data,build-timezones-data,build-geo-data">
+            depends="cleanup-data,compile-test-data,build-phone-metadata,build-short-metadata,build-alternate-metadata,build-carrier-data,build-timezones-data,build-geo-data,cs-fixer">
     </target>
 
     <target name="cleanup-test-data" description="Cleanup old built test data"
@@ -220,4 +220,9 @@
         </exec>
     </target>
 
+    <target name="cs-fixer">
+        <exec executable="vendor/bin/php-cs-fixer" passthru="true">
+            <arg value="fix"/>
+        </exec>
+    </target>
 </project>
