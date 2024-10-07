@@ -11,21 +11,21 @@ class Leniency
 {
     public static function POSSIBLE()
     {
-        return new Possible;
+        return new Possible();
     }
 
     public static function VALID()
     {
-        return new Valid;
+        return new Valid();
     }
 
     public static function STRICT_GROUPING()
     {
-        return new StrictGrouping;
+        return new StrictGrouping();
     }
 
     public static function EXACT_GROUPING()
     {
-        return new ExactGrouping;
+        return new ExactGrouping();
     }
 }

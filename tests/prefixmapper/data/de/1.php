@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  1201 => 'New Jersey',
-  1650 => 'Kalifornien',
-);
+return  [
+    1201 => 'New Jersey',
+    1650 => 'Kalifornien',
+];

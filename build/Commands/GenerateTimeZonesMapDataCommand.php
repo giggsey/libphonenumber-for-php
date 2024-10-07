@@ -15,10 +15,10 @@ class GenerateTimeZonesMapDataCommand extends Command
         $this->setName('GenerateTimeZonesMapData');
         $this->setDescription('Generate time zone data files');
         $this->setDefinition(
-            array(
+            [
                 new InputArgument('InputFile', InputArgument::REQUIRED, 'The input file containing the timezone map data'),
                 new InputArgument('OutputDirectory', InputArgument::REQUIRED, 'The output directory to save the file'),
-            )
+            ]
         );
     }
 

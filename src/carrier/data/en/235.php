@@ -10,9 +10,9 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2356 => 'Airtel',
-  2357 => 'Sotel',
-  2358 => 'Airtel',
-  2359 => 'Tigo',
-);
+return  [
+    2356 => 'Airtel',
+    2357 => 'Sotel',
+    2358 => 'Airtel',
+    2359 => 'Tigo',
+];

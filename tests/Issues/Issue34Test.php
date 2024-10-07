@@ -1,4 +1,5 @@
 <?php
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
@@ -11,7 +12,7 @@ class Issue34Test extends TestCase
      */
     private $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();

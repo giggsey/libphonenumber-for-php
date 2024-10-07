@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2362 => 'Bangui',
-);
+return  [
+    2362 => 'Bangui',
+];

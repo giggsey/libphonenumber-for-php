@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  4411 => 'British fixed line carrier',
-  4473 => 'British carrier',
-  44760 => 'British pager',
-);
+return  [
+    4411 => 'British fixed line carrier',
+    4473 => 'British carrier',
+    44760 => 'British pager',
+];

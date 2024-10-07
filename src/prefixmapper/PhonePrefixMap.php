@@ -14,7 +14,7 @@ use libphonenumber\PhoneNumberUtil;
  */
 class PhonePrefixMap
 {
-    protected $phonePrefixMapStorage = array();
+    protected $phonePrefixMapStorage = [];
     /**
      * @var PhoneNumberUtil
      */

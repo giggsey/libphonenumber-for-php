@@ -1,7 +1,5 @@
 <?php
 /**
- *
- *
  * @author giggsey
  * @created: 02/10/13 16:52
  * @project libphonenumber-for-php
@@ -17,7 +15,7 @@ class PhoneNumberToCarrierMapper
     /**
      * @var PhoneNumberToCarrierMapper[]
      */
-    protected static $instance = array();
+    protected static $instance = [];
 
     /**
      * @var PhoneNumberUtil

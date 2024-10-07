@@ -12,7 +12,7 @@ class Issue76Test extends TestCase
     {
         $this->doExpectException(
             '\libphonenumber\NumberParseException',
-            "The string supplied did not seem to be a phone number.",
+            'The string supplied did not seem to be a phone number.',
             NumberParseException::NOT_A_NUMBER
         );
 
@@ -24,7 +24,6 @@ class Issue76Test extends TestCase
 
     /**
      * Helper function to support older PHPUnit versions
-     * @param $class
      * @param string|null $message
      * @param int|null $code
      */

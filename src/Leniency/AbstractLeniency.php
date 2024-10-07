@@ -16,21 +16,18 @@ abstract class AbstractLeniency
     /**
      * Returns true if $number is a verified number according to this leniency
      *
-     * @param PhoneNumber $number
      * @param string $candidate
-     * @param PhoneNumberUtil $util
      * @return bool
      * @codeCoverageIgnore
      */
     public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
     {
         // This can not be called directly
-        throw new \BadMethodCallException;
+        throw new \BadMethodCallException();
     }
 
     /**
      * Compare against another Leniency
-     * @param AbstractLeniency $leniency
      * @return int
      */
     public static function compareTo(AbstractLeniency $leniency)

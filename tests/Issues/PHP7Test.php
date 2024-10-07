@@ -1,6 +1,5 @@
 <?php
 
-
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
@@ -14,14 +13,13 @@ class PHP7Test extends TestCase
      */
     private $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
     /**
-     * @param $number
      * @dataProvider validPolishNumbers
      */
     public function testValidPolishNumbers($number)
@@ -34,19 +32,19 @@ class PHP7Test extends TestCase
 
     public function validPolishNumbers()
     {
-        return array(
-            array('22 222 22 22'),
-            array('33 222 22 22'),
-            array('46 222 22 22'),
-            array('61 222 22 22'),
-            array('62 222 22 22'),
-            array('642 222 222'),
-            array('65 222 22 22'),
-            array('512 345 678'),
-            array('800 123 456'),
-            array('700 000 000'),
-            array('801 234 567'),
-            array('91 000 00 00'),
-        );
+        return [
+            ['22 222 22 22'],
+            ['33 222 22 22'],
+            ['46 222 22 22'],
+            ['61 222 22 22'],
+            ['62 222 22 22'],
+            ['642 222 222'],
+            ['65 222 22 22'],
+            ['512 345 678'],
+            ['800 123 456'],
+            ['700 000 000'],
+            ['801 234 567'],
+            ['91 000 00 00'],
+        ];
     }
 }

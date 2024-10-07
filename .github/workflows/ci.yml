@@ -20,21 +20,14 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "5.3"
-          - "5.4"
-          - "5.5"
-          - "5.6"
-          - "7.0"
-          - "7.1"
-          - "7.2"
-          - "7.3"
           - "7.4"
           - "8.0"
           - "8.1"
           - "8.2"
           - "8.3"
+          - "8.4"
         include:
-          - php-version: 8.1
+          - php-version: 8.3
             coverage: coverage
     steps:
       - name: Checkout
@@ -72,10 +65,10 @@ jobs:
       - name: Test with phpunit (with coverage)
         id: phpunit-coverage
         if: "matrix.coverage == 'coverage'"
-        run: ./phpunit --verbose ${{ env.COVERAGE_FLAGS }}
+        run: vendor/bin/phpunit --verbose ${{ env.COVERAGE_FLAGS }}
       - name: Test with phpunit (without coverage)
         if: "matrix.coverage != 'coverage'"
-        run: ./phpunit --verbose
+        run: vendor/bin/phpunit --verbose
       - name: Submit Coveralls
         if: steps.phpunit-coverage.outcome == 'success'
         uses: nick-invision/retry@v1

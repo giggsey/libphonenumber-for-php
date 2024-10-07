@@ -12,7 +12,7 @@ class PrefixTimeZonesMap
     protected final PhonePrefixMap phonePrefixMap = new PhonePrefixMap();
     protected static final String RAW_STRING_TIMEZONES_SEPARATOR = "&";
     */
-    const RAW_STRING_TIMEZONES_SEPARATOR = '&';
+    public const RAW_STRING_TIMEZONES_SEPARATOR = '&';
     protected $phonePrefixMap;
 
     public function __construct($map)
@@ -54,7 +54,7 @@ class PrefixTimeZonesMap
         $timezonesString = $this->phonePrefixMap->lookupKey($key);
 
         if ($timezonesString === null) {
-            return array();
+            return [];
         }
 
         return $this->tokenizeRawOutputString($timezonesString);

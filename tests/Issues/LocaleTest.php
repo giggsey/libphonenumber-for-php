@@ -1,7 +1,5 @@
 <?php
 /**
- *
- *
  * @author joshuag
  * @created: 14/08/2014 12:35
  * @project libphonenumber-for-php
@@ -27,7 +25,7 @@ class LocaleTest extends TestCase
      */
     private $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         PhoneNumberOfflineGeocoder::resetInstance();
@@ -59,9 +57,9 @@ class LocaleTest extends TestCase
     {
         $codes = $this->getCountryCodes();
 
-        $return = array();
+        $return = [];
         foreach ($codes as $code => $country) {
-            $return[] = array($code, $country);
+            $return[] = [$code, $country];
         }
 
         return $return;
@@ -75,7 +73,7 @@ class LocaleTest extends TestCase
      */
     private function getCountryCodes()
     {
-        return array(
+        return [
             'AF' => 'Afghanistan',
             'AX' => 'Åland Islands',
             'AL' => 'Albania',
@@ -308,6 +306,6 @@ class LocaleTest extends TestCase
             'YE' => 'Yemen',
             'ZM' => 'Zambia',
             'ZW' => 'Zimbabwe',
-        );
+        ];
     }
 }

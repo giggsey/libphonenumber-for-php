@@ -10,20 +10,20 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2202 => 'Africell',
-  2203 => 'QCell',
-  22040 => 'Africell',
-  22041 => 'Africell',
-  22045 => 'Africell',
-  22050 => 'QCell',
-  22051 => 'QCell',
-  22052 => 'QCell',
-  22053 => 'QCell',
-  22054 => 'QCell',
-  22058 => 'QCell',
-  22059 => 'QCell',
-  2206 => 'Comium',
-  2207 => 'Africell',
-  2209 => 'Gamcel',
-);
+return  [
+    2202 => 'Africell',
+    2203 => 'QCell',
+    22040 => 'Africell',
+    22041 => 'Africell',
+    22045 => 'Africell',
+    22050 => 'QCell',
+    22051 => 'QCell',
+    22052 => 'QCell',
+    22053 => 'QCell',
+    22054 => 'QCell',
+    22058 => 'QCell',
+    22059 => 'QCell',
+    2206 => 'Comium',
+    2207 => 'Africell',
+    2209 => 'Gamcel',
+];

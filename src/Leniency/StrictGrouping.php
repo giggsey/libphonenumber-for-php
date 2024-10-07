@@ -22,9 +22,7 @@ class StrictGrouping extends AbstractLeniency
      * code "+1". If you are not sure about which level to use, email the discussion group
      * libphonenumber-discuss@googlegroups.com.
      *
-     * @param PhoneNumber $number
      * @param string $candidate
-     * @param PhoneNumberUtil $util
      * @return bool
      */
     public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)

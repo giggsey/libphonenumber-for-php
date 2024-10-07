@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  24638 => 'Sure Ltd',
-);
+return  [
+    24638 => 'Sure Ltd',
+];

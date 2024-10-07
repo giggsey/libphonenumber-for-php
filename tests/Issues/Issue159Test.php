@@ -14,9 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class Issue159Test extends TestCase
 {
-    const LOS_ANGELES_TZ = 'America/Los_Angeles';
+    public const LOS_ANGELES_TZ = 'America/Los_Angeles';
 
-    public function setUp()
+    public function setUp(): void
     {
         // Reset instance each time
         PhoneNumberUtil::resetInstance();
@@ -29,6 +29,6 @@ class Issue159Test extends TestCase
 
         $timeZoneMapper = PhoneNumberToTimeZonesMapper::getInstance();
 
-        $this->assertEquals(array(self::LOS_ANGELES_TZ), $timeZoneMapper->getTimeZonesForNumber($number));
+        $this->assertEquals([self::LOS_ANGELES_TZ], $timeZoneMapper->getTimeZonesForNumber($number));
     }
 }

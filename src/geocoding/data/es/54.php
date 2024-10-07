@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  542335 => 'Dpto. Realicó/Rancul, La Pampa',
-  543404 => 'Dpto. Las Colonias, Santa Fe',
-);
+return  [
+    542335 => 'Dpto. Realicó/Rancul, La Pampa',
+    543404 => 'Dpto. Las Colonias, Santa Fe',
+];

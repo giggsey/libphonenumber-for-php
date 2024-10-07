@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  35567 => 'One',
-  35568 => 'One',
-  35569 => 'Vodafone',
-);
+return  [
+    35567 => 'One',
+    35568 => 'One',
+    35569 => 'Vodafone',
+];

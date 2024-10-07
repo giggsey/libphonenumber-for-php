@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  23990 => 'Unitel',
-  23998 => 'CSTmovel',
-  23999 => 'CSTmovel',
-);
+return  [
+    23990 => 'Unitel',
+    23998 => 'CSTmovel',
+    23999 => 'CSTmovel',
+];

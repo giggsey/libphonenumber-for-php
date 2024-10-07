@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  22501 => 'Moov',
-  22505 => 'MTN',
-  22507 => 'Orange',
-);
+return  [
+    22501 => 'Moov',
+    22505 => 'MTN',
+    22507 => 'Orange',
+];

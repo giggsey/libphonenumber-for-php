@@ -60,18 +60,20 @@
     ]
   },
   "require": {
-    "php": ">=5.3.2",
-    "giggsey/locale": "^1.7|^2.0",
+    "php": "^7.4|^8.0",
+    "giggsey/locale": "^2.0",
     "symfony/polyfill-mbstring": "^1.17"
   },
   "require-dev": {
-    "phing/phing": "^2.7",
-    "pear/versioncontrol_git": "^0.5",
-    "pear/pear-core-minimal": "^1.9",
+    "phing/phing": "^3.0",
+    "pear/versioncontrol_git": "^0.7",
+    "pear/pear-core-minimal": "^1.10",
     "pear/pear_exception": "^1.0",
-    "symfony/phpunit-bridge": "^4.2 || ^5",
-    "symfony/console": "^2.8|^3.0|^v4.4|^v5.2",
-    "php-coveralls/php-coveralls": "^1.0|^2.0"
+    "phpunit/phpunit": "^9.6",
+    "symfony/console": "^v5.2",
+    "symfony/var-exporter": "^5.2",
+    "php-coveralls/php-coveralls": "^2.0",
+    "friendsofphp/php-cs-fixer": "^3.64"
   },
   "replace": {
     "giggsey/libphonenumber-for-php-lite": "self.version"
@@ -82,7 +84,8 @@
     }
   },
   "scripts": {
-    "test": "./phpunit",
+    "cs": "vendor/bin/php-cs-fixer fix",
+    "test": "vendor/bin/phpunit",
     "metadata": "vendor/bin/phing compile"
   }
 }

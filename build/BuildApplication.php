@@ -9,18 +9,18 @@ use Symfony\Component\Console\Application;
 
 class BuildApplication extends Application
 {
-    const VERSION = '5';
+    public const VERSION = '5';
 
     public function __construct()
     {
         parent::__construct('libphonenumber Data Builder', self::VERSION);
 
         $this->addCommands(
-            array(
+            [
                 new BuildMetadataPHPFromXMLCommand(),
                 new GeneratePhonePrefixDataCommand(),
                 new GenerateTimeZonesMapDataCommand(),
-            )
+            ]
         );
     }
 }

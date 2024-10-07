@@ -10,7 +10,7 @@
  * Do not modify this file directly!
  */
 
-return array (
-  37861 => 'TELENET',
-  37866 => 'Telecom Italia San Marino',
-);
+return  [
+    37861 => 'TELENET',
+    37866 => 'Telecom Italia San Marino',
+];

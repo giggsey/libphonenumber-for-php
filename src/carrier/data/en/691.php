@@ -10,16 +10,16 @@
  * Do not modify this file directly!
  */
 
-return array (
-  69132 => 'FSMTC',
-  69133 => 'FSMTC',
-  69135 => 'FSMTC',
-  69137 => 'FSMTC',
-  6918 => 'FSMTC',
-  69192 => 'FSMTC',
-  69193 => 'FSMTC',
-  69194 => 'FSMTC',
-  69195 => 'FSMTC',
-  69196 => 'BOOM!',
-  69197 => 'FSMTC',
-);
+return  [
+    69132 => 'FSMTC',
+    69133 => 'FSMTC',
+    69135 => 'FSMTC',
+    69137 => 'FSMTC',
+    6918 => 'FSMTC',
+    69192 => 'FSMTC',
+    69193 => 'FSMTC',
+    69194 => 'FSMTC',
+    69195 => 'FSMTC',
+    69196 => 'BOOM!',
+    69197 => 'FSMTC',
+];

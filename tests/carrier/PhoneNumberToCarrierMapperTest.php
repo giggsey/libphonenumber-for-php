@@ -28,7 +28,7 @@ class PhoneNumberToCarrierMapperTest extends TestCase
      */
     protected $carrierMapper;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         PhoneNumberUtil::resetInstance();
 
@@ -75,7 +75,7 @@ class PhoneNumberToCarrierMapperTest extends TestCase
         self::$INTERNATIONAL_TOLL_FREE->setCountryCode(800)->setNationalNumber(12345678);
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(__DIR__ . '/../carrier/data/');
     }

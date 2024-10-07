@@ -13,7 +13,7 @@ class CodeCoverageTest extends TestCase
      */
     private $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();
@@ -27,10 +27,10 @@ class CodeCoverageTest extends TestCase
             if (!$e instanceof NumberParseException) {
                 throw $e;
             }
-            $this->assertEquals("libphonenumber\\NumberParseException", \get_class($e));
+            $this->assertEquals('libphonenumber\\NumberParseException', \get_class($e));
             $this->assertEquals('The phone number supplied was null.', $e->getMessage());
 
-            $this->assertEquals('Error type: 1. The phone number supplied was null.', (string)$e);
+            $this->assertEquals('Error type: 1. The phone number supplied was null.', (string) $e);
         }
     }
 
@@ -39,11 +39,11 @@ class CodeCoverageTest extends TestCase
         try {
             $this->phoneUtil->parse('+441', 'GB');
         } catch (\Exception $e) {
-            $this->assertEquals("libphonenumber\\NumberParseException", \get_class($e));
+            $this->assertEquals('libphonenumber\\NumberParseException', \get_class($e));
             $this->assertEquals('The string supplied is too short to be a phone number.', $e->getMessage());
             $this->assertEquals(3, $e->getCode());
 
-            $this->assertEquals('Error type: 3. The string supplied is too short to be a phone number.', (string)$e);
+            $this->assertEquals('Error type: 3. The string supplied is too short to be a phone number.', (string) $e);
         }
     }
 }

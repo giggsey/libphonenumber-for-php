@@ -25,7 +25,7 @@ class PrefixFileReader
      * loaded.
      * @var array
      */
-    protected $availablePhonePrefixMaps = array();
+    protected $availablePhonePrefixMaps = [];
 
     public function __construct($phonePrefixDataDirectory)
     {
@@ -47,10 +47,6 @@ class PrefixFileReader
 
 
     /**
-     * @param $prefixMapKey
-     * @param $language
-     * @param $script
-     * @param $region
      * @return PhonePrefixMap|null
      */
     public function getPhonePrefixDescriptions($prefixMapKey, $language, $script, $region)

@@ -19,7 +19,6 @@ class RegexBasedMatcher implements MatcherAPIInterface
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
      *
      * @param string $number
-     * @param PhoneNumberDesc $numberDesc
      * @param boolean $allowPrefixMatch
      * @return boolean
      */
@@ -40,7 +39,6 @@ class RegexBasedMatcher implements MatcherAPIInterface
     /**
      * @param string $number
      * @param string $pattern
-     * @param $allowPrefixMatch
      * @return bool
      */
     private function match($number, $pattern, $allowPrefixMatch)

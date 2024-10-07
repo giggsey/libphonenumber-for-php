@@ -10,9 +10,9 @@
  * Do not modify this file directly!
  */
 
-return array (
-  67210 => 'Davis',
-  67211 => 'Mawson',
-  67212 => 'Casey',
-  67213 => 'Macquarie Island',
-);
+return  [
+    67210 => 'Davis',
+    67211 => 'Mawson',
+    67212 => 'Casey',
+    67213 => 'Macquarie Island',
+];

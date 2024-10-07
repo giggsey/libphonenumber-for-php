@@ -10,6 +10,6 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2537 => 'Evatis',
-);
+return  [
+    2537 => 'Evatis',
+];

@@ -2,7 +2,6 @@
 
 namespace libphonenumber\Tests\Issues;
 
-use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
@@ -15,7 +14,7 @@ class UKNumbersTest extends TestCase
      */
     protected $phoneUtil;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();

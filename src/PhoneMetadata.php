@@ -34,7 +34,7 @@ class PhoneMetadata
     protected $premiumRate;
     protected $fixedLine;
     protected $sameMobileAndFixedLinePattern = false;
-    protected $numberFormat = array();
+    protected $numberFormat = [];
     protected $tollFree;
     protected $sharedCost;
     protected $personalNumber;
@@ -64,10 +64,9 @@ class PhoneMetadata
      */
     protected $noInternationalDialling;
     /**
-     *
      * @var NumberFormat[]
      */
-    protected $intlNumberFormat = array();
+    protected $intlNumberFormat = [];
 
     /**
      * @return boolean
@@ -153,13 +152,13 @@ class PhoneMetadata
 
     public function clearIntlNumberFormat()
     {
-        $this->intlNumberFormat = array();
+        $this->intlNumberFormat = [];
         return $this;
     }
 
     public function toArray()
     {
-        $output = array();
+        $output = [];
 
         if ($this->hasGeneralDesc()) {
             $output['generalDesc'] = $this->getGeneralDesc()->toArray();
@@ -266,12 +265,12 @@ class PhoneMetadata
             $output['sameMobileAndFixedLinePattern'] = $this->getSameMobileAndFixedLinePattern();
         }
 
-        $output['numberFormat'] = array();
+        $output['numberFormat'] = [];
         foreach ($this->numberFormats() as $numberFormat) {
             $output['numberFormat'][] = $numberFormat->toArray();
         }
 
-        $output['intlNumberFormat'] = array();
+        $output['intlNumberFormat'] = [];
         foreach ($this->intlNumberFormats() as $intlNumberFormat) {
             $output['intlNumberFormat'][] = $intlNumberFormat->toArray();
         }
@@ -815,7 +814,6 @@ class PhoneMetadata
     }
 
     /**
-     * @param array $input
      * @return PhoneMetadata
      */
     public function fromArray(array $input)

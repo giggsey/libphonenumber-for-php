@@ -19,7 +19,7 @@ class Issue44Test extends TestCase
      */
     private $geocoder;
 
-    public function setUp()
+    public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance();

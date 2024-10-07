@@ -21,7 +21,7 @@ class MatcherTest extends TestCase
         // Test if there is no matcher data.
         $this->assertInvalid($matcher, '1', $desc);
 
-        $desc = $this->createDesc("9\\d{2}");
+        $desc = $this->createDesc('9\\d{2}');
         $this->assertInvalid($matcher, '91', $desc);
         $this->assertInvalid($matcher, '81', $desc);
         $this->assertMatched($matcher, '911', $desc);
@@ -29,7 +29,7 @@ class MatcherTest extends TestCase
         $this->assertTooLong($matcher, '9111', $desc);
         $this->assertInvalid($matcher, '8111', $desc);
 
-        $desc = $this->createDesc("\\d{1,2}");
+        $desc = $this->createDesc('\\d{1,2}');
         $this->assertMatched($matcher, '2', $desc);
         $this->assertMatched($matcher, '20', $desc);
 

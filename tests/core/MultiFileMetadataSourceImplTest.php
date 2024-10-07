@@ -14,7 +14,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
      */
     private $multiFileMetadataSource;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
             new DefaultMetadataLoader(),
@@ -58,10 +58,6 @@ class MultiFileMetadataSourceImplTest extends TestCase
 
     /**
      * Provide PHPUnit compatibility
-     *
-     * @param $needle
-     * @param $haystack
-     * @param $message
      */
     private function doAssertStringContainsString($needle, $haystack, $message)
     {

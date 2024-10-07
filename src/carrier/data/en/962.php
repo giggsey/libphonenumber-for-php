@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  96277 => 'Orange',
-  96278 => 'Umniah',
-  96279 => 'Zain JO',
-);
+return  [
+    96277 => 'Orange',
+    96278 => 'Umniah',
+    96279 => 'Zain JO',
+];

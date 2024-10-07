@@ -10,8 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  2135 => 'Ooredoo',
-  2136 => 'Mobilis',
-  2137 => 'Djezzy',
-);
+return  [
+    2135 => 'Ooredoo',
+    2136 => 'Mobilis',
+    2137 => 'Djezzy',
+];

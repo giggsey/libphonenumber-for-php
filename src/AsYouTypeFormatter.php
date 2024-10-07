@@ -84,7 +84,7 @@ class AsYouTypeFormatter
     /**
      * @var NumberFormat[]
      */
-    private $possibleFormats = array();
+    private $possibleFormats = [];
 
     /**
      * @var int
@@ -187,8 +187,8 @@ class AsYouTypeFormatter
             self::$emptyMetadata->setInternationalPrefix('NA');
 
             self::$eligibleFormatPattern = '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*'
-                . "\\$1" . "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*(\\$\\d"
-                . "[" . PhoneNumberUtil::VALID_PUNCTUATION . "]*)*";
+                . '\$1' . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*(\$\\d'
+                . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*)*';
         }
     }
 
@@ -308,7 +308,6 @@ class AsYouTypeFormatter
     }
 
     /**
-     * @param $leadingDigits
      */
     private function narrowDownPossibleFormats($leadingDigits)
     {
@@ -329,7 +328,6 @@ class AsYouTypeFormatter
     }
 
     /**
-     * @param NumberFormat $format
      * @return bool
      */
     private function createFormattingTemplate(NumberFormat $format)
@@ -392,7 +390,7 @@ class AsYouTypeFormatter
         $this->originalPosition = 0;
         $this->isCompleteNumber = false;
         $this->isExpectingCountryCallingCode = false;
-        $this->possibleFormats = array();
+        $this->possibleFormats = [];
         $this->shouldAddSpaceAfterNationalPrefix = false;
         if ($this->currentMetadata !== $this->defaultMetadata) {
             $this->currentMetadata = $this->getMetadataForRegion($this->defaultCountry);
@@ -524,7 +522,7 @@ class AsYouTypeFormatter
     {
         $this->ableToFormat = true;
         $this->isExpectingCountryCallingCode = false;
-        $this->possibleFormats = array();
+        $this->possibleFormats = [];
         $this->lastMatchPosition = 0;
         $this->formattingTemplate = '';
         $this->currentFormattingPattern = '';
@@ -743,7 +741,7 @@ class AsYouTypeFormatter
      */
     private function attemptToExtractIdd()
     {
-        $internationalPrefix = "\\" . PhoneNumberUtil::PLUS_SIGN . '|' . $this->currentMetadata->getInternationalPrefix();
+        $internationalPrefix = '\\' . PhoneNumberUtil::PLUS_SIGN . '|' . $this->currentMetadata->getInternationalPrefix();
         $iddMatcher = new Matcher($internationalPrefix, $this->accruedInputWithoutFormatting);
 
         if ($iddMatcher->lookingAt()) {
@@ -782,7 +780,7 @@ class AsYouTypeFormatter
         } elseif ($newRegionCode != $this->defaultCountry) {
             $this->currentMetadata = $this->getMetadataForRegion($newRegionCode);
         }
-        $countryCodeString = (string)$countryCode;
+        $countryCodeString = (string) $countryCode;
         $this->prefixBeforeNationalNumber .= $countryCodeString . self::$separatorBeforeNationalNumber;
         // When we have successfully extracted the IDD, the previously extracted NDD should be cleared
         // because it is no longer valid.
