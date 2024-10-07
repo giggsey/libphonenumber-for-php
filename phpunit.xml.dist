@@ -2,7 +2,8 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          bootstrap="./tests/bootstrap.php"
          beStrictAboutTestsThatDoNotTestAnything="false"
-         colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+         convertDeprecationsToExceptions="true"
+         colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd">
     <coverage>
         <include>
             <directory suffix=".php">./src/</directory>
