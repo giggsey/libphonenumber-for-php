@@ -622,7 +622,7 @@ class PhoneNumberMatcher implements \Iterator
     protected static function getNationalNumberGroups(
         PhoneNumberUtil $util,
         PhoneNumber $number,
-        NumberFormat $formattingPattern = null
+        ?NumberFormat $formattingPattern = null
     ) {
         if ($formattingPattern === null) {
             // This will be in the format +CC-DG;ext=EXT where DG represents groups of digits.

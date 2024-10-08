@@ -428,8 +428,12 @@ class PhoneNumberUtil
      * @param string|null $baseFileLocation
      * @return PhoneNumberUtil instance
      */
-    public static function getInstance($baseFileLocation = null, array $countryCallingCodeToRegionCodeMap = null, MetadataLoaderInterface $metadataLoader = null, MetadataSourceInterface $metadataSource = null)
-    {
+    public static function getInstance(
+        $baseFileLocation = null,
+        ?array $countryCallingCodeToRegionCodeMap = null,
+        ?MetadataLoaderInterface $metadataLoader = null,
+        ?MetadataSourceInterface $metadataSource = null
+    ) {
         if (static::$instance === null) {
             if ($countryCallingCodeToRegionCodeMap === null) {
                 $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
@@ -1576,7 +1580,7 @@ class PhoneNumberUtil
      *                                  as that of the default region supplied.
      * @return PhoneNumber              a phone number proto buffer filled with the parsed number
      */
-    public function parseAndKeepRawInput($numberToParse, $defaultRegion, PhoneNumber $phoneNumber = null)
+    public function parseAndKeepRawInput($numberToParse, $defaultRegion, ?PhoneNumber $phoneNumber = null)
     {
         if ($phoneNumber === null) {
             $phoneNumber = new PhoneNumber();
@@ -1594,7 +1598,7 @@ class PhoneNumberUtil
      * @param int $maxTries Defaults to PHP_INT_MAX
      * @return PhoneNumberMatcher
      */
-    public function findNumbers($text, $defaultRegion, AbstractLeniency $leniency = null, $maxTries = PHP_INT_MAX)
+    public function findNumbers($text, $defaultRegion, ?AbstractLeniency $leniency = null, $maxTries = PHP_INT_MAX)
     {
         if ($leniency === null) {
             $leniency = Leniency::VALID();
@@ -2030,7 +2034,7 @@ class PhoneNumberUtil
      */
     public function maybeExtractCountryCode(
         $number,
-        PhoneMetadata $defaultRegionMetadata = null,
+        ?PhoneMetadata $defaultRegionMetadata,
         &$nationalNumber,
         $keepRawInput,
         PhoneNumber $phoneNumber
@@ -3166,7 +3170,7 @@ class PhoneNumberUtil
      *                               and the number is not in international format (does not start
      *                               with +)
      */
-    public function parse($numberToParse, $defaultRegion = null, PhoneNumber $phoneNumber = null, $keepRawInput = false)
+    public function parse($numberToParse, $defaultRegion = null, ?PhoneNumber $phoneNumber = null, $keepRawInput = false)
     {
         if ($phoneNumber === null) {
             $phoneNumber = new PhoneNumber();
