@@ -8,7 +8,7 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 return $config->setRules(
     [
-        '@PER-CS' => true,
+        '@PER-CS2.0' => true,
         '@PHP74Migration' => true,
         'single_quote' => true,
         'no_unused_imports' => true,
