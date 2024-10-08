@@ -8,10 +8,11 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '1\\d\\d(?:\\d(?:\\d{2})?)?',
+        'NationalNumberPattern' => '[01]\\d{2,5}',
         'PossibleLength' => [
             3,
             4,
+            5,
             6,
         ],
         'PossibleLengthLocalOnly' => [],
@@ -40,7 +41,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'shortCode' => [
-        'NationalNumberPattern' => '1(?:1(?:[0239]|61(?:1[17]|23))|2[048]|4(?:12|[59])|7[57]|8[5-9]\\d|90)',
+        'NationalNumberPattern' => '04\\d{3}|1(?:1(?:[0239]|61(?:1[17]|23))|2[048]|4(?:12|[59])|7[57]|8[5-9]\\d|90)',
         'ExampleNumber' => '110',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
@@ -58,8 +59,10 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'smsServices' => [
+        'NationalNumberPattern' => '04\\d{3}',
+        'ExampleNumber' => '04000',
         'PossibleLength' => [
-            -1,
+            5,
         ],
         'PossibleLengthLocalOnly' => [],
     ],

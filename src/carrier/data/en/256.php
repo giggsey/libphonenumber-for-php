@@ -16,6 +16,7 @@ return  [
     256720 => 'Smile',
     256724 => 'Hamilton Telecom',
     256726 => 'Tangerine',
+    256727 => 'Tangerine',
     256728 => 'Talkio',
     25673 => 'Hamilton Telecom',
     25674 => 'Airtel',

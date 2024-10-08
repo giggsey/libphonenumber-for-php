@@ -8,16 +8,19 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '1\\d\\d',
+        'NationalNumberPattern' => '[01]\\d\\d(?:\\d{2})?',
         'PossibleLength' => [
             3,
+            5,
         ],
         'PossibleLengthLocalOnly' => [],
     ],
     'tollFree' => [
         'NationalNumberPattern' => '11[023]',
         'ExampleNumber' => '110',
-        'PossibleLength' => [],
+        'PossibleLength' => [
+            3,
+        ],
         'PossibleLengthLocalOnly' => [],
     ],
     'premiumRate' => [
@@ -29,11 +32,13 @@ return [
     'emergency' => [
         'NationalNumberPattern' => '11[023]',
         'ExampleNumber' => '110',
-        'PossibleLength' => [],
+        'PossibleLength' => [
+            3,
+        ],
         'PossibleLengthLocalOnly' => [],
     ],
     'shortCode' => [
-        'NationalNumberPattern' => '11[023]',
+        'NationalNumberPattern' => '04\\d{3}|11[023]',
         'ExampleNumber' => '110',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
@@ -51,8 +56,10 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'smsServices' => [
+        'NationalNumberPattern' => '04\\d{3}',
+        'ExampleNumber' => '04000',
         'PossibleLength' => [
-            -1,
+            5,
         ],
         'PossibleLengthLocalOnly' => [],
     ],

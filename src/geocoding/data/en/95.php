@@ -11,6 +11,7 @@
  */
 
 return  [
+    9511 => 'Yangon',
     951422 => 'Yangon',
     951423 => 'Yangon',
     951424 => 'Yangon',
