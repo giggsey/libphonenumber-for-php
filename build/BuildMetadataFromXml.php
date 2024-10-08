@@ -615,7 +615,7 @@ class BuildMetadataFromXml
      * @param array $lengths
      * @param array $localOnlyLengths
      */
-    private static function setPossibleLengths($lengths, $localOnlyLengths, PhoneNumberDesc $parentDesc = null, PhoneNumberDesc $desc)
+    private static function setPossibleLengths($lengths, $localOnlyLengths, ?PhoneNumberDesc $parentDesc, PhoneNumberDesc $desc)
     {
         // We clear these fields since the metadata tends to inherit from the parent element for other
         // fields (via a mergeFrom).
@@ -679,7 +679,7 @@ class BuildMetadataFromXml
      * @return PhoneNumberDesc complete description of that phone number type
      */
     public static function processPhoneNumberDescElement(
-        PhoneNumberDesc $parentDesc = null,
+        ?PhoneNumberDesc $parentDesc,
         \DOMElement $countryElement,
         $numberType
     ) {
