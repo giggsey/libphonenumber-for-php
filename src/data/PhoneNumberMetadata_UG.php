@@ -29,7 +29,7 @@ return [
         ],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '72[48]0\\d{5}|7(?:[015-8]\\d|2[067]|36|4[0-5]|9[89])\\d{6}',
+        'NationalNumberPattern' => '72[48]0\\d{5}|7(?:[015-8]\\d|2[067]|36|4[0-6]|9[89])\\d{6}',
         'ExampleNumber' => '712345678',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
