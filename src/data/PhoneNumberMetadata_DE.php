@@ -51,7 +51,7 @@ return [
         ],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '15310\\d{6}|1(?:6[023]|7[0-57-9])\\d{7,8}|1(?:5[0-25-9]|76)\\d{8}',
+        'NationalNumberPattern' => '16[023]\\d{7,8}|1(?:5310|7[0-57-9]\\d)\\d{6}|1(?:5[0-25-9]|76)\\d{8}',
         'ExampleNumber' => '15123456789',
         'PossibleLength' => [
             10,

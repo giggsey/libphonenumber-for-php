@@ -8,7 +8,7 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '(?:40|72)\\d{4}|8\\d{5}(?:\\d{3})?',
+        'NationalNumberPattern' => '(?:40|72|8\\d{4})\\d{4}|[89]\\d{5}',
         'PossibleLength' => [
             6,
             9,
@@ -58,8 +58,10 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'voip' => [
+        'NationalNumberPattern' => '9[23]\\d{4}',
+        'ExampleNumber' => '921234',
         'PossibleLength' => [
-            -1,
+            6,
         ],
         'PossibleLengthLocalOnly' => [],
     ],
@@ -98,7 +100,7 @@ return [
             'pattern' => '(\\d{2})(\\d{2})(\\d{2})',
             'format' => '$1 $2 $3',
             'leadingDigitsPatterns' => [
-                '[478]',
+                '[47-9]',
             ],
             'nationalPrefixFormattingRule' => '',
             'domesticCarrierCodeFormattingRule' => '',
