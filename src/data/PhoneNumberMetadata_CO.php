@@ -8,22 +8,26 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '60\\d{8}|(?:1\\d|[39])\\d{9}',
+        'NationalNumberPattern' => '(?:46|60\\d\\d)\\d{6}|(?:1\\d|[39])\\d{9}',
         'PossibleLength' => [
+            8,
             10,
             11,
         ],
         'PossibleLengthLocalOnly' => [
+            4,
             7,
         ],
     ],
     'fixedLine' => [
-        'NationalNumberPattern' => '601055(?:[0-4]\\d|50)\\d\\d|6010(?:[0-4]\\d|5[0-4])\\d{4}|60(?:[124-7][2-9]|8[1-9])\\d{6}',
+        'NationalNumberPattern' => '601055(?:[0-4]\\d|50)\\d\\d|6010(?:[0-4]\\d|5[0-4])\\d{4}|(?:46|60(?:[124-7][2-9]|8[1-9]))\\d{6}',
         'ExampleNumber' => '6012345678',
         'PossibleLength' => [
+            8,
             10,
         ],
         'PossibleLengthLocalOnly' => [
+            4,
             7,
         ],
     ],
@@ -46,7 +50,10 @@ return [
     'premiumRate' => [
         'NationalNumberPattern' => '(?:19(?:0[01]|4[78])|901)\\d{7}',
         'ExampleNumber' => '19001234567',
-        'PossibleLength' => [],
+        'PossibleLength' => [
+            10,
+            11,
+        ],
         'PossibleLengthLocalOnly' => [],
     ],
     'sharedCost' => [
@@ -99,6 +106,16 @@ return [
     'sameMobileAndFixedLinePattern' => false,
     'numberFormat' => [
         [
+            'pattern' => '(\\d{4})(\\d{4})',
+            'format' => '$1 $2',
+            'leadingDigitsPatterns' => [
+                '46',
+            ],
+            'nationalPrefixFormattingRule' => '',
+            'domesticCarrierCodeFormattingRule' => '',
+            'nationalPrefixOptionalWhenFormatting' => false,
+        ],
+        [
             'pattern' => '(\\d{3})(\\d{7})',
             'format' => '$1 $2',
             'leadingDigitsPatterns' => [
@@ -130,6 +147,16 @@ return [
         ],
     ],
     'intlNumberFormat' => [
+        [
+            'pattern' => '(\\d{4})(\\d{4})',
+            'format' => '$1 $2',
+            'leadingDigitsPatterns' => [
+                '46',
+            ],
+            'nationalPrefixFormattingRule' => '',
+            'domesticCarrierCodeFormattingRule' => '',
+            'nationalPrefixOptionalWhenFormatting' => false,
+        ],
         [
             'pattern' => '(\\d{3})(\\d{7})',
             'format' => '$1 $2',

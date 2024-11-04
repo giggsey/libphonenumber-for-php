@@ -8,7 +8,7 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '[45]\\d{5}|(?:708|80\\d)\\d{6}',
+        'NationalNumberPattern' => '[45]\\d{5}|(?:708|8\\d\\d)\\d{6}',
         'PossibleLength' => [
             6,
             9,
@@ -16,15 +16,13 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'fixedLine' => [
-        'NationalNumberPattern' => '(?:4[1-35-7]|5[01])\\d{4}',
+        'NationalNumberPattern' => '(?:4[1-35-9]|5[0-47-9]|80[6-9]\\d\\d)\\d{4}',
         'ExampleNumber' => '430123',
-        'PossibleLength' => [
-            6,
-        ],
+        'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '(?:4[02-4]|5[056]|708[45][0-5])\\d{4}',
+        'NationalNumberPattern' => '(?:4[02-489]|5[02-9]|708[45][0-5])\\d{4}',
         'ExampleNumber' => '551234',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
@@ -38,8 +36,10 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'premiumRate' => [
+        'NationalNumberPattern' => '8[129]\\d{7}',
+        'ExampleNumber' => '810123456',
         'PossibleLength' => [
-            -1,
+            9,
         ],
         'PossibleLengthLocalOnly' => [],
     ],
