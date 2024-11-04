@@ -19,6 +19,7 @@ return  [
     99210 => 'O-Mobile',
     99211 => 'Tcell',
     99217 => 'Babilon-M',
+    99218 => 'ZET-MOBILE',
     9922 => 'O-Mobile',
     99230 => 'O-Mobile',
     992330 => 'ZET-MOBILE',
