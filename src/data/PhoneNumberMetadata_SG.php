@@ -25,7 +25,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '8(?:09[0-689]|96[0-2])\\d{4}|(?:8(?:0[1-8]|[1-8]\\d|9[0-5])|9[0-8]\\d)\\d{5}',
+        'NationalNumberPattern' => '896[0-4]\\d{4}|(?:8(?:0[1-9]|[1-8]\\d|9[0-5])|9[0-8]\\d)\\d{5}',
         'ExampleNumber' => '81234567',
         'PossibleLength' => [
             8,

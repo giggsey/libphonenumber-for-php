@@ -24,6 +24,7 @@ return  [
     38597595 => 'YATECO',
     38597596 => 'Altavox',
     38597597 => 'INNOVAC',
+    38597599 => 'Digicom',
     385976 => 'Hrvatski Telekom',
     385977 => 'Hrvatski Telekom',
     385979 => 'Hrvatski Telekom',

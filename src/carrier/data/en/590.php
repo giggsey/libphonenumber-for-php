@@ -65,4 +65,9 @@ return  [
     59069135 => 'Orange',
     590694 => 'Digicel',
     590696 => 'Digicel',
+    59070900 => 'Free Caraïbe',
+    59070901 => 'Outremer Telecom',
+    59070902 => 'Digicel',
+    59070903 => 'Orange',
+    59070904 => 'Dauphin Telecom',
 ];

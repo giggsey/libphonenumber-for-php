@@ -16,8 +16,8 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'tollFree' => [
-        'NationalNumberPattern' => '11[78]|7[3-5]\\d\\d',
-        'ExampleNumber' => '117',
+        'NationalNumberPattern' => '1(?:1[246-8]|3[68]|6[06])|7[3-5]\\d\\d',
+        'ExampleNumber' => '112',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
     ],
@@ -28,16 +28,16 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'emergency' => [
-        'NationalNumberPattern' => '11[78]',
-        'ExampleNumber' => '117',
+        'NationalNumberPattern' => '11[246-8]',
+        'ExampleNumber' => '112',
         'PossibleLength' => [
             3,
         ],
         'PossibleLengthLocalOnly' => [],
     ],
     'shortCode' => [
-        'NationalNumberPattern' => '1(?:1[78]|2[02-5]|60)|7[0-5]\\d\\d',
-        'ExampleNumber' => '117',
+        'NationalNumberPattern' => '1(?:05|1[24-8]|2[02-5]|3[126-8]|5[05]|6[06]|89)|7[0-5]\\d\\d',
+        'ExampleNumber' => '105',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],
     ],
