@@ -1,4 +1,5 @@
 <?php
+
 /**
  * libphonenumber-for-php-lite data file
  * This file has been @generated from libphonenumber data
@@ -8,7 +9,7 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '(?:80|9\\d)\\d{7}|(?:26|63)9\\d{6}',
+        'NationalNumberPattern' => '7093\\d{5}|(?:80|9\\d)\\d{7}|(?:26|63)9\\d{6}',
         'PossibleLength' => [
             9,
         ],
@@ -21,7 +22,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '639(?:0[0-79]|1[019]|[267]\\d|3[09]|40|5[05-9]|9[04-79])\\d{4}',
+        'NationalNumberPattern' => '(?:639(?:0[0-79]|1[019]|[267]\\d|3[09]|40|5[05-9]|9[04-79])|7093[5-7])\\d{4}',
         'ExampleNumber' => '639012345',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [],

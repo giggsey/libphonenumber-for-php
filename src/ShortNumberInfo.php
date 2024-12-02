@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Methods for getting information about short phone numbers, such as short codes and emergency
  * numbers. Note that most commercial short numbers are not handled here, but by the
