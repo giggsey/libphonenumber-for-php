@@ -9,7 +9,7 @@
 
 return [
     'generalDesc' => [
-        'NationalNumberPattern' => '00[1-9]\\d{6,14}|[257-9]\\d{9}|(?:00|[1-9]\\d\\d)\\d{6}',
+        'NationalNumberPattern' => '00[1-9]\\d{6,14}|[25-9]\\d{9}|(?:00|[1-9]\\d\\d)\\d{6}',
         'PossibleLength' => [
             8,
             9,
@@ -33,7 +33,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '[7-9]0[1-9]\\d{7}',
+        'NationalNumberPattern' => '(?:60\\d|[7-9]0[1-9])\\d{7}',
         'ExampleNumber' => '9012345678',
         'PossibleLength' => [
             10,
@@ -160,8 +160,8 @@ return [
             'pattern' => '(\\d)(\\d{4})(\\d{4})',
             'format' => '$1-$2-$3',
             'leadingDigitsPatterns' => [
-                '[36]|4(?:2[09]|7[01])',
-                '[36]|4(?:2(?:0|9[02-69])|7(?:0[019]|1))',
+                '3|4(?:2[09]|7[01])|6[1-9]',
+                '3|4(?:2(?:0|9[02-69])|7(?:0[019]|1))|6[1-9]',
             ],
             'nationalPrefixFormattingRule' => '0$1',
             'domesticCarrierCodeFormattingRule' => '',
@@ -224,7 +224,7 @@ return [
             'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
             'format' => '$1-$2-$3',
             'leadingDigitsPatterns' => [
-                '[257-9]',
+                '[25-9]',
             ],
             'nationalPrefixFormattingRule' => '0$1',
             'domesticCarrierCodeFormattingRule' => '',
@@ -308,8 +308,8 @@ return [
             'pattern' => '(\\d)(\\d{4})(\\d{4})',
             'format' => '$1-$2-$3',
             'leadingDigitsPatterns' => [
-                '[36]|4(?:2[09]|7[01])',
-                '[36]|4(?:2(?:0|9[02-69])|7(?:0[019]|1))',
+                '3|4(?:2[09]|7[01])|6[1-9]',
+                '3|4(?:2(?:0|9[02-69])|7(?:0[019]|1))|6[1-9]',
             ],
             'nationalPrefixFormattingRule' => '0$1',
             'domesticCarrierCodeFormattingRule' => '',
@@ -351,7 +351,7 @@ return [
             'pattern' => '(\\d{2})(\\d{4})(\\d{4})',
             'format' => '$1-$2-$3',
             'leadingDigitsPatterns' => [
-                '[257-9]',
+                '[25-9]',
             ],
             'nationalPrefixFormattingRule' => '0$1',
             'domesticCarrierCodeFormattingRule' => '',

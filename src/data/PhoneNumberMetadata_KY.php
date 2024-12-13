@@ -18,7 +18,7 @@ return [
         ],
     ],
     'fixedLine' => [
-        'NationalNumberPattern' => '345(?:2(?:22|3[23]|44|66)|333|444|6(?:23|38|40)|7(?:30|4[35-79]|6[6-9]|77)|8(?:00|1[45]|[48]8)|9(?:14|4[035-9]))\\d{4}',
+        'NationalNumberPattern' => '345(?:2(?:22|3[23]|44|66)|333|444|6(?:23|38|40)|7(?:30|4[35-79]|6[6-9]|77)|8(?:00|1[45]|4[89]|88)|9(?:14|4[035-9]))\\d{4}',
         'ExampleNumber' => '3452221234',
         'PossibleLength' => [],
         'PossibleLengthLocalOnly' => [
@@ -64,9 +64,9 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'pager' => [
-        'NationalNumberPattern' => '345849\\d{4}',
-        'ExampleNumber' => '3458491234',
-        'PossibleLength' => [],
+        'PossibleLength' => [
+            -1,
+        ],
         'PossibleLengthLocalOnly' => [],
     ],
     'uan' => [

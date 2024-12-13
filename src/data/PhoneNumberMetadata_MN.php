@@ -32,7 +32,7 @@ return [
         ],
     ],
     'mobile' => [
-        'NationalNumberPattern' => '(?:83[01]|92[039])\\d{5}|(?:5[05]|6[069]|8[015689]|9[013-9])\\d{6}',
+        'NationalNumberPattern' => '(?:83[01]|92[039])\\d{5}|(?:5[05]|6[069]|72|8[015689]|9[013-9])\\d{6}',
         'ExampleNumber' => '88123456',
         'PossibleLength' => [
             8,
@@ -64,7 +64,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'voip' => [
-        'NationalNumberPattern' => '712[0-79]\\d{4}|7(?:1[013-9]|[25-9]\\d)\\d{5}',
+        'NationalNumberPattern' => '712[0-79]\\d{4}|7(?:1[013-9]|[5-9]\\d)\\d{5}',
         'ExampleNumber' => '75123456',
         'PossibleLength' => [
             8,
