@@ -57,6 +57,8 @@ return  [
     3519280 => 'NOWO',
     3519281 => 'NOWO',
     3519282 => 'Digi Communications',
+    3519283 => 'Digi Communications',
+    3519284 => 'Digi Communications',
     3519285 => 'ONITELECOM',
     3519290 => 'NOS',
     3519291 => 'NOS',
