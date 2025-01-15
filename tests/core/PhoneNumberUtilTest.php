@@ -880,6 +880,13 @@ class PhoneNumberUtilTest extends TestCase
             $this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumber, RegionCode::BS)
         );
 
+        // Testing a number with extension.
+        $alphaNumericNumberWithExtn = $this->phoneUtil->parseAndKeepRawInput('800 SIX-flag ext. 1234', RegionCode::US);
+        $this->assertEquals(
+            '0011 1 800 SIX-FLAG extn. 1234',
+            $this->phoneUtil->formatOutOfCountryKeepingAlphaChars($alphaNumericNumberWithExtn, RegionCode::AU)
+        );
+
         // Testing that if the raw input doesn't exist, it is formatted using
         // formatOutOfCountryCallingNumber.
         $alphaNumericNumber->clearRawInput();

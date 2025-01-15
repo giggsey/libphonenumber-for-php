@@ -17,8 +17,6 @@ return  [
     38972 => 'T-Mobile',
     38973 => 'A1',
     389736 => 'T-Mobile',
-    3897370 => 'T-Mobile',
-    3897371 => 'T-Mobile',
     389742 => 'T-Mobile',
     3897421 => 'Mobik',
     389746 => 'T-Mobile',

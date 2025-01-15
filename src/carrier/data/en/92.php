@@ -12,9 +12,9 @@
  */
 
 return  [
-    9230 => 'Mobilink',
+    9230 => 'Jazz',
     9231 => 'Zong',
-    9232 => 'Warid',
+    9232 => 'Jazz',
     9233 => 'Ufone',
     9234 => 'Telenor',
     9235 => 'Special Communications Organization',

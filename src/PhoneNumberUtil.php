@@ -2776,6 +2776,9 @@ class PhoneNumberUtil
         $regionCode = $this->getRegionCodeForCountryCode($countryCode);
         // Metadata cannot be null because the country calling code is valid.
         $metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
+        // Strip any extension
+        $this->maybeStripExtension($formattedNumber);
+        // Append the formatted extension
         $this->maybeAppendFormattedExtension(
             $number,
             $metadataForRegion,
@@ -3675,6 +3678,13 @@ class PhoneNumberUtil
      *        length (obviously includes the length of area codes for fixed line numbers), it will
      *        return false for the subscriber-number-only version.
      * </ol>
+     *
+     * There is a known <a href="https://issuetracker.google.com/issues/335892662">issue</a> with this
+     * method: if a number is possible only in a certain region among several regions that share the
+     * same country calling code, this method will consider only the "main" region. For example,
+     * +1310xxxx are valid numbers in Canada. However, they are not possible in the US. As a result,
+     * this method will return IS_POSSIBLE_LOCAL_ONLY for +1310xxxx.
+     *
      * @param PhoneNumber $number the number that needs to be checked
      * @return int a ValidationResult object which indicates whether the number is possible
      */
@@ -3704,6 +3714,12 @@ class PhoneNumberUtil
      *        length (obviously includes the length of area codes for fixed line numbers), it will
      *        return false for the subscriber-number-only version.
      * </ol>
+     *
+     * There is a known <a href="https://issuetracker.google.com/issues/335892662">issue</a> with this
+     * method: if a number is possible only in a certain region among several regions that share the
+     * same country calling code, this method will consider only the "main" region. For example,
+     * +1310xxxx are valid numbers in Canada. However, they are not possible in the US. As a result,
+     * this method will return IS_POSSIBLE_LOCAL_ONLY for +1310xxxx.
      *
      * @param PhoneNumber $number the number that needs to be checked
      * @param int $type the PhoneNumberType we are interested in
