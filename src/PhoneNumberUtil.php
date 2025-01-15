@@ -2776,6 +2776,9 @@ class PhoneNumberUtil
         $regionCode = $this->getRegionCodeForCountryCode($countryCode);
         // Metadata cannot be null because the country calling code is valid.
         $metadataForRegion = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
+        // Strip any extension
+        $this->maybeStripExtension($formattedNumber);
+        // Append the formatted extension
         $this->maybeAppendFormattedExtension(
             $number,
             $metadataForRegion,
