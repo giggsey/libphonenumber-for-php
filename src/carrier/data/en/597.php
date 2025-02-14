@@ -21,4 +21,5 @@ return  [
     5978 => 'Telesur',
     59781 => 'Digicel',
     59782 => 'Digicel',
+    59783 => 'Digicel',
 ];

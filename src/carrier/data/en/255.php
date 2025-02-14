@@ -26,5 +26,5 @@ return  [
     25576 => 'Vodacom',
     25577 => 'tiGO',
     25578 => 'Airtel',
-    25579 => 'Benson Informatics',
+    25579 => 'Vodacom',
 ];
