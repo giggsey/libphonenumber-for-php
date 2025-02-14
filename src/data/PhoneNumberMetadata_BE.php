@@ -41,7 +41,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'premiumRate' => [
-        'NationalNumberPattern' => '(?:70(?:2[0-57]|3[04-7]|44|6[4-69]|7[0579])|90\\d\\d)\\d{4}',
+        'NationalNumberPattern' => '(?:70(?:2[0-57]|3[04-7]|44|6[04-69]|7[0579])|90\\d\\d)\\d{4}',
         'ExampleNumber' => '90012345',
         'PossibleLength' => [
             8,
@@ -75,7 +75,7 @@ return [
         'PossibleLengthLocalOnly' => [],
     ],
     'uan' => [
-        'NationalNumberPattern' => '78(?:0[57]|1[014-8]|2[25]|3[15-8]|48|[56]0|7[06-8]|9\\d)\\d{4}',
+        'NationalNumberPattern' => '78(?:0[578]|1[014-8]|2[25]|3[15-8]|48|5[05]|60|7[06-8]|9\\d)\\d{4}',
         'ExampleNumber' => '78102345',
         'PossibleLength' => [
             8,
