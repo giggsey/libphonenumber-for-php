@@ -35,8 +35,16 @@ class NumberParseException extends \Exception
      */
     public const TOO_LONG = 4;
 
+    /**
+     * @var int
+     */
     protected $errorType;
 
+    /**
+     * @param int $errorType
+     * @param string $message
+     * @param \Throwable|null $previous
+     */
     public function __construct($errorType, $message, $previous = null)
     {
         parent::__construct($message, $errorType, $previous);
@@ -46,6 +54,8 @@ class NumberParseException extends \Exception
 
     /**
      * Returns the error type of the exception that has been thrown.
+     *
+     * @return int
      */
     public function getErrorType()
     {
