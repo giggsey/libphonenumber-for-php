@@ -25,7 +25,7 @@ class PrefixTimeZonesMap
      * instead of a long.
      *
      * @param $number PhoneNumber the phone number to look up
-     * @return array the list of corresponding time zones
+     * @return string[] the list of corresponding time zones
      */
     public function lookupTimeZonesForNumber(PhoneNumber $number)
     {
@@ -45,7 +45,7 @@ class PrefixTimeZonesMap
      * input. Also, any of its prefixes, such as 16502, is also valid.
      *
      * @param $key int the key to look up
-     * @return array the list of corresponding time zones
+     * @return string[] the list of corresponding time zones
      */
     protected function lookupTimeZonesForNumberKey($key)
     {
@@ -64,7 +64,7 @@ class PrefixTimeZonesMap
      * Split {@code timezonesString} into all the time zones that are part of it.
      *
      * @param $timezonesString String
-     * @return array
+     * @return string[]
      */
     protected function tokenizeRawOutputString($timezonesString)
     {
@@ -75,7 +75,7 @@ class PrefixTimeZonesMap
      * Returns the list of time zones {@code number}'s calling country code corresponds to.
      *
      * @param $number PhoneNumber the phone number to look up
-     * @return array the list of corresponding time zones
+     * @return string[] the list of corresponding time zones
      */
     public function lookupCountryLevelTimeZonesForNumber(PhoneNumber $number)
     {

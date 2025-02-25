@@ -81,7 +81,7 @@ class PhoneNumberToTimeZonesMapper
      * the validity of the number passed in.
      *
      * @param $number PhoneNumber the phone number for which we want to get the time zones to which it belongs
-     * @return array a list of the corresponding time zones or a single element list with the default
+     * @return string[] a list of the corresponding time zones or a single element list with the default
      *     unknown time zone if no other time zone was found or if the number was invalid
      */
     public function getTimeZonesForNumber(PhoneNumber $number)
@@ -103,7 +103,7 @@ class PhoneNumberToTimeZonesMapper
      * Returns the list of time zones corresponding to the country calling code of {@code number}.
      *
      * @param $number PhoneNumber the phone number to look up
-     * @return array the list of corresponding time zones or a single element list with the default
+     * @return string[] the list of corresponding time zones or a single element list with the default
      *     unknown time zone if no other time zone was found
      */
     protected function getCountryLevelTimeZonesforNumber(PhoneNumber $number)
@@ -120,7 +120,7 @@ class PhoneNumberToTimeZonesMapper
      * for geo-localization.
      *
      * @param $number PhoneNumber a valid phone number for which we want to get the time zones to which it belongs
-     * @return array a list of the corresponding time zones or a single element list with the default
+     * @return string[] a list of the corresponding time zones or a single element list with the default
      *     unknown time zone if no other time zone was found or if the number was invalid
      */
     public function getTimeZonesForGeographicalNumber(PhoneNumber $number)
@@ -132,7 +132,7 @@ class PhoneNumberToTimeZonesMapper
      * Returns a list of time zones to which a geocodable phone number belongs.
      *
      * @param PhoneNumber $number The phone number for which we want to get the time zones to which it belongs
-     * @return array the list of correspondiing time zones or a single element list with the default
+     * @return string[] the list of corresponding time zones or a single element list with the default
      * unknown timezone if no other time zone was found or if the number was invalid
      */
     protected function getTimeZonesForGeocodableNumber(PhoneNumber $number)
