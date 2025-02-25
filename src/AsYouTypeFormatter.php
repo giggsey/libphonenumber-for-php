@@ -530,10 +530,9 @@ class AsYouTypeFormatter
     }
 
     /**
-     * @return string
      * @internal
      */
-    public function getExtractedNationalPrefix()
+    public function getExtractedNationalPrefix(): string
     {
         return $this->extractedNationalPrefix;
     }

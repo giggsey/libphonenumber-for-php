@@ -225,10 +225,9 @@ class PhoneNumberUtil
      */
     protected static $EXTN_PATTERNS_FOR_PARSING;
     /**
-     * @var string
      * @internal
      */
-    public static $EXTN_PATTERNS_FOR_MATCHING;
+    public static string $EXTN_PATTERNS_FOR_MATCHING;
 
     // Regular expression of valid global-number-digits for the phone-context parameter, following the
     // syntax defined in RFC3966.
@@ -488,7 +487,7 @@ class PhoneNumberUtil
     /**
      * @internal
      */
-    public static function initExtnPatterns()
+    public static function initExtnPatterns(): void
     {
         static::$EXTN_PATTERNS_FOR_PARSING = static::createExtnPattern(true);
         static::$EXTN_PATTERNS_FOR_MATCHING = static::createExtnPattern(false);
@@ -2243,12 +2242,9 @@ class PhoneNumberUtil
      * Extracts country calling code from fullNumber, returns it and places the remaining number in  nationalNumber.
      * It assumes that the leading plus sign or IDD has already been removed.
      * Returns 0 if fullNumber doesn't start with a valid country calling code, and leaves nationalNumber unmodified.
-     * @param string $fullNumber
-     * @param string $nationalNumber
-     * @return int
      * @internal
      */
-    public function extractCountryCode($fullNumber, &$nationalNumber)
+    public function extractCountryCode(string $fullNumber, string &$nationalNumber): int
     {
         if (($fullNumber === '') || ($fullNumber[0] == '0')) {
             // Country codes do not begin with a '0'.

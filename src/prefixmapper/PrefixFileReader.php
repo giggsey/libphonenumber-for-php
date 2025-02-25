@@ -13,27 +13,25 @@ use libphonenumber\PhoneNumberUtil;
  */
 class PrefixFileReader
 {
-    protected $phonePrefixDataDirectory;
+    protected string $phonePrefixDataDirectory;
     /**
      * The mappingFileProvider knows for which combination of countryCallingCode and language a phone
      * prefix mapping file is available in the file system, so that a file can be loaded when needed.
-     * @var MappingFileProvider
      */
-    protected $mappingFileProvider;
+    protected MappingFileProvider $mappingFileProvider;
     /**
      * A mapping from countryCallingCode_lang to the corresponding phone prefix map that has been
      * loaded.
-     * @var array
      */
-    protected $availablePhonePrefixMaps = [];
+    protected array $availablePhonePrefixMaps = [];
 
-    public function __construct($phonePrefixDataDirectory)
+    public function __construct(string $phonePrefixDataDirectory)
     {
         $this->phonePrefixDataDirectory = $phonePrefixDataDirectory;
         $this->loadMappingFileProvider();
     }
 
-    protected function loadMappingFileProvider()
+    protected function loadMappingFileProvider(): void
     {
         $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . 'Map.php';
         if (!file_exists($mapPath)) {
@@ -45,11 +43,7 @@ class PrefixFileReader
         $this->mappingFileProvider = new MappingFileProvider($map);
     }
 
-
-    /**
-     * @return PhonePrefixMap|null
-     */
-    public function getPhonePrefixDescriptions($prefixMapKey, $language, $script, $region)
+    public function getPhonePrefixDescriptions(string $prefixMapKey, string $language, string $script, string $region): ?PhonePrefixMap
     {
         $fileName = $this->mappingFileProvider->getFileName($prefixMapKey, $language, $script, $region);
         if (strlen($fileName) == 0) {
@@ -63,7 +57,7 @@ class PrefixFileReader
         return $this->availablePhonePrefixMaps[$fileName];
     }
 
-    protected function loadPhonePrefixMapFromFile($fileName)
+    protected function loadPhonePrefixMapFromFile(string $fileName): void
     {
         $path = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . $fileName;
         if (!file_exists($path)) {
@@ -76,7 +70,7 @@ class PrefixFileReader
         $this->availablePhonePrefixMaps[$fileName] = $areaCodeMap;
     }
 
-    public function mayFallBackToEnglish($language)
+    public function mayFallBackToEnglish(string $language): bool
     {
         // Don't fall back to English if the requested language is among the following:
         // - Chinese
@@ -96,7 +90,7 @@ class PrefixFileReader
      * @return string a text description for the given language code for the given phone number, or empty
      *     string if the number passed in is invalid or could belong to multiple countries
      */
-    public function getDescriptionForNumber(PhoneNumber $number, $language, $script, $region)
+    public function getDescriptionForNumber(PhoneNumber $number, string $language, string $script, string $region): string
     {
         $phonePrefix = $number->getCountryCode() . PhoneNumberUtil::getInstance()->getNationalSignificantNumber($number);
 
