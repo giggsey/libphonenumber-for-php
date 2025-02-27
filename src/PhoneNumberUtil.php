@@ -711,7 +711,7 @@ class PhoneNumberUtil
     /**
      * Returns all regions the library has metadata for.
      *
-     * @return array An unordered array of the two-letter region codes for every geographical region the
+     * @return string[] An unordered array of the two-letter region codes for every geographical region the
      *  library supports
      */
     public function getSupportedRegions()
@@ -722,7 +722,7 @@ class PhoneNumberUtil
     /**
      * Returns all global network calling codes the library has metadata for.
      *
-     * @return array An unordered array of the country calling codes for every non-geographical entity
+     * @return int[] An unordered array of the country calling codes for every non-geographical entity
      *  the library supports
      */
     public function getSupportedGlobalNetworkCallingCodes()
@@ -736,7 +736,7 @@ class PhoneNumberUtil
      * used to populate a drop-down box of country calling codes for a phone-number widget, for
      * instance.
      *
-     * @return array An unordered array of the country calling codes for every geographical and
+     * @return int[] An unordered array of the country calling codes for every geographical and
      *      non-geographical entity the library supports
      */
     public function getSupportedCallingCodes()
@@ -804,7 +804,7 @@ class PhoneNumberUtil
      * No types will be returned for invalid or unknown region codes.
      *
      * @param string $regionCode
-     * @return array
+     * @return (PhoneNumberType::*)[]
      */
     public function getSupportedTypesForRegion($regionCode)
     {
@@ -822,7 +822,7 @@ class PhoneNumberUtil
      * present) and UNKNOWN.
      *
      * @param int $countryCallingCode
-     * @return array
+     * @return (PhoneNumberType::*)[]
      */
     public function getSupportedTypesForNonGeoEntity($countryCallingCode)
     {
@@ -2447,7 +2447,7 @@ class PhoneNumberUtil
      * non-geographical country calling codes, the region code 001 is returned. Also, in the case
      * of no region code being found, an empty list is returned.
      * @param int $countryCallingCode
-     * @return array
+     * @return string[]
      */
     public function getRegionCodesForCountryCode($countryCallingCode)
     {
@@ -3190,7 +3190,7 @@ class PhoneNumberUtil
      *
      * @param PhoneNumber $number the phone number to be formatted
      * @param int $numberFormat the format the phone number should be formatted into
-     * @param array $userDefinedFormats formatting rules specified by clients
+     * @param NumberFormat[] $userDefinedFormats formatting rules specified by clients
      * @return String the formatted phone number
      */
     public function formatByPattern(PhoneNumber $number, $numberFormat, array $userDefinedFormats)
