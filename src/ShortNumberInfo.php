@@ -70,7 +70,7 @@ class ShortNumberInfo
      * of no region code being found, an empty list is returned.
      *
      * @param int $countryCallingCode
-     * @return array
+     * @return string[]
      */
     protected function getRegionCodesForCountryCode($countryCallingCode)
     {
