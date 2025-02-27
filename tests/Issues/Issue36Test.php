@@ -8,15 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class Issue36Test extends TestCase
 {
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -26,7 +20,7 @@ class Issue36Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testIsleOfManLocale()
+    public function testIsleOfManLocale(): void
     {
         $number = '447797752305';
 

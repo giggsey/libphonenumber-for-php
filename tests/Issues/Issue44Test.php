@@ -9,15 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class Issue44Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
     public function setUp(): void
     {
@@ -27,7 +21,7 @@ class Issue44Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testMemoryUsageOfGeoLocationWithNoResult()
+    public function testMemoryUsageOfGeoLocationWithNoResult(): void
     {
         $number = $this->phoneUtil->parse('86-157-9662-1289', 'CN');
 
@@ -42,7 +36,7 @@ class Issue44Test extends TestCase
         $this->assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
     }
 
-    public function testMemoryUsageOfGeoLocationWithResult()
+    public function testMemoryUsageOfGeoLocationWithResult(): void
     {
         $number = $this->phoneUtil->parse('86-131-2270-1411', 'CN');
 
@@ -57,7 +51,7 @@ class Issue44Test extends TestCase
         $this->assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
     }
 
-    public function testChineseGeolocation()
+    public function testChineseGeolocation(): void
     {
         $number = $this->phoneUtil->parse('+86 150 3657 7264', 'CN');
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
@@ -65,7 +59,7 @@ class Issue44Test extends TestCase
         $this->assertEquals('Luoyang, Henan', $location);
     }
 
-    public function testChineseCarrierLookup()
+    public function testChineseCarrierLookup(): void
     {
         $number = $this->phoneUtil->parse('+86 150 3657 7264', 'CN');
 

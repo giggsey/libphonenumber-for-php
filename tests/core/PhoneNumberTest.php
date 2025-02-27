@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  */
 class PhoneNumberTest extends TestCase
 {
-    public function testEqualSimpleNumber()
+    public function testEqualSimpleNumber(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)->setNationalNumber(6502530000);
@@ -22,7 +22,7 @@ class PhoneNumberTest extends TestCase
         $this->assertEquals($numberA, $numberB);
     }
 
-    public function testEqualWithItalianLeadingZeroSetToDefault()
+    public function testEqualWithItalianLeadingZeroSetToDefault(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setItalianLeadingZero(false);
@@ -34,7 +34,7 @@ class PhoneNumberTest extends TestCase
         $this->assertEquals($numberA, $numberB);
     }
 
-    public function testEqualWithCountryCodeSourceSet()
+    public function testEqualWithCountryCodeSourceSet(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setRawInput('+1 650 253 00 00')->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
@@ -45,7 +45,7 @@ class PhoneNumberTest extends TestCase
         $this->assertEquals($numberA, $numberB);
     }
 
-    public function testNonEqualWithItalianLeadingZeroSetToTrue()
+    public function testNonEqualWithItalianLeadingZeroSetToTrue(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setItalianLeadingZero(true);
@@ -57,7 +57,7 @@ class PhoneNumberTest extends TestCase
         $this->assertFalse($numberA->equals($numberB));
     }
 
-    public function testNonEqualWithDifferingRawInput()
+    public function testNonEqualWithDifferingRawInput(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)
@@ -75,7 +75,7 @@ class PhoneNumberTest extends TestCase
         $this->assertFalse($numberA->equals($numberB));
     }
 
-    public function testNonEqualWithPreferredDomesticCarrierCodeSetToDefault()
+    public function testNonEqualWithPreferredDomesticCarrierCodeSetToDefault(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode('');
@@ -87,7 +87,7 @@ class PhoneNumberTest extends TestCase
         $this->assertFalse($numberA->equals($numberB));
     }
 
-    public function testEqualWithSameExtension()
+    public function testEqualWithSameExtension(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setNationalNumber(6502530000)->setExtension('123');
@@ -98,7 +98,7 @@ class PhoneNumberTest extends TestCase
         $this->assertTrue($numberA->equals($numberB));
     }
 
-    public function testNonEqualWithDifferentExtension()
+    public function testNonEqualWithDifferentExtension(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setNationalNumber(6502530000)->setExtension('123');
@@ -109,7 +109,7 @@ class PhoneNumberTest extends TestCase
         $this->assertFalse($numberA->equals($numberB));
     }
 
-    public function testEqualWithPreferredDomesticCarrierCodeSetToDefault()
+    public function testEqualWithPreferredDomesticCarrierCodeSetToDefault(): void
     {
         $numberA = new PhoneNumber();
         $numberA->setCountryCode(1)->setNationalNumber(6502530000)->setPreferredDomesticCarrierCode('');
@@ -120,7 +120,7 @@ class PhoneNumberTest extends TestCase
         $this->assertEquals($numberA, $numberB);
     }
 
-    public function testUnserialize()
+    public function testUnserialize(): void
     {
         $numberA = new PhoneNumber();
         $numberB = new PhoneNumber();

@@ -14,7 +14,7 @@ class UKTest extends TestCase
         PhoneNumberUtil::resetInstance();
     }
 
-    public function testGBNumber()
+    public function testGBNumber(): void
     {
         $number = new PhoneNumber();
         $number->setCountryCode(44)->setNationalNumber(1614960000);
@@ -23,7 +23,7 @@ class UKTest extends TestCase
         $this->assertEquals(['Europe/London'], $timeZone->getTimeZonesForNumber($number));
     }
 
-    public function testNonGeocodableNumber()
+    public function testNonGeocodableNumber(): void
     {
         $number = new PhoneNumber();
         $number->setCountryCode(44)->setNationalNumber(8001111);

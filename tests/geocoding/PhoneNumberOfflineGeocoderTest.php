@@ -8,26 +8,23 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberOfflineGeocoderTest extends TestCase
 {
-    private static $KO_Number1;
-    private static $KO_Number2;
-    private static $KO_Number3;
-    private static $KO_InvalidNumber;
-    private static $KO_Mobile;
-    private static $US_Number1;
-    private static $US_Number2;
-    private static $US_Number3;
-    private static $US_Number4;
-    private static $US_InvalidNumber;
-    private static $NANPA_TollFree;
-    private static $BS_Number1;
-    private static $AU_Number;
-    private static $AR_MobileNumber;
-    private static $numberWithInvalidCountryCode;
-    private static $internationalTollFree;
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    protected $geocoder;
+    private static PhoneNumber $KO_Number1;
+    private static PhoneNumber $KO_Number2;
+    private static PhoneNumber $KO_Number3;
+    private static PhoneNumber $KO_InvalidNumber;
+    private static PhoneNumber $KO_Mobile;
+    private static PhoneNumber $US_Number1;
+    private static PhoneNumber $US_Number2;
+    private static PhoneNumber $US_Number3;
+    private static PhoneNumber $US_Number4;
+    private static PhoneNumber $US_InvalidNumber;
+    private static PhoneNumber $NANPA_TollFree;
+    private static PhoneNumber $BS_Number1;
+    private static PhoneNumber $AU_Number;
+    private static PhoneNumber $AR_MobileNumber;
+    private static PhoneNumber $numberWithInvalidCountryCode;
+    private static PhoneNumber $internationalTollFree;
+    protected PhoneNumberOfflineGeocoder $geocoder;
 
     public static function setUpBeforeClass(): void
     {
@@ -86,7 +83,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance(__DIR__ . '/../prefixmapper/data/');
     }
 
-    public function testGetDescriptionForNumberWithNoDataFile()
+    public function testGetDescriptionForNumberWithNoDataFile(): void
     {
         // No data file containing mappings for US numbers is available in Chinese for the unittests. As
         // a result, the country name of United States in simplified Chinese is returned.
@@ -101,7 +98,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$internationalTollFree, 'en_US'));
     }
 
-    public function testGetDescriptionForNumberWithMissingPrefix()
+    public function testGetDescriptionForNumberWithMissingPrefix(): void
     {
         // Test that the name of the country is returned when the number passed in is valid but not
         // covered by the geocoding data file.
@@ -109,14 +106,14 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->assertEquals('United States', $this->geocoder->getDescriptionForNumber(self::$US_Number4, 'en_US'));
     }
 
-    public function testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty()
+    public function testGetDescriptionForNumberBelongingToMultipleCountriesIsEmpty(): void
     {
         // Test that nothing is returned when the number passed in is valid but not
         // covered by the geocoding data file and belongs to multiple countries
         $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$NANPA_TollFree, 'en_US'));
     }
 
-    public function testGetDescriptionForNumber_en_US()
+    public function testGetDescriptionForNumber_en_US(): void
     {
         $ca = $this->geocoder->getDescriptionForNumber(self::$US_Number1, 'en_US');
         $this->assertEquals('CA', $ca);
@@ -124,7 +121,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->assertEquals('New York, NY', $this->geocoder->getDescriptionForNumber(self::$US_Number3, 'en_US'));
     }
 
-    public function testGetDescriptionForKoreanNumber()
+    public function testGetDescriptionForKoreanNumber(): void
     {
         $this->assertEquals('Seoul', $this->geocoder->getDescriptionForNumber(self::$KO_Number1, 'en'));
         $this->assertEquals('Incheon', $this->geocoder->getDescriptionForNumber(self::$KO_Number2, 'en'));
@@ -140,12 +137,12 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         );
     }
 
-    public function testGetDescriptionForArgentinianMobileNumber()
+    public function testGetDescriptionForArgentinianMobileNumber(): void
     {
         $this->assertEquals('La Plata', $this->geocoder->getDescriptionForNumber(self::$AR_MobileNumber, 'en'));
     }
 
-    public function testGetDescriptionForFallBack()
+    public function testGetDescriptionForFallBack(): void
     {
         // No fallback, as the location name for the given phone number is available in the requested
         // language.
@@ -165,7 +162,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         );
     }
 
-    public function testGetDescriptionForNumberWithUserRegion()
+    public function testGetDescriptionForNumberWithUserRegion(): void
     {
         // User in Italy, American number. We should just show United States, in Spanish, and not more
         // detailed information.
@@ -191,13 +188,13 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
         $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, 'en', 'US'));
     }
 
-    public function testGetDescriptionForInvalidNumber()
+    public function testGetDescriptionForInvalidNumber(): void
     {
         $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$KO_InvalidNumber, 'en'));
         $this->assertEquals('', $this->geocoder->getDescriptionForNumber(self::$US_InvalidNumber, 'en'));
     }
 
-    public function testGetDescriptionForNonGeographicalNumberWithGeocodingPrefix()
+    public function testGetDescriptionForNonGeographicalNumberWithGeocodingPrefix(): void
     {
         // We have a geocoding prefix, but we shouldn't use it since this is not geographical.
         $this->assertEquals('South Korea', $this->geocoder->getDescriptionForNumber(self::$KO_Mobile, 'en'));

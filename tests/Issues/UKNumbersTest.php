@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class UKNumbersTest extends TestCase
 {
-    /**
-     * @var \libphonenumber\PhoneNumberUtil
-     */
-    protected $phoneUtil;
+    protected PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -20,7 +17,7 @@ class UKNumbersTest extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testMobileNumber()
+    public function testMobileNumber(): void
     {
         $number = '07987458147';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -38,7 +35,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('07987 458147', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testFixedLine()
+    public function testFixedLine(): void
     {
         $number = '01234512345';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -56,7 +53,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('01234 512345', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testPersonalNumber()
+    public function testPersonalNumber(): void
     {
         $number = '07010020249';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -78,7 +75,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('070 1002 0249', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testUAN()
+    public function testUAN(): void
     {
         $number = '03335555555';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -96,7 +93,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('0333 555 5555', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testTollFree()
+    public function testTollFree(): void
     {
         $number = '0800800150';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -114,7 +111,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('0800 800150', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testPremium()
+    public function testPremium(): void
     {
         $number = '09063020288';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -132,7 +129,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('0906 302 0288', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testChildLine()
+    public function testChildLine(): void
     {
         $number = '08001111';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');
@@ -154,7 +151,7 @@ class UKNumbersTest extends TestCase
         $this->assertEquals('0800 1111', $formattedNational, 'Checking National format is correct');
     }
 
-    public function testInvalidNumber()
+    public function testInvalidNumber(): void
     {
         $number = '123401234512345';
         $phoneObject = $this->phoneUtil->parse($number, 'GB');

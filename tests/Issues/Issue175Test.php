@@ -21,7 +21,7 @@ class Issue175Test extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testIsViablePhoneNumber()
+    public function testIsViablePhoneNumber(): void
     {
         $ret = PhoneNumberUtil::isViablePhoneNumber('01111');
         $this->assertTrue($ret);

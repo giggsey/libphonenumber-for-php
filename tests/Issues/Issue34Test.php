@@ -7,10 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue34Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -18,7 +15,7 @@ class Issue34Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testIsValidNumberForRegion()
+    public function testIsValidNumberForRegion(): void
     {
         $number = '+33 6 76 83 51 85';
         $region = 'DE';

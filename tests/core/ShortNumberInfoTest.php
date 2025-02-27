@@ -13,15 +13,9 @@ use PHPUnit\Framework\TestCase;
 
 class ShortNumberInfoTest extends TestCase
 {
-    private static $plusSymbol;
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
-    /**
-     * @var ShortNumberInfo
-     */
-    private $shortInfo;
+    private static string $plusSymbol;
+    protected PhoneNumberUtil $phoneUtil;
+    private ShortNumberInfo $shortInfo;
 
     public function setUp(): void
     {
@@ -36,7 +30,7 @@ class ShortNumberInfoTest extends TestCase
         $this->shortInfo = ShortNumberInfo::getInstance();
     }
 
-    public function testIsPossibleShortNumber()
+    public function testIsPossibleShortNumber(): void
     {
         $possibleNumber = new PhoneNumber();
         $possibleNumber->setCountryCode(33)->setNationalNumber(123456);
@@ -55,7 +49,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertTrue($this->shortInfo->isPossibleShortNumber($gbNumber));
     }
 
-    public function testIsValidShortNumber()
+    public function testIsValidShortNumber(): void
     {
         $phoneNumberObj = new PhoneNumber();
         $phoneNumberObj->setCountryCode(33)->setNationalNumber(1010);
@@ -73,7 +67,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertTrue($this->shortInfo->isValidShortNumber($phoneNumberObj));
     }
 
-    public function testIsCarrierSpecific()
+    public function testIsCarrierSpecific(): void
     {
         $carrierSpecificNumber = new PhoneNumber();
         $carrierSpecificNumber->setCountryCode(1)->setNationalNumber(33669);
@@ -92,7 +86,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::BB));
     }
 
-    public function testIsSmsService()
+    public function testIsSmsService(): void
     {
         $smsServiceNumberForSomeRegion = new PhoneNumber();
         $smsServiceNumberForSomeRegion->setCountryCode(1)->setNationalNumber(21234);
@@ -100,7 +94,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->isSmsServiceForRegion($smsServiceNumberForSomeRegion, RegionCode::BB));
     }
 
-    public function testGetExpectedCost()
+    public function testGetExpectedCost(): void
     {
         $premiumRateExample = $this->shortInfo->getExampleShortNumberForCost(
             RegionCode::FR,
@@ -166,7 +160,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($unknownCostNumber));
     }
 
-    public function testGetExpectedCostForSharedCountryCallingCode()
+    public function testGetExpectedCostForSharedCountryCallingCode(): void
     {
         // Test some numbers which have different costs in countries sharing the same country calling
         // code. In Australia, 1234 is premium-rate, 1194 is standard-rate, and 733 is toll-free. These
@@ -229,7 +223,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCost($ambiguousTollFreeNumber));
     }
 
-    public function testExampleShortNumberPresence()
+    public function testExampleShortNumberPresence(): void
     {
         $this->assertNotEmpty($this->shortInfo->getExampleShortNumber(RegionCode::AD));
         $this->assertNotEmpty($this->shortInfo->getExampleShortNumber(RegionCode::FR));
@@ -237,28 +231,28 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEmpty($this->shortInfo->getExampleShortNumber(null));
     }
 
-    public function testConnectsToEmergencyNumber_US()
+    public function testConnectsToEmergencyNumber_US(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::US));
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('112', RegionCode::US));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('999', RegionCode::US));
     }
 
-    public function testConnectsToEmergencyNumberLongNumber_US()
+    public function testConnectsToEmergencyNumberLongNumber_US(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('9116666666', RegionCode::US));
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('1126666666', RegionCode::US));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9996666666', RegionCode::US));
     }
 
-    public function testConnectsToEmergencyNumberWithFormatting_US()
+    public function testConnectsToEmergencyNumberWithFormatting_US(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('9-1-1', RegionCode::US));
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('1-1-2', RegionCode::US));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9-9-9', RegionCode::US));
     }
 
-    public function testConnectsToEmergencyNumberWithPlusSign_US()
+    public function testConnectsToEmergencyNumberWithPlusSign_US(): void
     {
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('+911', RegionCode::US));
         $this->assertFalse(
@@ -269,14 +263,14 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('+999', RegionCode::US));
     }
 
-    public function testConnectsToEmergencyNumber_BR()
+    public function testConnectsToEmergencyNumber_BR(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::BR));
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('190', RegionCode::BR));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('999', RegionCode::BR));
     }
 
-    public function testConnectsToEmergencyNumberLongNumber_BR()
+    public function testConnectsToEmergencyNumberLongNumber_BR(): void
     {
         // Brazilian emergency numbers don't work when additional digits are appended.
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9111', RegionCode::BR));
@@ -284,20 +278,20 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9996', RegionCode::BR));
     }
 
-    public function testConnectsToEmergencyNumber_CL()
+    public function testConnectsToEmergencyNumber_CL(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('131', RegionCode::CL));
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('133', RegionCode::CL));
     }
 
-    public function testConnectsToEmergencyNumberLongNumber_CL()
+    public function testConnectsToEmergencyNumberLongNumber_CL(): void
     {
         // Chilean emergency numbers don't work when additional digits are appended.
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('1313', RegionCode::CL));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('1330', RegionCode::CL));
     }
 
-    public function testConnectsToEmergencyNumber_AO()
+    public function testConnectsToEmergencyNumber_AO(): void
     {
         // Angola doesn't have any metadata for emergency numbers in the test metadata.
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::AO));
@@ -305,7 +299,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('923123456', RegionCode::BR));
     }
 
-    public function testConnectsToEmergencyNumber_ZW()
+    public function testConnectsToEmergencyNumber_ZW(): void
     {
         // Zimbabwe doesn't have any metadata in the test metadata.
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('911', RegionCode::ZW));
@@ -313,21 +307,21 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('0711234567', RegionCode::ZW));
     }
 
-    public function testIsEmergencyNumber_US()
+    public function testIsEmergencyNumber_US(): void
     {
         $this->assertTrue($this->shortInfo->isEmergencyNumber('911', RegionCode::US));
         $this->assertTrue($this->shortInfo->isEmergencyNumber('112', RegionCode::US));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('999', RegionCode::US));
     }
 
-    public function testIsEmergencyNumberLongNumber_US()
+    public function testIsEmergencyNumberLongNumber_US(): void
     {
         $this->assertFalse($this->shortInfo->isEmergencyNumber('9116666666', RegionCode::US));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('1126666666', RegionCode::US));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('9996666666', RegionCode::US));
     }
 
-    public function testIsEmergencyNumberWithFormatting_US()
+    public function testIsEmergencyNumberWithFormatting_US(): void
     {
         $this->assertTrue($this->shortInfo->isEmergencyNumber('9-1-1', RegionCode::US));
         $this->assertTrue($this->shortInfo->isEmergencyNumber('*911', RegionCode::US));
@@ -337,7 +331,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->isEmergencyNumber('*999', RegionCode::US));
     }
 
-    public function testIsEmergencyNumberWithPlusSign_US()
+    public function testIsEmergencyNumberWithPlusSign_US(): void
     {
         $this->assertFalse($this->shortInfo->isEmergencyNumber('+911', RegionCode::US));
         $this->assertFalse($this->shortInfo->isEmergencyNumber(self::$plusSymbol . '911', RegionCode::US));
@@ -346,21 +340,21 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->isEmergencyNumber('+999', RegionCode::US));
     }
 
-    public function testIsEmergencyNumber_BR()
+    public function testIsEmergencyNumber_BR(): void
     {
         $this->assertTrue($this->shortInfo->isEmergencyNumber('911', RegionCode::BR));
         $this->assertTrue($this->shortInfo->isEmergencyNumber('190', RegionCode::BR));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('999', RegionCode::BR));
     }
 
-    public function testIsEmergencyNumberLongNumber_BR()
+    public function testIsEmergencyNumberLongNumber_BR(): void
     {
         $this->assertFalse($this->shortInfo->isEmergencyNumber('9111', RegionCode::BR));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('1900', RegionCode::BR));
         $this->assertFalse($this->shortInfo->isEmergencyNumber('9996', RegionCode::BR));
     }
 
-    public function testIsEmergencyNumber_AO()
+    public function testIsEmergencyNumber_AO(): void
     {
         // Angola doesn't have any metadata for emergency numbers in the test metadata.
         $this->assertFalse($this->shortInfo->isEmergencyNumber('911', RegionCode::AO));
@@ -368,7 +362,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertFalse($this->shortInfo->isEmergencyNumber('923123456', RegionCode::AO));
     }
 
-    public function testIsEmergencyNumber_ZW()
+    public function testIsEmergencyNumber_ZW(): void
     {
         // Zimbabwe doesn't have any metadata in the test metadata.
         $this->assertFalse($this->shortInfo->isEmergencyNumber('911', RegionCode::ZW));
@@ -377,7 +371,7 @@ class ShortNumberInfoTest extends TestCase
     }
 
 
-    public function testEmergencyNumberForSharedCountryCallingCode()
+    public function testEmergencyNumberForSharedCountryCallingCode(): void
     {
         // Test the emergency number 112, which is valid in both Australia and the Christmas Islands.
         $this->assertTrue($this->shortInfo->isEmergencyNumber('112', RegionCode::AU));
@@ -398,7 +392,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEquals(ShortNumberCost::TOLL_FREE, $this->shortInfo->getExpectedCost($sharedEmergencyNumber));
     }
 
-    public function testOverlappingNANPANumber()
+    public function testOverlappingNANPANumber(): void
     {
         // 211 is an emergency number in Barbados, while it is a toll-free information line in Canada
         // and the USA.
@@ -419,7 +413,7 @@ class ShortNumberInfoTest extends TestCase
         );
     }
 
-    public function testCountryCallingCodeIsNotIgnored()
+    public function testCountryCallingCodeIsNotIgnored(): void
     {
         // +46 is the country calling code for Sweden (SE), and 40404 is a valid short number in the US.
         $this->assertFalse($this->shortInfo->isPossibleShortNumberForRegion($this->parse('+4640404', RegionCode::SE), RegionCode::US));
@@ -427,12 +421,7 @@ class ShortNumberInfoTest extends TestCase
         $this->assertEquals(ShortNumberCost::UNKNOWN_COST, $this->shortInfo->getExpectedCostForRegion($this->parse('+4640404', RegionCode::SE), RegionCode::US));
     }
 
-    /**
-     * @param string $number
-     * @param string $regionCode
-     * @return PhoneNumber
-     */
-    private function parse($number, $regionCode)
+    private function parse(string $number, string $regionCode): PhoneNumber
     {
         try {
             return $this->phoneUtil->parse($number, $regionCode);
@@ -441,7 +430,7 @@ class ShortNumberInfoTest extends TestCase
         }
     }
 
-    public function testThatANullRegionCodeDoesNotCauseDeprecationWarning()
+    public function testThatANullRegionCodeDoesNotCauseDeprecationWarning(): void
     {
         $validRegularNumber = $this->parse('01234 567 890', 'GB');
         $this->assertFalse($this->shortInfo->isValidShortNumber($validRegularNumber));

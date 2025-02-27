@@ -10,16 +10,16 @@ use PHPUnit\Framework\TestCase;
 
 class MetadataFilterTest extends TestCase
 {
-    private static $ID = 'AM';
-    private static $countryCode = 374;
-    private static $internationalPrefix = '0[01]';
-    private static $preferredInternationalPrefix = '00';
-    private static $nationalNumberPattern = '\\d{8}';
-    private static $possibleLengths = [8];
-    private static $possibleLengthsLocalOnly = [5, 6];
-    private static $exampleNumber = '10123456';
+    private static string $ID = 'AM';
+    private static int $countryCode = 374;
+    private static string $internationalPrefix = '0[01]';
+    private static string $preferredInternationalPrefix = '00';
+    private static string $nationalNumberPattern = '\\d{8}';
+    private static array $possibleLengths = [8];
+    private static array $possibleLengthsLocalOnly = [5, 6];
+    private static string $exampleNumber = '10123456';
 
-    public function testForLiteBuild()
+    public function testForLiteBuild(): void
     {
         $blackList = [];
         $blackList['fixedLine'] = ['exampleNumber'];
@@ -42,7 +42,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::forLiteBuild(), new MetadataFilter($blackList));
     }
 
-    public function testForSpecialBuild()
+    public function testForSpecialBuild(): void
     {
         $blackList = [];
         $blackList['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -71,12 +71,12 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::forSpecialBuild(), new MetadataFilter($blackList));
     }
 
-    public function testEmptyFilter()
+    public function testEmptyFilter(): void
     {
         $this->assertEquals(MetadataFilter::emptyFilter(), new MetadataFilter([]));
     }
 
-    public function testParseFieldMapFromString_parentAsGroup()
+    public function testParseFieldMapFromString_parentAsGroup(): void
     {
         $fieldMap = [];
         $fieldMap['fixedLine'] = [
@@ -89,7 +89,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine'), $fieldMap);
     }
 
-    public function testParseFieldMapFromString_childAsGroup()
+    public function testParseFieldMapFromString_childAsGroup(): void
     {
         $fieldMap = [];
         $fieldMap['fixedLine'] = ['exampleNumber'];
@@ -112,7 +112,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
     }
 
-    public function testParseFieldMapFromString_childlessFieldAsGroup()
+    public function testParseFieldMapFromString_childlessFieldAsGroup(): void
     {
         $fieldMap = [];
         $fieldMap['nationalPrefix'] = [];
@@ -120,7 +120,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('nationalPrefix'), $fieldMap);
     }
 
-    public function testParseFieldMapFromString_parentWithOneChildAsGroup()
+    public function testParseFieldMapFromString_parentWithOneChildAsGroup(): void
     {
         $fieldMap = [];
         $fieldMap['fixedLine'] = ['exampleNumber'];
@@ -128,7 +128,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber)'), $fieldMap);
     }
 
-    public function testParseFieldMapFromString_parentWithTwoChildrenAsGroup()
+    public function testParseFieldMapFromString_parentWithTwoChildrenAsGroup(): void
     {
         $fieldMap = [];
         $fieldMap['fixedLine'] = ['exampleNumber', 'possibleLength'];
@@ -139,7 +139,7 @@ class MetadataFilterTest extends TestCase
         );
     }
 
-    public function testParseFieldMapFromString_mixOfGroups()
+    public function testParseFieldMapFromString_mixOfGroups(): void
     {
         $fieldMap = [];
         $fieldMap['uan'] = ['possibleLength', 'exampleNumber', 'possibleLengthLocalOnly', 'nationalNumberPattern'];
@@ -177,7 +177,7 @@ class MetadataFilterTest extends TestCase
         );
     }
 
-    public function testParseFieldMapFromString_equivalentExpressions()
+    public function testParseFieldMapFromString_equivalentExpressions(): void
     {
         // Listing all excludable parent fields is equivalent to listing all excludable child field.s
         $this->assertEquals(
@@ -313,9 +313,8 @@ class MetadataFilterTest extends TestCase
 
     /**
      * Need to sort some of the results, as PHP arrays are ordered by when they were added
-     * @return bool
      */
-    private function recursive_ksort($array)
+    private function recursive_ksort(array $array): bool
     {
         foreach ($array as &$value) {
             if (\is_array($value)) {
@@ -325,7 +324,7 @@ class MetadataFilterTest extends TestCase
         return \ksort($array);
     }
 
-    public function testParseFieldMapFromString_RuntimeExceptionCases()
+    public function testParseFieldMapFromString_RuntimeExceptionCases(): void
     {
         // Null input.
         try {
@@ -795,7 +794,7 @@ class MetadataFilterTest extends TestCase
         }
     }
 
-    public function testComputeComplement_allAndNothing()
+    public function testComputeComplement_allAndNothing(): void
     {
         $map1 = [];
         $map1['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -828,7 +827,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
     }
 
-    public function testComputeComplement_inBetween()
+    public function testComputeComplement_inBetween(): void
     {
         $map1 = [];
         $map1['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -869,7 +868,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
     }
 
-    public function testShouldDrop()
+    public function testShouldDrop(): void
     {
         $blacklist = [];
         $blacklist['fixedLine'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
@@ -920,7 +919,7 @@ class MetadataFilterTest extends TestCase
         $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
     }
 
-    public function testFilterMetadata_liteBuild()
+    public function testFilterMetadata_liteBuild(): void
     {
         $metadata = $this->getFakeArmeniaPhoneMetadata();
 
@@ -947,7 +946,7 @@ class MetadataFilterTest extends TestCase
         }
     }
 
-    private function getFakeArmeniaPhoneMetadata()
+    private function getFakeArmeniaPhoneMetadata(): PhoneMetadata
     {
         $metadata = new PhoneMetadata();
         $metadata->setId(self::$ID);
@@ -961,11 +960,7 @@ class MetadataFilterTest extends TestCase
         return $metadata;
     }
 
-    /**
-     * @param bool $generalDesc
-     * @return PhoneNumberDesc
-     */
-    private function getFakeArmeniaPhoneNumberDesc($generalDesc)
+    private function getFakeArmeniaPhoneNumberDesc(bool $generalDesc): PhoneNumberDesc
     {
         $desc = new PhoneNumberDesc();
         $desc->setNationalNumberPattern(self::$nationalNumberPattern);
@@ -985,7 +980,7 @@ class MetadataFilterTest extends TestCase
         return $desc;
     }
 
-    public function testFilterMetadata_specialBuild()
+    public function testFilterMetadata_specialBuild(): void
     {
         $metadata = $this->getFakeArmeniaPhoneMetadata();
 
@@ -1014,7 +1009,7 @@ class MetadataFilterTest extends TestCase
         }
     }
 
-    public function testFilterMetadata_emptyFilter()
+    public function testFilterMetadata_emptyFilter(): void
     {
         $metadata = $this->getFakeArmeniaPhoneMetadata();
 
@@ -1044,7 +1039,7 @@ class MetadataFilterTest extends TestCase
         $this->assertEquals($metadata->getTollFree()->getExampleNumber(), self::$exampleNumber);
     }
 
-    public function testIntegrityOfFieldSets()
+    public function testIntegrityOfFieldSets(): void
     {
         $union = \array_merge(
             MetadataFilter::$EXCLUDABLE_PARENT_FIELDS,

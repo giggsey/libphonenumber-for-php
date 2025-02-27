@@ -22,7 +22,7 @@ class Issue159Test extends TestCase
         PhoneNumberUtil::resetInstance();
     }
 
-    public function testLookupTZ_LA()
+    public function testLookupTZ_LA(): void
     {
         $number = new PhoneNumber();
         $number->setCountryCode(1)->setNationalNumber(2082924565);

@@ -8,15 +8,12 @@ use PHPUnit\Framework\TestCase;
 
 class PrefixFileReaderTest extends TestCase
 {
-    private static $KO_NUMBER;
-    private static $US_NUMBER1;
-    private static $US_NUMBER2;
-    private static $US_NUMBER3;
-    private static $SE_NUMBER;
-    /**
-     * @var PrefixFileReader
-     */
-    protected $reader;
+    private static PhoneNumber $KO_NUMBER;
+    private static PhoneNumber $US_NUMBER1;
+    private static PhoneNumber $US_NUMBER2;
+    private static PhoneNumber $US_NUMBER3;
+    private static PhoneNumber $SE_NUMBER;
+    protected PrefixFileReader $reader;
 
     public static function setUpBeforeClass(): void
     {
@@ -41,7 +38,7 @@ class PrefixFileReaderTest extends TestCase
         $this->reader = new PrefixFileReader(__DIR__ . '/data/');
     }
 
-    public function testGetDescriptionForNumberWithMapping()
+    public function testGetDescriptionForNumberWithMapping(): void
     {
         $this->assertEquals('Kalifornien', $this->reader->getDescriptionForNumber(self::$US_NUMBER1, 'de', '', 'CH'));
         $this->assertEquals('CA', $this->reader->getDescriptionForNumber(self::$US_NUMBER1, 'en', '', 'AU'));
@@ -52,12 +49,12 @@ class PrefixFileReaderTest extends TestCase
         $this->assertEquals('Seoul', $this->reader->getDescriptionForNumber(self::$KO_NUMBER, 'en', '', ''));
     }
 
-    public function testGetDescriptionForNumberWithMissingMapping()
+    public function testGetDescriptionForNumberWithMissingMapping(): void
     {
         $this->assertEquals('', $this->reader->getDescriptionForNumber(self::$US_NUMBER3, 'en', '', ''));
     }
 
-    public function testGetDescriptionUsingFallbackLanguage()
+    public function testGetDescriptionUsingFallbackLanguage(): void
     {
         // Mapping file exists but the number isn't present, causing it to fallback.
         $this->assertEquals('New York, NY', $this->reader->getDescriptionForNumber(self::$US_NUMBER2, 'de', '', 'CH'));
@@ -65,12 +62,12 @@ class PrefixFileReaderTest extends TestCase
         $this->assertEquals('New York, NY', $this->reader->getDescriptionForNumber(self::$US_NUMBER2, 'sv', '', ''));
     }
 
-    public function testGetDescriptionForNonFallbackLanguage()
+    public function testGetDescriptionForNonFallbackLanguage(): void
     {
         $this->assertEquals('', $this->reader->getDescriptionForNumber(self::$US_NUMBER2, 'ko', '', ''));
     }
 
-    public function testGetDescriptionForNumberWithoutMappingFile()
+    public function testGetDescriptionForNumberWithoutMappingFile(): void
     {
         $this->assertEquals('', $this->reader->getDescriptionForNumber(self::$SE_NUMBER, 'sv', '', ''));
         $this->assertEquals('', $this->reader->getDescriptionForNumber(self::$SE_NUMBER, 'en', '', ''));

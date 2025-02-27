@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberMatchTest extends TestCase
 {
-    public function testValueTypeSemantics()
+    public function testValueTypeSemantics(): void
     {
         $number = new PhoneNumber();
 
@@ -24,7 +24,7 @@ class PhoneNumberMatchTest extends TestCase
         $this->assertEquals('1 800 234 45 67', $match1->rawString());
     }
 
-    public function testIllegalArguments()
+    public function testIllegalArguments(): void
     {
         try {
             new PhoneNumberMatch(-110, '1 800 234 45 67', new PhoneNumber());

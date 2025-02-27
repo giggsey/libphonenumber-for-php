@@ -24,7 +24,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testConvertAlphaCharactersInNumber()
      * @runInSeparateProcess
      */
-    public function testConvertAlphaCharactersInNumber()
+    public function testConvertAlphaCharactersInNumber(): void
     {
         $input = '1800-ABC-DEF';
         // Alpha chars are converted to digits; everything else is left untouched.
@@ -36,7 +36,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testGetCountryMobileToken()
      * @runInSeparateProcess
      */
-    public function testGetCountryMobileToken()
+    public function testGetCountryMobileToken(): void
     {
         // AR
         $this->assertEquals('9', PhoneNumberUtil::getCountryMobileToken(54));
@@ -49,7 +49,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testIsViablePhoneNumber()
      * @runInSeparateProcess
      */
-    public function testIsViablePhoneNumber()
+    public function testIsViablePhoneNumber(): void
     {
         $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('1'));
     }
@@ -58,7 +58,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testExtractPossibleNumber()
      * @runInSeparateProcess
      */
-    public function testExtractPossibleNumber()
+    public function testExtractPossibleNumber(): void
     {
         $this->assertEquals('0800-345-600', PhoneNumberUtil::extractPossibleNumber('Tel:0800-345-600'));
     }
@@ -67,7 +67,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testNormaliseOtherDigits()
      * @runInSeparateProcess
      */
-    public function testNormaliseReplaceAlphaCharacters()
+    public function testNormaliseReplaceAlphaCharacters(): void
     {
         $inputNumber = '034-I-am-HUNGRY';
         $expectedOutput = '034426486479';
@@ -82,7 +82,7 @@ class Issue135Test extends TestCase
      * @see PhoneNumberUtilTest::testNormaliseStripNonDiallableCharacters()
      * @runInSeparateProcess
      */
-    public function testNormalizeDiallableCharsOnly()
+    public function testNormalizeDiallableCharsOnly(): void
     {
         $inputNumber = '03*4-56&+a#234';
         $expectedOutput = '03*456+#234';
