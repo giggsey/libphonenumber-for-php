@@ -6,21 +6,18 @@ class PhoneNumberMatch
 {
     /**
      * The start index into the text.
-     * @var int
      */
-    private $start;
+    private int $start;
 
     /**
      * The raw substring matched.
-     * @var string
      */
-    private $rawString;
+    private string $rawString;
 
     /**
      * The matched phone number.
-     * @var PhoneNumber
      */
-    private $number;
+    private PhoneNumber $number;
 
     /**
      * Creates a new match

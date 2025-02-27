@@ -774,10 +774,8 @@ class PhoneNumberUtil
 
     /**
      * Returns the types we have metadata for based on the PhoneMetadata object passed in.
-     *
-     * @return array
      */
-    private function getSupportedTypesForMetadata(PhoneMetadata $metadata)
+    private function getSupportedTypesForMetadata(PhoneMetadata $metadata): array
     {
         $types = [];
         foreach (array_keys(PhoneNumberType::values()) as $type) {
