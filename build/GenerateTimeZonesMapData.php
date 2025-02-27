@@ -26,9 +26,9 @@ class GenerateTimeZonesMapData
 
 
         EOT;
-    private $inputTextFile;
+    private string $inputTextFile;
 
-    public function __construct($inputFile, $outputDir)
+    public function __construct(string $inputFile, string $outputDir)
     {
         $this->inputTextFile = $inputFile;
 
@@ -44,7 +44,7 @@ class GenerateTimeZonesMapData
      * Reads phone prefix data from the provided input stream and returns a SortedMap with the
      * prefix to time zones mappings.
      */
-    private function parseTextFile()
+    private function parseTextFile(): array
     {
         $data = \file($this->inputTextFile);
 
@@ -73,7 +73,7 @@ class GenerateTimeZonesMapData
         return $timeZoneMap;
     }
 
-    private function writeMappingFile($outputFile, $data)
+    private function writeMappingFile(string $outputFile, array $data): void
     {
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT

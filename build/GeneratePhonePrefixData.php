@@ -29,11 +29,11 @@ class GeneratePhonePrefixData
 
         EOT;
 
-    public $inputDir;
-    private $filesToIgnore = ['.', '..', '.svn', '.git'];
-    private $outputDir;
-    private $englishMaps = [];
-    private $prefixesToExpand = [
+    public string $inputDir;
+    private array $filesToIgnore = ['.', '..', '.svn', '.git'];
+    private string $outputDir;
+    private array $englishMaps = [];
+    private array $prefixesToExpand = [
         861 => 5,
         12 => 2,
         13 => 2,
@@ -46,7 +46,7 @@ class GeneratePhonePrefixData
     ];
 
 
-    public function start($inputDir, $outputDir, OutputInterface $consoleOutput, $expandCountries)
+    public function start(string $inputDir, string $outputDir, OutputInterface $consoleOutput, bool $expandCountries): void
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
@@ -77,7 +77,7 @@ class GeneratePhonePrefixData
         $progress->finish();
     }
 
-    private function createInputOutputMappings($expandCountries)
+    private function createInputOutputMappings(bool $expandCountries): array
     {
         $topLevel = \scandir($this->inputDir);
 
@@ -121,13 +121,8 @@ class GeneratePhonePrefixData
      * from the provided input text file. For the data files expected to be large (currently only
      * NANPA is supported), this method generates a list containing one output file for each area
      * code. Otherwise, a single file is added to the list.
-     * @param string $file
-     * @param string $countryCode
-     * @param string $language
-     * @param bool $expandCountries
-     * @return array
      */
-    private function createOutputFileNames($file, $countryCode, $language, $expandCountries)
+    private function createOutputFileNames(string $file, string $countryCode, string $language, bool $expandCountries): array
     {
         $outputFiles = [];
 
@@ -175,11 +170,9 @@ class GeneratePhonePrefixData
      * Reads phone prefix data from the provides file path and invokes the given handler for each
      * mapping read.
      *
-     * @param string $filePath
-     * @return array
      * @throws \InvalidArgumentException
      */
-    private function parseTextFile($filePath, \Closure $handler)
+    private function parseTextFile(string $filePath, \Closure $handler): array
     {
         if (!\file_exists($filePath) || !\is_readable($filePath)) {
             throw new \InvalidArgumentException("File '{$filePath}' does not exist");
@@ -212,51 +205,29 @@ class GeneratePhonePrefixData
         return $countryData;
     }
 
-    /**
-     * @param string $language
-     * @param string $code
-     * @return string
-     */
-    private function getFilePathFromLanguageAndCountryCode($language, $code)
+    private function getFilePathFromLanguageAndCountryCode(string $language, string $code): string
     {
         return $this->getFilePath($language . DIRECTORY_SEPARATOR . $code . self::DATA_FILE_EXTENSION);
     }
 
-    /**
-     * @param string $fileName
-     * @return string
-     */
-    private function getFilePath($fileName)
+    private function getFilePath(string $fileName): string
     {
         $path = $this->inputDir . $fileName;
 
         return $path;
     }
 
-    /**
-     * @param string $prefix
-     * @param string $language
-     * @return string
-     */
-    private function generateFilename($prefix, $language)
+    private function generateFilename(string $prefix, string $language): string
     {
         return $language . DIRECTORY_SEPARATOR . $prefix . self::DATA_FILE_EXTENSION;
     }
 
-    /**
-     * @param string $countryCodeFileName
-     * @return string
-     */
-    private function getCountryCodeFromTextFileName($countryCodeFileName)
+    private function getCountryCodeFromTextFileName(string $countryCodeFileName): string
     {
         return \str_replace(self::DATA_FILE_EXTENSION, '', $countryCodeFileName);
     }
 
-    /**
-     * @param string $inputFile
-     * @return array
-     */
-    private function readMappingsFromFile($inputFile)
+    private function readMappingsFromFile(string $inputFile): array
     {
         $areaCodeMap = [];
 
@@ -270,22 +241,14 @@ class GeneratePhonePrefixData
         return $areaCodeMap;
     }
 
-    /**
-     * @param string $textFile
-     * @return mixed
-     */
-    private function getLanguageFromTextFile($textFile)
+    private function getLanguageFromTextFile(string $textFile): string
     {
         $parts = \explode(DIRECTORY_SEPARATOR, $textFile);
 
         return $parts[0];
     }
 
-    /**
-     * @param array $mappings
-     * @param string $language
-     */
-    private function removeEmptyEnglishMappings(&$mappings, $language)
+    private function removeEmptyEnglishMappings(array &$mappings, string $language): void
     {
         if ($language != 'en') {
             return;
@@ -300,10 +263,8 @@ class GeneratePhonePrefixData
 
     /**
      * Compress the provided mappings according to the English data file if any.
-     * @param string $textFile
-     * @param array $mappings
      */
-    private function makeDataFallbackToEnglish($textFile, &$mappings)
+    private function makeDataFallbackToEnglish(string $textFile, array &$mappings): void
     {
         $englishPath = $this->getEnglishDataPath($textFile);
 
@@ -322,12 +283,12 @@ class GeneratePhonePrefixData
         $this->compressAccordingToEnglishData($this->englishMaps[$countryCode], $mappings);
     }
 
-    private function getEnglishDataPath($textFile)
+    private function getEnglishDataPath(string $textFile): string
     {
         return 'en' . DIRECTORY_SEPARATOR . \substr($textFile, 3);
     }
 
-    private function compressAccordingToEnglishData($englishMap, &$nonEnglishMap)
+    private function compressAccordingToEnglishData(array $englishMap, array &$nonEnglishMap): void
     {
         foreach ($nonEnglishMap as $prefix => $value) {
             if (\array_key_exists($prefix, $englishMap)) {
@@ -343,7 +304,7 @@ class GeneratePhonePrefixData
         }
     }
 
-    private function hasOverlappingPrefix($number, $mappings)
+    private function hasOverlappingPrefix(string $number, array $mappings): bool
     {
         while (\strlen($number) > 0) {
             $number = \substr($number, 0, -1);
@@ -356,7 +317,7 @@ class GeneratePhonePrefixData
         return false;
     }
 
-    private function splitMap($mappings, $outputFiles)
+    private function splitMap(array $mappings, array $outputFiles): array
     {
         $mappingForFiles = [];
 
@@ -383,7 +344,7 @@ class GeneratePhonePrefixData
     /**
      * Extracts the phone prefix and the language code contained in the provided file name.
      */
-    private function getPhonePrefixLanguagePairFromFilename($outputFile)
+    private function getPhonePrefixLanguagePairFromFilename(string $outputFile): \stdClass
     {
         $parts = \explode(DIRECTORY_SEPARATOR, $outputFile);
 
@@ -397,14 +358,13 @@ class GeneratePhonePrefixData
 
     /**
      * @link http://stackoverflow.com/a/834355/403165
-     * @return bool
      */
-    private static function startsWith($haystack, $needle)
+    private static function startsWith(string $haystack, string $needle): bool
     {
         return !\strncmp($haystack, $needle, \strlen($needle));
     }
 
-    private function writeMappingFile($language, $outputFile, $data)
+    private function writeMappingFile(string $language, string $outputFile, array $data): void
     {
         if (!\file_exists($this->outputDir . $language)) {
             \mkdir($this->outputDir . $language);
@@ -420,7 +380,10 @@ class GeneratePhonePrefixData
         \file_put_contents($outputPath, $phpSource);
     }
 
-    public function addConfigurationMapping(&$availableDataFiles, $language, $prefix)
+    /**
+     * @param int|string $prefix Build uses int, tests use string.
+     */
+    public function addConfigurationMapping(array &$availableDataFiles, string $language, $prefix): void
     {
         if (!\array_key_exists($language, $availableDataFiles)) {
             $availableDataFiles[$language] = [];
@@ -429,7 +392,7 @@ class GeneratePhonePrefixData
         $availableDataFiles[$language][] = $prefix;
     }
 
-    private function writeConfigMap($availableDataFiles)
+    private function writeConfigMap(array $availableDataFiles): void
     {
         $phpSource = '<?php' . PHP_EOL
             . self::GENERATION_COMMENT

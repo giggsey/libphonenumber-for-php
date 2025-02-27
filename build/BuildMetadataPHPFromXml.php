@@ -34,7 +34,7 @@ class BuildMetadataPHPFromXml
     public const REGION_CODE_SET_COMMENT =
         "  // A set of all region codes for which data is available.\n";
 
-    public function start($inputFile, $outputDir, $filePrefix, $mappingClass, $mappingClassLocation, $liteBuild)
+    public function start(string $inputFile, string $outputDir, string $filePrefix, string $mappingClass, string $mappingClassLocation, bool $liteBuild): void
     {
         $savePath = $outputDir . $filePrefix;
 
@@ -48,9 +48,9 @@ class BuildMetadataPHPFromXml
     }
 
     /**
-     * @param $metadataCollection PhoneMetadata[]
+     * @param PhoneMetadata[] $metadataCollection
      */
-    private function writeMetadataToFile($metadataCollection, $filePrefix)
+    private function writeMetadataToFile(array $metadataCollection, string $filePrefix): void
     {
         foreach ($metadataCollection as $metadata) {
             /** @var $phoneMetadata PhoneMetadata */
