@@ -39,7 +39,7 @@ class PhoneNumberDesc
     }
 
     /**
-     * @return array
+     * @return int[]
      */
     public function getPossibleLength()
     {
@@ -47,13 +47,16 @@ class PhoneNumberDesc
     }
 
     /**
-     * @param array $possibleLength
+     * @param int[] $possibleLength
      */
     public function setPossibleLength($possibleLength)
     {
         $this->possibleLength = $possibleLength;
     }
 
+    /**
+     * @param int $possibleLength
+     */
     public function addPossibleLength($possibleLength)
     {
         if (!in_array($possibleLength, $this->possibleLength)) {
@@ -67,7 +70,7 @@ class PhoneNumberDesc
     }
 
     /**
-     * @return array
+     * @return int[]
      */
     public function getPossibleLengthLocalOnly()
     {
@@ -75,13 +78,16 @@ class PhoneNumberDesc
     }
 
     /**
-     * @param array $possibleLengthLocalOnly
+     * @param int[] $possibleLengthLocalOnly
      */
     public function setPossibleLengthLocalOnly($possibleLengthLocalOnly)
     {
         $this->possibleLengthLocalOnly = $possibleLengthLocalOnly;
     }
 
+    /**
+     * @param int $possibleLengthLocalOnly
+     */
     public function addPossibleLengthLocalOnly($possibleLengthLocalOnly)
     {
         if (!in_array($possibleLengthLocalOnly, $this->possibleLengthLocalOnly)) {
