@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class PHP7Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -22,7 +19,7 @@ class PHP7Test extends TestCase
     /**
      * @dataProvider validPolishNumbers
      */
-    public function testValidPolishNumbers($number)
+    public function testValidPolishNumbers(string $number): void
     {
         $phoneNumber = $this->phoneUtil->parse($number, 'PL');
 
@@ -30,7 +27,7 @@ class PHP7Test extends TestCase
         $this->assertEquals($number, $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
     }
 
-    public function validPolishNumbers()
+    public function validPolishNumbers(): array
     {
         return [
             ['22 222 22 22'],

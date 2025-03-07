@@ -9,7 +9,7 @@ namespace libphonenumber;
  */
 class RegexBasedMatcher implements MatcherAPIInterface
 {
-    public static function create()
+    public static function create(): RegexBasedMatcher
     {
         return new static();
     }
@@ -17,12 +17,8 @@ class RegexBasedMatcher implements MatcherAPIInterface
     /**
      * Returns whether the given national number (a string containing only decimal digits) matches
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
-     *
-     * @param string $number
-     * @param boolean $allowPrefixMatch
-     * @return boolean
      */
-    public function matchNationalNumber($number, PhoneNumberDesc $numberDesc, $allowPrefixMatch)
+    public function matchNationalNumber(string $number, PhoneNumberDesc $numberDesc, bool $allowPrefixMatch): bool
     {
         $nationalNumberPattern = $numberDesc->getNationalNumberPattern();
 
@@ -36,12 +32,7 @@ class RegexBasedMatcher implements MatcherAPIInterface
         return $this->match($number, $nationalNumberPattern, $allowPrefixMatch);
     }
 
-    /**
-     * @param string $number
-     * @param string $pattern
-     * @return bool
-     */
-    private function match($number, $pattern, $allowPrefixMatch)
+    private function match(string $number, string $pattern, bool $allowPrefixMatch): bool
     {
         $matcher = new Matcher($pattern, $number);
 

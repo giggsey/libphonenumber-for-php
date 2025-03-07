@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue21Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -19,7 +16,7 @@ class Issue21Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testFloatNumber()
+    public function testFloatNumber(): void
     {
         $number = '0358112345678987';
         $phoneNumber = $this->phoneUtil->parse($number, 'DE');
@@ -35,7 +32,7 @@ class Issue21Test extends TestCase
         $this->assertEquals('00 49 3581 12345678987', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
     }
 
-    public function testLongerNumber()
+    public function testLongerNumber(): void
     {
         $number = '12345678901234567';
         $phoneNumber = $this->phoneUtil->parse($number, 'DE');

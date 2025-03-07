@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue4Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    public $phoneNumberUtil;
+    public PhoneNumberUtil $phoneNumberUtil;
 
     public function setUp(): void
     {
@@ -19,7 +16,7 @@ class Issue4Test extends TestCase
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testParseUSNumber()
+    public function testParseUSNumber(): void
     {
         $number = $this->phoneNumberUtil->parse('0351-152-303-473', 'AR');
 

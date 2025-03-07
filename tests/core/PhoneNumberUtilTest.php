@@ -19,55 +19,49 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberUtilTest extends TestCase
 {
-    private static $bsNumber;
-    private static $coFixedLine;
-    private static $internationalTollFree;
-    private static $sgNumber;
-    private static $usShortByOneNumber;
-    private static $usTollFree;
-    private static $usNumber;
-    private static $usLocalNumber;
-    private static $usLongNumber;
-    /**
-     * @var PhoneNumber
-     */
-    private static $nzNumber;
-    private static $usPremium;
-    private static $usSpoof;
-    private static $usSpoofWithRawInput;
-    private static $uzFixedLine;
-    private static $uzMobile;
-    private static $gbMobile;
-    private static $bsMobile;
-    private static $gbNumber;
-    private static $deShortNumber;
-    private static $itMobile;
-    private static $itNumber;
-    private static $auNumber;
-    private static $arMobile;
-    private static $arNumber;
-    private static $mxMobile1;
-    private static $mxNumber1;
-    private static $mxMobile2;
-    private static $mxNumber2;
-    private static $deNumber;
-    private static $jpStarNumber;
-    private static $internationalTollFreeTooLong;
-    private static $universalPremiumRate;
-    private static $alphaNumericNumber;
-    private static $aeUAN;
-    private static $unknownCountryCodeNoRawInput;
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
+    private static PhoneNumber $bsNumber;
+    private static PhoneNumber $coFixedLine;
+    private static PhoneNumber $internationalTollFree;
+    private static PhoneNumber $sgNumber;
+    private static PhoneNumber $usShortByOneNumber;
+    private static PhoneNumber $usTollFree;
+    private static PhoneNumber $usNumber;
+    private static PhoneNumber $usLocalNumber;
+    private static PhoneNumber $usLongNumber;
+    private static PhoneNumber $nzNumber;
+    private static PhoneNumber $usPremium;
+    private static PhoneNumber $usSpoof;
+    private static PhoneNumber $usSpoofWithRawInput;
+    private static PhoneNumber $uzFixedLine;
+    private static PhoneNumber $uzMobile;
+    private static PhoneNumber $gbMobile;
+    private static PhoneNumber $bsMobile;
+    private static PhoneNumber $gbNumber;
+    private static PhoneNumber $deShortNumber;
+    private static PhoneNumber $itMobile;
+    private static PhoneNumber $itNumber;
+    private static PhoneNumber $auNumber;
+    private static PhoneNumber $arMobile;
+    private static PhoneNumber $arNumber;
+    private static PhoneNumber $mxMobile1;
+    private static PhoneNumber $mxNumber1;
+    private static PhoneNumber $mxMobile2;
+    private static PhoneNumber $mxNumber2;
+    private static PhoneNumber $deNumber;
+    private static PhoneNumber $jpStarNumber;
+    private static PhoneNumber $internationalTollFreeTooLong;
+    private static PhoneNumber $universalPremiumRate;
+    private static PhoneNumber $alphaNumericNumber;
+    private static PhoneNumber $aeUAN;
+    private static PhoneNumber $unknownCountryCodeNoRawInput;
+    protected PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
         $this->phoneUtil = self::initializePhoneUtilForTesting();
     }
 
-    private static function initializePhoneUtilForTesting()
+    private static function initializePhoneUtilForTesting(): PhoneNumberUtil
     {
         self::$bsNumber = new PhoneNumber();
         self::$bsNumber->setCountryCode(1)->setNationalNumber(2423651234);
@@ -150,12 +144,12 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testGetSupportedRegions()
+    public function testGetSupportedRegions(): void
     {
         $this->assertGreaterThan(0, \count($this->phoneUtil->getSupportedRegions()));
     }
 
-    public function testGetSupportedGlobalNetworkCallingCodes()
+    public function testGetSupportedGlobalNetworkCallingCodes(): void
     {
         $globalNetworkCallingCodes = $this->phoneUtil->getSupportedGlobalNetworkCallingCodes();
 
@@ -167,7 +161,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testGetSupportedCallingCodes()
+    public function testGetSupportedCallingCodes(): void
     {
         $callingCodes = $this->phoneUtil->getSupportedCallingCodes();
 
@@ -184,13 +178,13 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertContains(979, $callingCodes);
     }
 
-    public function testGetInstanceLoadBadMetadata()
+    public function testGetInstanceLoadBadMetadata(): void
     {
         $this->assertNull($this->phoneUtil->getMetadataForRegion('No Such Region'));
         $this->assertNull($this->phoneUtil->getMetadataForRegion(-1));
     }
 
-    public function testGetSupportedTypesForRegion()
+    public function testGetSupportedTypesForRegion(): void
     {
         $this->assertContains(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::BR));
         // Our test data has no mobile numbers for Brazil.
@@ -208,7 +202,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertCount(0, $this->phoneUtil->getSupportedTypesForRegion(RegionCode::ZZ));
     }
 
-    public function testGetSupportedTypesForNonGeoEntity()
+    public function testGetSupportedTypesForNonGeoEntity(): void
     {
         // No data exists for 999 at all, no types should be returned.
         $this->assertCount(0, $this->phoneUtil->getSupportedTypesForNonGeoEntity(999));
@@ -219,7 +213,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertNotContains(PhoneNumberType::UNKNOWN, $typesFor979);
     }
 
-    public function testGetInstanceLoadUSMetadata()
+    public function testGetInstanceLoadUSMetadata(): void
     {
         $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::US);
         $this->assertEquals('US', $metadata->getId());
@@ -242,7 +236,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($metadata->getSharedCost()->hasNationalNumberPattern());
     }
 
-    public function testGetInstanceLoadDEMetadata()
+    public function testGetInstanceLoadDEMetadata(): void
     {
         $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::DE);
         $this->assertEquals('DE', $metadata->getId());
@@ -270,7 +264,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('900([135]\\d{6}|9\\d{7})', $metadata->getPremiumRate()->getNationalNumberPattern());
     }
 
-    public function testGetInstanceLoadARMetadata()
+    public function testGetInstanceLoadARMetadata(): void
     {
         $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::AR);
         $this->assertEquals('AR', $metadata->getId());
@@ -285,7 +279,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('$1 $2 $3 $4', $metadata->getIntlNumberFormat(3)->getFormat());
     }
 
-    public function testGetInstanceLoadInternationalTollFreeMetadata()
+    public function testGetInstanceLoadInternationalTollFreeMetadata(): void
     {
         $metadata = $this->phoneUtil->getMetadataForNonGeographicalRegion(800);
         $this->assertEquals('001', $metadata->getId());
@@ -297,7 +291,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('12345678', $metadata->getTollFree()->getExampleNumber());
     }
 
-    public function testIsNumberGeographical()
+    public function testIsNumberGeographical(): void
     {
         $this->assertFalse($this->phoneUtil->isNumberGeographical(self::$bsMobile)); // Bahamas, mobile phone number.
         $this->assertTrue($this->phoneUtil->isNumberGeographical(self::$auNumber)); // Australian fixed line number.
@@ -305,7 +299,7 @@ class PhoneNumberUtilTest extends TestCase
         // free number
     }
 
-    public function testGetLengthOfGeographicalAreaCode()
+    public function testGetLengthOfGeographicalAreaCode(): void
     {
         // Google MTV, which has area code "650".
         $this->assertEquals(3, $this->phoneUtil->getLengthOfGeographicalAreaCode(self::$usNumber));
@@ -354,7 +348,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(0, $this->phoneUtil->getLengthOfGeographicalAreaCode($cnMobile));
     }
 
-    public function testGetLengthOfNationalDestinationCode()
+    public function testGetLengthOfNationalDestinationCode(): void
     {
         // Google MTV, which has national destination code (NDC) "650".
         $this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode(self::$usNumber));
@@ -399,7 +393,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(3, $this->phoneUtil->getLengthOfNationalDestinationCode($cnMobile));
     }
 
-    public function testGetCountryMobileToken()
+    public function testGetCountryMobileToken(): void
     {
         $this->assertEquals(
             '9',
@@ -413,7 +407,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testGetNationalSignificantNumber()
+    public function testGetNationalSignificantNumber(): void
     {
         $this->assertEquals('6502530000', $this->phoneUtil->getNationalSignificantNumber(self::$usNumber));
 
@@ -426,7 +420,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('12345678', $this->phoneUtil->getNationalSignificantNumber(self::$internationalTollFree));
     }
 
-    public function testGetNationalSignificantNumber_ManyLeadingZeros()
+    public function testGetNationalSignificantNumber_ManyLeadingZeros(): void
     {
         $number = new PhoneNumber();
         $number->setCountryCode(1);
@@ -441,7 +435,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('650', $this->phoneUtil->getNationalSignificantNumber($number));
     }
 
-    public function testGetExampleNumber()
+    public function testGetExampleNumber(): void
     {
         $this->assertEquals(self::$deNumber, $this->phoneUtil->getExampleNumber(RegionCode::DE));
 
@@ -465,13 +459,13 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(null, $this->phoneUtil->getExampleNumber(RegionCode::UN001));
     }
 
-    public function testGetExampleNumberForNonGeoEntity()
+    public function testGetExampleNumberForNonGeoEntity(): void
     {
         $this->assertEquals(self::$internationalTollFree, $this->phoneUtil->getExampleNumberForNonGeoEntity(800));
         $this->assertEquals(self::$universalPremiumRate, $this->phoneUtil->getExampleNumberForNonGeoEntity(979));
     }
 
-    public function testGetExampleNumberWithoutRegion()
+    public function testGetExampleNumberWithoutRegion(): void
     {
         // In our test metadata we don't cover all types: in our real metadata, we do.
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(PhoneNumberType::FIXED_LINE));
@@ -479,7 +473,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertNotNull($this->phoneUtil->getExampleNumberForType(PhoneNumberType::PREMIUM_RATE));
     }
 
-    public function testConvertAlphaCharactersInNumber()
+    public function testConvertAlphaCharactersInNumber(): void
     {
         $input = '1800-ABC-DEF';
         // Alpha chars are converted to digits; everything else is left untouched.
@@ -487,7 +481,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($expectedOutput, PhoneNumberUtil::convertAlphaCharactersInNumber($input));
     }
 
-    public function testNormaliseRemovePunctuation()
+    public function testNormaliseRemovePunctuation(): void
     {
         $inputNumber = '034-56&+#2' . \pack('H*', 'c2ad') . '34';
         $expectedOutput = '03456234';
@@ -498,7 +492,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testNormaliseReplaceAlphaCharacters()
+    public function testNormaliseReplaceAlphaCharacters(): void
     {
         $inputNumber = '034-I-am-HUNGRY';
         $expectedOutput = '034426486479';
@@ -509,7 +503,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testNormaliseOtherDigits()
+    public function testNormaliseOtherDigits(): void
     {
         $inputNumber = "\xEF\xBC\x92" . "5\xD9\xA5" /* "２5٥" */
         ;
@@ -530,7 +524,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testNormaliseStripAlphaCharacters()
+    public function testNormaliseStripAlphaCharacters(): void
     {
         $inputNumber = '034-56&+a#234';
         $expectedOutput = '03456234';
@@ -541,7 +535,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testNormaliseStripNonDiallableCharacters()
+    public function testNormaliseStripNonDiallableCharacters(): void
     {
         $inputNumber = '03*4-56&+1a#234';
         $expectedOutput = '03*456+1#234';
@@ -552,7 +546,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatUSNumber()
+    public function testFormatUSNumber(): void
     {
         $this->assertEquals('650 253 0000', $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -584,7 +578,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('0', $this->phoneUtil->format(self::$usSpoof, PhoneNumberFormat::NATIONAL));
     }
 
-    public function testFormatBSNumber()
+    public function testFormatBSNumber(): void
     {
         $this->assertEquals('242 365 1234', $this->phoneUtil->format(self::$bsNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -593,7 +587,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatGBNumber()
+    public function testFormatGBNumber(): void
     {
         $this->assertEquals('(020) 7031 3000', $this->phoneUtil->format(self::$gbNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -608,7 +602,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatDENumber()
+    public function testFormatDENumber(): void
     {
         $deNumber = new PhoneNumber();
         $deNumber->setCountryCode(49)->setNationalNumber(301234);
@@ -648,7 +642,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('04134 1234', $this->phoneUtil->format($deNumber, PhoneNumberFormat::NATIONAL));
     }
 
-    public function testFormatITNumber()
+    public function testFormatITNumber(): void
     {
         $this->assertEquals('02 3661 8300', $this->phoneUtil->format(self::$itNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -665,7 +659,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('+39345678901', $this->phoneUtil->format(self::$itMobile, PhoneNumberFormat::E164));
     }
 
-    public function testFormatAUNumber()
+    public function testFormatAUNumber(): void
     {
         $this->assertEquals('02 3661 8300', $this->phoneUtil->format(self::$auNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -681,7 +675,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('+611800123456', $this->phoneUtil->format($auNumber, PhoneNumberFormat::E164));
     }
 
-    public function testFormatARNumber()
+    public function testFormatARNumber(): void
     {
         $this->assertEquals('011 8765-4321', $this->phoneUtil->format(self::$arNumber, PhoneNumberFormat::NATIONAL));
         $this->assertEquals(
@@ -698,7 +692,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('+5491187654321', $this->phoneUtil->format(self::$arMobile, PhoneNumberFormat::E164));
     }
 
-    public function testFormatMXNumber()
+    public function testFormatMXNumber(): void
     {
         $this->assertEquals(
             '045 234 567 8900',
@@ -735,7 +729,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('+528211234567', $this->phoneUtil->format(self::$mxNumber2, PhoneNumberFormat::E164));
     }
 
-    public function testFormatOutOfCountryCallingNumber()
+    public function testFormatOutOfCountryCallingNumber(): void
     {
         $this->assertEquals(
             '00 1 900 253 0000',
@@ -811,7 +805,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatOutOfCountryWithInvalidRegion()
+    public function testFormatOutOfCountryWithInvalidRegion(): void
     {
         // AQ/Antarctica isn't a valid region code for phone number formatting,
         // so this falls back to intl formatting.
@@ -826,7 +820,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatOutOfCountryWithPreferredIntlPrefix()
+    public function testFormatOutOfCountryWithPreferredIntlPrefix(): void
     {
         // This should use 0011, since that is the preferred international prefix (both 0011 and 0012
         // are accepted as possible international prefixes in our test metadata.)
@@ -842,7 +836,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatOutOfCountryKeepingAlphaChars()
+    public function testFormatOutOfCountryKeepingAlphaChars(): void
     {
         $alphaNumericNumber = new PhoneNumber();
         $alphaNumericNumber->setCountryCode(1)->setNationalNumber(8007493524)->setRawInput('1800 six-flag');
@@ -961,7 +955,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatWithCarrierCode()
+    public function testFormatWithCarrierCode(): void
     {
         // We only support this for AR in our test metadata, and only for mobile numbers starting with
         // certain values.
@@ -993,7 +987,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatWithPreferredCarrierCode()
+    public function testFormatWithPreferredCarrierCode(): void
     {
         // We only support this for AR in our test metadata.
         $arNumber = new PhoneNumber();
@@ -1042,7 +1036,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatNumberForMobileDialing()
+    public function testFormatNumberForMobileDialing(): void
     {
         // Numbers are normally dialed in national format in-country, and international format from
         // outside the country.
@@ -1235,7 +1229,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($auNumber, RegionCode::NZ, false));
     }
 
-    public function testFormatByPattern()
+    public function testFormatByPattern(): void
     {
         $newNumFormat = new NumberFormat();
         $newNumFormat->setPattern('(\\d{3})(\\d{3})(\\d{4})');
@@ -1353,7 +1347,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatE164Number()
+    public function testFormatE164Number(): void
     {
         $this->assertEquals('+16502530000', $this->phoneUtil->format(self::$usNumber, PhoneNumberFormat::E164));
         $this->assertEquals('+4930123456', $this->phoneUtil->format(self::$deNumber, PhoneNumberFormat::E164));
@@ -1363,7 +1357,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatNumberWithExtension()
+    public function testFormatNumberWithExtension(): void
     {
         $nzNumber = new PhoneNumber();
         $nzNumber->mergeFrom(self::$nzNumber)->setExtension('1234');
@@ -1383,7 +1377,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testFormatInOriginalFormat()
+    public function testFormatInOriginalFormat(): void
     {
         $number1 = $this->phoneUtil->parseAndKeepRawInput('+442087654321', RegionCode::GB);
         $this->assertEquals('+44 20 8765 4321', $this->phoneUtil->formatInOriginalFormat($number1, RegionCode::GB));
@@ -1529,7 +1523,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPremiumRate()
+    public function testIsPremiumRate(): void
     {
         $this->assertEquals(PhoneNumberType::PREMIUM_RATE, $this->phoneUtil->getNumberType(self::$usPremium));
 
@@ -1562,7 +1556,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsTollFree()
+    public function testIsTollFree(): void
     {
         $tollFreeNumber = new PhoneNumber();
 
@@ -1599,7 +1593,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsMobile()
+    public function testIsMobile(): void
     {
         $this->assertEquals(PhoneNumberType::MOBILE, $this->phoneUtil->getNumberType(self::$bsMobile));
         $this->assertEquals(PhoneNumberType::MOBILE, $this->phoneUtil->getNumberType(self::$gbMobile));
@@ -1611,7 +1605,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(PhoneNumberType::MOBILE, $this->phoneUtil->getNumberType($mobileNumber));
     }
 
-    public function testIsFixedLine()
+    public function testIsFixedLine(): void
     {
         $this->assertEquals(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getNumberType(self::$bsNumber));
         $this->assertEquals(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getNumberType(self::$itNumber));
@@ -1619,7 +1613,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(PhoneNumberType::FIXED_LINE, $this->phoneUtil->getNumberType(self::$deNumber));
     }
 
-    public function testIsFixedLineAndMobile()
+    public function testIsFixedLineAndMobile(): void
     {
         $this->assertEquals(PhoneNumberType::FIXED_LINE_OR_MOBILE, $this->phoneUtil->getNumberType(self::$usNumber));
 
@@ -1631,34 +1625,34 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsSharedCost()
+    public function testIsSharedCost(): void
     {
         $gbNumber = new PhoneNumber();
         $gbNumber->setCountryCode(44)->setNationalNumber(8431231234);
         $this->assertEquals(PhoneNumberType::SHARED_COST, $this->phoneUtil->getNumberType($gbNumber));
     }
 
-    public function testIsVoip()
+    public function testIsVoip(): void
     {
         $gbNumber = new PhoneNumber();
         $gbNumber->setCountryCode(44)->setNationalNumber(5631231234);
         $this->assertEquals(PhoneNumberType::VOIP, $this->phoneUtil->getNumberType($gbNumber));
     }
 
-    public function testIsPersonalNumber()
+    public function testIsPersonalNumber(): void
     {
         $gbNumber = new PhoneNumber();
         $gbNumber->setCountryCode(44)->setNationalNumber(7031231234);
         $this->assertEquals(PhoneNumberType::PERSONAL_NUMBER, $this->phoneUtil->getNumberType($gbNumber));
     }
 
-    public function testIsUnknown()
+    public function testIsUnknown(): void
     {
         // Invalid numbers should be of type UNKNOWN.
         $this->assertEquals(PhoneNumberType::UNKNOWN, $this->phoneUtil->getNumberType(self::$usLocalNumber));
     }
 
-    public function testIsValidNumber()
+    public function testIsValidNumber(): void
     {
         $this->assertTrue($this->phoneUtil->isValidNumber(self::$usNumber));
         $this->assertTrue($this->phoneUtil->isValidNumber(self::$itNumber));
@@ -1671,7 +1665,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->isValidNumber($nzNumber));
     }
 
-    public function testIsValidForRegion()
+    public function testIsValidForRegion(): void
     {
         // This number is valid for the Bahamas, but is not a valid US number.
         $this->assertTrue($this->phoneUtil->isValidNumber(self::$bsNumber));
@@ -1717,7 +1711,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isValidNumberForRegion($invalidNumber, RegionCode::ZZ));
     }
 
-    public function testIsNotValidNumber()
+    public function testIsNotValidNumber(): void
     {
         $this->assertFalse($this->phoneUtil->isValidNumber(self::$usLocalNumber));
 
@@ -1747,7 +1741,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isValidNumber(self::$internationalTollFreeTooLong));
     }
 
-    public function testGetRegionCodeForCountryCode()
+    public function testGetRegionCodeForCountryCode(): void
     {
         $this->assertEquals(RegionCode::US, $this->phoneUtil->getRegionCodeForCountryCode(1));
         $this->assertEquals(RegionCode::GB, $this->phoneUtil->getRegionCodeForCountryCode(44));
@@ -1756,7 +1750,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForCountryCode(979));
     }
 
-    public function testGetRegionCodeForNumber()
+    public function testGetRegionCodeForNumber(): void
     {
         $this->assertEquals(RegionCode::BS, $this->phoneUtil->getRegionCodeForNumber(self::$bsNumber));
         $this->assertEquals(RegionCode::US, $this->phoneUtil->getRegionCodeForNumber(self::$usNumber));
@@ -1765,7 +1759,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$universalPremiumRate));
     }
 
-    public function testGetRegionCodesForCountryCode()
+    public function testGetRegionCodesForCountryCode(): void
     {
         $regionCodesForNANPA = $this->phoneUtil->getRegionCodesForCountryCode(1);
         $this->assertContains(RegionCode::US, $regionCodesForNANPA);
@@ -1777,7 +1771,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEmpty($this->phoneUtil->getRegionCodesForCountryCode(-1));
     }
 
-    public function testGetCountryCodeForRegion()
+    public function testGetCountryCodeForRegion(): void
     {
         $this->assertEquals(1, $this->phoneUtil->getCountryCodeForRegion(RegionCode::US));
         $this->assertEquals(64, $this->phoneUtil->getCountryCodeForRegion(RegionCode::NZ));
@@ -1788,7 +1782,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(0, $this->phoneUtil->getCountryCodeForRegion(RegionCode::CS));
     }
 
-    public function testGetNationalDiallingPrefixForRegion()
+    public function testGetNationalDiallingPrefixForRegion(): void
     {
         $this->assertEquals('1', $this->phoneUtil->getNddPrefixForRegion(RegionCode::US, false));
         // Test non-main country to see it gets the national dialling prefix for the main country with
@@ -1806,7 +1800,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertNull($this->phoneUtil->getNddPrefixForRegion(RegionCode::CS, false));
     }
 
-    public function testIsNANPACountry()
+    public function testIsNANPACountry(): void
     {
         $this->assertTrue($this->phoneUtil->isNANPACountry(RegionCode::US));
         $this->assertTrue($this->phoneUtil->isNANPACountry(RegionCode::BS));
@@ -1816,7 +1810,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isNANPACountry(null));
     }
 
-    public function testIsPossibleNumber()
+    public function testIsPossibleNumber(): void
     {
         $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$usNumber));
         $this->assertTrue($this->phoneUtil->isPossibleNumber(self::$usLocalNumber));
@@ -1835,7 +1829,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->isPossibleNumber('+800 1234 5678', RegionCode::UN001));
     }
 
-    public function testIsPossibleNumberForType_DifferentTypeLengths()
+    public function testIsPossibleNumberForType_DifferentTypeLengths(): void
     {
         // We use Argentinian numbers since they have different possible lengths for different types.
         $number = new PhoneNumber();
@@ -1877,7 +1871,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::TOLL_FREE));
     }
 
-    public function testIsPossibleNumberForType_LocalOnly()
+    public function testIsPossibleNumberForType_LocalOnly(): void
     {
         $number = new PhoneNumber();
         // Here we test a number length which matches a local-only length.
@@ -1888,7 +1882,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::MOBILE));
     }
 
-    public function testIsPossibleNumberForType_DataMissingForSizeReasons()
+    public function testIsPossibleNumberForType_DataMissingForSizeReasons(): void
     {
         $number = new PhoneNumber();
         // Here we test something where the possible lengths match the possible lengths of the country
@@ -1903,7 +1897,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::FIXED_LINE));
     }
 
-    public function testIsPossibleNumberForType_NumberTypeNotSupportedForRegion()
+    public function testIsPossibleNumberForType_NumberTypeNotSupportedForRegion(): void
     {
         $number = new PhoneNumber();
         // There are *no* mobile numbers for this region at all, so we return false.
@@ -1922,7 +1916,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->isPossibleNumberForType($number, PhoneNumberType::PREMIUM_RATE));
     }
 
-    public function testIsPossibleNumberWithReason()
+    public function testIsPossibleNumberWithReason(): void
     {
         // National numbers for country calling code +1 that are within 7 to 10 digits are possible.
         $this->assertEquals(
@@ -1961,7 +1955,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPossibleNumberForTypeWithReason_DifferentTypeLengths()
+    public function testIsPossibleNumberForTypeWithReason_DifferentTypeLengths(): void
     {
         // We use Argentinian numbers since they have different possible lengths for different types.
         $number = new PhoneNumber();
@@ -2056,7 +2050,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPossibleNumberForTypeWithReason_LocalOnly()
+    public function testIsPossibleNumberForTypeWithReason_LocalOnly(): void
     {
         $number = new PhoneNumber();
         // Here we test a number length which matches a local-only length.
@@ -2076,7 +2070,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPossibleNumberForTypeWithReason_DataMissingForSizeReasons()
+    public function testIsPossibleNumberForTypeWithReason_DataMissingForSizeReasons(): void
     {
         $number = new PhoneNumber();
         // Here we test something where the possible lengths match the possible lengths of the country
@@ -2104,7 +2098,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPossibleNumberForTypeWithReason_NumberTypeNotSupportedForRegion()
+    public function testIsPossibleNumberForTypeWithReason_NumberTypeNotSupportedForRegion(): void
     {
         $number = new PhoneNumber();
         // There are *no* mobile numbers for this region at all, so we return INVALID_LENGTH.
@@ -2169,7 +2163,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsPossibleNumberForTypeWithReason_FixedLineOrMobile()
+    public function testIsPossibleNumberForTypeWithReason_FixedLineOrMobile(): void
     {
         $number = new PhoneNumber();
         // For FIXED_LINE_OR_MOBILE, a number should be considered valid if it matches the possible
@@ -2242,7 +2236,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsNotPossibleNumber()
+    public function testIsNotPossibleNumber(): void
     {
         $this->assertFalse($this->phoneUtil->isPossibleNumber(self::$usLongNumber));
         $this->assertFalse($this->phoneUtil->isPossibleNumber(self::$internationalTollFreeTooLong));
@@ -2263,7 +2257,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isPossibleNumber('+800 1234 5678 9', RegionCode::UN001));
     }
 
-    public function testTruncateTooLongNumber()
+    public function testTruncateTooLongNumber(): void
     {
         // GB number 080 1234 5678, but entered with 4 extra digits at the end.
         $tooLongNumber = new PhoneNumber();
@@ -2320,7 +2314,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($tooShortNumberCopy, $tooShortNumber);
     }
 
-    public function testIsViablePhoneNumber()
+    public function testIsViablePhoneNumber(): void
     {
         $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('1'));
         // Only one or two digits before strange non-possible punctuation.
@@ -2339,7 +2333,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse(PhoneNumberUtil::isViablePhoneNumber('12. March'));
     }
 
-    public function testIsViablePhoneNumberNonAscii()
+    public function testIsViablePhoneNumberNonAscii(): void
     {
         // Only one or two digits before possible punctuation followed by more digits.
         $this->assertTrue(PhoneNumberUtil::isViablePhoneNumber('1' . \pack('H*', 'e38080') . '34'));
@@ -2356,7 +2350,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testExtractPossibleNumber()
+    public function testExtractPossibleNumber(): void
     {
         // Removes preceding funky punctuation and letters but leaves the rest untouched.
         $this->assertEquals('0800-345-600', PhoneNumberUtil::extractPossibleNumber('Tel:0800-345-600'));
@@ -2390,7 +2384,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testMaybeStripNationalPrefix()
+    public function testMaybeStripNationalPrefix(): void
     {
         $metadata = new PhoneMetadata();
         $metadata->setNationalPrefixForParsing('34');
@@ -2465,7 +2459,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($transformedNumber, $numberToStrip, 'Should transform the 031 to a 5315.');
     }
 
-    public function testMaybeStripInternationalPrefix()
+    public function testMaybeStripInternationalPrefix(): void
     {
         $internationalPrefix = '00[39]';
         $numberToStrip = '0034567700-3898003';
@@ -2553,7 +2547,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testMaybeExtractCountryCode()
+    public function testMaybeExtractCountryCode(): void
     {
         $number = new PhoneNumber();
         $metadata = $this->phoneUtil->getMetadataForRegion(RegionCode::US);
@@ -2713,7 +2707,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseNationalNumber()
+    public function testParseNationalNumber(): void
     {
         // National prefix attached.
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('033316005', RegionCode::NZ));
@@ -2813,7 +2807,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($shortNumber, $this->phoneUtil->parse('0123456', RegionCode::GB));
     }
 
-    public function testParseNumberWithAlphaCharacters()
+    public function testParseNumberWithAlphaCharacters(): void
     {
         // Test case with alpha characters.
         $tollFreeNumber = new PhoneNumber();
@@ -2831,7 +2825,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($premiumNumber, $this->phoneUtil->parse('0900 a332 600A5', RegionCode::NZ));
     }
 
-    public function testParseMaliciousInput()
+    public function testParseMaliciousInput(): void
     {
         // Lots of leading + signs before the possible number.
         $maliciousNumber = \str_repeat('+', 6000);
@@ -2864,7 +2858,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseWithInternationalPrefixes()
+    public function testParseWithInternationalPrefixes(): void
     {
         $this->assertEquals(self::$usNumber, $this->phoneUtil->parse('+1 (650) 253-0000', RegionCode::NZ));
         $this->assertEquals(self::$internationalTollFree, $this->phoneUtil->parse('011 800 1234 5678', RegionCode::US));
@@ -2882,7 +2876,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(self::$usNumber, $this->phoneUtil->parse('++1 (650) 253-0000', RegionCode::PL));
     }
 
-    public function testParseNonAscii()
+    public function testParseNonAscii(): void
     {
         // Using a full-width plus sign.
         $this->assertEquals(
@@ -2941,7 +2935,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testParseWithLeadingZero()
+    public function testParseWithLeadingZero(): void
     {
         $this->assertEquals(self::$itNumber, $this->phoneUtil->parse('+39 02-36618 300', RegionCode::NZ));
         $this->assertEquals(self::$itNumber, $this->phoneUtil->parse('02-36618 300', RegionCode::IT));
@@ -2949,7 +2943,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(self::$itMobile, $this->phoneUtil->parse('345 678 901', RegionCode::IT));
     }
 
-    public function testParseNationalNumberArgentina()
+    public function testParseNationalNumberArgentina(): void
     {
         // Test parsing mobile numbers of Argentina.
         $arNumber = new PhoneNumber();
@@ -2978,7 +2972,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($arNumber, $this->phoneUtil->parse('023 1234 0000', RegionCode::AR));
     }
 
-    public function testParseWithXInNumber()
+    public function testParseWithXInNumber(): void
     {
         // Test that having an 'x' in the phone number at the start is ok and that it just gets removed.
         $this->assertEquals(self::$arNumber, $this->phoneUtil->parse('01187654321', RegionCode::AR));
@@ -2995,7 +2989,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($arFromUs, $this->phoneUtil->parse('011xx5481429712', RegionCode::US));
     }
 
-    public function testParseNumbersMexico()
+    public function testParseNumbersMexico(): void
     {
         // Test parsing fixed-line numbers of Mexico.
         $mxNumber = new PhoneNumber();
@@ -3012,7 +3006,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($mxNumber, $this->phoneUtil->parse('045 33 1234-5678', RegionCode::MX));
     }
 
-    public function testFailedParseOnInvalidNumbers()
+    public function testFailedParseOnInvalidNumbers(): void
     {
         try {
             $sentencePhoneNumber = 'This is not a phone number';
@@ -3332,7 +3326,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseNumbersWithPlusWithNoRegion()
+    public function testParseNumbersWithPlusWithNoRegion(): void
     {
         // RegionCode.ZZ is allowed only if the number starts with a '+' - then the country calling code
         // can be calculated.
@@ -3372,7 +3366,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($nzNumberWithRawInput, $this->phoneUtil->parseAndKeepRawInput('+64 3 331 6005', null));
     }
 
-    public function testParseNumberTooShortIfNationalPrefixStripped()
+    public function testParseNumberTooShortIfNationalPrefixStripped(): void
     {
         // Test that a number whose first digits happen to coincide with the national prefix does not
         // get them stripped if doing so would result in a number too short to be a possible (regular
@@ -3393,7 +3387,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($byNumber, $this->phoneUtil->parse('8123456', RegionCode::BY));
     }
 
-    public function testParseExtensions()
+    public function testParseExtensions(): void
     {
         $nzNumber = new PhoneNumber();
         $nzNumber->setCountryCode(64)->setNationalNumber(33316005)->setExtension('3456');
@@ -3512,7 +3506,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($usWithExtension, $this->phoneUtil->parse('+1 (645) 123 1234 ext. 910#', RegionCode::US));
     }
 
-    public function testParseHandlesLongExtensionsWithExplicitLabels()
+    public function testParseHandlesLongExtensionsWithExplicitLabels(): void
     {
         // Test lower and upper limits of extension lengths for each type of label.
         $nzNumber = new PhoneNumber();
@@ -3584,7 +3578,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseHandlesLongExtensionsWithAutoDiallingLabels()
+    public function testParseHandlesLongExtensionsWithAutoDiallingLabels(): void
     {
         // Secondly, cases of auto-dialling and other standard extension labels,
         // PhoneNumberUtil $extLimitAfterLikelyLabel
@@ -3623,7 +3617,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseHandlesShortExtensionsWithAmbiguousChar()
+    public function testParseHandlesShortExtensionsWithAmbiguousChar(): void
     {
         $nzNumber = new PhoneNumber();
         $nzNumber
@@ -3651,7 +3645,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseHandlesShortExtensionsWhenNotSureOfLabel()
+    public function testParseHandlesShortExtensionsWhenNotSureOfLabel(): void
     {
         // Lastly, when no explicit extension label present, but denoted by tailing #:
         // PhoneNumberUtil $extLimitWhenNotSure
@@ -3679,7 +3673,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseAndKeepRaw()
+    public function testParseAndKeepRaw(): void
     {
         $alphaNumericNumber = new PhoneNumber();
         $alphaNumericNumber->mergeFrom(self::$alphaNumericNumber);
@@ -3736,7 +3730,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($koreanNumber, $this->phoneUtil->parseAndKeepRawInput('08122123456', RegionCode::KR));
     }
 
-    public function testParseItalianLeadingZeros()
+    public function testParseItalianLeadingZeros(): void
     {
         // Test the number "011".
         $oneZero = new PhoneNumber();
@@ -3761,7 +3755,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals($threeZeros, $this->phoneUtil->parse('0000', RegionCode::AU));
     }
 
-    public function testParseWithPhoneContext()
+    public function testParseWithPhoneContext(): void
     {
         // context    = ";phone-context=" descriptor
         // descriptor = domainname / global-number-digits
@@ -3796,7 +3790,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(self::$nzNumber, $this->phoneUtil->parse('tel:033316005;phone-context=a--z', RegionCode::NZ));
     }
 
-    public function dataForInvalidPhoneContext()
+    public function dataForInvalidPhoneContext(): array
     {
         return [
             ['tel:033316005;phone-context='],
@@ -3813,9 +3807,8 @@ class PhoneNumberUtilTest extends TestCase
 
     /**
      * @dataProvider dataForInvalidPhoneContext
-     * @param string $numberToParse
      */
-    public function testThrowForInvalidPhoneContext($numberToParse)
+    public function testThrowForInvalidPhoneContext(string $numberToParse): void
     {
         try {
             $this->phoneUtil->parse($numberToParse, RegionCode::ZZ);
@@ -3830,7 +3823,7 @@ class PhoneNumberUtilTest extends TestCase
         }
     }
 
-    public function testParseHasDefaultNullRegion()
+    public function testParseHasDefaultNullRegion(): void
     {
         $ukNumber = '+441174960123';
 
@@ -3839,7 +3832,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->isValidNumber($phone));
     }
 
-    public function testCountryWithNoNumberDesc()
+    public function testCountryWithNoNumberDesc(): void
     {
         // Andorra is a country where we don't have PhoneNumberDesc info in the metadata.
         $adNumber = new PhoneNumber();
@@ -3858,7 +3851,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testUnknownCountryCallingCode()
+    public function testUnknownCountryCallingCode(): void
     {
         $this->assertFalse($this->phoneUtil->isValidNumber(self::$unknownCountryCodeNoRawInput));
         // It's not very well defined as to what the E164 representation for a number with an invalid
@@ -3870,7 +3863,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsNumberMatchMatches()
+    public function testIsNumberMatchMatches(): void
     {
         // Test simple matches where formatting is different, or leading zeros, or country calling code
         // has been specified.
@@ -3930,7 +3923,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsNumberMatchShortMatchIfDiffNumLeadingZeros()
+    public function testIsNumberMatchShortMatchIfDiffNumLeadingZeros(): void
     {
         $nzNumberOne = new PhoneNumber();
         $nzNumberTwo = new PhoneNumber();
@@ -3947,7 +3940,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch($nzNumberOne, $nzNumberTwo));
     }
 
-    public function testIsNumberMatchAcceptsProtoDefaultsAsMatch()
+    public function testIsNumberMatchAcceptsProtoDefaultsAsMatch(): void
     {
         $nzNumberOne = new PhoneNumber();
         $nzNumberTwo = new PhoneNumber();
@@ -3960,7 +3953,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch($nzNumberOne, $nzNumberTwo));
     }
 
-    public function testIsNumberMatchMatchesDiffLeadingZerosIfItalianLeadingZeroFalse()
+    public function testIsNumberMatchMatchesDiffLeadingZerosIfItalianLeadingZeroFalse(): void
     {
         $nzNumberOne = new PhoneNumber();
         $nzNumberTwo = new PhoneNumber();
@@ -3978,7 +3971,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch($nzNumberOne, $nzNumberTwo));
     }
 
-    public function testIsNumberMatchIgnoresSomeFields()
+    public function testIsNumberMatchIgnoresSomeFields(): void
     {
         // Check raw_input, country_code_source and preferred_domestic_carrier_code are ignored.
         $brNumberOne = new PhoneNumber();
@@ -3993,7 +3986,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(MatchType::EXACT_MATCH, $this->phoneUtil->isNumberMatch($brNumberOne, $brNumberTwo));
     }
 
-    public function testIsNumberMatchNonMatches()
+    public function testIsNumberMatchNonMatches(): void
     {
         // Non-matches.
         $this->assertEquals(MatchType::NO_MATCH, $this->phoneUtil->isNumberMatch('03 331 6005', '03 331 6006'));
@@ -4024,7 +4017,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertEquals(MatchType::NOT_A_NUMBER, $this->phoneUtil->isNumberMatch('Dog', '64 3 331 6005'));
     }
 
-    public function testIsNumberMatchNsnMatches()
+    public function testIsNumberMatchNsnMatches(): void
     {
         // NSN matches.
         $this->assertEquals(MatchType::NSN_MATCH, $this->phoneUtil->isNumberMatch('+64 3 331-6005', '03 331 6005'));
@@ -4061,7 +4054,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testIsNumberMatchShortNsnMatches()
+    public function testIsNumberMatchShortNsnMatches(): void
     {
         // Short NSN matches with the country not specified for either one or both numbers.
         $this->assertEquals(MatchType::SHORT_NSN_MATCH, $this->phoneUtil->isNumberMatch('+64 3 331-6005', '331 6005'));
@@ -4118,7 +4111,7 @@ class PhoneNumberUtilTest extends TestCase
         );
     }
 
-    public function testCanBeInternationallyDialled()
+    public function testCanBeInternationallyDialled(): void
     {
         // We have no-international-dialling rules for the US in our test metadata that say that
         // toll-free numbers cannot be dialled internationally.
@@ -4134,7 +4127,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertTrue($this->phoneUtil->canBeInternationallyDialled(self::$internationalTollFree));
     }
 
-    public function testIsAlphaNumber()
+    public function testIsAlphaNumber(): void
     {
         $this->assertTrue($this->phoneUtil->isAlphaNumber('1800 six-flags'));
         $this->assertTrue($this->phoneUtil->isAlphaNumber('1800 six-flags ext. 1234'));
@@ -4147,7 +4140,7 @@ class PhoneNumberUtilTest extends TestCase
         $this->assertFalse($this->phoneUtil->isAlphaNumber('+800 1234-1234'));
     }
 
-    public function testIsMobileNumberPortableRegion()
+    public function testIsMobileNumberPortableRegion(): void
     {
         $this->assertTrue($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::US));
         $this->assertTrue($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::GB));

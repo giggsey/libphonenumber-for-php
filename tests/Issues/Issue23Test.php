@@ -9,14 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 class Issue23Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
-    /**
-     * @var PhoneNumberOfflineGeocoder|null
-     */
-    private $geocoder;
+    private PhoneNumberUtil $phoneUtil;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
     public function setUp(): void
     {
@@ -26,7 +20,7 @@ class Issue23Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testTKGeoLocation()
+    public function testTKGeoLocation(): void
     {
         $number = '+6903010';
 

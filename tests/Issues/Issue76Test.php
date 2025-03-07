@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue76Test extends TestCase
 {
-    public function testIssue76()
+    public function testIssue76(): void
     {
         $this->doExpectException(
             '\libphonenumber\NumberParseException',
@@ -24,10 +24,8 @@ class Issue76Test extends TestCase
 
     /**
      * Helper function to support older PHPUnit versions
-     * @param string|null $message
-     * @param int|null $code
      */
-    private function doExpectException($class, $message = null, $code = null)
+    private function doExpectException(string $class, ?string $message = null, ?int $code = null): void
     {
         if (method_exists($this, 'expectException')
             && method_exists($this, 'expectExceptionMessage')

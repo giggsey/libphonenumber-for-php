@@ -9,15 +9,9 @@ use PHPUnit\Framework\TestCase;
 
 class RegionCodeCaseInsensitiveTest extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
-    /**
-     * @var ShortNumberInfo
-     */
-    private $shortInfo;
+    private ShortNumberInfo $shortInfo;
 
     public function setUp(): void
     {
@@ -26,7 +20,7 @@ class RegionCodeCaseInsensitiveTest extends TestCase
         $this->shortInfo = ShortNumberInfo::getInstance();
     }
 
-    public function testParse()
+    public function testParse(): void
     {
         $number = '07987458147';
         $phoneObject = $this->phoneUtil->parse($number, 'gb');
@@ -36,30 +30,30 @@ class RegionCodeCaseInsensitiveTest extends TestCase
         $this->assertTrue($this->phoneUtil->isValidNumberForRegion($phoneObject, 'gb'));
     }
 
-    public function testIsNANPACountry()
+    public function testIsNANPACountry(): void
     {
         $this->assertTrue($this->phoneUtil->isNANPACountry('us'));
     }
 
-    public function testGetMetadataForRegion()
+    public function testGetMetadataForRegion(): void
     {
         $metadata = $this->phoneUtil->getMetadataForRegion('gb');
 
         $this->assertInstanceOf('\libphonenumber\PhoneMetadata', $metadata);
     }
 
-    public function testConnectsToEmergency()
+    public function testConnectsToEmergency(): void
     {
         $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', 'us'));
         $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9111', 'br'));
     }
 
-    public function testGetCountryCodeForRegion()
+    public function testGetCountryCodeForRegion(): void
     {
         $this->assertEquals(44, $this->phoneUtil->getCountryCodeForRegion('gb'));
     }
 
-    public function testExampleNumber()
+    public function testExampleNumber(): void
     {
         $this->assertSame(
             (string) $this->phoneUtil->parse('+441212345678'),
@@ -75,7 +69,7 @@ class RegionCodeCaseInsensitiveTest extends TestCase
         );
     }
 
-    public function testFindNumbers()
+    public function testFindNumbers(): void
     {
         $phoneNumberMatcher = $this->phoneUtil->findNumbers('Testing 01212345678', 'gb');
 

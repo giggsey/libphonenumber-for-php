@@ -2,13 +2,14 @@
 
 namespace libphonenumber\Tests\Issues;
 
+use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\ShortNumberInfo;
 use PHPUnit\Framework\TestCase;
 
 class Issue68Test extends TestCase
 {
-    public function testShortNumberInfoIsPossibleShortNumberWithRegionMissingFromCodeSet()
+    public function testShortNumberInfoIsPossibleShortNumberWithRegionMissingFromCodeSet(): void
     {
         $exampleNumber = $this->getExampleNumber('NE');
 
@@ -17,7 +18,7 @@ class Issue68Test extends TestCase
         $this->assertFalse($shortNumberInfo->isPossibleShortNumber($exampleNumber));
     }
 
-    public function testShortNumberInfoIsPossibleShortNumberForRegionWithRegionMissingFromCodeSet()
+    public function testShortNumberInfoIsPossibleShortNumberForRegionWithRegionMissingFromCodeSet(): void
     {
         $exampleNumber = $this->getExampleNumber('NE');
 
@@ -26,7 +27,7 @@ class Issue68Test extends TestCase
         $this->assertFalse($shortNumberInfo->isPossibleShortNumberForRegion($exampleNumber, 'NE'));
     }
 
-    private function getExampleNumber($region)
+    private function getExampleNumber(string $region): PhoneNumber
     {
         $phoneUtil = PhoneNumberUtil::getInstance();
 

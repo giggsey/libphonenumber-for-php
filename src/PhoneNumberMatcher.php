@@ -341,11 +341,9 @@ class PhoneNumberMatcher implements \Iterator
      * combining marks should also return true since we assume they have been added to a preceding
      * Latin character.
      *
-     * @param string $letter
-     * @return bool
      * @internal
      */
-    public static function isLatinLetter($letter)
+    public static function isLatinLetter(string $letter): bool
     {
         // Combining marks are a subset of non-spacing-mark.
         if (\preg_match('/\p{L}/u', $letter) !== 1 && \preg_match('/\p{Mn}/u', $letter) !== 1) {

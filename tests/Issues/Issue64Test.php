@@ -8,13 +8,13 @@ use PHPUnit\Framework\TestCase;
 
 class Issue64Test extends TestCase
 {
-    public function testIssue64WithoutPhoneNumberUtil()
+    public function testIssue64WithoutPhoneNumberUtil(): void
     {
         $sortNumberUtil = ShortNumberInfo::getInstance();
         $this->assertTrue($sortNumberUtil->isEmergencyNumber('999', 'GB'));
     }
 
-    public function testIssue64WithoutPhoneNumberUtilgetInstance()
+    public function testIssue64WithoutPhoneNumberUtilgetInstance(): void
     {
         PhoneNumberUtil::getInstance();
 
@@ -22,7 +22,7 @@ class Issue64Test extends TestCase
         $this->assertTrue($sortNumberUtil->isEmergencyNumber('999', 'GB'));
     }
 
-    public function testIssue64WithoutPhoneNumberUtilresetInstance()
+    public function testIssue64WithoutPhoneNumberUtilresetInstance(): void
     {
         PhoneNumberUtil::resetInstance();
 

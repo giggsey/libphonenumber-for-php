@@ -14,10 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneNumberMatcherTest extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
+    protected PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -28,7 +25,7 @@ class PhoneNumberMatcherTest extends TestCase
         );
     }
 
-    public function testContainsMoreThanOneSlashInNationalNumber()
+    public function testContainsMoreThanOneSlashInNationalNumber(): void
     {
         // A date should return true.
         $number = new PhoneNumber();
@@ -73,7 +70,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertTrue(PhoneNumberMatcher::containsMoreThanOneSlashInNationalNumber($number, $candidate));
     }
 
-    public function testFindNationalNumber()
+    public function testFindNationalNumber(): void
     {
         // same cases as in testParseNationalNumber
         $this->doTestFindInContext('033316005', RegionCode::NZ);
@@ -97,7 +94,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('123-456-7890', RegionCode::US);
     }
 
-    public function testFindWithInternationalPrefixes()
+    public function testFindWithInternationalPrefixes(): void
     {
         $this->doTestFindInContext('+1 (650) 333-6000', RegionCode::NZ);
         $this->doTestFindInContext('1-650-333-6000', RegionCode::US);
@@ -118,14 +115,14 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('＋１ （６５０） ３３３－６０００', RegionCode::SG);
     }
 
-    public function testFindWithLeadingZero()
+    public function testFindWithLeadingZero(): void
     {
         $this->doTestFindInContext('+39 02-36618 300', RegionCode::NZ);
         $this->doTestFindInContext('02-36618 300', RegionCode::IT);
         $this->doTestFindInContext('312 345 678', RegionCode::IT);
     }
 
-    public function testFindNationalNumberArgentina()
+    public function testFindNationalNumberArgentina(): void
     {
         // Test parsing mobile numbers of Argentina.
         $this->doTestFindInContext('+54 9 343 555 1212', RegionCode::AR);
@@ -145,7 +142,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('023 1234 0000', RegionCode::AR);
     }
 
-    public function testFindWithXInNumber()
+    public function testFindWithXInNumber(): void
     {
         $this->doTestFindInContext('(0xx) 123456789', RegionCode::AR);
         // A case where x denotes both carrier codes and extension symbol.
@@ -158,7 +155,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('011xx5481429712', RegionCode::US);
     }
 
-    public function testFindNumbersMexico()
+    public function testFindNumbersMexico(): void
     {
         // Test parsing fixed-line numbers of Mexico.
         $this->doTestFindInContext('+52 (449)978-0001', RegionCode::MX);
@@ -171,7 +168,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('045 33 1234-5678', RegionCode::MX);
     }
 
-    public function testFindNumbersWithPlusWithNoRegion()
+    public function testFindNumbersWithPlusWithNoRegion(): void
     {
         // RegionCode.ZZ is allowed only if the number starts with a '+' - then the country code can be
         // calculated.
@@ -180,7 +177,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('+64 3 331 6005', null);
     }
 
-    public function testFindExtensions()
+    public function testFindExtensions(): void
     {
         $this->doTestFindInContext('03 331 6005 ext 3456', RegionCode::NZ);
         $this->doTestFindInContext('03-3316005x3456', RegionCode::NZ);
@@ -209,7 +206,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestFindInContext('(800) 901-3355 ext: 7246433', RegionCode::US);
     }
 
-    public function testFindInterspersedWithSpace()
+    public function testFindInterspersedWithSpace(): void
     {
         $this->doTestFindInContext('0 3   3 3 1   6 0 0 5', RegionCode::NZ);
     }
@@ -217,7 +214,7 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Test matching behaviour when starting in the middle of a phone number.
      */
-    public function testIntermediateParsePositions()
+    public function testIntermediateParsePositions(): void
     {
         $text = 'Call 033316005  or 032316005!';
         //       |    |    |    |    |    |
@@ -236,7 +233,7 @@ class PhoneNumberMatcherTest extends TestCase
         }
     }
 
-    public function testFourMatchesInARow()
+    public function testFourMatchesInARow(): void
     {
         $number1 = '415-666-7777';
         $number2 = '800-443-1223';
@@ -263,7 +260,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertMatchProperties($match, $text, $number4, RegionCode::US);
     }
 
-    public function testMatchesFoundWithMultipleSpaces()
+    public function testMatchesFoundWithMultipleSpaces(): void
     {
         $number1 = '(415) 666-7777';
         $number2 = '(800) 443-1223';
@@ -280,7 +277,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertMatchProperties($match, $text, $number2, RegionCode::US);
     }
 
-    public function testMatchWithSurroundingZipcodes()
+    public function testMatchWithSurroundingZipcodes(): void
     {
         $number = '415-666-7777';
         $zipPreceding = 'My address is CA 34215 - ' . $number . ' is my number.';
@@ -303,7 +300,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertMatchProperties($match, $zipFollowing, $number, RegionCode::US);
     }
 
-    public function dataLatinLetters()
+    public function dataLatinLetters(): array
     {
         return [
             ['c', true],
@@ -323,10 +320,8 @@ class PhoneNumberMatcherTest extends TestCase
 
     /**
      * @dataProvider dataLatinLetters
-     * @param string $letter
-     * @param string $expectedResult
      */
-    public function testIsLatinLetter($letter, $expectedResult)
+    public function testIsLatinLetter(string $letter, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,
@@ -335,7 +330,7 @@ class PhoneNumberMatcherTest extends TestCase
         );
     }
 
-    public function testMatchesWithSurroundingLatinChars()
+    public function testMatchesWithSurroundingLatinChars(): void
     {
         $possibleOnlyContexts = [];
         $possibleOnlyContexts[] = ['abc', 'def'];
@@ -351,7 +346,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($possibleOnlyContexts, false, true);
     }
 
-    public function testMoneyNotSeenAsPhoneNumber()
+    public function testMoneyNotSeenAsPhoneNumber(): void
     {
         $possibleOnlyContexts = [];
         $possibleOnlyContexts[] = ['$', ''];
@@ -362,7 +357,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($possibleOnlyContexts, false, true);
     }
 
-    public function testPercentageNotSeenAsPhoneNumber()
+    public function testPercentageNotSeenAsPhoneNumber(): void
     {
         $possibleOnlyContexts = [];
         $possibleOnlyContexts[] = ['', '%'];
@@ -370,7 +365,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($possibleOnlyContexts, false, true);
     }
 
-    public function testPhoneNumberWithLeadingOrTrailingMoneyMatches()
+    public function testPhoneNumberWithLeadingOrTrailingMoneyMatches(): void
     {
         // Because of the space after the 20 (or before the 100) these dollar amounts should not stop
         // the actual number from being found.
@@ -381,7 +376,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($contexts, true, true);
     }
 
-    public function testMatchesWithSurroundingLatinCharsAndLeadingPunctuation()
+    public function testMatchesWithSurroundingLatinCharsAndLeadingPunctuation(): void
     {
         // Contexts with trailing characters. Leading characters are okay here since the numbers we will
         // insert start with punctuation, but trailing characters are still not allowed.
@@ -408,7 +403,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($validContexts, true, true, RegionCode::US, $numberWithBrackets);
     }
 
-    public function testMatchesWithSurroundingChineseChars()
+    public function testMatchesWithSurroundingChineseChars(): void
     {
         $validContexts = [];
         $validContexts[] = ['我的电话号码是', ''];
@@ -419,7 +414,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($validContexts, true, true);
     }
 
-    public function testMatchesWithSurroundingPunctuation()
+    public function testMatchesWithSurroundingPunctuation(): void
     {
         $validContexts = [];
         $validContexts[] = ['My number-', '']; // At end of text
@@ -431,7 +426,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->findMatchesInContexts($validContexts, true, true);
     }
 
-    public function testMatchesMultiplePhoneNumbersSeparatedByPhoneNumberPunctuation()
+    public function testMatchesMultiplePhoneNumbersSeparatedByPhoneNumberPunctuation(): void
     {
         $text = 'Call 650-253-4561 -- 455-234-3451';
         $region = RegionCode::US;
@@ -455,7 +450,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertEquals($match2, $matches->current());
     }
 
-    public function testDoesNotMatchMultiplePhoneNumbersSeparatedWithNoWhiteSpace()
+    public function testDoesNotMatchMultiplePhoneNumbersSeparatedWithNoWhiteSpace(): void
     {
         // No white-space found between numbers - neither is found.
         $text = 'Call 650-253-4561--455-234-3451';
@@ -466,9 +461,8 @@ class PhoneNumberMatcherTest extends TestCase
 
     /**
      * Strings with number-like things that shouldn't be found under any level.
-     * @return array
      */
-    public function dataImpossibleCases()
+    public function dataImpossibleCases(): array
     {
         return [
             ['12345', RegionCode::US],
@@ -493,9 +487,8 @@ class PhoneNumberMatcherTest extends TestCase
 
     /**
      * Strings with number-like things that should only be found under "possible".
-     * @return array
      */
-    public function dataPossibleOnlyCases()
+    public function dataPossibleOnlyCases(): array
     {
         return [
             // US numbers cannot start with 7 in the test metadata to be valid.
@@ -512,9 +505,8 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Strings with number-like things that should only be found up to and including the "valid"
      * leniency level.
-     * @return array
      */
-    public function dataValidCases()
+    public function dataValidCases(): array
     {
         return [
             ['65 02 53 00 00', RegionCode::US],
@@ -544,9 +536,8 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Strings with number-like things that should only be found up to and including the
      * "strict_grouping" leniency level.
-     * @return array
      */
-    public function dataStrictGroupingCases()
+    public function dataStrictGroupingCases(): array
     {
         return [
             ['(415) 6667777', RegionCode::US],
@@ -567,9 +558,8 @@ class PhoneNumberMatcherTest extends TestCase
 
     /**
      * Strings with number-like things that should be found at all levels.
-     * @return array
      */
-    public function dataExactGroupingCases()
+    public function dataExactGroupingCases(): array
     {
         return [
             ['４１５６６６７７７７', RegionCode::US],
@@ -601,7 +591,7 @@ class PhoneNumberMatcherTest extends TestCase
         ];
     }
 
-    public function data_testMatchesWithPossibleLeniency()
+    public function data_testMatchesWithPossibleLeniency(): array
     {
         return $this->dataStrictGroupingCases()
         + $this->dataExactGroupingCases()
@@ -610,26 +600,22 @@ class PhoneNumberMatcherTest extends TestCase
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider data_testMatchesWithPossibleLeniency
      */
-    public function testMatchesWithPossibleLeniency($rawString, $region)
+    public function testMatchesWithPossibleLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::POSSIBLE());
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider dataImpossibleCases
      */
-    public function testNonMatchesWithPossibleLeniency($rawString, $region)
+    public function testNonMatchesWithPossibleLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::POSSIBLE());
     }
 
-    public function data_testMatchesWithValidLeniency()
+    public function data_testMatchesWithValidLeniency(): array
     {
         return $this->dataStrictGroupingCases()
         + $this->dataExactGroupingCases()
@@ -637,16 +623,14 @@ class PhoneNumberMatcherTest extends TestCase
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider data_testMatchesWithValidLeniency
      */
-    public function testMatchesWithValidLeniency($rawString, $region)
+    public function testMatchesWithValidLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::VALID());
     }
 
-    public function data_testNonMatchesWithValidLeniency()
+    public function data_testNonMatchesWithValidLeniency(): array
     {
         return $this->dataImpossibleCases()
             + $this->dataPossibleOnlyCases();
@@ -655,28 +639,26 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * @dataProvider data_testNonMatchesWithValidLeniency
      */
-    public function testNonMatchesWithValidLeniency($rawString, $region)
+    public function testNonMatchesWithValidLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::VALID());
     }
 
-    public function data_testMatchesWithStrictGroupingLeniency()
+    public function data_testMatchesWithStrictGroupingLeniency(): array
     {
         return $this->dataStrictGroupingCases()
             + $this->dataExactGroupingCases();
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider data_testMatchesWithStrictGroupingLeniency
      */
-    public function testMatchesWithStrictGroupingLeniency($rawString, $region)
+    public function testMatchesWithStrictGroupingLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::STRICT_GROUPING());
     }
 
-    public function data_testNonMatchesWithStrictGroupLeniency()
+    public function data_testNonMatchesWithStrictGroupLeniency(): array
     {
         return $this->dataImpossibleCases()
             + $this->dataPossibleOnlyCases()
@@ -684,26 +666,22 @@ class PhoneNumberMatcherTest extends TestCase
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider data_testNonMatchesWithStrictGroupLeniency
      */
-    public function testNonMatchesWithStrictGroupLeniency($rawString, $region)
+    public function testNonMatchesWithStrictGroupLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::STRICT_GROUPING());
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider dataExactGroupingCases
      */
-    public function testMatchesWithExactGroupingLeniency($rawString, $region)
+    public function testMatchesWithExactGroupingLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberMatchesForLeniency($rawString, $region, Leniency::EXACT_GROUPING());
     }
 
-    public function data_testNonMatchesExactGroupLeniency()
+    public function data_testNonMatchesExactGroupLeniency(): array
     {
         return $this->dataImpossibleCases()
             + $this->dataPossibleOnlyCases()
@@ -712,16 +690,14 @@ class PhoneNumberMatcherTest extends TestCase
     }
 
     /**
-     * @param string $rawString
-     * @param string $region
      * @dataProvider data_testNonMatchesExactGroupLeniency
      */
-    public function testNonMatchesExactGroupLeniency($rawString, $region)
+    public function testNonMatchesExactGroupLeniency(string $rawString, string $region): void
     {
         $this->doTestNumberNonMatchesForLeniency($rawString, $region, Leniency::EXACT_GROUPING());
     }
 
-    protected function doTestNumberMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
+    protected function doTestNumberMatchesForLeniency(string $string, string $region, Leniency\AbstractLeniency $leniency): void
     {
         $iterator = $this->findNumbersForLeniency($string, $region, $leniency);
 
@@ -732,7 +708,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertEquals($string, $match->rawString(), "Found wrong match in test {$string} ({$region}). Found {$match->rawString()}");
     }
 
-    protected function doTestNumberNonMatchesForLeniency($string, $region, Leniency\AbstractLeniency $leniency)
+    protected function doTestNumberNonMatchesForLeniency(string $string, string $region, Leniency\AbstractLeniency $leniency): void
     {
         $iterator = $this->findNumbersForLeniency($string, $region, $leniency);
 
@@ -748,21 +724,14 @@ class PhoneNumberMatcherTest extends TestCase
      *  matching is set to VALID; else no test number should be extracted at that leniency level
      * -- if isPossible is true, they all find a test number inserted in the middle when leniency of
      *  matching is set to POSSIBLE; else no test number should be extracted at that leniency level
-     *
-     *
-     * @param array $contexts
-     * @param bool $isValid
-     * @param bool $isPossible
-     * @param string $region
-     * @param string $number
      */
     protected function findMatchesInContexts(
-        $contexts,
-        $isValid,
-        $isPossible,
-        $region = RegionCode::US,
-        $number = '415-666-7777'
-    ) {
+        array $contexts,
+        bool $isValid,
+        bool $isPossible,
+        string $region = RegionCode::US,
+        string $number = '415-666-7777'
+    ): void {
         if ($isValid) {
             $this->doTestInContext($number, $region, $contexts, Leniency::VALID());
         } else {
@@ -788,7 +757,7 @@ class PhoneNumberMatcherTest extends TestCase
         }
     }
 
-    public function testNonMatchingBracketsAreInvalid()
+    public function testNonMatchingBracketsAreInvalid(): void
     {
         // The digits up to the ", " form a valid US number, but it shouldn't be matched as one since
         // there was a non-matching bracket present.
@@ -816,7 +785,7 @@ class PhoneNumberMatcherTest extends TestCase
         )));
     }
 
-    public function testNoMatchIfRegionIsNull()
+    public function testNoMatchIfRegionIsNull(): void
     {
         // Fail on non-international prefix if region code is null.
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
@@ -825,13 +794,13 @@ class PhoneNumberMatcherTest extends TestCase
         )));
     }
 
-    public function testNoMatchInEmptyString()
+    public function testNoMatchInEmptyString(): void
     {
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers('', RegionCode::US)));
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers('  ', RegionCode::US)));
     }
 
-    public function testNoMatchIfNoNumber()
+    public function testNoMatchIfNoNumber(): void
     {
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(
             'Random text body - number is foobar, see you there',
@@ -839,7 +808,7 @@ class PhoneNumberMatcherTest extends TestCase
         )));
     }
 
-    public function testSequences()
+    public function testSequences(): void
     {
         // Test multiple occurrences.
         $text = 'Call 033316005  or 032316005!';
@@ -864,13 +833,13 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertEquals($match2, $matches->current());
     }
 
-    public function testNullInput()
+    public function testNullInput(): void
     {
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(null, RegionCode::US)));
         $this->assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers(null, null)));
     }
 
-    public function testMaxMatches()
+    public function testMaxMatches(): void
     {
         // Set up text with 100 valid phone numbers.
         $numbers = \str_repeat('My info: 415-666-7777,', 100);
@@ -888,7 +857,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testMaxMatchesInvalid()
+    public function testMaxMatchesInvalid(): void
     {
         // Set up text with 10 invalid phone numbers followed by 100 valid.
         $numbers = '';
@@ -904,7 +873,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertNull($iterable->current());
     }
 
-    public function testMaxMatchesMixed()
+    public function testMaxMatchesMixed(): void
     {
         // Set up text with 100 valid numbers inside an invalid number.
         $numbers = '';
@@ -926,7 +895,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function testNonPlusPrefixedNumbersNotFoundForInvalidRegion()
+    public function testNonPlusPrefixedNumbersNotFoundForInvalidRegion(): void
     {
         // Does not start with a "+", we won't match it.
         $iterable = $this->phoneUtil->findNumbers('1 456 764 156', RegionCode::ZZ);
@@ -935,7 +904,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertFalse($iterable->valid());
     }
 
-    public function testEmptyIteration()
+    public function testEmptyIteration(): void
     {
         $iterable = $this->phoneUtil->findNumbers('', RegionCode::ZZ);
 
@@ -943,7 +912,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertFalse($iterable->valid());
     }
 
-    public function testSingleIteration()
+    public function testSingleIteration(): void
     {
         $iterable = $this->phoneUtil->findNumbers('+14156667777', RegionCode::ZZ);
 
@@ -956,7 +925,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->assertNull($iterable->current());
     }
 
-    public function testDoubleIteration()
+    public function testDoubleIteration(): void
     {
         $iterable = $this->phoneUtil->findNumbers('+14156667777 foobar +14156667777 ', RegionCode::ZZ);
 
@@ -976,12 +945,8 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Asserts that the expected match is non-null, and that the raw string and expected
      * proto buffer are set appropriately
-     *
-     * @param string $text
-     * @param string $number
-     * @param string $region
      */
-    protected function assertMatchProperties(PhoneNumberMatch $match, $text, $number, $region)
+    protected function assertMatchProperties(PhoneNumberMatch $match, string $text, string $number, string $region): void
     {
         $expectedResult = $this->phoneUtil->parse($number, $region);
         $this->assertNotNull($match, "Did not find a number in {$text}; expected {$number}");
@@ -992,13 +957,8 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Asserts that another number can be found in $text starting at $index, and that its
      * corresponding range in $start to $end
-     *
-     * @param string $text
-     * @param int $index
-     * @param int $start
-     * @param int $end
      */
-    protected function assertEqualRange($text, $index, $start, $end)
+    protected function assertEqualRange(string $text, int $index, int $start, int $end): void
     {
         $sub = \mb_substr($text, $index, \mb_strlen($text) - $index);
         $matches = $this->phoneUtil->findNumbers($sub, RegionCode::NZ, Leniency::POSSIBLE(), PHP_INT_MAX);
@@ -1018,9 +978,9 @@ class PhoneNumberMatcherTest extends TestCase
      * textual contexts
      *
      * @param string $number The number to test
-     * @param string $defaultCountry The corresponding region code
+     * @param string|null $defaultCountry The corresponding region code
      */
-    protected function doTestFindInContext($number, $defaultCountry)
+    protected function doTestFindInContext(string $number, ?string $defaultCountry): void
     {
         $this->findPossibleInContext($number, $defaultCountry);
 
@@ -1033,7 +993,7 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Tests valid numbers in contexts that should pass for Leniency::POSSIBLE()
      */
-    protected function findPossibleInContext($number, $defaultCountry)
+    protected function findPossibleInContext(string $number, ?string $defaultCountry): void
     {
         $contextPairs = [];
         $contextPairs[] = ['', '']; // no content
@@ -1070,11 +1030,8 @@ class PhoneNumberMatcherTest extends TestCase
     /**
      * Tests valid numbers in contexts that fail for Leniency::POSSIBLE() but are valid for
      * Leniency::VALID()
-     *
-     * @param string $number
-     * @param string $defaultCountry
      */
-    protected function findValidInContext($number, $defaultCountry)
+    protected function findValidInContext(string $number, ?string $defaultCountry): void
     {
         $contextPairs = [];
         // With other small numbers
@@ -1091,7 +1048,7 @@ class PhoneNumberMatcherTest extends TestCase
         $this->doTestInContext($number, $defaultCountry, $contextPairs, Leniency::VALID());
     }
 
-    protected function doTestInContext($number, $defaultCountry, $contextPairs, Leniency\AbstractLeniency $leniency)
+    protected function doTestInContext(string $number, ?string $defaultCountry, array $contextPairs, Leniency\AbstractLeniency $leniency): void
     {
         foreach ($contextPairs as $context) {
             $prefix = $context[0];
@@ -1116,7 +1073,7 @@ class PhoneNumberMatcherTest extends TestCase
         }
     }
 
-    protected function ensureTermination($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
+    protected function ensureTermination(string $text, ?string $defaultCountry, Leniency\AbstractLeniency $leniency): void
     {
         $textLength = \mb_strlen($text);
         for ($index = 0; $index <= $textLength; $index++) {
@@ -1129,12 +1086,12 @@ class PhoneNumberMatcherTest extends TestCase
         }
     }
 
-    protected function findNumbersForLeniency($text, $defaultCountry, Leniency\AbstractLeniency $leniency)
+    protected function findNumbersForLeniency(string $text, string $defaultCountry, Leniency\AbstractLeniency $leniency): PhoneNumberMatcher
     {
         return $this->phoneUtil->findNumbers($text, $defaultCountry, $leniency, PHP_INT_MAX);
     }
 
-    protected function hasNoMatches(PhoneNumberMatcher $match)
+    protected function hasNoMatches(PhoneNumberMatcher $match): bool
     {
         return !$match->valid();
     }

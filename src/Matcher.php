@@ -13,31 +13,18 @@ namespace libphonenumber;
  */
 class Matcher
 {
-    /**
-     * @var string
-     */
-    protected $pattern;
+    protected string $pattern;
 
-    /**
-     * @var string
-     */
-    protected $subject = '';
+    protected string $subject = '';
 
-    /**
-     * @var array
-     */
-    protected $groups = [];
+    protected array $groups = [];
 
-    private $searchIndex = 0;
+    private int $searchIndex = 0;
 
-    /**
-     * @param string $pattern
-     * @param string $subject
-     */
-    public function __construct($pattern, $subject)
+    public function __construct(string $pattern, string $subject)
     {
-        $this->pattern = str_replace('/', '\/', (string) $pattern);
-        $this->subject = (string) $subject;
+        $this->pattern = str_replace('/', '\/', $pattern);
+        $this->subject = $subject;
     }
 
     protected function doMatch($type = 'find', $offset = 0)

@@ -9,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class AsYouTypeFormatterTest extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
+    protected PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -23,7 +20,7 @@ class AsYouTypeFormatterTest extends TestCase
         );
     }
 
-    public function testInvalidRegion()
+    public function testInvalidRegion(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::ZZ);
         $this->assertEquals('+', $formatter->inputDigit('+'));
@@ -46,7 +43,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('650253', $formatter->inputDigit('3'));
     }
 
-    public function testInvalidPlusSign()
+    public function testInvalidPlusSign(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::ZZ);
         $this->assertEquals('+', $formatter->inputDigit('+'));
@@ -64,7 +61,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+48881231+2', $formatter->inputDigit('2'));
     }
 
-    public function testTooLongNumberMatchingMultipleLeadingDigits()
+    public function testTooLongNumberMatchingMultipleLeadingDigits(): void
     {
         // See https://github.com/googlei18n/libphonenumber/issues/36
         // The bug occurred last time for countries which have two formatting rules with exactly the
@@ -88,7 +85,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+819012345678901', $formatter->inputDigit('1'));
     }
 
-    public function testCountryWithSpaceInNationalPrefixFormattingRule()
+    public function testCountryWithSpaceInNationalPrefixFormattingRule(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::BY);
         $this->assertEquals('8', $formatter->inputDigit('8'));
@@ -104,7 +101,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('88190123', $formatter->inputDigit('3'));
     }
 
-    public function testCountryWithSpaceInNationalPrefixFormattingRuleAndLongNdd()
+    public function testCountryWithSpaceInNationalPrefixFormattingRuleAndLongNdd(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::BY);
         $this->assertEquals('9', $formatter->inputDigit('9'));
@@ -119,7 +116,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('99999 12 345', $formatter->inputDigit('5'));
     }
 
-    public function testAYTFUS()
+    public function testAYTFUS(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         $this->assertEquals('6', $formatter->inputDigit('6'));
@@ -214,7 +211,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+48 88 123 12 12', $formatter->inputDigit('2'));
     }
 
-    public function testAYTFUSFullWidthCharacters()
+    public function testAYTFUSFullWidthCharacters(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         $this->assertEquals("\xEF\xBC\x96", $formatter->inputDigit("\xEF\xBC\x96"));
@@ -229,7 +226,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('650 253 2222', $formatter->inputDigit("\xEF\xBC\x92"));
     }
 
-    public function testAYTFUSMobileShortCode()
+    public function testAYTFUSMobileShortCode(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         $this->assertEquals('*', $formatter->inputDigit('*'));
@@ -239,7 +236,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('*121#', $formatter->inputDigit('#'));
     }
 
-    public function testAYTFUSVanityNumber()
+    public function testAYTFUSVanityNumber(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         $this->assertEquals('8', $formatter->inputDigit('8'));
@@ -256,7 +253,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('800 MY APPLE', $formatter->inputDigit('E'));
     }
 
-    public function testAYTFAndRememberPositionUS()
+    public function testAYTFAndRememberPositionUS(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         $this->assertEquals('1', $formatter->inputDigitAndRememberPosition('1'));
@@ -393,7 +390,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals(3, $formatter->getRememberedPosition());
     }
 
-    public function testAYTFGBFixedLine()
+    public function testAYTFGBFixedLine(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::GB);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -411,7 +408,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('020 7031 3000', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFGBTollFree()
+    public function testAYTFGBTollFree(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::GB);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -427,7 +424,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('080 7031 3000', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFGBPremiumRate()
+    public function testAYTFGBPremiumRate(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::GB);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -443,7 +440,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('090 7031 3000', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFNZMobile()
+    public function testAYTFNZMobile(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::NZ);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -458,7 +455,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('02-112 3456', $formatter->inputDigit('6'));
     }
 
-    public function testAYTFDE()
+    public function testAYTFDE(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::DE);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -510,7 +507,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('00 1 650 253 2222', $formatter->inputDigit('2'));
     }
 
-    public function testAYTFAR()
+    public function testAYTFAR(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::AR);
         $this->assertEquals('0', $formatter->inputDigit('0'));
@@ -526,7 +523,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('011 7031-3000', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFARMobile()
+    public function testAYTFARMobile(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::AR);
         $this->assertEquals('+', $formatter->inputDigit('+'));
@@ -545,7 +542,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+54 9 11 2312 1234', $formatter->inputDigit('4'));
     }
 
-    public function testAYTFKR()
+    public function testAYTFKR(): void
     {
         // +82 51 234 5678
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::KR);
@@ -636,7 +633,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('011-9876-7890', $formatter->inputDigit('0'));
     }
 
-    public function testAYTF_MX()
+    public function testAYTF_MX(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::MX);
 
@@ -736,7 +733,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+52 1 541 234 5678', $formatter->inputDigit('8'));
     }
 
-    public function testAYTF_International_Toll_Free()
+    public function testAYTF_International_Toll_Free(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
         // +800 1234 5678
@@ -755,7 +752,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+800123456789', $formatter->inputDigit('9'));
     }
 
-    public function testAYTFMultipleLeadingDigitPatterns()
+    public function testAYTFMultipleLeadingDigitPatterns(): void
     {
         // +81 50 2345 6789
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::JP);
@@ -813,7 +810,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+81 3332 2 5678', $formatter->inputDigit('8'));
     }
 
-    public function testAYTFLongIDD_AU()
+    public function testAYTFLongIDD_AU(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::AU);
         // 0011 1 650 253 2250
@@ -871,7 +868,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('0011 244 250 253 222', $formatter->inputDigit('2'));
     }
 
-    public function testAYTFLongIDD_KR()
+    public function testAYTFLongIDD_KR(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::KR);
         // 00300 1 650 253 2222
@@ -893,7 +890,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('00300 1 650 253 2222', $formatter->inputDigit('2'));
     }
 
-    public function testAYTFLongNDD_KR()
+    public function testAYTFLongNDD_KR(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::KR);
         // 08811-9876-7890
@@ -930,7 +927,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('08500 11-9876-7890', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFLongNDD_SG()
+    public function testAYTFLongNDD_SG(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::SG);
         // 777777 9876 7890
@@ -950,7 +947,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('777777 9876 7890', $formatter->inputDigit('0'));
     }
 
-    public function testAYTFShortNumberFormattingFix_AU()
+    public function testAYTFShortNumberFormattingFix_AU(): void
     {
         // For Australia, the national prefix is not optional when formatting.
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::AU);
@@ -1025,7 +1022,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+61 2 1234 5678', $formatter->inputDigit('8'));
     }
 
-    public function testAYTFShortNumberFormattingFix_KR()
+    public function testAYTFShortNumberFormattingFix_KR(): void
     {
         // For Korea, the national prefix is not optional when formatting, and the national prefix
         // formatting rule doesn't consist of only the first group.
@@ -1069,7 +1066,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+82 131-2-1234', $formatter->inputDigit('4'));
     }
 
-    public function testAYTFShortNumberFormattingFix_MX()
+    public function testAYTFShortNumberFormattingFix_MX(): void
     {
         // For Mexico, the national prefix is optional when formatting.
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::MX);
@@ -1110,7 +1107,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('+52 800 123 4567', $formatter->inputDigit('7'));
     }
 
-    public function testAYTFNoNationalPrefix()
+    public function testAYTFNoNationalPrefix(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::IT);
 
@@ -1122,7 +1119,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('333 333', $formatter->inputDigit('3'));
     }
 
-    public function testAYTFNoNationalPrefixFormattingRule()
+    public function testAYTFNoNationalPrefixFormattingRule(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::AO);
 
@@ -1134,7 +1131,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('333 333', $formatter->inputDigit('3'));
     }
 
-    public function testAYTFShortNumberFormattingFix_US()
+    public function testAYTFShortNumberFormattingFix_US(): void
     {
         // For the US, an initial 1 is treated specially.
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::US);
@@ -1157,7 +1154,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('1 22', $formatter->inputDigit('2'));
     }
 
-    public function testAYTFClearNDDAfterIDDExtraction()
+    public function testAYTFClearNDDAfterIDDExtraction(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::KR);
 
@@ -1193,7 +1190,7 @@ class AsYouTypeFormatterTest extends TestCase
         $this->assertEquals('0070012345678901234567', $formatter->inputDigit('7'));
     }
 
-    public function testAYTFNumberPatternsBecomingInvalidShouldNotResultInDigitLoss()
+    public function testAYTFNumberPatternsBecomingInvalidShouldNotResultInDigitLoss(): void
     {
         $formatter = $this->phoneUtil->getAsYouTypeFormatter(RegionCode::CN);
 

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class GeneratePhonePrefixDataTest extends TestCase
 {
-    private static $available_data_files;
+    private static array $available_data_files;
 
     public static function setUpBeforeClass(): void
     {
@@ -31,7 +31,7 @@ class GeneratePhonePrefixDataTest extends TestCase
         self::$available_data_files = $temporaryMap;
     }
 
-    public function testAddConfigurationMapping()
+    public function testAddConfigurationMapping(): void
     {
         $this->assertCount(3, self::$available_data_files);
 

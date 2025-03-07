@@ -16,15 +16,9 @@ use PHPUnit\Framework\TestCase;
 
 class LocaleTest extends TestCase
 {
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -36,10 +30,8 @@ class LocaleTest extends TestCase
 
     /**
      * @dataProvider localeList
-     * @param string $regionCode
-     * @param string $countryName
      */
-    public function testLocales($regionCode, $countryName)
+    public function testLocales(string $regionCode, string $countryName): void
     {
         if (!\in_array($regionCode, $this->phoneUtil->getSupportedRegions())) {
             $this->markTestSkipped("{$regionCode} is not supported");
@@ -54,7 +46,7 @@ class LocaleTest extends TestCase
         $this->assertEquals($countryName, $this->geocoder->getDescriptionForValidNumber($phoneNumber, 'en', 'ZZ'), "Checking {$phoneNumber} is part of {$countryName}");
     }
 
-    public function localeList()
+    public function localeList(): array
     {
         $codes = $this->getCountryCodes();
 
@@ -70,9 +62,8 @@ class LocaleTest extends TestCase
      * This list was got from the Internet, and altered slightly to make the tests pass
      *
      * @see https://gist.github.com/vxnick/380904
-     * @return array
      */
-    private function getCountryCodes()
+    private function getCountryCodes(): array
     {
         return [
             'AF' => 'Afghanistan',

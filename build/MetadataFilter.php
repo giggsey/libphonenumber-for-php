@@ -52,14 +52,14 @@ class MetadataFilter
         'mobileNumberPortableRegion',
     ];
 
-    protected $blackList;
+    protected array $blackList;
 
-    public function __construct($blackList = [])
+    public function __construct(array $blackList = [])
     {
         $this->blackList = $blackList;
     }
 
-    public static function forLiteBuild()
+    public static function forLiteBuild(): MetadataFilter
     {
         // "exampleNumber" is a blacklist.
         return new static(self::parseFieldMapFromString('exampleNumber'));
@@ -72,10 +72,8 @@ class MetadataFilter
      * duplicates, malformed strings, or strings where field tokens do not correspond to strings in
      * the sets of excludable fields. We also throw RuntimeException for empty strings since such
      * strings should be treated as a special case by the flag checking code and not passed here.
-     * @param string $string
-     * @return array
      */
-    public static function parseFieldMapFromString($string)
+    public static function parseFieldMapFromString(?string $string): array
     {
         if ($string === null) {
             throw new \RuntimeException('Null string should not be passed to parseFieldMapFromString');
@@ -170,7 +168,7 @@ class MetadataFilter
         return $fieldMap;
     }
 
-    public static function forSpecialBuild()
+    public static function forSpecialBuild(): MetadataFilter
     {
         // "mobile" is a whitelist.
         return new static(self::computeComplement(self::parseFieldMapFromString('mobile')));
@@ -180,9 +178,8 @@ class MetadataFilter
      * Does not check that legal tokens are used, assuming that $fieldMap is constructed using
      * parseFieldMapFromString which does check. If $fieldMap contains illegal tokens or parent
      * fields with no children or other unexpected state, the behavior of this function is undefined.
-     * @return array
      */
-    public static function computeComplement($fieldMap)
+    public static function computeComplement(array $fieldMap): array
     {
         $complement = [];
         foreach (self::$EXCLUDABLE_PARENT_FIELDS as $parent) {
@@ -212,7 +209,7 @@ class MetadataFilter
         return $complement;
     }
 
-    public static function emptyFilter()
+    public static function emptyFilter(): MetadataFilter
     {
         // Empty blacklist, meaning we filter nothing.
         return new MetadataFilter();
@@ -225,7 +222,7 @@ class MetadataFilter
      *
      * @param PhoneMetadata $metadata The object to be filtered
      */
-    public function filterMetadata(PhoneMetadata $metadata)
+    public function filterMetadata(PhoneMetadata $metadata): void
     {
         if ($metadata->hasFixedLine()) {
             $metadata->setFixedLine($this->getFiltered('fixedLine', $metadata->getFixedLine()));
@@ -319,11 +316,7 @@ class MetadataFilter
         }
     }
 
-    /**
-     * @param string $type
-     * @return PhoneNumberDesc
-     */
-    private function getFiltered($type, PhoneNumberDesc $desc)
+    private function getFiltered(string $type, PhoneNumberDesc $desc): PhoneNumberDesc
     {
         $builder = new PhoneNumberDesc();
         $builder->mergeFrom($desc);
@@ -347,10 +340,7 @@ class MetadataFilter
         return $builder;
     }
 
-    /**
-     * @return bool
-     */
-    public function shouldDrop($parent, $child = null)
+    public function shouldDrop(string $parent, ?string $child = null): bool
     {
         if ($child !== null) {
             if (!\in_array($parent, self::$EXCLUDABLE_PARENT_FIELDS)) {

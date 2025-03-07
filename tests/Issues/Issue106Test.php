@@ -8,11 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 class Issue106Test extends TestCase
 {
-    private static $TW_Number1;
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    protected $geocoder;
+    private static PhoneNumber $TW_Number1;
+    protected PhoneNumberOfflineGeocoder $geocoder;
 
     public static function setUpBeforeClass(): void
     {
@@ -26,7 +23,7 @@ class Issue106Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testGeocoderForZh()
+    public function testGeocoderForZh(): void
     {
         $this->assertEquals('Taipei', $this->geocoder->getDescriptionForNumber(self::$TW_Number1, 'en'));
 

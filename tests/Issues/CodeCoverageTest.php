@@ -8,10 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class CodeCoverageTest extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -19,7 +16,7 @@ class CodeCoverageTest extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testNullException()
+    public function testNullException(): void
     {
         try {
             $this->phoneUtil->parse(null, null);
@@ -34,7 +31,7 @@ class CodeCoverageTest extends TestCase
         }
     }
 
-    public function testTooShortNumber()
+    public function testTooShortNumber(): void
     {
         try {
             $this->phoneUtil->parse('+441', 'GB');

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneMetadataTest extends TestCase
 {
-    public function phoneNumberRegionList()
+    public function phoneNumberRegionList(): array
     {
         $returnList = [];
 
@@ -22,7 +22,7 @@ class PhoneMetadataTest extends TestCase
         return $returnList;
     }
 
-    public function shortNumberRegionList()
+    public function shortNumberRegionList(): array
     {
         $returnList = [];
 
@@ -38,7 +38,7 @@ class PhoneMetadataTest extends TestCase
     /**
      * @dataProvider phoneNumberRegionList
      */
-    public function testPhoneNumberMetadataToAndFromArray($region)
+    public function testPhoneNumberMetadataToAndFromArray(string $region): void
     {
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
         $phoneMetadata = $phoneNumberUtil->getMetadataForRegion($region);
@@ -58,7 +58,7 @@ class PhoneMetadataTest extends TestCase
     /**
      * @dataProvider shortNumberRegionList
      */
-    public function testShortCodeMetadataToAndFromArray($region)
+    public function testShortCodeMetadataToAndFromArray(string $region): void
     {
         $shortNumberInfo = ShortNumberInfo::getInstance();
         $phoneMetadata = $shortNumberInfo->getMetadataForRegion($region);
