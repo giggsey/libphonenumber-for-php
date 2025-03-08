@@ -20,14 +20,12 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1"
           - "8.2"
           - "8.3"
           - "8.4"
         include:
-          - php-version: 8.3
+          - php-version: 8.4
             coverage: coverage
     steps:
       - name: Checkout
