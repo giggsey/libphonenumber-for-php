@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * libphonenumber-for-php-lite data file
+ * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
  * Do not modify!
  * @internal
@@ -92,9 +91,7 @@ return [
     'internationalPrefix' => '011',
     'nationalPrefix' => '1',
     'nationalPrefixForParsing' => '1',
-    'sameMobileAndFixedLinePattern' => false,
     'numberFormat' => [],
     'intlNumberFormat' => [],
     'mainCountryForCode' => false,
-    'mobileNumberPortableRegion' => false,
 ];

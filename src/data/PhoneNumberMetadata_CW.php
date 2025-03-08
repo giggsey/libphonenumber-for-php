@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * libphonenumber-for-php-lite data file
+ * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
  * Do not modify!
  * @internal
@@ -91,7 +90,6 @@ return [
     'id' => 'CW',
     'countryCode' => 599,
     'internationalPrefix' => '00',
-    'sameMobileAndFixedLinePattern' => false,
     'numberFormat' => [
         [
             'pattern' => '(\\d{3})(\\d{4})',
@@ -117,5 +115,4 @@ return [
     'intlNumberFormat' => [],
     'mainCountryForCode' => true,
     'leadingDigits' => '[69]',
-    'mobileNumberPortableRegion' => false,
 ];

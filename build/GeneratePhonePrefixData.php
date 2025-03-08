@@ -93,7 +93,7 @@ class GeneratePhonePrefixData
             $mappingForFiles = $this->splitMap($mappings, $outputFiles);
 
             foreach ($mappingForFiles as $outputFile => $value) {
-                $this->writeMappingFile($language, $outputFile, $value);
+                $this->writeMappingFile($language, (string) $outputFile, $value);
                 $this->addConfigurationMapping($availableDataFiles, $language, $outputFile);
             }
             $progress->advance();
@@ -322,8 +322,8 @@ class GeneratePhonePrefixData
     }
 
     /**
-     * @param array<string,string> $englishMap
-     * @param array<string,string> $nonEnglishMap
+     * @param array<string|int,string> $englishMap
+     * @param array<string|int,string> $nonEnglishMap
      */
     private function compressAccordingToEnglishData(array $englishMap, array &$nonEnglishMap): void
     {
@@ -331,7 +331,7 @@ class GeneratePhonePrefixData
             if (array_key_exists($prefix, $englishMap)) {
                 $englishDescription = $englishMap[$prefix];
                 if ($englishDescription === $value) {
-                    if (!$this->hasOverlappingPrefix($prefix, $nonEnglishMap)) {
+                    if (!$this->hasOverlappingPrefix((string) $prefix, $nonEnglishMap)) {
                         unset($nonEnglishMap[$prefix]);
                     } else {
                         $nonEnglishMap[$prefix] = '';
@@ -358,9 +358,9 @@ class GeneratePhonePrefixData
     }
 
     /**
-     * @param array<string,string> $mappings
+     * @param array<string|int,string> $mappings
      * @param string[] $outputFiles
-     * @return array<string,array<string,string>>
+     * @return array<string|int,array<string,string>>
      */
     private function splitMap(array $mappings, array $outputFiles): array
     {
@@ -371,8 +371,8 @@ class GeneratePhonePrefixData
 
             foreach ($outputFiles as $k => $outputFile) {
                 $outputFilePrefix = $this->getPhonePrefixLanguagePairFromFilename($outputFile)->prefix;
-                if (str_starts_with($prefix, $outputFilePrefix)) {
-                    $targetFile = $outputFilePrefix;
+                if (str_starts_with((string) $prefix, $outputFilePrefix)) {
+                    $targetFile = (string) $outputFilePrefix;
                     break;
                 }
             }

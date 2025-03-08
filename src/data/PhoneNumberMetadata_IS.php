@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
-
 /**
- * libphonenumber-for-php-lite data file
+ * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
  * Do not modify!
  * @internal
@@ -100,7 +99,6 @@ return [
     'countryCode' => 354,
     'internationalPrefix' => '00|1(?:0(?:01|[12]0)|100)',
     'preferredInternationalPrefix' => '00',
-    'sameMobileAndFixedLinePattern' => false,
     'numberFormat' => [
         [
             'pattern' => '(\\d{3})(\\d{4})',

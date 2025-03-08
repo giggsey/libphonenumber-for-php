@@ -248,7 +248,7 @@ If you do need to generate the data, the commands are provided by [Phing](https:
 vendor/bin/phing compile
 ```
 
-This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).
+This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.php](METADATA-VERSION.php).
 
 ### Running tests
 

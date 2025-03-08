@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
+namespace libphonenumber;
+
 /**
- * libphonenumber-for-php-lite data file
+ * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
  * Do not modify!
  * @internal
  */
 
-namespace libphonenumber;
-
 class CountryCodeToRegionCodeMap
 {
-    // A mapping from a country code to the region codes which denote the
-    // country/region represented by that country code. In the case of multiple
-    // countries sharing a calling code, such as the NANPA countries, the one
-    // indicated with "isMainCountryForCode" in the metadata should be first.
-
     /**
-     * @var array<int,string[]>
-     */
+      * A mapping from a country code to the region codes which denote the
+      * country/region represented by that country code. In the case of multiple
+      * countries sharing a calling code, such as the NANPA countries, the one
+      * indicated with "isMainCountryForCode" in the metadata should be first.
+      * @param array<int,string[]>
+      */
+
     public static array $countryCodeToRegionCodeMap = [
         1 => [
             'US',
