@@ -81,7 +81,7 @@ class Matcher
         return $this->doMatch('lookingAt');
     }
 
-    public function find(int $offset = null): bool
+    public function find(?int $offset = null): bool
     {
         if ($offset === null) {
             $offset = $this->searchIndex;
@@ -101,7 +101,7 @@ class Matcher
         return count($this->groups) - 1;
     }
 
-    public function group(int $group = null): ?string
+    public function group(?int $group = null): ?string
     {
         if ($group === null) {
             $group = 0;
@@ -109,7 +109,7 @@ class Matcher
         return $this->groups[$group][0] ?? null;
     }
 
-    public function end(int $group = null): ?int
+    public function end(?int $group = null): ?int
     {
         if ($group === null) {
             $group = 0;
@@ -120,7 +120,7 @@ class Matcher
         return $this->groups[$group][1] + mb_strlen($this->groups[$group][0]);
     }
 
-    public function start(int $group = null): mixed
+    public function start(?int $group = null): mixed
     {
         if ($group === null) {
             $group = 0;

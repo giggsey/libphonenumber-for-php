@@ -47,7 +47,7 @@ class NumberParseException extends Exception
      * @param int $errorType
      * @param string $message
      */
-    public function __construct($errorType, $message, Throwable $previous = null)
+    public function __construct($errorType, $message, ?Throwable $previous = null)
     {
         parent::__construct($message, $errorType, $previous);
         $this->message = $message;

@@ -42,7 +42,7 @@ class PhoneNumberToCarrierMapper
      * <p> The {@link PhoneNumberToCarrierMapper} is implemented as a singleton. Therefore, calling
      * this method multiple times will only result in one instance being created.
      */
-    public static function getInstance(string $mappingDir = null): PhoneNumberToCarrierMapper
+    public static function getInstance(?string $mappingDir = null): PhoneNumberToCarrierMapper
     {
         if (!array_key_exists($mappingDir, static::$instance)) {
             static::$instance[$mappingDir] = new static($mappingDir);

@@ -1067,7 +1067,7 @@ class PhoneNumberUtil
      * @param int|PhoneNumber $phoneNumberObjOrType A PhoneNumber object, or a PhoneNumberType integer
      * @param int|null $countryCallingCode Used when passing a PhoneNumberType
      */
-    public function isNumberGeographical(PhoneNumber|int $phoneNumberObjOrType, int $countryCallingCode = null): bool
+    public function isNumberGeographical(PhoneNumber|int $phoneNumberObjOrType, ?int $countryCallingCode = null): bool
     {
         if ($phoneNumberObjOrType instanceof PhoneNumber) {
             return $this->isNumberGeographical($this->getNumberType($phoneNumberObjOrType), $phoneNumberObjOrType->getCountryCode());
@@ -3219,7 +3219,7 @@ class PhoneNumberUtil
      * If $regionCodeOrType is the only parameter supplied, then a valid number for the specified number type
      * will be returned that may belong to any country.
      */
-    public function getExampleNumberForType(int|string $regionCodeOrType, int $type = null): ?PhoneNumber
+    public function getExampleNumberForType(int|string $regionCodeOrType, ?int $type = null): ?PhoneNumber
     {
         if ($type === null) {
             /*
