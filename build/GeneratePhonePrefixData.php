@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\VarExporter\VarExporter;
 use Closure;
 use InvalidArgumentException;
-use stdClass;
 
 use function array_key_exists;
 use function count;
@@ -295,7 +294,7 @@ class GeneratePhonePrefixData
 
     /**
      * Compress the provided mappings according to the English data file if any.
-     * @param array<string,string> $mappings
+     * @param array<string|int,string> $mappings
      */
     private function makeDataFallbackToEnglish(string $textFile, array &$mappings): void
     {
@@ -342,7 +341,7 @@ class GeneratePhonePrefixData
     }
 
     /**
-     * @param array<string,string> $mappings
+     * @param array<int|string,string> $mappings
      */
     private function hasOverlappingPrefix(string $number, array $mappings): bool
     {
@@ -360,7 +359,7 @@ class GeneratePhonePrefixData
     /**
      * @param array<string|int,string> $mappings
      * @param string[] $outputFiles
-     * @return array<string|int,array<string,string>>
+     * @return array<string,array<int|string,string>>
      */
     private function splitMap(array $mappings, array $outputFiles): array
     {
@@ -370,9 +369,9 @@ class GeneratePhonePrefixData
             $targetFile = null;
 
             foreach ($outputFiles as $k => $outputFile) {
-                $outputFilePrefix = $this->getPhonePrefixLanguagePairFromFilename($outputFile)->prefix;
+                $outputFilePrefix = $this->getPhonePrefixLanguagePairFromFilename($outputFile)[1];
                 if (str_starts_with((string) $prefix, $outputFilePrefix)) {
-                    $targetFile = (string) $outputFilePrefix;
+                    $targetFile = $outputFilePrefix;
                     break;
                 }
             }
@@ -388,21 +387,17 @@ class GeneratePhonePrefixData
 
     /**
      * Extracts the phone prefix and the language code contained in the provided file name.
+     * @return array{string,string}
      */
-    private function getPhonePrefixLanguagePairFromFilename(string $outputFile): stdClass
+    private function getPhonePrefixLanguagePairFromFilename(string $outputFile): array
     {
         $parts = explode(DIRECTORY_SEPARATOR, $outputFile);
 
-        $returnObj = new stdClass();
-        $returnObj->language = $parts[0];
-
-        $returnObj->prefix = $this->getCountryCodeFromTextFileName($parts[1]);
-
-        return $returnObj;
+        return [$parts[0], $this->getCountryCodeFromTextFileName($parts[1])];
     }
 
     /**
-     * @param array<string,string> $data
+     * @param array<string|int,string> $data
      */
     private function writeMappingFile(string $language, string $outputFile, array $data): void
     {

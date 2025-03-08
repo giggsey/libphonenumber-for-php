@@ -18,7 +18,7 @@ class CountryCodeToRegionCodeMap
       * country/region represented by that country code. In the case of multiple
       * countries sharing a calling code, such as the NANPA countries, the one
       * indicated with "isMainCountryForCode" in the metadata should be first.
-      * @param array<int,string[]>
+       * @var array<int,string[]>
       */
 
     public static array $countryCodeToRegionCodeMap = [

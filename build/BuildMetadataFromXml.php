@@ -88,7 +88,7 @@ class BuildMetadataFromXml
     {
         $compressedRegex = $removeWhitespace ? preg_replace('/\\s/', '', $regex) : $regex;
         // Match regex against an empty string to check the regex is valid
-        if (preg_match('/' . $compressedRegex . '/', '') === false) {
+        if (@preg_match('/' . $compressedRegex . '/', '') === false) {
             throw new RuntimeException('Regex error: ' . preg_last_error());
         }
         // We don't ever expect to see | followed by a ) in our metadata - this would be an indication

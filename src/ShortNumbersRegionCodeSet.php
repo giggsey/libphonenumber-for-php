@@ -15,7 +15,7 @@ class ShortNumbersRegionCodeSet
 {
     /**
      * A set of all region codes for which data is available.
-     * @param string[]
+     * @var string[]
      */
     public static array $shortNumbersRegionCodeSet = [
         'AC',

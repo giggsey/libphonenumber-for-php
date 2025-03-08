@@ -15,7 +15,7 @@ class AlternateFormatsCountryCodeSet
 {
     /**
      * A set of all country calling codes for which data is available.
-     * @param int[]
+     * @var int[]
      */
     public static array $alternateFormatsCountryCodeSet = [
         7,

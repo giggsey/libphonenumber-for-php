@@ -36,20 +36,20 @@ class BuildMetadataPHPFromXml
           * country/region represented by that country code. In the case of multiple
           * countries sharing a calling code, such as the NANPA countries, the one
           * indicated with "isMainCountryForCode" in the metadata should be first.
-          * @param array<int,string[]>
+          * @var array<int,string[]>
           */
 
         EOT;
     public const COUNTRY_CODE_SET_COMMENT = <<<php
         /**
          * A set of all country calling codes for which data is available.
-         * @param int[]
+         * @var int[]
          */
         php;
     public const REGION_CODE_SET_COMMENT = <<<php
         /**
          * A set of all region codes for which data is available.
-         * @param string[]
+         * @var string[]
          */
         php;
 
