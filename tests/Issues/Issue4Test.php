@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
@@ -20,6 +22,6 @@ class Issue4Test extends TestCase
     {
         $number = $this->phoneNumberUtil->parse('0351-152-303-473', 'AR');
 
-        $this->assertEquals('+5493512303473', $this->phoneNumberUtil->format($number, PhoneNumberFormat::E164));
+        self::assertSame('+5493512303473', $this->phoneNumberUtil->format($number, PhoneNumberFormat::E164));
     }
 }

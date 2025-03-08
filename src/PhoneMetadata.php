@@ -1,11 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
+
+use function count;
 
 /**
  * Class PhoneMetadata
  * @package libphonenumber
  * @internal Used internally, and can change at any time
+ * @phpstan-import-type PhoneNumberDescArray from PhoneNumberDesc
+ * @phpstan-import-type NumberFormatArray from NumberFormat
+ * @phpstan-type PhoneMetadataArray array{generalDesc?:PhoneNumberDescArray,fixedLine?:PhoneNumberDescArray,mobile?:PhoneNumberDescArray,tollFree?:PhoneNumberDescArray,premiumRate?:PhoneNumberDescArray,sharedCost?:PhoneNumberDescArray,personalNumber?:PhoneNumberDescArray,voip?:PhoneNumberDescArray,pager?:PhoneNumberDescArray,uan?:PhoneNumberDescArray,emergency?:PhoneNumberDescArray,voicemail?:PhoneNumberDescArray,shortCode?:PhoneNumberDescArray,standardRate?:PhoneNumberDescArray,carrierSpecific?:PhoneNumberDescArray,smsServices?:PhoneNumberDescArray,noInternationalDialling?:PhoneNumberDescArray,id:string|null,countryCode?:int,internationalPrefix?:string,preferredInternationalPrefix?:string,nationalPrefix?:string,preferredExtnPrefix?:string,nationalPrefixForParsing?:string,nationalPrefixTransformRule?:string,sameMobileAndFixedLinePattern?:bool,numberFormat:NumberFormatArray[],intlNumberFormat?:NumberFormatArray[],mainCountryForCode?:bool,leadingDigits?:string,mobileNumberPortableRegion?:bool}
  */
 class PhoneMetadata
 {
@@ -62,11 +69,6 @@ class PhoneMetadata
         return $this->internationalPrefix !== null;
     }
 
-    public function hasMainCountryForCode(): bool
-    {
-        return $this->mainCountryForCode !== null;
-    }
-
     public function isMainCountryForCode(): bool
     {
         return $this->mainCountryForCode;
@@ -91,17 +93,17 @@ class PhoneMetadata
 
     public function hasMobileNumberPortableRegion(): bool
     {
-        return $this->mobileNumberPortableRegion !== null;
+        return $this->mobileNumberPortableRegion !== false;
     }
 
     public function hasSameMobileAndFixedLinePattern(): bool
     {
-        return $this->sameMobileAndFixedLinePattern !== null;
+        return $this->sameMobileAndFixedLinePattern !== false;
     }
 
     public function numberFormatSize(): int
     {
-        return \count($this->numberFormat);
+        return count($this->numberFormat);
     }
 
     public function getNumberFormat(int $index): NumberFormat
@@ -111,7 +113,7 @@ class PhoneMetadata
 
     public function intlNumberFormatSize(): int
     {
-        return \count($this->intlNumberFormat);
+        return count($this->intlNumberFormat);
     }
 
     public function getIntlNumberFormat(int $index): NumberFormat
@@ -125,6 +127,9 @@ class PhoneMetadata
         return $this;
     }
 
+    /**
+     * @return PhoneMetadataArray
+     */
     public function toArray(): array
     {
         $output = [];
@@ -691,6 +696,9 @@ class PhoneMetadata
         return $this->numberFormat;
     }
 
+    /**
+     * @return NumberFormat[]
+     */
     public function intlNumberFormats(): array
     {
         return $this->intlNumberFormat;
@@ -729,6 +737,9 @@ class PhoneMetadata
         return $this;
     }
 
+    /**
+     * @param PhoneMetadataArray $input
+     */
     public function fromArray(array $input): PhoneMetadata
     {
         if (isset($input['generalDesc'])) {
@@ -817,8 +828,14 @@ class PhoneMetadata
         }
 
         $this->setId($input['id']);
-        $this->setCountryCode($input['countryCode']);
-        $this->setInternationalPrefix($input['internationalPrefix']);
+
+        if (isset($input['countryCode'])) {
+            $this->setCountryCode($input['countryCode']);
+        }
+
+        if (isset($input['internationalPrefix'])) {
+            $this->setInternationalPrefix($input['internationalPrefix']);
+        }
 
         if (isset($input['preferredInternationalPrefix'])) {
             $this->setPreferredInternationalPrefix($input['preferredInternationalPrefix']);
@@ -842,19 +859,21 @@ class PhoneMetadata
             $this->setNationalPrefixTransformRule($input['nationalPrefixTransformRule']);
         }
 
-        foreach ($input['numberFormat'] as $numberFormatElt) {
+        foreach ($input['numberFormat'] ?? [] as $numberFormatElt) {
             $numberFormat = new NumberFormat();
             $numberFormat->fromArray($numberFormatElt);
             $this->addNumberFormat($numberFormat);
         }
 
-        foreach ($input['intlNumberFormat'] as $intlNumberFormatElt) {
+        foreach ($input['intlNumberFormat'] ?? [] as $intlNumberFormatElt) {
             $numberFormat = new NumberFormat();
             $numberFormat->fromArray($intlNumberFormatElt);
             $this->addIntlNumberFormat($numberFormat);
         }
 
-        $this->setMainCountryForCode($input['mainCountryForCode']);
+        if (isset($input['mainCountryForCode'])) {
+            $this->setMainCountryForCode($input['mainCountryForCode']);
+        }
 
         if (isset($input['leadingDigits'])) {
             $this->setLeadingDigits($input['leadingDigits']);

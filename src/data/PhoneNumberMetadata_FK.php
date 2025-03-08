@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * libphonenumber-for-php-lite data file
  * This file has been @generated from libphonenumber data

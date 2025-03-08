@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumber;
@@ -25,10 +27,10 @@ class Issue159Test extends TestCase
     public function testLookupTZ_LA(): void
     {
         $number = new PhoneNumber();
-        $number->setCountryCode(1)->setNationalNumber(2082924565);
+        $number->setCountryCode(1)->setNationalNumber('2082924565');
 
         $timeZoneMapper = PhoneNumberToTimeZonesMapper::getInstance();
 
-        $this->assertEquals([self::LOS_ANGELES_TZ], $timeZoneMapper->getTimeZonesForNumber($number));
+        self::assertSame([self::LOS_ANGELES_TZ], $timeZoneMapper->getTimeZonesForNumber($number));
     }
 }

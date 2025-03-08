@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumber;
@@ -11,27 +13,28 @@ class Issue68Test extends TestCase
 {
     public function testShortNumberInfoIsPossibleShortNumberWithRegionMissingFromCodeSet(): void
     {
-        $exampleNumber = $this->getExampleNumber('NE');
+        $exampleNumber = $this->getExampleNumber();
 
         $shortNumberInfo = ShortNumberInfo::getInstance();
 
-        $this->assertFalse($shortNumberInfo->isPossibleShortNumber($exampleNumber));
+        self::assertFalse($shortNumberInfo->isPossibleShortNumber($exampleNumber));
     }
 
     public function testShortNumberInfoIsPossibleShortNumberForRegionWithRegionMissingFromCodeSet(): void
     {
-        $exampleNumber = $this->getExampleNumber('NE');
+        $exampleNumber = $this->getExampleNumber();
 
         $shortNumberInfo = ShortNumberInfo::getInstance();
 
-        $this->assertFalse($shortNumberInfo->isPossibleShortNumberForRegion($exampleNumber, 'NE'));
+        self::assertFalse($shortNumberInfo->isPossibleShortNumberForRegion($exampleNumber, 'NE'));
     }
 
-    private function getExampleNumber(string $region): PhoneNumber
+    private function getExampleNumber(): PhoneNumber
     {
         $phoneUtil = PhoneNumberUtil::getInstance();
 
-        $exampleNumber = $phoneUtil->getExampleNumber($region);
+        $exampleNumber = $phoneUtil->getExampleNumber('NE');
+        self::assertNotNull($exampleNumber);
 
         // Reset PhoneNumberUtil just to make sure that doesn't interfere
         PhoneNumberUtil::resetInstance();

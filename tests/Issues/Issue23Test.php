@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
@@ -26,8 +28,8 @@ class Issue23Test extends TestCase
 
         $phoneNumber = $this->phoneUtil->parse($number, RegionCode::ZZ);
 
-        $this->assertEquals('TK', $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
+        self::assertSame('TK', $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 
-        $this->assertEquals('Fakaofo Atoll', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        self::assertSame('Fakaofo Atoll', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }

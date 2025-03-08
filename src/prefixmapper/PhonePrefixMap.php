@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\prefixmapper;
 
 use libphonenumber\PhoneNumber;
@@ -11,16 +13,20 @@ use libphonenumber\PhoneNumberUtil;
  *
  * Class PhonePrefixMap
  * @package libphonenumber\prefixmapper
+ * @internal
  */
 class PhonePrefixMap
 {
-    protected $phonePrefixMapStorage = [];
     /**
-     * @var PhoneNumberUtil
+     * @var array<string|int,string>
      */
-    protected $phoneUtil;
+    protected array $phonePrefixMapStorage = [];
+    protected PhoneNumberUtil $phoneUtil;
 
-    public function __construct($map)
+    /**
+     * @param array<string|int,string> $map
+     */
+    public function __construct(array $map)
     {
         $this->phonePrefixMapStorage = $map;
         $this->phoneUtil = PhoneNumberUtil::getInstance();
@@ -35,20 +41,20 @@ class PhonePrefixMap
      * @param PhoneNumber $number The phone number to look up
      * @return string|null the description of the number
      */
-    public function lookup(PhoneNumber $number)
+    public function lookup(PhoneNumber $number): ?string
     {
         $phonePrefix = $number->getCountryCode() . $this->phoneUtil->getNationalSignificantNumber($number);
 
         return $this->lookupKey($phonePrefix);
     }
 
-    public function lookupKey($key)
+    public function lookupKey(string $key): ?string
     {
-        if (count($this->phonePrefixMapStorage) == 0) {
+        if (count($this->phonePrefixMapStorage) === 0) {
             return null;
         }
 
-        while (strlen($key) > 0) {
+        while ($key !== '') {
             if (array_key_exists($key, $this->phonePrefixMapStorage)) {
                 return $this->phonePrefixMapStorage[$key];
             }

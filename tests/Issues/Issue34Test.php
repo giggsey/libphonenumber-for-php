@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
@@ -21,6 +23,6 @@ class Issue34Test extends TestCase
         $region = 'DE';
         $phoneNumber = $this->phoneUtil->parse($number, $region);
 
-        $this->assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, 'DE'));
+        self::assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, 'DE'));
     }
 }

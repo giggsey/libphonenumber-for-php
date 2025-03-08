@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * libphonenumber-for-php-lite data file
  * This file has been @generated from libphonenumber data
@@ -16,7 +18,10 @@ class CountryCodeToRegionCodeMapForTesting
     // countries sharing a calling code, such as the NANPA countries, the one
     // indicated with "isMainCountryForCode" in the metadata should be first.
 
-    public static $countryCodeToRegionCodeMapForTesting = [
+    /**
+     * @var array<int,string[]>
+     */
+    public static array $countryCodeToRegionCodeMapForTesting = [
         1 => [
             'US',
             'BB',

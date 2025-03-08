@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\NumberParseException;
@@ -10,36 +12,12 @@ class Issue76Test extends TestCase
 {
     public function testIssue76(): void
     {
-        $this->doExpectException(
-            '\libphonenumber\NumberParseException',
-            'The string supplied did not seem to be a phone number.',
-            NumberParseException::NOT_A_NUMBER
-        );
+        $this->expectException(NumberParseException::class);
+        $this->expectExceptionMessage('The string supplied did not seem to be a phone number.');
 
         $number = 'Abc811@hotmail.com';
         $region = 'DE';
         $util = PhoneNumberUtil::getInstance();
         $util->parse($number, $region);
-    }
-
-    /**
-     * Helper function to support older PHPUnit versions
-     */
-    private function doExpectException(string $class, ?string $message = null, ?int $code = null): void
-    {
-        if (method_exists($this, 'expectException')
-            && method_exists($this, 'expectExceptionMessage')
-            && method_exists($this, 'expectExceptionCode')
-        ) {
-            $this->expectException($class);
-            if ($message) {
-                $this->expectExceptionMessage($message);
-            }
-            if ($code) {
-                $this->expectExceptionCode($code);
-            }
-        } else {
-            $this->setExpectedException($class, $message, $code);
-        }
     }
 }

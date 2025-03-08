@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
 /**
@@ -9,11 +11,6 @@ namespace libphonenumber;
  */
 class RegexBasedMatcher implements MatcherAPIInterface
 {
-    public static function create(): RegexBasedMatcher
-    {
-        return new static();
-    }
-
     /**
      * Returns whether the given national number (a string containing only decimal digits) matches
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
@@ -25,7 +22,7 @@ class RegexBasedMatcher implements MatcherAPIInterface
         // We don't want to consider it a prefix match when matching non-empty input against an empty
         // pattern
 
-        if (\strlen($nationalNumberPattern) === 0) {
+        if ($nationalNumberPattern === '') {
             return false;
         }
 

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class MultiFileMetadataSourceImplTest extends TestCase
 {
@@ -27,9 +30,9 @@ class MultiFileMetadataSourceImplTest extends TestCase
 
         try {
             $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
-            $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->doAssertStringContainsString(
+            self::fail('Expected Exception');
+        } catch (RuntimeException $e) {
+            self::assertStringContainsString(
                 'no/such/file_XX',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
@@ -43,25 +46,13 @@ class MultiFileMetadataSourceImplTest extends TestCase
                 123,
                 new DefaultMetadataLoader()
             );
-            $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->doAssertStringContainsString(
+            self::fail('Expected Exception');
+        } catch (RuntimeException $e) {
+            self::assertStringContainsString(
                 'no/such/file_123',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
             );
-        }
-    }
-
-    /**
-     * Provide PHPUnit compatibility
-     */
-    private function doAssertStringContainsString(string $needle, string $haystack, string $message): void
-    {
-        if (method_exists($this, 'assertStringContainsString')) {
-            $this->assertStringContainsString($needle, $haystack, $message);
-        } else {
-            $this->assertContains($needle, $haystack, $message);
         }
     }
 }

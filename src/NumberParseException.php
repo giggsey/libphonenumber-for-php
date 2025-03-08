@@ -1,12 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
+
+use Exception;
+use Throwable;
 
 /**
  * Generic exception class for errors encountered when parsing phone numbers.
  * @author Lara Rennie
+ * @no-named-arguments
  */
-class NumberParseException extends \Exception
+class NumberParseException extends Exception
 {
     /**
      * The country code supplied did not belong to a supported country or non-geographical entity.
@@ -35,17 +41,13 @@ class NumberParseException extends \Exception
      */
     public const TOO_LONG = 4;
 
-    /**
-     * @var int
-     */
-    protected $errorType;
+    protected int $errorType;
 
     /**
      * @param int $errorType
      * @param string $message
-     * @param \Throwable|null $previous
      */
-    public function __construct($errorType, $message, $previous = null)
+    public function __construct($errorType, $message, Throwable $previous = null)
     {
         parent::__construct($message, $errorType, $previous);
         $this->message = $message;
@@ -54,15 +56,13 @@ class NumberParseException extends \Exception
 
     /**
      * Returns the error type of the exception that has been thrown.
-     *
-     * @return int
      */
-    public function getErrorType()
+    public function getErrorType(): int
     {
         return $this->errorType;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return 'Error type: ' . $this->errorType . '. ' . $this->message;
     }

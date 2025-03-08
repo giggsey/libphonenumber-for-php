@@ -1,80 +1,51 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
 /**
  * Number Format
+ * @internal
+ * @phpstan-type NumberFormatArray array{pattern:string|null,format:string|null,leadingDigitsPatterns:array<string>,nationalPrefixFormattingRule?:string,domesticCarrierCodeFormattingRule?:string,nationalPrefixOptionalWhenFormatting?:bool}
  */
 class NumberFormat
 {
-    /**
-     * @var string
-     */
-    protected $pattern;
-    /**
-     * @var bool
-     */
-    protected $hasPattern = false;
+    protected string $pattern;
+    protected bool $hasPattern = false;
+
+    protected string $format;
+
+    protected bool $hasFormat = false;
 
     /**
-     * @var string
+     * @var array<int,string>
      */
-    protected $format;
+    protected array $leadingDigitsPattern = [];
 
-    /**
-     * @var bool
-     */
-    protected $hasFormat = false;
+    protected string $nationalPrefixFormattingRule = '';
 
-    /**
-     * @var array
-     */
-    protected $leadingDigitsPattern = [];
+    protected bool $hasNationalPrefixFormattingRule = false;
+    protected bool $nationalPrefixOptionalWhenFormatting = false;
 
-    /**
-     * @var string
-     */
-    protected $nationalPrefixFormattingRule = '';
+    protected bool $hasNationalPrefixOptionalWhenFormatting = false;
 
-    /**
-     * @var bool
-     */
-    protected $hasNationalPrefixFormattingRule = false;
-    /**
-     * @var bool
-     */
-    protected $nationalPrefixOptionalWhenFormatting = false;
+    protected string $domesticCarrierCodeFormattingRule = '';
 
-    /**
-     * @var bool
-     */
-    protected $hasNationalPrefixOptionalWhenFormatting = false;
-
-    /**
-     * @var string
-     */
-    protected $domesticCarrierCodeFormattingRule = '';
-
-    /**
-     * @var bool
-     */
-    protected $hasDomesticCarrierCodeFormattingRule = false;
+    protected bool $hasDomesticCarrierCodeFormattingRule = false;
 
     public function __construct()
     {
         $this->clear();
     }
 
-    /**
-     * @return NumberFormat
-     */
-    public function clear()
+    public function clear(): static
     {
         $this->hasPattern = false;
-        $this->pattern = null;
+        $this->pattern = '';
 
         $this->hasFormat = false;
-        $this->format = null;
+        $this->format = '';
 
         $this->leadingDigitsPattern = [];
 
@@ -93,24 +64,17 @@ class NumberFormat
     /**
      * @return boolean
      */
-    public function hasPattern()
+    public function hasPattern(): bool
     {
         return $this->hasPattern;
     }
 
-    /**
-     * @return string
-     */
-    public function getPattern()
+    public function getPattern(): string
     {
         return $this->pattern;
     }
 
-    /**
-     * @param string $value
-     * @return NumberFormat
-     */
-    public function setPattern($value)
+    public function setPattern(string $value): static
     {
         $this->hasPattern = true;
         $this->pattern = $value;
@@ -121,7 +85,7 @@ class NumberFormat
     /**
      * @return boolean
      */
-    public function hasNationalPrefixOptionalWhenFormatting()
+    public function hasNationalPrefixOptionalWhenFormatting(): bool
     {
         return $this->hasNationalPrefixOptionalWhenFormatting;
     }
@@ -129,7 +93,7 @@ class NumberFormat
     /**
      * @return boolean
      */
-    public function getNationalPrefixOptionalWhenFormatting()
+    public function getNationalPrefixOptionalWhenFormatting(): bool
     {
         return $this->nationalPrefixOptionalWhenFormatting;
     }
@@ -137,7 +101,7 @@ class NumberFormat
     /**
      * @param boolean $nationalPrefixOptionalWhenFormatting
      */
-    public function setNationalPrefixOptionalWhenFormatting($nationalPrefixOptionalWhenFormatting)
+    public function setNationalPrefixOptionalWhenFormatting(bool $nationalPrefixOptionalWhenFormatting): void
     {
         $this->hasNationalPrefixOptionalWhenFormatting = true;
         $this->nationalPrefixOptionalWhenFormatting = $nationalPrefixOptionalWhenFormatting;
@@ -146,24 +110,17 @@ class NumberFormat
     /**
      * @return boolean
      */
-    public function hasFormat()
+    public function hasFormat(): bool
     {
         return $this->hasFormat;
     }
 
-    /**
-     * @return string
-     */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
 
-    /**
-     * @param string $value
-     * @return NumberFormat
-     */
-    public function setFormat($value)
+    public function setFormat(string $value): static
     {
         $this->hasFormat = true;
         $this->format = $value;
@@ -172,35 +129,24 @@ class NumberFormat
     }
 
     /**
-     * @return string[]
+     * @return array<int,string>
      */
-    public function leadingDigitPatterns()
+    public function leadingDigitPatterns(): array
     {
         return $this->leadingDigitsPattern;
     }
 
-    /**
-     * @return int
-     */
-    public function leadingDigitsPatternSize()
+    public function leadingDigitsPatternSize(): int
     {
         return count($this->leadingDigitsPattern);
     }
 
-    /**
-     * @param int $index
-     * @return string
-     */
-    public function getLeadingDigitsPattern($index)
+    public function getLeadingDigitsPattern(int $index): string
     {
         return $this->leadingDigitsPattern[$index];
     }
 
-    /**
-     * @param string $value
-     * @return NumberFormat
-     */
-    public function addLeadingDigitsPattern($value)
+    public function addLeadingDigitsPattern(string $value): static
     {
         $this->leadingDigitsPattern[] = $value;
 
@@ -210,73 +156,50 @@ class NumberFormat
     /**
      * @return boolean
      */
-    public function hasNationalPrefixFormattingRule()
+    public function hasNationalPrefixFormattingRule(): bool
     {
         return $this->hasNationalPrefixFormattingRule;
     }
 
-    /**
-     * @return string
-     */
-    public function getNationalPrefixFormattingRule()
+    public function getNationalPrefixFormattingRule(): string
     {
         return $this->nationalPrefixFormattingRule;
     }
 
-    /**
-     * @param string $value
-     * @return NumberFormat
-     */
-    public function setNationalPrefixFormattingRule($value)
+    public function setNationalPrefixFormattingRule(string $value): static
     {
         $this->hasNationalPrefixFormattingRule = true;
-        $this->nationalPrefixFormattingRule = (string) $value;
+        $this->nationalPrefixFormattingRule = $value;
 
         return $this;
     }
 
-    /**
-     * @return NumberFormat
-     */
-    public function clearNationalPrefixFormattingRule()
+    public function clearNationalPrefixFormattingRule(): static
     {
         $this->nationalPrefixFormattingRule = '';
 
         return $this;
     }
 
-    /**
-     * @return boolean
-     */
-    public function hasDomesticCarrierCodeFormattingRule()
+    public function hasDomesticCarrierCodeFormattingRule(): bool
     {
         return $this->hasDomesticCarrierCodeFormattingRule;
     }
 
-    /**
-     * @return string
-     */
-    public function getDomesticCarrierCodeFormattingRule()
+    public function getDomesticCarrierCodeFormattingRule(): string
     {
         return $this->domesticCarrierCodeFormattingRule;
     }
 
-    /**
-     * @param string $value
-     * @return NumberFormat
-     */
-    public function setDomesticCarrierCodeFormattingRule($value)
+    public function setDomesticCarrierCodeFormattingRule(string $value): static
     {
         $this->hasDomesticCarrierCodeFormattingRule = true;
-        $this->domesticCarrierCodeFormattingRule = (string) $value;
+        $this->domesticCarrierCodeFormattingRule = $value;
 
         return $this;
     }
 
-    /**
-     * @return NumberFormat
-     */
-    public function mergeFrom(NumberFormat $other)
+    public function mergeFrom(NumberFormat $other): static
     {
         if ($other->hasPattern()) {
             $this->setPattern($other->getPattern());
@@ -302,9 +225,9 @@ class NumberFormat
     }
 
     /**
-     * @return array
+     * @return NumberFormatArray
      */
-    public function toArray()
+    public function toArray(): array
     {
         $output = [];
         $output['pattern'] = $this->getPattern();
@@ -328,8 +251,9 @@ class NumberFormat
     }
 
     /**
+     * @param NumberFormatArray $input
      */
-    public function fromArray(array $input)
+    public function fromArray(array $input): void
     {
         $this->setPattern($input['pattern']);
         $this->setFormat($input['format']);

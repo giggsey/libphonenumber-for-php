@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
@@ -18,12 +20,10 @@ class Issue175Test extends TestCase
         PhoneNumberUtil::resetInstance();
     }
 
-    /**
-     * @runInSeparateProcess
-     */
+    #[\PHPUnit\Framework\Attributes\RunInSeparateProcess]
     public function testIsViablePhoneNumber(): void
     {
         $ret = PhoneNumberUtil::isViablePhoneNumber('01111');
-        $this->assertTrue($ret);
+        self::assertTrue($ret);
     }
 }

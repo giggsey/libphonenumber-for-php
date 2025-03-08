@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\PhoneMetadata;
@@ -9,7 +11,10 @@ use PHPUnit\Framework\TestCase;
 
 class PhoneMetadataTest extends TestCase
 {
-    public function phoneNumberRegionList(): array
+    /**
+     * @return array<array{string}>
+     */
+    public static function phoneNumberRegionList(): array
     {
         $returnList = [];
 
@@ -22,7 +27,10 @@ class PhoneMetadataTest extends TestCase
         return $returnList;
     }
 
-    public function shortNumberRegionList(): array
+    /**
+     * @return array<array{string}>
+     */
+    public static function shortNumberRegionList(): array
     {
         $returnList = [];
 
@@ -35,14 +43,14 @@ class PhoneMetadataTest extends TestCase
         return $returnList;
     }
 
-    /**
-     * @dataProvider phoneNumberRegionList
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('phoneNumberRegionList')]
     public function testPhoneNumberMetadataToAndFromArray(string $region): void
     {
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
         $phoneMetadata = $phoneNumberUtil->getMetadataForRegion($region);
 
+        self::assertNotNull($phoneMetadata);
+
         $array = $phoneMetadata->toArray();
 
         /*
@@ -52,17 +60,17 @@ class PhoneMetadataTest extends TestCase
         $newPhoneMetadata = new PhoneMetadata();
         $newPhoneMetadata->fromArray($array);
 
-        $this->assertEquals($phoneMetadata, $newPhoneMetadata);
+        self::assertEquals($phoneMetadata, $newPhoneMetadata);
     }
 
-    /**
-     * @dataProvider shortNumberRegionList
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('shortNumberRegionList')]
     public function testShortCodeMetadataToAndFromArray(string $region): void
     {
         $shortNumberInfo = ShortNumberInfo::getInstance();
         $phoneMetadata = $shortNumberInfo->getMetadataForRegion($region);
 
+        self::assertNotNull($phoneMetadata);
+
         $array = $phoneMetadata->toArray();
 
         /*
@@ -72,6 +80,6 @@ class PhoneMetadataTest extends TestCase
         $newPhoneMetadata = new PhoneMetadata();
         $newPhoneMetadata->fromArray($array);
 
-        $this->assertEquals($phoneMetadata, $newPhoneMetadata);
+        self::assertEquals($phoneMetadata, $newPhoneMetadata);
     }
 }

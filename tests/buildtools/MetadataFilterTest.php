@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\buildtools;
 
 use libphonenumber\buildtools\BuildMetadataFromXml;
@@ -7,6 +9,13 @@ use libphonenumber\buildtools\MetadataFilter;
 use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
+
+use function array_merge;
+use function array_unique;
+use function count;
+use function strlen;
+use function trim;
 
 class MetadataFilterTest extends TestCase
 {
@@ -15,7 +24,13 @@ class MetadataFilterTest extends TestCase
     private static string $internationalPrefix = '0[01]';
     private static string $preferredInternationalPrefix = '00';
     private static string $nationalNumberPattern = '\\d{8}';
+    /**
+     * @var int[]
+     */
     private static array $possibleLengths = [8];
+    /**
+     * @var int[]
+     */
     private static array $possibleLengthsLocalOnly = [5, 6];
     private static string $exampleNumber = '10123456';
 
@@ -39,7 +54,7 @@ class MetadataFilterTest extends TestCase
         $blackList['smsServices'] = ['exampleNumber'];
         $blackList['noInternationalDialling'] = ['exampleNumber'];
 
-        $this->assertEquals(MetadataFilter::forLiteBuild(), new MetadataFilter($blackList));
+        self::assertEquals(MetadataFilter::forLiteBuild(), new MetadataFilter($blackList));
     }
 
     public function testForSpecialBuild(): void
@@ -68,12 +83,12 @@ class MetadataFilterTest extends TestCase
         $blackList['mainCountryForCode'] = [];
         $blackList['mobileNumberPortableRegion'] = [];
 
-        $this->assertEquals(MetadataFilter::forSpecialBuild(), new MetadataFilter($blackList));
+        self::assertEquals(MetadataFilter::forSpecialBuild(), new MetadataFilter($blackList));
     }
 
     public function testEmptyFilter(): void
     {
-        $this->assertEquals(MetadataFilter::emptyFilter(), new MetadataFilter([]));
+        self::assertEquals(MetadataFilter::emptyFilter(), new MetadataFilter([]));
     }
 
     public function testParseFieldMapFromString_parentAsGroup(): void
@@ -86,7 +101,7 @@ class MetadataFilterTest extends TestCase
             'exampleNumber',
         ];
 
-        $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine'), $fieldMap);
+        self::assertSame(MetadataFilter::parseFieldMapFromString('fixedLine'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_childAsGroup(): void
@@ -109,7 +124,7 @@ class MetadataFilterTest extends TestCase
         $fieldMap['smsServices'] = ['exampleNumber'];
         $fieldMap['noInternationalDialling'] = ['exampleNumber'];
 
-        $this->assertEquals(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
+        self::assertSame(MetadataFilter::parseFieldMapFromString('exampleNumber'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_childlessFieldAsGroup(): void
@@ -117,7 +132,7 @@ class MetadataFilterTest extends TestCase
         $fieldMap = [];
         $fieldMap['nationalPrefix'] = [];
 
-        $this->assertEquals(MetadataFilter::parseFieldMapFromString('nationalPrefix'), $fieldMap);
+        self::assertSame(MetadataFilter::parseFieldMapFromString('nationalPrefix'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_parentWithOneChildAsGroup(): void
@@ -125,7 +140,7 @@ class MetadataFilterTest extends TestCase
         $fieldMap = [];
         $fieldMap['fixedLine'] = ['exampleNumber'];
 
-        $this->assertEquals(MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber)'), $fieldMap);
+        self::assertSame(MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber)'), $fieldMap);
     }
 
     public function testParseFieldMapFromString_parentWithTwoChildrenAsGroup(): void
@@ -133,7 +148,7 @@ class MetadataFilterTest extends TestCase
         $fieldMap = [];
         $fieldMap['fixedLine'] = ['exampleNumber', 'possibleLength'];
 
-        $this->assertEquals(
+        self::assertSame(
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,possibleLength)'),
             $fieldMap
         );
@@ -165,7 +180,7 @@ class MetadataFilterTest extends TestCase
         $fieldMap['smsServices'] = ['nationalNumberPattern'];
         $fieldMap['noInternationalDialling'] = ['nationalNumberPattern'];
 
-        $this->assertEquals(
+        self::assertSame(
             $fieldMap,
             MetadataFilter::parseFieldMapFromString(
                 'uan(possibleLength,exampleNumber,possibleLengthLocalOnly)'
@@ -180,7 +195,7 @@ class MetadataFilterTest extends TestCase
     public function testParseFieldMapFromString_equivalentExpressions(): void
     {
         // Listing all excludable parent fields is equivalent to listing all excludable child field.s
-        $this->assertEquals(
+        self::assertSame(
             MetadataFilter::parseFieldMapFromString(
                 'fixedLine'
                 . ':mobile'
@@ -208,44 +223,44 @@ class MetadataFilterTest extends TestCase
         );
 
         // Order and whitespace don't matter
-        $this->assertEquals(
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
+        self::assertEqualsCanonicalizing(
+            MetadataFilter::parseFieldMapFromString(
                 ' nationalNumberPattern '
             . ': uan ( exampleNumber , possibleLengthLocalOnly,     possibleLength ) '
             . ': nationalPrefix '
             . ': fixedLine '
             . ': pager ( exampleNumber ) '
-            )),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
+            ),
+            MetadataFilter::parseFieldMapFromString(
                 'uan(possibleLength,exampleNumber,possibleLengthLocalOnly)'
                 . ':pager(exampleNumber)'
                 . ':fixedLine'
                 . ':nationalPrefix'
                 . ':nationalNumberPattern'
-            ))
+            )
         );
 
         // Parent explicitly listing all possible children.
-        $this->assertEquals(
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
+        self::assertEqualsCanonicalizing(
+            MetadataFilter::parseFieldMapFromString(
                 'uan(nationalNumberPattern,possibleLength,exampleNumber,possibleLengthLocalOnly)'
-            )),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan'))
+            ),
+            MetadataFilter::parseFieldMapFromString('uan')
         );
 
         // All parent's children covered, some implicitly and some explicitly.
-        $this->assertEquals(
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString(
+        self::assertEqualsCanonicalizing(
+            MetadataFilter::parseFieldMapFromString(
                 'uan(nationalNumberPattern,possibleLength,exampleNumber)'
                 . ':possibleLengthLocalOnly'
-            )),
-            $this->recursive_ksort(MetadataFilter::parseFieldMapFromString('uan:possibleLengthLocalOnly'))
+            ),
+            MetadataFilter::parseFieldMapFromString('uan:possibleLengthLocalOnly')
         );
 
         // Child field covered by all parents explicitly.
         // It seems this will always be better expressed as a wildcard child, but the check is complex
         // and may not be worth it.
-        $this->assertEquals(
+        self::assertSame(
             MetadataFilter::parseFieldMapFromString(
                 'fixedLine(exampleNumber)'
                 . ':mobile(exampleNumber)'
@@ -270,7 +285,7 @@ class MetadataFilterTest extends TestCase
         // Child field given as a group by itself while it's covered by all parents implicitly.
         // It seems this will always be better expressed without the wildcard child, but the check is
         // complex and may not be worth it.
-        $this->assertEquals(
+        self::assertSame(
             MetadataFilter::parseFieldMapFromString(
                 'fixedLine'
                 . ':mobile'
@@ -311,26 +326,13 @@ class MetadataFilterTest extends TestCase
         );
     }
 
-    /**
-     * Need to sort some of the results, as PHP arrays are ordered by when they were added
-     */
-    private function recursive_ksort(array $array): bool
-    {
-        foreach ($array as &$value) {
-            if (\is_array($value)) {
-                $this->recursive_ksort($value);
-            }
-        }
-        return \ksort($array);
-    }
-
     public function testParseFieldMapFromString_RuntimeExceptionCases(): void
     {
         // Null input.
         try {
             MetadataFilter::parseFieldMapFromString(null);
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -338,8 +340,8 @@ class MetadataFilterTest extends TestCase
         // Empty input.
         try {
             MetadataFilter::parseFieldMapFromString('');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -347,8 +349,8 @@ class MetadataFilterTest extends TestCase
         // Whitespace input.
         try {
             MetadataFilter::parseFieldMapFromString(' ');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -356,8 +358,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as only group.
         try {
             MetadataFilter::parseFieldMapFromString('something_else');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -365,8 +367,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as last group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine:something_else');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -376,8 +378,8 @@ class MetadataFilterTest extends TestCase
             MetadataFilter::parseFieldMapFromString(
                 'pager:nationalPrefix:something_else:nationalNumberPattern'
             );
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -385,8 +387,8 @@ class MetadataFilterTest extends TestCase
         // Childless field given as parent.
         try {
             MetadataFilter::parseFieldMapFromString('nationalPrefix(exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -394,8 +396,8 @@ class MetadataFilterTest extends TestCase
         // Child field given as parent.
         try {
             MetadataFilter::parseFieldMapFromString('possibleLength(exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -403,8 +405,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as parent.
         try {
             MetadataFilter::parseFieldMapFromString('something_else(exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -412,8 +414,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as only child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(uan)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -421,8 +423,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as first child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(uan,possibleLength)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -430,8 +432,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as last child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,uan)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -439,8 +441,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as middle child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,uan,exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -448,8 +450,8 @@ class MetadataFilterTest extends TestCase
         // Childless field given as only child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(nationalPrefix)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -457,8 +459,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as only child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(something_else)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -466,8 +468,8 @@ class MetadataFilterTest extends TestCase
         // Bad token given as last child.
         try {
             MetadataFilter::parseFieldMapFromString('uan(possibleLength,something_else)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -475,8 +477,8 @@ class MetadataFilterTest extends TestCase
         // Empty parent.
         try {
             MetadataFilter::parseFieldMapFromString('(exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -484,8 +486,8 @@ class MetadataFilterTest extends TestCase
         // Whitespace parent.
         try {
             MetadataFilter::parseFieldMapFromString(' (exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -493,8 +495,8 @@ class MetadataFilterTest extends TestCase
         // Empty child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine()');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -502,8 +504,8 @@ class MetadataFilterTest extends TestCase
         // Whitespace child.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine( )');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -511,8 +513,8 @@ class MetadataFilterTest extends TestCase
         // Empty parent and child.
         try {
             MetadataFilter::parseFieldMapFromString('()');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -520,8 +522,8 @@ class MetadataFilterTest extends TestCase
         // Whitespace parent and empty child.
         try {
             MetadataFilter::parseFieldMapFromString(' ()');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -529,8 +531,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as a group twice.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine:uan:fixedLine');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -538,8 +540,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as the parent of a group and as a group by itself.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):fixedLine');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -547,8 +549,8 @@ class MetadataFilterTest extends TestCase
         // Parent field given as the parent of one group and then as the parent of another group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):fixedLine(possibleLength)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -556,8 +558,8 @@ class MetadataFilterTest extends TestCase
         // Childless field given twice as a group.
         try {
             MetadataFilter::parseFieldMapFromString('nationalPrefix:uan:nationalPrefix');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -565,8 +567,8 @@ class MetadataFilterTest extends TestCase
         // Child field given twice as a group.
         try {
             MetadataFilter::parseFieldMapFromString('exampleNumber:uan:exampleNumber');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -574,8 +576,8 @@ class MetadataFilterTest extends TestCase
         // Child field given first as the only child in a group and then as a group by itself.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber):exampleNumber');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -587,8 +589,8 @@ class MetadataFilterTest extends TestCase
                 . ':possibleLengthLocalOnly'
                 . ':exampleNumber'
             );
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -598,8 +600,8 @@ class MetadataFilterTest extends TestCase
             MetadataFilter::parseFieldMapFromString(
                 'fixedLine(possibleLength,exampleNumber,possibleLength)'
             );
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -624,8 +626,8 @@ class MetadataFilterTest extends TestCase
                 . ':noInternationalDialling(exampleNumber)'
                 . ':exampleNumber'
             );
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -652,8 +654,8 @@ class MetadataFilterTest extends TestCase
                 . ':noInternationalDialling(exampleNumber)'
                 . ':exampleNumber'
             );
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -661,8 +663,8 @@ class MetadataFilterTest extends TestCase
         // Missing right parenthesis in only group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -670,8 +672,8 @@ class MetadataFilterTest extends TestCase
         // Missing right parenthesis in first group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber:pager');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -679,8 +681,8 @@ class MetadataFilterTest extends TestCase
         // Missing left parenthesis in only group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLineexampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -688,8 +690,8 @@ class MetadataFilterTest extends TestCase
         // Early right parenthesis in only group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(example_numb)er');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -697,8 +699,8 @@ class MetadataFilterTest extends TestCase
         // Extra right parenthesis at end of only group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber))');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -706,8 +708,8 @@ class MetadataFilterTest extends TestCase
         // Extra right parenthesis between proper parentheses.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(example_numb)er)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -715,8 +717,8 @@ class MetadataFilterTest extends TestCase
         // Extra left parenthesis in only group.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine((exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -724,8 +726,8 @@ class MetadataFilterTest extends TestCase
         // Extra level of children.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber(possibleLength))');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -733,8 +735,8 @@ class MetadataFilterTest extends TestCase
         // Trailing comma in children.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(exampleNumber,)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -742,8 +744,8 @@ class MetadataFilterTest extends TestCase
         // Leading comma in children.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(,exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -751,8 +753,8 @@ class MetadataFilterTest extends TestCase
         // Empty token between commas.
         try {
             MetadataFilter::parseFieldMapFromString('fixedLine(possibleLength,,exampleNumber)');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -760,8 +762,8 @@ class MetadataFilterTest extends TestCase
         // Trailing colon.
         try {
             MetadataFilter::parseFieldMapFromString('uan:');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -769,8 +771,8 @@ class MetadataFilterTest extends TestCase
         // Leading colon.
         try {
             MetadataFilter::parseFieldMapFromString(':uan');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -778,8 +780,8 @@ class MetadataFilterTest extends TestCase
         // Empty token between colons.
         try {
             MetadataFilter::parseFieldMapFromString('uan::fixedLine');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -787,8 +789,8 @@ class MetadataFilterTest extends TestCase
         // Missing colon between groups.
         try {
             MetadataFilter::parseFieldMapFromString('uan(possibleLength)pager');
-            $this->fail();
-        } catch (\RuntimeException $e) {
+            self::fail();
+        } catch (RuntimeException $e) {
             // Test passed.
             $this->addToAssertionCount(1);
         }
@@ -823,8 +825,8 @@ class MetadataFilterTest extends TestCase
 
         $map2 = [];
 
-        $this->assertEquals(MetadataFilter::computeComplement($map1), $map2);
-        $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
+        self::assertSame(MetadataFilter::computeComplement($map1), $map2);
+        self::assertSame(MetadataFilter::computeComplement($map2), $map1);
     }
 
     public function testComputeComplement_inBetween(): void
@@ -835,11 +837,11 @@ class MetadataFilterTest extends TestCase
         $map1['tollFree'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['premiumRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['emergency'] = ['nationalNumberPattern'];
+        $map1['smsServices'] = ['nationalNumberPattern'];
         $map1['voicemail'] = ['possibleLength', 'exampleNumber'];
         $map1['shortCode'] = ['exampleNumber'];
         $map1['standardRate'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['carrierSpecific'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
-        $map1['smsServices'] = ['nationalNumberPattern'];
         $map1['noInternationalDialling'] = MetadataFilter::$EXCLUDABLE_CHILD_FIELDS;
         $map1['nationalPrefixTransformRule'] = [];
         $map1['sameMobileAndFixedLinePattern'] = [];
@@ -864,8 +866,8 @@ class MetadataFilterTest extends TestCase
         $map2['nationalPrefix'] = [];
         $map2['preferredExtnPrefix'] = [];
 
-        $this->assertEquals(MetadataFilter::computeComplement($map1), $map2);
-        $this->assertEquals(MetadataFilter::computeComplement($map2), $map1);
+        self::assertEquals(MetadataFilter::computeComplement($map1), $map2);
+        self::assertEquals(MetadataFilter::computeComplement($map2), $map1);
     }
 
     public function testShouldDrop(): void
@@ -888,35 +890,35 @@ class MetadataFilterTest extends TestCase
         $blacklist['mobileNumberPortableRegion'] = [];
 
         $filter = new MetadataFilter($blacklist);
-        $this->assertTrue($filter->shouldDrop('fixedLine', 'exampleNumber'));
-        $this->assertFalse($filter->shouldDrop('sharedCost', 'exampleNumber'));
-        $this->assertFalse($filter->shouldDrop('emergency', 'exampleNumber'));
-        $this->assertTrue($filter->shouldDrop('emergency', 'nationalNumberPattern'));
-        $this->assertFalse($filter->shouldDrop('preferredInternationalPrefix'));
-        $this->assertTrue($filter->shouldDrop('mobileNumberPortableRegion'));
-        $this->assertTrue($filter->shouldDrop('smsServices', 'nationalNumberPattern'));
+        self::assertTrue($filter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertFalse($filter->shouldDrop('sharedCost', 'exampleNumber'));
+        self::assertFalse($filter->shouldDrop('emergency', 'exampleNumber'));
+        self::assertTrue($filter->shouldDrop('emergency', 'nationalNumberPattern'));
+        self::assertFalse($filter->shouldDrop('preferredInternationalPrefix'));
+        self::assertTrue($filter->shouldDrop('mobileNumberPortableRegion'));
+        self::assertTrue($filter->shouldDrop('smsServices', 'nationalNumberPattern'));
 
         // Integration tests starting with flag values
-        $this->assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop(
+        self::assertTrue(BuildMetadataFromXml::getMetadataFilter(true, false)->shouldDrop(
             'fixedLine',
             'exampleNumber'
         ));
 
         // Integration tests starting with blacklist strings.
         $metadataFilter = new MetadataFilter(MetadataFilter::parseFieldMapFromString('fixedLine'));
-        $this->assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
         $metadataFilter = new MetadataFilter(MetadataFilter::parseFieldMapFromString('uan'));
-        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
 
         // Integration tests starting with whitelist strings.
         $metadataFilter = new MetadataFilter(MetadataFilter::computeComplement(MetadataFilter::parseFieldMapFromString('exampleNumber')));
-        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
         $metadataFilter = new MetadataFilter(MetadataFilter::computeComplement(MetadataFilter::parseFieldMapFromString('uan')));
-        $this->assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertTrue($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
 
         // Integration tests with an empty blacklist.
         $metadataFilter = new MetadataFilter();
-        $this->assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
+        self::assertFalse($metadataFilter->shouldDrop('fixedLine', 'exampleNumber'));
     }
 
     public function testFilterMetadata_liteBuild(): void
@@ -925,11 +927,11 @@ class MetadataFilterTest extends TestCase
 
         MetadataFilter::forLiteBuild()->filterMetadata($metadata);
 
-        $this->assertEquals(self::$ID, $metadata->getId());
-        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
-        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
+        self::assertSame(self::$ID, $metadata->getId());
+        self::assertSame(self::$countryCode, $metadata->getCountryCode());
+        self::assertSame(self::$internationalPrefix, $metadata->getInternationalPrefix());
 
-        $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
+        self::assertSame(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
         $combinedDesc = [
@@ -939,10 +941,10 @@ class MetadataFilterTest extends TestCase
             $metadata->getTollFree(),
         ];
         foreach ($combinedDesc as $desc) {
-            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
-            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
-            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
-            $this->assertFalse($desc->hasExampleNumber());
+            self::assertSame(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            self::assertSame(self::$possibleLengths, $desc->getPossibleLength());
+            self::assertSame(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+            self::assertFalse($desc->hasExampleNumber());
         }
     }
 
@@ -986,26 +988,27 @@ class MetadataFilterTest extends TestCase
 
         MetadataFilter::forSpecialBuild()->filterMetadata($metadata);
 
-        $this->assertEquals(self::$ID, $metadata->getId());
-        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
-        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
+        self::assertSame(self::$ID, $metadata->getId());
+        self::assertSame(self::$countryCode, $metadata->getCountryCode());
+        self::assertSame(self::$internationalPrefix, $metadata->getInternationalPrefix());
 
-        $this->assertFalse($metadata->hasPreferredInternationalPrefix());
+        self::assertFalse($metadata->hasPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
         $combinedDesc = [$metadata->getGeneralDesc(), $metadata->getMobile()];
         foreach ($combinedDesc as $desc) {
-            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
-            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
-            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+            self::assertSame(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            self::assertSame(self::$possibleLengths, $desc->getPossibleLength());
+            self::assertSame(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
         }
 
         $combinedDesc = [$metadata->getFixedLine(), $metadata->getTollFree()];
         foreach ($combinedDesc as $desc) {
-            $this->assertFalse($desc->hasNationalNumberPattern());
-            $this->assertCount(0, $desc->getPossibleLength());
-            $this->assertCount(0, $desc->getPossibleLengthLocalOnly());
-            $this->assertFalse($desc->hasExampleNumber());
+            self::assertNotNull($desc);
+            self::assertFalse($desc->hasNationalNumberPattern());
+            self::assertCount(0, $desc->getPossibleLength());
+            self::assertCount(0, $desc->getPossibleLengthLocalOnly());
+            self::assertFalse($desc->hasExampleNumber());
         }
     }
 
@@ -1015,10 +1018,10 @@ class MetadataFilterTest extends TestCase
 
         MetadataFilter::emptyFilter()->filterMetadata($metadata);
 
-        $this->assertEquals(self::$ID, $metadata->getId());
-        $this->assertEquals(self::$countryCode, $metadata->getCountryCode());
-        $this->assertEquals(self::$internationalPrefix, $metadata->getInternationalPrefix());
-        $this->assertEquals(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
+        self::assertSame(self::$ID, $metadata->getId());
+        self::assertSame(self::$countryCode, $metadata->getCountryCode());
+        self::assertSame(self::$internationalPrefix, $metadata->getInternationalPrefix());
+        self::assertSame(self::$preferredInternationalPrefix, $metadata->getPreferredInternationalPrefix());
 
         /** @var PhoneNumberDesc[] $combinedDesc */
         $combinedDesc = [
@@ -1028,41 +1031,42 @@ class MetadataFilterTest extends TestCase
             $metadata->getTollFree(),
         ];
         foreach ($combinedDesc as $desc) {
-            $this->assertEquals(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
-            $this->assertEquals(self::$possibleLengths, $desc->getPossibleLength());
-            $this->assertEquals(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
+            self::assertSame(self::$nationalNumberPattern, $desc->getNationalNumberPattern());
+            self::assertSame(self::$possibleLengths, $desc->getPossibleLength());
+            self::assertSame(self::$possibleLengthsLocalOnly, $desc->getPossibleLengthLocalOnly());
         }
 
-        $this->assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
-        $this->assertEquals($metadata->getFixedLine()->getExampleNumber(), self::$exampleNumber);
-        $this->assertEquals($metadata->getMobile()->getExampleNumber(), self::$exampleNumber);
-        $this->assertEquals($metadata->getTollFree()->getExampleNumber(), self::$exampleNumber);
+        self::assertNotNull($metadata->getGeneralDesc());
+        self::assertFalse($metadata->getGeneralDesc()->hasExampleNumber());
+        self::assertSame($metadata->getFixedLine()?->getExampleNumber(), self::$exampleNumber);
+        self::assertSame($metadata->getMobile()?->getExampleNumber(), self::$exampleNumber);
+        self::assertSame($metadata->getTollFree()?->getExampleNumber(), self::$exampleNumber);
     }
 
     public function testIntegrityOfFieldSets(): void
     {
-        $union = \array_merge(
+        $union = array_merge(
             MetadataFilter::$EXCLUDABLE_PARENT_FIELDS,
             MetadataFilter::$EXCLUDABLE_CHILD_FIELDS,
             MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS
         );
-        $union = \array_unique($union);
+        $union = array_unique($union);
 
         // Mutually exclusive sets
-        $this->assertEquals(
-            \count($union),
-            \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS)
+        self::assertSame(
+            count($union),
+            count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS) + count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS) + count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS)
         );
 
         // Non empty sets
-        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS));
-        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS));
-        $this->assertGreaterThan(0, \count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
+        self::assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_PARENT_FIELDS));
+        self::assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_CHILD_FIELDS));
+        self::assertGreaterThan(0, count(MetadataFilter::$EXCLUDABLE_CHILDLESS_FIELDS));
 
         // Nonempty and canonical field names.
         foreach ($union as $field) {
-            $this->assertGreaterThan(0, \strlen($field));
-            $this->assertEquals($field, \trim($field));
+            self::assertGreaterThan(0, strlen($field));
+            self::assertSame($field, trim($field));
         }
     }
 }

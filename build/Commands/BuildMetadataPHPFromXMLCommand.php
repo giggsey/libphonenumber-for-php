@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\buildtools\Commands;
 
 use libphonenumber\buildtools\BuildMetadataPHPFromXml;
@@ -8,9 +10,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @internal
+ */
 class BuildMetadataPHPFromXMLCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('BuildMetadataPHPFromXML');
         $this->setDescription('Generate phone metadata data files');
@@ -26,7 +31,7 @@ class BuildMetadataPHPFromXMLCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $build = new BuildMetadataPHPFromXml();
         $build->start(
@@ -35,9 +40,9 @@ class BuildMetadataPHPFromXMLCommand extends Command
             $input->getArgument('DataPrefix'),
             $input->getArgument('MappingClass'),
             $input->getArgument('MappingClassLocation'),
-            ($input->getArgument('LiteBuild') == 'true') ? true : false
+            $input->getArgument('LiteBuild') === 'true'
         );
 
-        return 0;
+        return self::SUCCESS;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\buildtools;
 
 use libphonenumber\buildtools\GeneratePhonePrefixData;
@@ -7,7 +9,10 @@ use PHPUnit\Framework\TestCase;
 
 class GeneratePhonePrefixDataTest extends TestCase
 {
-    private static array $available_data_files;
+    /**
+     * @var array<string,array<int|string>>
+     */
+    private static array $availableDataFiles;
 
     public static function setUpBeforeClass(): void
     {
@@ -28,27 +33,30 @@ class GeneratePhonePrefixDataTest extends TestCase
         // Languages for China.
         $phonePrefixData->addConfigurationMapping($temporaryMap, '86', 'zh_Hans');
 
-        self::$available_data_files = $temporaryMap;
+        self::$availableDataFiles = $temporaryMap;
     }
 
     public function testAddConfigurationMapping(): void
     {
-        $this->assertCount(3, self::$available_data_files);
+        self::assertCount(3, self::$availableDataFiles);
 
-        $languagesForUS = self::$available_data_files[1];
+        self::assertArrayHasKey('1', self::$availableDataFiles);
+        $languagesForUS = self::$availableDataFiles['1'];
 
-        $this->assertContains('en', $languagesForUS);
-        $this->assertContains('en_US', $languagesForUS);
-        $this->assertContains('es', $languagesForUS);
+        self::assertContains('en', $languagesForUS);
+        self::assertContains('en_US', $languagesForUS);
+        self::assertContains('es', $languagesForUS);
 
-        $languagesForFR = self::$available_data_files[33];
+        self::assertArrayHasKey('33', self::$availableDataFiles);
+        $languagesForFR = self::$availableDataFiles['33'];
 
-        $this->assertContains('fr', $languagesForFR);
-        $this->assertContains('en', $languagesForFR);
+        self::assertContains('fr', $languagesForFR);
+        self::assertContains('en', $languagesForFR);
 
-        $languagesForCN = self::$available_data_files[86];
-        $this->assertCount(1, $languagesForCN);
+        self::assertArrayHasKey('86', self::$availableDataFiles);
+        $languagesForCN = self::$availableDataFiles['86'];
+        self::assertCount(1, $languagesForCN);
 
-        $this->assertContains('zh_Hans', $languagesForCN);
+        self::assertContains('zh_Hans', $languagesForCN);
     }
 }

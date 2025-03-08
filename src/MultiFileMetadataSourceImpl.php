@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author joshuag
  * @created: 04/08/2015 09:03
@@ -7,6 +9,8 @@
  */
 
 namespace libphonenumber;
+
+use RuntimeException;
 
 /**
  * @internal
@@ -48,10 +52,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         $this->metadataLoader = $metadataLoader;
     }
 
-    /**
-     *
-     */
-    public function getMetadataForRegion($regionCode): PhoneMetadata
+    public function getMetadataForRegion(string $regionCode): PhoneMetadata
     {
         $regionCode = strtoupper($regionCode);
 
@@ -64,10 +65,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         return $this->regionToMetadataMap[$regionCode];
     }
 
-    /**
-     *
-     */
-    public function getMetadataForNonGeographicalRegion($countryCallingCode): PhoneMetadata
+    public function getMetadataForNonGeographicalRegion(int $countryCallingCode): PhoneMetadata
     {
         if (!array_key_exists($countryCallingCode, $this->countryCodeToNonGeographicalMetadataMap)) {
             $this->loadMetadataFromFile($this->currentFilePrefix, PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode, $this->metadataLoader);
@@ -77,7 +75,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
     }
 
     /**
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function loadMetadataFromFile(string $filePrefix, string $regionCode, int $countryCallingCode, MetadataLoaderInterface $metadataLoader): void
     {
@@ -86,7 +84,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
         if (!is_readable($fileName)) {
-            throw new \RuntimeException('missing metadata: ' . $fileName);
+            throw new RuntimeException('missing metadata: ' . $fileName);
         }
 
         $data = $metadataLoader->loadMetadata($fileName);

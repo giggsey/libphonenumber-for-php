@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\geocoding;
 
 use Giggsey\Locale\Locale;
@@ -9,26 +11,24 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
+use function count;
+use function strlen;
+use function substr;
+
+/**
+ * @phpstan-consistent-constructor
+ * @no-named-arguments
+ */
 class PhoneNumberOfflineGeocoder
 {
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    protected static $instance;
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
-    /**
-     * @var PrefixFileReader
-     */
-    protected $prefixFileReader;
+    protected static ?PhoneNumberOfflineGeocoder $instance;
+    protected PhoneNumberUtil $phoneUtil;
+    protected PrefixFileReader $prefixFileReader;
 
     /**
      * PhoneNumberOfflineGeocoder constructor.
-     * @param string|null $phonePrefixDataDirectory
      */
-    protected function __construct($phonePrefixDataDirectory)
+    protected function __construct(?string $phonePrefixDataDirectory)
     {
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
@@ -42,22 +42,21 @@ class PhoneNumberOfflineGeocoder
     /**
      * Gets a PhoneNumberOfflineGeocoder instance to carry out international phone number geocoding.
      *
-     * <p>The PhoneNumberOfflineGeocoder is implemented as a singleton. Therefore, calling this method
+     * The PhoneNumberOfflineGeocoder is implemented as a singleton. Therefore, calling this method
      * multiple times will only result in one instance being created.
      *
      * @param string|null $mappingDir (Optional) Mapping Data Directory
-     * @return PhoneNumberOfflineGeocoder
      */
-    public static function getInstance($mappingDir = null)
+    public static function getInstance(?string $mappingDir = null): PhoneNumberOfflineGeocoder
     {
-        if (static::$instance === null) {
+        if (!isset(static::$instance)) {
             static::$instance = new static($mappingDir);
         }
 
         return static::$instance;
     }
 
-    public static function resetInstance()
+    public static function resetInstance(): void
     {
         static::$instance = null;
     }
@@ -70,13 +69,13 @@ class PhoneNumberOfflineGeocoder
      * @see getDescriptionForValidNumber
      * @param PhoneNumber $number a valid phone number for which we want to get a text description
      * @param string $locale the language code for which the description should be written
-     * @param string $userRegion the region code for a given user. This region will be omitted from the
-     *     description if the phone number comes from this region. It is a two-letter uppercase CLDR region
-     *     code.
+     * @param string|null $userRegion the region code for a given user. This region will be omitted from the
+     *                                description if the phone number comes from this region. It is a two-letter uppercase CLDR region
+     *                                code.
      * @return string a text description for the given language code for the given phone number, or empty
-     *     string if the number passed in is invalid
+     *                string if the number passed in is invalid
      */
-    public function getDescriptionForNumber(PhoneNumber $number, $locale, $userRegion = null)
+    public function getDescriptionForNumber(PhoneNumber $number, string $locale, ?string $userRegion = null): string
     {
         $numberType = $this->phoneUtil->getNumberType($number);
 
@@ -94,15 +93,12 @@ class PhoneNumberOfflineGeocoder
     /**
      * Returns the customary display name in the given language for the given territory the phone
      * number is from. If it could be from many territories, nothing is returned.
-     *
-     * @param string $locale
-     * @return string
      */
-    protected function getCountryNameForNumber(PhoneNumber $number, $locale)
+    protected function getCountryNameForNumber(PhoneNumber $number, string $locale): string
     {
         $regionCodes = $this->phoneUtil->getRegionCodesForCountryCode($number->getCountryCode());
 
-        if (\count($regionCodes) === 1) {
+        if (count($regionCodes) === 1) {
             return $this->getRegionDisplayName($regionCodes[0], $locale);
         }
 
@@ -123,12 +119,10 @@ class PhoneNumberOfflineGeocoder
 
     /**
      * Returns the customary display name in the given language for the given region.
-     *
-     * @return string
      */
-    protected function getRegionDisplayName($regionCode, $locale)
+    protected function getRegionDisplayName(string $regionCode, string $locale): string
     {
-        if ($regionCode === null || $regionCode == 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) {
+        if ($regionCode === 'ZZ' || $regionCode === PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY) {
             return '';
         }
 
@@ -160,30 +154,36 @@ class PhoneNumberOfflineGeocoder
      *
      * @param PhoneNumber $number a valid phone number for which we want to get a text description
      * @param string $locale the language code for which the description should be written
-     * @param string $userRegion the region code for a given user. This region will be omitted from the
-     *     description if the phone number comes from this region. It is a two-letter upper-case CLDR
-     *     region code.
+     * @param string|null $userRegion the region code for a given user. This region will be omitted from the
+     *                                description if the phone number comes from this region. It is a two-letter upper-case CLDR
+     *                                region code.
      * @return string a text description for the given language code for the given phone number, or an
-     *     empty string if the number could come from multiple countries, or the country code is
-     *     in fact invalid
+     *                empty string if the number could come from multiple countries, or the country code is
+     *                in fact invalid
      */
-    public function getDescriptionForValidNumber(PhoneNumber $number, $locale, $userRegion = null)
+    public function getDescriptionForValidNumber(PhoneNumber $number, string $locale, ?string $userRegion = null): string
     {
         // If the user region matches the number's region, then we just show the lower-level
         // description, if one exists - if no description exists, we will show the region(country) name
         // for the number.
         $regionCode = $this->phoneUtil->getRegionCodeForNumber($number);
-        if ($userRegion == null || $userRegion == $regionCode) {
+
+        if ($regionCode === null) {
+            // Invalid number
+            return '';
+        }
+
+        if ($userRegion === null || $userRegion === $regionCode) {
             $languageStr = Locale::getPrimaryLanguage($locale);
             $scriptStr = '';
             $regionStr = Locale::getRegion($locale);
 
             $mobileToken = PhoneNumberUtil::getCountryMobileToken($number->getCountryCode());
             $nationalNumber = $this->phoneUtil->getNationalSignificantNumber($number);
-            if ($mobileToken !== '' && (!\strncmp($nationalNumber, $mobileToken, \strlen($mobileToken)))) {
+            if ($mobileToken !== '' && str_starts_with($nationalNumber, $mobileToken)) {
                 // In some countries, eg. Argentina, mobile numbers have a mobile token before the national
                 // destination code, this should be removed before geocoding.
-                $nationalNumber = \substr($nationalNumber, \strlen($mobileToken));
+                $nationalNumber = substr($nationalNumber, strlen($mobileToken));
                 $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
                 try {
                     $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
@@ -196,7 +196,7 @@ class PhoneNumberOfflineGeocoder
                 $areaDescription = $this->prefixFileReader->getDescriptionForNumber($number, $languageStr, $scriptStr, $regionStr);
             }
 
-            return (\strlen($areaDescription) > 0) ? $areaDescription : $this->getCountryNameForNumber($number, $locale);
+            return ($areaDescription !== '') ? $areaDescription : $this->getCountryNameForNumber($number, $locale);
         }
         // Otherwise, we just show the region(country) name for now.
         return $this->getRegionDisplayName($regionCode, $locale);

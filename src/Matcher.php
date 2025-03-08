@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
 /**
@@ -17,6 +19,9 @@ class Matcher
 
     protected string $subject = '';
 
+    /**
+     * @var array<int,mixed>
+     */
     protected array $groups = [];
 
     private int $searchIndex = 0;
@@ -27,7 +32,7 @@ class Matcher
         $this->subject = $subject;
     }
 
-    protected function doMatch($type = 'find', $offset = 0)
+    protected function doMatch(string $type = 'find', int $offset = 0): bool
     {
         $final_pattern = '(?:' . $this->pattern . ')';
         switch ($type) {
@@ -66,26 +71,17 @@ class Matcher
         return ($result === 1);
     }
 
-    /**
-     * @return bool
-     */
-    public function matches()
+    public function matches(): bool
     {
         return $this->doMatch('matches');
     }
 
-    /**
-     * @return bool
-     */
-    public function lookingAt()
+    public function lookingAt(): bool
     {
         return $this->doMatch('lookingAt');
     }
 
-    /**
-     * @return bool
-     */
-    public function find($offset = null)
+    public function find(int $offset = null): bool
     {
         if ($offset === null) {
             $offset = $this->searchIndex;
@@ -96,23 +92,16 @@ class Matcher
         return $this->doMatch('find', $offset);
     }
 
-    /**
-     * @return int
-     */
-    public function groupCount()
+    public function groupCount(): ?int
     {
-        if (empty($this->groups)) {
+        if ($this->groups === []) {
             return null;
         }
 
         return count($this->groups) - 1;
     }
 
-    /**
-     * @param int $group
-     * @return string
-     */
-    public function group($group = null)
+    public function group(int $group = null): ?string
     {
         if ($group === null) {
             $group = 0;
@@ -120,11 +109,7 @@ class Matcher
         return $this->groups[$group][0] ?? null;
     }
 
-    /**
-     * @param int|null $group
-     * @return int
-     */
-    public function end($group = null)
+    public function end(int $group = null): ?int
     {
         if ($group === null) {
             $group = 0;
@@ -135,7 +120,7 @@ class Matcher
         return $this->groups[$group][1] + mb_strlen($this->groups[$group][0]);
     }
 
-    public function start($group = null)
+    public function start(int $group = null): mixed
     {
         if ($group === null) {
             $group = 0;
@@ -147,29 +132,17 @@ class Matcher
         return $this->groups[$group][1];
     }
 
-    /**
-     * @param string $replacement
-     * @return string
-     */
-    public function replaceFirst($replacement)
+    public function replaceFirst(string $replacement): string
     {
         return preg_replace('/' . $this->pattern . '/x', $replacement, $this->subject, 1);
     }
 
-    /**
-     * @param string $replacement
-     * @return string
-     */
-    public function replaceAll($replacement)
+    public function replaceAll(string $replacement): string
     {
         return preg_replace('/' . $this->pattern . '/x', $replacement, $this->subject);
     }
 
-    /**
-     * @param string $input
-     * @return Matcher
-     */
-    public function reset($input = '')
+    public function reset(string $input = ''): static
     {
         $this->subject = $input;
 

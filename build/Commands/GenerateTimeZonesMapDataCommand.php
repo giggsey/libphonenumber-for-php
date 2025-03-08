@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\buildtools\Commands;
 
 use libphonenumber\buildtools\GenerateTimeZonesMapData;
@@ -8,9 +10,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @internal
+ */
 class GenerateTimeZonesMapDataCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('GenerateTimeZonesMapData');
         $this->setDescription('Generate time zone data files');
@@ -22,10 +27,10 @@ class GenerateTimeZonesMapDataCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         new GenerateTimeZonesMapData($input->getArgument('InputFile'), $input->getArgument('OutputDirectory'));
 
-        return 0;
+        return self::SUCCESS;
     }
 }
