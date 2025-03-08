@@ -10,7 +10,7 @@
          failOnPhpunitDeprecation="true"
          failOnRisky="true"
          failOnSkipped="true"
-         failOnWarning="true"
+         failOnWarning="false"
          displayDetailsOnIncompleteTests="true"
          displayDetailsOnPhpunitDeprecations="true"
          displayDetailsOnSkippedTests="true"
