@@ -763,7 +763,7 @@ class PhoneNumberUtil
     private function getSupportedTypesForMetadata(PhoneMetadata $metadata): array
     {
         $types = [];
-        foreach (array_keys(PhoneNumberType::values()) as $type) {
+        foreach (PhoneNumberType::cases() as $type) {
             if ($type === PhoneNumberType::FIXED_LINE_OR_MOBILE || $type === PhoneNumberType::UNKNOWN) {
                 // Never return FIXED_LINE_OR_MOBILE (it is a convenience type, and represents that a
                 // particular number type can't be determined) or UNKNOWN (the non-type).
@@ -979,12 +979,7 @@ class PhoneNumberUtil
         return $nationalNumber;
     }
 
-    /**
-     * Returns the type of number passed in i.e Toll free, premium.
-     *
-     * @return int PhoneNumberType constant
-     */
-    protected function getNumberTypeHelper(string $nationalNumber, PhoneMetadata $metadata): int
+    protected function getNumberTypeHelper(string $nationalNumber, PhoneMetadata $metadata): PhoneNumberType
     {
         if (!$this->isNumberMatchingDesc($nationalNumber, $metadata->getGeneralDesc())) {
             return PhoneNumberType::UNKNOWN;
@@ -1064,10 +1059,10 @@ class PhoneNumberUtil
      * This version exists since calculating the phone number type is expensive; if we have already
      * done this, we don't want to do it again.
      *
-     * @param int|PhoneNumber $phoneNumberObjOrType A PhoneNumber object, or a PhoneNumberType integer
+     * @param PhoneNumber|PhoneNumberType $phoneNumberObjOrType A PhoneNumber object, or a PhoneNumberType integer
      * @param int|null $countryCallingCode Used when passing a PhoneNumberType
      */
-    public function isNumberGeographical(PhoneNumber|int $phoneNumberObjOrType, ?int $countryCallingCode = null): bool
+    public function isNumberGeographical(PhoneNumber|PhoneNumberType $phoneNumberObjOrType, ?int $countryCallingCode = null): bool
     {
         if ($phoneNumberObjOrType instanceof PhoneNumber) {
             return $this->isNumberGeographical($this->getNumberType($phoneNumberObjOrType), $phoneNumberObjOrType->getCountryCode());
@@ -1083,9 +1078,9 @@ class PhoneNumberUtil
      * Gets the type of a valid phone number.
      *
      * @param PhoneNumber $number the number the phone number that we want to know the type
-     * @return int PhoneNumberType the type of the phone number, or UNKNOWN if it is invalid
+     * @return PhoneNumberType the type of the phone number, or PhoneNumberType::UNKNOWN if it is invalid
      */
-    public function getNumberType(PhoneNumber $number): int
+    public function getNumberType(PhoneNumber $number): PhoneNumberType
     {
         $regionCode = $this->getRegionCodeForNumber($number);
         $metadata = $this->getMetadataForRegionOrCallingCode($number->getCountryCode(), $regionCode);
@@ -1191,12 +1186,8 @@ class PhoneNumberUtil
      * country calling code of 0 or an otherwise invalid country calling code, we cannot work out
      * which formatting rules to apply so we return the national significant number with no formatting
      * applied.
-     *
-     * @param PhoneNumber $number the phone number to be formatted
-     * @param int $numberFormat the PhoneNumberFormat the phone number should be formatted into
-     * @return string the formatted phone number
      */
-    public function format(PhoneNumber $number, int $numberFormat): string
+    public function format(PhoneNumber $number, PhoneNumberFormat $numberFormat): string
     {
         if ($number->getNationalNumber() === '0' && $number->hasRawInput()) {
             // Unparsable numbers that kept their raw input just use that.
@@ -1242,9 +1233,8 @@ class PhoneNumberUtil
 
     /**
      * A helper function that is used by format and formatByPattern.
-     * @param int $numberFormat PhoneNumberFormat
      */
-    protected function prefixNumberWithCountryCallingCode(int $countryCallingCode, int $numberFormat, string &$formattedNumber): void
+    protected function prefixNumberWithCountryCallingCode(int $countryCallingCode, PhoneNumberFormat $numberFormat, string &$formattedNumber): void
     {
         switch ($numberFormat) {
             case PhoneNumberFormat::E164:
@@ -1257,7 +1247,6 @@ class PhoneNumberUtil
                 $formattedNumber = static::RFC3966_PREFIX . static::PLUS_SIGN . $countryCallingCode . '-' . $formattedNumber;
                 return;
             case PhoneNumberFormat::NATIONAL:
-            default:
                 return;
         }
     }
@@ -1289,9 +1278,8 @@ class PhoneNumberUtil
      * depending on whether it forms part of the NATIONAL format or INTERNATIONAL format. The
      * numberFormat parameter here is used to specify which format to use for those cases. If a
      * carrierCode is specified, this will be inserted into the formatted string to replace $CC.
-     * @param int $numberFormat PhoneNumberFormat
      */
-    protected function formatNsn(string $number, PhoneMetadata $metadata, int $numberFormat, ?string $carrierCode = null): string
+    protected function formatNsn(string $number, PhoneMetadata $metadata, PhoneNumberFormat $numberFormat, ?string $carrierCode = null): string
     {
         $intlNumberFormats = $metadata->intlNumberFormats();
         // When the intlNumberFormats exists, we use that to format national number for the
@@ -1333,13 +1321,12 @@ class PhoneNumberUtil
     /**
      * Note that carrierCode is optional - if null or an empty string, no carrier code replacement
      * will take place.
-     * @param int $numberFormat PhoneNumberFormat
      */
     public function formatNsnUsingPattern(
-        string       $nationalNumber,
+        string $nationalNumber,
         NumberFormat $formattingPattern,
-        int          $numberFormat,
-        ?string $carrierCode = null
+        PhoneNumberFormat $numberFormat,
+        ?string $carrierCode = null,
     ): string {
         $numberFormatRule = $formattingPattern->getFormat();
         $m = new Matcher($formattingPattern->getPattern(), $nationalNumber);
@@ -1382,10 +1369,8 @@ class PhoneNumberUtil
     /**
      * Appends the formatted extension of a phone number to formattedNumber, if the phone number had
      * an extension specified.
-     *
-     * @param int $numberFormat PhoneNumberFormat
      */
-    protected function maybeAppendFormattedExtension(PhoneNumber $number, ?PhoneMetadata $metadata, int $numberFormat, string &$formattedNumber): void
+    protected function maybeAppendFormattedExtension(PhoneNumber $number, ?PhoneMetadata $metadata, PhoneNumberFormat $numberFormat, string &$formattedNumber): void
     {
         if ($number->hasExtension() && $number->getExtension() !== '') {
             if ($numberFormat === PhoneNumberFormat::RFC3966) {
@@ -2032,11 +2017,11 @@ class PhoneNumberUtil
      *                       dialing prefix from.
      * @param string $possibleIddPrefix string the international direct dialing prefix from the region we
      *                                  think this number may be dialed in
-     * @return int the corresponding CountryCodeSource if an international dialing prefix could be
-     *             removed from the number, otherwise CountryCodeSource.FROM_DEFAULT_COUNTRY if the number did
-     *             not seem to be in international format.
+     * @return CountryCodeSource the corresponding CountryCodeSource if an international dialing prefix could be
+     *                           removed from the number, otherwise CountryCodeSource::FROM_DEFAULT_COUNTRY if the number did
+     *                           not seem to be in international format.
      */
-    public function maybeStripInternationalPrefixAndNormalize(string &$number, string $possibleIddPrefix): int
+    public function maybeStripInternationalPrefixAndNormalize(string &$number, string $possibleIddPrefix): CountryCodeSource
     {
         if ($number === '') {
             return CountryCodeSource::FROM_DEFAULT_COUNTRY;
@@ -2249,10 +2234,10 @@ class PhoneNumberUtil
      * connect, the number is not considered possible without it.
      *
      * @param PhoneNumber $number The number that needs to be checked
-     * @param int $type PhoneNumberType The type we are interested in
+     * @param PhoneNumberType $type PhoneNumberType The type we are interested in
      * @return bool true if the number is possible for this particular type
      */
-    public function isPossibleNumberForType(PhoneNumber $number, int $type): bool
+    public function isPossibleNumberForType(PhoneNumber $number, PhoneNumberType $type): bool
     {
         $result = $this->isPossibleNumberForTypeWithReason($number, $type);
         return $result === ValidationResult::IS_POSSIBLE
@@ -2262,11 +2247,8 @@ class PhoneNumberUtil
     /**
      * Helper method to check a number against possible lengths for this number type, and determine
      * whether it matches, or is too short or too long.
-     *
-     * @param int $type PhoneNumberType
-     * @return int ValidationResult
      */
-    protected function testNumberLength(string $number, PhoneMetadata $metadata, int $type = PhoneNumberType::UNKNOWN): int
+    protected function testNumberLength(string $number, PhoneMetadata $metadata, PhoneNumberType $type = PhoneNumberType::UNKNOWN): ValidationResult
     {
         $descForType = $this->getNumberDescByType($metadata, $type);
         // There should always be "possibleLengths" set for every element. This is declared in the XML
@@ -3081,12 +3063,10 @@ class PhoneNumberUtil
      * code, we cannot work out things like whether there should be a national prefix applied, or how
      * to format extensions, so we return the national significant number with no formatting applied.
      *
-     * @param PhoneNumber $number the phone number to be formatted
-     * @param int $numberFormat the format the phone number should be formatted into
      * @param NumberFormat[] $userDefinedFormats formatting rules specified by clients
      * @return string the formatted phone number
      */
-    public function formatByPattern(PhoneNumber $number, int $numberFormat, array $userDefinedFormats): string
+    public function formatByPattern(PhoneNumber $number, PhoneNumberFormat $numberFormat, array $userDefinedFormats): string
     {
         $countryCallingCode = $number->getCountryCode();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
@@ -3209,8 +3189,8 @@ class PhoneNumberUtil
     /**
      * Gets a valid number for the specified region and number type.
      *
-     * @param int|string $regionCodeOrType the region for which an example number is needed
-     * @param int|null $type the PhoneNumberType of number that is needed
+     * @param string|PhoneNumberType $regionCodeOrType the region for which an example number is needed or the
+     *                                                 PhoneNumberType when not passing in $type
      * @return PhoneNumber|null a valid number for the specified region and type. Returns null when the metadata
      *                          does not contain such information or if an invalid region or region 001 was entered.
      *                          For 001 (representing non-geographical numbers), call
@@ -3219,14 +3199,18 @@ class PhoneNumberUtil
      * If $regionCodeOrType is the only parameter supplied, then a valid number for the specified number type
      * will be returned that may belong to any country.
      */
-    public function getExampleNumberForType(int|string $regionCodeOrType, ?int $type = null): ?PhoneNumber
+    public function getExampleNumberForType(string|PhoneNumberType $regionCodeOrType, ?PhoneNumberType $type = null): ?PhoneNumber
     {
         if ($type === null) {
+            if (!$regionCodeOrType instanceof PhoneNumberType) {
+                throw new \TypeError('$regionCodeOrType must be a PhoneNumberType');
+            }
+
             /*
              * Gets a valid number for the specified number type (it may belong to any country).
              */
             foreach ($this->getSupportedRegions() as $regionCode) {
-                $exampleNumber = $this->getExampleNumberForType($regionCode, (int) $regionCodeOrType);
+                $exampleNumber = $this->getExampleNumberForType($regionCode, $regionCodeOrType);
                 if ($exampleNumber !== null) {
                     return $exampleNumber;
                 }
@@ -3234,7 +3218,7 @@ class PhoneNumberUtil
 
             // If there wasn't an example number for a region, try the non-geographical entities.
             foreach ($this->getSupportedGlobalNetworkCallingCodes() as $countryCallingCode) {
-                $desc = $this->getNumberDescByType($this->getMetadataForNonGeographicalRegion($countryCallingCode), (int) $regionCodeOrType);
+                $desc = $this->getNumberDescByType($this->getMetadataForNonGeographicalRegion($countryCallingCode), $regionCodeOrType);
                 try {
                     if ($desc->getExampleNumber() !== '') {
                         return $this->parse('+' . $countryCallingCode . $desc->getExampleNumber(), static::UNKNOWN_REGION);
@@ -3247,25 +3231,26 @@ class PhoneNumberUtil
             return null;
         }
 
+        if (!is_string($regionCodeOrType)) {
+            throw new \TypeError('$regionCodeOrType must be a string if $type is null');
+        }
+
         // Check the region code is valid.
-        if (!$this->isValidRegionCode((string) $regionCodeOrType)) {
+        if (!$this->isValidRegionCode($regionCodeOrType)) {
             return null;
         }
-        $desc = $this->getNumberDescByType($this->getMetadataForRegion((string) $regionCodeOrType), $type);
+        $desc = $this->getNumberDescByType($this->getMetadataForRegion($regionCodeOrType), $type);
         try {
             if ($desc->hasExampleNumber()) {
-                return $this->parse($desc->getExampleNumber(), (string) $regionCodeOrType);
+                return $this->parse($desc->getExampleNumber(), $regionCodeOrType);
             }
-        } catch (NumberParseException $e) {
+        } catch (NumberParseException) {
             // noop
         }
         return null;
     }
 
-    /**
-     * @param int $type PhoneNumberType
-     */
-    protected function getNumberDescByType(PhoneMetadata $metadata, int $type): PhoneNumberDesc
+    protected function getNumberDescByType(PhoneMetadata $metadata, PhoneNumberType $type): PhoneNumberDesc
     {
         return match ($type) {
             PhoneNumberType::PREMIUM_RATE => $metadata->getPremiumRate(),
@@ -3341,10 +3326,9 @@ class PhoneNumberUtil
      * @param $secondNumberIn string|PhoneNumber Second number to compare. If it is a
      *                       string it can contain formatting, and can have country calling code specified
      *                       with + at the start.
-     * @return int {MatchType} NOT_A_NUMBER, NO_MATCH,
      * @throws InvalidArgumentException
      */
-    public function isNumberMatch(PhoneNumber|string $firstNumberIn, PhoneNumber|string $secondNumberIn): int
+    public function isNumberMatch(PhoneNumber|string $firstNumberIn, PhoneNumber|string $secondNumberIn): MatchType
     {
         if (is_string($firstNumberIn) && is_string($secondNumberIn)) {
             try {
@@ -3550,9 +3534,9 @@ class PhoneNumberUtil
      * this method will return IS_POSSIBLE_LOCAL_ONLY for +1310xxxx.
      *
      * @param PhoneNumber $number the number that needs to be checked
-     * @return int a ValidationResult object which indicates whether the number is possible
+     * @return ValidationResult object which indicates whether the number is possible
      */
-    public function isPossibleNumberWithReason(PhoneNumber $number): int
+    public function isPossibleNumberWithReason(PhoneNumber $number): ValidationResult
     {
         return $this->isPossibleNumberForTypeWithReason($number, PhoneNumberType::UNKNOWN);
     }
@@ -3586,10 +3570,10 @@ class PhoneNumberUtil
      * this method will return IS_POSSIBLE_LOCAL_ONLY for +1310xxxx.
      *
      * @param PhoneNumber $number the number that needs to be checked
-     * @param int $type the PhoneNumberType we are interested in
-     * @return int a ValidationResult object which indicates whether the number is possible
+     * @param PhoneNumberType $type the PhoneNumberType we are interested in
+     * @return ValidationResult object which indicates whether the number is possible
      */
-    public function isPossibleNumberForTypeWithReason(PhoneNumber $number, int $type): int
+    public function isPossibleNumberForTypeWithReason(PhoneNumber $number, PhoneNumberType $type): ValidationResult
     {
         $nationalNumber = $this->getNationalSignificantNumber($number);
         $countryCode = $number->getCountryCode();

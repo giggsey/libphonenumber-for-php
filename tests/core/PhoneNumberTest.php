@@ -42,10 +42,10 @@ class PhoneNumberTest extends TestCase
     public function testEqualWithCountryCodeSourceSet(): void
     {
         $numberA = new PhoneNumber();
-        $numberA->setRawInput('+1 650 253 00 00')->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
+        $numberA->setRawInput('+1 650 253 00 00')->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         $numberB = new PhoneNumber();
-        $numberB->setRawInput('+1 650 253 00 00')->setCountryCode(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
+        $numberB->setRawInput('+1 650 253 00 00')->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITH_PLUS_SIGN);
 
         self::assertEquals($numberA, $numberB);
     }

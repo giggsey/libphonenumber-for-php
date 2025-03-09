@@ -44,7 +44,7 @@ class PhoneNumberMatcherTest extends TestCase
         // Here, the country code source thinks it started with a country calling code, but this is not
         // the same as the part before the slash, so it's still true.
         $number = new PhoneNumber();
-        $number->setCountryCodeSource(274);
+        $number->setCountryCode(274);
         $number->setCountryCodeSource(CountryCodeSource::FROM_NUMBER_WITHOUT_PLUS_SIGN);
         $candidate = '27/4/2013';
         self::assertTrue(PhoneNumberMatcher::containsMoreThanOneSlashInNationalNumber($number, $candidate));

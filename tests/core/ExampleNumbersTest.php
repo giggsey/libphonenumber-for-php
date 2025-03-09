@@ -54,7 +54,7 @@ class ExampleNumbersTest extends TestCase
     }
 
     /**
-     * @return array<array{int}>
+     * @return array<array{PhoneNumberType}>
      */
     public static function numberTypes(): array
     {
@@ -88,9 +88,9 @@ class ExampleNumbersTest extends TestCase
     }
 
     /**
-     * @param int[] $possibleExpectedTypes
+     * @param PhoneNumberType[] $possibleExpectedTypes
      */
-    private function checkNumbersValidAndCorrectType(int $exampleNumberRequestedType, array $possibleExpectedTypes, string $regionCode): void
+    private function checkNumbersValidAndCorrectType(PhoneNumberType $exampleNumberRequestedType, array $possibleExpectedTypes, string $regionCode): void
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForType($regionCode, $exampleNumberRequestedType);
         if ($exampleNumber !== null) {
@@ -257,10 +257,10 @@ class ExampleNumbersTest extends TestCase
     }
 
     #[DataProvider('numberTypes')]
-    public function testEveryTypeHasAnExampleNumber(int $numberType): void
+    public function testEveryTypeHasAnExampleNumber(PhoneNumberType $numberType): void
     {
         $exampleNumber = $this->phoneNumberUtil->getExampleNumberForType($numberType);
-        self::assertNotNull($exampleNumber, 'No example number found for type ' . $numberType);
+        self::assertNotNull($exampleNumber, 'No example number found for type ' . $numberType->name);
     }
 
     #[DataProvider('shortNumberRegionList')]
@@ -283,7 +283,7 @@ class ExampleNumbersTest extends TestCase
     }
 
     /**
-     * @return array<array{string,int}>
+     * @return array<array{string,ShortNumberCost}>
      */
     public static function shortRegionListAndNumberCost(): array
     {
@@ -306,7 +306,7 @@ class ExampleNumbersTest extends TestCase
     }
 
     #[DataProvider('shortRegionListAndNumberCost')]
-    public function testShortNumberHasCorrectCost(string $regionCode, int $cost): void
+    public function testShortNumberHasCorrectCost(string $regionCode, ShortNumberCost $cost): void
     {
         $exampleShortNumber = $this->shortNumberInfo->getExampleShortNumberForCost($regionCode, $cost);
         if ($exampleShortNumber !== '') {

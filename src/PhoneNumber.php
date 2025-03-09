@@ -60,12 +60,8 @@ class PhoneNumber implements Serializable
     /**
      * The source from which the country_code is derived. This is not set in the general parsing method,
      * but in the method that parses and keeps raw_input. New fields could be added upon request.
-     *
-     * @see CountryCodeSource
-     *
-     * This must be one of the CountryCodeSource constants.
      */
-    protected ?int $countryCodeSource = CountryCodeSource::UNSPECIFIED;
+    protected ?CountryCodeSource $countryCodeSource = CountryCodeSource::UNSPECIFIED;
     /**
      * The carrier selection code that is preferred when calling this phone number domestically. This
      * also includes codes that need to be dialed in some countries when calling from landlines to
@@ -285,12 +281,12 @@ class PhoneNumber implements Serializable
         return $this->countryCodeSource !== CountryCodeSource::UNSPECIFIED;
     }
 
-    public function getCountryCodeSource(): ?int
+    public function getCountryCodeSource(): ?CountryCodeSource
     {
         return $this->countryCodeSource;
     }
 
-    public function setCountryCodeSource(int $value): static
+    public function setCountryCodeSource(CountryCodeSource $value): static
     {
         $this->countryCodeSource = $value;
         return $this;
@@ -352,7 +348,7 @@ class PhoneNumber implements Serializable
             $outputString .= ' Extension: ' . $this->extension;
         }
         if ($this->hasCountryCodeSource()) {
-            $outputString .= ' Country Code Source: ' . $this->countryCodeSource;
+            $outputString .= ' Country Code Source: ' . $this->countryCodeSource->name;
         }
         if ($this->hasPreferredDomesticCarrierCode()) {
             $outputString .= ' Preferred Domestic Carrier Code: ' . $this->preferredDomesticCarrierCode;
@@ -385,7 +381,7 @@ class PhoneNumber implements Serializable
     }
 
     /**
-     * @param array{int,string,string,bool|null,int,string|null,int|null,string|null} $data
+     * @param array{int,string,string,bool|null,int,string|null,CountryCodeSource|null,string|null} $data
      */
     public function __unserialize(array $data): void
     {

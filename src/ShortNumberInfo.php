@@ -174,11 +174,11 @@ class ShortNumberInfo
      *  Gets a valid short number for the specified cost category.
      *
      * @param string $regionCode the region for which an example short number is needed
-     * @param int $cost the cost category of number that is needed
+     * @param ShortNumberCost $cost the cost category of number that is needed
      * @return string a valid short number for the specified region and cost category. Returns an empty string
      *                when the metadata does not contain such information, or the cost is UNKNOWN_COST.
      */
-    public function getExampleShortNumberForCost(string $regionCode, int $cost): string
+    public function getExampleShortNumberForCost(string $regionCode, ShortNumberCost $cost): string
     {
         $phoneMetadata = $this->getMetadataForRegion($regionCode);
         if ($phoneMetadata === null) {
@@ -490,11 +490,11 @@ class ShortNumberInfo
      * @param PhoneNumber $number the short number for which we want to know the expected cost category,
      *                            as a string
      * @param string $regionDialingFrom the region from which the number is dialed
-     * @return int the expected cost category for that region of the short number. Returns UNKNOWN_COST if
-     *             the number does not match a cost category. Note that an invalid number may match any cost
-     *             category.
+     * @return ShortNumberCost the expected cost category for that region of the short number. Returns ShortNumberCost::UNKNOWN_COST if
+     *                         the number does not match a cost category. Note that an invalid number may match any cost
+     *                         category.
      */
-    public function getExpectedCostForRegion(PhoneNumber $number, string $regionDialingFrom): int
+    public function getExpectedCostForRegion(PhoneNumber $number, string $regionDialingFrom): ShortNumberCost
     {
         if (!$this->regionDialingFromMatchesNumber($number, $regionDialingFrom)) {
             return ShortNumberCost::UNKNOWN_COST;
@@ -556,10 +556,10 @@ class ShortNumberInfo
      * {@link #getExpectedCostForRegion(PhoneNumber, String)} instead.
      *
      * @param PhoneNumber $number the short number for which we want to know the expected cost category
-     * @return int the highest expected cost category of the short number in the region(s) with the given
-     *             country calling code
+     * @return ShortNumberCost the highest expected cost category of the short number in the region(s) with the given
+     *                         country calling code
      */
-    public function getExpectedCost(PhoneNumber $number): int
+    public function getExpectedCost(PhoneNumber $number): ShortNumberCost
     {
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
 
