@@ -54,6 +54,7 @@
       "phpunit.xml.dist",
       "phpstan.neon.dist",
       ".php-cs-fixer.dist.php",
+      "infection.json5",
       "src/CountryCodeToRegionCodeMapForTesting.php"
     ]
   },
