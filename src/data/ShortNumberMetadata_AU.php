@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,88 +7,54 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[0-27]\\d{2,7}',
-        'PossibleLength' => [
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '000|1(?:06|12|258885|55\\d)|733',
-        'ExampleNumber' => '000',
-        'PossibleLength' => [
-            3,
-            4,
-            7,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'NationalNumberPattern' => '1(?:2(?:34|456)|9\\d{4,6})',
-        'ExampleNumber' => '1234',
-        'PossibleLength' => [
-            4,
-            5,
-            6,
-            7,
-            8,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '000|1(?:06|12)',
-        'ExampleNumber' => '000',
-        'PossibleLength' => [
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '000|1(?:06|1(?:00|2|9[46])|2(?:014[1-3]|[23]\\d|(?:4|5\\d)\\d{2,3}|68[689]|72(?:20|3\\d\\d)|8(?:[013-9]\\d|2))|555|9\\d{4,6})|225|7(?:33|67)',
-        'ExampleNumber' => '000',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'NationalNumberPattern' => '1(?:1[09]\\d|24733)|225|767',
-        'ExampleNumber' => '225',
-        'PossibleLength' => [
-            3,
-            4,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'NationalNumberPattern' => '1(?:258885|55\\d)',
-        'ExampleNumber' => '1550',
-        'PossibleLength' => [
-            4,
-            7,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'NationalNumberPattern' => '19\\d{4,6}',
-        'ExampleNumber' => '190000',
-        'PossibleLength' => [
-            6,
-            7,
-            8,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'AU',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_AU extends PhoneMetadata
+{
+    protected const ID = 'AU';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[0-27]\d{2,7}')
+            ->setPossibleLength([3, 4, 5, 6, 7, 8]);
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:2(?:34|456)|9\d{4,6})')
+            ->setExampleNumber('1234')
+            ->setPossibleLength([4, 5, 6, 7, 8]);
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('000|1(?:06|12|258885|55\d)|733')
+            ->setExampleNumber('000')
+            ->setPossibleLength([3, 4, 7]);
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('000|1(?:06|12)')
+            ->setExampleNumber('000')
+            ->setPossibleLength([3]);
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('000|1(?:06|1(?:00|2|9[46])|2(?:014[1-3]|[23]\d|(?:4|5\d)\d{2,3}|68[689]|72(?:20|3\d\d)|8(?:[013-9]\d|2))|555|9\d{4,6})|225|7(?:33|67)')
+            ->setExampleNumber('000');
+        $this->standard_rate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:1[09]\d|24733)|225|767')
+            ->setExampleNumber('225')
+            ->setPossibleLength([3, 4, 6]);
+        $this->carrierSpecific = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:258885|55\d)')
+            ->setExampleNumber('1550')
+            ->setPossibleLength([4, 7]);
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('19\d{4,6}')
+            ->setExampleNumber('190000')
+            ->setPossibleLength([6, 7, 8]);
+    }
+}

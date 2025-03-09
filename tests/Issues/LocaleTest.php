@@ -42,7 +42,7 @@ class LocaleTest extends TestCase
         $phoneNumber = $this->phoneUtil->getExampleNumberForType($regionCode, PhoneNumberType::FIXED_LINE_OR_MOBILE);
 
         self::assertNotNull($phoneNumber);
-        self::assertContains($regionCode, CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$phoneNumber->getCountryCode()]);
+        self::assertContains($regionCode, CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP[$phoneNumber->getCountryCode()]);
 
         self::assertSame($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 

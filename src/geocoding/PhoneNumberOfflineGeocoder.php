@@ -187,7 +187,7 @@ class PhoneNumberOfflineGeocoder
                 $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
                 try {
                     $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
-                } catch (NumberParseException $e) {
+                } catch (NumberParseException) {
                     // If this happens, just reuse what we had.
                     $copiedNumber = $number;
                 }
