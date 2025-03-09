@@ -63,8 +63,9 @@
     "symfony/polyfill-mbstring": "^1.31"
   },
   "require-dev": {
-    "ext-dom":  "*",
+    "ext-dom": "*",
     "friendsofphp/php-cs-fixer": "^3.71",
+    "infection/infection": "^0.29.14",
     "pear/pear-core-minimal": "^1.10.16",
     "pear/pear_exception": "^1.0.2",
     "pear/versioncontrol_git": "^0.7",
@@ -96,6 +97,7 @@
   "config": {
     "sort-packages": true,
     "allow-plugins": {
+      "infection/extension-installer": true,
       "phpstan/extension-installer": true
     }
   }

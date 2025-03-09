@@ -17,6 +17,8 @@ class Issue23Test extends TestCase
     public function setUp(): void
     {
         PhoneNumberUtil::resetInstance();
+        PhoneNumberOfflineGeocoder::resetInstance();
+
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
