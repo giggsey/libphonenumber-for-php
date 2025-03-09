@@ -7,6 +7,7 @@ namespace libphonenumber;
 use libphonenumber\Leniency\AbstractLeniency;
 use InvalidArgumentException;
 use RuntimeException;
+use TypeError;
 
 /**
  * Utility for international phone numbers. Functionality includes formatting, parsing and
@@ -3203,7 +3204,7 @@ class PhoneNumberUtil
     {
         if ($type === null) {
             if (!$regionCodeOrType instanceof PhoneNumberType) {
-                throw new \TypeError('$regionCodeOrType must be a PhoneNumberType');
+                throw new TypeError('$regionCodeOrType must be a PhoneNumberType');
             }
 
             /*
@@ -3232,7 +3233,7 @@ class PhoneNumberUtil
         }
 
         if (!is_string($regionCodeOrType)) {
-            throw new \TypeError('$regionCodeOrType must be a string if $type is null');
+            throw new TypeError('$regionCodeOrType must be a string if $type is null');
         }
 
         // Check the region code is valid.
