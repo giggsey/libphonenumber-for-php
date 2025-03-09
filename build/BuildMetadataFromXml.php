@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace libphonenumber\buildtools;
 
+use libphonenumber\buildtools\Builders\PhoneMetadataBuilder;
 use libphonenumber\NumberFormat;
-use libphonenumber\PhoneMetadata;
 use libphonenumber\PhoneNumberDesc;
 use DOMDocument;
 use DOMElement;
@@ -102,9 +102,9 @@ class BuildMetadataFromXml
     }
 
     /**
-     * @return PhoneMetadata[]
+     * @return PhoneMetadataBuilder[]
      */
-    public static function buildPhoneMetadataCollection(string|DOMElement $inputXmlFile, bool $liteBuild, bool $specialBuild, bool $isShortNumberMetadata = false, bool $isAlternateFormatsMetadata = false): array
+    public static function buildPhoneMetadataCollection(string|DOMElement $inputXmlFile, bool $isShortNumberMetadata = false, bool $isAlternateFormatsMetadata = false): array
     {
         if ($inputXmlFile instanceof DOMElement) {
             $document = $inputXmlFile;
@@ -120,8 +120,6 @@ class BuildMetadataFromXml
         $territories = $document->getElementsByTagName('territory');
         $metadataCollection = [];
 
-        $metadataFilter = self::getMetadataFilter($liteBuild, $specialBuild);
-
         foreach ($territories as $territoryElement) {
             /** @var DOMElement $territoryElement */
             // For the main metadata file this should always be set, but for other supplementary data
@@ -132,13 +130,12 @@ class BuildMetadataFromXml
                 $regionCode = '';
             }
             $metadata = self::loadCountryMetadata($regionCode, $territoryElement, $isShortNumberMetadata, $isAlternateFormatsMetadata);
-            $metadataFilter->filterMetadata($metadata);
             $metadataCollection[] = $metadata;
         }
         return $metadataCollection;
     }
 
-    public static function loadCountryMetadata(string $regionCode, DOMElement $element, bool $isShortNumberMetadata, bool $isAlternateFormatsMetadata): PhoneMetadata
+    public static function loadCountryMetadata(string $regionCode, DOMElement $element, bool $isShortNumberMetadata, bool $isAlternateFormatsMetadata): PhoneMetadataBuilder
     {
         $nationalPrefix = self::getNationalPrefix($element);
         $metadata = self::loadTerritoryTagMetadata($regionCode, $element, $nationalPrefix);
@@ -150,25 +147,6 @@ class BuildMetadataFromXml
             self::setRelevantDescPatterns($metadata, $element, $isShortNumberMetadata);
         }
         return $metadata;
-    }
-
-    /**
-     * Processes the custom build flags and gets a MetadataFilter which may be used to
-     * filter PhoneMetadata objects. Incompatible flag combinations throw RuntimeException.
-     */
-    public static function getMetadataFilter(bool $liteBuild, bool $specialBuild): MetadataFilter
-    {
-        if ($specialBuild) {
-            if ($liteBuild) {
-                throw new RuntimeException('liteBuild and specialBuild may not both be set');
-            }
-            return MetadataFilter::forSpecialBuild();
-        }
-        if ($liteBuild) {
-            return MetadataFilter::forLiteBuild();
-        }
-
-        return MetadataFilter::emptyFilter();
     }
 
     /**
@@ -194,8 +172,17 @@ class BuildMetadataFromXml
         string $regionCode,
         DOMElement $element,
         string $nationalPrefix
-    ): PhoneMetadata {
-        $metadata = new PhoneMetadata();
+    ): PhoneMetadataBuilder {
+        /*
+         * Create a new class called PhoneMetadataBuilder extending PhoneMetadata
+         *
+         * Have a property called $constants. The appropiate setter will set the const
+         * This class will have all the setters
+         *
+         * This class will have a function to write it to PHP
+         *
+         */
+        $metadata = new PhoneMetadataBuilder();
         $metadata->setId($regionCode);
         $metadata->setCountryCode((int) $element->getAttribute(self::COUNTRY_CODE));
         if ($element->hasAttribute(self::LEADING_DIGITS)) {
@@ -239,7 +226,7 @@ class BuildMetadataFromXml
      * nationalPrefixOptionalWhenFormatting values are provided from the parent (territory) element.
      */
     public static function loadAvailableFormats(
-        PhoneMetadata $metadata,
+        PhoneMetadataBuilder $metadata,
         DOMElement $element,
         string $nationalPrefix,
         string $nationalPrefixFormattingRule,
@@ -312,7 +299,7 @@ class BuildMetadataFromXml
      * @throws RuntimeException if multiple or no formats have been encountered.
      */
     public static function loadNationalFormat(
-        PhoneMetadata $metadata,
+        PhoneMetadataBuilder $metadata,
         DOMElement $numberFormatElement,
         NumberFormat $format
     ): void {
@@ -347,7 +334,7 @@ class BuildMetadataFromXml
      * @return bool whether an international number format is defined.
      */
     public static function loadInternationalFormat(
-        PhoneMetadata $metadata,
+        PhoneMetadataBuilder $metadata,
         DOMElement $numberFormatElement,
         NumberFormat $nationalFormat
     ): bool {
@@ -379,7 +366,7 @@ class BuildMetadataFromXml
         return $hasExplicitIntlFormatDefined;
     }
 
-    public static function setRelevantDescPatterns(PhoneMetadata $metadata, DOMElement $element, bool $isShortNumberMetadata): void
+    public static function setRelevantDescPatterns(PhoneMetadataBuilder $metadata, DOMElement $element, bool $isShortNumberMetadata): void
     {
         $generalDesc = self::processPhoneNumberDescElement(null, $element, self::GENERAL_DESC);
         $metadata->setGeneralDesc($generalDesc);
@@ -722,7 +709,7 @@ class BuildMetadataFromXml
     }
 
     /**
-     * @param PhoneMetadata[] $metadataCollection
+     * @param PhoneMetadataBuilder[] $metadataCollection
      * @return array<int|string,array<string>>
      */
     public static function buildCountryCodeToRegionCodeMap(array $metadataCollection): array

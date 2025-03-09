@@ -81,7 +81,7 @@ class PhoneNumberToTimeZonesMapper
     }
 
     /**
-     * As per {@link #getTimeZonesForGeographicalNumber(PhoneNumber)} but explicitly checks
+     * As per {@see getTimeZonesForGeographicalNumber(PhoneNumber)} but explicitly checks
      * the validity of the number passed in.
      *
      * @param $number PhoneNumber the phone number for which we want to get the time zones to which it belongs

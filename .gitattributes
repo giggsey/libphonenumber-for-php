@@ -10,5 +10,6 @@ phpunit.xml.dist export-ignore
 .github/ export-ignore
 src/CountryCodeToRegionCodeMapForTesting.php export-ignore
 phpstan.neon.dist export-ignore
+infection.json5 export-ignore
 
 * text=auto

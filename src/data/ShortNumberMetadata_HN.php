@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,69 +7,48 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[14]\\d\\d(?:\\d{2})?',
-        'PossibleLength' => [
-            3,
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '199',
-        'ExampleNumber' => '199',
-        'PossibleLength' => [
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '199',
-        'ExampleNumber' => '199',
-        'PossibleLength' => [
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '199|40404',
-        'ExampleNumber' => '199',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'NationalNumberPattern' => '404\\d\\d',
-        'ExampleNumber' => '40400',
-        'PossibleLength' => [
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'NationalNumberPattern' => '404\\d\\d',
-        'ExampleNumber' => '40400',
-        'PossibleLength' => [
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'HN',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_HN extends PhoneMetadata
+{
+    protected const ID = 'HN';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[14]\d\d(?:\d{2})?')
+            ->setPossibleLength([3, 5]);
+        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('199')
+            ->setExampleNumber('199')
+            ->setPossibleLength([3]);
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('199')
+            ->setExampleNumber('199')
+            ->setPossibleLength([3]);
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('199|40404')
+            ->setExampleNumber('199');
+        $this->standard_rate = PhoneNumberDesc::empty();
+        $this->carrierSpecific = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('404\d\d')
+            ->setExampleNumber('40400')
+            ->setPossibleLength([5]);
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('404\d\d')
+            ->setExampleNumber('40400')
+            ->setPossibleLength([5]);
+    }
+}

@@ -145,8 +145,8 @@ class PhoneNumberUtilTest extends TestCase
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
-            __DIR__ . '/data/PhoneNumberMetadataForTesting',
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
+            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_',
+            CountryCodeToRegionCodeMapForTesting::COUNTRY_CODE_TO_REGION_CODE_MAP_FOR_TESTING
         );
     }
 
@@ -2401,7 +2401,22 @@ class PhoneNumberUtilTest extends TestCase
 
     public function testMaybeStripNationalPrefix(): void
     {
-        $metadata = new PhoneMetadata();
+        $metadata = new class extends PhoneMetadata {
+            public function setNationalPrefixForParsing(string $value): void
+            {
+                $this->nationalPrefixForParsing = $value;
+            }
+
+            public function setGeneralDesc(PhoneNumberDesc $value): void
+            {
+                $this->generalDesc = $value;
+            }
+
+            public function setNationalPrefixTransformRule(string $value): void
+            {
+                $this->nationalPrefixTransformRule = $value;
+            }
+        };
         $metadata->setNationalPrefixForParsing('34');
         $phoneNumberDesc = new PhoneNumberDesc();
         $phoneNumberDesc->setNationalNumberPattern('\\d{4,8}');

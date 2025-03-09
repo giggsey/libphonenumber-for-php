@@ -24,7 +24,7 @@ class PrefixTimeZonesMap
     }
 
     /**
-     * As per {@link #lookupTimeZonesForNumber(long)}, but receives the number as a PhoneNumber
+     * As per {@see lookupTimeZonesForNumber(long)}, but receives the number as a PhoneNumber
      * instead of a long.
      *
      * @param $number PhoneNumber the phone number to look up

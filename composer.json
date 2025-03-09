@@ -54,6 +54,7 @@
       "phpunit.xml.dist",
       "phpstan.neon.dist",
       ".php-cs-fixer.dist.php",
+      "infection.json5",
       "src/CountryCodeToRegionCodeMapForTesting.php"
     ]
   },
@@ -66,6 +67,7 @@
     "ext-dom": "*",
     "friendsofphp/php-cs-fixer": "^3.71",
     "infection/infection": "^0.28.0",
+    "nette/php-generator": "^4.1",
     "pear/pear-core-minimal": "^1.10.16",
     "pear/pear_exception": "^1.0.2",
     "pear/versioncontrol_git": "^0.7",

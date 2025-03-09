@@ -6,7 +6,6 @@ namespace libphonenumber;
 
 use libphonenumber\Leniency\AbstractLeniency;
 use Closure;
-use Exception;
 use InvalidArgumentException;
 use Iterator;
 use RuntimeException;
@@ -15,7 +14,6 @@ use function count;
 use function explode;
 use function in_array;
 use function is_numeric;
-use function is_readable;
 use function mb_strlen;
 use function mb_strpos;
 use function mb_substr;
@@ -104,14 +102,11 @@ class PhoneNumberMatcher implements Iterator
      */
     protected static string $leadClass;
 
-    /**
-     * Prefix of the files
-     */
-    protected static string $alternateFormatsFilePrefix;
+    protected static MetadataSourceInterface $metadataSource;
 
     protected static function init(): void
     {
-        static::$alternateFormatsFilePrefix = __DIR__ . '/data/PhoneNumberAlternateFormats';
+        static::$metadataSource = new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\PhoneNumberAlternateFormats_');
 
         static::$innerMatches = [
             // Breaks on the slash - e.g. "651-234-2345/332-445-1234"
@@ -209,16 +204,6 @@ class PhoneNumberMatcher implements Iterator
     }
 
     /**
-     * The phone number utility.
-     */
-    protected PhoneNumberUtil $phoneUtil;
-
-    /**
-     * The text searched for phone numbers.
-     */
-    protected string $text;
-
-    /**
      * The region (country) to assume for phone numbers without an international prefix, possibly
      * null.
      */
@@ -255,9 +240,6 @@ class PhoneNumberMatcher implements Iterator
     /**
      * Creates a new instance. See the factory methods in PhoneNumberUtil on how to obtain a new instance.
      *
-     *
-     * @param PhoneNumberUtil $util The Phone Number Util to use
-     * @param string|null $text The text that we will search, null for no text
      * @param string|null $country The country to assume for phone numbers not written in international format.
      *                             (with a leading plus, or with the international dialling prefix of the specified region).
      *                             May be null, or "ZZ" if only numbers with a leading plus should be considered.
@@ -265,15 +247,18 @@ class PhoneNumberMatcher implements Iterator
      * @param int $maxTries The maximum number of invalid numbers to try before giving up on the text.
      *                      This is to cover degenerate cases where the text has a lot of false positives in it. Must be >= 0
      * @throws InvalidArgumentException
+     * @internal @see PhoneNumberUtil::findNumbers() instead
      */
-    public function __construct(PhoneNumberUtil $util, ?string $text, ?string $country, AbstractLeniency $leniency, int $maxTries)
-    {
+    public function __construct(
+        protected readonly PhoneNumberUtil $phoneUtil,
+        protected readonly string $text,
+        ?string $country,
+        AbstractLeniency $leniency,
+        int $maxTries,
+    ) {
         if ($maxTries < 0) {
             throw new InvalidArgumentException();
         }
-
-        $this->phoneUtil = $util;
-        $this->text = $text ?? '';
         $this->preferredRegion = $country;
         $this->leniency = $leniency;
         $this->maxTries = $maxTries;
@@ -641,7 +626,7 @@ class PhoneNumberMatcher implements Iterator
         }
 
         // If this didn't pass, see if there are any alternative formats that match, and try them instead.
-        $alternateFormats = static::getAlternateFormatsForCountry($number->getCountryCode());
+        $alternateFormats = self::getAlternateFormatsForCountry($number->getCountryCode());
 
         $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
         if ($alternateFormats !== null) {
@@ -770,44 +755,15 @@ class PhoneNumberMatcher implements Iterator
         return true;
     }
 
-
-    /**
-     * Storage for Alternate Formats
-     * @var array<int,PhoneMetadata>
-     */
-    protected static array $callingCodeToAlternateFormatsMap = [];
-
     protected static function getAlternateFormatsForCountry(int $countryCallingCode): ?PhoneMetadata
     {
-        $countryCodeSet = AlternateFormatsCountryCodeSet::$alternateFormatsCountryCodeSet;
+        $countryCodeSet = AlternateFormatsCountryCodeSet::ALTERNATE_FORMATS_COUNTRY_CODE_SET;
 
         if (!in_array($countryCallingCode, $countryCodeSet, true)) {
             return null;
         }
 
-        if (!isset(static::$callingCodeToAlternateFormatsMap[$countryCallingCode])) {
-            static::loadAlternateFormatsMetadataFromFile($countryCallingCode);
-        }
-
-        return static::$callingCodeToAlternateFormatsMap[$countryCallingCode];
-    }
-
-    /**
-     * @throws Exception
-     */
-    protected static function loadAlternateFormatsMetadataFromFile(int $countryCallingCode): void
-    {
-        $fileName = static::$alternateFormatsFilePrefix . '_' . $countryCallingCode . '.php';
-
-        if (!is_readable($fileName)) {
-            throw new Exception('missing metadata: ' . $fileName);
-        }
-
-        $metadataLoader = new DefaultMetadataLoader();
-        $data = $metadataLoader->loadMetadata($fileName);
-        $metadata = new PhoneMetadata();
-        $metadata->fromArray($data);
-        static::$callingCodeToAlternateFormatsMap[$countryCallingCode] = $metadata;
+        return static::$metadataSource->getMetadataForNonGeographicalRegion($countryCallingCode);
     }
 
     public function current(): ?PhoneNumberMatch

@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,64 +7,43 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[1-3578]\\d(?:\\d(?:\\d{3})?)?',
-        'PossibleLength' => [
-            2,
-            3,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '1(?:18|[578])|723\\d{3}',
-        'ExampleNumber' => '15',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '1(?:18|[578])|723141',
-        'ExampleNumber' => '15',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '1(?:0[01]|1[128]|2[034]|3[013]|[46]0|55?|[78])|222|333|555|723141|888',
-        'ExampleNumber' => '15',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'NationalNumberPattern' => '1(?:0[01]|1[12]|2[034]|3[013]|[46]0|55)|222|333|555|888',
-        'ExampleNumber' => '100',
-        'PossibleLength' => [
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'NE',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_NE extends PhoneMetadata
+{
+    protected const ID = 'NE';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[1-3578]\d(?:\d(?:\d{3})?)?')
+            ->setPossibleLength([2, 3, 6]);
+        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:18|[578])|723\d{3}')
+            ->setExampleNumber('15');
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:18|[578])|723141')
+            ->setExampleNumber('15');
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:0[01]|1[128]|2[034]|3[013]|[46]0|55?|[78])|222|333|555|723141|888')
+            ->setExampleNumber('15');
+        $this->standard_rate = PhoneNumberDesc::empty();
+        $this->carrierSpecific = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:0[01]|1[12]|2[034]|3[013]|[46]0|55)|222|333|555|888')
+            ->setExampleNumber('100')
+            ->setPossibleLength([3]);
+        $this->smsServices = PhoneNumberDesc::empty();
+    }
+}

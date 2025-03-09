@@ -28,8 +28,8 @@ class ShortNumberInfoTest extends TestCase
         PhoneNumberUtil::resetInstance();
         ShortNumberInfo::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance(
-            __DIR__ . '/data/PhoneNumberMetadataForTesting',
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
+            'libphonenumber\Tests\core\data\PhoneNumberMetadataForTesting_',
+            CountryCodeToRegionCodeMapForTesting::COUNTRY_CODE_TO_REGION_CODE_MAP_FOR_TESTING
         );
         $this->shortInfo = ShortNumberInfo::getInstance();
     }
