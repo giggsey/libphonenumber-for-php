@@ -71,6 +71,10 @@ class BuildMetadataPHPFromXml
 
             $pos = strrpos($namespaceAndClassPrefix, '\\');
 
+            if ($pos === false) {
+                throw new \RuntimeException('Invalid namespaceAndClassPrefix: ' . $namespaceAndClassPrefix);
+            }
+
             $namespace = substr($namespaceAndClassPrefix, 0, $pos);
             $classPrefix = substr($namespaceAndClassPrefix, $pos + 1);
 

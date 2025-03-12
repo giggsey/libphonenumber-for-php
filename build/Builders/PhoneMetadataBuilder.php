@@ -16,7 +16,6 @@ use RuntimeException;
 
 /**
  * @internal
- * @phpstan-import-type PhoneNumberDescArray from PhoneNumberDesc
  */
 class PhoneMetadataBuilder extends PhoneMetadata
 {
@@ -360,7 +359,7 @@ class PhoneMetadataBuilder extends PhoneMetadata
                     $class->removeProperty($property->getName());
 
                     if (!$propertyValue instanceof PhoneNumberDesc) {
-                        throw new RuntimeException('Unsupported type: ' . gettype($value));
+                        throw new RuntimeException('Unsupported type: ' . gettype($propertyValue));
                     }
 
                     $chained = [];

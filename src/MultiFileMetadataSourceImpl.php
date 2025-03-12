@@ -69,7 +69,6 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
 
         $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
 
-
         $class = $filePrefix . ($isNonGeoRegion ? $countryCallingCode : ucfirst($regionCode));
 
         if (!class_exists($class)) {
@@ -77,6 +76,10 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         }
 
         $metadata = new $class();
+
+        if (!$metadata instanceof PhoneMetadata) {
+            throw new RuntimeException('invalid metadata: ' . $class);
+        }
 
         if ($isNonGeoRegion) {
             $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
