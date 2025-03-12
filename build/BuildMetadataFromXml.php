@@ -173,15 +173,6 @@ class BuildMetadataFromXml
         DOMElement $element,
         string $nationalPrefix
     ): PhoneMetadataBuilder {
-        /*
-         * Create a new class called PhoneMetadataBuilder extending PhoneMetadata
-         *
-         * Have a property called $constants. The appropiate setter will set the const
-         * This class will have all the setters
-         *
-         * This class will have a function to write it to PHP
-         *
-         */
         $metadata = new PhoneMetadataBuilder();
         $metadata->setId($regionCode);
         $metadata->setCountryCode((int) $element->getAttribute(self::COUNTRY_CODE));
