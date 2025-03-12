@@ -7,6 +7,7 @@ namespace libphonenumber\buildtools;
 use libphonenumber\buildtools\Builders\PhoneMetadataBuilder;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PsrPrinter;
+use RuntimeException;
 
 use function array_keys;
 use function count;
@@ -72,7 +73,7 @@ class BuildMetadataPHPFromXml
             $pos = strrpos($namespaceAndClassPrefix, '\\');
 
             if ($pos === false) {
-                throw new \RuntimeException('Invalid namespaceAndClassPrefix: ' . $namespaceAndClassPrefix);
+                throw new RuntimeException('Invalid namespaceAndClassPrefix: ' . $namespaceAndClassPrefix);
             }
 
             $namespace = substr($namespaceAndClassPrefix, 0, $pos);
