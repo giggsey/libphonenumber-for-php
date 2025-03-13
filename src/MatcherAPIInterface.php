@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
 /**
@@ -16,10 +18,6 @@ interface MatcherAPIInterface
     /**
      * Returns whether the given national number (a string containing only decimal digits) matches
      * the national number pattern defined in the given {@code PhoneNumberDesc} message.
-     *
-     * @param string $number
-     * @param boolean $allowPrefixMatch
-     * @return boolean
      */
-    public function matchNationalNumber($number, PhoneNumberDesc $numberDesc, $allowPrefixMatch);
+    public function matchNationalNumber(string $number, PhoneNumberDesc $numberDesc, bool $allowPrefixMatch): bool;
 }

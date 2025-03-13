@@ -1,6 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
+
+use function count;
+use function mb_strlen;
+use function mb_strrpos;
+use function mb_substr;
+use function min;
+use function preg_match;
+use function preg_replace;
+use function str_pad;
+use function str_starts_with;
 
 /**
  * Class AsYouTypeFormatter
@@ -10,139 +22,89 @@ namespace libphonenumber;
  * After that, digits can be added by invoking inputDigit() on the formatter instance, and the partially
  * formatted phone number will be returned each time a digit is added. clear() can be invoked before
  * formatting a new number.
+ * @no-named-arguments
  */
 class AsYouTypeFormatter
 {
-    /**
-     * @var string
-     */
-    private $currentOutput;
-    /**
-     * @var string
-     */
-    private $formattingTemplate;
+    private string $currentOutput = '';
+    private string $formattingTemplate = '';
     /**
      * The pattern from numberFormat that is currently used to create formattingTemplate.
-     * @var string
      */
-    private $currentFormattingPattern;
+    private string $currentFormattingPattern = '';
 
-    /**
-     * @var string
-     */
-    private $accruedInput;
+    private string $accruedInput = '';
 
-    /**
-     * @var string
-     */
-    private $accruedInputWithoutFormatting;
+    private string $accruedInputWithoutFormatting = '';
     /**
      * This indicated whether AsYouTypeFormatter is currently doing the formatting
-     * @var bool
      */
-    private $ableToFormat = true;
+    private bool $ableToFormat = true;
 
     /**
      * Set to true when users enter their own formatting. AsYouTypeFormatter will do no formatting at
      * all when this is set to true
-     * @var bool
      */
-    private $inputHasFormatting = false;
+    private bool $inputHasFormatting = false;
 
     /**
      * This is set to true when we know the user is entering a full national significant number, since
      * we have either detected a national prefix or an international dialing prefix. When this is
      * true, we will no longer use local formatting patterns.
-     * @var bool
      */
-    private $isCompleteNumber = false;
+    private bool $isCompleteNumber = false;
 
-    /**
-     * @var bool
-     */
-    private $isExpectingCountryCallingCode = false;
+    private bool $isExpectingCountryCallingCode = false;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
-    /**
-     * @var string
-     */
-    private $defaultCountry;
+    private string $defaultCountry;
 
-    /**
-     * @var PhoneMetadata
-     */
-    private $defaultMetadata;
-    /**
-     * @var PhoneMetadata
-     */
-    private $currentMetadata;
+    private PhoneMetadata $defaultMetadata;
+    private PhoneMetadata $currentMetadata;
 
     /**
      * @var NumberFormat[]
      */
-    private $possibleFormats = [];
+    private array $possibleFormats = [];
 
-    /**
-     * @var int
-     */
-    private $lastMatchPosition = 0;
+    private int $lastMatchPosition = 0;
     /**
      * The position of a digit upon which inputDigitAndRememberPosition is most recently invoked,
      * as found in the original sequence of characters the user entered.
-     * @var int
      */
-    private $originalPosition = 0;
+    private int $originalPosition = 0;
 
     /**
      * The position of a digit upon which inputDigitAndRememberPosition is most recently invoked,
      * as found in accruedInputWithoutFormatting
-     * @var int
      */
-    private $positionToRemember = 0;
+    private int $positionToRemember = 0;
 
     /**
      * This contains anything that has been entered so far preceding the national significant number,
      * and it is formatted (e.g. with space inserted). For example, this can contain IDD, country code,
      * and/or NDD, etc.
-     * @var string
      */
-    private $prefixBeforeNationalNumber = '';
+    private string $prefixBeforeNationalNumber = '';
 
-    /**
-     * @var bool
-     */
-    private $shouldAddSpaceAfterNationalPrefix = false;
+    private bool $shouldAddSpaceAfterNationalPrefix = false;
 
     /**
      * This contains the national prefix that has been extracted. It contains only digits without
      * formatting
-     * @var string
      */
-    private $extractedNationalPrefix = '';
+    private string $extractedNationalPrefix = '';
 
-    /**
-     * @var string
-     */
-    private $nationalNumber;
+    private string $nationalNumber = '';
 
-    /**
-     * @var bool
-     */
-    private static $initialised = false;
+    private static bool $initialised = false;
     /**
      * Character used when appropriate to separate a prefix, such as a long NDD or a country
      * calling code, from the national number.
-     * @var string
      */
-    private static $separatorBeforeNationalNumber = ' ';
-    /**
-     * @var PhoneMetadata
-     */
-    private static $emptyMetadata;
+    private static string $separatorBeforeNationalNumber = ' ';
+    private static PhoneMetadata $emptyMetadata;
 
     /**
      * A pattern that is used to determine if a numberFormat under availableFormats is eligible
@@ -151,34 +113,30 @@ class AsYouTypeFormatter
      * This prevents invalid punctuation (such as the star sign in Israeli star numbers) getting
      * into the output of the AYTF. We require that the first group is present in the output pattern to ensure
      * no data is lost while formatting; when we format as you type, this should always be the case.
-     * @var string
      */
-    private static $eligibleFormatPattern;
+    private static string $eligibleFormatPattern;
 
     /**
      * A set of characters that, if found in the national prefix formatting rules, are an indicator
      * to us that we should separate the national prefix from the numbers when formatting.
-     * @var string
      */
-    private static $nationalPrefixSeparatorsPattern = '[- ]';
+    private static string $nationalPrefixSeparatorsPattern = '[- ]';
 
     /**
      * This is the minimum length of national number accrued that is required to trigger the
      * formatter. The first element of the leadingDigitsPattern of each numberFormat contains
      * a regular expression that matches up to this number of digits.
-     * @var int
      */
-    private static $minLeadingDigitsLength = 3;
+    private static int $minLeadingDigitsLength = 3;
 
     /**
      * The digits that have not been entered yet will be represented by a \u2008, the punctuation
      * space.
-     * @var string
      */
-    private static $digitPattern = "\xE2\x80\x88";
+    private static string $digitPattern = "\xE2\x80\x88";
 
 
-    private static function init()
+    private static function init(): void
     {
         if (self::$initialised === false) {
             self::$initialised = true;
@@ -196,7 +154,7 @@ class AsYouTypeFormatter
      * Constructs as as-you-type formatter. Should be obtained from PhoneNumberUtil->getAsYouTypeFormatter()
      * @param string $regionCode The country/region where the phone number is being entered
      */
-    public function __construct($regionCode)
+    public function __construct(string $regionCode)
     {
         self::init();
 
@@ -210,10 +168,8 @@ class AsYouTypeFormatter
     /**
      * The metadata needed by this class is the same for all regions sharing the same country calling
      * code. Therefore, we return the metadata for the 'main' region for this country calling code.
-     * @param string $regionCode
-     * @return PhoneMetadata
      */
-    private function getMetadataForRegion($regionCode)
+    private function getMetadataForRegion(string $regionCode): PhoneMetadata
     {
         $countryCallingCode = $this->phoneUtil->getCountryCodeForRegion($regionCode);
         $mainCountry = $this->phoneUtil->getRegionCodeForCountryCode($countryCallingCode);
@@ -228,15 +184,14 @@ class AsYouTypeFormatter
 
     /**
      * Returns true if a new template is created as opposed to reusing the existing template.
-     * @return bool
      */
-    private function maybeCreateNewTemplate()
+    private function maybeCreateNewTemplate(): bool
     {
         // When there are multiple available formats, the formatter uses the first format where a
         // formatting template could be created.
         foreach ($this->possibleFormats as $key => $numberFormat) {
             $pattern = $numberFormat->getPattern();
-            if ($this->currentFormattingPattern == $pattern) {
+            if ($this->currentFormattingPattern === $pattern) {
                 return false;
             }
             if ($this->createFormattingTemplate($numberFormat)) {
@@ -259,10 +214,7 @@ class AsYouTypeFormatter
         return false;
     }
 
-    /**
-     * @param string $leadingDigits
-     */
-    private function getAvailableFormats($leadingDigits)
+    private function getAvailableFormats(string $leadingDigits): void
     {
         // First decide whether we should use international or national number rules.
         $isInternationalNumber = $this->isCompleteNumber && $this->extractedNationalPrefix === '';
@@ -307,18 +259,16 @@ class AsYouTypeFormatter
         $this->narrowDownPossibleFormats($leadingDigits);
     }
 
-    /**
-     */
-    private function narrowDownPossibleFormats($leadingDigits)
+    private function narrowDownPossibleFormats(string $leadingDigits): void
     {
-        $indexOfLeadingDigitsPattern = \mb_strlen($leadingDigits) - self::$minLeadingDigitsLength;
+        $indexOfLeadingDigitsPattern = mb_strlen($leadingDigits) - self::$minLeadingDigitsLength;
 
         foreach ($this->possibleFormats as $key => $format) {
             if ($format->leadingDigitsPatternSize() === 0) {
                 // Keep everything that isn't restricted by leading digits.
                 continue;
             }
-            $lastLeadingDigitsPattern = \min($indexOfLeadingDigitsPattern, $format->leadingDigitsPatternSize() - 1);
+            $lastLeadingDigitsPattern = min($indexOfLeadingDigitsPattern, $format->leadingDigitsPatternSize() - 1);
             $leadingDigitsPattern = $format->getLeadingDigitsPattern($lastLeadingDigitsPattern);
             $m = new Matcher($leadingDigitsPattern, $leadingDigits);
             if (!$m->lookingAt()) {
@@ -327,10 +277,7 @@ class AsYouTypeFormatter
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function createFormattingTemplate(NumberFormat $format)
+    private function createFormattingTemplate(NumberFormat $format): bool
     {
         $numberPattern = $format->getPattern();
 
@@ -346,11 +293,8 @@ class AsYouTypeFormatter
     /**
      * Gets a formatting template which can be used to efficiently format a partial number where
      * digits are added one by one.
-     * @param string $numberPattern
-     * @param string $numberFormat
-     * @return string
      */
-    private function getFormattingTemplate($numberPattern, $numberFormat)
+    private function getFormattingTemplate(string $numberPattern, string $numberFormat): string
     {
         // Creates a phone number consisting only of the digit 9 that matches the
         // numberPattern by applying the pattern to the longestPhoneNumber string.
@@ -360,20 +304,19 @@ class AsYouTypeFormatter
         $aPhoneNumber = $m->group();
         // No formatting template can be created if the number of digits entered entered so far
         // is longer than the maximum the current formatting rule can accommodate.
-        if (\mb_strlen($aPhoneNumber) < \mb_strlen($this->nationalNumber)) {
+        if (mb_strlen($aPhoneNumber) < mb_strlen($this->nationalNumber)) {
             return '';
         }
         // Formats the number according to $numberFormat
-        $template = \preg_replace('/' . $numberPattern . '/' . PhoneNumberUtil::REGEX_FLAGS, $numberFormat, $aPhoneNumber);
+        $template = preg_replace('/' . $numberPattern . '/' . PhoneNumberUtil::REGEX_FLAGS, $numberFormat, $aPhoneNumber);
         // Replaces each digit with character self::$digitPlattern
-        $template = \preg_replace('/9/', self::$digitPattern, $template);
-        return $template;
+        return str_replace('9', self::$digitPattern, $template);
     }
 
     /**
      * Clears the internal state of the formatter, so it can be reused.
      */
-    public function clear()
+    public function clear(): void
     {
         $this->currentOutput = '';
         $this->accruedInput = '';
@@ -401,12 +344,12 @@ class AsYouTypeFormatter
      * Formats a phone number on-the-fly as each digit is entered.
      *
      * @param string $nextChar the most recently entered digit of a phone number. Formatting characters
-     *  are allowed, but as soon as they are encountered this method foramts the number as entered
-     *  and not "as you type" anymore. Full width digits and Arabic-indic digits are allowed, and will
-     *  be shown as they are.
+     *                         are allowed, but as soon as they are encountered this method foramts the number as entered
+     *                         and not "as you type" anymore. Full width digits and Arabic-indic digits are allowed, and will
+     *                         be shown as they are.
      * @return string The partially formatted phone number
      */
-    public function inputDigit($nextChar)
+    public function inputDigit(string $nextChar): string
     {
         $this->currentOutput = $this->inputDigitWithOptionToRememberPosition($nextChar, false);
         return $this->currentOutput;
@@ -417,25 +360,18 @@ class AsYouTypeFormatter
      * that is can be retrieved later by using $this->getRememberedPosition(). The remembered
      * position will be automatically adjusted if additional formatting characters are later
      * inserted/removed in front of $nextChar
-     * @param string $nextChar
-     * @return string
      */
-    public function inputDigitAndRememberPosition($nextChar)
+    public function inputDigitAndRememberPosition(string $nextChar): string
     {
         $this->currentOutput = $this->inputDigitWithOptionToRememberPosition($nextChar, true);
         return $this->currentOutput;
     }
 
-    /**
-     * @param string $nextChar
-     * @param bool $rememberPosition
-     * @return string
-     */
-    private function inputDigitWithOptionToRememberPosition($nextChar, $rememberPosition)
+    private function inputDigitWithOptionToRememberPosition(string $nextChar, bool $rememberPosition): string
     {
         $this->accruedInput .= $nextChar;
         if ($rememberPosition) {
-            $this->originalPosition = \mb_strlen($this->accruedInput);
+            $this->originalPosition = mb_strlen($this->accruedInput);
         }
         // We do formatting on-the-fly only when each character entered is either a digit, or a plus
         // sign (accepted at the start of the number only).
@@ -469,7 +405,7 @@ class AsYouTypeFormatter
 
         // We start to attempt to format only when at least MIN_LEADING_DIGITS_LENGTH digits (the plus
         // sign is counted as a digit as well for this purpose) have been entered.
-        switch (\mb_strlen($this->accruedInputWithoutFormatting)) {
+        switch (mb_strlen($this->accruedInputWithoutFormatting)) {
             case 0:
             case 1:
             case 2:
@@ -492,7 +428,7 @@ class AsYouTypeFormatter
                     }
                     return $this->prefixBeforeNationalNumber . $this->nationalNumber;
                 }
-                if (\count($this->possibleFormats) > 0) {
+                if (count($this->possibleFormats) > 0) {
                     // The formatting patterns are already chosen.
                     $tempNationalNumber = $this->inputDigitHelper($nextChar);
                     // See if the accrued digits can be formatted properly already. If not, use the results
@@ -515,10 +451,7 @@ class AsYouTypeFormatter
         }
     }
 
-    /**
-     * @return string
-     */
-    private function attemptToChoosePatternWithPrefixExtracted()
+    private function attemptToChoosePatternWithPrefixExtracted(): string
     {
         $this->ableToFormat = true;
         $this->isExpectingCountryCallingCode = false;
@@ -530,10 +463,9 @@ class AsYouTypeFormatter
     }
 
     /**
-     * @return string
      * @internal
      */
-    public function getExtractedNationalPrefix()
+    public function getExtractedNationalPrefix(): string
     {
         return $this->extractedNationalPrefix;
     }
@@ -541,41 +473,34 @@ class AsYouTypeFormatter
     /**
      * Some national prefixes are a substring of others. If extracting the shorter NDD doesn't result
      * in a number we can format, we try to see if we can extract a longer version here.
-     * @return bool
      */
-    private function ableToExtractLongerNdd()
+    private function ableToExtractLongerNdd(): bool
     {
-        if (\mb_strlen($this->extractedNationalPrefix) > 0) {
+        if ($this->extractedNationalPrefix !== '') {
             // Put the extracted NDD back to the national number before attempting to extract a new NDD.
             $this->nationalNumber = $this->extractedNationalPrefix . $this->nationalNumber;
             // Remove the previously extracted NDD from prefixBeforeNationalNumber. We cannot simply set
             // it to empty string because people sometimes incorrectly enter national prefix after the
             // country code, e.g. +44 (0)20-1234-5678.
-            $indexOfPreviousNdd = \mb_strrpos($this->prefixBeforeNationalNumber, $this->extractedNationalPrefix);
-            $this->prefixBeforeNationalNumber = \mb_substr(\str_pad($this->prefixBeforeNationalNumber, $indexOfPreviousNdd), 0, $indexOfPreviousNdd);
+            $indexOfPreviousNdd = mb_strrpos($this->prefixBeforeNationalNumber, $this->extractedNationalPrefix);
+            $this->prefixBeforeNationalNumber = mb_substr(str_pad($this->prefixBeforeNationalNumber, (int) $indexOfPreviousNdd), 0, (int) $indexOfPreviousNdd);
         }
         return ($this->extractedNationalPrefix !== $this->removeNationalPrefixFromNationalNumber());
     }
 
-    /**
-     * @param string $nextChar
-     * @return bool
-     */
-    private function isDigitOrLeadingPlusSign($nextChar)
+    private function isDigitOrLeadingPlusSign(string $nextChar): bool
     {
         $plusCharsMatcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $nextChar);
 
-        return \preg_match('/' . PhoneNumberUtil::DIGITS . '/' . PhoneNumberUtil::REGEX_FLAGS, $nextChar)
-            || (\mb_strlen($this->accruedInput) === 1 &&
-                $plusCharsMatcher->matches());
+        return preg_match('/' . PhoneNumberUtil::DIGITS . '/' . PhoneNumberUtil::REGEX_FLAGS, $nextChar) === 1
+            || (mb_strlen($this->accruedInput) === 1 && $plusCharsMatcher->matches());
     }
 
     /**
      * Checks to see if there is an exact pattern match for these digits. If so, we should use this
      * instead of any other formatting template whose leadingDigitsPattern also matches the input.
-     * @return string
      */
-    public function attemptToFormatAccruedDigits()
+    public function attemptToFormatAccruedDigits(): string
     {
         foreach ($this->possibleFormats as $numberFormat) {
             $m = new Matcher($numberFormat->getPattern(), $this->nationalNumber);
@@ -605,9 +530,8 @@ class AsYouTypeFormatter
     /**
      * returns the current position in the partially formatted phone number of the character which was
      * previously passed in as a parameter of $this->inputDigitAndRememberPosition().
-     * @return int
      */
-    public function getRememberedPosition()
+    public function getRememberedPosition(): int
     {
         if (!$this->ableToFormat) {
             return $this->originalPosition;
@@ -615,9 +539,9 @@ class AsYouTypeFormatter
 
         $accruedInputIndex = 0;
         $currentOutputIndex = 0;
-        $currentOutputLength = \mb_strlen($this->currentOutput);
+        $currentOutputLength = mb_strlen($this->currentOutput);
         while ($accruedInputIndex < $this->positionToRemember && $currentOutputIndex < $currentOutputLength) {
-            if (\mb_substr($this->accruedInputWithoutFormatting, $accruedInputIndex, 1) == \mb_substr($this->currentOutput, $currentOutputIndex, 1)) {
+            if (mb_substr($this->accruedInputWithoutFormatting, $accruedInputIndex, 1) === mb_substr($this->currentOutput, $currentOutputIndex, 1)) {
                 $accruedInputIndex++;
             }
             $currentOutputIndex++;
@@ -629,15 +553,12 @@ class AsYouTypeFormatter
      * Combines the national number with any prefix (IDD/+ and country code or national prefix) that
      * was collected. A space will be inserted between them if the current formatting template
      * indicates this to be suitable.
-     * @param string $nationalNumber
-     * @return string
      */
-    private function appendNationalNumber($nationalNumber)
+    private function appendNationalNumber(string $nationalNumber): string
     {
-        $prefixBeforeNationalNumberLength = \mb_strlen($this->prefixBeforeNationalNumber);
+        $prefixBeforeNationalNumberLength = mb_strlen($this->prefixBeforeNationalNumber);
         if ($this->shouldAddSpaceAfterNationalPrefix && $prefixBeforeNationalNumberLength > 0
-            && \mb_substr($this->prefixBeforeNationalNumber, $prefixBeforeNationalNumberLength - 1, 1)
-            != self::$separatorBeforeNationalNumber
+            && mb_substr($this->prefixBeforeNationalNumber, $prefixBeforeNationalNumberLength - 1, 1) !== self::$separatorBeforeNationalNumber
         ) {
             // We want to add a space after the national prefix if the national prefix formatting rule
             // indicates that this would normally be done, with the exception of the case where we already
@@ -651,13 +572,12 @@ class AsYouTypeFormatter
     /**
      * Attempts to set the formatting template and returns a string which contains the formatted
      * version of the digits entered so far.
-     * @return string
      */
-    private function attemptToChooseFormattingPattern()
+    private function attemptToChooseFormattingPattern(): string
     {
         // We start to attempt to format only when at least MIN_LEADING_DIGITS_LENGTH digits of national
         // number (excluding national prefix) have been entered.
-        if (\mb_strlen($this->nationalNumber) >= self::$minLeadingDigitsLength) {
+        if (mb_strlen($this->nationalNumber) >= self::$minLeadingDigitsLength) {
             $this->getAvailableFormats($this->nationalNumber);
             // See if the accrued digits can be formatted properly already.
             $formattedNumber = $this->attemptToFormatAccruedDigits();
@@ -673,15 +593,14 @@ class AsYouTypeFormatter
     /**
      * Invokes inputDigitHelper on each digit of the national number accrued, and returns a formatted
      * string in the end
-     * @return string
      */
-    private function inputAccruedNationalNumber()
+    private function inputAccruedNationalNumber(): string
     {
-        $lengthOfNationalNumber = \mb_strlen($this->nationalNumber);
+        $lengthOfNationalNumber = mb_strlen($this->nationalNumber);
         if ($lengthOfNationalNumber > 0) {
             $tempNationalNumber = '';
             for ($i = 0; $i < $lengthOfNationalNumber; $i++) {
-                $tempNationalNumber = $this->inputDigitHelper(\mb_substr($this->nationalNumber, $i, 1));
+                $tempNationalNumber = $this->inputDigitHelper(mb_substr($this->nationalNumber, $i, 1));
             }
             return $this->ableToFormat ? $this->appendNationalNumber($tempNationalNumber) : $this->accruedInput;
         }
@@ -692,23 +611,21 @@ class AsYouTypeFormatter
     /**
      * Returns true if the current country is a NANPA country and the national number beings with
      * the national prefix
-     * @return bool
      */
-    private function isNanpaNumberWithNationalPrefix()
+    private function isNanpaNumberWithNationalPrefix(): bool
     {
         // For NANPA numbers beginning with 1[2-9], treat the 1 as the national prefix. The reason is
         // that national significant numbers in NANPA always start with [2-9] after the national prefix.
         // Numbers beginning with 1[01] can only be short/emergency numbers, which don't need the
         // national prefix.
-        return ($this->currentMetadata->getCountryCode() == 1) && (\mb_substr($this->nationalNumber, 0, 1) == '1')
-            && (\mb_substr($this->nationalNumber, 1, 1) != '0') && (\mb_substr($this->nationalNumber, 1, 1) != '1');
+        return ($this->currentMetadata->getCountryCode() === 1) && (str_starts_with($this->nationalNumber, '1'))
+            && (mb_substr($this->nationalNumber, 1, 1) !== '0') && (mb_substr($this->nationalNumber, 1, 1) !== '1');
     }
 
     /**
      * Returns the national prefix extracted, or an empty string if it is not present.
-     * @return string
      */
-    private function removeNationalPrefixFromNationalNumber()
+    private function removeNationalPrefixFromNationalNumber(): string
     {
         $startOfNationalNumber = 0;
         if ($this->isNanpaNumberWithNationalPrefix()) {
@@ -725,11 +642,11 @@ class AsYouTypeFormatter
                 // for numbers entered without area code.
                 $this->isCompleteNumber = true;
                 $startOfNationalNumber = $m->end();
-                $this->prefixBeforeNationalNumber .= \mb_substr($this->nationalNumber, 0, $startOfNationalNumber);
+                $this->prefixBeforeNationalNumber .= mb_substr($this->nationalNumber, 0, $startOfNationalNumber);
             }
         }
-        $nationalPrefix = \mb_substr($this->nationalNumber, 0, $startOfNationalNumber);
-        $this->nationalNumber = \mb_substr($this->nationalNumber, $startOfNationalNumber);
+        $nationalPrefix = mb_substr($this->nationalNumber, 0, $startOfNationalNumber);
+        $this->nationalNumber = mb_substr($this->nationalNumber, $startOfNationalNumber);
         return $nationalPrefix;
     }
 
@@ -737,9 +654,9 @@ class AsYouTypeFormatter
      * Extracts IDD and plus sign to $this->prefixBeforeNationalNumber when they are available, and places
      * the remaining input into $this->nationalNumber.
      * @return bool true when $this->accruedInputWithoutFormatting begins with the plus sign or valid IDD
-     *  for $this->defaultCountry.
+     *              for $this->defaultCountry.
      */
-    private function attemptToExtractIdd()
+    private function attemptToExtractIdd(): bool
     {
         $internationalPrefix = '\\' . PhoneNumberUtil::PLUS_SIGN . '|' . $this->currentMetadata->getInternationalPrefix();
         $iddMatcher = new Matcher($internationalPrefix, $this->accruedInputWithoutFormatting);
@@ -747,9 +664,9 @@ class AsYouTypeFormatter
         if ($iddMatcher->lookingAt()) {
             $this->isCompleteNumber = true;
             $startOfCountryCallingCode = $iddMatcher->end();
-            $this->nationalNumber = \mb_substr($this->accruedInputWithoutFormatting, $startOfCountryCallingCode);
-            $this->prefixBeforeNationalNumber = \mb_substr($this->accruedInputWithoutFormatting, 0, $startOfCountryCallingCode);
-            if (\mb_substr($this->accruedInputWithoutFormatting, 0, 1) != PhoneNumberUtil::PLUS_SIGN) {
+            $this->nationalNumber = mb_substr($this->accruedInputWithoutFormatting, $startOfCountryCallingCode);
+            $this->prefixBeforeNationalNumber = mb_substr($this->accruedInputWithoutFormatting, 0, $startOfCountryCallingCode);
+            if (!str_starts_with($this->accruedInputWithoutFormatting, PhoneNumberUtil::PLUS_SIGN)) {
                 $this->prefixBeforeNationalNumber .= self::$separatorBeforeNationalNumber;
             }
             return true;
@@ -763,7 +680,7 @@ class AsYouTypeFormatter
      * into $this->>nationalNumber.
      * @return bool true when a valid country calling code can be found
      */
-    private function attemptToExtractCountryCallingCode()
+    private function attemptToExtractCountryCallingCode(): bool
     {
         if ($this->nationalNumber === '') {
             return false;
@@ -775,9 +692,9 @@ class AsYouTypeFormatter
         }
         $this->nationalNumber = $numberWithoutCountryCallingCode;
         $newRegionCode = $this->phoneUtil->getRegionCodeForCountryCode($countryCode);
-        if (PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY == $newRegionCode) {
+        if (PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $newRegionCode) {
             $this->currentMetadata = $this->phoneUtil->getMetadataForNonGeographicalRegion($countryCode);
-        } elseif ($newRegionCode != $this->defaultCountry) {
+        } elseif ($newRegionCode !== $this->defaultCountry) {
             $this->currentMetadata = $this->getMetadataForRegion($newRegionCode);
         }
         $countryCodeString = (string) $countryCode;
@@ -794,13 +711,10 @@ class AsYouTypeFormatter
      * is first normalized to the ASCII version. The return value is $nextChar itself, or its
      * normalized version, if $nextChar is a digit in non-ASCII format. This method assumes its
      * input is either a digit or the plus sign.
-     * @param string $nextChar
-     * @param bool $rememberPosition
-     * @return string
      */
-    private function normalizeAndAccrueDigitsAndPlusSign($nextChar, $rememberPosition)
+    private function normalizeAndAccrueDigitsAndPlusSign(string $nextChar, bool $rememberPosition): string
     {
-        if ($nextChar == PhoneNumberUtil::PLUS_SIGN) {
+        if ($nextChar === PhoneNumberUtil::PLUS_SIGN) {
             $normalizedChar = $nextChar;
             $this->accruedInputWithoutFormatting .= $nextChar;
         } else {
@@ -809,31 +723,27 @@ class AsYouTypeFormatter
             $this->nationalNumber .= $normalizedChar;
         }
         if ($rememberPosition) {
-            $this->positionToRemember = \mb_strlen($this->accruedInputWithoutFormatting);
+            $this->positionToRemember = mb_strlen($this->accruedInputWithoutFormatting);
         }
         return $normalizedChar;
     }
 
-    /**
-     * @param string $nextChar
-     * @return string
-     */
-    private function inputDigitHelper($nextChar)
+    private function inputDigitHelper(string $nextChar): string
     {
         // Note that formattingTemplate is not guaranteed to have a value, it could be empty, e.g.
         // when the next digit is entered after extracting an IDD or NDD.
         $digitMatcher = new Matcher(self::$digitPattern, $this->formattingTemplate);
         if ($digitMatcher->find($this->lastMatchPosition)) {
             $tempTemplate = $digitMatcher->replaceFirst($nextChar);
-            $this->formattingTemplate = $tempTemplate . \mb_substr($this->formattingTemplate, \mb_strlen(
+            $this->formattingTemplate = $tempTemplate . mb_substr($this->formattingTemplate, mb_strlen(
                 $tempTemplate,
                 'UTF-8'
             ), null, 'UTF-8');
             $this->lastMatchPosition = $digitMatcher->start();
-            return \mb_substr($this->formattingTemplate, 0, $this->lastMatchPosition + 1);
+            return mb_substr($this->formattingTemplate, 0, $this->lastMatchPosition + 1);
         }
 
-        if (\count($this->possibleFormats) === 1) {
+        if (count($this->possibleFormats) === 1) {
             // More digits are entered than we could handle, and there are no other valid patterns to
             // try.
             $this->ableToFormat = false;

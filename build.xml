@@ -6,14 +6,7 @@
     <property name="git.url" value="https://github.com/google/libphonenumber.git"/>
     <property name="git.path" value="libphonenumber-data-dir"/>
 
-    <loadfile property="metadata.version" file="METADATA-VERSION.txt">
-        <filterchain>
-            <striplinecomments>
-                <comment value="#" />
-            </striplinecomments>
-            <striplinebreaks />
-        </filterchain>
-    </loadfile>
+    <php returnProperty="metadata.version" expression="require 'METADATA-VERSION.php';" />
 
     <property name="data.testCoreData" value="tests/core/data/"/>
     <property name="data.testPrefixMapperData" value="tests/prefixmapper/data/"/>

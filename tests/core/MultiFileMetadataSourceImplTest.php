@@ -1,18 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\core;
 
 use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class MultiFileMetadataSourceImplTest extends TestCase
 {
-    /**
-     * @var MultiFileMetadataSourceImpl
-     */
-    private $multiFileMetadataSource;
+    private MultiFileMetadataSourceImpl $multiFileMetadataSource;
 
     public function setUp(): void
     {
@@ -22,7 +22,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
         );
     }
 
-    public function testMissingMetadataFileThrowsRuntimeException()
+    public function testMissingMetadataFileThrowsRuntimeException(): void
     {
         // In normal usage we should never get a state where we are asking to load metadata that doesn't
         // exist. However if the library is packaged incorrectly, this could happen and the best we can
@@ -30,9 +30,9 @@ class MultiFileMetadataSourceImplTest extends TestCase
 
         try {
             $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
-            $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->doAssertStringContainsString(
+            self::fail('Expected Exception');
+        } catch (RuntimeException $e) {
+            self::assertStringContainsString(
                 'no/such/file_XX',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
@@ -46,25 +46,13 @@ class MultiFileMetadataSourceImplTest extends TestCase
                 123,
                 new DefaultMetadataLoader()
             );
-            $this->fail('Expected Exception');
-        } catch (\RuntimeException $e) {
-            $this->doAssertStringContainsString(
+            self::fail('Expected Exception');
+        } catch (RuntimeException $e) {
+            self::assertStringContainsString(
                 'no/such/file_123',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
             );
-        }
-    }
-
-    /**
-     * Provide PHPUnit compatibility
-     */
-    private function doAssertStringContainsString($needle, $haystack, $message)
-    {
-        if (method_exists($this, 'assertStringContainsString')) {
-            $this->assertStringContainsString($needle, $haystack, $message);
-        } else {
-            $this->assertContains($needle, $haystack, $message);
         }
     }
 }

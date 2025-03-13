@@ -1,21 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\prefixmapper;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 
+/**
+ * @internal
+ */
 class PrefixTimeZonesMap
 {
-    /*
-
-    protected final PhonePrefixMap phonePrefixMap = new PhonePrefixMap();
-    protected static final String RAW_STRING_TIMEZONES_SEPARATOR = "&";
-    */
     public const RAW_STRING_TIMEZONES_SEPARATOR = '&';
-    protected $phonePrefixMap;
+    protected PhonePrefixMap $phonePrefixMap;
 
-    public function __construct($map)
+    /**
+     * @param array<string|int,string> $map
+     */
+    public function __construct(array $map)
     {
         $this->phonePrefixMap = new PhonePrefixMap($map);
     }
@@ -27,7 +30,7 @@ class PrefixTimeZonesMap
      * @param $number PhoneNumber the phone number to look up
      * @return string[] the list of corresponding time zones
      */
-    public function lookupTimeZonesForNumber(PhoneNumber $number)
+    public function lookupTimeZonesForNumber(PhoneNumber $number): array
     {
         $phonePrefix = $number->getCountryCode() . PhoneNumberUtil::getInstance()->getNationalSignificantNumber(
             $number
@@ -44,10 +47,9 @@ class PrefixTimeZonesMap
      * For example, the full number 16502530000 (from the phone-number +1 650 253 0000) is a valid
      * input. Also, any of its prefixes, such as 16502, is also valid.
      *
-     * @param $key int the key to look up
      * @return string[] the list of corresponding time zones
      */
-    protected function lookupTimeZonesForNumberKey($key)
+    protected function lookupTimeZonesForNumberKey(string $key): array
     {
         // Lookup in the map data. The returned String may consist of several time zones, so it must be
         // split.
@@ -63,10 +65,10 @@ class PrefixTimeZonesMap
     /**
      * Split {@code timezonesString} into all the time zones that are part of it.
      *
-     * @param $timezonesString String
+     * @param $timezonesString string
      * @return string[]
      */
-    protected function tokenizeRawOutputString($timezonesString)
+    protected function tokenizeRawOutputString(string $timezonesString): array
     {
         return explode(static::RAW_STRING_TIMEZONES_SEPARATOR, $timezonesString);
     }
@@ -77,8 +79,8 @@ class PrefixTimeZonesMap
      * @param $number PhoneNumber the phone number to look up
      * @return string[] the list of corresponding time zones
      */
-    public function lookupCountryLevelTimeZonesForNumber(PhoneNumber $number)
+    public function lookupCountryLevelTimeZonesForNumber(PhoneNumber $number): array
     {
-        return $this->lookupTimeZonesForNumberKey($number->getCountryCode());
+        return $this->lookupTimeZonesForNumberKey((string) $number->getCountryCode());
     }
 }

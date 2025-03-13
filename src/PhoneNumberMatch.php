@@ -1,26 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber;
 
+use InvalidArgumentException;
+
+use function mb_strlen;
+
+/**
+ * @no-named-arguments
+ */
 class PhoneNumberMatch
 {
     /**
      * The start index into the text.
-     * @var int
      */
-    private $start;
+    private int $start;
 
     /**
      * The raw substring matched.
-     * @var string
      */
-    private $rawString;
+    private string $rawString;
 
     /**
      * The matched phone number.
-     * @var PhoneNumber
      */
-    private $number;
+    private PhoneNumber $number;
 
     /**
      * Creates a new match
@@ -29,14 +35,10 @@ class PhoneNumberMatch
      * @param string $rawString The matched substring of the target text
      * @param PhoneNumber $number The matched phone number
      */
-    public function __construct($start, $rawString, PhoneNumber $number)
+    public function __construct(int $start, string $rawString, PhoneNumber $number)
     {
         if ($start < 0) {
-            throw new \InvalidArgumentException('Start index must be >= 0.');
-        }
-
-        if ($rawString === null) {
-            throw new \InvalidArgumentException('$rawString must be a string');
+            throw new InvalidArgumentException('Start index must be >= 0.');
         }
 
         $this->start = $start;
@@ -46,36 +48,32 @@ class PhoneNumberMatch
 
     /**
      * Returns the phone number matched by the receiver.
-     * @return PhoneNumber
      */
-    public function number()
+    public function number(): PhoneNumber
     {
         return $this->number;
     }
 
     /**
      * Returns the start index of the matched phone number within the searched text.
-     * @return int
      */
-    public function start()
+    public function start(): int
     {
         return $this->start;
     }
 
     /**
      * Returns the exclusive end index of the matched phone number within the searched text.
-     * @return int
      */
-    public function end()
+    public function end(): int
     {
-        return $this->start + \mb_strlen($this->rawString);
+        return $this->start + mb_strlen($this->rawString);
     }
 
     /**
      * Returns the raw string matched as a phone number in the searched text.
-     * @return string
      */
-    public function rawString()
+    public function rawString(): string
     {
         return $this->rawString;
     }

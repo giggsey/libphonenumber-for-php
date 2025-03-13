@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
@@ -7,17 +9,13 @@ use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
 
+use function memory_get_usage;
+
 class Issue44Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
     public function setUp(): void
     {
@@ -27,45 +25,45 @@ class Issue44Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testMemoryUsageOfGeoLocationWithNoResult()
+    public function testMemoryUsageOfGeoLocationWithNoResult(): void
     {
         $number = $this->phoneUtil->parse('86-157-9662-1289', 'CN');
 
-        $startMemory = \memory_get_usage();
+        $startMemory = memory_get_usage();
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
-        $endMemory = \memory_get_usage();
+        $endMemory = memory_get_usage();
 
-        $this->assertEquals('China', $location);
+        self::assertSame('China', $location);
 
         $memoryUsed = $endMemory - $startMemory;
 
-        $this->assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
+        self::assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
     }
 
-    public function testMemoryUsageOfGeoLocationWithResult()
+    public function testMemoryUsageOfGeoLocationWithResult(): void
     {
         $number = $this->phoneUtil->parse('86-131-2270-1411', 'CN');
 
-        $startMemory = \memory_get_usage();
+        $startMemory = memory_get_usage();
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
-        $endMemory = \memory_get_usage();
+        $endMemory = memory_get_usage();
 
-        $this->assertEquals('Shanghai', $location);
+        self::assertSame('Shanghai', $location);
 
         $memoryUsed = $endMemory - $startMemory;
 
-        $this->assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
+        self::assertLessThan(5000000, $memoryUsed, 'Memory usage should be below 5MB');
     }
 
-    public function testChineseGeolocation()
+    public function testChineseGeolocation(): void
     {
         $number = $this->phoneUtil->parse('+86 150 3657 7264', 'CN');
         $location = $this->geocoder->getDescriptionForNumber($number, 'en');
 
-        $this->assertEquals('Luoyang, Henan', $location);
+        self::assertSame('Luoyang, Henan', $location);
     }
 
-    public function testChineseCarrierLookup()
+    public function testChineseCarrierLookup(): void
     {
         $number = $this->phoneUtil->parse('+86 150 3657 7264', 'CN');
 
@@ -73,6 +71,6 @@ class Issue44Test extends TestCase
 
         $location = $carrier->getNameForNumber($number, 'en');
 
-        $this->assertEquals('China Mobile', $location);
+        self::assertSame('China Mobile', $location);
     }
 }

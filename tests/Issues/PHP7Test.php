@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
@@ -8,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class PHP7Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -19,18 +18,19 @@ class PHP7Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    /**
-     * @dataProvider validPolishNumbers
-     */
-    public function testValidPolishNumbers($number)
+    #[\PHPUnit\Framework\Attributes\DataProvider('validPolishNumbers')]
+    public function testValidPolishNumbers(string $number): void
     {
         $phoneNumber = $this->phoneUtil->parse($number, 'PL');
 
-        $this->assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
-        $this->assertEquals($number, $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
+        self::assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
+        self::assertSame($number, $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
     }
 
-    public function validPolishNumbers()
+    /**
+     * @return array<array{string}>
+     */
+    public static function validPolishNumbers(): array
     {
         return [
             ['22 222 22 22'],

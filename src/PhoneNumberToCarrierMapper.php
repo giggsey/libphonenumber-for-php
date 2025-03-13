@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author giggsey
  * @created: 02/10/13 16:52
@@ -11,26 +13,20 @@ namespace libphonenumber;
 use Giggsey\Locale\Locale;
 use libphonenumber\prefixmapper\PrefixFileReader;
 
+/**
+ * @phpstan-consistent-constructor
+ * @no-named-arguments
+ */
 class PhoneNumberToCarrierMapper
 {
     /**
      * @var PhoneNumberToCarrierMapper[]
      */
-    protected static $instance = [];
+    protected static array $instance = [];
+    protected PhoneNumberUtil $phoneUtil;
+    protected PrefixFileReader $prefixFileReader;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    protected $phoneUtil;
-    /**
-     * @var PrefixFileReader
-     */
-    protected $prefixFileReader;
-
-    /**
-     * @param string|null $phonePrefixDataDirectory
-     */
-    protected function __construct($phonePrefixDataDirectory)
+    protected function __construct(?string $phonePrefixDataDirectory)
     {
         if ($phonePrefixDataDirectory === null) {
             $phonePrefixDataDirectory = __DIR__ . '/carrier/data/';
@@ -45,11 +41,8 @@ class PhoneNumberToCarrierMapper
      *
      * <p> The {@link PhoneNumberToCarrierMapper} is implemented as a singleton. Therefore, calling
      * this method multiple times will only result in one instance being created.
-     *
-     * @param string|null $mappingDir
-     * @return PhoneNumberToCarrierMapper
      */
-    public static function getInstance($mappingDir = null)
+    public static function getInstance(?string $mappingDir = null): PhoneNumberToCarrierMapper
     {
         if (!array_key_exists($mappingDir, static::$instance)) {
             static::$instance[$mappingDir] = new static($mappingDir);
@@ -72,7 +65,7 @@ class PhoneNumberToCarrierMapper
      * @param string $languageCode the language code in which the name should be written
      * @return string a carrier name for the given phone number
      */
-    public function getNameForValidNumber(PhoneNumber $number, $languageCode)
+    public function getNameForValidNumber(PhoneNumber $number, string $languageCode): string
     {
         $languageStr = Locale::getPrimaryLanguage($languageCode);
         $scriptStr = '';
@@ -90,9 +83,9 @@ class PhoneNumberToCarrierMapper
      * @param PhoneNumber $number The phone number  for which we want to get a carrier name
      * @param string $languageCode Language code for which the description should be written
      * @return string a carrier name for the given phone number, or empty string if the number passed in is
-     *     invalid
+     *                invalid
      */
-    public function getNameForNumber(PhoneNumber $number, $languageCode)
+    public function getNameForNumber(PhoneNumber $number, string $languageCode): string
     {
         $numberType = $this->phoneUtil->getNumberType($number);
         if ($this->isMobile($numberType)) {
@@ -111,7 +104,7 @@ class PhoneNumberToCarrierMapper
      * @param $languageCode String the language code in which the name should be written
      * @return string a carrier name that is safe to display to users, or the empty string
      */
-    public function getSafeDisplayName(PhoneNumber $number, $languageCode)
+    public function getSafeDisplayName(PhoneNumber $number, string $languageCode): string
     {
         if ($this->phoneUtil->isMobileNumberPortableRegion($this->phoneUtil->getRegionCodeForNumber($number))) {
             return '';
@@ -122,10 +115,8 @@ class PhoneNumberToCarrierMapper
 
     /**
      * Checks if the supplied number type supports carrier lookup.
-     * @param int $numberType A PhoneNumberType int
-     * @return bool
      */
-    protected function isMobile($numberType)
+    protected function isMobile(PhoneNumberType $numberType): bool
     {
         return ($numberType === PhoneNumberType::MOBILE ||
             $numberType === PhoneNumberType::FIXED_LINE_OR_MOBILE ||

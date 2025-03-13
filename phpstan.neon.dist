@@ -1,0 +1,7 @@
+parameters:
+    level: 7
+    paths:
+        - src
+        - build
+        - tests
+    treatPhpDocTypesAsCertain: false

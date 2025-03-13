@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author joshuag
  * @created: 14/08/2014 12:35
@@ -14,17 +16,13 @@ use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
 
+use function in_array;
+
 class LocaleTest extends TestCase
 {
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -34,29 +32,29 @@ class LocaleTest extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    /**
-     * @dataProvider localeList
-     * @param string $regionCode
-     * @param string $countryName
-     */
-    public function testLocales($regionCode, $countryName)
+    #[\PHPUnit\Framework\Attributes\DataProvider('localeList')]
+    public function testLocales(string $regionCode, string $countryName): void
     {
-        if (!\in_array($regionCode, $this->phoneUtil->getSupportedRegions())) {
-            $this->markTestSkipped("{$regionCode} is not supported");
+        if (!in_array($regionCode, $this->phoneUtil->getSupportedRegions(), true)) {
+            self::markTestSkipped("{$regionCode} is not supported");
         }
 
         $phoneNumber = $this->phoneUtil->getExampleNumberForType($regionCode, PhoneNumberType::FIXED_LINE_OR_MOBILE);
 
-        $this->assertContains($regionCode, CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$phoneNumber->getCountryCode()]);
+        self::assertNotNull($phoneNumber);
+        self::assertContains($regionCode, CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap[$phoneNumber->getCountryCode()]);
 
-        $this->assertEquals($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
+        self::assertSame($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 
-        $this->assertEquals($countryName, $this->geocoder->getDescriptionForValidNumber($phoneNumber, 'en', 'ZZ'), "Checking {$phoneNumber} is part of {$countryName}");
+        self::assertSame($countryName, $this->geocoder->getDescriptionForValidNumber($phoneNumber, 'en', 'ZZ'), "Checking {$phoneNumber} is part of {$countryName}");
     }
 
-    public function localeList()
+    /**
+     * @return array<array{string,string}>
+     */
+    public static function localeList(): array
     {
-        $codes = $this->getCountryCodes();
+        $codes = self::getCountryCodes();
 
         $return = [];
         foreach ($codes as $code => $country) {
@@ -67,12 +65,12 @@ class LocaleTest extends TestCase
     }
 
     /**
-     * This list was got from the Internet, and altered slightly to make the tests pass
+     * This list is from the Internet, and altered slightly to make the tests pass
      *
      * @see https://gist.github.com/vxnick/380904
-     * @return array
+     * @return array<string,string>
      */
-    private function getCountryCodes()
+    private static function getCountryCodes(): array
     {
         return [
             'AF' => 'Afghanistan',

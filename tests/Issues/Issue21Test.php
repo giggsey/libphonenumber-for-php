@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberFormat;
@@ -8,10 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue21Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -19,33 +18,33 @@ class Issue21Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testFloatNumber()
+    public function testFloatNumber(): void
     {
         $number = '0358112345678987';
         $phoneNumber = $this->phoneUtil->parse($number, 'DE');
 
-        $this->assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
+        self::assertTrue($this->phoneUtil->isValidNumber($phoneNumber));
 
-        $this->assertEquals('+49358112345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164));
-        $this->assertEquals('+49 3581 12345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL));
-        $this->assertEquals('03581 12345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
+        self::assertSame('+49358112345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164));
+        self::assertSame('+49 3581 12345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL));
+        self::assertSame('03581 12345678987', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
 
 
-        $this->assertEquals('011 49 3581 12345678987', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'US'));
-        $this->assertEquals('00 49 3581 12345678987', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
+        self::assertSame('011 49 3581 12345678987', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'US'));
+        self::assertSame('00 49 3581 12345678987', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
     }
 
-    public function testLongerNumber()
+    public function testLongerNumber(): void
     {
         $number = '12345678901234567';
         $phoneNumber = $this->phoneUtil->parse($number, 'DE');
 
-        $this->assertEquals('+4912345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164));
-        $this->assertEquals('+49 12345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL));
-        $this->assertEquals('12345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
+        self::assertSame('+4912345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164));
+        self::assertSame('+49 12345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::INTERNATIONAL));
+        self::assertSame('12345678901234567', $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL));
 
 
-        $this->assertEquals('011 49 12345678901234567', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'US'));
-        $this->assertEquals('00 49 12345678901234567', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
+        self::assertSame('011 49 12345678901234567', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'US'));
+        self::assertSame('00 49 12345678901234567', $this->phoneUtil->formatOutOfCountryCallingNumber($phoneNumber, 'CH'));
     }
 }

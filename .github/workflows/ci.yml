@@ -1,4 +1,4 @@
-name: "Continuous Integration"
+name: "Tests"
 
 on:
   push:
@@ -8,76 +8,37 @@ on:
     paths-ignore:
       - 'docs/**'
 
-env:
-  COMPOSER_FLAGS: "--ansi --no-interaction --no-progress --no-suggest --prefer-dist"
-  COVERAGE_FLAGS: "--coverage-text --coverage-clover build/logs/clover.xml"
-  SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT: "1"
-
 jobs:
   tests:
-    name: PHP ${{ matrix.php-version }}
+    name: PHP ${{ matrix.php-version }} - ${{ matrix.composer }}
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        php-version:
-          - "7.4"
-          - "8.0"
-          - "8.1"
-          - "8.2"
-          - "8.3"
-          - "8.4"
-        include:
-          - php-version: 8.3
-            coverage: coverage
+        php-version: [8.1, 8.2, 8.3, 8.4]
+        composer: [highest, lowest]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 10
+        uses: actions/checkout@v4
+
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           extensions: dom
           coverage: xdebug
-        env:
-          update: true
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Setup Problem Matchers for PHPUnit
-        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - name: Cache composer dependencies
-        uses: actions/cache@v1
+          tools: composer:v2
+
+      - uses: "ramsey/composer-install@v3"
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: ${{ matrix.php-version }}-composer-
-      - name: Install Composer
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: composer update ${{ env.COMPOSER_FLAGS }}
+          dependency-versions: "${{ matrix.composer }}"
+
       - name: composer validate
         run: composer validate --strict
-      - name: Test with phpunit (with coverage)
-        id: phpunit-coverage
-        if: "matrix.coverage == 'coverage'"
-        run: vendor/bin/phpunit --verbose ${{ env.COVERAGE_FLAGS }}
-      - name: Test with phpunit (without coverage)
-        if: "matrix.coverage != 'coverage'"
-        run: vendor/bin/phpunit --verbose
-      - name: Submit Coveralls
-        if: steps.phpunit-coverage.outcome == 'success'
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 10
-          max_attempts: 3
-          command: |
-            [[ -f vendor/bin/php-coveralls ]] && COVERALLS_PATH=vendor/bin/php-coveralls || COVERALLS_PATH=vendor/bin/coveralls
-            [[ -n $COVERALLS_REPO_TOKEN ]] && php $COVERALLS_PATH -v --exclude-no-stmt || true
-        env:
-          COVERALLS_RUN_LOCALLY: 1
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+      - name: Run unit tests
+        run: "./vendor/bin/phpunit --colors=always --coverage-clover build/logs/clover.xml --coverage-text"
+
+      - name: Publish coverage report to Codecov
+        uses: "codecov/codecov-action@v5"

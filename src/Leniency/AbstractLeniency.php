@@ -1,44 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Leniency;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
+use RuntimeException;
 
+/**
+ * @no-named-arguments
+ */
 abstract class AbstractLeniency
 {
     /**
      * Integer level to compare 'ENUMs'
-     * @var int
      */
-    protected static $level;
+    protected static int $level;
 
     /**
      * Returns true if $number is a verified number according to this leniency
      *
-     * @param string $candidate
-     * @return bool
      * @codeCoverageIgnore
      */
-    public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
-    {
-        // This can not be called directly
-        throw new \BadMethodCallException();
-    }
+    abstract public static function verify(PhoneNumber $number, string $candidate, PhoneNumberUtil $util): bool;
 
     /**
      * Compare against another Leniency
-     * @return int
      */
-    public static function compareTo(AbstractLeniency $leniency)
+    public static function compareTo(AbstractLeniency $leniency): int
     {
         return static::getLevel() - $leniency::getLevel();
     }
 
-    protected static function getLevel()
+    protected static function getLevel(): int
     {
-        if (static::$level === null) {
-            throw new \RuntimeException('$level should be defined');
+        if (!isset(static::$level)) {
+            throw new RuntimeException('$level should be defined');
         }
 
         return static::$level;

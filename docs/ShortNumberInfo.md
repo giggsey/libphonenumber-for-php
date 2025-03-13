@@ -71,7 +71,7 @@ Checks whether the specified `PhoneNumber` object is a possible short number.
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->isPossibleShortNumber($phoneNumber));
 // bool(true)
@@ -85,7 +85,7 @@ Checks whether the supplied `$shortNumber` (which can either be a string or a `P
 
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->isPossibleShortNumberForRegion($phoneNumber, 'GB'));
 // bool(true)
@@ -103,7 +103,7 @@ Checks whether the specified `PhoneNumber` object is a valid short number.
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->isValidShortNumber($phoneNumber));
 // bool(true)
@@ -118,7 +118,7 @@ Checks whether the supplied `$shortNumber` (which can either be a string or a `P
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->isValidShortNumberForRegion($phoneNumber, 'GB'));
 // bool(true)
@@ -134,7 +134,7 @@ Returns whether the supplied `PhoneNumber` is a carrier specific short number.
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(1);
-$phoneNumber->setNationalNumber(611);
+$phoneNumber->setNationalNumber('611');
 
 var_dump($shortNumberUtil->isCarrierSpecific($phoneNumber));
 // (bool) true
@@ -147,7 +147,7 @@ Returns whether the supplied `PhoneNumber` is a carrier specific short number in
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(1);
-$phoneNumber->setNationalNumber(611);
+$phoneNumber->setNationalNumber('611');
 
 var_dump($shortNumberUtil->isCarrierSpecificForRegion($phoneNumber, 'US'));
 // (bool) true
@@ -162,7 +162,7 @@ Returns the expected cost (as a `ShortNumberCost` constant) of the supplied `Pho
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->getExpectedCost($phoneNumber, 'GB'));
 // int(10) (\libphonenumber\ShortNumberCost::UNKNOWN_COST)
@@ -175,7 +175,7 @@ Returns the expected cost (as a `ShortNumberCost` constant) of the supplied `$nu
 ```php
 $phoneNumber = new \libphonenumber\PhoneNumber();
 $phoneNumber->setCountryCode(44);
-$phoneNumber->setNationalNumber(118118);
+$phoneNumber->setNationalNumber('118118');
 
 var_dump($shortNumberUtil->getExpectedCostForRegion($phoneNumber, 'GB'));
 // int(10) (\libphonenumber\ShortNumberCost::UNKNOWN_COST)

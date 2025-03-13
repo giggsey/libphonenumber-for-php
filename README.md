@@ -26,7 +26,7 @@ A PHP library for parsing, formatting, storing and validating international phon
 
 ## Installation
 
-PHP versions 7.4 to PHP 8.4 are currently supported.
+PHP versions 8.1 to 8.4 are currently supported.
 
 The PECL [mbstring](http://php.net/mbstring) extension is required.
 
@@ -43,6 +43,10 @@ If you do not use composer, ensure that you also load any dependencies that this
 ## giggsey/libphonenumber-for-php-lite
 
 If you only want to make use of the core PhoneNumber Util functionality, you can use [giggsey/libphonenumber-for-php-lite](https://github.com/giggsey/libphonenumber-for-php-lite), which offers a much smaller package size.
+
+### PHP Version Policy
+
+This library will be updated to use [supported versions of PHP](https://www.php.net/supported-versions.php) without major version bumps.
 
 ## Documentation
 
@@ -244,7 +248,7 @@ If you do need to generate the data, the commands are provided by [Phing](https:
 vendor/bin/phing compile
 ```
 
-This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.txt](METADATA-VERSION.txt).
+This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.php](METADATA-VERSION.php).
 
 ### Running tests
 

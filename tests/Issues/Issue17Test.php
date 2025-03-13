@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
@@ -8,15 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class Issue17Test extends TestCase
 {
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geocoder;
+    private PhoneNumberOfflineGeocoder $geocoder;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -26,12 +22,12 @@ class Issue17Test extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    public function testIsleOfManLocale()
+    public function testIsleOfManLocale(): void
     {
         $number = '447624206000';
 
         $phoneNumber = $this->phoneUtil->parse($number, 'GB');
 
-        $this->assertEquals('Isle of Man', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
+        self::assertSame('Isle of Man', $this->geocoder->getDescriptionForNumber($phoneNumber, 'en'));
     }
 }

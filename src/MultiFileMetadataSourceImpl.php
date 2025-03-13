@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author joshuag
  * @created: 04/08/2015 09:03
@@ -7,6 +9,8 @@
  */
 
 namespace libphonenumber;
+
+use RuntimeException;
 
 /**
  * @internal
@@ -17,7 +21,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
      * A mapping from a region code to the PhoneMetadata for that region.
      * @var PhoneMetadata[]
      */
-    protected $regionToMetadataMap = [];
+    protected array $regionToMetadataMap = [];
 
     /**
      * A mapping from a country calling code for a non-geographical entity to the PhoneMetadata for
@@ -25,25 +29,20 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
      * Toll Free Service) and 808 (International Shared Cost Service).
      * @var PhoneMetadata[]
      */
-    protected $countryCodeToNonGeographicalMetadataMap = [];
+    protected array $countryCodeToNonGeographicalMetadataMap = [];
 
     /**
      * The prefix of the metadata files from which region data is loaded.
-     * @var String
      */
-    protected $currentFilePrefix;
+    protected string $currentFilePrefix;
 
 
     /**
      * The metadata loader used to inject alternative metadata sources.
-     * @var MetadataLoaderInterface
      */
-    protected $metadataLoader;
+    protected MetadataLoaderInterface $metadataLoader;
 
-    /**
-     * @param string|null $currentFilePrefix
-     */
-    public function __construct(MetadataLoaderInterface $metadataLoader, $currentFilePrefix = null)
+    public function __construct(MetadataLoaderInterface $metadataLoader, ?string $currentFilePrefix = null)
     {
         if ($currentFilePrefix === null) {
             $currentFilePrefix = __DIR__ . '/data/PhoneNumberMetadata';
@@ -53,10 +52,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         $this->metadataLoader = $metadataLoader;
     }
 
-    /**
-     *
-     */
-    public function getMetadataForRegion($regionCode)
+    public function getMetadataForRegion(string $regionCode): PhoneMetadata
     {
         $regionCode = strtoupper($regionCode);
 
@@ -69,10 +65,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         return $this->regionToMetadataMap[$regionCode];
     }
 
-    /**
-     *
-     */
-    public function getMetadataForNonGeographicalRegion($countryCallingCode)
+    public function getMetadataForNonGeographicalRegion(int $countryCallingCode): PhoneMetadata
     {
         if (!array_key_exists($countryCallingCode, $this->countryCodeToNonGeographicalMetadataMap)) {
             $this->loadMetadataFromFile($this->currentFilePrefix, PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode, $this->metadataLoader);
@@ -82,19 +75,16 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
     }
 
     /**
-     * @param string $filePrefix
-     * @param string $regionCode
-     * @param int $countryCallingCode
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
-    public function loadMetadataFromFile($filePrefix, $regionCode, $countryCallingCode, MetadataLoaderInterface $metadataLoader)
+    public function loadMetadataFromFile(string $filePrefix, string $regionCode, int $countryCallingCode, MetadataLoaderInterface $metadataLoader): void
     {
         $regionCode = strtoupper($regionCode);
 
         $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
         $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
         if (!is_readable($fileName)) {
-            throw new \RuntimeException('missing metadata: ' . $fileName);
+            throw new RuntimeException('missing metadata: ' . $fileName);
         }
 
         $data = $metadataLoader->loadMetadata($fileName);

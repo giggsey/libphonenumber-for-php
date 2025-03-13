@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberType;
@@ -9,15 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 class RegionCodeCaseInsensitiveTest extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
-    /**
-     * @var ShortNumberInfo
-     */
-    private $shortInfo;
+    private ShortNumberInfo $shortInfo;
 
     public function setUp(): void
     {
@@ -26,61 +22,61 @@ class RegionCodeCaseInsensitiveTest extends TestCase
         $this->shortInfo = ShortNumberInfo::getInstance();
     }
 
-    public function testParse()
+    public function testParse(): void
     {
         $number = '07987458147';
         $phoneObject = $this->phoneUtil->parse($number, 'gb');
 
-        $this->assertTrue($this->phoneUtil->isValidNumber($phoneObject));
+        self::assertTrue($this->phoneUtil->isValidNumber($phoneObject));
 
-        $this->assertTrue($this->phoneUtil->isValidNumberForRegion($phoneObject, 'gb'));
+        self::assertTrue($this->phoneUtil->isValidNumberForRegion($phoneObject, 'gb'));
     }
 
-    public function testIsNANPACountry()
+    public function testIsNANPACountry(): void
     {
-        $this->assertTrue($this->phoneUtil->isNANPACountry('us'));
+        self::assertTrue($this->phoneUtil->isNANPACountry('us'));
     }
 
-    public function testGetMetadataForRegion()
+    public function testGetMetadataForRegion(): void
     {
         $metadata = $this->phoneUtil->getMetadataForRegion('gb');
 
-        $this->assertInstanceOf('\libphonenumber\PhoneMetadata', $metadata);
+        self::assertInstanceOf('\libphonenumber\PhoneMetadata', $metadata);
     }
 
-    public function testConnectsToEmergency()
+    public function testConnectsToEmergency(): void
     {
-        $this->assertTrue($this->shortInfo->connectsToEmergencyNumber('911', 'us'));
-        $this->assertFalse($this->shortInfo->connectsToEmergencyNumber('9111', 'br'));
+        self::assertTrue($this->shortInfo->connectsToEmergencyNumber('911', 'us'));
+        self::assertFalse($this->shortInfo->connectsToEmergencyNumber('9111', 'br'));
     }
 
-    public function testGetCountryCodeForRegion()
+    public function testGetCountryCodeForRegion(): void
     {
-        $this->assertEquals(44, $this->phoneUtil->getCountryCodeForRegion('gb'));
+        self::assertSame(44, $this->phoneUtil->getCountryCodeForRegion('gb'));
     }
 
-    public function testExampleNumber()
+    public function testExampleNumber(): void
     {
-        $this->assertSame(
+        self::assertSame(
             (string) $this->phoneUtil->parse('+441212345678'),
             (string) $this->phoneUtil->getExampleNumber('gb')
         );
-        $this->assertSame(
+        self::assertSame(
             (string) $this->phoneUtil->parse('+44121234567'),
             (string) $this->phoneUtil->getInvalidExampleNumber('gb')
         );
-        $this->assertSame(
+        self::assertSame(
             (string) $this->phoneUtil->parse('+447400123456'),
             (string) $this->phoneUtil->getExampleNumberForType('gb', PhoneNumberType::MOBILE)
         );
     }
 
-    public function testFindNumbers()
+    public function testFindNumbers(): void
     {
         $phoneNumberMatcher = $this->phoneUtil->findNumbers('Testing 01212345678', 'gb');
 
         $phoneNumberMatcher->next();
         $match = $phoneNumberMatcher->current();
-        $this->assertNotNull($match);
+        self::assertNotNull($match);
     }
 }

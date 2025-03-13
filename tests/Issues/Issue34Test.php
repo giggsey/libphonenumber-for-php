@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
@@ -7,10 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class Issue34Test extends TestCase
 {
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneUtil;
+    private PhoneNumberUtil $phoneUtil;
 
     public function setUp(): void
     {
@@ -18,12 +17,12 @@ class Issue34Test extends TestCase
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
-    public function testIsValidNumberForRegion()
+    public function testIsValidNumberForRegion(): void
     {
         $number = '+33 6 76 83 51 85';
         $region = 'DE';
         $phoneNumber = $this->phoneUtil->parse($number, $region);
 
-        $this->assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, 'DE'));
+        self::assertFalse($this->phoneUtil->isValidNumberForRegion($phoneNumber, 'DE'));
     }
 }

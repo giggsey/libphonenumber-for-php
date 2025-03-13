@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\buildtools\Commands;
 
 use libphonenumber\buildtools\GeneratePhonePrefixData;
@@ -9,9 +11,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @internal
+ */
 class GeneratePhonePrefixDataCommand extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('GeneratePhonePrefixData');
         $this->setDescription('Generate phone prefix data files');
@@ -24,7 +29,7 @@ class GeneratePhonePrefixDataCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $generatePhonePrefixData = new GeneratePhonePrefixData();
         $generatePhonePrefixData->start(
@@ -34,6 +39,6 @@ class GeneratePhonePrefixDataCommand extends Command
             $input->getOption('expandCountries')
         );
 
-        return 0;
+        return self::SUCCESS;
     }
 }

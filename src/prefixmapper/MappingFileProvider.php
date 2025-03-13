@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\prefixmapper;
 
 /**
@@ -13,20 +15,26 @@ namespace libphonenumber\prefixmapper;
  */
 class MappingFileProvider
 {
-    protected $map;
+    /**
+     * @var array<string,int[]>
+     */
+    protected array $map;
 
-    public function __construct($map)
+    /**
+     * @param array<string,int[]> $map
+     */
+    public function __construct(array $map)
     {
         $this->map = $map;
     }
 
-    public function getFileName($countryCallingCode, $language, $script, $region)
+    public function getFileName(string $countryCallingCode, string $language, string $script, string $region): string
     {
-        if (strlen($language) == 0) {
+        if ($language === '') {
             return '';
         }
 
-        if ($language === 'zh' && ($region == 'TW' || $region == 'HK' || $region == 'MO')) {
+        if ($language === 'zh' && ($region === 'TW' || $region === 'HK' || $region === 'MO')) {
             $language = 'zh_Hant';
         }
 
@@ -35,7 +43,7 @@ class MappingFileProvider
 
         for ($i = $prefixLength; $i > 0; $i--) {
             $prefix = substr($countryCallingCode, 0, $i);
-            if ($this->inMap($language, $prefix)) {
+            if ($this->inMap($language, (int) $prefix)) {
                 return $language . DIRECTORY_SEPARATOR . $prefix . '.php';
             }
         }
@@ -43,8 +51,8 @@ class MappingFileProvider
         return '';
     }
 
-    protected function inMap($language, $countryCallingCode)
+    protected function inMap(string $language, int $countryCallingCode): bool
     {
-        return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language]));
+        return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language], true));
     }
 }

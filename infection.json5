@@ -1,0 +1,28 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "src/data/",
+            "src/carrier/data/",
+            "src/geocoding/data/",
+            "src/AlternateFormatsCountryCodeSet.php",
+            "src/CountryCodeToRegionMap.php",
+            "src/CountryCodeToRegionCodeMapForTesting.php",
+            "src/RegionCode.php",
+        ],
+    },
+    "logs": {
+        "text": "infection.txt",
+        "stryker": {
+            "badge": "main"
+        }
+    },
+    "mutators": {
+        "@default": true
+    },
+    "minMsi": 76,
+    "minCoveredMsi": 82,
+}

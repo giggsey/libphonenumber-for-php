@@ -1,14 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Leniency;
 
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberMatcher;
 use libphonenumber\PhoneNumberUtil;
 
+/**
+ * @no-named-arguments
+ */
 class ExactGrouping extends AbstractLeniency
 {
-    protected static $level = 4;
+    protected static int $level = 4;
 
     /**
      * Phone numbers accepted are PhoneNumberUtil::isValidNumber() valid and are grouped
@@ -20,11 +25,8 @@ class ExactGrouping extends AbstractLeniency
      * Warning: This level might result in lower coverage especially for regions outside of country
      * code "+1". If you are not sure about which level to use, email the discussion group
      * libphonenumber-discuss@googlegroups.com.
-     *
-     * @param string $candidate
-     * @return bool
      */
-    public static function verify(PhoneNumber $number, $candidate, PhoneNumberUtil $util)
+    public static function verify(PhoneNumber $number, string $candidate, PhoneNumberUtil $util): bool
     {
         if (!$util->isValidNumber($number)
             || !PhoneNumberMatcher::containsOnlyValidXChars($number, $candidate, $util)
@@ -38,7 +40,7 @@ class ExactGrouping extends AbstractLeniency
             $number,
             $candidate,
             $util,
-            function (PhoneNumberUtil $util, PhoneNumber $number, $normalizedCandidate, $expectedNumberGroups) {
+            static function (PhoneNumberUtil $util, PhoneNumber $number, $normalizedCandidate, $expectedNumberGroups) {
                 return PhoneNumberMatcher::allNumberGroupsAreExactlyPresent(
                     $util,
                     $number,

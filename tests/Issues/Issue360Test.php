@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace libphonenumber\Tests\Issues;
 
 use libphonenumber\PhoneNumberUtil;
@@ -12,8 +14,8 @@ use PHPUnit\Framework\TestCase;
  */
 class Issue360Test extends TestCase
 {
-    public function testNullRegion()
+    public function testNullRegion(): void
     {
-        $this->assertTrue(PhoneNumberUtil::getInstance()->isPossibleNumber('+441174960123', null));
+        self::assertTrue(PhoneNumberUtil::getInstance()->isPossibleNumber('+441174960123', null));
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "giggsey/libphonenumber-for-php",
   "type": "library",
-  "description": "PHP Port of Google's libphonenumber",
+  "description": "A library for parsing, formatting, storing and validating international phone numbers, a PHP Port of Google's libphonenumber.",
   "keywords": [
     "phonenumber",
     "libphonenumber",
@@ -50,30 +50,36 @@
       ".editorconfig",
       ".gitattributes",
       ".gitignore",
-      ".styleci.yml",
-      ".travis.yml",
       "build.xml",
-      "libphonenumber-for-php.spec",
       "phpunit.xml.dist",
-      "phpunit",
+      "phpstan.neon.dist",
+      ".php-cs-fixer.dist.php",
+      "infection.json5",
       "src/CountryCodeToRegionCodeMapForTesting.php"
     ]
   },
   "require": {
-    "php": "^7.4|^8.0",
-    "giggsey/locale": "^2.0",
-    "symfony/polyfill-mbstring": "^1.17"
+    "php": "^8.1",
+    "giggsey/locale": "^2.7",
+    "symfony/polyfill-mbstring": "^1.31"
   },
   "require-dev": {
-    "phing/phing": "^3.0",
+    "ext-dom": "*",
+    "friendsofphp/php-cs-fixer": "^3.71",
+    "infection/infection": "^0.28.0",
+    "pear/pear-core-minimal": "^1.10.16",
+    "pear/pear_exception": "^1.0.2",
     "pear/versioncontrol_git": "^0.7",
-    "pear/pear-core-minimal": "^1.10",
-    "pear/pear_exception": "^1.0",
-    "phpunit/phpunit": "^9.6",
-    "symfony/console": "^v5.2",
-    "symfony/var-exporter": "^5.2",
-    "php-coveralls/php-coveralls": "^2.0",
-    "friendsofphp/php-cs-fixer": "^3.64"
+    "phing/phing": "^3.0.1",
+    "php-coveralls/php-coveralls": "^2.7",
+    "phpstan/extension-installer": "^1.4.3",
+    "phpstan/phpstan": "^2.1.7",
+    "phpstan/phpstan-deprecation-rules": "^2.0.1",
+    "phpstan/phpstan-phpunit": "^2.0.4",
+    "phpstan/phpstan-strict-rules": "^2.0.3",
+    "phpunit/phpunit": "^10.5.45",
+    "symfony/console": "^6.4.17",
+    "symfony/var-exporter": "^6.4.19"
   },
   "replace": {
     "giggsey/libphonenumber-for-php-lite": "self.version"
@@ -85,7 +91,15 @@
   },
   "scripts": {
     "cs": "vendor/bin/php-cs-fixer fix",
+    "phpstan": "vendor/bin/phpstan",
     "test": "vendor/bin/phpunit",
     "metadata": "vendor/bin/phing compile"
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "infection/extension-installer": true,
+      "phpstan/extension-installer": true
+    }
   }
 }
