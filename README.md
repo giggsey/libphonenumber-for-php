@@ -250,12 +250,6 @@ vendor/bin/phing compile
 
 This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.php](METADATA-VERSION.php).
 
-### Running tests
-
-This project uses [PHPUnit Bridge](https://symfony.com/doc/current/components/phpunit_bridge.html) to maintain compatibility for the supported PHP versions.
-
-To run the tests locally, run the `./phpunit` script.
-
 ## Integration with frameworks
 
 Other packages exist that integrate libphonenumber-for-php into frameworks.
