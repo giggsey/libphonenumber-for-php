@@ -139,14 +139,14 @@ class AsYouTypeFormatter
     private static function init(): void
     {
         if (self::$initialised === false) {
-            self::$initialised = true;
-
             self::$emptyMetadata = new PhoneMetadata();
             self::$emptyMetadata->setInternationalPrefix('NA');
 
             self::$eligibleFormatPattern = '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*'
                 . '\$1' . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*(\$\\d'
                 . '[' . PhoneNumberUtil::VALID_PUNCTUATION . ']*)*';
+
+            self::$initialised = true;
         }
     }
 
@@ -174,12 +174,9 @@ class AsYouTypeFormatter
         $countryCallingCode = $this->phoneUtil->getCountryCodeForRegion($regionCode);
         $mainCountry = $this->phoneUtil->getRegionCodeForCountryCode($countryCallingCode);
         $metadata = $this->phoneUtil->getMetadataForRegion($mainCountry);
-        if ($metadata !== null) {
-            return $metadata;
-        }
         // Set to a default instance of the metadata. This allows us to function with an incorrect
         // region code, even if the formatting only works for numbers specified with "+".
-        return self::$emptyMetadata;
+        return $metadata ?? self::$emptyMetadata;
     }
 
     /**

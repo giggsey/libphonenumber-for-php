@@ -422,31 +422,15 @@ class PhoneNumberUtil
      * <p>The {@link PhoneNumberUtil} is implemented as a singleton. Therefore calling getInstance
      * multiple times will only result in one instance being created.
      *
-     * @param array<int,string[]>|null $countryCallingCodeToRegionCodeMap
+     * @param array<int,string[]> $countryCallingCodeToRegionCodeMap
      * @return PhoneNumberUtil instance
      */
     public static function getInstance(
-        ?string                  $baseFileLocation = null,
-        ?array                   $countryCallingCodeToRegionCodeMap = null,
-        ?MetadataLoaderInterface $metadataLoader = null,
-        ?MetadataSourceInterface $metadataSource = null
+        string $metadataLocation = __NAMESPACE__ . '\data\PhoneNumberMetadata_',
+        array $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP,
     ): PhoneNumberUtil {
         if (!isset(static::$instance)) {
-            if ($countryCallingCodeToRegionCodeMap === null) {
-                $countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
-            }
-
-            if ($metadataLoader === null) {
-                $metadataLoader = new DefaultMetadataLoader();
-            }
-
-            if ($metadataSource === null) {
-                if ($baseFileLocation === null) {
-                    $baseFileLocation = __DIR__ . '/data/PhoneNumberMetadata';
-                }
-
-                $metadataSource = new MultiFileMetadataSourceImpl($metadataLoader, $baseFileLocation);
-            }
+            $metadataSource = new MultiFileMetadataSourceImpl($metadataLocation);
 
             static::$instance = new static($metadataSource, $countryCallingCodeToRegionCodeMap);
         }
@@ -1031,8 +1015,11 @@ class PhoneNumberUtil
         return PhoneNumberType::UNKNOWN;
     }
 
-    public function isNumberMatchingDesc(string $nationalNumber, PhoneNumberDesc $numberDesc): bool
+    protected function isNumberMatchingDesc(string $nationalNumber, ?PhoneNumberDesc $numberDesc): bool
     {
+        if ($numberDesc === null) {
+            return false;
+        }
         // Check if any possible number lengths are present; if so, we use them to avoid checking the
         // validation pattern if they don't match. If they are absent, this means they match the general
         // description, which we have already checked before checking a specific number type.
@@ -1135,7 +1122,7 @@ class PhoneNumberUtil
      * </code>
      *
      * Refer to the unit tests to see the difference between this function and
-     * {@link #getLengthOfGeographicalAreaCode}.
+     * {@see getLengthOfGeographicalAreaCode}.
      *
      * @param PhoneNumber $number the PhoneNumber object for which clients want to know the length of the NDC.
      * @return int the length of NDC of the PhoneNumber object passed in, which could be zero
@@ -1408,8 +1395,8 @@ class PhoneNumberUtil
      * Checks if the number is a valid vanity (alpha) number such as 800 MICROSOFT. A valid vanity
      * number will start with at least 3 digits and will have three or more alpha characters. This
      * does not do region-specific checks - to work out if this number is actually valid for a region,
-     * it should be parsed and methods such as {@link #isPossibleNumberWithReason} and
-     * {@link #isValidNumber} should be used.
+     * it should be parsed and methods such as {@see isPossibleNumberWithReason} and
+     * {@see isValidNumber} should be used.
      *
      * @param string $number the number that needs to be checked
      * @return bool true if the number is a valid vanity number
@@ -1489,7 +1476,7 @@ class PhoneNumberUtil
     }
 
     /**
-     * Parses a string and returns it in proto buffer format. This method differs from {@link #parse}
+     * Parses a string and returns it in proto buffer format. This method differs from {@see parse}
      * in that it always populates the raw_input field of the protocol buffer with numberToParse as
      * well as the country_code_source field.
      *
@@ -2504,7 +2491,7 @@ class PhoneNumberUtil
      * {@code preferredDomesticCarrierCode}, and the {@code fallbackCarrierCode} contains an empty
      * string, return the number in national format without any carrier code.
      *
-     * <p>Use {@link #formatNationalNumberWithCarrierCode} instead if the carrier code passed in
+     * <p>Use {@see formatNationalNumberWithCarrierCode} instead if the carrier code passed in
      * should take precedence over the number's {@code preferredDomesticCarrierCode} when formatting.
      *
      * @param PhoneNumber $number the phone number to be formatted
@@ -2990,7 +2977,7 @@ class PhoneNumberUtil
      * immediately exits with false. After this, the specific number pattern rules for the region are
      * examined. This is useful for determining for example whether a particular number is valid for
      * Canada, rather than just a valid NANPA number.
-     * Warning: In most cases, you want to use {@link #isValidNumber} instead. For example, this
+     * Warning: In most cases, you want to use {@see isValidNumber} instead. For example, this
      * method will mark numbers from British Crown dependencies such as the Isle of Man as invalid for
      * the region "GB" (United Kingdom), since it has its own region code, "IM", which may be
      * undesirable.
@@ -3027,7 +3014,7 @@ class PhoneNumberUtil
      *
      * <p> This method will throw a {@link NumberParseException} if the number is not considered to
      * be a possible number. Note that validation of whether the number is actually a valid number
-     * for a particular region is not performed. This can be done separately with {@link #isValidNumber}.
+     * for a particular region is not performed. This can be done separately with {@see isValidNumber}.
      *
      * <p> Note this method canonicalizes the phone number such that different representations can be
      * easily compared, no matter what form it was originally entered in (e.g. national,
@@ -3122,7 +3109,7 @@ class PhoneNumberUtil
      * @param $regionCode string the region for which an example number is needed
      * @return PhoneNumber a valid fixed-line number for the specified region. Returns null when the metadata
      *                     does not contain such information, or the region 001 is passed in. For 001 (representing
-     *                     non-geographical numbers), call {@link #getExampleNumberForNonGeoEntity} instead.
+     *                     non-geographical numbers), call {@see getExampleNumberForNonGeoEntity} instead.
      */
     public function getExampleNumber(string $regionCode): ?PhoneNumber
     {
@@ -3195,7 +3182,7 @@ class PhoneNumberUtil
      * @return PhoneNumber|null a valid number for the specified region and type. Returns null when the metadata
      *                          does not contain such information or if an invalid region or region 001 was entered.
      *                          For 001 (representing non-geographical numbers), call
-     *                          {@link #getExampleNumberForNonGeoEntity} instead.
+     *                          {@see getExampleNumberForNonGeoEntity} instead.
      *
      * If $regionCodeOrType is the only parameter supplied, then a valid number for the specified number type
      * will be returned that may belong to any country.
@@ -3467,9 +3454,9 @@ class PhoneNumberUtil
     /**
      * Check whether a phone number is a possible number given a number in the form of a string, and
      * the region where the number could be dialed from. It provides a more lenient check than
-     * {@link #isValidNumber}. See {@link #isPossibleNumber(PhoneNumber)} for details.
+     * {@see isValidNumber}. See {@see isPossibleNumber(PhoneNumber)} for details.
      *
-     * Convenience wrapper around {@link #isPossibleNumberWithReason}. Instead of returning the reason
+     * Convenience wrapper around {@see isPossibleNumberWithReason}. Instead of returning the reason
      * for failure, this method returns a bool value.
      * For failure, this method returns true if the number is either a possible fully-qualified number
      * (containing the area code and country code), or if the number could be a possible local number
@@ -3498,7 +3485,7 @@ class PhoneNumberUtil
         if (is_string($number)) {
             try {
                 return $this->isPossibleNumber($this->parse($number, $regionDialingFrom));
-            } catch (NumberParseException $e) {
+            } catch (NumberParseException) {
                 return false;
             }
         } else {
@@ -3511,7 +3498,7 @@ class PhoneNumberUtil
 
     /**
      * Check whether a phone number is a possible number. It provides a more lenient check than
-     * {@link #isValidNumber} in the following sense:
+     * {@see isValidNumber} in the following sense:
      * <ol>
      *   <li> It only checks the length of phone numbers. In particular, it doesn't check starting
      *        digits of the number.
@@ -3545,11 +3532,11 @@ class PhoneNumberUtil
     /**
      * Check whether a phone number is a possible number of a particular type. For types that don't
      * exist in a particular region, this will return a result that isn't so useful; it is recommended
-     * that you use {@link #getSupportedTypesForRegion} or {@link #getSupportedTypesForNonGeoEntity}
+     * that you use {@see getSupportedTypesForRegion} or {@see getSupportedTypesForNonGeoEntity}
      * respectively before calling this method to determine whether you should call it for this number
      * at all.
      *
-     * This provides a more lenient check than {@link #isValidNumber} in the following sense:
+     * This provides a more lenient check than {@see isValidNumber} in the following sense:
      *
      * <ol>
      *   <li> It only checks the length of phone numbers. In particular, it doesn't check starting

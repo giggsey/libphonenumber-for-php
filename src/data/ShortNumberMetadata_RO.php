@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,73 +7,48 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[18]\\d{2,5}',
-        'PossibleLength' => [
-            3,
-            4,
-            5,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '11(?:2|6\\d{3})',
-        'ExampleNumber' => '112',
-        'PossibleLength' => [
-            3,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'NationalNumberPattern' => '(?:1(?:18[39]|[24])|8[48])\\d\\d',
-        'ExampleNumber' => '1200',
-        'PossibleLength' => [
-            4,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '112',
-        'ExampleNumber' => '112',
-        'PossibleLength' => [
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '1(?:1(?:2|6(?:000|1(?:11|23))|8(?:(?:01|8[18])1|119|[23]00|932))|[24]\\d\\d|9(?:0(?:00|19)|1[19]|21|3[02]|5[178]))|8[48]\\d\\d',
-        'ExampleNumber' => '112',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'NationalNumberPattern' => '(?:1[24]|8[48])\\d\\d',
-        'ExampleNumber' => '1200',
-        'PossibleLength' => [
-            4,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'RO',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_RO extends PhoneMetadata
+{
+    protected const ID = 'RO';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[18]\d{2,5}')
+            ->setPossibleLength([3, 4, 5, 6]);
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('(?:1(?:18[39]|[24])|8[48])\d\d')
+            ->setExampleNumber('1200')
+            ->setPossibleLength([4, 6]);
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('11(?:2|6\d{3})')
+            ->setExampleNumber('112')
+            ->setPossibleLength([3, 6]);
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('112')
+            ->setExampleNumber('112')
+            ->setPossibleLength([3]);
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:1(?:2|6(?:000|1(?:11|23))|8(?:(?:01|8[18])1|119|[23]00|932))|[24]\d\d|9(?:0(?:00|19)|1[19]|21|3[02]|5[178]))|8[48]\d\d')
+            ->setExampleNumber('112');
+        $this->standard_rate = PhoneNumberDesc::empty();
+        $this->carrierSpecific = PhoneNumberDesc::empty();
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('(?:1[24]|8[48])\d\d')
+            ->setExampleNumber('1200')
+            ->setPossibleLength([4]);
+    }
+}

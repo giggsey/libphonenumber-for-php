@@ -17,8 +17,8 @@ class AsYouTypeFormatterTest extends TestCase
     {
         PhoneNumberUtil::resetInstance();
         $this->phoneUtil = PhoneNumberUtil::getInstance(
-            __DIR__ . '/data/PhoneNumberMetadataForTesting',
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
+            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_',
+            CountryCodeToRegionCodeMapForTesting::COUNTRY_CODE_TO_REGION_CODE_MAP_FOR_TESTING
         );
     }
 

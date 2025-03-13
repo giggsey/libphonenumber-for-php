@@ -120,10 +120,9 @@
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${git.path}/resources/PhoneNumberMetadataForTesting.xml"/>
             <arg value="${data.testCoreData}"/>
-            <arg value="PhoneNumberMetadataForTesting"/>
+            <arg value="libphonenumber\\Tests\\core\\data\\PhoneNumberMetadataForTesting"/>
             <arg value="CountryCodeToRegionCodeMapForTesting"/>
             <arg value="src/"/>
-            <arg value="false"/>
         </exec>
     </target>
 
@@ -149,10 +148,9 @@
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${git.path}/resources/PhoneNumberMetadata.xml"/>
             <arg value="${data.coreData}"/>
-            <arg value="PhoneNumberMetadata"/>
+            <arg value="libphonenumber\\data\\PhoneNumberMetadata"/>
             <arg value="CountryCodeToRegionCodeMap"/>
             <arg value="src/"/>
-            <arg value="false"/>
         </exec>
     </target>
 
@@ -161,10 +159,9 @@
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${git.path}/resources/ShortNumberMetadata.xml"/>
             <arg value="${data.coreData}"/>
-            <arg value="ShortNumberMetadata"/>
+            <arg value="libphonenumber\\data\\ShortNumberMetadata"/>
             <arg value="ShortNumbersRegionCodeSet"/>
             <arg value="src/"/>
-            <arg value="false"/>
         </exec>
     </target>
 
@@ -173,10 +170,9 @@
             <arg value="BuildMetadataPHPFromXML"/>
             <arg value="${git.path}/resources/PhoneNumberAlternateFormats.xml"/>
             <arg value="${data.coreData}"/>
-            <arg value="PhoneNumberAlternateFormats"/>
+            <arg value="libphonenumber\\data\\PhoneNumberAlternateFormats"/>
             <arg value="AlternateFormatsCountryCodeSet"/>
             <arg value="src/"/>
-            <arg value="false"/>
         </exec>
     </target>
 

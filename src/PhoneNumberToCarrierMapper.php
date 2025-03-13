@@ -77,7 +77,7 @@ class PhoneNumberToCarrierMapper
 
     /**
      * Gets the name of the carrier for the given phone number, in the language provided. As per
-     * {@link #getNameForValidNumber(PhoneNumber, Locale)} but explicitly checks the validity of
+     * {@see getNameForValidNumber(PhoneNumber, Locale)} but explicitly checks the validity of
      * the number passed in.
      *
      * @param PhoneNumber $number The phone number  for which we want to get a carrier name

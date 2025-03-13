@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,72 +7,48 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[04]\\d(?:\\d(?:\\d{2})?)?',
-        'PossibleLength' => [
-            2,
-            3,
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '0(?:0[1-3]|[1-3]|50)',
-        'ExampleNumber' => '01',
-        'PossibleLength' => [
-            2,
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '0(?:0[1-3]|[1-3]|50)',
-        'ExampleNumber' => '01',
-        'PossibleLength' => [
-            2,
-            3,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '0(?:0[1-3]|[1-3]|50)|45400',
-        'ExampleNumber' => '01',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'PossibleLength' => [
-            -1,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'NationalNumberPattern' => '454\\d\\d',
-        'ExampleNumber' => '45400',
-        'PossibleLength' => [
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'NationalNumberPattern' => '454\\d\\d',
-        'ExampleNumber' => '45400',
-        'PossibleLength' => [
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'UZ',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_UZ extends PhoneMetadata
+{
+    protected const ID = 'UZ';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[04]\d(?:\d(?:\d{2})?)?')
+            ->setPossibleLength([2, 3, 5]);
+        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('0(?:0[1-3]|[1-3]|50)')
+            ->setExampleNumber('01')
+            ->setPossibleLength([2, 3]);
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('0(?:0[1-3]|[1-3]|50)')
+            ->setExampleNumber('01')
+            ->setPossibleLength([2, 3]);
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('0(?:0[1-3]|[1-3]|50)|45400')
+            ->setExampleNumber('01');
+        $this->standard_rate = PhoneNumberDesc::empty();
+        $this->carrierSpecific = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('454\d\d')
+            ->setExampleNumber('45400')
+            ->setPossibleLength([5]);
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('454\d\d')
+            ->setExampleNumber('45400')
+            ->setPossibleLength([5]);
+    }
+}

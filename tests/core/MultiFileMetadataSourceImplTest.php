@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace libphonenumber\Tests\core;
 
-use libphonenumber\DefaultMetadataLoader;
 use libphonenumber\MultiFileMetadataSourceImpl;
 use libphonenumber\PhoneNumberUtil;
 use PHPUnit\Framework\TestCase;
@@ -17,8 +16,7 @@ class MultiFileMetadataSourceImplTest extends TestCase
     public function setUp(): void
     {
         $this->multiFileMetadataSource = new MultiFileMetadataSourceImpl(
-            new DefaultMetadataLoader(),
-            __DIR__ . '/data/PhoneNumberMetadataForTesting'
+            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_',
         );
     }
 
@@ -29,11 +27,11 @@ class MultiFileMetadataSourceImplTest extends TestCase
         // do is make sure the exception has the file name in it.
 
         try {
-            $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1, new DefaultMetadataLoader());
+            $this->multiFileMetadataSource->loadMetadataFromFile('no/such/file', 'XX', -1);
             self::fail('Expected Exception');
         } catch (RuntimeException $e) {
             self::assertStringContainsString(
-                'no/such/file_XX',
+                'missing metadata: no/such/fileXX',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
             );
@@ -44,12 +42,11 @@ class MultiFileMetadataSourceImplTest extends TestCase
                 'no/such/file',
                 PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY,
                 123,
-                new DefaultMetadataLoader()
             );
             self::fail('Expected Exception');
         } catch (RuntimeException $e) {
             self::assertStringContainsString(
-                'no/such/file_123',
+                'missing metadata: no/such/file123',
                 $e->getMessage(),
                 'Unexpected error: ' . $e->getMessage()
             );

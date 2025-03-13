@@ -5,13 +5,13 @@
             "src"
         ],
         "excludes": [
-            "src/data/",
-            "src/carrier/data/",
-            "src/geocoding/data/",
-            "src/AlternateFormatsCountryCodeSet.php",
-            "src/CountryCodeToRegionMap.php",
-            "src/CountryCodeToRegionCodeMapForTesting.php",
-            "src/RegionCode.php",
+            "data/",
+            "carrier/data/",
+            "geocoding/data/",
+            "AlternateFormatsCountryCodeSet.php",
+            "CountryCodeToRegionMap.php",
+            "CountryCodeToRegionCodeMapForTesting.php",
+            "RegionCode.php",
         ],
     },
     "logs": {
