@@ -40,7 +40,7 @@ class PhoneNumberToCarrierMapper
      */
     public static function getInstance(?string $mappingNamespace = __NAMESPACE__ . '\\carrier\\data\\'): PhoneNumberToCarrierMapper
     {
-        if (!array_key_exists($mappingNamespace, static::$instance)) {
+        if (!isset(static::$instance[$mappingNamespace])) {
             static::$instance[$mappingNamespace] = new static($mappingNamespace);
         }
 

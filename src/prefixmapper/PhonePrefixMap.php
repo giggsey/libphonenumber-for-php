@@ -55,7 +55,7 @@ class PhonePrefixMap
         }
 
         while ($key !== '') {
-            if (array_key_exists($key, $this->phonePrefixMapStorage)) {
+            if (isset($this->phonePrefixMapStorage[$key])) {
                 return $this->phonePrefixMapStorage[$key];
             }
 

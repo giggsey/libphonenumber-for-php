@@ -42,7 +42,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
     {
         $regionCode = strtoupper($regionCode);
 
-        if (!array_key_exists($regionCode, $this->regionToMetadataMap)) {
+        if (!isset($this->regionToMetadataMap[$regionCode])) {
             // The regionCode here will be valid and won't be '001', so we don't need to worry about
             // what to pass in for the country calling code.
             $this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
@@ -53,7 +53,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
 
     public function getMetadataForNonGeographicalRegion(int $countryCallingCode): PhoneMetadata
     {
-        if (!array_key_exists($countryCallingCode, $this->countryCodeToNonGeographicalMetadataMap)) {
+        if (!isset($this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode])) {
             $this->loadMetadataFromFile($this->currentFilePrefix, PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode);
         }
 

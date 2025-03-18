@@ -1385,7 +1385,7 @@ class PhoneNumberUtil
             static::initMobileTokenMappings();
         }
 
-        if (array_key_exists((string) $countryCallingCode, static::$MOBILE_TOKEN_MAPPINGS)) {
+        if (isset(static::$MOBILE_TOKEN_MAPPINGS[(string) $countryCallingCode])) {
             return static::$MOBILE_TOKEN_MAPPINGS[(string) $countryCallingCode];
         }
         return '';
@@ -2083,7 +2083,7 @@ class PhoneNumberUtil
         }
         foreach ($numberAsArray as $character) {
             // Check if we are in the unicode number range
-            if (array_key_exists($character, static::$numericCharacters)) {
+            if (isset(static::$numericCharacters[$character])) {
                 $normalizedDigits .= static::$numericCharacters[$character];
             } elseif (is_numeric($character)) {
                 $normalizedDigits .= $character;

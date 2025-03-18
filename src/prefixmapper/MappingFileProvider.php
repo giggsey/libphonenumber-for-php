@@ -53,6 +53,6 @@ class MappingFileProvider
 
     protected function inMap(string $language, int $countryCallingCode): bool
     {
-        return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language], true));
+        return (isset($this->map[$language]) && in_array($countryCallingCode, $this->map[$language], true));
     }
 }
