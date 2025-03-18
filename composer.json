@@ -79,8 +79,7 @@
     "phpstan/phpstan-phpunit": "^2.0.4",
     "phpstan/phpstan-strict-rules": "^2.0.3",
     "phpunit/phpunit": "^10.5.45",
-    "symfony/console": "^6.4.17",
-    "symfony/var-exporter": "^6.4.19"
+    "symfony/console": "^6.4.17"
   },
   "replace": {
     "giggsey/libphonenumber-for-php-lite": "self.version"

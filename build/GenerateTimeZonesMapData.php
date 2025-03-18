@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace libphonenumber\buildtools;
 
-use libphonenumber\PhoneNumberToTimeZonesMapper;
-use Symfony\Component\VarExporter\VarExporter;
+use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PsrPrinter;
 use RuntimeException;
 
 use function explode;
@@ -34,7 +34,7 @@ class GenerateTimeZonesMapData
         EOT;
     private string $inputTextFile;
 
-    public function __construct(string $inputFile, string $outputDir)
+    public function __construct(string $inputFile, string $outputDir, string $outputNamespace)
     {
         $this->inputTextFile = $inputFile;
 
@@ -43,7 +43,7 @@ class GenerateTimeZonesMapData
         }
 
         $data = $this->parseTextFile();
-        $this->writeMappingFile($outputDir, $data);
+        $this->writeMappingFile($outputDir, $outputNamespace, $data);
     }
 
     /**
@@ -85,15 +85,26 @@ class GenerateTimeZonesMapData
     /**
      * @param array<string,string> $data
      */
-    private function writeMappingFile(string $outputFile, array $data): void
+    private function writeMappingFile(string $outputFile, string $outputNamespace, array $data): void
     {
-        $phpSource = '<?php' . PHP_EOL
-            . self::GENERATION_COMMENT
-            . 'return ' . VarExporter::export($data) . ';'
-            . PHP_EOL;
+        $mappingClass = 'Map';
 
-        $outputPath = $outputFile . DIRECTORY_SEPARATOR . PhoneNumberToTimeZonesMapper::MAPPING_DATA_FILE_NAME;
+        $file = new PhpFile();
+        $file->setStrictTypes();
+        $file->addComment(self::GENERATION_COMMENT);
 
-        file_put_contents($outputPath, $phpSource);
+        $namespace = $file->addNamespace($outputNamespace);
+
+        $class = $namespace->addClass($mappingClass);
+        $class->addComment('@internal');
+
+        $constant = $class->addConstant('DATA', $data);
+        $constant->setPublic();
+
+        $printer = new PsrPrinter();
+
+        $outputPath = $outputFile . DIRECTORY_SEPARATOR . $mappingClass . '.php';
+
+        file_put_contents($outputPath, $printer->printFile($file));
     }
 }

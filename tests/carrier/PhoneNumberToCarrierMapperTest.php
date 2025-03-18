@@ -78,7 +78,7 @@ class PhoneNumberToCarrierMapperTest extends TestCase
 
     public function setUp(): void
     {
-        $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(__DIR__ . '/../carrier/data/');
+        $this->carrierMapper = PhoneNumberToCarrierMapper::getInstance(__NAMESPACE__ . '\\data\\');
     }
 
     public function testGetNameForMobilePortableRegion(): void

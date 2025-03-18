@@ -26,13 +26,9 @@ class PhoneNumberToCarrierMapper
     protected PhoneNumberUtil $phoneUtil;
     protected PrefixFileReader $prefixFileReader;
 
-    protected function __construct(?string $phonePrefixDataDirectory)
+    protected function __construct(string $phonePrefixDataNamespace)
     {
-        if ($phonePrefixDataDirectory === null) {
-            $phonePrefixDataDirectory = __DIR__ . '/carrier/data/';
-        }
-
-        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataNamespace);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
     }
 
@@ -42,13 +38,13 @@ class PhoneNumberToCarrierMapper
      * <p> The {@link PhoneNumberToCarrierMapper} is implemented as a singleton. Therefore, calling
      * this method multiple times will only result in one instance being created.
      */
-    public static function getInstance(?string $mappingDir = null): PhoneNumberToCarrierMapper
+    public static function getInstance(?string $mappingNamespace = __NAMESPACE__ . '\\carrier\\data\\'): PhoneNumberToCarrierMapper
     {
-        if (!array_key_exists($mappingDir, static::$instance)) {
-            static::$instance[$mappingDir] = new static($mappingDir);
+        if (!array_key_exists($mappingNamespace, static::$instance)) {
+            static::$instance[$mappingNamespace] = new static($mappingNamespace);
         }
 
-        return static::$instance[$mappingDir];
+        return static::$instance[$mappingNamespace];
     }
 
     /**

@@ -14,6 +14,7 @@ namespace libphonenumber;
 use libphonenumber\prefixmapper\PrefixTimeZonesMap;
 use InvalidArgumentException;
 
+use libphonenumber\timezone\data\Map;
 use function count;
 use function is_readable;
 
@@ -24,7 +25,13 @@ use function is_readable;
 class PhoneNumberToTimeZonesMapper
 {
     public const UNKNOWN_TIMEZONE = 'Etc/Unknown';
+    /**
+     * @internal
+     */
     public const MAPPING_DATA_DIRECTORY = '/timezone/data/';
+    /**
+     * @internal
+     */
     public const MAPPING_DATA_FILE_NAME = 'map_data.php';
     protected static ?PhoneNumberToTimeZonesMapper $instance;
     /**
@@ -34,25 +41,16 @@ class PhoneNumberToTimeZonesMapper
     protected PhoneNumberUtil $phoneUtil;
     protected PrefixTimeZonesMap $prefixTimeZonesMap;
 
-    protected function __construct(string $phonePrefixDataDirectory)
+    protected function __construct(string $className)
     {
-        $this->prefixTimeZonesMap = static::loadPrefixTimeZonesMapFromFile(
-            __DIR__ . $phonePrefixDataDirectory . DIRECTORY_SEPARATOR . static::MAPPING_DATA_FILE_NAME
-        );
+        if (!class_exists($className)) {
+            throw new InvalidArgumentException('Mapping class can not be found');
+        }
+
+        $this->prefixTimeZonesMap = new PrefixTimeZonesMap($className::DATA);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
         $this->unknownTimeZoneList[] = static::UNKNOWN_TIMEZONE;
-    }
-
-    protected static function loadPrefixTimeZonesMapFromFile(string $path): PrefixTimeZonesMap
-    {
-        if (!is_readable($path)) {
-            throw new InvalidArgumentException('Mapping file can not be found');
-        }
-
-        $data = require $path;
-
-        return new PrefixTimeZonesMap($data);
     }
 
     /**
@@ -63,10 +61,10 @@ class PhoneNumberToTimeZonesMapper
      *
      * @return PhoneNumberToTimeZonesMapper instance
      */
-    public static function getInstance(string $mappingDir = self::MAPPING_DATA_DIRECTORY): PhoneNumberToTimeZonesMapper
+    public static function getInstance(string $className = Map::class): PhoneNumberToTimeZonesMapper
     {
         if (!isset(static::$instance)) {
-            static::$instance = new static($mappingDir);
+            static::$instance = new static($className);
         }
 
         return static::$instance;

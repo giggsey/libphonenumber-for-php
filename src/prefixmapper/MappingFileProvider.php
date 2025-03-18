@@ -44,7 +44,7 @@ class MappingFileProvider
         for ($i = $prefixLength; $i > 0; $i--) {
             $prefix = substr($countryCallingCode, 0, $i);
             if ($this->inMap($language, (int) $prefix)) {
-                return $language . DIRECTORY_SEPARATOR . $prefix . '.php';
+                return $language . '\\' . ucfirst($language) . '_' . $prefix;
             }
         }
 

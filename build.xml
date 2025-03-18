@@ -10,13 +10,19 @@
 
     <property name="data.testCoreData" value="tests/core/data/"/>
     <property name="data.testPrefixMapperData" value="tests/prefixmapper/data/"/>
+    <property name="data.testPrefixMapperNamespace" value="libphonenumber\\Tests\\prefixmapper\\data"/>
     <property name="data.testCarrierData" value="tests/carrier/data/"/>
+    <property name="data.testCarrierNamespace" value="libphonenumber\\Tests\\carrier\\data"/>
     <property name="data.testTimezoneData" value="tests/timezone/data/"/>
+    <property name="data.testTimezoneNamespace" value="libphonenumber\\Tests\\timezone\\data"/>
 
     <property name="data.coreData" value="src/data/"/>
     <property name="data.carrierData" value="src/carrier/data/"/>
+    <property name="data.carrierNamespace" value="libphonenumber\\carrier\\data"/>
     <property name="data.geocodingData" value="src/geocoding/data/"/>
+    <property name="data.geocodingNamespace" value="libphonenumber\\geocoding\\data"/>
     <property name="data.timezoneData" value="src/timezone/data/"/>
+    <property name="data.timezoneNamespace" value="libphonenumber\\timezone\\data"/>
 
 
     <target name="test" description="Run unit tests" depends="compile-test-data">
@@ -131,6 +137,7 @@
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${git.path}/resources/test/geocoding/"/>
             <arg value="${data.testPrefixMapperData}"/>
+            <arg value="${data.testPrefixMapperNamespace}"/>
         </exec>
     </target>
 
@@ -139,6 +146,7 @@
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${git.path}/resources/test/carrier/"/>
             <arg value="${data.testCarrierData}"/>
+            <arg value="${data.testCarrierNamespace}"/>
         </exec>
     </target>
 
@@ -181,6 +189,7 @@
             <arg value="GeneratePhonePrefixData"/>
             <arg value="${git.path}/resources/carrier/"/>
             <arg value="${data.carrierData}"/>
+            <arg value="${data.carrierNamespace}"/>
         </exec>
     </target>
 
@@ -190,6 +199,7 @@
             <arg line="--expandCountries"/>
             <arg value="${git.path}/resources/geocoding/"/>
             <arg value="${data.geocodingData}"/>
+            <arg value="${data.geocodingNamespace}"/>
         </exec>
     </target>
 
@@ -198,6 +208,7 @@
             <arg value="GenerateTimeZonesMapData"/>
             <arg value="${git.path}/resources/timezones/map_data.txt"/>
             <arg value="${data.timezoneData}"/>
+            <arg value="${data.timezoneNamespace}"/>
         </exec>
     </target>
 
@@ -206,6 +217,7 @@
             <arg value="GenerateTimeZonesMapData"/>
             <arg value="${git.path}/resources/test/timezones/map_data.txt"/>
             <arg value="${data.testTimezoneData}"/>
+            <arg value="${data.testTimezoneNamespace}"/>
         </exec>
     </target>
 

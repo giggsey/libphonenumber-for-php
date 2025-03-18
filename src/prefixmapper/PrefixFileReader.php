@@ -16,7 +16,7 @@ use InvalidArgumentException;
  */
 class PrefixFileReader
 {
-    protected string $phonePrefixDataDirectory;
+    protected string $phonePrefixDataNamespace;
     /**
      * The mappingFileProvider knows for which combination of countryCallingCode and language a phone
      * prefix mapping file is available in the file system, so that a file can be loaded when needed.
@@ -29,20 +29,21 @@ class PrefixFileReader
      */
     protected array $availablePhonePrefixMaps = [];
 
-    public function __construct(string $phonePrefixDataDirectory)
+    public function __construct(string $phonePrefixDataNamespace)
     {
-        $this->phonePrefixDataDirectory = $phonePrefixDataDirectory;
+        $this->phonePrefixDataNamespace = $phonePrefixDataNamespace;
         $this->loadMappingFileProvider();
     }
 
     protected function loadMappingFileProvider(): void
     {
-        $mapPath = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . 'Map.php';
-        if (!file_exists($mapPath)) {
-            throw new InvalidArgumentException("Invalid data directory: $mapPath");
+        $mapClass = $this->phonePrefixDataNamespace . 'Map';
+
+        if (!class_exists($mapClass)) {
+            throw new InvalidArgumentException("Unable to find mapping class: $mapClass");
         }
 
-        $map = require $mapPath;
+        $map = $mapClass::DATA;
 
         $this->mappingFileProvider = new MappingFileProvider($map);
     }
@@ -63,12 +64,12 @@ class PrefixFileReader
 
     protected function loadPhonePrefixMapFromFile(string $fileName): void
     {
-        $path = $this->phonePrefixDataDirectory . DIRECTORY_SEPARATOR . $fileName;
-        if (!file_exists($path)) {
+        $path = $this->phonePrefixDataNamespace . $fileName;
+        if (!class_exists($path)) {
             throw new InvalidArgumentException('Data does not exist');
         }
 
-        $map = require $path;
+        $map = $path::DATA;
         $areaCodeMap = new PhonePrefixMap($map);
 
         $this->availablePhonePrefixMaps[$fileName] = $areaCodeMap;

@@ -84,7 +84,7 @@ class PhoneNumberOfflineGeocoderTest extends TestCase
     public function setUp(): void
     {
         PhoneNumberOfflineGeocoder::resetInstance();
-        $this->geocoder = PhoneNumberOfflineGeocoder::getInstance(__DIR__ . '/../prefixmapper/data/');
+        $this->geocoder = PhoneNumberOfflineGeocoder::getInstance('libphonenumber\\Tests\\prefixmapper\\data\\');
     }
 
     public function testGetDescriptionForNumberWithNoDataFile(): void
