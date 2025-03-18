@@ -13,10 +13,9 @@ namespace libphonenumber;
 
 use libphonenumber\prefixmapper\PrefixTimeZonesMap;
 use InvalidArgumentException;
-
 use libphonenumber\timezone\data\Map;
+
 use function count;
-use function is_readable;
 
 /**
  * @phpstan-consistent-constructor
