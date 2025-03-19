@@ -50,7 +50,6 @@
       ".editorconfig",
       ".gitattributes",
       ".gitignore",
-      "build.xml",
       "phpunit.xml.dist",
       "phpstan.neon.dist",
       ".php-cs-fixer.dist.php",
@@ -68,10 +67,6 @@
     "friendsofphp/php-cs-fixer": "^3.71",
     "infection/infection": "^0.28.0",
     "nette/php-generator": "^4.1",
-    "pear/pear-core-minimal": "^1.10.16",
-    "pear/pear_exception": "^1.0.2",
-    "pear/versioncontrol_git": "^0.7",
-    "phing/phing": "^3.0.1",
     "php-coveralls/php-coveralls": "^2.7",
     "phpstan/extension-installer": "^1.4.3",
     "phpstan/phpstan": "^2.1.7",
@@ -79,21 +74,29 @@
     "phpstan/phpstan-phpunit": "^2.0.4",
     "phpstan/phpstan-strict-rules": "^2.0.3",
     "phpunit/phpunit": "^10.5.45",
-    "symfony/console": "^6.4.17"
+    "symfony/console": "^6.4",
+    "symfony/filesystem": "^6.4",
+    "symfony/process": "^6.4"
   },
   "replace": {
     "giggsey/libphonenumber-for-php-lite": "self.version"
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "8.x-dev"
+      "dev-master": "9.x-dev"
     }
   },
   "scripts": {
     "cs": "vendor/bin/php-cs-fixer fix",
     "phpstan": "vendor/bin/phpstan",
     "test": "vendor/bin/phpunit",
-    "metadata": "vendor/bin/phing compile"
+    "metadata": "@php build/build.php build",
+    "build": [
+      "@metadata",
+      "@cs",
+      "@test",
+      "@phpstan"
+    ]
   },
   "config": {
     "sort-packages": true,

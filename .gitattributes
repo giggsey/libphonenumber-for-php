@@ -5,7 +5,6 @@ tests/ export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .php-cs-fixer.dist.php export-ignore
-build.xml export-ignore
 phpunit.xml.dist export-ignore
 .github/ export-ignore
 src/CountryCodeToRegionCodeMapForTesting.php export-ignore
