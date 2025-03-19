@@ -60,7 +60,7 @@ class PhoneNumberMetadata_GF extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9(?:(?:396|76\d)\d|476[0-5])\d{4}')
+            ->setNationalNumberPattern('9(?:(?:396|76\d)\d|476[0-6])\d{4}')
             ->setExampleNumber('976012345');
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();

@@ -40,7 +40,7 @@ class PhoneNumberAlternateFormats_385 extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[2-69]|76'])
+                ->setLeadingDigitsPattern(['[2-69]|7[67]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{4})')

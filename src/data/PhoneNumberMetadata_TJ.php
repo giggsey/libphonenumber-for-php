@@ -33,7 +33,7 @@ class PhoneNumberMetadata_TJ extends PhoneMetadata
             ->setPossibleLengthLocalOnly([3, 5, 6, 7])
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:33[03-9]|4(?:1[18]|4[02-479])|81[1-9])\d{6}|(?:[09]\d|1[0178]|2[02]|[34]0|5[05]|7[01578]|8[078])\d{7}')
+            ->setNationalNumberPattern('(?:33[03-9]|4(?:1[18]|4[02-479])|81[1-9])\d{6}|(?:[09]\d|1[0-27-9]|2[0-27]|[34]0|5[05]|7[01578]|8[078])\d{7}')
             ->setExampleNumber('917123456');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
