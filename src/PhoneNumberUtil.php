@@ -1054,9 +1054,9 @@ class PhoneNumberUtil
         }
 
         return $phoneNumberObjOrType === PhoneNumberType::FIXED_LINE
-        || $phoneNumberObjOrType === PhoneNumberType::FIXED_LINE_OR_MOBILE
-        || (in_array($countryCallingCode, static::$GEO_MOBILE_COUNTRIES, true)
-            && $phoneNumberObjOrType === PhoneNumberType::MOBILE);
+            || $phoneNumberObjOrType === PhoneNumberType::FIXED_LINE_OR_MOBILE
+            || (in_array($countryCallingCode, static::$GEO_MOBILE_COUNTRIES, true)
+                && $phoneNumberObjOrType === PhoneNumberType::MOBILE);
     }
 
     /**
@@ -1189,6 +1189,10 @@ class PhoneNumberUtil
         $formattedNumber = '';
         $countryCallingCode = $number->getCountryCode();
         $nationalSignificantNumber = $this->getNationalSignificantNumber($number);
+
+        if ($countryCallingCode === null) {
+            return $nationalSignificantNumber;
+        }
 
         if ($numberFormat === PhoneNumberFormat::E164) {
             // Early exit for E164 case (even if the country calling code is invalid) since no formatting
@@ -2983,6 +2987,9 @@ class PhoneNumberUtil
     public function isValidNumberForRegion(PhoneNumber $number, ?string $regionCode): bool
     {
         $countryCode = $number->getCountryCode();
+        if ($countryCode === null) {
+            return false;
+        }
         $metadata = $this->getMetadataForRegionOrCallingCode($countryCode, $regionCode);
         if (($metadata === null) ||
             (static::REGION_CODE_FOR_NON_GEO_ENTITY !== $regionCode &&
@@ -3013,8 +3020,8 @@ class PhoneNumberUtil
      * <p> Note this method canonicalizes the phone number such that different representations can be
      * easily compared, no matter what form it was originally entered in (e.g. national,
      * international). If you want to record context about the number being parsed, such as the raw
-     * input that was entered, how the country code was derived etc. then call {@link
-     * #parseAndKeepRawInput} instead.
+     * input that was entered, how the country code was derived etc. then call {@see parseAndKeepRawInput}
+     * instead.
      *
      * @param string $numberToParse number that we are attempting to parse. This can contain formatting
      *                              such as +, ( and -, as well as a phone number extension.
