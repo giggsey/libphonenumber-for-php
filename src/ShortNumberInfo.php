@@ -24,17 +24,9 @@ class ShortNumberInfo
 {
     protected static ?ShortNumberInfo $instance;
     /**
-     * @var array<string,PhoneMetadata>
-     */
-    protected array $regionToMetadataMap = [];
-    /**
      * @var array<int,string[]>
      */
     protected array $countryCallingCodeToRegionCodeMap = [];
-    /**
-     * @var array<int,PhoneMetadata>
-     */
-    protected array $countryCodeToNonGeographicalMetadataMap = [];
     /**
      * @var string[]
      */

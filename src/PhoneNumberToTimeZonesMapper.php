@@ -24,14 +24,6 @@ use function count;
 class PhoneNumberToTimeZonesMapper
 {
     public const UNKNOWN_TIMEZONE = 'Etc/Unknown';
-    /**
-     * @internal
-     */
-    public const MAPPING_DATA_DIRECTORY = '/timezone/data/';
-    /**
-     * @internal
-     */
-    public const MAPPING_DATA_FILE_NAME = 'map_data.php';
     protected static ?PhoneNumberToTimeZonesMapper $instance;
     /**
      * @var string[]

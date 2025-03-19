@@ -364,13 +364,7 @@ class PhoneNumberMatcher implements Iterator
 
         // Try to come up with a valid match given the entire candidate.
         $match = $this->parseAndVerify($candidate, $offset);
-        if ($match !== null) {
-            return $match;
-        }
-
-        // If that failed, try to find an "inner match" - there might be a phone number within this
-        // candidate.
-        return $this->extractInnerMatch($candidate, $offset);
+        return $match ?? $this->extractInnerMatch($candidate, $offset);
     }
 
     /**
@@ -469,7 +463,7 @@ class PhoneNumberMatcher implements Iterator
                 $number->clearPreferredDomesticCarrierCode();
                 return new PhoneNumberMatch($offset, $candidate, $number);
             }
-        } catch (NumberParseException $e) {
+        } catch (NumberParseException) {
             // ignore and continue
         }
         return null;
@@ -749,7 +743,7 @@ class PhoneNumberMatcher implements Iterator
             $rawInput = $rawInputCopy;
             // Check if we found a national prefix and/or carrier code at the start of the raw input, and
             // return the result.
-            $carrierCode = null;
+            $carrierCode = '';
             return $util->maybeStripNationalPrefixAndCarrierCode($rawInput, $metadata, $carrierCode);
         }
         return true;
