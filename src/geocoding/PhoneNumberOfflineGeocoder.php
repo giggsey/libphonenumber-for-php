@@ -28,15 +28,11 @@ class PhoneNumberOfflineGeocoder
     /**
      * PhoneNumberOfflineGeocoder constructor.
      */
-    protected function __construct(?string $phonePrefixDataDirectory)
+    protected function __construct(string $phonePrefixDataNamespace)
     {
         $this->phoneUtil = PhoneNumberUtil::getInstance();
 
-        if ($phonePrefixDataDirectory === null) {
-            $phonePrefixDataDirectory = __DIR__ . '/data/';
-        }
-
-        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataDirectory);
+        $this->prefixFileReader = new PrefixFileReader($phonePrefixDataNamespace);
     }
 
     /**
@@ -45,12 +41,12 @@ class PhoneNumberOfflineGeocoder
      * The PhoneNumberOfflineGeocoder is implemented as a singleton. Therefore, calling this method
      * multiple times will only result in one instance being created.
      *
-     * @param string|null $mappingDir (Optional) Mapping Data Directory
+     * @param string $mappingNamespace (Optional) Mapping Data Namespace
      */
-    public static function getInstance(?string $mappingDir = null): PhoneNumberOfflineGeocoder
+    public static function getInstance(string $mappingNamespace = __NAMESPACE__ . '\\data\\'): PhoneNumberOfflineGeocoder
     {
         if (!isset(static::$instance)) {
-            static::$instance = new static($mappingDir);
+            static::$instance = new static($mappingNamespace);
         }
 
         return static::$instance;
@@ -187,7 +183,7 @@ class PhoneNumberOfflineGeocoder
                 $region = $this->phoneUtil->getRegionCodeForCountryCode($number->getCountryCode());
                 try {
                     $copiedNumber = $this->phoneUtil->parse($nationalNumber, $region);
-                } catch (NumberParseException $e) {
+                } catch (NumberParseException) {
                     // If this happens, just reuse what we had.
                     $copiedNumber = $number;
                 }

@@ -31,13 +31,17 @@
   </testsuites>
   <source>
     <include>
+      <directory suffix=".php">./bin/</directory>
       <directory suffix=".php">./src/</directory>
     </include>
     <exclude>
+      <directory suffix=".php">./build/Commands/</directory>
       <directory suffix=".php">./src/data/</directory>
       <directory suffix=".php">./src/carrier/data/</directory>
       <directory suffix=".php">./src/geocoding/data/</directory>
       <directory suffix=".php">./src/timezone/data/</directory>
+      <file>./build/build.php</file>
+      <file>./build/BuildApplication.php</file>
       <file>./src/AlternateFormatsCountryCodeSet.php</file>
       <file>./src/CountryCodeToRegionCodeMap.php</file>
       <file>./src/CountryCodeToRegionCodeMapForTesting.php</file>

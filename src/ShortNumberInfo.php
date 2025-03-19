@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace libphonenumber;
 
-use Exception;
+use RuntimeException;
 
 /**
  * @phpstan-consistent-constructor
@@ -23,20 +23,10 @@ use Exception;
 class ShortNumberInfo
 {
     protected static ?ShortNumberInfo $instance;
-    protected MatcherAPIInterface $matcherAPI;
-    protected string $currentFilePrefix;
-    /**
-     * @var array<string,PhoneMetadata>
-     */
-    protected array $regionToMetadataMap = [];
     /**
      * @var array<int,string[]>
      */
     protected array $countryCallingCodeToRegionCodeMap = [];
-    /**
-     * @var array<int,PhoneMetadata>
-     */
-    protected array $countryCodeToNonGeographicalMetadataMap = [];
     /**
      * @var string[]
      */
@@ -46,14 +36,12 @@ class ShortNumberInfo
         'NI',
     ];
 
-    protected function __construct(MatcherAPIInterface $matcherAPI)
-    {
-        $this->matcherAPI = $matcherAPI;
-
+    protected function __construct(
+        protected MatcherAPIInterface $matcherAPI,
+        protected MetadataSourceInterface $metadataSource = new MultiFileMetadataSourceImpl(__NAMESPACE__ . '\data\ShortNumberMetadata_'),
+    ) {
         // TODO: Create ShortNumberInfo for a given map
-        $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::$countryCodeToRegionCodeMap;
-
-        $this->currentFilePrefix = __DIR__ . '/data/ShortNumberMetadata';
+        $this->countryCallingCodeToRegionCodeMap = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP;
 
         // Initialise PhoneNumberUtil to make sure regex's are setup correctly
         PhoneNumberUtil::getInstance();
@@ -108,7 +96,7 @@ class ShortNumberInfo
      */
     public function getSupportedRegions(): array
     {
-        return ShortNumbersRegionCodeSet::$shortNumbersRegionCodeSet;
+        return ShortNumbersRegionCodeSet::SHORT_NUMBERS_REGION_CODE_SET;
     }
 
     /**
@@ -137,36 +125,14 @@ class ShortNumberInfo
     {
         $regionCode = strtoupper($regionCode);
 
-        if (!in_array($regionCode, ShortNumbersRegionCodeSet::$shortNumbersRegionCodeSet, true)) {
+        if (!in_array($regionCode, ShortNumbersRegionCodeSet::SHORT_NUMBERS_REGION_CODE_SET, true)) {
             return null;
         }
 
-        if (!isset($this->regionToMetadataMap[$regionCode])) {
-            // The regionCode here will be valid and won't be '001', so we don't need to worry about
-            // what to pass in for the country calling code.
-            $this->loadMetadataFromFile($this->currentFilePrefix, $regionCode, 0);
-        }
-
-        return $this->regionToMetadataMap[$regionCode] ?? null;
-    }
-
-    protected function loadMetadataFromFile(string $filePrefix, string $regionCode, int $countryCallingCode): void
-    {
-        $isNonGeoRegion = PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode;
-        $fileName = $filePrefix . '_' . ($isNonGeoRegion ? $countryCallingCode : $regionCode) . '.php';
-        if (!is_readable($fileName)) {
-            throw new Exception('missing metadata: ' . $fileName);
-        }
-
-        $metadataLoader = new DefaultMetadataLoader();
-        $data = $metadataLoader->loadMetadata($fileName);
-
-        $metadata = new PhoneMetadata();
-        $metadata->fromArray($data);
-        if ($isNonGeoRegion) {
-            $this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode] = $metadata;
-        } else {
-            $this->regionToMetadataMap[$regionCode] = $metadata;
+        try {
+            return $this->metadataSource->getMetadataForRegion($regionCode);
+        } catch (RuntimeException) {
+            return null;
         }
     }
 
@@ -258,8 +224,8 @@ class ShortNumberInfo
      * Given a valid short number, determines whether it is carrier-specific (however, nothing is
      * implied about its validity). Carrier-specific numbers may connect to a different end-point, or
      * not connect at all, depending on the user's carrier. If it is important that the number is
-     * valid, then its validity must first be checked using {@link #isValidShortNumber} or
-     * {@link #isValidShortNumberForRegion}.
+     * valid, then its validity must first be checked using {@see isValidShortNumber} or
+     * {@see isValidShortNumberForRegion}.
      *
      * @param PhoneNumber $number the valid short number to check
      * @return bool whether the short number is carrier-specific, assuming the input was a valid short
@@ -283,7 +249,7 @@ class ShortNumberInfo
      * given region (however, nothing is implied about its validity). Carrier-specific numbers may
      * connect to a different end-point, or not connect at all, depending on the user's carrier. If
      * it is important that the number is valid, then its validity must first be checked using
-     * {@link #isValidShortNumber} or {@link #isValidShortNumberForRegion}. Returns false if the
+     * {@see isValidShortNumber} or {@see isValidShortNumberForRegion}. Returns false if the
      * number doesn't match the region provided.
      * @param PhoneNumber $number The valid short number to check
      * @param string $regionDialingFrom The region from which the number is dialed
@@ -308,7 +274,7 @@ class ShortNumberInfo
      * implied about its validity). An SMS service is where the primary or only intended usage is to
      * receive and/or send text messages (SMSs). This includes MMS as MMS numbers downgrade to SMS if
      * the other party isn't MMS-capable. If it is important that the number is valid, then its
-     * validity must first be checked using {@link #isValidShortNumber} or {@link
+     * validity must first be checked using {@see isValidShortNumber} or {@link
      * #isValidShortNumberForRegion}. Returns false if the number doesn't match the region provided.
      *
      * @param PhoneNumber $number The valid short number to check
@@ -366,8 +332,8 @@ class ShortNumberInfo
     /**
      * Check whether a short number is a possible number. If a country calling code is shared by
      * multiple regions, this returns true if it's possible in any of them. This provides a more
-     * lenient check than {@link #isValidShortNumber}. See {@link
-     * #IsPossibleShortNumberForRegion(PhoneNumber, String)} for details.
+     * lenient check than {@see isValidShortNumber}. See {@see isPossibleShortNumberForRegion}
+     * for details.
      *
      * @param $number PhoneNumber the short number to check
      * @return bool whether the number is a possible short number
@@ -395,7 +361,7 @@ class ShortNumberInfo
     /**
      * Check whether a short number is a possible number when dialled from a region, given the number
      * in the form of a string, and the region where the number is dialled from. This provides a more
-     * lenient check than {@link #isValidShortNumber}.
+     * lenient check than {@see isValidShortNumber}.
      *
      * @param PhoneNumber $shortNumber The short number to check
      * @param string $regionDialingFrom Region dialing From
@@ -421,12 +387,12 @@ class ShortNumberInfo
      * Tests whether a short number matches a valid pattern. If a country calling code is shared by
      * multiple regions, this returns true if it's valid in any of them. Note that this doesn't verify
      * the number is actually in use, which is impossible to tell by just looking at the number
-     * itself. See {@link #isValidShortNumberForRegion(PhoneNumber, String)} for details.
+     * itself. See {@see isValidShortNumberForRegion(PhoneNumber, String)} for details.
      *
      * @param $number PhoneNumber the short number for which we want to test the validity
      * @return bool whether the short number matches a valid pattern
      */
-    public function isValidShortNumber(PhoneNumber $number)
+    public function isValidShortNumber(PhoneNumber $number): bool
     {
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
         $regionCode = $this->getRegionCodeForShortNumberFromRegionList($number, $regionCodes);
@@ -539,7 +505,7 @@ class ShortNumberInfo
     /**
      * Gets the expected cost category of a short number (however, nothing is implied about its
      * validity). If the country calling code is unique to a region, this method behaves exactly the
-     * same as {@link #getExpectedCostForRegion(PhoneNumber, String)}. However, if the country calling
+     * same as {@see getExpectedCostForRegion(PhoneNumber, String)}. However, if the country calling
      * code is shared by multiple regions, then it returns the highest cost in the sequence
      * PREMIUM_RATE, UNKNOWN_COST, STANDARD_RATE, TOLL_FREE. The reason for the position of
      * UNKNOWN_COST in this order is that if a number is UNKNOWN_COST in one region but STANDARD_RATE
@@ -553,7 +519,7 @@ class ShortNumberInfo
      * </p>
      *
      * Note: If the region from which the number is dialed is known, it is highly preferable to call
-     * {@link #getExpectedCostForRegion(PhoneNumber, String)} instead.
+     * {@see getExpectedCostForRegion(PhoneNumber, String)} instead.
      *
      * @param PhoneNumber $number the short number for which we want to know the expected cost category
      * @return ShortNumberCost the highest expected cost category of the short number in the region(s) with the given

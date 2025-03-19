@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace libphonenumber\buildtools;
 
-use libphonenumber\PhoneMetadata;
-use Symfony\Component\VarExporter\VarExporter;
+use libphonenumber\buildtools\Builders\PhoneMetadataBuilder;
+use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PsrPrinter;
+use RuntimeException;
 
 use function array_keys;
 use function count;
 use function file_put_contents;
 use function ksort;
-use function lcfirst;
 
 /**
  * Tool to convert phone number metadata from the XML format to protocol buffer format.
@@ -22,43 +23,33 @@ use function lcfirst;
 class BuildMetadataPHPFromXml
 {
     public const GENERATION_COMMENT = <<<EOT
-        /**
-         * libphonenumber-for-php data file
-         * This file has been @generated from libphonenumber data
-         * Do not modify!
-         * @internal
-         */
+        libphonenumber-for-php data file
+        This file has been @generated from libphonenumber data
+        Do not modify!
+        @internal
 
         EOT;
     public const MAP_COMMENT = <<<EOT
-        /**
-          * A mapping from a country code to the region codes which denote the
-          * country/region represented by that country code. In the case of multiple
-          * countries sharing a calling code, such as the NANPA countries, the one
-          * indicated with "isMainCountryForCode" in the metadata should be first.
-          * @var array<int,string[]>
-          */
+        A mapping from a country code to the region codes which denote the
+        country/region represented by that country code. In the case of multiple
+        countries sharing a calling code, such as the NANPA countries, the one
+        indicated with "isMainCountryForCode" in the metadata should be first.
+        @var array<int,string[]>
 
         EOT;
-    public const COUNTRY_CODE_SET_COMMENT = <<<php
-        /**
-         * A set of all country calling codes for which data is available.
-         * @var int[]
-         */
-        php;
-    public const REGION_CODE_SET_COMMENT = <<<php
-        /**
-         * A set of all region codes for which data is available.
-         * @var string[]
-         */
-        php;
+    public const COUNTRY_CODE_SET_COMMENT = <<<EOT
+        A set of all country calling codes for which data is available.
+        @var int[]
+        EOT;
+    public const REGION_CODE_SET_COMMENT = <<<EOT
+         A set of all region codes for which data is available.
+         @var string[]
+        EOT;
 
-    public function start(string $inputFile, string $outputDir, string $filePrefix, string $mappingClass, string $mappingClassLocation, bool $liteBuild): void
+    public function start(string $inputFile, string $outputDir, string $namespaceAndClassPrefix, string $mappingClass, string $mappingClassLocation): void
     {
-        $savePath = $outputDir . $filePrefix;
-
-        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($inputFile, $liteBuild, false);
-        $this->writeMetadataToFile($metadataCollection, $savePath);
+        $metadataCollection = BuildMetadataFromXml::buildPhoneMetadataCollection($inputFile);
+        $this->writeMetadataToFile($metadataCollection, $outputDir, $namespaceAndClassPrefix);
 
         $countryCodeToRegionCodeMap = BuildMetadataFromXml::buildCountryCodeToRegionCodeMap($metadataCollection);
         // Sort $countryCodeToRegionCodeMap just to have the regions in order
@@ -67,9 +58,9 @@ class BuildMetadataPHPFromXml
     }
 
     /**
-     * @param PhoneMetadata[] $metadataCollection
+     * @param PhoneMetadataBuilder[] $metadataCollection
      */
-    private function writeMetadataToFile(array $metadataCollection, string $filePrefix): void
+    private function writeMetadataToFile(array $metadataCollection, string $directory, string $namespaceAndClassPrefix): void
     {
         foreach ($metadataCollection as $metadata) {
             $regionCode = $metadata->getId();
@@ -79,11 +70,21 @@ class BuildMetadataPHPFromXml
                 $regionCode = $metadata->getCountryCode();
             }
 
-            $data = '<?php' . PHP_EOL
-                . self::GENERATION_COMMENT . PHP_EOL
-                . 'return ' . VarExporter::export($metadata->toArray()) . ';' . PHP_EOL;
+            $pos = strrpos($namespaceAndClassPrefix, '\\');
 
-            file_put_contents($filePrefix . '_' . $regionCode . '.php', $data);
+            if ($pos === false) {
+                throw new RuntimeException('Invalid namespaceAndClassPrefix: ' . $namespaceAndClassPrefix);
+            }
+
+            $namespace = substr($namespaceAndClassPrefix, 0, $pos);
+            $classPrefix = substr($namespaceAndClassPrefix, $pos + 1);
+
+            $data = $metadata->toFile($classPrefix . '_' . $regionCode, $namespace);
+            $data->addComment(self::GENERATION_COMMENT);
+
+            $printer = new PsrPrinter();
+
+            file_put_contents($directory . DIRECTORY_SEPARATOR . $classPrefix . '_' . $regionCode . '.php', $printer->printFile($data));
         }
     }
 
@@ -104,29 +105,32 @@ class BuildMetadataPHPFromXml
 
         $hasCountryCodes = count($countryCodeToRegionCodeMap) > 1;
 
-        $variableName = lcfirst($mappingClass);
+        $variableName = strtoupper(preg_replace('/(?<!^)[A-Z]/', '_$0', $mappingClass));
 
-        $data = '<?php' . PHP_EOL .
-            'declare(strict_types=1);' . PHP_EOL .
-            'namespace libphonenumber;' . PHP_EOL .
-            self::GENERATION_COMMENT . PHP_EOL .
-            "class {$mappingClass} {" . PHP_EOL .
-            PHP_EOL;
+        $file = new PhpFile();
+        $file->setStrictTypes();
+        $file->addComment(self::GENERATION_COMMENT);
+
+        $namespace = $file->addNamespace('libphonenumber');
+
+        $class = $namespace->addClass($mappingClass);
+        $class->addComment('@internal');
 
         if ($hasRegionCodes && $hasCountryCodes) {
-            $data .= self::MAP_COMMENT . PHP_EOL;
-            $data .= "   public static array \${$variableName} = " . VarExporter::export($countryCodeToRegionCodeMap) . ';' . PHP_EOL;
+            $constant = $class->addConstant($variableName, $countryCodeToRegionCodeMap);
+            $constant->setComment(self::MAP_COMMENT);
         } elseif ($hasCountryCodes) {
-            $data .= self::COUNTRY_CODE_SET_COMMENT . PHP_EOL;
-            $data .= "   public static array \${$variableName} = " . VarExporter::export(array_keys($countryCodeToRegionCodeMap)) . ';' . PHP_EOL;
+            $constant = $class->addConstant($variableName, array_keys($countryCodeToRegionCodeMap));
+            $constant->setComment(self::COUNTRY_CODE_SET_COMMENT);
         } else {
-            $data .= self::REGION_CODE_SET_COMMENT . PHP_EOL;
-            $data .= "   public static array \${$variableName} = " . VarExporter::export($countryCodeToRegionCodeMap[0]) . ';' . PHP_EOL;
+            $constant = $class->addConstant($variableName, $countryCodeToRegionCodeMap[0]);
+            $constant->setComment(self::REGION_CODE_SET_COMMENT);
         }
 
-        $data .= PHP_EOL .
-            '}' . PHP_EOL;
+        $constant->setPublic();
 
-        file_put_contents($outputDir . $mappingClass . '.php', $data);
+        $printer = new PsrPrinter();
+
+        file_put_contents($outputDir . $mappingClass . '.php', $printer->printFile($file));
     }
 }

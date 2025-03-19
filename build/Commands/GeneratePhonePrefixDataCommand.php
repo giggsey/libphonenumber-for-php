@@ -24,6 +24,7 @@ class GeneratePhonePrefixDataCommand extends Command
             [
                 new InputArgument('InputDirectory', InputArgument::REQUIRED, 'The input directory containing the locale/region.txt files'),
                 new InputArgument('OutputDirectory', InputArgument::REQUIRED, 'The output source directory'),
+                new InputArgument('OutputNamespace', InputArgument::REQUIRED, 'The output namespace'),
                 new InputOption('expandCountries', null, InputOption::VALUE_NONE, 'Should we expand certain countries into separate files'),
             ]
         );
@@ -35,6 +36,7 @@ class GeneratePhonePrefixDataCommand extends Command
         $generatePhonePrefixData->start(
             $input->getArgument('InputDirectory'),
             $input->getArgument('OutputDirectory'),
+            $input->getArgument('OutputNamespace'),
             $output,
             $input->getOption('expandCountries')
         );

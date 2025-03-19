@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace libphonenumber\buildtools;
 
+use Nette\PhpGenerator\PhpFile;
+use Nette\PhpGenerator\PsrPrinter;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\VarExporter\VarExporter;
 use Closure;
 use InvalidArgumentException;
 
@@ -36,12 +37,10 @@ class GeneratePhonePrefixData
 {
     public const DATA_FILE_EXTENSION = '.txt';
     public const GENERATION_COMMENT = <<<'EOT'
-        /**
-         * libphonenumber-for-php data file
-         * This file has been @generated from libphonenumber data
-         * Do not modify!
-         * @internal
-         */
+        libphonenumber-for-php data file
+        This file has been @generated from libphonenumber data
+        Do not modify!
+        @internal
 
         EOT;
 
@@ -71,7 +70,7 @@ class GeneratePhonePrefixData
     ];
 
 
-    public function start(string $inputDir, string $outputDir, OutputInterface $consoleOutput, bool $expandCountries): void
+    public function start(string $inputDir, string $outputDir, string $outputNamespace, OutputInterface $consoleOutput, bool $expandCountries): void
     {
         $this->inputDir = $inputDir;
         $this->outputDir = $outputDir;
@@ -92,13 +91,14 @@ class GeneratePhonePrefixData
             $mappingForFiles = $this->splitMap($mappings, $outputFiles);
 
             foreach ($mappingForFiles as $outputFile => $value) {
-                $this->writeMappingFile($language, (string) $outputFile, $value);
+                $this->writeMappingFile($language, (string) $outputFile, $outputNamespace, $value);
                 $this->addConfigurationMapping($availableDataFiles, $language, $outputFile);
             }
             $progress->advance();
         }
 
-        $this->writeConfigMap($availableDataFiles);
+        $this->writeConfigMap($availableDataFiles, $outputNamespace);
+
         $progress->finish();
     }
 
@@ -399,20 +399,34 @@ class GeneratePhonePrefixData
     /**
      * @param array<string|int,string> $data
      */
-    private function writeMappingFile(string $language, string $outputFile, array $data): void
+    private function writeMappingFile(string $language, string $outputFile, string $outputNamespace, array $data): void
     {
         if (!file_exists($this->outputDir . $language)) {
             mkdir($this->outputDir . $language);
         }
 
-        $phpSource = '<?php' . PHP_EOL
-            . self::GENERATION_COMMENT
-            . 'return ' . VarExporter::export($data) . ';'
-            . PHP_EOL;
+        $mappingClass = ucfirst($language) . '_' . $outputFile;
 
-        $outputPath = $this->outputDir . $language . DIRECTORY_SEPARATOR . $outputFile . '.php';
+        $file = new PhpFile();
+        $file->setStrictTypes();
+        $file->addComment(self::GENERATION_COMMENT);
 
-        file_put_contents($outputPath, $phpSource);
+        $namespace = $file->addNamespace($outputNamespace . '\\' . $language);
+
+        $class = $namespace->addClass($mappingClass);
+        $class->addComment('@internal');
+
+        // Sort by key to allow array optimizations
+        ksort($data);
+
+        $constant = $class->addConstant('DATA', $data);
+        $constant->setPublic();
+
+        $printer = new PsrPrinter();
+
+        $outputPath = $this->outputDir . $language . DIRECTORY_SEPARATOR . $mappingClass . '.php';
+
+        file_put_contents($outputPath, $printer->printFile($file));
     }
 
     /**
@@ -431,15 +445,26 @@ class GeneratePhonePrefixData
     /**
      * @param array<string,array<string|int>> $availableDataFiles
      */
-    private function writeConfigMap(array $availableDataFiles): void
+    private function writeConfigMap(array $availableDataFiles, string $outputNamespace): void
     {
-        $phpSource = '<?php' . PHP_EOL
-            . self::GENERATION_COMMENT
-            . 'return ' . VarExporter::export($availableDataFiles) . ';'
-            . PHP_EOL;
+        $mappingClass = 'Map';
 
-        $outputPath = $this->outputDir . 'Map.php';
+        $file = new PhpFile();
+        $file->setStrictTypes();
+        $file->addComment(self::GENERATION_COMMENT);
 
-        file_put_contents($outputPath, $phpSource);
+        $namespace = $file->addNamespace($outputNamespace);
+
+        $class = $namespace->addClass($mappingClass);
+        $class->addComment('@internal');
+
+        $constant = $class->addConstant('DATA', $availableDataFiles);
+        $constant->setPublic();
+
+        $printer = new PsrPrinter();
+
+        $outputPath = $this->outputDir . DIRECTORY_SEPARATOR . $mappingClass . '.php';
+
+        file_put_contents($outputPath, $printer->printFile($file));
     }
 }

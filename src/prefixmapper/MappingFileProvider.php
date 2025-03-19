@@ -44,7 +44,7 @@ class MappingFileProvider
         for ($i = $prefixLength; $i > 0; $i--) {
             $prefix = substr($countryCallingCode, 0, $i);
             if ($this->inMap($language, (int) $prefix)) {
-                return $language . DIRECTORY_SEPARATOR . $prefix . '.php';
+                return $language . '\\' . ucfirst($language) . '_' . $prefix;
             }
         }
 
@@ -53,6 +53,6 @@ class MappingFileProvider
 
     protected function inMap(string $language, int $countryCallingCode): bool
     {
-        return (array_key_exists($language, $this->map) && in_array($countryCallingCode, $this->map[$language], true));
+        return (isset($this->map[$language]) && in_array($countryCallingCode, $this->map[$language], true));
     }
 }

@@ -145,8 +145,8 @@ class PhoneNumberUtilTest extends TestCase
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
-            __DIR__ . '/data/PhoneNumberMetadataForTesting',
-            CountryCodeToRegionCodeMapForTesting::$countryCodeToRegionCodeMapForTesting
+            __NAMESPACE__ . '\data\PhoneNumberMetadataForTesting_',
+            CountryCodeToRegionCodeMapForTesting::COUNTRY_CODE_TO_REGION_CODE_MAP_FOR_TESTING
         );
     }
 
@@ -2401,7 +2401,22 @@ class PhoneNumberUtilTest extends TestCase
 
     public function testMaybeStripNationalPrefix(): void
     {
-        $metadata = new PhoneMetadata();
+        $metadata = new class extends PhoneMetadata {
+            public function setNationalPrefixForParsing(string $value): void
+            {
+                $this->nationalPrefixForParsing = $value;
+            }
+
+            public function setGeneralDesc(PhoneNumberDesc $value): void
+            {
+                $this->generalDesc = $value;
+            }
+
+            public function setNationalPrefixTransformRule(string $value): void
+            {
+                $this->nationalPrefixTransformRule = $value;
+            }
+        };
         $metadata->setNationalPrefixForParsing('34');
         $phoneNumberDesc = new PhoneNumberDesc();
         $phoneNumberDesc->setNationalNumberPattern('\\d{4,8}');
@@ -2410,7 +2425,7 @@ class PhoneNumberUtilTest extends TestCase
         $numberToStrip = '34356778';
         $strippedNumber = '356778';
 
-        $carrierCode = null;
+        $carrierCode = '';
 
         self::assertTrue(
             $this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode)
@@ -2418,7 +2433,7 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals($strippedNumber, $numberToStrip, 'Should have had national prefix stripped.');
         // Retry stripping - now the number should not start with the national prefix, so no more
         // stripping should occur.
-        $carrierCode = null;
+        $carrierCode = '';
         self::assertFalse(
             $this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode)
         );
@@ -2426,7 +2441,7 @@ class PhoneNumberUtilTest extends TestCase
 
         // Some countries have no national prefix. Repeat test with none specified.
         $metadata->setNationalPrefixForParsing('');
-        $carrierCode = null;
+        $carrierCode = '';
         self::assertFalse(
             $this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode)
         );
@@ -2436,7 +2451,7 @@ class PhoneNumberUtilTest extends TestCase
         $metadata->setNationalPrefixForParsing('3');
         $numberToStrip = '3123';
         $strippedNumber = '3123';
-        $carrierCode = null;
+        $carrierCode = '';
         self::assertFalse(
             $this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode)
         );
@@ -2467,7 +2482,7 @@ class PhoneNumberUtilTest extends TestCase
         $metadata->setNationalPrefixForParsing('0(\\d{2})');
         $numberToStrip = '031123';
         $transformedNumber = '5315123';
-        $carrierCode = null;
+        $carrierCode = '';
         self::assertTrue(
             $this->phoneUtil->maybeStripNationalPrefixAndCarrierCode($numberToStrip, $metadata, $carrierCode)
         );

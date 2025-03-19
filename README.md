@@ -11,13 +11,12 @@ A PHP library for parsing, formatting, storing and validating international phon
  - [Installation](#installation)
  - [Documentation](#documentation)
  - [Online Demo](#online-demo)
- - [Highlights of functionality](#highlights-of-functionality)
-   - [Versioning](#versioning)
-   - [Quick Examples](#quick-examples)
-     - [Geocoder](#geocoder)
-     - [ShortNumberInfo](#shortnumberinfo)
-     - [Mapping Phone Numbers to Carrier](#mapping-phone-numbers-to-carrier)
-     - [Mapping Phone Numbers to TimeZones](#mapping-phone-numbers-to-timezones)
+ - [Versioning](#versioning)
+ - [Quick Examples](#quick-examples)
+   - [Geocoder](#geocoder)
+   - [ShortNumberInfo](#shortnumberinfo)
+   - [Mapping Phone Numbers to Carrier](#mapping-phone-numbers-to-carrier)
+   - [Mapping Phone Numbers to TimeZones](#mapping-phone-numbers-to-timezones)
  - [FAQ](#faq)
    - [Problems with Invalid Numbers?](#problems-with-invalid-numbers)
  - [Generating data](#generating-data)
@@ -60,16 +59,6 @@ This library will be updated to use [supported versions of PHP](https://www.php.
 
 ## Online Demo
 An [online demo](http://giggsey.com/libphonenumber/) is available, and the source can be found at [giggsey/libphonenumber-example](https://github.com/giggsey/libphonenumber-example).
-
-# Highlights of functionality
-* Parsing/formatting/validating phone numbers for all countries/regions of the world.
-* `getNumberType` - gets the type of the number based on the number itself; able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared Cost, VoIP and Personal Numbers (whenever feasible).
-* `isNumberMatch` - gets a confidence level on whether two numbers could be the same.
-* `getExampleNumber`/`getExampleNumberByType` - provides valid example numbers for all countries/regions, with the option of specifying which type of example phone number is needed.
-* `isValidNumber` - full validation of a phone number for a region using length and prefix information.
-* `PhoneNumberOfflineGeocoder` - provides geographical information related to a phone number.
-* `PhoneNumberToTimeZonesMapper` - provides timezone information related to a phone number.
-* `PhoneNumberToCarrierMapper` - provides carrier information related to a phone number.
 
 ## Versioning
 
@@ -240,21 +229,15 @@ If Google's [Online Demo](https://libphonenumber.appspot.com/) gives a different
 
 ## Generating data
 
-Generating the data is not normally needed, as this repository will generally always have the up to data metadata.
+Generating the data is not normally needed, as this repository will generally always have the up to date metadata.
 
-If you do need to generate the data, the commands are provided by [Phing](https://www.phing.info). Ensure you have all the dev composer dependencies installed, then run
+To compile the data, run the composer script 'build'
 
 ```bash
-vendor/bin/phing compile
+composer run build
 ```
 
-This compile process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.php](METADATA-VERSION.php).
-
-### Running tests
-
-This project uses [PHPUnit Bridge](https://symfony.com/doc/current/components/phpunit_bridge.html) to maintain compatibility for the supported PHP versions.
-
-To run the tests locally, run the `./phpunit` script.
+This build process clones the [libphonenumber](https://github.com/google/libphonenumber) project at the version specified in [METADATA-VERSION.php](METADATA-VERSION.php).
 
 ## Integration with frameworks
 

@@ -39,7 +39,7 @@ class PrefixFileReaderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->reader = new PrefixFileReader(__DIR__ . '/data/');
+        $this->reader = new PrefixFileReader('libphonenumber\\Tests\\prefixmapper\\data\\');
     }
 
     public function testGetDescriptionForNumberWithMapping(): void

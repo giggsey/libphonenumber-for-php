@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1);
 /**
  * libphonenumber-for-php data file
  * This file has been @generated from libphonenumber data
@@ -8,81 +7,54 @@ declare(strict_types=1);
  * @internal
  */
 
-return [
-    'generalDesc' => [
-        'NationalNumberPattern' => '[12]\\d{1,5}',
-        'PossibleLength' => [
-            2,
-            3,
-            4,
-            5,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'tollFree' => [
-        'NationalNumberPattern' => '1(?:515|[78])|2(?:00|1)\\d{3}',
-        'ExampleNumber' => '17',
-        'PossibleLength' => [
-            2,
-            4,
-            5,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'premiumRate' => [
-        'NationalNumberPattern' => '2(?:0[246]|[468])\\d{3}',
-        'ExampleNumber' => '24000',
-        'PossibleLength' => [
-            5,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'emergency' => [
-        'NationalNumberPattern' => '1[78]',
-        'ExampleNumber' => '17',
-        'PossibleLength' => [
-            2,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'shortCode' => [
-        'NationalNumberPattern' => '1(?:1[69]|(?:[246]\\d|51)\\d)|2(?:0[0-246]|[12468])\\d{3}|1[278]',
-        'ExampleNumber' => '12',
-        'PossibleLength' => [],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'standardRate' => [
-        'NationalNumberPattern' => '2(?:01|2)\\d{3}',
-        'ExampleNumber' => '22000',
-        'PossibleLength' => [
-            5,
-            6,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'carrierSpecific' => [
-        'NationalNumberPattern' => '1[46]\\d\\d',
-        'ExampleNumber' => '1400',
-        'PossibleLength' => [
-            4,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'smsServices' => [
-        'NationalNumberPattern' => '2[468]\\d{3}',
-        'ExampleNumber' => '24000',
-        'PossibleLength' => [
-            5,
-        ],
-        'PossibleLengthLocalOnly' => [],
-    ],
-    'id' => 'SN',
-    'countryCode' => 0,
-    'internationalPrefix' => '',
-    'numberFormat' => [],
-    'intlNumberFormat' => [],
-    'mainCountryForCode' => false,
-];
+declare(strict_types=1);
+
+namespace libphonenumber\data;
+
+use libphonenumber\PhoneMetadata;
+use libphonenumber\PhoneNumberDesc;
+
+/**
+ * @internal
+ */
+class ShortNumberMetadata_SN extends PhoneMetadata
+{
+    protected const ID = 'SN';
+    protected const COUNTRY_CODE = 0;
+
+    protected ?string $internationalPrefix = '';
+
+    public function __construct()
+    {
+        $this->generalDesc = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('[12]\d{1,5}')
+            ->setPossibleLength([2, 3, 4, 5, 6]);
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('2(?:0[246]|[468])\d{3}')
+            ->setExampleNumber('24000')
+            ->setPossibleLength([5, 6]);
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:515|[78])|2(?:00|1)\d{3}')
+            ->setExampleNumber('17')
+            ->setPossibleLength([2, 4, 5, 6]);
+        $this->emergency = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1[78]')
+            ->setExampleNumber('17')
+            ->setPossibleLength([2]);
+        $this->short_code = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1(?:1[69]|(?:[246]\d|51)\d)|2(?:0[0-246]|[12468])\d{3}|1[278]')
+            ->setExampleNumber('12');
+        $this->standard_rate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('2(?:01|2)\d{3}')
+            ->setExampleNumber('22000')
+            ->setPossibleLength([5, 6]);
+        $this->carrierSpecific = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('1[46]\d\d')
+            ->setExampleNumber('1400')
+            ->setPossibleLength([4]);
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('2[468]\d{3}')
+            ->setExampleNumber('24000')
+            ->setPossibleLength([5]);
+    }
+}
