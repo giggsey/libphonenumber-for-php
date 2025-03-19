@@ -45,7 +45,7 @@ class PhoneNumberMetadata_MF extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9(?:(?:39[5-7]|76[018])\d|475[0-5])\d{4}')
+            ->setNationalNumberPattern('9(?:(?:39[5-7]|76[018])\d|475[0-6])\d{4}')
             ->setExampleNumber('976012345');
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();

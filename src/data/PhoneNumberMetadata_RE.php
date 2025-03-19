@@ -58,7 +58,7 @@ class PhoneNumberMetadata_RE extends PhoneMetadata
             ->setExampleNumber('810123456');
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9(?:399[0-3]|479[0-5]|76(?:2[278]|3[0-37]))\d{4}')
+            ->setNationalNumberPattern('9(?:399[0-3]|479[0-6]|76(?:2[278]|3[0-37]))\d{4}')
             ->setExampleNumber('939901234');
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();

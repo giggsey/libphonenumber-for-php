@@ -25,11 +25,13 @@ class En_256
         25676 => 'MTN',
         25677 => 'MTN',
         25678 => 'MTN',
-        25679 => 'Africell',
         256720 => 'Smile',
         256724 => 'Hamilton Telecom',
         256726 => 'Tangerine',
         256727 => 'Tangerine',
         256728 => 'Talkio',
+        256790 => 'MTN',
+        256798 => 'Africell',
+        256799 => 'Africell',
     ];
 }
