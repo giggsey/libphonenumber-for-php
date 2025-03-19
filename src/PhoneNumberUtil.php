@@ -2177,7 +2177,7 @@ class PhoneNumberUtil
                     )) {
                     return false;
                 }
-                if ($carrierCode !== null && $numOfGroups > 0 && $prefixMatcher->group($numOfGroups) !== null) {
+                if ($numOfGroups > 0 && $prefixMatcher->group($numOfGroups) !== null) {
                     $carrierCode .= $prefixMatcher->group(1);
                 }
 
@@ -2198,7 +2198,7 @@ class PhoneNumberUtil
                 && !$this->matcherAPI->matchNationalNumber($transformedNumber, $generalDesc, false)) {
                 return false;
             }
-            if ($carrierCode !== null && $numOfGroups > 1) {
+            if ($numOfGroups > 1) {
                 $carrierCode .= $prefixMatcher->group(1);
             }
             $number = substr_replace($number, $transformedNumber, 0, mb_strlen($number));
