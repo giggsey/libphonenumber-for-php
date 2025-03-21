@@ -274,8 +274,8 @@ class ShortNumberInfo
      * implied about its validity). An SMS service is where the primary or only intended usage is to
      * receive and/or send text messages (SMSs). This includes MMS as MMS numbers downgrade to SMS if
      * the other party isn't MMS-capable. If it is important that the number is valid, then its
-     * validity must first be checked using {@see isValidShortNumber} or {@link
-     * #isValidShortNumberForRegion}. Returns false if the number doesn't match the region provided.
+     * validity must first be checked using {@see isValidShortNumber} or {@see isValidShortNumberForRegion}.
+     * Returns false if the number doesn't match the region provided.
      *
      * @param PhoneNumber $number The valid short number to check
      * @param string $regionDialingFrom The region from which the number is dialed
