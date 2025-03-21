@@ -465,6 +465,7 @@ class En_65
         658952 => 'M1',
         658963 => 'SingTel',
         658964 => 'SingTel',
+        658965 => 'SingTel',
         659001 => 'StarHub',
         659002 => 'StarHub',
         659003 => 'StarHub',

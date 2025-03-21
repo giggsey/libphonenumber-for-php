@@ -30,11 +30,11 @@ class PhoneNumberMetadata_ZM extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('800\d{6}|(?:21|63|[79]\d)\d{7}')
+            ->setNationalNumberPattern('800\d{6}|(?:21|[579]\d|63)\d{7}')
             ->setPossibleLengthLocalOnly([6])
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:7[5-79]|9[5-8])\d{7}')
+            ->setNationalNumberPattern('(?:[59][5-8]|7[5-9])\d{7}')
             ->setExampleNumber('955123456');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
@@ -56,7 +56,7 @@ class PhoneNumberMetadata_ZM extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[79]'])
+                ->setLeadingDigitsPattern(['[579]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
@@ -82,7 +82,7 @@ class PhoneNumberMetadata_ZM extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[79]'])
+                ->setLeadingDigitsPattern(['[579]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
