@@ -26,14 +26,7 @@
   "autoload": {
     "psr-4": {
       "libphonenumber\\": "src/"
-    },
-    "exclude-from-classmap": [
-        "/src/data/",
-        "/src/carrier/data/",
-        "/src/geocoding/data/",
-        "/src/timezone/data/"
-    ]
-
+    }
   },
   "autoload-dev": {
     "psr-4": {

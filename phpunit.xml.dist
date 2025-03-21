@@ -31,7 +31,7 @@
   </testsuites>
   <source>
     <include>
-      <directory suffix=".php">./bin/</directory>
+      <directory suffix=".php">./build/</directory>
       <directory suffix=".php">./src/</directory>
     </include>
     <exclude>

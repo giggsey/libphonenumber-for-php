@@ -214,7 +214,7 @@ class BuildCommand extends Command
 
         if (!is_dir(self::GIT_PATH)) {
             $output->writeln('Cloning libphonenumber from ' . self::GIT_REPO);
-            (new Process(['git', 'clone', self::GIT_REPO, self::GIT_REPO]))->mustRun();
+            (new Process(['git', 'clone', self::GIT_REPO, self::GIT_PATH]))->mustRun();
         } else {
             $output->writeln('Pulling libphonenumber from ' . self::GIT_REPO);
             (new Process(['git', '-C', self::GIT_PATH, 'fetch', '--all']))->mustRun();
