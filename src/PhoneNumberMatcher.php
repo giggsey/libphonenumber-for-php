@@ -286,7 +286,7 @@ class PhoneNumberMatcher implements Iterator
             // Check for extra numbers at the end.
             // TODO: This is the place to start when trying to support extraction of multiple phone number
             // from split notations (+41 49 123 45 67 / 68).
-            $candidate = static::trimAfterFirstMatch(PhoneNumberUtil::$SECOND_NUMBER_START_PATTERN, $candidate);
+            $candidate = static::trimAfterFirstMatch(PhoneNumberUtil::SECOND_NUMBER_START_PATTERN, $candidate);
 
             $match = $this->extractMatch($candidate, $start);
             if ($match !== null) {
@@ -385,7 +385,7 @@ class PhoneNumberMatcher implements Iterator
                 if ($isFirstMatch) {
                     // We should handle any group before this one too.
                     $group = static::trimAfterFirstMatch(
-                        PhoneNumberUtil::$UNWANTED_END_CHAR_PATTERN,
+                        PhoneNumberUtil::UNWANTED_END_CHAR_PATTERN,
                         mb_substr($candidate, 0, $groupMatcher->start())
                     );
 
@@ -397,7 +397,7 @@ class PhoneNumberMatcher implements Iterator
                     $isFirstMatch = false;
                 }
                 $group = static::trimAfterFirstMatch(
-                    PhoneNumberUtil::$UNWANTED_END_CHAR_PATTERN,
+                    PhoneNumberUtil::UNWANTED_END_CHAR_PATTERN,
                     $groupMatcher->group(1)
                 );
                 $match = $this->parseAndVerify($group, $offset + $groupMatcher->start(1));

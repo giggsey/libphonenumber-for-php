@@ -196,7 +196,7 @@ class ShortNumberInfo
     protected function matchesEmergencyNumberHelper(string $number, string $regionCode, bool $allowPrefixMatch): bool
     {
         $number = PhoneNumberUtil::extractPossibleNumber($number);
-        $matcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $number);
+        $matcher = new Matcher(PhoneNumberUtil::PLUS_CHARS_PATTERN, $number);
         if ($matcher->lookingAt()) {
             // Returns false if the number starts with a plus sign. We don't believe dialing the country
             // code before emergency numbers (e.g. +1911) works, but later, if that proves to work, we can
