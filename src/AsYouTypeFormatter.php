@@ -487,7 +487,7 @@ class AsYouTypeFormatter
 
     private function isDigitOrLeadingPlusSign(string $nextChar): bool
     {
-        $plusCharsMatcher = new Matcher(PhoneNumberUtil::$PLUS_CHARS_PATTERN, $nextChar);
+        $plusCharsMatcher = new Matcher(PhoneNumberUtil::PLUS_CHARS_PATTERN, $nextChar);
 
         return preg_match('/' . PhoneNumberUtil::DIGITS . '/' . PhoneNumberUtil::REGEX_FLAGS, $nextChar) === 1
             || (mb_strlen($this->accruedInput) === 1 && $plusCharsMatcher->matches());
