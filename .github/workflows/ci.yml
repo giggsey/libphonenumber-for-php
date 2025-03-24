@@ -12,9 +12,11 @@ jobs:
   tests:
     name: PHP ${{ matrix.php-version }} - ${{ matrix.composer }}
     runs-on: ubuntu-latest
+    container: shivammathur/node:latest-${{ matrix.arch }}
     strategy:
       fail-fast: false
       matrix:
+        arch: [ "amd64", "i386" ]
         php-version: [8.1, 8.2, 8.3, 8.4]
         composer: [highest, lowest]
 
