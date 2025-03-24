@@ -3558,9 +3558,9 @@ class PhoneNumberUtil
         $numberCopy->mergeFrom($number);
         $nationalNumber = $number->getNationalNumber();
         do {
-            $nationalNumber = (string) floor((int) $nationalNumber / 10);
+            $nationalNumber = substr($nationalNumber, 0, -1);
             $numberCopy->setNationalNumber($nationalNumber);
-            if ($nationalNumber === '0' || $this->isPossibleNumberWithReason($numberCopy) === ValidationResult::TOO_SHORT) {
+            if ($nationalNumber === '' || $this->isPossibleNumberWithReason($numberCopy) === ValidationResult::TOO_SHORT) {
                 return false;
             }
         } while (!$this->isValidNumber($numberCopy));
