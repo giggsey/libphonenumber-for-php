@@ -10,7 +10,7 @@ on:
 
 jobs:
   tests:
-    name: PHP ${{ matrix.php-version }} - ${{ matrix.composer }}
+    name: PHP ${{ matrix.php-version }} (${{ matrix.arch }}) - ${{ matrix.composer }}
     runs-on: ubuntu-latest
     container: shivammathur/node:latest-${{ matrix.arch }}
     strategy:
