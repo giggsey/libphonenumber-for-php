@@ -28,10 +28,10 @@ class PhoneNumberMetadata_NR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:444|(?:55|8\d)\d|666)\d{4}')
+            ->setNationalNumberPattern('(?:222|444|(?:55|8\d)\d|666|777|999)\d{4}')
             ->setPossibleLength([7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:55[3-9]|666|8\d\d)\d{4}')
+            ->setNationalNumberPattern('(?:222|55[3-9]|666|777|8\d\d|999)\d{4}')
             ->setExampleNumber('5551234');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
@@ -41,7 +41,7 @@ class PhoneNumberMetadata_NR extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[4-68]'])
+                ->setLeadingDigitsPattern(['[24-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = PhoneNumberDesc::empty();

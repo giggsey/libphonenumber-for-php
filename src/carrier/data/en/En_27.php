@@ -18,6 +18,7 @@ class En_27
 {
     public const DATA = [
         2719 => 'Telkom Mobile',
+        2750 => 'Rain',
         2761 => 'Cell C',
         2762 => 'Cell C',
         2763 => 'MTN',

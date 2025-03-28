@@ -1643,6 +1643,7 @@ class Map
         1818 => 'America/Los_Angeles',
         1819 => 'America/Toronto',
         1820 => 'America/Los_Angeles',
+        1821 => 'America/New_York',
         1825 => 'America/Edmonton',
         1826 => 'America/New_York',
         1828 => 'America/New_York',
