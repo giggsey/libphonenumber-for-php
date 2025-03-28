@@ -17,8 +17,11 @@ namespace libphonenumber\carrier\data\en;
 class En_674
 {
     public const DATA = [
+        6742 => 'NEOTEL',
         6746 => 'Digicel',
-        6748 => 'FSM Telecom',
+        6747 => 'NEOTEL',
+        6748 => 'NEOTEL',
+        6749 => 'NEOTEL',
         674553 => 'Digicel',
         674554 => 'Digicel',
         674556 => 'Digicel',

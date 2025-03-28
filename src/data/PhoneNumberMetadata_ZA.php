@@ -34,7 +34,7 @@ class PhoneNumberMetadata_ZA extends PhoneMetadata
             ->setNationalNumberPattern('[1-79]\d{8}|8\d{4,9}')
             ->setPossibleLength([5, 6, 7, 8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1(?:3492[0-25]|4495[0235]|549(?:20|5[01]))|4[34]492[01])\d{3}|8[1-4]\d{3,7}|(?:2[27]|47|54)4950\d{3}|(?:1(?:049[2-4]|9[12]\d\d)|(?:6\d\d|7(?:[0-46-9]\d|5[0-4]))\d\d|8(?:5\d{3}|7(?:08[67]|158|28[5-9]|310)))\d{4}|(?:1[6-8]|28|3[2-69]|4[025689]|5[36-8])4920\d{3}|(?:12|[2-5]1)492\d{4}')
+            ->setNationalNumberPattern('(?:1(?:3492[0-25]|4495[0235]|549(?:20|5[01]))|4[34]492[01])\d{3}|8[1-4]\d{3,7}|(?:2[27]|47|54)4950\d{3}|(?:1(?:049[2-4]|9[12]\d\d)|(?:50[0-2]|6\d\d|7(?:[0-46-9]\d|5[0-4]))\d\d|8(?:5\d{3}|7(?:08[67]|158|28[5-9]|310)))\d{4}|(?:1[6-8]|28|3[2-69]|4[025689]|5[36-8])4920\d{3}|(?:12|[2-5]1)492\d{4}')
             ->setExampleNumber('711234567')
             ->setPossibleLength([5, 6, 7, 8, 9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -42,7 +42,7 @@ class PhoneNumberMetadata_ZA extends PhoneMetadata
             ->setExampleNumber('862345678')
             ->setPossibleLength([9]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('50[0-2]\d{6}|(?:2(?:0330|4302)|52087)0\d{3}|(?:1[0-8]|2[1-378]|3[1-69]|4\d|5[1346-8])\d{7}')
+            ->setNationalNumberPattern('(?:2(?:0330|4302)|52087)0\d{3}|(?:1[0-8]|2[1-378]|3[1-69]|4\d|5[1346-8])\d{7}')
             ->setExampleNumber('101234567')
             ->setPossibleLength([9]);
         $this->numberFormat = [

@@ -35,6 +35,7 @@ class En_18
         1818 => 'California',
         1819 => 'Quebec',
         1820 => 'California',
+        1821 => 'South Carolina',
         1825 => 'Alberta',
         1826 => 'Virginia',
         1828 => 'North Carolina',
