@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace libphonenumber;
 
-use libphonenumber\Leniency\AbstractLeniency;
 use InvalidArgumentException;
+use libphonenumber\Leniency\AbstractLeniency;
 use RuntimeException;
 use TypeError;
 
@@ -55,7 +55,7 @@ class PhoneNumberUtil
     public const REGION_CODE_FOR_NON_GEO_ENTITY = '001';
 
     // Region-code for the unknown region.
-    protected const UNKNOWN_REGION = 'ZZ';
+    public const UNKNOWN_REGION = 'ZZ';
 
     protected const NANPA_COUNTRY_CODE = 1;
     /**
