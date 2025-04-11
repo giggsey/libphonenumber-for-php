@@ -36,14 +36,14 @@ class PhoneNumberMetadata_GD extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('473(?:4(?:0[2-79]|1[04-9]|2[0-5]|49|5[68])|5(?:2[01]|3[3-8])|901)\d{4}')
+            ->setNationalNumberPattern('473(?:4(?:0[2-79]|1[04-9]|2[0-5]|49|5[6-8])|5(?:2[01]|3[3-8])|901)\d{4}')
             ->setExampleNumber('4734031234')
             ->setPossibleLengthLocalOnly([7]);
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('900[2-9]\d{6}')
             ->setExampleNumber('9002123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('473(?:2(?:3[0-2]|69)|3(?:2[89]|86)|4(?:[06]8|3[5-9]|4[0-4]|5[579]|73|90)|63[68]|7(?:58|84)|800|938)\d{4}')
+            ->setNationalNumberPattern('473(?:2(?:3[0-2]|69)|3(?:2[89]|86)|4(?:[06]8|3[5-9]|4[0-4]|5[59]|73|90)|63[68]|7(?:58|84)|800|938)\d{4}')
             ->setExampleNumber('4732691234')
             ->setPossibleLengthLocalOnly([7]);
         $this->tollFree = (new PhoneNumberDesc())
