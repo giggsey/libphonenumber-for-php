@@ -31,16 +31,17 @@ class PhoneNumberMetadata_HR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[24-69]\d|3[0-79])\d{7}|80\d{5,7}|[1-79]\d{7}|6\d{5,6}')
-            ->setPossibleLength([6, 7, 8, 9]);
+            ->setNationalNumberPattern('[2-69]\d{8}|80\d{5,7}|[1-79]\d{7}|6\d{6}')
+            ->setPossibleLengthLocalOnly([6])
+            ->setPossibleLength([7, 8, 9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('9(?:(?:0[1-9]|[12589]\d)\d\d|7(?:[0679]\d\d|5(?:[01]\d|44|55|77|9[5-79])))\d{4}|98\d{6}')
             ->setExampleNumber('921234567')
             ->setPossibleLength([8, 9]);
         $this->premiumRate = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6[01459]\d{6}|6[01]\d{4,5}')
-            ->setExampleNumber('611234')
-            ->setPossibleLength([6, 7, 8]);
+            ->setNationalNumberPattern('6[01459]\d{6}|6[01]\d{5}')
+            ->setExampleNumber('6001234')
+            ->setPossibleLength([7, 8]);
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('1\d{7}|(?:2[0-3]|3[1-5]|4[02-47-9]|5[1-3])\d{6,7}')
             ->setExampleNumber('12345678')
@@ -48,7 +49,7 @@ class PhoneNumberMetadata_HR extends PhoneMetadata
             ->setPossibleLength([8, 9]);
         $this->numberFormat = [
             (new NumberFormat())
-                ->setPattern('(\d{2})(\d{2})(\d{2,3})')
+                ->setPattern('(\d{2})(\d{2})(\d{3})')
                 ->setFormat('$1 $2 $3')
                 ->setLeadingDigitsPattern(['6[01]'])
                 ->setNationalPrefixFormattingRule('0$1')
@@ -92,8 +93,7 @@ class PhoneNumberMetadata_HR extends PhoneMetadata
         ];
         $this->tollFree = (new PhoneNumberDesc())
             ->setNationalNumberPattern('80\d{5,7}')
-            ->setExampleNumber('800123456')
-            ->setPossibleLength([7, 8, 9]);
+            ->setExampleNumber('800123456');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = (new PhoneNumberDesc())
             ->setNationalNumberPattern('7[45]\d{6}')

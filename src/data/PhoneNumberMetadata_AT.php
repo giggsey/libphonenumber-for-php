@@ -35,7 +35,7 @@ class PhoneNumberMetadata_AT extends PhoneMetadata
             ->setPossibleLengthLocalOnly([3])
             ->setPossibleLength([4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6(?:5[0-3579]|6[013-9]|[7-9]\d)\d{4,10}')
+            ->setNationalNumberPattern('6(?:485|(?:5[0-3579]|6[013-9]|[7-9]\d)\d)\d{3,9}')
             ->setExampleNumber('664123456')
             ->setPossibleLength([7, 8, 9, 10, 11, 12, 13]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -43,7 +43,7 @@ class PhoneNumberMetadata_AT extends PhoneMetadata
             ->setExampleNumber('900123456')
             ->setPossibleLength([9, 10, 11, 12, 13]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:11\d|[2-9]\d{3,11})|(?:316|463|(?:51|66|73)2)\d{3,10}|(?:2(?:1[467]|2[13-8]|5[2357]|6[1-46-8]|7[1-8]|8[124-7]|9[1458])|3(?:1[1-578]|3[23568]|4[5-7]|5[1378]|6[1-38]|8[3-68])|4(?:2[1-8]|35|7[1368]|8[2457])|5(?:2[1-8]|3[357]|4[147]|5[12578]|6[37])|6(?:13|2[1-47]|4[135-8]|5[468])|7(?:2[1-8]|35|4[13478]|5[68]|6[16-8]|7[1-6]|9[45]))\d{4,10}')
+            ->setNationalNumberPattern('1(?:11\d|[2-9]\d{3,11})|(?:316|463)\d{3,10}|648[34]\d{3,9}|(?:51|66|73)2\d{3,10}|(?:2(?:1[467]|2[13-8]|5[2357]|6[1-46-8]|7[1-8]|8[124-7]|9[1458])|3(?:1[1-578]|3[23568]|4[5-7]|5[1378]|6[1-38]|8[3-68])|4(?:2[1-8]|35|7[1368]|8[2457])|5(?:2[1-8]|3[357]|4[147]|5[12578]|6[37])|6(?:13|2[1-47]|4[135-7]|5[468])|7(?:2[1-8]|35|4[13478]|5[68]|6[16-8]|7[1-6]|9[45]))\d{4,10}')
             ->setExampleNumber('1234567890')
             ->setPossibleLengthLocalOnly([3]);
         $this->numberFormat = [
@@ -78,7 +78,7 @@ class PhoneNumberMetadata_AT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3,10})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['(?:31|4)6|51|6(?:5[0-3579]|[6-9])|7(?:20|32|8)|[89]'])
+                ->setLeadingDigitsPattern(['(?:31|4)6|51|6(?:48|5[0-3579]|[6-9])|7(?:20|32|8)|[89]', '(?:31|4)6|51|6(?:485|5[0-3579]|[6-9])|7(?:20|32|8)|[89]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -139,7 +139,7 @@ class PhoneNumberMetadata_AT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3,10})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['(?:31|4)6|51|6(?:5[0-3579]|[6-9])|7(?:20|32|8)|[89]'])
+                ->setLeadingDigitsPattern(['(?:31|4)6|51|6(?:48|5[0-3579]|[6-9])|7(?:20|32|8)|[89]', '(?:31|4)6|51|6(?:485|5[0-3579]|[6-9])|7(?:20|32|8)|[89]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
