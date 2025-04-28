@@ -17,7 +17,6 @@ namespace libphonenumber\geocoding\data\en;
 class En_234
 {
     public const DATA = [
-        2343 => 'Oyo',
         234201 => 'Lagos',
         234202 => 'Ibadan',
         234209 => 'Abuja',

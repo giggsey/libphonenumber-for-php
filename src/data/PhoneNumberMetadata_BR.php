@@ -32,7 +32,7 @@ class PhoneNumberMetadata_BR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[1-46-9]\d\d|5(?:[0-46-9]\d|5[0-46-9]))\d{8}|[1-9]\d{9}|[3589]\d{8}|[34]\d{7}')
+            ->setNationalNumberPattern('[1-467]\d{9,10}|55[0-46-9]\d{8}|[34]\d{7}|55\d{7,8}|(?:5[0-46-9]|[89]\d)\d{7,9}')
             ->setPossibleLength([8, 9, 10, 11]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:[14689][1-9]|2[12478]|3[1-578]|5[13-5]|7[13-579])(?:7|9\d)\d{7}')
@@ -40,8 +40,8 @@ class PhoneNumberMetadata_BR extends PhoneMetadata
             ->setPossibleLengthLocalOnly([8, 9])
             ->setPossibleLength([10, 11]);
         $this->premiumRate = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('300\d{6}|[59]00\d{6,7}')
-            ->setExampleNumber('300123456')
+            ->setNationalNumberPattern('[59]00\d{6,7}')
+            ->setExampleNumber('500123456')
             ->setPossibleLength([9, 10]);
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:[14689][1-9]|2[12478]|3[1-578]|5[13-5]|7[13-579])[2-5]\d{7}')
@@ -57,7 +57,7 @@ class PhoneNumberMetadata_BR extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{4})')
                 ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['300|4(?:0[02]|37)', '4(?:02|37)0|[34]00'])
+                ->setLeadingDigitsPattern(['300|4(?:0[02]|37|86)', '300|4(?:0(?:0|20)|370|864)'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{4})')
@@ -95,7 +95,7 @@ class PhoneNumberMetadata_BR extends PhoneMetadata
             ->setExampleNumber('800123456')
             ->setPossibleLength([9, 10]);
         $this->sharedCost = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:30[03]\d{3}|4(?:0(?:0\d|20)|370))\d{4}|300\d{5}')
+            ->setNationalNumberPattern('(?:30[03]\d{3}|4(?:0(?:0\d|20)|370|864))\d{4}|300\d{5}')
             ->setExampleNumber('40041234')
             ->setPossibleLength([8, 10]);
         $this->personalNumber = PhoneNumberDesc::empty();
@@ -104,13 +104,13 @@ class PhoneNumberMetadata_BR extends PhoneMetadata
         $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('30(?:0\d{5,7}|3\d{7})|40(?:0\d|20)\d{4}|800\d{6,7}')
+            ->setNationalNumberPattern('(?:30[03]\d{3}|4(?:0(?:0\d|20)|864))\d{4}|800\d{6,7}|300\d{5}')
             ->setPossibleLength([8, 9, 10]);
         $this->intlNumberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{4})')
                 ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['300|4(?:0[02]|37)', '4(?:02|37)0|[34]00'])
+                ->setLeadingDigitsPattern(['300|4(?:0[02]|37|86)', '300|4(?:0(?:0|20)|370|864)'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2,3})(\d{4})')

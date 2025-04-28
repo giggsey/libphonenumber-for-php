@@ -1751,7 +1751,7 @@ class PhoneNumberUtil
         $phoneContext = $this->extractPhoneContext($numberToParse, $indexOfPhoneContext);
 
         if (!$this->isPhoneContextValid($phoneContext)) {
-            throw new NumberParseException(NumberParseException::NOT_A_NUMBER, 'The phone-context valid is invalid.');
+            throw new NumberParseException(NumberParseException::NOT_A_NUMBER, 'The phone-context value is invalid.');
         }
 
         if ($phoneContext !== null) {
