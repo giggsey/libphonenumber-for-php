@@ -28,13 +28,16 @@ class PhoneNumberMetadata_SR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[2-5]|68|[78]\d)\d{5}')
+            ->setNationalNumberPattern('(?:[2-5]|68|[78]\d|90)\d{5}')
             ->setPossibleLength([6, 7]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:7[124-7]|8[1-9])\d{5}')
             ->setExampleNumber('7412345')
             ->setPossibleLength([7]);
-        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('90\d{5}')
+            ->setExampleNumber('9012345')
+            ->setPossibleLength([7]);
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:2[1-3]|3[0-7]|(?:4|68)\d|5[2-58])\d{4}')
             ->setExampleNumber('211234');
@@ -52,10 +55,13 @@ class PhoneNumberMetadata_SR extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['[6-8]'])
+                ->setLeadingDigitsPattern(['[6-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
-        $this->tollFree = PhoneNumberDesc::empty();
+        $this->tollFree = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('80\d{5}')
+            ->setExampleNumber('8012345')
+            ->setPossibleLength([7]);
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())

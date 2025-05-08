@@ -31,7 +31,7 @@ class PhoneNumberMetadata_ML extends PhoneMetadata
             ->setNationalNumberPattern('[24-9]\d{7}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2(?:0(?:01|79)|17\d)\d{4}|(?:5[01]|[679]\d|8[2-59])\d{6}')
+            ->setNationalNumberPattern('2(?:0(?:01|79)|17\d)\d{4}|(?:5[0-3]|[679]\d|8[2-59])\d{6}')
             ->setExampleNumber('65012345');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
