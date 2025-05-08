@@ -44,7 +44,7 @@ class PhoneNumberMetadata_QA extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['2[16]|8'])
+                ->setLeadingDigitsPattern(['2[136]|8'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{4})')
@@ -60,7 +60,7 @@ class PhoneNumberMetadata_QA extends PhoneMetadata
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = PhoneNumberDesc::empty();
         $this->pager = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2[16]\d{5}')
+            ->setNationalNumberPattern('2[136]\d{5}')
             ->setExampleNumber('2123456')
             ->setPossibleLength([7]);
         $this->uan = PhoneNumberDesc::empty();

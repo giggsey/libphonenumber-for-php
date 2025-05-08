@@ -100,7 +100,7 @@ class PhoneNumberMetadata_IL extends PhoneMetadata
             ->setPossibleLength([10]);
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7(?:38(?:0\d|5[0-3569]|88)|8(?:33|55|77|81)\d)\d{4}|7(?:18|2[23]|3[237]|47|6[258]|7\d|82|9[2-9])\d{6}')
+            ->setNationalNumberPattern('7(?:38(?:[05]\d|8[08])|8(?:33|55|77|81)\d)\d{4}|7(?:18|2[23]|3[237]|47|6[258]|7\d|82|9[2-9])\d{6}')
             ->setExampleNumber('771234567')
             ->setPossibleLength([9]);
         $this->pager = PhoneNumberDesc::empty();

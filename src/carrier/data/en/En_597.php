@@ -17,7 +17,6 @@ namespace libphonenumber\carrier\data\en;
 class En_597
 {
     public const DATA = [
-        5978 => 'Telesur',
         59771 => 'Digicel',
         59772 => 'Digicel',
         59774 => 'Digicel',
@@ -27,5 +26,11 @@ class En_597
         59781 => 'Digicel',
         59782 => 'Digicel',
         59783 => 'Digicel',
+        59784 => 'Telesur',
+        59785 => 'Telesur',
+        59786 => 'Telesur',
+        59787 => 'Telesur',
+        59788 => 'Telesur',
+        59789 => 'Telesur',
     ];
 }
