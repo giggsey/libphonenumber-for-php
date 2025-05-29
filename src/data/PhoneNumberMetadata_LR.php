@@ -30,10 +30,10 @@ class PhoneNumberMetadata_LR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[245]\d|33|77|88)\d{7}|(?:2\d|[4-6])\d{6}')
+            ->setNationalNumberPattern('(?:[2457]\d|33|88)\d{7}|(?:2\d|[4-6])\d{6}')
             ->setPossibleLength([7, 8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:(?:(?:22|33)0|555|(?:77|88)\d)\d|4(?:240|[67]))\d{5}|[56]\d{6}')
+            ->setNationalNumberPattern('(?:(?:(?:22|33)0|555|7(?:6[01]|7\d)|88\d)\d|4(?:240|[67]))\d{5}|[56]\d{6}')
             ->setExampleNumber('770123456')
             ->setPossibleLength([7, 9]);
         $this->premiumRate = (new PhoneNumberDesc())

@@ -56,6 +56,7 @@ class En_12
         1253 => 'Washington State',
         1254 => 'Texas',
         1256 => 'Alabama',
+        1257 => 'British Colombia',
         1260 => 'Indiana',
         1262 => 'Wisconsin',
         1263 => 'Montreal, QC',

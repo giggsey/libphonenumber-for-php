@@ -31,7 +31,7 @@ class PhoneNumberMetadata_BI extends PhoneMetadata
             ->setNationalNumberPattern('(?:[267]\d|31)\d{6}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('64[0-2]\d{5}|(?:29|[67][125-9])\d{6}')
+            ->setNationalNumberPattern('(?:29|6[124-9]|7[125-9])\d{6}')
             ->setExampleNumber('79561234');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())

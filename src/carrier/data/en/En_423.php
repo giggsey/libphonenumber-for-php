@@ -18,6 +18,7 @@ class En_423
 {
     public const DATA = [
         42364 => 'Soracom',
+        42365 => 'Cubic',
         42366 => 'Telecom Liechtenstein',
         42373 => 'Telecom Liechtenstein',
         42374 => 'First Mobile',
@@ -25,11 +26,6 @@ class En_423
         42378 => 'Salt',
         42379 => 'Telecom Liechtenstein',
         423650 => 'Telecom Liechtenstein',
-        423651 => 'Cubic',
-        423652 => 'Cubic',
-        423653 => 'Cubic',
-        423654 => 'Cubic',
-        423656 => 'Cubic',
         423659 => 'Telecom Liechtenstein',
         423661 => 'Dimoco',
         423666 => 'Datamobile AG',
