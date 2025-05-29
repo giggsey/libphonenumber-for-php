@@ -28,6 +28,7 @@ class En_98
         98991 => 'IR-MCI',
         98994 => 'IR-MCI',
         98996 => 'IR-MCI',
+        989955 => 'Irancell',
         989981 => 'Shatel Mobile',
         989982 => 'Shatel Mobile',
         989991 => 'Irancell',

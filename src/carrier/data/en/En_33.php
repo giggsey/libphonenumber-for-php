@@ -334,6 +334,7 @@ class En_33
         3375634 => 'Euroinformation Telecom',
         3375644 => 'SFR',
         3375645 => 'SFR',
+        3375648 => 'Bouygues',
         3375700 => 'Sewan communications',
         3375701 => 'Mobiweb telecom limited',
         3375702 => 'Mobiweb telecom limited',
