@@ -16,5 +16,5 @@ namespace libphonenumber\geocoding\data\nl;
  */
 class Nl_31
 {
-    public const DATA = [3170 => 'Den Haag', 31229 => 'Hoorn', 31481 => 'Elst', 31486 => 'Schaijk'];
+    public const DATA = [3170 => 'Den Haag', 31229 => 'Hoorn', 31481 => 'Elst', 31486 => 'Schaijk', 3197 => 'Cloud communication'];
 }
