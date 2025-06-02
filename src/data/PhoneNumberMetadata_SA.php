@@ -31,7 +31,7 @@ class PhoneNumberMetadata_SA extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('92\d{7}|(?:[15]|8\d)\d{8}')
+            ->setNationalNumberPattern('(?:[15]\d|800|92)\d{7}')
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([9, 10]);
         $this->mobile = (new PhoneNumberDesc())
@@ -66,12 +66,6 @@ class PhoneNumberMetadata_SA extends PhoneMetadata
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
-                ->setPattern('(\d{3})(\d{3})(\d{3,4})')
-                ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['81'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{4})')
                 ->setFormat('$1 $2 $3')
                 ->setLeadingDigitsPattern(['8'])
@@ -88,10 +82,7 @@ class PhoneNumberMetadata_SA extends PhoneMetadata
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
-        $this->uan = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('811\d{7}')
-            ->setExampleNumber('8110123456')
-            ->setPossibleLength([10]);
+        $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = PhoneNumberDesc::empty();
     }

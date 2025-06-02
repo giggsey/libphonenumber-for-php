@@ -18,6 +18,7 @@ class En_57
 {
     public const DATA = [
         5791 => 'Movistar',
+        5794 => 'Hablame',
         57303 => 'Uff!',
         57315 => 'Movistar',
         57316 => 'Movistar',

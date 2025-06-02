@@ -35,7 +35,7 @@ class PhoneNumberMetadata_IR extends PhoneMetadata
             ->setPossibleLengthLocalOnly([8])
             ->setPossibleLength([4, 5, 6, 7, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9(?:(?:0(?:[0-35]\d|4[4-6])|(?:[13]\d|2[0-3])\d)\d|9(?:[0-46]\d\d|5[15]0|8(?:[12]\d|88)|9(?:0[0-3]|[19]\d|21|69|77|8[7-9])))\d{5}')
+            ->setNationalNumberPattern('9(?:(?:0[0-5]|[13]\d|2[0-3])\d\d|9(?:[0-46]\d\d|5(?:10|5\d)|8(?:[12]\d|88)|9(?:0[0-3]|[19]\d|21|69|77|8[7-9])))\d{5}')
             ->setExampleNumber('9123456789')
             ->setPossibleLength([10]);
         $this->premiumRate = PhoneNumberDesc::empty();
