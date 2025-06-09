@@ -76,7 +76,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('79(?:1(?:[0-2]\d|3[0-3])|2[0-7]\d)\d{3}')
+            ->setNationalNumberPattern('79(?:1(?:[0-2]\d|3[0-8])|2[0-7]\d)\d{3}')
             ->setExampleNumber('79101234')
             ->setPossibleLength([8]);
         $this->pager = PhoneNumberDesc::empty();
