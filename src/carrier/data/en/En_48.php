@@ -25,6 +25,7 @@ class En_48
         48213 => 'Plus',
         48450 => 'Play',
         48454 => 'Orange',
+        48456 => 'Play',
         48532 => 'T-Mobile',
         48538 => 'T-Mobile',
         48539 => 'T-Mobile',
