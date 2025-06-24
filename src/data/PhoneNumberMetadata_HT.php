@@ -28,10 +28,10 @@ class PhoneNumberMetadata_HT extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[2-489]\d|55)\d{6}')
+            ->setNationalNumberPattern('[2-589]\d{7}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[34]\d|55)\d{6}')
+            ->setNationalNumberPattern('(?:[34]\d|5[56])\d{6}')
             ->setExampleNumber('34101234');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())

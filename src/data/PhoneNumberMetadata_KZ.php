@@ -21,7 +21,7 @@ class PhoneNumberMetadata_KZ extends PhoneMetadata
 {
     protected const ID = 'KZ';
     protected const COUNTRY_CODE = 7;
-    protected const LEADING_DIGITS = '33|7';
+    protected const LEADING_DIGITS = '33622|7';
     protected const NATIONAL_PREFIX = '8';
 
     protected ?string $nationalPrefixForParsing = '8';
