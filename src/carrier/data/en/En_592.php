@@ -73,5 +73,6 @@ class En_592
         592741 => 'E-Networks',
         592742 => 'E-Networks',
         592750 => 'Digicel Guyana',
+        592770 => 'E-Networks',
     ];
 }

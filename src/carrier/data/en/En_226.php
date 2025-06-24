@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_226
 {
     public const DATA = [
+        2264 => 'Orange',
         22601 => 'Onatel',
         22602 => 'Onatel',
         22603 => 'Onatel',

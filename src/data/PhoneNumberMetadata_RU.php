@@ -22,7 +22,6 @@ class PhoneNumberMetadata_RU extends PhoneMetadata
 {
     protected const ID = 'RU';
     protected const COUNTRY_CODE = 7;
-    protected const LEADING_DIGITS = '3[04-689]|[489]';
     protected const NATIONAL_PREFIX = '8';
 
     protected ?string $nationalPrefixForParsing = '8';
@@ -46,7 +45,7 @@ class PhoneNumberMetadata_RU extends PhoneMetadata
             ->setExampleNumber('8091234567')
             ->setPossibleLength([10]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:3(?:0[12]|4[1-35-79]|5[1-3]|65|8[1-58]|9[0145])|4(?:01|1[1356]|2[13467]|7[1-5]|8[1-7]|9[1-689])|8(?:1[1-8]|2[01]|3[13-6]|4[0-8]|5[15]|6[1-35-79]|7[1-37-9]))\d{7}')
+            ->setNationalNumberPattern('336(?:[013-9]\d|2[013-9])\d{5}|(?:3(?:0[12]|4[1-35-79]|5[1-3]|65|8[1-58]|9[0145])|4(?:01|1[1356]|2[13467]|7[1-5]|8[1-7]|9[1-689])|8(?:1[1-8]|2[01]|3[13-6]|4[0-8]|5[15-7]|6[0-35-79]|7[1-37-9]))\d{7}')
             ->setExampleNumber('3011234567')
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
