@@ -23,6 +23,7 @@ class En_685
         68575 => 'Bluesky',
         68576 => 'Bluesky',
         68577 => 'Digicel',
+        68578 => 'Digicel',
         68583 => 'Digicel',
         68584 => 'Digicel',
         68585 => 'Digicel',

@@ -46,6 +46,7 @@ class En_17
         1742 => 'Ontario',
         1743 => 'North Carolina',
         1747 => 'California',
+        1748 => 'Colorado',
         1753 => 'Ontario',
         1754 => 'Florida',
         1757 => 'Virginia',
