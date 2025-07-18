@@ -31,7 +31,7 @@ class PhoneNumberMetadata_SZ extends PhoneMetadata
             ->setNationalNumberPattern('0800\d{4}|(?:[237]\d|900)\d{6}')
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7[6-9]\d{6}')
+            ->setNationalNumberPattern('7[5-9]\d{6}')
             ->setExampleNumber('76123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())
