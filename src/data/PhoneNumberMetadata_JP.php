@@ -53,6 +53,11 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
                 ->setLeadingDigitsPattern(['007', '0077', '00777', '00777[01]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
+                ->setPattern('(\d{8,10})')
+                ->setFormat('$1')
+                ->setLeadingDigitsPattern(['000'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')
                 ->setFormat('$1-$2-$3')
                 ->setLeadingDigitsPattern(['(?:12|57|99)0'])
