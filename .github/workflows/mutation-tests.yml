@@ -39,4 +39,4 @@ jobs:
 
       - name: "Infection"
         run: |
-          vendor/bin/infection --threads=max
+          vendor/bin/infection --threads=max --static-analysis-tool=phpstan
