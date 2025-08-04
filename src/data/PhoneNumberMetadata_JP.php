@@ -24,7 +24,7 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
     protected const COUNTRY_CODE = 81;
     protected const NATIONAL_PREFIX = '0';
 
-    protected ?string $nationalPrefixForParsing = '(000[259]\d{6})$|(?:(?:003768)0?)|0';
+    protected ?string $nationalPrefixForParsing = '(000[2569]\d{4,6})$|(?:(?:003768)0?)|0';
     protected ?string $internationalPrefix = '010';
     protected ?string $nationalPrefixTransformRule = '$1';
     protected bool $mobileNumberPortableRegion = true;
@@ -32,10 +32,10 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('00[1-9]\d{6,14}|[257-9]\d{9}|(?:00|[1-9]\d\d)\d{6}')
+            ->setNationalNumberPattern('00[1-9]\d{6,14}|[25-9]\d{9}|(?:00|[1-9]\d\d)\d{6}')
             ->setPossibleLength([8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[7-9]0[1-9]\d{7}')
+            ->setNationalNumberPattern('(?:601[0-4]0|[7-9]0[1-9]\d\d)\d{5}')
             ->setExampleNumber('9012345678')
             ->setPossibleLength([10]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -82,7 +82,7 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{4})(\d{4})')
                 ->setFormat('$1-$2-$3')
-                ->setLeadingDigitsPattern(['[36]|4(?:2[09]|7[01])', '[36]|4(?:2(?:0|9[02-69])|7(?:0[019]|1))'])
+                ->setLeadingDigitsPattern(['3|4(?:2[09]|7[01])|6[1-9]', '3|4(?:2(?:0|9[02-69])|7(?:0[019]|1))|6[1-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -120,7 +120,7 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{4})(\d{4})')
                 ->setFormat('$1-$2-$3')
-                ->setLeadingDigitsPattern(['[257-9]'])
+                ->setLeadingDigitsPattern(['[25-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -193,7 +193,7 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{4})(\d{4})')
                 ->setFormat('$1-$2-$3')
-                ->setLeadingDigitsPattern(['[36]|4(?:2[09]|7[01])', '[36]|4(?:2(?:0|9[02-69])|7(?:0[019]|1))'])
+                ->setLeadingDigitsPattern(['3|4(?:2[09]|7[01])|6[1-9]', '3|4(?:2(?:0|9[02-69])|7(?:0[019]|1))|6[1-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -221,7 +221,7 @@ class PhoneNumberMetadata_JP extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{4})(\d{4})')
                 ->setFormat('$1-$2-$3')
-                ->setLeadingDigitsPattern(['[257-9]'])
+                ->setLeadingDigitsPattern(['[25-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

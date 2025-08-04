@@ -20,6 +20,7 @@ class En_968
         9681 => 'Ooredoo',
         96871 => 'Omantel',
         96872 => 'Omantel',
+        96874 => 'Ooredoo',
         96876 => 'Vodafone Oman',
         96877 => 'Vodafone Oman',
         96878 => 'Ooredoo',
