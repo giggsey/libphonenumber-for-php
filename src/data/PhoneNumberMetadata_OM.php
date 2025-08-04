@@ -32,7 +32,7 @@ class PhoneNumberMetadata_OM extends PhoneMetadata
             ->setNationalNumberPattern('(?:1505|[279]\d{3}|500)\d{4}|800\d{5,6}')
             ->setPossibleLength([7, 8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1505|90[1-9]\d)\d{4}|(?:7[126-9]|9[1-9])\d{6}')
+            ->setNationalNumberPattern('1505\d{4}|(?:7(?:[126-9]\d|41)|9(?:0[1-9]|[1-9]\d))\d{5}')
             ->setExampleNumber('92123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())

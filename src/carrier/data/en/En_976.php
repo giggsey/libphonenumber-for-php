@@ -23,6 +23,7 @@ class En_976
         97666 => 'ONDO',
         97669 => 'Skytel',
         97672 => 'Lime',
+        97678 => 'G-Mobile',
         97680 => 'Unitel',
         97681 => 'ONDO',
         97683 => 'G-Mobile',

@@ -58,7 +58,7 @@
   "require-dev": {
     "ext-dom": "*",
     "friendsofphp/php-cs-fixer": "^3.71",
-    "infection/infection": "^0.28.0",
+    "infection/infection": "^0.29|^0.31.0",
     "nette/php-generator": "^4.1",
     "php-coveralls/php-coveralls": "^2.7",
     "phpstan/extension-installer": "^1.4.3",

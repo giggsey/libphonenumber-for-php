@@ -46,7 +46,7 @@ class PhoneNumberMetadata_DO extends PhoneMetadata
             ->setExampleNumber('8092345678')
             ->setPossibleLengthLocalOnly([7]);
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('8(?:00(?:14|[2-9]\d)|(?:33|44|55|66|77|88)[2-9]\d)\d{5}')
+            ->setNationalNumberPattern('800(?:14|[2-9]\d)\d{5}|8[024]9[01]\d{6}|8(?:33|44|55|66|77|88)[2-9]\d{6}')
             ->setExampleNumber('8002123456');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = (new PhoneNumberDesc())
