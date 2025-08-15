@@ -31,11 +31,11 @@ class PhoneNumberMetadata_GM extends PhoneMetadata
             ->setNationalNumberPattern('[2-9]\d{6}')
             ->setPossibleLength([7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('556\d{4}|(?:[23679]\d|4[015]|5[0-489])\d{5}')
+            ->setNationalNumberPattern('556\d{4}|(?:[23679]\d|4[015]|5[0-489]|8[67])\d{5}')
             ->setExampleNumber('3012345');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:4(?:[23]\d\d|4(?:1[024679]|[6-9]\d))|5(?:5(?:3\d|4[0-7])|6[67]\d|7(?:1[04]|2[035]|3[58]|48))|8\d{3})\d{3}')
+            ->setNationalNumberPattern('(?:4(?:[23]\d\d|4(?:1[024679]|[6-9]\d))|5(?:5(?:3\d|4[0-7])|6[67]\d|7(?:1[04]|2[035]|3[58]|48))|8[0-589]\d\d)\d{3}')
             ->setExampleNumber('5661234');
         $this->numberFormat = [
             (new NumberFormat())

@@ -31,7 +31,7 @@ class PhoneNumberMetadata_GY extends PhoneMetadata
             ->setNationalNumberPattern('(?:[2-8]\d{3}|9008)\d{3}')
             ->setPossibleLength([7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:510|6\d\d|7(?:[0-5]\d|6[019]|70))\d{4}')
+            ->setNationalNumberPattern('(?:51[01]|6\d\d|7(?:[0-5]\d|6[019]|70))\d{4}')
             ->setExampleNumber('6091234');
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('9008\d{3}')

@@ -23,7 +23,7 @@ class PhoneNumberMetadata_GG extends PhoneMetadata
     protected const COUNTRY_CODE = 44;
     protected const NATIONAL_PREFIX = '0';
 
-    protected ?string $nationalPrefixForParsing = '([25-9]\d{5})$|0';
+    protected ?string $nationalPrefixForParsing = '([25-9]\d{5})$|0|180020';
     protected ?string $internationalPrefix = '00';
     protected ?string $nationalPrefixTransformRule = '1481$1';
 

@@ -23,7 +23,7 @@ class PhoneNumberMetadata_JE extends PhoneMetadata
     protected const COUNTRY_CODE = 44;
     protected const NATIONAL_PREFIX = '0';
 
-    protected ?string $nationalPrefixForParsing = '([0-24-8]\d{5})$|0';
+    protected ?string $nationalPrefixForParsing = '([0-24-8]\d{5})$|0|180020';
     protected ?string $internationalPrefix = '00';
     protected ?string $nationalPrefixTransformRule = '1534$1';
 
