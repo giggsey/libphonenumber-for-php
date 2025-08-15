@@ -24,7 +24,7 @@ class PhoneNumberMetadata_GB extends PhoneMetadata
     protected const COUNTRY_CODE = 44;
     protected const NATIONAL_PREFIX = '0';
 
-    protected ?string $nationalPrefixForParsing = '0';
+    protected ?string $nationalPrefixForParsing = '0|180020';
     protected ?string $internationalPrefix = '00';
     protected ?string $preferredExtnPrefix = ' x';
     protected bool $mainCountryForCode = true;
