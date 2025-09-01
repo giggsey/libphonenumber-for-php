@@ -18,6 +18,7 @@ class En_372
 {
     public const DATA = [
         37250 => 'Telia Eesti AS',
+        37251 => 'Telia Eesti AS',
         37252 => 'Telia Eesti AS',
         37254 => 'Telia Eesti AS',
         37255 => 'Tele 2',
@@ -29,7 +30,6 @@ class En_372
         37282 => 'Elisa',
         37283 => 'Tele 2',
         37284 => 'Tele 2',
-        372519 => 'Telia Eesti AS',
         372530 => 'Telia Eesti AS',
         372533 => 'Telia Eesti AS',
         372534 => 'Telia Eesti AS',

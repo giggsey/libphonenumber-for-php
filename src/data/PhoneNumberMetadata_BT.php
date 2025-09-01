@@ -28,11 +28,11 @@ class PhoneNumberMetadata_BT extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[17]\d{7}|[2-8]\d{6}')
+            ->setNationalNumberPattern('[178]\d{7}|[2-8]\d{6}')
             ->setPossibleLengthLocalOnly([6])
             ->setPossibleLength([7, 8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[67]|77)\d{6}')
+            ->setNationalNumberPattern('(?:1[67]|[78]7)\d{6}')
             ->setExampleNumber('17123456')
             ->setPossibleLength([8]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -50,12 +50,12 @@ class PhoneNumberMetadata_BT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[2-68]|7[246]'])
+                ->setLeadingDigitsPattern(['[2-6]|7[246]|8[2-4]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['1[67]|7'])
+                ->setLeadingDigitsPattern(['1[67]|[78]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = PhoneNumberDesc::empty();
@@ -70,12 +70,12 @@ class PhoneNumberMetadata_BT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[2-68]|7[246]'])
+                ->setLeadingDigitsPattern(['[2-6]|7[246]|8[2-4]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['1[67]|7'])
+                ->setLeadingDigitsPattern(['1[67]|[78]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
     }

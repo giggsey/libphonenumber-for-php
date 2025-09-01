@@ -471,6 +471,7 @@ class En_65
         658971 => 'Circle.Life',
         658972 => 'SingTel',
         658976 => 'SingTel',
+        658977 => 'SingTel',
         659001 => 'StarHub',
         659002 => 'StarHub',
         659003 => 'StarHub',
