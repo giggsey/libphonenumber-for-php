@@ -35,7 +35,7 @@ class PhoneNumberMetadata_DE extends PhoneMetadata
             ->setPossibleLengthLocalOnly([2, 3])
             ->setPossibleLength([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('15310\d{6}|1(?:5[0-25-9]\d|7[013-5])\d{7}|1(?:6[023]|7[26-9])\d{7,8}')
+            ->setNationalNumberPattern('1(?:(?:5(?:[0-25-9]\d\d|3(?:10|33))|7[26-9]\d\d)\d{6}|6[023]\d{7,8})|17\d{8}')
             ->setExampleNumber('15123456789')
             ->setPossibleLength([10, 11]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -135,7 +135,7 @@ class PhoneNumberMetadata_DE extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{5})(\d{6})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['15[03568]', '15(?:[0568]|31)'])
+                ->setLeadingDigitsPattern(['15[03568]', '15(?:[0568]|3[13])'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
