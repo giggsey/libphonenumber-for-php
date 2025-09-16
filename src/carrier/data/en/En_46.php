@@ -230,6 +230,7 @@ class En_46
         467908 => 'Tele2 Sverige',
         467909 => 'Tele2 Sverige',
         467910 => 'TELL ESS AB',
+        467915 => 'TeliaSonera',
         467930 => 'HI3G Access',
         467931 => 'HI3G Access',
         467932 => 'HI3G Access',
