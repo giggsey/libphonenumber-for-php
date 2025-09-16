@@ -30,7 +30,7 @@ class PhoneNumberMetadata_IT extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0\d{5,10}|1\d{8,10}|3(?:[0-8]\d{7,10}|9\d{7,8})|(?:43|55|70)\d{8}|8\d{5}(?:\d{2,4})?')
+            ->setNationalNumberPattern('0\d{5,11}|1\d{8,10}|3(?:[0-8]\d{7,10}|9\d{7,8})|(?:43|55|70)\d{8}|8\d{5}(?:\d{2,4})?')
             ->setPossibleLength([6, 7, 8, 9, 10, 11, 12]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('3[2-9]\d{7,8}|(?:31|43)\d{8}')
@@ -41,9 +41,8 @@ class PhoneNumberMetadata_IT extends PhoneMetadata
             ->setExampleNumber('899123456')
             ->setPossibleLength([6, 8, 9, 10]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0669[0-79]\d{1,6}|0(?:1(?:[0159]\d|[27][1-5]|31|4[1-4]|6[1356]|8[2-57])|2\d\d|3(?:[0159]\d|2[1-4]|3[12]|[48][1-6]|6[2-59]|7[1-7])|4(?:[0159]\d|[23][1-9]|4[245]|6[1-5]|7[1-4]|81)|5(?:[0159]\d|2[1-5]|3[2-6]|4[1-79]|6[4-6]|7[1-578]|8[3-8])|6(?:[0-57-9]\d|6[0-8])|7(?:[0159]\d|2[12]|3[1-7]|4[2-46]|6[13569]|7[13-6]|8[1-59])|8(?:[0159]\d|2[3-578]|3[1-356]|[6-8][1-5])|9(?:[0159]\d|[238][1-5]|4[12]|6[1-8]|7[1-6]))\d{2,7}')
-            ->setExampleNumber('0212345678')
-            ->setPossibleLength([6, 7, 8, 9, 10, 11]);
+            ->setNationalNumberPattern('0(?:669[0-79]\d{1,6}|831\d{2,8})|0(?:1(?:[0159]\d|[27][1-5]|31|4[1-4]|6[1356]|8[2-57])|2\d\d|3(?:[0159]\d|2[1-4]|3[12]|[48][1-6]|6[2-59]|7[1-7])|4(?:[0159]\d|[23][1-9]|4[245]|6[1-5]|7[1-4]|81)|5(?:[0159]\d|2[1-5]|3[2-6]|4[1-79]|6[4-6]|7[1-578]|8[3-8])|6(?:[0-57-9]\d|6[0-8])|7(?:[0159]\d|2[12]|3[1-7]|4[2-46]|6[13569]|7[13-6]|8[1-59])|8(?:[0159]\d|2[3-578]|3[2356]|[6-8][1-5])|9(?:[0159]\d|[238][1-5]|4[12]|6[1-8]|7[1-6]))\d{2,7}')
+            ->setExampleNumber('0212345678');
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{4,5})')
@@ -103,7 +102,7 @@ class PhoneNumberMetadata_IT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})(\d{4,5})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['3'])
+                ->setLeadingDigitsPattern(['[03]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
@@ -180,7 +179,7 @@ class PhoneNumberMetadata_IT extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})(\d{4,5})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['3'])
+                ->setLeadingDigitsPattern(['[03]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
     }

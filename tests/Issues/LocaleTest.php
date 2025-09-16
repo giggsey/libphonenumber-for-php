@@ -14,6 +14,7 @@ use libphonenumber\CountryCodeToRegionCodeMap;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function in_array;
@@ -32,7 +33,7 @@ class LocaleTest extends TestCase
         $this->geocoder = PhoneNumberOfflineGeocoder::getInstance();
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('localeList')]
+    #[DataProvider('localeList')]
     public function testLocales(string $regionCode, string $countryName): void
     {
         if (!in_array($regionCode, $this->phoneUtil->getSupportedRegions(), true)) {
@@ -42,7 +43,15 @@ class LocaleTest extends TestCase
         $phoneNumber = $this->phoneUtil->getExampleNumberForType($regionCode, PhoneNumberType::FIXED_LINE_OR_MOBILE);
 
         self::assertNotNull($phoneNumber);
-        self::assertContains($regionCode, CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP[$phoneNumber->getCountryCode()]);
+
+        $countryCode = $phoneNumber->getCountryCode();
+
+        if (!isset(CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP[$countryCode])) {
+            self::fail("Unknown country calling code: {$countryCode}");
+        }
+        $regions = CountryCodeToRegionCodeMap::COUNTRY_CODE_TO_REGION_CODE_MAP[$countryCode];
+        self::assertContains($regionCode, $regions);
+
 
         self::assertSame($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
 

@@ -29,7 +29,7 @@ class PhoneNumberMetadata_LV extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[268]\d|90)\d{6}')
+            ->setNationalNumberPattern('(?:[268]\d|78|90)\d{6}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('2333[0-8]\d{3}|2(?:[0-24-9]\d\d|3(?:0[07]|[14-9]\d|2[02-9]|3[0-24-9]))\d{4}')
@@ -44,7 +44,7 @@ class PhoneNumberMetadata_LV extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[269]|8[01]'])
+                ->setLeadingDigitsPattern(['[2679]|8[01]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
