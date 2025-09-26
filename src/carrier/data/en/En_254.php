@@ -20,6 +20,7 @@ class En_254
         25410 => 'Airtel',
         25411 => 'Safaricom',
         25413 => 'NRG Media Limited',
+        25414 => 'Safaricom',
         25470 => 'Safaricom',
         25471 => 'Safaricom',
         25472 => 'Safaricom',
