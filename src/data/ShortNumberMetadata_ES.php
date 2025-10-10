@@ -33,7 +33,7 @@ class ShortNumberMetadata_ES extends PhoneMetadata
             ->setNationalNumberPattern('[12]2\d{1,4}|90(?:5\d|7)|(?:118|2(?:[357]\d|80)|3[357]\d)\d\d|[79]9[57]\d{3}')
             ->setExampleNumber('120');
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0(?:16|6[57]|8[58])|1(?:006|12|[3-7]\d\d)|(?:116|20\d)\d{3}')
+            ->setNationalNumberPattern('0(?:16|20|6[57]|8[58])|1(?:006|12|[3-7]\d\d)|(?:116|20\d)\d{3}')
             ->setExampleNumber('016')
             ->setPossibleLength([3, 4, 6]);
         $this->emergency = (new PhoneNumberDesc())
@@ -41,7 +41,7 @@ class ShortNumberMetadata_ES extends PhoneMetadata
             ->setExampleNumber('085')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0(?:1[0-267]|2[148]|6[0-257]|8[058]|9[12])|1(?:0[03-57]\d{1,3}|1(?:2|6(?:000|111)|8\d\d)|2\d{1,4}|[3-9]\d\d)|2(?:2\d{1,4}|80\d\d)|90(?:5[124578]|7)|1(?:3[34]|77)|(?:2[01]\d|[79]9[57])\d{3}|[23][357]\d{3}')
+            ->setNationalNumberPattern('0(?:1[0-267]|2[0148]|6[0-257]|8[058]|9[12])|1(?:0[03-57]\d{1,3}|1(?:2|6(?:000|111)|8\d\d)|2\d{1,4}|[3-9]\d\d)|2(?:2\d{1,4}|80\d\d)|90(?:5[124578]|7)|1(?:3[34]|77)|(?:2[01]\d|[79]9[57])\d{3}|[23][357]\d{3}')
             ->setExampleNumber('010');
         $this->standard_rate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('0(?:1[0-27]|2[148]|6[0-2]|80|9[12])|21\d{4}')
