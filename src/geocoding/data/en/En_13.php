@@ -36,6 +36,7 @@ class En_13
         1320 => 'Minnesota',
         1321 => 'Florida',
         1323 => 'California',
+        1324 => 'Florida',
         1325 => 'Texas',
         1326 => 'Ohio',
         1327 => 'Arkansas',

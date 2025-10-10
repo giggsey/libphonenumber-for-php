@@ -44,7 +44,7 @@ class En_14
         1432 => 'Texas',
         1434 => 'Virginia',
         1435 => 'Utah',
-        1437 => 'Ontario',
+        1437 => 'Toronto',
         1438 => 'Quebec',
         1440 => 'Ohio',
         1442 => 'California',
