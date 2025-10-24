@@ -35,7 +35,7 @@ class PhoneNumberMetadata_MG extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('3[2-47-9]\d{7}')
+            ->setNationalNumberPattern('3[2-46-9]\d{7}')
             ->setExampleNumber('321234567');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
