@@ -21,6 +21,7 @@ jobs:
         composer: [highest, lowest]
         include:
           - php-version: "8.5"
+            arch: [ "amd64", "i386" ]
             composer: highest
 
     steps:
