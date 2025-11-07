@@ -17,15 +17,15 @@ jobs:
       fail-fast: false
       matrix:
         arch: [ "amd64", "i386" ]
-        php-version: [8.1, 8.2, 8.3, 8.4]
+        php-version: [8.1, 8.2, 8.3, 8.4, 8.5]
         composer: [highest, lowest]
-        include:
-          - php-version: "8.5"
-            arch: amd64
-            composer: highest
-          - php-version: "8.5"
+        exclude:
+          # PHP 8.5 doesn't work with lowest due to our deps loading nikic/php-parser@5.3
+          - composer: lowest
+            php-version: 8.4
+          # PHP 8.5 and i386 seems to timeout due to libxml2 issues
+          - php-version: 8.5
             arch: i386
-            composer: highest
 
     steps:
       - name: Checkout
