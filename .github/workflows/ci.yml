@@ -22,7 +22,7 @@ jobs:
         exclude:
           # PHP 8.5 doesn't work with lowest due to our deps loading nikic/php-parser@5.3
           - composer: lowest
-            php-version: 8.4
+            php-version: 8.5
           # PHP 8.5 and i386 seems to timeout due to libxml2 issues
           - php-version: 8.5
             arch: i386
