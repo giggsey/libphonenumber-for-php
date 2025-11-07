@@ -18,6 +18,7 @@ class En_992
 {
     public const DATA = [
         9920 => 'ZET-MOBILE',
+        9926 => 'ZET-MOBILE',
         99200 => 'Megafon',
         99201 => 'Megafon',
         99202 => 'Megafon',
@@ -33,6 +34,7 @@ class En_992
         99222 => 'O-Mobile',
         99227 => 'Megafon',
         99230 => 'O-Mobile',
+        99238 => 'ZET-MOBILE',
         99240 => 'ZET-MOBILE',
         99241 => 'Megafon',
         99250 => 'Tcell',

@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_503
 {
     public const DATA = [
+        5035 => 'Claro',
         50361 => 'Movistar',
         50365 => 'SIGET',
         50366 => 'SIGET',
