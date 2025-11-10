@@ -86,6 +86,7 @@ class En_61
         61486 => 'Telstra',
         61487 => 'Telstra',
         61488 => 'Telstra',
+        61495 => 'Optus',
         614400 => 'Aazad distribution discretionary trust',
         614444 => 'Telstra',
         614445 => 'Telstra',

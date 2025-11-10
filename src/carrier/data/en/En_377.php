@@ -16,5 +16,10 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_377
 {
-    public const DATA = [3773 => 'Monaco Telecom', 3774 => 'Monaco Telecom', 3776 => 'Monaco Telecom'];
+    public const DATA = [
+        3773 => 'Monaco Telecom',
+        3774 => 'Monaco Telecom',
+        3776 => 'Monaco Telecom',
+        3777 => 'Monaco Telecom',
+    ];
 }

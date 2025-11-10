@@ -52,6 +52,11 @@ class PhoneNumberMetadata_PY extends PhoneMetadata
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
+                ->setPattern('(\d{7})')
+                ->setFormat('$1')
+                ->setLeadingDigitsPattern(['[15]'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
                 ->setPattern('(\d{2})(\d{5})')
                 ->setFormat('$1 $2')
                 ->setLeadingDigitsPattern(['[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]'])
@@ -109,5 +114,53 @@ class PhoneNumberMetadata_PY extends PhoneMetadata
             ->setPossibleLength([6, 7, 8, 9]);
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = PhoneNumberDesc::empty();
+        $this->intlNumberFormat = [
+            (new NumberFormat())
+                ->setPattern('(\d{3})(\d{3,6})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['[2-9]0'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{5})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['[26]1|3[289]|4[1246-8]|7[1-3]|8[1-36]'])
+                ->setNationalPrefixFormattingRule('(0$1)')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{3})(\d{4,5})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['2[279]|3[13-5]|4[359]|5|6(?:[34]|7[1-46-8])|7[46-8]|85'])
+                ->setNationalPrefixFormattingRule('(0$1)')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{3})(\d{3,4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['2[14-68]|3[26-9]|4[1246-8]|6(?:1|75)|7[1-35]|8[1-36]'])
+                ->setNationalPrefixFormattingRule('(0$1)')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{3})(\d{4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['87'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{3})(\d{6})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['9(?:[5-79]|8[1-7])'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{3})(\d{3})(\d{3})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['[2-8]'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{4})(\d{3})(\d{4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['9'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+        ];
     }
 }

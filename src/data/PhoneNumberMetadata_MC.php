@@ -30,10 +30,10 @@ class PhoneNumberMetadata_MC extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[3489]|6\d)\d{7}')
+            ->setNationalNumberPattern('(?:[3489]|[67]\d)\d{7}')
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('4(?:[469]\d|5[1-9])\d{5}|(?:3|6\d)\d{7}')
+            ->setNationalNumberPattern('4(?:[469]\d|5[1-9])\d{5}|(?:3|[67]\d)\d{7}')
             ->setExampleNumber('612345678');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
@@ -60,7 +60,7 @@ class PhoneNumberMetadata_MC extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4 $5')
-                ->setLeadingDigitsPattern(['6'])
+                ->setLeadingDigitsPattern(['[67]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
@@ -92,7 +92,7 @@ class PhoneNumberMetadata_MC extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4 $5')
-                ->setLeadingDigitsPattern(['6'])
+                ->setLeadingDigitsPattern(['[67]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
