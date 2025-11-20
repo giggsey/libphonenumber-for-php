@@ -28,10 +28,10 @@ class PhoneNumberMetadata_SV extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[267]\d\d|500)\d{5}|(?:80\d|900)\d{4}(?:\d{4})?')
+            ->setNationalNumberPattern('[25-7]\d{7}|(?:80\d|900)\d{4}(?:\d{4})?')
             ->setPossibleLength([7, 8, 11]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:500[0-4]|[67]\d{3})\d{4}')
+            ->setNationalNumberPattern('(?:5(?:00[0-4]|100)|[67]\d{3})\d{4}')
             ->setExampleNumber('70123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())

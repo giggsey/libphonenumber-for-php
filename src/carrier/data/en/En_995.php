@@ -90,6 +90,7 @@ class En_995
         99550010 => 'Cellfie',
         99550011 => 'Silknet',
         99550012 => 'Silknet',
+        99550019 => 'Cellfie',
         99550033 => 'Silknet',
         99550050 => 'MagtiCom',
         99550055 => 'Silknet',
