@@ -186,6 +186,7 @@ class En_34
         346937 => 'Yoigo',
         346938 => 'Yoigo',
         346939 => 'Yoigo',
+        346942 => 'Orange',
         346944 => 'Yoigo',
         346945 => 'Yoigo',
         346946 => 'Yoigo',

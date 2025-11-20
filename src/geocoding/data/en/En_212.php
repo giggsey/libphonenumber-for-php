@@ -17,6 +17,7 @@ namespace libphonenumber\geocoding\data\en;
 class En_212
 {
     public const DATA = [
+        21251 => 'Rabat/Tanger/Fès/Meknès',
         212520 => 'Casablanca',
         212521 => 'Casablanca/Central Morocco',
         212525 => 'Southern Morocco',
@@ -24,6 +25,7 @@ class En_212
         212530 => 'Rabat/Kènitra',
         212531 => 'Tangier/Al Hoceima/Larache/Tètouan/Chefchaouen',
         212532 => 'Fès/Errachidia/Meknès/Nador/Oujda/Taza',
+        212549 => 'Casablanca/Marrakech/Agadir',
         2125220 => 'Casablanca',
         2125222 => 'Casablanca',
         2125223 => 'Casablanca',
