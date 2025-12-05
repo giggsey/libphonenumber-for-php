@@ -19,6 +19,7 @@ class En_255
     public const DATA = [
         25561 => 'Viettel',
         25562 => 'Viettel',
+        25563 => 'Viettel',
         25565 => 'Yas',
         25566 => 'SMILE',
         25567 => 'Yas',

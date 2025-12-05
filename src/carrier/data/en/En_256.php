@@ -19,7 +19,6 @@ class En_256
     public const DATA = [
         25670 => 'Airtel',
         25671 => 'UTL',
-        25673 => 'Hamilton Telecom',
         25674 => 'Airtel',
         25675 => 'Airtel',
         25676 => 'MTN',
@@ -31,6 +30,8 @@ class En_256
         256726 => 'LycaMobile',
         256727 => 'LycaMobile',
         256728 => 'Talkio',
+        256730 => 'Airtel',
+        256736 => 'Hamilton Telecom',
         256790 => 'MTN',
         256791 => 'MTN',
         256792 => 'MTN',
