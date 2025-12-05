@@ -19,10 +19,12 @@ class En_998
     public const DATA = [
         9982 => 'Beeline',
         9983 => 'HUMANS',
-        9988 => 'MobiUZ',
         99850 => 'Ucell',
         99870 => 'MobiUZ',
         99877 => 'Uzbektelecom',
+        99880 => 'Perfectum',
+        99887 => 'MobiUZ',
+        99888 => 'MobiUZ',
         99890 => 'Beeline',
         99891 => 'Beeline',
         99892 => 'Beeline',
