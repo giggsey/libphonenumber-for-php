@@ -35,7 +35,7 @@ class PhoneNumberMetadata_IN extends PhoneMetadata
             ->setPossibleLengthLocalOnly([6, 7])
             ->setPossibleLength([8, 9, 10, 11, 12, 13]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:6(?:1279|828[01489])|7(?:887[02-9]|9(?:313|79[07-9]))|8(?:079[04-9]|(?:84|91)7[02-8]))\d{5}|(?:6(?:12|[2-47]1|5[17]|6[13]|80)[0189]|7(?:1(?:2[0189]|9[0-5])|2(?:[14][017-9]|8[0-59])|3(?:2[5-8]|[34][017-9]|9[016-9])|4(?:1[015-9]|[29][89]|39|8[389])|5(?:[15][017-9]|2[04-9]|9[7-9])|6(?:0[0-47]|1[0-257-9]|2[0-4]|3[19]|5[4589])|70[0289]|88[089]|97[02-8])|8(?:0(?:6[67]|7[02-8])|70[017-9]|84[01489]|91[0-289]))\d{6}|(?:7(?:31|4[47])|8(?:16|2[014]|3[126]|6[136]|7[78]|83))(?:[0189]\d|7[02-8])\d{5}|(?:6(?:[09]\d|1[04679]|2[03689]|3[05-9]|4[0489]|50|6[069]|7[07]|8[7-9])|7(?:0\d|2[0235-79]|3[05-8]|40|5[0346-8]|6[6-9]|7[1-9]|8[0-79]|9[089])|8(?:0[01589]|1[0-57-9]|2[235-9]|3[03-57-9]|[45]\d|6[02457-9]|7[1-69]|8[0-25-9]|9[02-9])|9\d\d)\d{7}|(?:6(?:(?:1[1358]|2[2457]|3[2-4]|4[235-7]|5[2-689]|6[24578])\d|7(?:[235689]\d|4[0189])|8(?:[14-6]\d|2[0-79]))|7(?:1(?:[013-8]\d|9[6-9])|28[6-8]|3(?:2[0-49]|9[2-5])|4(?:1[2-4]|[29][0-7]|3[0-8]|[56]\d|8[0-24-7])|5(?:2[1-3]|9[0-6])|6(?:0[5689]|2[5-9]|3[02-8]|4\d|5[0-367])|70[13-7]|881))[0189]\d{5}')
+            ->setNationalNumberPattern('(?:6(?:1279|828[01489])|7(?:887[02-9]|9(?:313|79[07-9]))|8(?:079[04-9]|(?:84|91)7[02-8]))\d{5}|(?:160[01]|6(?:12|[2-47]1|5[17]|6[13]|80)[0189]|7(?:1(?:2[0189]|9[0-5])|2(?:[14][017-9]|8[0-59])|3(?:2[5-8]|[34][017-9]|9[016-9])|4(?:1[015-9]|[29][89]|39|8[389])|5(?:[15][017-9]|2[04-9]|9[7-9])|6(?:0[0-47]|1[0-257-9]|2[0-4]|3[19]|5[4589])|70[0289]|88[089]|97[02-8])|8(?:0(?:6[67]|7[02-8])|70[017-9]|84[01489]|91[0-289]))\d{6}|(?:7(?:31|4[47])|8(?:16|2[014]|3[126]|6[136]|7[78]|83))(?:[0189]\d|7[02-8])\d{5}|(?:6(?:[09]\d|1[04679]|2[03689]|3[05-9]|4[0489]|50|6[069]|7[07]|8[7-9])|7(?:0\d|2[0235-79]|3[05-8]|40|5[0346-8]|6[6-9]|7[1-9]|8[0-79]|9[089])|8(?:0[01589]|1[0-57-9]|2[235-9]|3[03-57-9]|[45]\d|6[02457-9]|7[1-69]|8[0-25-9]|9[02-9])|9\d\d)\d{7}|(?:6(?:(?:1[1358]|2[2457]|3[2-4]|4[235-7]|5[2-689]|6[24578])\d|7(?:[235689]\d|4[0189])|8(?:[14-6]\d|2[0-79]))|7(?:1(?:[013-8]\d|9[6-9])|28[6-8]|3(?:2[0-49]|9[2-5])|4(?:1[2-4]|[29][0-7]|3[0-8]|[56]\d|8[0-24-7])|5(?:2[1-3]|9[0-6])|6(?:0[5689]|2[5-9]|3[02-8]|4\d|5[0-367])|70[13-7]|881))[0189]\d{5}')
             ->setExampleNumber('8123456789')
             ->setPossibleLength([10]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -105,13 +105,13 @@ class PhoneNumberMetadata_IN extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{5})(\d{5})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[6-9]'])
+                ->setLeadingDigitsPattern(['16|[6-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{2,4})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['1(?:6|8[06])', '1(?:6|8[06]0)'])
+                ->setLeadingDigitsPattern(['18[06]', '18[06]0'])
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})(\d{4})')
@@ -125,7 +125,7 @@ class PhoneNumberMetadata_IN extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(true),
         ];
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('000800\d{7}|1(?:600\d{6}|80(?:0\d{4,9}|3\d{9}))')
+            ->setNationalNumberPattern('000800\d{7}|180(?:0\d{4,9}|3\d{9})')
             ->setExampleNumber('1800123456');
         $this->sharedCost = (new PhoneNumberDesc())
             ->setNationalNumberPattern('1860\d{7}')
@@ -140,7 +140,7 @@ class PhoneNumberMetadata_IN extends PhoneMetadata
             ->setPossibleLength([10]);
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:600\d{6}|800\d{4,9})|(?:000800|18(?:03\d\d|6(?:0|[12]\d\d)))\d{7}');
+            ->setNationalNumberPattern('1800\d{4,9}|(?:000800|18(?:03\d\d|6(?:0|[12]\d\d)))\d{7}');
         $this->intlNumberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{8})')
@@ -194,13 +194,13 @@ class PhoneNumberMetadata_IN extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{5})(\d{5})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[6-9]'])
+                ->setLeadingDigitsPattern(['16|[6-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{2,4})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['1(?:6|8[06])', '1(?:6|8[06]0)'])
+                ->setLeadingDigitsPattern(['18[06]', '18[06]0'])
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{3})(\d{3})(\d{3})')
