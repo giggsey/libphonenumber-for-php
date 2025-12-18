@@ -55,6 +55,7 @@ class En_13
         1350 => 'California',
         1351 => 'Massachusetts',
         1352 => 'Florida',
+        1353 => 'Wisconsin',
         1354 => 'Quebec',
         1360 => 'Washington State',
         1361 => 'Texas',

@@ -21,8 +21,14 @@ class En_501
         50161 => 'Belize Telemedia Ltd (Digi)',
         50162 => 'Belize Telemedia Ltd (Digi)',
         50163 => 'Belize Telemedia Ltd (Digi)',
-        50165 => 'Speednet (Smart)',
         50166 => 'Speednet (Smart)',
         50167 => 'Speednet (Smart)',
+        501650 => 'Speednet (Smart)',
+        501651 => 'Speednet (Smart)',
+        501652 => 'Speednet (Smart)',
+        501653 => 'Speednet (Smart)',
+        501654 => 'Speednet (Smart)',
+        501655 => 'Speednet (Smart)',
+        501656 => 'Belize Telemedia Ltd (Digi)',
     ];
 }
