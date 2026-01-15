@@ -879,6 +879,12 @@ class PhoneNumberUtil
     public function getRegionCodeForNumber(PhoneNumber $number): ?string
     {
         $countryCode = $number->getCountryCode();
+
+        if (null === $countryCode)
+        {
+            return null;
+        }
+
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCode])) {
             return null;
         }
