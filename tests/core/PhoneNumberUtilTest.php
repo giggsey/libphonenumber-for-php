@@ -61,6 +61,7 @@ class PhoneNumberUtilTest extends TestCase
     private static PhoneNumber $aeUAN;
     private static PhoneNumber $unknownCountryCodeNoRawInput;
     protected PhoneNumberUtil $phoneUtil;
+    private static PhoneNumber $notAPhoneNumber;
 
     public function setUp(): void
     {
@@ -142,6 +143,7 @@ class PhoneNumberUtilTest extends TestCase
         self::$aeUAN->setCountryCode(971)->setNationalNumber('600123456');
         self::$unknownCountryCodeNoRawInput = new PhoneNumber();
         self::$unknownCountryCodeNoRawInput->setCountryCode(2)->setNationalNumber('12345');
+        self::$notAPhoneNumber = (new PhoneNumber())->setNationalNumber('not-a-phone-number');
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
@@ -1775,6 +1777,8 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals(RegionCode::GB, $this->phoneUtil->getRegionCodeForNumber(self::$gbMobile));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$internationalTollFree));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$universalPremiumRate));
+        self::assertEquals(null, $this->phoneUtil->getRegionCodeForNumber(self::$notAPhoneNumber));
+
     }
 
     public function testGetRegionCodesForCountryCode(): void
