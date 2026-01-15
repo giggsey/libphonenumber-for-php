@@ -143,7 +143,7 @@ class PhoneNumberUtilTest extends TestCase
         self::$aeUAN->setCountryCode(971)->setNationalNumber('600123456');
         self::$unknownCountryCodeNoRawInput = new PhoneNumber();
         self::$unknownCountryCodeNoRawInput->setCountryCode(2)->setNationalNumber('12345');
-        self::$notAPhoneNumber = new PhoneNumber('not-a-phone-number');
+        self::$notAPhoneNumber = (new PhoneNumber())->setNationalNumber('not-a-phone-number');
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
