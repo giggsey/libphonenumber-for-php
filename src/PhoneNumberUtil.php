@@ -880,8 +880,7 @@ class PhoneNumberUtil
     {
         $countryCode = $number->getCountryCode();
 
-        if (null === $countryCode)
-        {
+        if (null === $countryCode) {
             return null;
         }
 
