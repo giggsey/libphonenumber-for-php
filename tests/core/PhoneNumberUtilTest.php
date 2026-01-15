@@ -1775,6 +1775,7 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals(RegionCode::GB, $this->phoneUtil->getRegionCodeForNumber(self::$gbMobile));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$internationalTollFree));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$universalPremiumRate));
+
     }
 
     public function testGetRegionCodesForCountryCode(): void
