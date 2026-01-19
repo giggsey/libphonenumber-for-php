@@ -148,7 +148,7 @@ class En_81
         8160100 => 'Softbank',
         8160110 => 'KDDI',
         8160120 => 'Rakuten Communications',
-        8160130 => 'Okinawa Cellular',
+        8160130 => 'KDDI',
         8160140 => 'NTT Docomo',
         8170250 => 'Softbank',
         8170340 => 'Softbank',
