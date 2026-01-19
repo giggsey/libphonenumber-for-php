@@ -135,7 +135,7 @@ class PhoneNumberMetadata_KR extends PhoneMetadata
             ->setExampleNumber('1523456789')
             ->setPossibleLength([9, 10]);
         $this->uan = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:5(?:22|33|44|5[15]|66|77|88|99)|6(?:[07]0|44|6[0168]|88)|8(?:00|11|33|44|55|66|77|99))\d{4}')
+            ->setNationalNumberPattern('1(?:5(?:22|33|44|66|77|88|99)|6(?:[07]0|44|6[0168]|88)|8(?:00|33|55|77|99))\d{4}')
             ->setExampleNumber('15441234')
             ->setPossibleLength([8]);
         $this->voicemail = PhoneNumberDesc::empty();

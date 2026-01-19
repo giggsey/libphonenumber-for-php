@@ -45,27 +45,21 @@ class PhoneNumberMetadata_MA extends PhoneMetadata
             ->setExampleNumber('520123456');
         $this->numberFormat = [
             (new NumberFormat())
-                ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
-                ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['5[45]'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
                 ->setPattern('(\d{4})(\d{5})')
                 ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['5(?:[19]|2[2-46-9]|3[3-9])|8(?:0[89]|92)'])
+                ->setLeadingDigitsPattern(['892'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{7})')
                 ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['8'])
+                ->setLeadingDigitsPattern(['8(?:0[0-7]|9)'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
-                ->setPattern('(\d{3})(\d{6})')
-                ->setFormat('$1-$2')
-                ->setLeadingDigitsPattern(['[5-7]'])
+                ->setPattern('(\d)(\d{2})(\d{2})(\d{2})(\d{2})')
+                ->setFormat('$1 $2 $3 $4 $5')
+                ->setLeadingDigitsPattern(['[5-8]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

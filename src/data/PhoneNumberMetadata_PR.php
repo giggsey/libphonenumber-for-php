@@ -51,7 +51,7 @@ class PhoneNumberMetadata_PR extends PhoneMetadata
             ->setExampleNumber('8002345678');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('52(?:3(?:[2-46-9][02-9]\d|5(?:[02-46-9]\d|5[0-46-9]))|4(?:[2-478][02-9]\d|5(?:[034]\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\d)|9(?:[05-9]\d|2[0-5]|49)))\d{4}|52[34][2-9]1[02-9]\d{4}|5(?:00|2[125-9]|33|44|66|77|88)[2-9]\d{6}')
+            ->setNationalNumberPattern('52(?:3(?:[2-46-9][02-9]\d|5(?:[02-46-9]\d|5[0-46-9]))|4(?:[2-478][02-9]\d|5(?:[034]\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\d)|9(?:[05-9]\d|2[0-5]|49)))\d{4}|52[34][2-9]1[02-9]\d{4}|5(?:00|2[125-9]|3[23]|44|66|77|88)[2-9]\d{6}')
             ->setExampleNumber('5002345678');
         $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
