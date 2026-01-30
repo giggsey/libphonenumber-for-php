@@ -33,7 +33,7 @@ class PhoneNumberMetadata_CD extends PhoneMetadata
             ->setNationalNumberPattern('(?:(?:[189]|5\d)\d|2)\d{7}|[1-68]\d{6}')
             ->setPossibleLength([7, 8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('88\d{5}|(?:8[0-69]|9[017-9])\d{7}')
+            ->setNationalNumberPattern('88\d{5}|(?:8[0-69]|9[016-9])\d{7}')
             ->setExampleNumber('991234567')
             ->setPossibleLength([7, 9]);
         $this->premiumRate = PhoneNumberDesc::empty();
