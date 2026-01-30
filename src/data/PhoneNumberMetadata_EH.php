@@ -21,7 +21,6 @@ class PhoneNumberMetadata_EH extends PhoneMetadata
 {
     protected const ID = 'EH';
     protected const COUNTRY_CODE = 212;
-    protected const LEADING_DIGITS = '528[89]';
     protected const NATIONAL_PREFIX = '0';
 
     protected ?string $nationalPrefixForParsing = '0';

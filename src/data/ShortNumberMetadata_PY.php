@@ -27,8 +27,8 @@ class ShortNumberMetadata_PY extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[159]\d\d(?:\d{4})?')
-            ->setPossibleLength([3, 7]);
+            ->setNationalNumberPattern('[12459]\d\d(?:\d{3,4})?')
+            ->setPossibleLength([3, 6, 7]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->tollFree = (new PhoneNumberDesc())
             ->setNationalNumberPattern('128|911')
@@ -39,16 +39,16 @@ class ShortNumberMetadata_PY extends PhoneMetadata
             ->setExampleNumber('128')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[01]|51)\d{5}|911|1[1-9]\d')
+            ->setNationalNumberPattern('[1245][01]\d{5}|(?:1[1-9]|[245]0\d{3})\d|911')
             ->setExampleNumber('110');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[01]|51)\d{5}')
-            ->setExampleNumber('1000000')
-            ->setPossibleLength([7]);
+            ->setNationalNumberPattern('[1245][01]\d{5}|[245]0\d{4}')
+            ->setExampleNumber('200000')
+            ->setPossibleLength([6, 7]);
         $this->smsServices = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[01]|51)\d{5}')
-            ->setExampleNumber('1000000')
-            ->setPossibleLength([7]);
+            ->setNationalNumberPattern('[1245][01]\d{5}|[245]0\d{4}')
+            ->setExampleNumber('200000')
+            ->setPossibleLength([6, 7]);
     }
 }

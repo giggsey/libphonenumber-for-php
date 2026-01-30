@@ -35,14 +35,14 @@ class PhoneNumberMetadata_AS extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('684(?:2(?:48|5[2468]|7[26])|7(?:3[13]|70|82))\d{4}')
+            ->setNationalNumberPattern('684(?:2(?:48|5[2468]|7[246])|7(?:3[13]|70|82))\d{4}')
             ->setExampleNumber('6847331234')
             ->setPossibleLengthLocalOnly([7]);
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('900[2-9]\d{6}')
             ->setExampleNumber('9002123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6846(?:22|33|44|55|77|88|9[19])\d{4}')
+            ->setNationalNumberPattern('684(?:274|6(?:22|33|44|55|77|88|9[19]))\d{4}')
             ->setExampleNumber('6846221234')
             ->setPossibleLengthLocalOnly([7]);
         $this->tollFree = (new PhoneNumberDesc())

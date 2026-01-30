@@ -8,4 +8,4 @@ declare(strict_types=1);
  * For more information, look at the phing tasks in build.xml
  * @internal
  */
-return 'v9.0.22';
+return 'v9.0.23';

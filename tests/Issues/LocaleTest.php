@@ -53,7 +53,7 @@ class LocaleTest extends TestCase
         self::assertContains($regionCode, $regions);
 
 
-        self::assertSame($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber));
+        self::assertSame($regionCode, $this->phoneUtil->getRegionCodeForNumber($phoneNumber), "Checking {$phoneNumber} is part of {$regionCode}");
 
         self::assertSame($countryName, $this->geocoder->getDescriptionForValidNumber($phoneNumber, 'en', 'ZZ'), "Checking {$phoneNumber} is part of {$countryName}");
     }
@@ -310,7 +310,6 @@ class LocaleTest extends TestCase
             'VG' => 'British Virgin Islands',
             'VI' => 'U.S. Virgin Islands',
             'WF' => 'Wallis & Futuna',
-            'EH' => 'Western Sahara',
             'YE' => 'Yemen',
             'ZM' => 'Zambia',
             'ZW' => 'Zimbabwe',
