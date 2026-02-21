@@ -1,25 +1,25 @@
-name: "Mutation tests"
+name: Mutation tests
 
 on:
   push:
     branches:
-      - 'master'
+      - master
     paths-ignore:
-      - 'docs/**'
+      - docs/**
   pull_request:
     paths-ignore:
-      - 'docs/**'
+      - docs/**
 
 jobs:
   mutation-tests:
-    name: "Mutation tests"
+    name: Mutation tests
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        php-version: [ 8.4 ]
-        composer: [ highest ]
+        php-version: ['8.3', 8.4, '8.4', '8.5']
+        composer: [highest]
 
     steps:
       - name: Checkout
@@ -34,10 +34,10 @@ jobs:
           coverage: xdebug
           tools: composer:v2
 
-      - uses: "ramsey/composer-install@v3"
+      - uses: ramsey/composer-install@v3
         with:
-          dependency-versions: "${{ matrix.composer }}"
+          dependency-versions: ${{ matrix.composer }}
 
-      - name: "Infection"
+      - name: Infection
         run: |
           vendor/bin/infection --threads=max --static-analysis-tool=phpstan
