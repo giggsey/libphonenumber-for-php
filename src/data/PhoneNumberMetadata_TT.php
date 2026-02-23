@@ -47,7 +47,7 @@ class PhoneNumberMetadata_TT extends PhoneMetadata
             ->setExampleNumber('8682211234')
             ->setPossibleLengthLocalOnly([7]);
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('8(?:00|33|44|55|66|77|88)[2-9]\d{6}')
+            ->setNationalNumberPattern('868800\d{4}|8(?:00|33|44|55|66|77|88)[2-9]\d{6}')
             ->setExampleNumber('8002345678');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = (new PhoneNumberDesc())

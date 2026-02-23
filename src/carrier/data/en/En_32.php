@@ -34,6 +34,7 @@ class En_32
         32488 => 'Telenet',
         32489 => 'Telenet',
         324510 => 'DIGI Communications',
+        324511 => 'DIGI Communications',
         324618 => 'N.M.B.S.',
         324630 => 'Lancelot Telecom',
         324631 => 'Lancelot Telecom',

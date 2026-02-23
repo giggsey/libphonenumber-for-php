@@ -17,6 +17,7 @@ namespace libphonenumber\geocoding\data\en;
 class En_7
 {
     public const DATA = [
+        733 => 'Baikonur',
         736 => 'Simferopol',
         740 => 'Kaliningrad',
         7301 => 'Republic of Buryatia',
@@ -140,7 +141,6 @@ class En_7
         77279 => 'Almaty',
         77282 => 'Taldykorgan',
         77292 => 'Aktau',
-        733622 => 'Baikonur',
         771030 => 'Atasu',
         771031 => 'Aksu-Ayuly',
         771032 => 'Karazhal',

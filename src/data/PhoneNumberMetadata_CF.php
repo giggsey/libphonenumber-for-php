@@ -28,7 +28,7 @@ class PhoneNumberMetadata_CF extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[27]\d{3}|8776)\d{4}')
+            ->setNationalNumberPattern('8776\d{4}|(?:[27]\d|61)\d{6}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('7[02-7]\d{6}')
@@ -37,13 +37,13 @@ class PhoneNumberMetadata_CF extends PhoneMetadata
             ->setNationalNumberPattern('8776\d{4}')
             ->setExampleNumber('87761234');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2[12]\d{6}')
+            ->setNationalNumberPattern('(?:2[12]|61)\d{6}')
             ->setExampleNumber('21612345');
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[278]'])
+                ->setLeadingDigitsPattern(['[26-8]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = PhoneNumberDesc::empty();

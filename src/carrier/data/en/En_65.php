@@ -488,6 +488,7 @@ class En_65
         658993 => 'Simba',
         658994 => 'Simba',
         658995 => 'M1',
+        658996 => 'SingTel',
         659001 => 'StarHub',
         659002 => 'StarHub',
         659003 => 'StarHub',

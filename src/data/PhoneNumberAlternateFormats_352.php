@@ -30,7 +30,7 @@ class PhoneNumberAlternateFormats_352 extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['2(?:[0367]|4[3-8])'])
+                ->setLeadingDigitsPattern(['20'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
     }

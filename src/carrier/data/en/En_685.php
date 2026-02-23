@@ -17,11 +17,11 @@ namespace libphonenumber\carrier\data\en;
 class En_685
 {
     public const DATA = [
-        68571 => 'Bluesky',
+        68571 => 'Vodafone',
         68572 => 'Digicel',
         68573 => 'Digicel',
-        68575 => 'Bluesky',
-        68576 => 'Bluesky',
+        68575 => 'Vodafone',
+        68576 => 'Vodafone',
         68577 => 'Digicel',
         68578 => 'Digicel',
         68583 => 'Digicel',
