@@ -25,6 +25,7 @@ class En_255
         25567 => 'Yas',
         25568 => 'Airtel',
         25569 => 'Airtel',
+        25570 => 'Yas',
         25571 => 'Yas',
         25573 => 'Tanzania Telecom',
         25574 => 'Vodacom',
