@@ -79,6 +79,7 @@ class En_81
         817086 => 'KDDI',
         817087 => 'KDDI',
         817088 => 'KDDI',
+        817089 => 'Rakuten Communications',
         818077 => 'NTT Docomo',
         818078 => 'NTT Docomo',
         818090 => 'KDDI',

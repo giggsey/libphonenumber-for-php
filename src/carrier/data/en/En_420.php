@@ -112,6 +112,7 @@ class En_420
         4207952 => 'O2',
         4207953 => 'O2',
         4207954 => 'Tesco Mobile CR',
+        4207955 => 'Tesco Mobile CR',
         4207976 => 'T-Mobile',
         4207978 => 'T-Mobile',
         4207990 => 'T-Mobile',

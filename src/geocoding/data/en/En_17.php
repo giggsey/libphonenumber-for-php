@@ -37,6 +37,7 @@ class En_17
         1725 => 'Nevada',
         1726 => 'San Antonio, TX',
         1727 => 'Florida',
+        1728 => 'Palm Beach, FL',
         1730 => 'Illinois',
         1731 => 'Tennessee',
         1732 => 'New Jersey',
