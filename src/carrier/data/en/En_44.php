@@ -432,6 +432,7 @@ class En_44
         4473896 => 'Gamma Telecom',
         4473897 => 'Vodafone',
         4473898 => 'Vodafone',
+        4473899 => 'Wireless Logic',
         4473900 => 'Home Office',
         4473970 => 'Three',
         4473971 => 'Three',

@@ -36,7 +36,7 @@ class PhoneNumberMetadata_KY extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('345(?:32[1-9]|42[0-4]|5(?:1[67]|2[5-79]|4[6-9]|50|76)|649|82[56]|9(?:1[679]|2[2-9]|3[06-9]|90))\d{4}')
+            ->setNationalNumberPattern('345(?:32[1-9]|4(?:1[2-6]|2[0-4])|5(?:1[67]|2[5-79]|4[6-9]|50|76)|649|82[56]|9(?:1[679]|2[2-9]|3[06-9]|90))\d{4}')
             ->setExampleNumber('3453231234')
             ->setPossibleLengthLocalOnly([7]);
         $this->premiumRate = (new PhoneNumberDesc())

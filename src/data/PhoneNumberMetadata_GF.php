@@ -31,20 +31,22 @@ class PhoneNumberMetadata_GF extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[56]94\d|7093)\d{5}|(?:80|9\d)\d{7}')
+            ->setNationalNumberPattern('7093\d{5}|(?:[56]94|[89]\d\d)\d{6}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:694(?:[0-249]\d|3[0-8])|7093[0-3])\d{4}')
             ->setExampleNumber('694201234');
-        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('8[129]\d{7}')
+            ->setExampleNumber('890123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('594(?:[02-49]\d|1[0-5]|5[6-9]|6[0-3]|80)\d{4}')
+            ->setNationalNumberPattern('(?:594(?:[02-49]\d|1[0-5]|5[6-9]|6[0-3]|80)|80[6-9]\d\d)\d{4}')
             ->setExampleNumber('594101234');
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[5-7]|9[47]'])
+                ->setLeadingDigitsPattern(['[5-7]|80[6-9]|9[47]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

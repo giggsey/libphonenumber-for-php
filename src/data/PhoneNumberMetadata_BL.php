@@ -30,17 +30,19 @@ class PhoneNumberMetadata_BL extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:590\d|7090)\d{5}|(?:69|80|9\d)\d{7}')
+            ->setNationalNumberPattern('(?:590\d|7090)\d{5}|(?:69|[89]\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:69(?:0\d\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\d)|6(?:1[016-9]|5[0-4]|[67]\d))|7090[0-4])\d{4}')
             ->setExampleNumber('690001234');
-        $this->premiumRate = PhoneNumberDesc::empty();
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('8[129]\d{7}')
+            ->setExampleNumber('810123456');
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('590(?:2[7-9]|3[3-7]|5[12]|87)\d{4}')
             ->setExampleNumber('590271234');
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('80[0-5]\d{6}')
+            ->setNationalNumberPattern('80\d{7}')
             ->setExampleNumber('800012345');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();

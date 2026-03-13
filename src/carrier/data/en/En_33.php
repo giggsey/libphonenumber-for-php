@@ -218,6 +218,8 @@ class En_33
         337755 => 'Mobiquithings',
         337756 => 'Mobiquithings',
         337757 => 'Free Mobile',
+        337758 => 'Bouygues',
+        337759 => 'Bouygues',
         337807 => 'Lebara France Limited',
         337808 => 'Lebara France Limited',
         337809 => 'Onoff telecom',

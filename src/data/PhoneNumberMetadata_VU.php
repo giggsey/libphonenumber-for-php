@@ -31,7 +31,7 @@ class PhoneNumberMetadata_VU extends PhoneMetadata
             ->setNationalNumberPattern('[57-9]\d{6}|(?:[238]\d|48)\d{3}')
             ->setPossibleLength([5, 7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[58]\d|7[013-7])\d{5}')
+            ->setNationalNumberPattern('(?:[58]\d|7[0-7])\d{5}')
             ->setExampleNumber('5912345')
             ->setPossibleLength([7]);
         $this->premiumRate = PhoneNumberDesc::empty();
