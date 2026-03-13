@@ -31,7 +31,7 @@ class ShortNumberMetadata_GY extends PhoneMetadata
             ->setPossibleLength([3, 4]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('91[1-3]')
+            ->setNationalNumberPattern('91[1-4]')
             ->setExampleNumber('911')
             ->setPossibleLength([3]);
         $this->emergency = (new PhoneNumberDesc())
@@ -39,7 +39,7 @@ class ShortNumberMetadata_GY extends PhoneMetadata
             ->setExampleNumber('911')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0(?:02|(?:17|80)1|444|7(?:[67]7|9)|9(?:0[78]|[2-47]))|1(?:443|5[568])|91[1-3]')
+            ->setNationalNumberPattern('0(?:02|(?:17|80)1|444|7(?:[67]7|9)|9(?:0[78]|[2-47]))|1(?:443|5[568])|91[1-4]')
             ->setExampleNumber('002');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = (new PhoneNumberDesc())

@@ -29,6 +29,7 @@ class En_48
         4824 => 'Plock',
         4825 => 'Siedlce',
         4829 => 'Ostrolęka',
+        4830 => 'Kraków',
         4832 => 'Katowice',
         4833 => 'Bielsko-Biala',
         4834 => 'Częstochowa',
