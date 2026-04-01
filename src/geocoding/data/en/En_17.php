@@ -43,6 +43,7 @@ class En_17
         1732 => 'New Jersey',
         1734 => 'Michigan',
         1737 => 'Texas',
+        1738 => 'California',
         1740 => 'Ohio',
         1742 => 'Ontario',
         1743 => 'North Carolina',

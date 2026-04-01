@@ -30,7 +30,7 @@ class PhoneNumberMetadata_MF extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:590\d|7090)\d{5}|(?:69|[89]\d)\d{7}')
+            ->setNationalNumberPattern('7090\d{5}|(?:[56]9|[89]\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:69(?:0\d\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\d)|6(?:1[016-9]|5[0-4]|[67]\d))|7090[0-4])\d{4}')
@@ -39,10 +39,10 @@ class PhoneNumberMetadata_MF extends PhoneMetadata
             ->setNationalNumberPattern('8[129]\d{7}')
             ->setExampleNumber('810123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('590(?:0[079]|[14]3|[27][79]|3[03-7]|5[0-268]|87)\d{4}')
+            ->setNationalNumberPattern('(?:59(?:0(?:0[079]|[14]3|[27][79]|3[03-7]|5[0-268]|87)|87\d)|80[6-9]\d\d)\d{4}')
             ->setExampleNumber('590271234');
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('80\d{7}')
+            ->setNationalNumberPattern('80[0-5]\d{6}')
             ->setExampleNumber('800012345');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
