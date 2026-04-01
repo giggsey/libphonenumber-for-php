@@ -31,7 +31,7 @@ class PhoneNumberMetadata_GF extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7093\d{5}|(?:[56]94|[89]\d\d)\d{6}')
+            ->setNationalNumberPattern('(?:694\d|7093)\d{5}|(?:59|[89]\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:694(?:[0-249]\d|3[0-8])|7093[0-3])\d{4}')
@@ -40,7 +40,7 @@ class PhoneNumberMetadata_GF extends PhoneMetadata
             ->setNationalNumberPattern('8[129]\d{7}')
             ->setExampleNumber('890123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:594(?:[02-49]\d|1[0-5]|5[6-9]|6[0-3]|80)|80[6-9]\d\d)\d{4}')
+            ->setNationalNumberPattern('(?:59(?:4(?:[02-49]\d|1[0-5]|5[6-9]|6[0-3]|80)|88\d)|80[6-9]\d\d)\d{4}')
             ->setExampleNumber('594101234');
         $this->numberFormat = [
             (new NumberFormat())

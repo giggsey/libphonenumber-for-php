@@ -1448,6 +1448,7 @@ class Map
         1732 => 'America/New_York',
         1734 => 'America/New_York',
         1737 => 'America/Chicago',
+        1738 => 'America/Los_Angeles',
         1740 => 'America/New_York',
         1742 => 'America/Toronto',
         1743 => 'America/New_York',

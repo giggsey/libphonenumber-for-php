@@ -32,7 +32,7 @@ class PhoneNumberMetadata_GP extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:590\d|7090)\d{5}|(?:69|[89]\d)\d{7}')
+            ->setNationalNumberPattern('7090\d{5}|(?:[56]9|[89]\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:69(?:0\d\d|1(?:2[2-9]|3[0-5])|4(?:0[89]|1[2-6]|9\d)|6(?:1[016-9]|5[0-4]|[67]\d))|7090[0-4])\d{4}')
@@ -41,13 +41,13 @@ class PhoneNumberMetadata_GP extends PhoneMetadata
             ->setNationalNumberPattern('8[129]\d{7}')
             ->setExampleNumber('810123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('590(?:0[1-68]|[14][0-24-9]|2[0-68]|3[1-9]|5[3-579]|[68][0-689]|7[08]|9\d)\d{4}')
+            ->setNationalNumberPattern('(?:59(?:0(?:0[1-68]|[14][0-24-9]|2[0-68]|3[1-9]|5[3-579]|[68][0-689]|7[08]|9\d)|87\d)|80[6-9]\d\d)\d{4}')
             ->setExampleNumber('590201234');
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[5-79]'])
+                ->setLeadingDigitsPattern(['[5-79]|80[6-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -58,7 +58,7 @@ class PhoneNumberMetadata_GP extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('80\d{7}')
+            ->setNationalNumberPattern('80[0-5]\d{6}')
             ->setExampleNumber('800012345');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
