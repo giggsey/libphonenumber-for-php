@@ -29,14 +29,14 @@ class PhoneNumberMetadata_YT extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7093\d{5}|(?:80|9\d)\d{7}|(?:26|63)9\d{6}')
+            ->setNationalNumberPattern('(?:639\d|7093)\d{5}|(?:26|80|9\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:639(?:0[0-79]|1[019]|[267]\d|3[09]|40|5[05-9]|9[04-79])|7093[5-7])\d{4}')
             ->setExampleNumber('639012345');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('269(?:0[0-467]|15|5[0-4]|6\d|[78]0)\d{4}')
+            ->setNationalNumberPattern('26(?:89\d|9(?:0[0-467]|15|5[0-4]|6\d|[78]0))\d{4}')
             ->setExampleNumber('269601234');
         $this->tollFree = (new PhoneNumberDesc())
             ->setNationalNumberPattern('80\d{7}')
