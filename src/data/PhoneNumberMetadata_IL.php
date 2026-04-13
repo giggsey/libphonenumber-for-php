@@ -34,11 +34,11 @@ class PhoneNumberMetadata_IL extends PhoneMetadata
             ->setNationalNumberPattern('1\d{6}(?:\d{3,5})?|[57]\d{8}|[1-489]\d{7}')
             ->setPossibleLength([7, 8, 9, 10, 11, 12]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('55(?:4(?:0[0-2]|[16]0)|57[0-289])\d{4}|5(?:(?:[0-2][02-9]|[36]\d|[49][2-9]|8[3-7])\d|5(?:01|2\d|3[0-3]|4[3-5]|5[0-25689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\d{5}')
+            ->setNationalNumberPattern('55(?:4(?:0[0-3]|[16]0)|57[0-289])\d{4}|5(?:(?:[0-2][02-9]|[36]\d|[49][2-9]|8[3-7])\d|5(?:01|2\d|3[0-3]|4[3-5]|5[0-25689]|6[6-8]|7[0-267]|8[7-9]|9[1-9]))\d{5}')
             ->setExampleNumber('502345678')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1212\d{4}|1(?:200|9(?:0[0-2]|19))\d{6}')
+            ->setNationalNumberPattern('1212\d{4}|1(?:200|9(?:0[0-2]|19|9\d))\d{6}')
             ->setExampleNumber('1919123456')
             ->setPossibleLength([8, 10]);
         $this->fixedLine = (new PhoneNumberDesc())

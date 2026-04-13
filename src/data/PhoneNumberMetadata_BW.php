@@ -31,7 +31,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
             ->setNationalNumberPattern('(?:0800|(?:[37]|800)\d)\d{6}|(?:[2-6]\d|90)\d{5}')
             ->setPossibleLength([7, 8, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:321|7[1-8]\d)\d{5}')
+            ->setNationalNumberPattern('(?:321|7(?:[1-8]\d|9[03]))\d{5}')
             ->setExampleNumber('71123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())
