@@ -34,7 +34,7 @@ class PhoneNumberMetadata_TR extends PhoneMetadata
             ->setNationalNumberPattern('4\d{6}|8\d{11,12}|(?:[2-58]\d\d|900)\d{7}')
             ->setPossibleLength([7, 10, 12, 13]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('561(?:011|61\d)\d{4}|5(?:0[15-7]|1[06]|[27]4|[34]\d|5[1-59]|9[46])\d{7}')
+            ->setNationalNumberPattern('561(?:011|61\d)\d{4}|5(?:[03-5]\d|1[06]|24|7[45]|9[46])\d{7}')
             ->setExampleNumber('5012345678')
             ->setPossibleLength([10]);
         $this->premiumRate = (new PhoneNumberDesc())

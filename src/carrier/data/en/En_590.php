@@ -17,8 +17,6 @@ namespace libphonenumber\carrier\data\en;
 class En_590
 {
     public const DATA = [
-        590694 => 'Digicel',
-        590696 => 'Digicel',
         5906901 => 'Digicel',
         5906903 => 'Orange',
         5906905 => 'Orange',
