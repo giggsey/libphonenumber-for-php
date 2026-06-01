@@ -264,6 +264,7 @@ class En_1
         1246446 => 'Neptune Communications',
         1246522 => 'Ozone',
         1264469 => 'Cable & Wireless',
+        1264477 => 'Flow',
         1264729 => 'Cable & Wireless',
         1268720 => 'Digicel',
         1268721 => 'Digicel',

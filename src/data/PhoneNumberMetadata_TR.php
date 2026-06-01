@@ -34,7 +34,7 @@ class PhoneNumberMetadata_TR extends PhoneMetadata
             ->setNationalNumberPattern('4\d{6}|8\d{11,12}|(?:[2-58]\d\d|900)\d{7}')
             ->setPossibleLength([7, 10, 12, 13]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('561(?:011|61\d)\d{4}|5(?:[03-5]\d|1[06]|24|7[45]|9[46])\d{7}')
+            ->setNationalNumberPattern('561(?:011|61\d)\d{4}|5(?:[03-5]\d|1[06]|24|6[24]|7[245]|9[46])\d{7}')
             ->setExampleNumber('5012345678')
             ->setPossibleLength([10]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -42,7 +42,7 @@ class PhoneNumberMetadata_TR extends PhoneMetadata
             ->setExampleNumber('9001234567')
             ->setPossibleLength([10]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:2(?:[13][26]|[28][2468]|[45][268]|[67][246])|3(?:[13][28]|[24-6][2468]|[78][02468]|92)|4(?:[16][246]|[23578][2468]|4[26]))\d{7}')
+            ->setNationalNumberPattern('(?:2(?:1[26]|[28][2468]|[3-5][268]|[67][246])|3(?:[13][28]|[24-6][2468]|[78][02468]|92)|4(?:[16][246]|[23578][2468]|4[26]))\d{7}')
             ->setExampleNumber('2123456789')
             ->setPossibleLength([10]);
         $this->numberFormat = [
@@ -60,7 +60,7 @@ class PhoneNumberMetadata_TR extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['5(?:[0-579]|61)', '5(?:[0-579]|61[06])', '5(?:[0-579]|61[06]1)'])
+                ->setLeadingDigitsPattern(['5[0-79]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
@@ -111,7 +111,7 @@ class PhoneNumberMetadata_TR extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['5(?:[0-579]|61)', '5(?:[0-579]|61[06])', '5(?:[0-579]|61[06]1)'])
+                ->setLeadingDigitsPattern(['5[0-79]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())

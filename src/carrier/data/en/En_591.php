@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_591
 {
     public const DATA = [
+        59157 => 'Entel',
         59160 => 'Nuevatel',
         59161 => 'Nuevatel',
         59162 => 'Tigo',

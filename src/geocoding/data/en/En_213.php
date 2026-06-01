@@ -18,7 +18,13 @@ class En_213
 {
     public const DATA = [
         21321 => 'Algiers',
+        21322 => 'Algiers',
+        21323 => 'Algiers',
+        21324 => 'Boumerdès/Tipaza',
+        21325 => 'Blida/Médéa',
+        21326 => 'Bouira/Tizi Ouzou',
         21327 => 'Chlef',
+        21328 => 'Algiers',
         21329 => 'Ghardaia/Illizi/Tamanrasset',
         21331 => 'Constantine',
         21332 => 'El Oued',
@@ -27,6 +33,7 @@ class En_213
         21335 => 'Bordj Bou Arreridj',
         21337 => 'Tebessa',
         21338 => 'Annaba/Skikda',
+        21339 => 'Skikda',
         21341 => 'Oran',
         21343 => 'Tlemcen',
         21344 => 'Blida',
