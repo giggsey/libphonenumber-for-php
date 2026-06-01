@@ -36,7 +36,7 @@ class PhoneNumberMetadata_AI extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('264(?:235|4(?:69|76)|5(?:3[6-9]|8[1-4])|7(?:29|72))\d{4}')
+            ->setNationalNumberPattern('264(?:235|4(?:69|7[67])|5(?:3[6-9]|8[1-4])|7(?:29|72))\d{4}')
             ->setExampleNumber('2642351234')
             ->setPossibleLengthLocalOnly([7]);
         $this->premiumRate = (new PhoneNumberDesc())

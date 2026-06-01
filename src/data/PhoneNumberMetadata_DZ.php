@@ -33,7 +33,7 @@ class PhoneNumberMetadata_DZ extends PhoneMetadata
             ->setNationalNumberPattern('(?:[1-4]|[5-79]\d|80)\d{7}')
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:5(?:4[0-29]|5\d|6[0-3])|6(?:[569]\d|7[0-6])|7[7-9]\d)\d{6}')
+            ->setNationalNumberPattern('5(?:4[0-29]|6[0-3])\d{6}|(?:55|6\d|7[7-9])\d{7}')
             ->setExampleNumber('551234567')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -41,7 +41,7 @@ class PhoneNumberMetadata_DZ extends PhoneMetadata
             ->setExampleNumber('808123456')
             ->setPossibleLength([9]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9619\d{5}|(?:1\d|2[013-79]|3[0-8]|4[013-689])\d{6}')
+            ->setNationalNumberPattern('9619\d{5}|(?:[1-3]\d|4[013-689])\d{6}')
             ->setExampleNumber('12345678');
         $this->numberFormat = [
             (new NumberFormat())
