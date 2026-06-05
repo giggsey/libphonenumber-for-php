@@ -33,7 +33,7 @@ class PhoneNumberMetadata_SO extends PhoneMetadata
             ->setNationalNumberPattern('[346-9]\d{8}|[12679]\d{7}|[1-5]\d{6}|[1348]\d{5}')
             ->setPossibleLength([6, 7, 8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:(?:15|(?:3[59]|4[89]|6\d|7[679]|8[08])\d|9(?:0\d|[2-9]))\d|2(?:4\d|8))\d{5}|(?:[67]\d\d|904)\d{5}')
+            ->setNationalNumberPattern('(?:(?:15|(?:3[59]|4[89]|6\d|7[0-35-9]|8[08])\d|9(?:0\d|[2-9]))\d|2(?:4\d|8))\d{5}|(?:[67]\d\d|904)\d{5}')
             ->setExampleNumber('71123456')
             ->setPossibleLength([7, 8, 9]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -58,19 +58,19 @@ class PhoneNumberMetadata_SO extends PhoneMetadata
                 ->setLeadingDigitsPattern(['[15]|2[0-79]|3[0-46-8]|4[0-7]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
-                ->setPattern('(\d)(\d{7})')
-                ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['(?:2|90)4|[67]'])
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
-                ->setPattern('(\d{3})(\d{3})(\d{3})')
-                ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[348]|64|79|90'])
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
                 ->setPattern('(\d{2})(\d{5,7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['1|28|6[0-35-9]|7[67]|9[2-9]'])
+                ->setLeadingDigitsPattern(['1|28|9[2-9]'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d)(\d{7})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['[267]|904'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{3})(\d{4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['[346-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = PhoneNumberDesc::empty();
