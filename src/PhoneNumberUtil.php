@@ -1156,13 +1156,17 @@ class PhoneNumberUtil
     public function format(PhoneNumber $number, PhoneNumberFormat $numberFormat): string
     {
         if ($number->getNationalNumber() === '0' && $number->hasRawInput()) {
-            // Unparsable numbers that kept their raw input just use that.
-            // This is the only case where a number can be formatted as E164 without a
-            // leading '+' symbol (but the original number wasn't parseable anyway).
-            // TODO: Consider removing the 'if' above so that unparsable
-            // strings without raw input format to the empty string instead of "+00"
+            // Unparseable numbers that kept their raw input just use that, unless default country was
+            // specified and the format is E164. In that case, we prepend the raw input with the country
+            // code
             $rawInput = $number->getRawInput();
-            if ($rawInput !== '') {
+
+            if ($rawInput !== '' && $number->hasCountryCode() && $number->getCountryCodeSource() === CountryCodeSource::FROM_DEFAULT_COUNTRY && $numberFormat === PhoneNumberFormat::E164) {
+                $countryCallingCode = $number->getCountryCode();
+                $formattedNumber = $rawInput;
+                $this->prefixNumberWithCountryCallingCode($countryCallingCode, $numberFormat, $formattedNumber);
+                return $formattedNumber;
+            } elseif ($rawInput !== '' || !$number->hasCountryCode()) {
                 return $rawInput;
             }
         }

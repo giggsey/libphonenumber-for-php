@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_235
 {
-    public const DATA = [2353 => 'Moov', 2356 => 'Airtel', 2357 => 'Sotel', 2358 => 'Airtel', 2359 => 'Tigo'];
+    public const DATA = [2353 => 'Moov', 2356 => 'Airtel', 2357 => 'Sotel', 2358 => 'Airtel', 2359 => 'Moov'];
 }

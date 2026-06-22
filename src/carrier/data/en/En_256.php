@@ -26,7 +26,7 @@ class En_256
         25678 => 'MTN',
         256720 => 'Smile',
         256721 => 'LycaMobile',
-        256724 => 'Hamilton Telecom',
+        256724 => 'MTN',
         256726 => 'LycaMobile',
         256727 => 'LycaMobile',
         256728 => 'Talkio',
@@ -41,5 +41,6 @@ class En_256
         256795 => 'Airtel',
         256798 => 'Africell',
         256799 => 'Africell',
+        2567240 => 'Hamilton Telecom',
     ];
 }

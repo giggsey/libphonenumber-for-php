@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_265
 {
     public const DATA = [
+        2652 => 'Zero2',
         2653 => 'TNM',
         2657 => 'Globally Advanced Integrated Networks Ltd',
         2658 => 'TNM',
