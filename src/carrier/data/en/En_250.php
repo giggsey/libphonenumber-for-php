@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_250
 {
-    public const DATA = [25072 => 'TIGO', 25073 => 'Airtel', 25077 => 'KtRN', 25078 => 'MTN', 25079 => 'MTN'];
+    public const DATA = [2507 => 'KtRN'];
 }

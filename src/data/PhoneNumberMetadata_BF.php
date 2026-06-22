@@ -35,7 +35,7 @@ class PhoneNumberMetadata_BF extends PhoneMetadata
             ->setExampleNumber('70123456');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2(?:0(?:49|5[23]|6[5-7]|9[016-9])|4(?:4[569]|5[4-6]|6[5-7]|7[0179])|5(?:[34]\d|50|6[5-7]))\d{4}')
+            ->setNationalNumberPattern('2(?:0(?:49|5[23]|6[5-7]|9[016-9])|4(?:4[569]|5[4-6]|6[5-7]|7[0179])|5(?:[34]\d|50|6[5-8]))\d{4}')
             ->setExampleNumber('20491234');
         $this->numberFormat = [
             (new NumberFormat())

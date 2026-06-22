@@ -602,10 +602,10 @@ class PhoneNumberUtilTest extends TestCase
     {
         $auShortCodeNumber = $this->phoneUtil->parse('000', RegionCode::AU);
 
-        $this->assertEquals('+61000', $this->phoneUtil->format($auShortCodeNumber, PhoneNumberFormat::E164));
+        self::assertEquals('+61000', $this->phoneUtil->format($auShortCodeNumber, PhoneNumberFormat::E164));
 
         $pgShortCodeNumber = (new PhoneNumber())->setCountryCode(675)->setNationalNumber('0')->setRawInput('+675000');
-        $this->assertEquals('+675000', $this->phoneUtil->format($pgShortCodeNumber, PhoneNumberFormat::E164));
+        self::assertEquals('+675000', $this->phoneUtil->format($pgShortCodeNumber, PhoneNumberFormat::E164));
     }
 
     public function testFormatBSNumber(): void

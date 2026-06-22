@@ -36,6 +36,7 @@ class En_47
         4764 => 'Akershus',
         4766 => 'Akershus',
         4767 => 'Akershus',
+        4768 => 'Østfold/Akershus',
         4769 => 'Østfold',
         4770 => 'Møre og Romsdal',
         4771 => 'Møre og Romsdal',
