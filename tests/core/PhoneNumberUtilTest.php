@@ -598,6 +598,16 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals('0', $this->phoneUtil->format(self::$usSpoof, PhoneNumberFormat::NATIONAL));
     }
 
+    public function testFormatAUShortCodeNumber(): void
+    {
+        $auShortCodeNumber = $this->phoneUtil->parse('000', RegionCode::AU);
+
+        $this->assertEquals('+61000', $this->phoneUtil->format($auShortCodeNumber, PhoneNumberFormat::E164));
+
+        $pgShortCodeNumber = (new PhoneNumber())->setCountryCode(675)->setNationalNumber('0')->setRawInput('+675000');
+        $this->assertEquals('+675000', $this->phoneUtil->format($pgShortCodeNumber, PhoneNumberFormat::E164));
+    }
+
     public function testFormatBSNumber(): void
     {
         self::assertEquals('242 365 1234', $this->phoneUtil->format(self::$bsNumber, PhoneNumberFormat::NATIONAL));
