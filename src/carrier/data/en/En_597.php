@@ -20,6 +20,7 @@ class En_597
         5976 => 'Telesur',
         59771 => 'Digicel',
         59772 => 'Digicel',
+        59773 => 'Telesur',
         59774 => 'Digicel',
         59775 => 'Telesur',
         59776 => 'Digicel',
