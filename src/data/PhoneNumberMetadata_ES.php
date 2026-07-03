@@ -29,7 +29,7 @@ class PhoneNumberMetadata_ES extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[5-9]\d{8}')
+            ->setNationalNumberPattern('(?:400|[5-9]\d\d)\d{6}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('96906(?:09|10)\d\d|(?:590(?:10[0-2]|600)|97390\d)\d{3}|(?:6\d|7[1-48])\d{7}')
@@ -38,7 +38,7 @@ class PhoneNumberMetadata_ES extends PhoneMetadata
             ->setNationalNumberPattern('80[367]\d{6}')
             ->setExampleNumber('803123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('96906(?:0[0-8]|1[1-9]|[2-9]\d)\d\d|9(?:69(?:0[0-57-9]|[1-9]\d)|73(?:[0-8]\d|9[1-9]))\d{4}|(?:8(?:[1356]\d|[28][0-8]|[47][1-9])|9(?:[135]\d|[268][0-8]|4[1-9]|7[124-9]))\d{6}')
+            ->setNationalNumberPattern('96906(?:0[0-8]|1[1-9]|[2-9]\d)\d\d|9(?:69(?:0[0-57-9]|[1-9]\d)|73(?:[0-8]\d|9[1-9]))\d{4}|(?:400|8(?:[1356]\d|[28][0-8]|[47][1-9])|9(?:[135]\d|[268][0-8]|4[1-9]|7[124-9]))\d{6}')
             ->setExampleNumber('810123456');
         $this->numberFormat = [
             (new NumberFormat())
@@ -59,7 +59,7 @@ class PhoneNumberMetadata_ES extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[5-9]'])
+                ->setLeadingDigitsPattern(['[4-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
@@ -87,7 +87,7 @@ class PhoneNumberMetadata_ES extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[5-9]'])
+                ->setLeadingDigitsPattern(['[4-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
     }

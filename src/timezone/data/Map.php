@@ -2170,6 +2170,7 @@ class Map
         32 => 'Europe/Brussels',
         33 => 'Europe/Paris',
         34 => 'Atlantic/Canary&Europe/Madrid',
+        344 => 'Europe/Madrid',
         345 => 'Europe/Madrid',
         346 => 'Europe/Madrid',
         347 => 'Europe/Madrid',

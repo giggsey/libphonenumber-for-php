@@ -299,6 +299,8 @@ class En_46
         4672648 => 'Telavox AB',
         4672649 => 'Soatso AB',
         4672660 => 'Telenor Sverige',
+        4672663 => 'Telavox AB',
+        4672665 => 'Telavox AB',
         4672666 => 'Telenor Sverige',
         4672667 => 'Telenor Sverige',
         4672669 => 'Nortech',
