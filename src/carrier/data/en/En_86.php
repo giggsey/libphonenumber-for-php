@@ -32,6 +32,7 @@ class En_86
         86153 => 'China Telecom',
         86155 => 'China Unicom',
         86156 => 'China Unicom',
+        86161 => 'China Broadnet',
         86166 => 'China Unicom',
         86167 => 'China Unicom',
         86171 => 'China Unicom',

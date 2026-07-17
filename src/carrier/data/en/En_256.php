@@ -33,6 +33,7 @@ class En_256
         256730 => 'Airtel',
         256731 => 'Airtel',
         256736 => 'Hamilton Telecom',
+        256737 => 'MTN',
         256790 => 'MTN',
         256791 => 'MTN',
         256792 => 'MTN',
@@ -41,6 +42,7 @@ class En_256
         256795 => 'Airtel',
         256798 => 'Africell',
         256799 => 'Africell',
+        2567210 => 'Savanna',
         2567240 => 'Hamilton Telecom',
     ];
 }
