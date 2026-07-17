@@ -27,15 +27,15 @@ class PhoneNumberMetadata_AC extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[01589]\d|[46])\d{4}')
+            ->setNationalNumberPattern('(?:[01589]\d|[2-467])\d{4}')
             ->setPossibleLength([5, 6]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('4\d{4}')
+            ->setNationalNumberPattern('[2-47]\d{4}')
             ->setExampleNumber('40123')
             ->setPossibleLength([5]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6[2-467]\d{3}')
+            ->setNationalNumberPattern('6\d{4}')
             ->setExampleNumber('62889')
             ->setPossibleLength([5]);
         $this->tollFree = PhoneNumberDesc::empty();

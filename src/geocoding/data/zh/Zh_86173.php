@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace libphonenumber\carrier\data\en;
+namespace libphonenumber\geocoding\data\zh;
 
 /**
  * @internal
  */
-class En_250
+class Zh_86173
 {
-    public const DATA = [25072 => 'Airtel', 25073 => 'Airtel', 25077 => 'KtRN', 25078 => 'MTN', 25079 => 'MTN'];
+    public const DATA = [86173 => '北京市'];
 }
