@@ -32,7 +32,7 @@ class PhoneNumberMetadata_PG extends PhoneMetadata
             ->setNationalNumberPattern('(?:180|[78]\d{3})\d{4}|(?:[2-589]\d|64)\d{5}')
             ->setPossibleLength([7, 8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:7\d|8[1-38])\d{6}')
+            ->setNationalNumberPattern('(?:7\d|8[1-48])\d{6}')
             ->setExampleNumber('70123456')
             ->setPossibleLength([8]);
         $this->premiumRate = PhoneNumberDesc::empty();

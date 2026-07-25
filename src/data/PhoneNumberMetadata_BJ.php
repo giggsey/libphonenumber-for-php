@@ -29,20 +29,22 @@ class PhoneNumberMetadata_BJ extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:01\d|[24-689])\d{7}')
+            ->setNationalNumberPattern('(?:01\d|8)\d{7}')
             ->setPossibleLength([8, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:01(?:2[5-9]|[4-69]\d)|4[0-8]|[56]\d|9[013-9])\d{6}')
-            ->setExampleNumber('0195123456');
+            ->setNationalNumberPattern('01(?:2[5-9]|[4-69]\d)\d{6}')
+            ->setExampleNumber('0195123456')
+            ->setPossibleLength([10]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2090\d{4}|(?:012\d\d|2(?:02|1[037]|2[45]|3[68]|4\d))\d{5}')
-            ->setExampleNumber('0120211234');
+            ->setNationalNumberPattern('012\d{7}')
+            ->setExampleNumber('0120211234')
+            ->setPossibleLength([10]);
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[24-689]'])
+                ->setLeadingDigitsPattern(['8'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})')

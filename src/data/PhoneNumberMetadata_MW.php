@@ -33,13 +33,14 @@ class PhoneNumberMetadata_MW extends PhoneMetadata
             ->setNationalNumberPattern('(?:[1289]\d|31|77)\d{7}|1\d{6}')
             ->setPossibleLength([7, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('111\d{6}|(?:31|77|[89][89])\d{7}')
+            ->setNationalNumberPattern('111\d{6}|(?:2[12]|31|77|[89][89])\d{7}')
             ->setExampleNumber('991234567')
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[2-9]|2[12]\d\d)\d{5}')
-            ->setExampleNumber('1234567');
+            ->setNationalNumberPattern('1[2-9]\d{5}')
+            ->setExampleNumber('1234567')
+            ->setPossibleLength([7]);
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3})(\d{3})')
@@ -48,15 +49,9 @@ class PhoneNumberMetadata_MW extends PhoneMetadata
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
-                ->setPattern('(\d{3})(\d{3})(\d{3})')
-                ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['2'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[137-9]'])
+                ->setLeadingDigitsPattern(['[1-37-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

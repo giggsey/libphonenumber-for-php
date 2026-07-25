@@ -32,7 +32,7 @@ class PhoneNumberMetadata_PL extends PhoneMetadata
             ->setNationalNumberPattern('(?:6|8\d\d)\d{7}|[1-9]\d{6}(?:\d{2})?|[26]\d{5}')
             ->setPossibleLength([6, 7, 8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2131[89]\d{4}|21(?:1[013-5]|2\d|3[2-9])\d{5}|(?:45|5[0137]|6[069]|7[2389]|88)\d{7}')
+            ->setNationalNumberPattern('21(?:1[013-5]|2\d|3[1-9])\d{5}|(?:45|5[0137]|6[069]|7[2389]|88)\d{7}')
             ->setExampleNumber('512345678')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -40,7 +40,7 @@ class PhoneNumberMetadata_PL extends PhoneMetadata
             ->setExampleNumber('701234567')
             ->setPossibleLength([9]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('47\d{7}|(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])(?:[02-9]\d{6}|1(?:[0-8]\d{5}|9\d{3}(?:\d{2})?))')
+            ->setNationalNumberPattern('(?:30|47\d\d)\d{5}|(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])(?:[02-9]\d{6}|1(?:[0-8]\d{5}|9\d{3}(?:\d{2})?))')
             ->setExampleNumber('123456789')
             ->setPossibleLength([7, 9]);
         $this->numberFormat = [
@@ -58,8 +58,8 @@ class PhoneNumberMetadata_PL extends PhoneMetadata
                 ->setPattern('(\d{2})(\d{2})(\d{3})')
                 ->setFormat('$1 $2 $3')
                 ->setLeadingDigitsPattern([
-                    '(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])1',
-                    '(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])19',
+                    '30|(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])1',
+                    '30|(?:1[2-8]|2[2-69]|3[2-4]|4[1-468]|5[24-689]|6[1-3578]|7[14-7]|8[1-79]|9[145])19',
                 ])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

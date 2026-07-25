@@ -65,7 +65,7 @@ class PhoneNumberMetadata_PT extends PhoneMetadata
             ->setNationalNumberPattern('30\d{7}')
             ->setExampleNumber('301234567');
         $this->pager = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6(?:222\d|8988)\d{4}')
+            ->setNationalNumberPattern('6(?:222\d|89(?:00|88|99))\d{4}')
             ->setExampleNumber('622212345');
         $this->uan = (new PhoneNumberDesc())
             ->setNationalNumberPattern('70(?:38[01]|596|(?:7\d|8[17])\d)\d{4}')

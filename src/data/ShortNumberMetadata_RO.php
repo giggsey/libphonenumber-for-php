@@ -34,7 +34,7 @@ class ShortNumberMetadata_RO extends PhoneMetadata
             ->setExampleNumber('1200')
             ->setPossibleLength([4, 6]);
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('11(?:2|6\d{3})')
+            ->setNationalNumberPattern('11(?:[23]|6\d{3})')
             ->setExampleNumber('112')
             ->setPossibleLength([3, 6]);
         $this->emergency = (new PhoneNumberDesc())
@@ -42,13 +42,13 @@ class ShortNumberMetadata_RO extends PhoneMetadata
             ->setExampleNumber('112')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:1(?:2|6(?:000|1(?:11|23))|8(?:(?:01|8[18])1|119|[23]00|932))|[24]\d\d|9(?:0(?:00|19)|1[19]|21|3[02]|5[178]))|8[48]\d\d')
+            ->setNationalNumberPattern('1(?:1(?:[23]|6(?:000|1(?:11|23))|8(?:(?:01|8[18])1|119|[23]00|932))|[24]\d\d|9(?:0(?:00|19)|1[19]|21|3[02]|5[178]))|8[48]\d\d')
             ->setExampleNumber('112');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = PhoneNumberDesc::empty();
         $this->smsServices = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[24]|8[48])\d\d')
-            ->setExampleNumber('1200')
-            ->setPossibleLength([4]);
+            ->setNationalNumberPattern('113|(?:1[24]|8[48])\d\d')
+            ->setExampleNumber('113')
+            ->setPossibleLength([3, 4]);
     }
 }

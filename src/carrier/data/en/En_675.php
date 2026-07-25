@@ -25,6 +25,7 @@ class En_675
         67581 => 'Vodafone',
         67582 => 'Vodafone',
         67583 => 'Vodafone',
+        67584 => 'Vodafone',
         67588 => 'Digicel',
     ];
 }

@@ -31,7 +31,7 @@ class PhoneNumberMetadata_TG extends PhoneMetadata
             ->setNationalNumberPattern('[279]\d{7}')
             ->setPossibleLength([8]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:7[0-29]|9[0-36-9])\d{6}')
+            ->setNationalNumberPattern('(?:7[0-289]|9[0-36-9])\d{6}')
             ->setExampleNumber('90112345');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())

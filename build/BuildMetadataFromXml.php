@@ -524,6 +524,7 @@ class BuildMetadataFromXml
         if (!$isShortNumberMetadata) {
             // Make a copy here since we want to remove some nodes, but we don't want to do that on our
             // actual data.
+            /** @var DOMElement $allDescData */
             $allDescData = $data->cloneNode(true);
             foreach (self::$phoneNumberDescsWithoutMatchingTypes as $tag) {
                 $nodesToRemove = $allDescData->getElementsByTagName($tag);

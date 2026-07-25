@@ -31,7 +31,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
             ->setNationalNumberPattern('(?:0800|(?:[37]|800)\d)\d{6}|(?:[2-6]\d|90)\d{5}')
             ->setPossibleLength([7, 8, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:321|7[1-8]\d)\d{5}')
+            ->setNationalNumberPattern('(?:321|7(?:[1-8]\d|9[03]))\d{5}')
             ->setExampleNumber('71123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -76,7 +76,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('79(?:1(?:[0-2]\d|3[0-3])|2[0-7]\d)\d{3}')
+            ->setNationalNumberPattern('79(?:1(?:[0-2]\d|3[0-8])|2[0-7]\d)\d{3}')
             ->setExampleNumber('79101234')
             ->setPossibleLength([8]);
         $this->pager = PhoneNumberDesc::empty();

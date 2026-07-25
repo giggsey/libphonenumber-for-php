@@ -39,6 +39,7 @@ class En_49
         491526 => 'Vodafone',
         491529 => 'Vodafone/Truphone',
         491531 => 'Mtel',
+        491533 => 'Simsalasim',
         491555 => '1&1 Mobilfunk',
         491556 => '1&1 Mobilfunk',
         491570 => 'Eplus/Telogic',

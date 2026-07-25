@@ -37,7 +37,7 @@ class PhoneNumberMetadata_QA extends PhoneMetadata
             ->setPossibleLength([8]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('4(?:1111|2022)\d{3}|4(?:[04]\d\d|14[0-6]|999)\d{4}')
+            ->setNationalNumberPattern('4(?:(?:[014]\d\d|999)\d|2022)\d{3}')
             ->setExampleNumber('44123456')
             ->setPossibleLength([8]);
         $this->numberFormat = [

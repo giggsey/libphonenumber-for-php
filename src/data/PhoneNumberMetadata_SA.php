@@ -35,7 +35,7 @@ class PhoneNumberMetadata_SA extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('579[01]\d{5}|5(?:[013-689]\d|7[0-8])\d{6}')
+            ->setNationalNumberPattern('579[0-8]\d{5}|5(?:[013-689]\d|7[0-8])\d{6}')
             ->setExampleNumber('512345678')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())

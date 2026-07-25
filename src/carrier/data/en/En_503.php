@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_503
 {
     public const DATA = [
+        5035 => 'Digicel',
         50361 => 'Movistar',
         50365 => 'SIGET',
         50366 => 'SIGET',
@@ -54,7 +55,7 @@ class En_503
         503646 => 'Tigo',
         503649 => 'SIGET',
         503690 => 'Tigo',
-        503692 => 'Tigo',
+        503692 => 'Movistar',
         503693 => 'Tigo',
         503694 => 'Tigo',
         503695 => 'Tigo',
@@ -102,6 +103,12 @@ class En_503
         503796 => 'Claro',
         503797 => 'Digicel',
         503799 => 'Movistar',
+        5035000 => 'Claro',
+        5035001 => 'Claro',
+        5035002 => 'Claro',
+        5035003 => 'Claro',
+        5035004 => 'Claro',
+        5035100 => 'Tigo',
         5036310 => 'Claro',
         5036311 => 'Claro',
         5036312 => 'Claro',

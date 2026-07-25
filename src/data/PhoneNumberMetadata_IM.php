@@ -24,7 +24,7 @@ class PhoneNumberMetadata_IM extends PhoneMetadata
     protected const LEADING_DIGITS = '74576|(?:16|7[56])24';
     protected const NATIONAL_PREFIX = '0';
 
-    protected ?string $nationalPrefixForParsing = '([25-8]\d{5})$|0';
+    protected ?string $nationalPrefixForParsing = '([25-8]\d{5})$|0|180020';
     protected ?string $internationalPrefix = '00';
     protected ?string $nationalPrefixTransformRule = '1624$1';
 

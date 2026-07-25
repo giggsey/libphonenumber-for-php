@@ -6,7 +6,6 @@ namespace libphonenumber;
 
 /**
  * Number Format
- * @internal
  */
 class NumberFormat
 {

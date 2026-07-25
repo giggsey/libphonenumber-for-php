@@ -19,6 +19,7 @@ class En_236
     public const DATA = [
         23670 => 'A-Cell',
         23672 => 'Orange',
+        23673 => 'Orange',
         23674 => 'Orange',
         23675 => 'Telecel',
         23676 => 'Telecel',

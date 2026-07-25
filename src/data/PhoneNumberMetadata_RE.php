@@ -40,7 +40,7 @@ class PhoneNumberMetadata_RE extends PhoneMetadata
             ->setNationalNumberPattern('89[1-37-9]\d{6}')
             ->setExampleNumber('891123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('26(?:2\d\d|3(?:0\d|1[0-6]))\d{4}')
+            ->setNationalNumberPattern('2631[0-6]\d{4}|26(?:2\d|30|88)\d{5}')
             ->setExampleNumber('262161234');
         $this->numberFormat = [
             (new NumberFormat())

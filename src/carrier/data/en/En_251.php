@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_251
 {
-    public const DATA = [2517 => 'Safaricom', 2519 => 'Ethio Telecom'];
+    public const DATA = [2517 => 'Safaricom', 'Ethio Telecom', 'Ethio Telecom'];
 }

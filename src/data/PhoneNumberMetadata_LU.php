@@ -33,7 +33,7 @@ class PhoneNumberMetadata_LU extends PhoneMetadata
             ->setNationalNumberPattern('35[013-9]\d{4,8}|6\d{8}|35\d{2,4}|(?:[2457-9]\d|3[0-46-9])\d{2,9}')
             ->setPossibleLength([4, 5, 6, 7, 8, 9, 10, 11]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('6(?:[269][18]|5[1568]|7[189]|81)\d{6}')
+            ->setNationalNumberPattern('6(?:[26][18]|5[1568]|7[189]|81|9[128])\d{6}')
             ->setExampleNumber('628123456')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -65,7 +65,13 @@ class PhoneNumberMetadata_LU extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{1,2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['2(?:[0367]|4[3-8])'])
+                ->setLeadingDigitsPattern(['20'])
+                ->setDomesticCarrierCodeFormattingRule('$CC $1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{2})(\d{2})(\d{1,5})')
+                ->setFormat('$1 $2 $3 $4')
+                ->setLeadingDigitsPattern(['[3-57]|8[13-9]|9(?:0[89]|[2-579])|(?:2|80)[2-9]'])
                 ->setDomesticCarrierCodeFormattingRule('$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -89,13 +95,7 @@ class PhoneNumberMetadata_LU extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})(\d{1,2})')
                 ->setFormat('$1 $2 $3 $4 $5')
-                ->setLeadingDigitsPattern(['2(?:[0367]|4[3-8])'])
-                ->setDomesticCarrierCodeFormattingRule('$CC $1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
-                ->setPattern('(\d{2})(\d{2})(\d{2})(\d{1,5})')
-                ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[3-57]|8[13-9]|9(?:0[89]|[2-579])|(?:2|80)[2-9]'])
+                ->setLeadingDigitsPattern(['20'])
                 ->setDomesticCarrierCodeFormattingRule('$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

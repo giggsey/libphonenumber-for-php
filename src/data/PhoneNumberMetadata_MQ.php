@@ -31,7 +31,7 @@ class PhoneNumberMetadata_MQ extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:596\d|7091)\d{5}|(?:69|[89]\d)\d{7}')
+            ->setNationalNumberPattern('7091\d{5}|(?:[56]9|[89]\d)\d{7}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('(?:69[67]\d\d|7091[0-3])\d{4}')
@@ -40,7 +40,7 @@ class PhoneNumberMetadata_MQ extends PhoneMetadata
             ->setNationalNumberPattern('8[129]\d{7}')
             ->setExampleNumber('810123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:596(?:[03-7]\d|1[05]|2[7-9]|8[0-39]|9[04-9])|80[6-9]\d\d|9(?:477[6-9]|767[4589]))\d{4}')
+            ->setNationalNumberPattern('(?:59(?:6(?:[03-7]\d|1[05]|2[7-9]|8[0-39]|9[04-9])|89\d)|80[6-9]\d\d|9(?:477[6-9]|767[4589]))\d{4}')
             ->setExampleNumber('596301234');
         $this->numberFormat = [
             (new NumberFormat())

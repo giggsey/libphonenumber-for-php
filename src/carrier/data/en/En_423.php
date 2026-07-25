@@ -27,7 +27,9 @@ class En_423
         42379 => 'Telecom Liechtenstein',
         423650 => 'Telecom Liechtenstein',
         423659 => 'Telecom Liechtenstein',
-        423661 => 'Dimoco',
         423666 => 'Datamobile AG',
+        423668 => 'Velos IoT',
+        4236610 => 'Dimoco',
+        4236611 => 'FL1',
     ];
 }

@@ -32,8 +32,8 @@ class PhoneNumberMetadata_UY extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('0004\d{2,9}|[1249]\d{7}|(?:[49]\d|80)\d{5}')
-            ->setPossibleLength([6, 7, 8, 9, 10, 11, 12, 13]);
+            ->setNationalNumberPattern('0004\d{2,9}|[1249]\d{7}|2\d{3,4}|(?:[49]\d|80)\d{5}')
+            ->setPossibleLength([4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('9[1-9]\d{6}')
             ->setExampleNumber('94231234')
@@ -48,6 +48,11 @@ class PhoneNumberMetadata_UY extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([8]);
         $this->numberFormat = [
+            (new NumberFormat())
+                ->setPattern('(\d{4,5})')
+                ->setFormat('$1')
+                ->setLeadingDigitsPattern(['21'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3,4})')
                 ->setFormat('$1 $2')
@@ -83,12 +88,16 @@ class PhoneNumberMetadata_UY extends PhoneMetadata
         ];
         $this->tollFree = (new PhoneNumberDesc())
             ->setNationalNumberPattern('0004\d{2,9}|(?:405|80[05])\d{4}')
-            ->setExampleNumber('8001234');
+            ->setExampleNumber('8001234')
+            ->setPossibleLength([6, 7, 8, 9, 10, 11, 12, 13]);
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
-        $this->uan = PhoneNumberDesc::empty();
+        $this->uan = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('21\d{2,3}')
+            ->setExampleNumber('21123')
+            ->setPossibleLength([4, 5]);
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = PhoneNumberDesc::empty();
     }

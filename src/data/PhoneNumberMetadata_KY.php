@@ -36,7 +36,7 @@ class PhoneNumberMetadata_KY extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('345(?:32[1-9]|42[0-4]|5(?:1[67]|2[5-79]|4[6-9]|50|76)|649|82[56]|9(?:1[679]|2[2-9]|3[06-9]|90))\d{4}')
+            ->setNationalNumberPattern('345(?:32[1-9]|4(?:1[2-6]|2[0-4])|5(?:1[67]|2[5-79]|4[6-9]|50|76)|649|82[56]|9(?:1[679]|2[2-9]|3[06-9]|90))\d{4}')
             ->setExampleNumber('3453231234')
             ->setPossibleLengthLocalOnly([7]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -51,7 +51,7 @@ class PhoneNumberMetadata_KY extends PhoneMetadata
             ->setExampleNumber('8002345678');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('52(?:3(?:[2-46-9][02-9]\d|5(?:[02-46-9]\d|5[0-46-9]))|4(?:[2-478][02-9]\d|5(?:[034]\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\d)|9(?:[05-9]\d|2[0-5]|49)))\d{4}|52[34][2-9]1[02-9]\d{4}|5(?:00|2[125-9]|33|44|66|77|88)[2-9]\d{6}')
+            ->setNationalNumberPattern('52(?:3(?:[2-46-9][02-9]\d|5(?:[02-46-9]\d|5[0-46-9]))|4(?:[2-478][02-9]\d|5(?:[034]\d|2[024-9]|5[0-46-9])|6(?:0[1-9]|[2-9]\d)|9(?:[05-9]\d|2[0-5]|49)))\d{4}|52[34][2-9]1[02-9]\d{4}|5(?:00|2[125-9]|3[23]|44|66|77|88)[2-9]\d{6}')
             ->setExampleNumber('5002345678');
         $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();

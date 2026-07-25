@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_962
 {
-    public const DATA = [96277 => 'Orange', 'Umniah', 'Zain JO'];
+    public const DATA = [9624 => 'Orange', 96277 => 'Orange', 96278 => 'Umniah', 96279 => 'Zain JO'];
 }

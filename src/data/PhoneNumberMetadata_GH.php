@@ -31,7 +31,7 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[235]\d{3}|800)\d{5}')
+            ->setNationalNumberPattern('[235]\d{8}|800\d{5,6}')
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
@@ -59,14 +59,13 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[235]'])
+                ->setLeadingDigitsPattern(['[2358]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('800\d{5}')
-            ->setExampleNumber('80012345')
-            ->setPossibleLength([8]);
+            ->setNationalNumberPattern('800\d{5,6}')
+            ->setExampleNumber('80012345');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = PhoneNumberDesc::empty();
@@ -74,8 +73,7 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
         $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('800\d{5}')
-            ->setPossibleLength([8]);
+            ->setNationalNumberPattern('800\d{5,6}');
         $this->intlNumberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{5})')
@@ -86,7 +84,7 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[235]'])
+                ->setLeadingDigitsPattern(['[2358]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

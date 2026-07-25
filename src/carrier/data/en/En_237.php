@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_237
 {
     public const DATA = [
+        23724 => 'Camtel',
         23762 => 'Camtel',
         23764 => 'Orange',
         23766 => 'NEXTTEL',

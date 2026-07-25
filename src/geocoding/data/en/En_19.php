@@ -61,6 +61,7 @@ class En_19
         1971 => 'Oregon',
         1972 => 'Texas',
         1973 => 'New Jersey',
+        1975 => 'Missouri',
         1978 => 'Massachusetts',
         1979 => 'Texas',
         1980 => 'North Carolina',

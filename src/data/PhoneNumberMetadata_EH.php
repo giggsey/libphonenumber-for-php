@@ -21,7 +21,6 @@ class PhoneNumberMetadata_EH extends PhoneMetadata
 {
     protected const ID = 'EH';
     protected const COUNTRY_CODE = 212;
-    protected const LEADING_DIGITS = '528[89]';
     protected const NATIONAL_PREFIX = '0';
 
     protected ?string $nationalPrefixForParsing = '0';
@@ -33,7 +32,7 @@ class PhoneNumberMetadata_EH extends PhoneMetadata
             ->setNationalNumberPattern('[5-8]\d{8}')
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:6(?:[0-79]\d|8[0-247-9])|7(?:[0167]\d|2[0-467]|5[0-3]|8[0-7]))\d{6}')
+            ->setNationalNumberPattern('(?:6(?:[0-79]\d|8[0-247-9])|7(?:[016-8]\d|2[0-8]|5[0-5]))\d{6}')
             ->setExampleNumber('650123456');
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('89\d{7}')

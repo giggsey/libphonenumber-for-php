@@ -31,7 +31,7 @@ class PhoneNumberMetadata_MZ extends PhoneMetadata
             ->setNationalNumberPattern('(?:2|8\d)\d{7}')
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('8[2-79]\d{7}')
+            ->setNationalNumberPattern('8(?:[2-79]\d|80)\d{6}')
             ->setExampleNumber('821234567')
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -43,7 +43,7 @@ class PhoneNumberMetadata_MZ extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{3,4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['2|8[2-79]'])
+                ->setLeadingDigitsPattern(['2|8[2-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')

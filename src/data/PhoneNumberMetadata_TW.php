@@ -54,15 +54,33 @@ class PhoneNumberMetadata_TW extends PhoneMetadata
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
+                ->setPattern('(\d{3})(\d{5})')
+                ->setFormat('$1 $2')
+                ->setLeadingDigitsPattern(['826'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{3})(\d{2})(\d{3})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['83'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{2})(\d{4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['82'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{3,4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[258]0'])
+                ->setLeadingDigitsPattern(['[25]0|37|49|8[09]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3,4})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[23568]|4(?:0[02-48]|[1-47-9])|7[1-9]', '[23568]|4(?:0[2-48]|[1-47-9])|(?:400|7)[1-9]'])
+                ->setLeadingDigitsPattern(['[23568]|4(?:0[02-48]|[1-478])|7[1-9]', '[23568]|4(?:0[2-48]|[1-478])|(?:400|7)[1-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

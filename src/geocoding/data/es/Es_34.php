@@ -37,7 +37,6 @@ class Es_34
         34957 => 'Córdoba',
         34971 => 'Baleares',
         34972 => 'Gerona',
-        34981 => 'A Coruña',
         34988 => 'Orense',
         349730 => 'Lérida',
         349731 => 'Lérida',

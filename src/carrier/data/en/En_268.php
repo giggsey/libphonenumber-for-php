@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_268
 {
-    public const DATA = [26876 => 'Swazi MTN', 'SPTC', 'Swazi MTN', 'Eswatini Mobile'];
+    public const DATA = [26875 => 'Eswatini Mobile', 'Swazi MTN', 'SPTC', 'Swazi MTN', 'Eswatini Mobile'];
 }

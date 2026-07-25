@@ -16,5 +16,9 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_975
 {
-    public const DATA = [9751 => 'B-Mobile of Bhutan Telecom', 97577 => 'TashiCell of Tashi InfoComm'];
+    public const DATA = [
+        9751 => 'B-Mobile of Bhutan Telecom',
+        97577 => 'TashiCell of Tashi InfoComm',
+        97587 => 'TashiCell of Tashi InfoComm',
+    ];
 }

@@ -61,6 +61,7 @@ class PhoneNumberUtilTest extends TestCase
     private static PhoneNumber $aeUAN;
     private static PhoneNumber $unknownCountryCodeNoRawInput;
     protected PhoneNumberUtil $phoneUtil;
+    private static PhoneNumber $notAPhoneNumber;
 
     public function setUp(): void
     {
@@ -142,6 +143,7 @@ class PhoneNumberUtilTest extends TestCase
         self::$aeUAN->setCountryCode(971)->setNationalNumber('600123456');
         self::$unknownCountryCodeNoRawInput = new PhoneNumber();
         self::$unknownCountryCodeNoRawInput->setCountryCode(2)->setNationalNumber('12345');
+        self::$notAPhoneNumber = (new PhoneNumber())->setNationalNumber('not-a-phone-number');
 
         PhoneNumberUtil::resetInstance();
         return PhoneNumberUtil::getInstance(
@@ -594,6 +596,16 @@ class PhoneNumberUtilTest extends TestCase
             $this->phoneUtil->format(self::$usSpoofWithRawInput, PhoneNumberFormat::NATIONAL)
         );
         self::assertEquals('0', $this->phoneUtil->format(self::$usSpoof, PhoneNumberFormat::NATIONAL));
+    }
+
+    public function testFormatAUShortCodeNumber(): void
+    {
+        $auShortCodeNumber = $this->phoneUtil->parse('000', RegionCode::AU);
+
+        self::assertEquals('+61000', $this->phoneUtil->format($auShortCodeNumber, PhoneNumberFormat::E164));
+
+        $pgShortCodeNumber = (new PhoneNumber())->setCountryCode(675)->setNationalNumber('0')->setRawInput('+675000');
+        self::assertEquals('+675000', $this->phoneUtil->format($pgShortCodeNumber, PhoneNumberFormat::E164));
     }
 
     public function testFormatBSNumber(): void
@@ -1775,6 +1787,8 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals(RegionCode::GB, $this->phoneUtil->getRegionCodeForNumber(self::$gbMobile));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$internationalTollFree));
         self::assertEquals(RegionCode::UN001, $this->phoneUtil->getRegionCodeForNumber(self::$universalPremiumRate));
+        self::assertEquals(null, $this->phoneUtil->getRegionCodeForNumber(self::$notAPhoneNumber));
+
     }
 
     public function testGetRegionCodesForCountryCode(): void

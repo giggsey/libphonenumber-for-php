@@ -41,7 +41,7 @@ class ShortNumberMetadata_FR extends PhoneMetadata
             ->setExampleNumber('15')
             ->setPossibleLength([2, 3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:0\d\d|1(?:[02459]|6(?:000|111)|8\d{3})|[578]|9[167])|2(?:0(?:00|2)0|24)|[3-8]\d{4}|3\d{3}|6(?:1[14]|34)|7(?:0[06]|22|40)')
+            ->setNationalNumberPattern('1(?:0\d\d|1(?:[02459]|6(?:00[06]|11[17])|8\d{3})|[578]|9[167])|2(?:0(?:00|2)0|24)|[3-8]\d{4}|3\d{3}|6(?:1[14]|34)|7(?:0[06]|22|40)')
             ->setExampleNumber('15');
         $this->standard_rate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('202\d|6(?:1[14]|34)|70[06]')

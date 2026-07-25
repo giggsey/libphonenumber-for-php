@@ -65,7 +65,7 @@ class PhoneNumberMetadata_SK extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3})(\d{3})(\d{2})')
-                ->setFormat('$1/$2 $3 $4')
+                ->setFormat('$1 $2 $3 $4')
                 ->setLeadingDigitsPattern(['2'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
@@ -77,7 +77,7 @@ class PhoneNumberMetadata_SK extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{2})(\d{2})')
-                ->setFormat('$1/$2 $3 $4')
+                ->setFormat('$1 $2 $3 $4')
                 ->setLeadingDigitsPattern(['[3-5]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
@@ -122,7 +122,7 @@ class PhoneNumberMetadata_SK extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d)(\d{3})(\d{3})(\d{2})')
-                ->setFormat('$1/$2 $3 $4')
+                ->setFormat('$1 $2 $3 $4')
                 ->setLeadingDigitsPattern(['2'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
@@ -134,7 +134,7 @@ class PhoneNumberMetadata_SK extends PhoneMetadata
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{2})(\d{2})')
-                ->setFormat('$1/$2 $3 $4')
+                ->setFormat('$1 $2 $3 $4')
                 ->setLeadingDigitsPattern(['[3-5]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),

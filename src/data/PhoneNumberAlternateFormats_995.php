@@ -40,12 +40,12 @@ class PhoneNumberAlternateFormats_995 extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{6})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[348]'])
+                ->setLeadingDigitsPattern(['[348]|5545'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[348]'])
+                ->setLeadingDigitsPattern(['[348]|5545'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{3})(\d{2})')

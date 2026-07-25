@@ -26,8 +26,9 @@ class En_381
         38166 => 'Telekom Srbija a.d.',
         38168 => 'A1',
         38169 => 'Telenor',
-        381676 => 'GLOBALTEL',
-        381677 => 'GLOBALTEL',
+        381671 => 'Ringtel',
+        381676 => 'Telekom Srbija a.d.',
+        381677 => 'Telekom Srbija a.d.',
         381678 => 'Vectone Mobile',
     ];
 }

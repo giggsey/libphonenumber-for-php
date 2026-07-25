@@ -30,11 +30,11 @@ class PhoneNumberMetadata_BO extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('8001\d{5}|(?:[2-467]\d|50)\d{6}')
+            ->setNationalNumberPattern('(?:[2-7]\d\d|8001)\d{5}')
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([8, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[67]\d{7}')
+            ->setNationalNumberPattern('(?:57|[67]\d)\d{6}')
             ->setExampleNumber('71234567')
             ->setPossibleLength([8]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -47,13 +47,13 @@ class PhoneNumberMetadata_BO extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d)(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[235]|4[46]'])
+                ->setLeadingDigitsPattern(['[23]|4[46]|50'])
                 ->setDomesticCarrierCodeFormattingRule('0$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{8})')
                 ->setFormat('$1')
-                ->setLeadingDigitsPattern(['[67]'])
+                ->setLeadingDigitsPattern(['[5-7]'])
                 ->setDomesticCarrierCodeFormattingRule('0$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

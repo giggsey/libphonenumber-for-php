@@ -132,4 +132,11 @@ class PhoneNumberTest extends TestCase
 
         self::assertEquals($numberA, unserialize(serialize($numberB)));
     }
+
+    public function testUnserializeWithOldPhoneNumberData(): void
+    {
+        $oldPhoneNumberSerialized = 'O:26:"libphonenumber\PhoneNumber":8:{i:0;N;i:1;N;i:2;N;i:3;N;i:4;i:1;i:5;N;i:6;i:4;i:7;N;}';
+
+        self::assertEquals(new PhoneNumber(), unserialize($oldPhoneNumberSerialized));
+    }
 }

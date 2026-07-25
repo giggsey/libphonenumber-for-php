@@ -65,6 +65,7 @@ class En_16
         1681 => 'West Virginia',
         1682 => 'Texas',
         1683 => 'Ontario',
+        1686 => 'Virginia',
         1689 => 'Florida',
         160223 => 'Phoenix, AZ',
         160224 => 'Phoenix, AZ',

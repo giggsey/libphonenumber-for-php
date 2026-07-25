@@ -943,7 +943,7 @@ class En_81
         818479 => 'Tojo, Hiroshima',
         818490 => 'Onomichi, Hiroshima',
         818493 => 'Onomichi, Hiroshima',
-        818512 => 'Nishigo, Fukushima',
+        818512 => 'Okinoshima, Shimane',
         818514 => 'Ama, Shimane',
         818542 => 'Yasugi, Shimane',
         818543 => 'Yasugi, Shimane',

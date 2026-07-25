@@ -392,9 +392,15 @@ class PhoneNumber implements Serializable
             $this->italianLeadingZero,
             $this->numberOfLeadingZeros,
             $this->rawInput,
-            $this->countryCodeSource,
+            $countryCodeSource,
             $this->preferredDomesticCarrierCode
         ] = $data;
+
+        // BC layer to allow this method to unserialize "old" phonenumbers
+        if (is_int($countryCodeSource)) {
+            $countryCodeSource = CountryCodeSource::from($countryCodeSource);
+        }
+        $this->countryCodeSource = $countryCodeSource;
 
         if ($this->numberOfLeadingZeros > 1) {
             $this->hasNumberOfLeadingZeros = true;

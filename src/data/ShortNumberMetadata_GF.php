@@ -27,17 +27,22 @@ class ShortNumberMetadata_GF extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1\d')
-            ->setPossibleLength([2]);
-        $this->premiumRate = PhoneNumberDesc::empty();
+            ->setNationalNumberPattern('[13]\d(?:\d\d(?:\d{2})?)?')
+            ->setPossibleLength([2, 4, 6]);
+        $this->premiumRate = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('3[2469]\d\d')
+            ->setExampleNumber('3200')
+            ->setPossibleLength([4]);
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1[578]')
-            ->setExampleNumber('15');
+            ->setNationalNumberPattern('1[578]|3(?:0\d|1[0-689])\d')
+            ->setExampleNumber('15')
+            ->setPossibleLength([2, 4]);
         $this->emergency = (new PhoneNumberDesc())
             ->setNationalNumberPattern('1[578]')
-            ->setExampleNumber('15');
+            ->setExampleNumber('15')
+            ->setPossibleLength([2]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1[578]')
+            ->setNationalNumberPattern('1[578]|300[0-79]|(?:118[02-9]\d|3(?:0[1-9]|1[0-689]|[2469]\d))\d')
             ->setExampleNumber('15');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = PhoneNumberDesc::empty();
