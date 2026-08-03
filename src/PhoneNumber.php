@@ -381,7 +381,7 @@ class PhoneNumber implements Serializable
     }
 
     /**
-     * @param array{int,string,string,bool|null,int,string|null,CountryCodeSource|null,string|null} $data
+     * @param array{int,string,string,bool|null,int,string|null,CountryCodeSource|int|null,string|null} $data
      */
     public function __unserialize(array $data): void
     {

@@ -38,10 +38,13 @@ class ShortNumberMetadata_FO extends PhoneMetadata
             ->setExampleNumber('112')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:1[248]|819)|1(?:4[124]|71|8[7-9])\d')
+            ->setNationalNumberPattern('11[248]|1(?:4[124]|71|8[17-9]|9\d)\d')
             ->setExampleNumber('112');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = PhoneNumberDesc::empty();
-        $this->smsServices = PhoneNumberDesc::empty();
+        $this->smsServices = (new PhoneNumberDesc())
+            ->setNationalNumberPattern('19\d\d')
+            ->setExampleNumber('1900')
+            ->setPossibleLength([4]);
     }
 }

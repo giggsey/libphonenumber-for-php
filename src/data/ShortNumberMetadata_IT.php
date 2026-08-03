@@ -34,7 +34,7 @@ class ShortNumberMetadata_IT extends PhoneMetadata
             ->setExampleNumber('1200')
             ->setPossibleLength([4, 5, 7]);
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:1(?:[2358]|6\d{3})|87)')
+            ->setNationalNumberPattern('1(?:1(?:[2358]|6\d{3})|46|87)')
             ->setExampleNumber('112')
             ->setPossibleLength([3, 6]);
         $this->emergency = (new PhoneNumberDesc())

@@ -18,9 +18,6 @@ class En_47
 {
     public const DATA = [
         4741 => 'telenor norge',
-        4742 => 'telenor norge',
-        4743 => 'telenor norge',
-        4744 => 'telenor norge',
         4745 => 'telia',
         4749 => 'telenor norge',
         4790 => 'telenor norge',

@@ -32,7 +32,7 @@ class PhoneNumberMetadata_FO extends PhoneMetadata
             ->setNationalNumberPattern('[2-9]\d{5}')
             ->setPossibleLength([6]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[27][1-9]|5\d|9[136])\d{4}')
+            ->setNationalNumberPattern('(?:[27][1-9]|5\d|9[16])\d{4}')
             ->setExampleNumber('211234');
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('90(?:[13-5][15-7]|2[125-7]|9\d)\d\d')
@@ -42,8 +42,8 @@ class PhoneNumberMetadata_FO extends PhoneMetadata
             ->setExampleNumber('201234');
         $this->numberFormat = [
             (new NumberFormat())
-                ->setPattern('(\d{6})')
-                ->setFormat('$1')
+                ->setPattern('(\d{2})(\d{2})(\d{2})')
+                ->setFormat('$1 $2 $3')
                 ->setLeadingDigitsPattern(['[2-9]'])
                 ->setDomesticCarrierCodeFormattingRule('$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
@@ -54,7 +54,7 @@ class PhoneNumberMetadata_FO extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:6[0-36]|88)\d{4}')
+            ->setNationalNumberPattern('6[0-36]\d{4}')
             ->setExampleNumber('601234');
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();
