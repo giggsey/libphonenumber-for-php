@@ -24,6 +24,7 @@ class En_212
         21270 => 'Inwi',
         21271 => 'Inwi',
         21272 => 'Inwi',
+        21273 => 'Orange',
         21275 => 'Maroc Telecom',
         21276 => 'Maroc Telecom',
         21277 => 'Orange',

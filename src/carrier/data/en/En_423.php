@@ -17,7 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_423
 {
     public const DATA = [
-        42364 => 'Soracom',
+        42364 => 'Telecom Liechtenstein',
         42365 => 'Cubic',
         42366 => 'Telecom Liechtenstein',
         42373 => 'Telecom Liechtenstein',
