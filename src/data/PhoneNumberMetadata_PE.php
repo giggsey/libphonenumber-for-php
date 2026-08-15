@@ -45,7 +45,7 @@ class PhoneNumberMetadata_PE extends PhoneMetadata
             ->setExampleNumber('80512345')
             ->setPossibleLength([8]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:(?:(?:4[34]|5[14])[0-8]|687)\d|7(?:173|(?:3[0-8]|55)\d)|8(?:10[05689]|6(?:0[06-9]|1[6-9]|29)|7(?:0[0569]|[56]0)))\d{4}|(?:1[0-8]|4[12]|5[236]|6[1-7]|7[246]|8[2-4])\d{6}')
+            ->setNationalNumberPattern('(?:(?:19[02-68]|(?:4[34]|5[14])[0-8]|687)\d|7(?:173|(?:3[0-8]|55)\d)|8(?:10[05689]|6(?:0[06-9]|1[6-9]|29)|7(?:0[0569]|[56]0)))\d{4}|(?:1[0-8]|4[12]|5[236]|6[1-7]|7[246]|8[2-4])\d{6}')
             ->setExampleNumber('11234567')
             ->setPossibleLengthLocalOnly([6, 7])
             ->setPossibleLength([8]);

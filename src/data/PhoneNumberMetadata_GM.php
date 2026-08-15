@@ -28,20 +28,25 @@ class PhoneNumberMetadata_GM extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[2-9]\d{6}')
-            ->setPossibleLength([7]);
+            ->setNationalNumberPattern('[48]\d{8}|[2-9]\d{6}')
+            ->setPossibleLength([7, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('556\d{4}|(?:[23679]\d|4[015]|5[0-489]|8[4-7])\d{5}')
+            ->setNationalNumberPattern('(?:(?:[23679]\d|4[015]|8(?:(?:3[35]|6[68]|99)\d|7(?:[27]\d|4[015])))\d|5(?:[0-489]\d|56))\d{4}|8[4-7]\d{5}')
             ->setExampleNumber('3012345');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:4(?:[23]\d\d|4(?:1[024679]|[6-9]\d))|5(?:5(?:3\d|4[0-7])|6[67]\d|7(?:1[04]|2[035]|3[58]|48))|8[0-389]\d\d)\d{3}')
+            ->setNationalNumberPattern('44(?:44[6-9]|8[0-389]\d)\d{4}|44[6-9]\d{4}|(?:4(?:[23]|44[23])|8[0-389])\d{5}|44(?:1|441)[024679]\d{3}|(?:445|5)(?:5(?:3\d|4[0-7])|6[67]\d|7(?:1[04]|2[035]|3[58]|48))\d{3}')
             ->setExampleNumber('5661234');
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[2-9]'])
+                ->setLeadingDigitsPattern(['[235-9]|4(?:[0-35]|4[16-9])'])
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{3})(\d{4})')
+                ->setFormat('$1 $2 $3')
+                ->setLeadingDigitsPattern(['[48]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = PhoneNumberDesc::empty();
