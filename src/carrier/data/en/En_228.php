@@ -20,6 +20,7 @@ class En_228
         22870 => 'Togo Telecom',
         22871 => 'Togo Telecom',
         22872 => 'Togo Telecom',
+        22873 => 'Togo Telecom',
         22878 => 'Moov',
         22879 => 'Moov',
         22890 => 'Togo Telecom',

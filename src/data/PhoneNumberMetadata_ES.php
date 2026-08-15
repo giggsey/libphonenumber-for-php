@@ -44,7 +44,7 @@ class PhoneNumberMetadata_ES extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{4})')
                 ->setFormat('$1')
-                ->setLeadingDigitsPattern(['905'])
+                ->setLeadingDigitsPattern(['905', '905[124578]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{6})')

@@ -33,6 +33,7 @@ class En_256
         256728 => 'Talkio',
         256730 => 'Airtel',
         256731 => 'Airtel',
+        256734 => 'Roke Telkom',
         256736 => 'Hamilton Telecom',
         256737 => 'MTN',
         256798 => 'Africell',

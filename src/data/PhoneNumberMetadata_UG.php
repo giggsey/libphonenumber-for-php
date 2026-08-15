@@ -34,32 +34,32 @@ class PhoneNumberMetadata_UG extends PhoneMetadata
             ->setPossibleLengthLocalOnly([5, 6, 7])
             ->setPossibleLength([9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7280\d{5}|7(?:[014-8]\d|2[01467]|3[0167]|9[0-589])\d{6}')
+            ->setNationalNumberPattern('7(?:28|34)0\d{5}|7(?:[014-8]\d|2[01467]|3[0167]|9[0-589])\d{6}')
             ->setExampleNumber('712345678');
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('90[1-3]\d{6}')
             ->setExampleNumber('901123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('20(?:(?:240|30[67])\d|6(?:00[0-2]|30[0-4]))\d{3}|(?:20(?:[017]\d|2[5-9]|3[1-4]|5[0-4]|6[15-9])|[34]\d{3})\d{5}')
+            ->setNationalNumberPattern('20(?:(?:24[09]|30[67])\d|6(?:00[0-2]|30[0-4]))\d{3}|(?:20(?:[017]\d|2[5-9]|3[1-4]|5[0-4]|6[15-9])|[34]\d{3})\d{5}')
             ->setExampleNumber('312345678')
             ->setPossibleLengthLocalOnly([5, 6, 7]);
         $this->numberFormat = [
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{5})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['202', '2024'])
+                ->setLeadingDigitsPattern(['202', '2024', '20240'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{6})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[27-9]|4(?:6[45]|[7-9])'])
+                ->setLeadingDigitsPattern(['20[0-35-7]|4(?:6[45]|[7-9])|[7-9]', '20(?:[0135-7]|2[5-9])|4(?:6[45]|[7-9])|[7-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[34]'])
+                ->setLeadingDigitsPattern(['[2-4]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

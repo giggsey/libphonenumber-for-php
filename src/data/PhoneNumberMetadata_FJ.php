@@ -37,7 +37,7 @@ class PhoneNumberMetadata_FJ extends PhoneMetadata
             ->setPossibleLength([7]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('603\d{4}|(?:3[0-5]|6[25-7]|8[58])\d{5}')
+            ->setNationalNumberPattern('603\d{4}|(?:3[0-6]|6[25-7]|8[58])\d{5}')
             ->setExampleNumber('3212345')
             ->setPossibleLength([7]);
         $this->numberFormat = [

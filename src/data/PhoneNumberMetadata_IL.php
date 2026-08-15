@@ -25,7 +25,7 @@ class PhoneNumberMetadata_IL extends PhoneMetadata
     protected const NATIONAL_PREFIX = '0';
 
     protected ?string $nationalPrefixForParsing = '0';
-    protected ?string $internationalPrefix = '0(?:0|1[2-9])';
+    protected ?string $internationalPrefix = '0(?:0|1(?:05|[2-9]))';
     protected bool $mobileNumberPortableRegion = true;
 
     public function __construct()
