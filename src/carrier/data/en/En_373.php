@@ -27,6 +27,7 @@ class En_373
         37379 => 'Moldcell',
         373610 => 'Orange',
         373611 => 'Orange',
+        373612 => 'Orange',
         373620 => 'Orange',
         373621 => 'Orange',
         373774 => 'IDC',

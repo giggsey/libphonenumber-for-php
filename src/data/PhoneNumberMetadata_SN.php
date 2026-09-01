@@ -37,7 +37,7 @@ class PhoneNumberMetadata_SN extends PhoneMetadata
             ->setNationalNumberPattern('88[4689]\d{6}')
             ->setExampleNumber('884123456');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('3(?:0(?:1[0-2]|80)|282|3(?:8[1-9]|9[3-9])|611)\d{5}')
+            ->setNationalNumberPattern('3(?:[026]\d|3[89])\d{6}')
             ->setExampleNumber('301012345');
         $this->numberFormat = [
             (new NumberFormat())
@@ -59,7 +59,7 @@ class PhoneNumberMetadata_SN extends PhoneMetadata
             ->setExampleNumber('810123456');
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:3(?:392|9[01]\d)\d|93(?:3[13]0|929))\d{4}')
+            ->setNationalNumberPattern('(?:39|93)\d{7}')
             ->setExampleNumber('933301234');
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();
