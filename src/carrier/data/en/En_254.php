@@ -40,6 +40,7 @@ class En_254
         254757 => 'Safaricom',
         254758 => 'Safaricom',
         254759 => 'Safaricom',
+        254761 => 'Telkom',
         254768 => 'Safaricom',
         254769 => 'Safaricom',
     ];

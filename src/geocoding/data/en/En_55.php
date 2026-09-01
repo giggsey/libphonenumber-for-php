@@ -944,6 +944,7 @@ class En_55
         55114607 => 'Jundiaí - SP',
         55114608 => 'Francisco Morato - SP',
         55114609 => 'Francisco Morato - SP',
+        55114610 => 'Itaquaquecetuba - SP',
         55114618 => 'Jandira - SP',
         55114619 => 'Jandira - SP',
         55114620 => 'Osasco - SP',

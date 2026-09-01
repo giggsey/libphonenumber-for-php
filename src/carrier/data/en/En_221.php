@@ -21,7 +21,7 @@ class En_221
         22171 => 'Orange',
         22172 => 'HAYO',
         22175 => 'Promobile',
-        22176 => 'Free',
+        22176 => 'Yas',
         22177 => 'Orange',
         22178 => 'Orange',
         22179 => 'ADIE',
