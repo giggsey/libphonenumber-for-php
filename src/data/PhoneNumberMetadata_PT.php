@@ -35,7 +35,7 @@ class PhoneNumberMetadata_PT extends PhoneMetadata
             ->setNationalNumberPattern('6(?:[06]92(?:30|9\d)|[35]92(?:[049]\d|3[034]))\d{3}|(?:(?:16|6[0356])93|9(?:[1-36]\d\d|480))\d{5}')
             ->setExampleNumber('912345678');
         $this->premiumRate = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:6(?:0[178]|4[68])\d|76(?:0[1-57]|1[2-47]|2[237]))\d{5}')
+            ->setNationalNumberPattern('(?:6(?:0[178]|4[68])\d|76(?:0[1-57]|1[2-47]|2[1-37]))\d{5}')
             ->setExampleNumber('760123456');
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('2(?:[12]\d|3[1-689]|4[1-59]|[57][1-9]|6[1-35689]|8[1-69]|9[1256])\d{6}')

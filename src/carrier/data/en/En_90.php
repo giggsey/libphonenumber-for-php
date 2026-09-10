@@ -31,6 +31,7 @@ class En_90
         905822 => 'Turkcell',
         905823 => 'Turkcell',
         905824 => 'Vodafone',
+        905825 => 'TTM',
         9051616 => 'Turkcell',
         90510210 => 'Pasifik Telekom',
         90510220 => 'Netgsm',
