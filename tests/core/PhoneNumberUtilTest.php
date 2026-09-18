@@ -4165,4 +4165,13 @@ class PhoneNumberUtilTest extends TestCase
         self::assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::AE));
         self::assertFalse($this->phoneUtil->isMobileNumberPortableRegion(RegionCode::BS));
     }
+
+    public function testRawInput(): void
+    {
+        $numberA = new PhoneNumber();
+        $numberA->setRawInput('+1 650 253 00 00');
+
+        $responseString = $this->phoneUtil->format($numberA, PhoneNumberFormat::E164);
+        self::assertEquals('+1 650 253 00 00', $responseString);
+    }
 }
