@@ -1059,13 +1059,13 @@ class PhoneNumberUtil
         return $this->getNumberTypeHelper($nationalSignificantNumber, $metadata);
     }
 
-    protected function getMetadataForRegionOrCallingCode(int $countryCallingCode, ?string $regionCode): ?PhoneMetadata
+    protected function getMetadataForRegionOrCallingCode(?int $countryCallingCode, ?string $regionCode): ?PhoneMetadata
     {
         return static::REGION_CODE_FOR_NON_GEO_ENTITY === $regionCode ?
             $this->getMetadataForNonGeographicalRegion($countryCallingCode) : $this->getMetadataForRegion($regionCode);
     }
 
-    public function getMetadataForNonGeographicalRegion(int $countryCallingCode): ?PhoneMetadata
+    public function getMetadataForNonGeographicalRegion(?int $countryCallingCode): ?PhoneMetadata
     {
         if (!isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode])) {
             return null;
@@ -1230,7 +1230,7 @@ class PhoneNumberUtil
     /**
      * Helper function to check the country calling code is valid.
      */
-    protected function hasValidCountryCallingCode(int $countryCallingCode): bool
+    protected function hasValidCountryCallingCode(?int $countryCallingCode): bool
     {
         return isset($this->countryCallingCodeToRegionCodeMap[$countryCallingCode]);
     }

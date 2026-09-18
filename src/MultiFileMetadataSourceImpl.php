@@ -51,7 +51,7 @@ class MultiFileMetadataSourceImpl implements MetadataSourceInterface
         return $this->regionToMetadataMap[$regionCode];
     }
 
-    public function getMetadataForNonGeographicalRegion(int $countryCallingCode): PhoneMetadata
+    public function getMetadataForNonGeographicalRegion(?int $countryCallingCode): PhoneMetadata
     {
         if (!isset($this->countryCodeToNonGeographicalMetadataMap[$countryCallingCode])) {
             $this->loadMetadataFromFile($this->currentFilePrefix, PhoneNumberUtil::REGION_CODE_FOR_NON_GEO_ENTITY, $countryCallingCode);
