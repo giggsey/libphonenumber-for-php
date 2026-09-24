@@ -64,6 +64,7 @@ class En_12
         1269 => 'Michigan',
         1270 => 'Kentucky',
         1272 => 'Pennsylvania',
+        1273 => 'Quebec',
         1274 => 'Wisconsin',
         1276 => 'Virginia',
         1279 => 'California',

@@ -25,5 +25,6 @@ class En_880
         88017 => 'Grameenphone',
         88018 => 'Robi',
         88019 => 'Banglalink',
+        88064 => 'Grameenphone',
     ];
 }
