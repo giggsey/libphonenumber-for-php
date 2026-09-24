@@ -14,5 +14,5 @@ interface MetadataSourceInterface
     /**
      * Gets phone metadata for a non-geographical region.
      */
-    public function getMetadataForNonGeographicalRegion(?int $countryCallingCode): PhoneMetadata;
+    public function getMetadataForNonGeographicalRegion(int $countryCallingCode): PhoneMetadata;
 }
