@@ -32,5 +32,7 @@ class En_39
         39383 => 'Vodafone',
         393780 => 'spusu',
         393784 => 'Vodafone',
+        393785 => 'Vodafone',
+        393786 => 'Vodafone',
     ];
 }
