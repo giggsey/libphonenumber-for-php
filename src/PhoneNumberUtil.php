@@ -2396,7 +2396,8 @@ class PhoneNumberUtil
                 // Historically, we set this to an empty string when parsing with raw input if none was
                 // found in the input string. However, this doesn't result in a number we can dial. For this
                 // reason, we treat the empty string the same as if it isn't set at all.
-                $formattedNumber = $numberNoExt->getPreferredDomesticCarrierCode() !== ''
+                $formattedNumber = $numberNoExt->hasPreferredDomesticCarrierCode()
+                    && $numberNoExt->getPreferredDomesticCarrierCode() !== ''
                     ? $this->formatNationalNumberWithPreferredCarrierCode($numberNoExt, '')
                     // Brazilian fixed line and mobile numbers need to be dialed with a carrier code when
                     // called within Brazil. Without that, most of the carriers won't connect the call.

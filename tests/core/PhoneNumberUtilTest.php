@@ -1252,6 +1252,16 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::CA, false));
         self::assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($usShortNumber, RegionCode::BR, false));
 
+        // Brazilian fixed line and mobile numbers cannot be dialed in-country without a carrier code.
+        $brNumber = new PhoneNumber();
+        $brNumber->setCountryCode(55)->setNationalNumber('3121286979');
+        self::assertEquals('', $this->phoneUtil->formatNumberForMobileDialing($brNumber, RegionCode::BR, false));
+        $brNumber->setPreferredDomesticCarrierCode('12');
+        self::assertEquals(
+            '3121286979',
+            $this->phoneUtil->formatNumberForMobileDialing($brNumber, RegionCode::BR, false)
+        );
+
         // Test that the Australian emergency number 000 is formatted correctly.
         $auNumber = new PhoneNumber();
         $auNumber->setCountryCode(61)->setNationalNumber('0')->setItalianLeadingZero(true)->setNumberOfLeadingZeros(2);
