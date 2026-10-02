@@ -88,6 +88,10 @@ class ShortNumberInfoTest extends TestCase
         self::assertTrue($this->shortInfo->isCarrierSpecific($carrierSpecificNumberForSomeRegion));
         self::assertTrue($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::US));
         self::assertFalse($this->shortInfo->isCarrierSpecificForRegion($carrierSpecificNumberForSomeRegion, RegionCode::BB));
+
+        $numberWithNoShortNumberRegion = new PhoneNumber();
+        $numberWithNoShortNumberRegion->setCountryCode(1)->setNationalNumber('6502530000');
+        self::assertFalse($this->shortInfo->isCarrierSpecific($numberWithNoShortNumberRegion));
     }
 
     public function testIsSmsService(): void

@@ -236,7 +236,7 @@ class ShortNumberInfo
         $regionCodes = $this->getRegionCodesForCountryCode($number->getCountryCode());
         $regionCode = $this->getRegionCodeForShortNumberFromRegionList($number, $regionCodes);
         $nationalNumber = $this->getNationalSignificantNumber($number);
-        $phoneMetadata = $this->getMetadataForRegion($regionCode);
+        $phoneMetadata = $regionCode === null ? null : $this->getMetadataForRegion($regionCode);
 
         return ($phoneMetadata !== null) && $this->matchesPossibleNumberAndNationalNumber(
             $nationalNumber,
