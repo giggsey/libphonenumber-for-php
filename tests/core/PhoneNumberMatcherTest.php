@@ -850,6 +850,31 @@ class PhoneNumberMatcherTest extends TestCase
         self::assertEquals($match2, $matches->current());
     }
 
+    public function testSequenceStartingRightAfterPreviousMatch(): void
+    {
+        // The second number starts with the character right after the first match.
+        $text = 'Call 033316005+64 3 331 6005';
+        $region = RegionCode::NZ;
+
+        $number1 = new PhoneNumber();
+        $number1->setCountryCode($this->phoneUtil->getCountryCodeForRegion($region));
+        $number1->setNationalNumber('33316005');
+        $match1 = new PhoneNumberMatch(5, '033316005', $number1);
+
+        $number2 = new PhoneNumber();
+        $number2->setCountryCode($this->phoneUtil->getCountryCodeForRegion($region));
+        $number2->setNationalNumber('33316005');
+        $match2 = new PhoneNumberMatch(14, '+64 3 331 6005', $number2);
+
+        $matches = $this->phoneUtil->findNumbers($text, $region, Leniency::POSSIBLE());
+
+        $matches->next();
+        self::assertEquals($match1, $matches->current());
+
+        $matches->next();
+        self::assertEquals($match2, $matches->current());
+    }
+
     public function testMaxMatches(): void
     {
         // Set up text with 100 valid phone numbers.
