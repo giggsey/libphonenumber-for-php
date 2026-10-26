@@ -78,6 +78,15 @@ class PhoneNumberMatcherTest extends TestCase
         self::assertTrue(PhoneNumberMatcher::containsMoreThanOneSlashInNationalNumber($number, $candidate));
     }
 
+    public function testContainsOnlyValidXCharsWithoutExtension(): void
+    {
+        // A number without an extension has an empty extension, so an x that is not followed by any
+        // digits is allowed, but one that is followed by digits is not.
+        $number = $this->phoneUtil->parse('+1 650 253 0000', RegionCode::US);
+        self::assertTrue(PhoneNumberMatcher::containsOnlyValidXChars($number, '+1 650 253 0000 x.', $this->phoneUtil));
+        self::assertFalse(PhoneNumberMatcher::containsOnlyValidXChars($number, '+1 650 253 0000 x1', $this->phoneUtil));
+    }
+
     public function testFindNationalNumber(): void
     {
         // same cases as in testParseNationalNumber

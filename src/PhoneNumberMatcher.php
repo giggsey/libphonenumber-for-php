@@ -698,7 +698,7 @@ class PhoneNumberMatcher implements Iterator
                     if ($util->isNumberMatch($number, mb_substr($candidate, $index)) !== MatchType::NSN_MATCH) {
                         return false;
                     }
-                } elseif (PhoneNumberUtil::normalizeDigitsOnly(mb_substr($candidate, $index)) !== $number->getExtension()) {
+                } elseif (PhoneNumberUtil::normalizeDigitsOnly(mb_substr($candidate, $index)) !== ($number->getExtension() ?? '')) {
                     // This is the extension sign case, in which the 'x' or 'X' should always precede the
                     // extension number
                     return false;
