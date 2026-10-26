@@ -21,6 +21,7 @@ use function preg_match;
 use function preg_split;
 use function str_contains;
 use function str_ends_with;
+use function str_starts_with;
 
 /**
  * A class that finds and extracts telephone numbers from $text.
@@ -511,10 +512,10 @@ class PhoneNumberMatcher implements Iterator
                     // accept the number if there is no formatting symbol at all in the number, except
                     // for extensions. This is only important for countries with national prefixes.
                     $nationalSignificantNumber = $util->getNationalSignificantNumber($number);
-                    return mb_substr(
+                    return str_starts_with(
                         mb_substr($normalizedCandidate, $fromIndex - mb_strlen($iValue)),
-                        mb_strlen($nationalSignificantNumber)
-                    ) === $nationalSignificantNumber;
+                        $nationalSignificantNumber
+                    );
                 }
             }
         }

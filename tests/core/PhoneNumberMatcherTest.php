@@ -610,10 +610,12 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testMatchesWithPossibleLeniency(): array
     {
-        return self::dataStrictGroupingCases()
-        + self::dataExactGroupingCases()
-        + self::dataValidCases()
-        + self::dataPossibleOnlyCases();
+        return array_merge(
+            self::dataStrictGroupingCases(),
+            self::dataExactGroupingCases(),
+            self::dataValidCases(),
+            self::dataPossibleOnlyCases()
+        );
     }
 
     #[DataProvider('data_testMatchesWithPossibleLeniency')]
@@ -633,9 +635,11 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testMatchesWithValidLeniency(): array
     {
-        return self::dataStrictGroupingCases()
-        + self::dataExactGroupingCases()
-        + self::dataValidCases();
+        return array_merge(
+            self::dataStrictGroupingCases(),
+            self::dataExactGroupingCases(),
+            self::dataValidCases()
+        );
     }
 
     #[DataProvider('data_testMatchesWithValidLeniency')]
@@ -649,8 +653,10 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testNonMatchesWithValidLeniency(): array
     {
-        return self::dataImpossibleCases()
-            + self::dataPossibleOnlyCases();
+        return array_merge(
+            self::dataImpossibleCases(),
+            self::dataPossibleOnlyCases()
+        );
     }
 
     #[DataProvider('data_testNonMatchesWithValidLeniency')]
@@ -664,8 +670,10 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testMatchesWithStrictGroupingLeniency(): array
     {
-        return self::dataStrictGroupingCases()
-            + self::dataExactGroupingCases();
+        return array_merge(
+            self::dataStrictGroupingCases(),
+            self::dataExactGroupingCases()
+        );
     }
 
     #[DataProvider('data_testMatchesWithStrictGroupingLeniency')]
@@ -679,9 +687,11 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testNonMatchesWithStrictGroupLeniency(): array
     {
-        return self::dataImpossibleCases()
-            + self::dataPossibleOnlyCases()
-            + self::dataValidCases();
+        return array_merge(
+            self::dataImpossibleCases(),
+            self::dataPossibleOnlyCases(),
+            self::dataValidCases()
+        );
     }
 
     #[DataProvider('data_testNonMatchesWithStrictGroupLeniency')]
@@ -701,10 +711,12 @@ class PhoneNumberMatcherTest extends TestCase
      */
     public static function data_testNonMatchesExactGroupLeniency(): array
     {
-        return self::dataImpossibleCases()
-            + self::dataPossibleOnlyCases()
-            + self::dataValidCases()
-            + self::dataStrictGroupingCases();
+        return array_merge(
+            self::dataImpossibleCases(),
+            self::dataPossibleOnlyCases(),
+            self::dataValidCases(),
+            self::dataStrictGroupingCases()
+        );
     }
 
     #[DataProvider('data_testNonMatchesExactGroupLeniency')]
