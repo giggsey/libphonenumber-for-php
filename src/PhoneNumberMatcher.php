@@ -776,8 +776,6 @@ class PhoneNumberMatcher implements Iterator
             $this->searchIndex = $this->lastMatch->end();
             $this->state = 'READY';
         }
-
-        $this->searchIndex++;
     }
 
     public function key(): int
