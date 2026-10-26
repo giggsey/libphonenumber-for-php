@@ -31,7 +31,7 @@ class PhoneNumberMetadata_SB extends PhoneMetadata
             ->setNationalNumberPattern('[6-9]\d{6}|[1-6]\d{4}')
             ->setPossibleLength([5, 7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('48\d{3}|(?:(?:6[89]|7[1-9]|8[4-9])\d|9(?:1[2-9]|2[013-9]|3[0-2]|[46]\d|5[0-46-9]|7[0-689]|8[0-79]|9[0-8]))\d{4}')
+            ->setNationalNumberPattern('(?:48|99[0-8]\d)\d{3}|(?:6[89]|7[1-9]|8[4-9]|9[0-8])\d{5}')
             ->setExampleNumber('7421234');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
@@ -42,7 +42,7 @@ class PhoneNumberMetadata_SB extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{5})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['6[89]|7|8[4-9]|9(?:[1-8]|9[0-8])'])
+                ->setLeadingDigitsPattern(['6[89]|7|8[4-9]|9(?:[0-8]|9[0-8])'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())

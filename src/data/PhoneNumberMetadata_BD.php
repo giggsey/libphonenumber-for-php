@@ -33,7 +33,7 @@ class PhoneNumberMetadata_BD extends PhoneMetadata
             ->setNationalNumberPattern('[1-469]\d{9}|8[0-79]\d{7,8}|[2-79]\d{8}|[2-9]\d{7}|[3-9]\d{6}|[57-9]\d{5}')
             ->setPossibleLength([6, 7, 8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[13-9]\d|644)\d{7}|(?:3[78]|44|66)[02-9]\d{7}')
+            ->setNationalNumberPattern('(?:1[13-9]|64)\d{8}|(?:3[78]|44|66)[02-9]\d{7}')
             ->setExampleNumber('1812345678')
             ->setPossibleLength([10]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -51,7 +51,7 @@ class PhoneNumberMetadata_BD extends PhoneMetadata
                 ->setPattern('(\d{3})(\d{3,7})')
                 ->setFormat('$1-$2')
                 ->setLeadingDigitsPattern([
-                    '3(?:[67]|8[013-9])|4(?:6[168]|7|[89][18])|5(?:6[128]|9)|6(?:[15]|28|4[14])|7[2-589]|8(?:0[014-9]|[12])|9[358]|(?:3[2-5]|4[235]|5[2-578]|6[0389]|76|8[3-7]|9[24])1|(?:44|66)[01346-9]',
+                    '3(?:[67]|8[013-9])|4(?:6[168]|7|[89][18])|5(?:6[128]|9)|6(?:[15]|28)|7[2-589]|8(?:0[014-9]|[12])|9[358]|(?:3[2-5]|4[235]|5[2-578]|6[0389]|76|8[3-7]|9[24])1|(?:44|66)[01346-9]',
                 ])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),

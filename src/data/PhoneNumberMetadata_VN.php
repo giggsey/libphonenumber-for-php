@@ -33,7 +33,7 @@ class PhoneNumberMetadata_VN extends PhoneMetadata
             ->setNationalNumberPattern('[12]\d{9}|[135-9]\d{8}|[16]\d{6,7}|7\d{6}')
             ->setPossibleLength([7, 8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('121[0-3]\d{5}|(?:160|(?:3\d|7[06-9])\d|5(?:[1689]\d|2[238]|59)|8(?:[1-8]\d|9[6-9])|9(?:[0-8]\d|9[013-9]))\d{6}')
+            ->setNationalNumberPattern('121[0-3]\d{5}|(?:1[46]0|(?:3\d|7[06-9])\d|5(?:[1689]\d|2[238]|59)|8(?:[1-8]\d|9[6-9])|9(?:[0-8]\d|9[013-9]))\d{6}')
             ->setExampleNumber('912345678')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -71,7 +71,7 @@ class PhoneNumberMetadata_VN extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[357-9]'])
+                ->setLeadingDigitsPattern(['[1357-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())
@@ -121,7 +121,7 @@ class PhoneNumberMetadata_VN extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[357-9]'])
+                ->setLeadingDigitsPattern(['[1357-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(true),
             (new NumberFormat())

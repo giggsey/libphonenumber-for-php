@@ -35,7 +35,7 @@ class PhoneNumberMetadata_NG extends PhoneMetadata
             ->setPossibleLengthLocalOnly([6, 7])
             ->setPossibleLength([10, 11, 12, 13, 14]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:702[0-24-9]|819[01])\d{6}|(?:7(?:0[13-9]|[12]\d)|8(?:0[1-9]|1[0-8])|9(?:0[1-9]|1[1-6]))\d{7}')
+            ->setNationalNumberPattern('(?:702[0-24-9]|819[01])\d{6}|(?:7(?:0[13-9]|[12]\d)|8(?:0[1-9]|1[0-8])|9(?:0[1-9]|1[0-6]))\d{7}')
             ->setExampleNumber('8021234567')
             ->setPossibleLength([10]);
         $this->premiumRate = PhoneNumberDesc::empty();

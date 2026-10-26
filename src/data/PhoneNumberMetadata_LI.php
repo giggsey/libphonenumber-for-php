@@ -40,7 +40,7 @@ class PhoneNumberMetadata_LI extends PhoneMetadata
             ->setExampleNumber('9002222')
             ->setPossibleLength([7]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:2(?:01|1[27]|2[024]|3\d|6[02-578]|96)|3(?:[24]0|33|7[0135-7]|8[048]|9[0269]))\d{4}')
+            ->setNationalNumberPattern('(?:2(?:01|1[27]|2[024]|3\d|6[02-578]|9[06])|3(?:[24]0|33|7[0135-7]|8[048]|9[0269]))\d{4}')
             ->setExampleNumber('2345678')
             ->setPossibleLength([7]);
         $this->numberFormat = [
