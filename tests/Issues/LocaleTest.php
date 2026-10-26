@@ -256,7 +256,7 @@ class LocaleTest extends TestCase
             'RO' => 'Romania',
             'RU' => 'Russia',
             'RW' => 'Rwanda',
-            'SH' => 'St. Helena',
+            'SH' => 'St. Helena, Ascension & Tristan da Cunha',
             'KN' => 'St. Kitts & Nevis',
             'LC' => 'St. Lucia',
             'PM' => 'St. Pierre & Miquelon',
