@@ -40,7 +40,7 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('3082[0-5]\d{4}|3(?:0(?:[237]\d|8[01])|[167](?:2[0-6]|7\d|80)|2(?:2[0-5]|7\d|80)|3(?:2[0-3]|7\d|80)|4(?:2[013-9]|3[01]|7\d|80)|5(?:2[0-7]|7\d|80)|8(?:2[0-2]|7\d|80)|9(?:[28]0|7\d))\d{5}')
+            ->setNationalNumberPattern('3(?:181[0-5]|285[0-7]|3810)\d{4}|3(?:0(?:[237-9]\d|60)|[167](?:2[0-6]|7\d|80)|2(?:2[0-5]|7\d|8[0-4])|3(?:2[0-3]|7\d|80)|4(?:2[013-9]|3[01]|7\d|80)|5(?:2[0-7]|7\d|80)|8(?:2[0-2]|7\d|80)|9(?:[28]0|7\d))\d{5}')
             ->setExampleNumber('302345678')
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([9]);
@@ -48,7 +48,7 @@ class PhoneNumberMetadata_GH extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[237]|8[0-2]'])
+                ->setLeadingDigitsPattern(['[236-9]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{5})')

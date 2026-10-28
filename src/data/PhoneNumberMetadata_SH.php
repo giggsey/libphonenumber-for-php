@@ -21,7 +21,7 @@ class PhoneNumberMetadata_SH extends PhoneMetadata
 {
     protected const ID = 'SH';
     protected const COUNTRY_CODE = 290;
-    protected const LEADING_DIGITS = '[256]';
+    protected const LEADING_DIGITS = '[2569]';
 
     protected ?string $internationalPrefix = '00';
     protected bool $mainCountryForCode = true;
@@ -29,10 +29,10 @@ class PhoneNumberMetadata_SH extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[256]\d|8)\d{3}')
+            ->setNationalNumberPattern('(?:[2569]\d|8)\d{3}')
             ->setPossibleLength([4, 5]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[56]\d{4}')
+            ->setNationalNumberPattern('[569]\d{4}')
             ->setExampleNumber('51234')
             ->setPossibleLength([5]);
         $this->premiumRate = PhoneNumberDesc::empty();

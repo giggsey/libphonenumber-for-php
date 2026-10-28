@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\ar;
  */
 class Ar_965
 {
-    public const DATA = [9655 => 'فيفا', 9656 => 'أوريدو', 9659 => 'زين'];
+    public const DATA = [9655 => 'فيفا', 9656 => 'أوريدو', 9659 => 'زين', 96559 => ''];
 }

@@ -16,5 +16,5 @@ namespace libphonenumber\carrier\data\en;
  */
 class En_965
 {
-    public const DATA = [9654 => 'Virgin mobile', 9655 => 'VIVA', 9656 => 'Ooredoo', 9659 => 'Zain'];
+    public const DATA = [9654 => 'Virgin mobile', 9655 => 'VIVA', 9656 => 'Ooredoo', 9659 => 'Zain', 96559 => 'STC'];
 }

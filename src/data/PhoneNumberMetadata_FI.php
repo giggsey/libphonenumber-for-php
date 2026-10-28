@@ -37,7 +37,7 @@ class PhoneNumberMetadata_FI extends PhoneMetadata
             ->setNationalNumberPattern('[1-35689]\d{4}|7\d{10,11}|(?:[124-7]\d|3[0-46-9])\d{8}|[1-9]\d{5,8}')
             ->setPossibleLength([5, 6, 7, 8, 9, 10, 11, 12]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('4946\d{2,6}|(?:4[0-8]|50)\d{4,8}')
+            ->setNationalNumberPattern('(?:4[0-8]|50)\d{4,8}')
             ->setExampleNumber('412345678')
             ->setPossibleLength([6, 7, 8, 9, 10]);
         $this->premiumRate = (new PhoneNumberDesc())

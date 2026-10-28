@@ -35,7 +35,7 @@ class PhoneNumberMetadata_CO extends PhoneMetadata
             ->setPossibleLengthLocalOnly([4, 7])
             ->setPossibleLength([8, 10, 11]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('333301[0-5]\d{3}|3333(?:00|2[5-9]|[3-9]\d)\d{4}|(?:3(?:(?:0[0-5]|1\d|5[01]|70)\d|2(?:[0-3]\d|4[1-9])|3(?:00|3[0-24-9]))|9(?:101|408))\d{6}')
+            ->setNationalNumberPattern('333301[0-5]\d{3}|3333(?:00|2[5-9]|[3-9]\d)\d{4}|(?:3(?:24[1-9]|3(?:00|3[0-24-9]))|9408)\d{6}|3(?:0[0-5]|1\d|2[0-3]|5[01]|70)\d{7}')
             ->setExampleNumber('3211234567')
             ->setPossibleLength([10]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -63,7 +63,7 @@ class PhoneNumberMetadata_CO extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['3[0-357]|9[14]'])
+                ->setLeadingDigitsPattern(['3[0-357]|94'])
                 ->setDomesticCarrierCodeFormattingRule('0$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -100,7 +100,7 @@ class PhoneNumberMetadata_CO extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{7})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['3[0-357]|9[14]'])
+                ->setLeadingDigitsPattern(['3[0-357]|94'])
                 ->setDomesticCarrierCodeFormattingRule('0$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

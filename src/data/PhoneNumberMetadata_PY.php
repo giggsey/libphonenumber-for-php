@@ -35,7 +35,7 @@ class PhoneNumberMetadata_PY extends PhoneMetadata
             ->setPossibleLengthLocalOnly([5])
             ->setPossibleLength([6, 7, 8, 9, 10, 11]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('9(?:51|6[129]|7[1-6]|8[1-7]|9[1-5])\d{6}')
+            ->setNationalNumberPattern('9881\d{5}|9(?:51|6[129]|7[1-6]|8[1-7]|9[1-5])\d{6}')
             ->setExampleNumber('961456789')
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -82,7 +82,7 @@ class PhoneNumberMetadata_PY extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{6})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['9(?:[5-79]|8[1-7])'])
+                ->setLeadingDigitsPattern(['9(?:[5-79]|8[1-8])'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -147,7 +147,7 @@ class PhoneNumberMetadata_PY extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{6})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['9(?:[5-79]|8[1-7])'])
+                ->setLeadingDigitsPattern(['9(?:[5-79]|8[1-8])'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

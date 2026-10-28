@@ -34,7 +34,7 @@ class PhoneNumberMetadata_AX extends PhoneMetadata
             ->setNationalNumberPattern('2\d{4,9}|35\d{4,5}|(?:60\d\d|800)\d{4,6}|7\d{5,11}|(?:[14]\d|3[0-46-9]|50)\d{4,8}')
             ->setPossibleLength([5, 6, 7, 8, 9, 10, 11, 12]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('4946\d{2,6}|(?:4[0-8]|50)\d{4,8}')
+            ->setNationalNumberPattern('(?:4[0-8]|50)\d{4,8}')
             ->setExampleNumber('412345678')
             ->setPossibleLength([6, 7, 8, 9, 10]);
         $this->premiumRate = (new PhoneNumberDesc())

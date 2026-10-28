@@ -59,7 +59,7 @@ class PhoneNumberMetadata_PG extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('2(?:0[0-57]|7[568])\d{4}')
+            ->setNationalNumberPattern('2(?:0[0-7]|7[568])\d{4}')
             ->setExampleNumber('2751234')
             ->setPossibleLength([7]);
         $this->pager = (new PhoneNumberDesc())
