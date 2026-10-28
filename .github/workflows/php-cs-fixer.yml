@@ -2,10 +2,13 @@ name: PHP CS Fixer
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
   pull_request:
     paths:
       - '**.php'
+
+permissions:
+  contents: write
 
 concurrency:
   # The concurrency group contains the workflow name and the branch name.
@@ -18,14 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
 
-      - uses: "ramsey/composer-install@v3"
+      - uses: "ramsey/composer-install@v4"
         with:
           dependency-versions: highest
 
@@ -33,6 +36,6 @@ jobs:
         run: "composer run-script cs"
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: ":art: Fix code styling"

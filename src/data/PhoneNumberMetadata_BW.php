@@ -28,10 +28,10 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:0800|(?:[37]|800)\d)\d{6}|(?:[2-6]\d|90)\d{5}')
+            ->setNationalNumberPattern('90\d{5}|(?:0800|[2-6]|(?:7|800)\d)\d{6}')
             ->setPossibleLength([7, 8, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:321|7(?:[1-8]\d|9[03]))\d{5}')
+            ->setNationalNumberPattern('7(?:[1-8]\d{3}|9(?:(?:[03]\d|2[0-7])\d|1(?:0[13-9]|1[0-35-9]|2\d|3[0-8])))\d{3}')
             ->setExampleNumber('71123456')
             ->setPossibleLength([8]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -39,7 +39,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
             ->setExampleNumber('9012345')
             ->setPossibleLength([7]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:2(?:4[0-48]|6[0-24]|9[0578])|3(?:1[0-35-9]|55|[69]\d|7[013]|81)|4(?:6[03]|7[1267]|9[0-5])|5(?:3[03489]|4[0489]|7[1-47]|88|9[0-49])|6(?:2[1-35]|5[149]|8[013467]))\d{4}')
+            ->setNationalNumberPattern('(?:2(?:1[01]|31|[469]\d|5[0-2]|7[5-7]|89)|3(?:[15-79]\d|2[1-5]|45|8[0-5])|4(?:[38]0|42|51|[679]\d)|5(?:[056][01]|1[23]|2[034]|[347-9]\d)|6(?:0[01]|[258]\d|[34]0|6[03]))\d{4}')
             ->setExampleNumber('2401234')
             ->setPossibleLength([7]);
         $this->numberFormat = [
@@ -51,12 +51,12 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['[24-6]|3[15-9]'])
+                ->setLeadingDigitsPattern(['[2-6]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[37]'])
+                ->setLeadingDigitsPattern(['7'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{3})(\d{3})')
@@ -75,10 +75,7 @@ class PhoneNumberMetadata_BW extends PhoneMetadata
             ->setPossibleLength([10]);
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
-        $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('79(?:1(?:[0-2]\d|3[0-8])|2[0-7]\d)\d{3}')
-            ->setExampleNumber('79101234')
-            ->setPossibleLength([8]);
+        $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();

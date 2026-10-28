@@ -40,7 +40,7 @@ class PhoneNumberMetadata_CR extends PhoneMetadata
             ->setExampleNumber('9001234567')
             ->setPossibleLength([10]);
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('210[7-9]\d{4}|2(?:[024-7]\d|1[1-9])\d{5}')
+            ->setNationalNumberPattern('2(?:010|1(?:0[7-9]|[1-9]\d)|[24-7]\d\d)\d{4}')
             ->setExampleNumber('22123456')
             ->setPossibleLength([8]);
         $this->numberFormat = [
@@ -64,7 +64,7 @@ class PhoneNumberMetadata_CR extends PhoneMetadata
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
         $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:210[0-6]|4\d{3}|5100)\d{4}')
+            ->setNationalNumberPattern('(?:2(?:00[0-3]|10[0-6])|4\d{3}|5100)\d{4}')
             ->setExampleNumber('40001234')
             ->setPossibleLength([8]);
         $this->pager = PhoneNumberDesc::empty();

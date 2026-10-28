@@ -17,6 +17,7 @@ namespace libphonenumber\carrier\data\en;
 class En_290
 {
     public const DATA = [
+        2909 => 'Sure South Atlantic Ltd',
         29051 => 'Sure South Atlantic Ltd',
         29052 => 'Sure South Atlantic Ltd',
         29053 => 'Sure South Atlantic Ltd',
