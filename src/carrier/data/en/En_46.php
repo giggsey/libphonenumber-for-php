@@ -194,6 +194,7 @@ class En_46
         467668 => 'Tele2 Sverige',
         467670 => 'Tele2 Sverige',
         467671 => 'Tele2 Sverige',
+        467673 => 'Soatso AB',
         467674 => 'Lycamobile Sweden',
         467675 => 'Lycamobile Sweden',
         467676 => 'TeliaSonera',

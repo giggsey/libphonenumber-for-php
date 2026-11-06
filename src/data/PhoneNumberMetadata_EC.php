@@ -35,7 +35,7 @@ class PhoneNumberMetadata_EC extends PhoneMetadata
             ->setPossibleLengthLocalOnly([7])
             ->setPossibleLength([8, 9, 10, 11]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('964[0-2]\d{5}|9(?:39|[57][89]|6[0-36-9]|[89]\d)\d{6}')
+            ->setNationalNumberPattern('964[0-2]\d{5}|9(?:3[0-29]|[57][89]|6[0-36-9]|[89]\d)\d{6}')
             ->setExampleNumber('991234567')
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();

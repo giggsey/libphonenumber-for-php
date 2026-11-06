@@ -284,7 +284,7 @@ class En_48
         4869974 => 'Compatel Limited',
         4869978 => 'VOXBONE SA',
         4869979 => 'Play',
-        4872970 => 'AMD Telecom S.A.',
+        4872970 => 'Play',
         4872971 => 'Plus',
         4872972 => 'Compatel Limited',
         4872973 => 'Play',
