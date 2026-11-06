@@ -17,9 +17,6 @@ namespace libphonenumber\carrier\data\en;
 class En_40
 {
     public const DATA = [
-        4060 => 'Vodafone',
-        4062 => 'Vodafone',
-        4063 => 'Digi Mobil',
         4072 => 'Vodafone',
         4073 => 'Vodafone',
         4074 => 'Orange',

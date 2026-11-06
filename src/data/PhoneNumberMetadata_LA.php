@@ -30,11 +30,11 @@ class PhoneNumberMetadata_LA extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[23]\d{9}|3\d{8}|(?:[235-8]\d|41)\d{6}')
+            ->setNationalNumberPattern('(?:2\d|3)\d{8}|(?:[235-8]\d|41)\d{6}')
             ->setPossibleLengthLocalOnly([6])
             ->setPossibleLength([8, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:20(?:[23579]\d|8[78])|30[24]\d)\d{6}|30\d{7}')
+            ->setNationalNumberPattern('208[78]\d{6}|(?:20[23579]|30)\d{7}')
             ->setExampleNumber('2023123456')
             ->setPossibleLength([9, 10]);
         $this->premiumRate = PhoneNumberDesc::empty();
@@ -59,7 +59,7 @@ class PhoneNumberMetadata_LA extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[23]'])
+                ->setLeadingDigitsPattern(['2'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];

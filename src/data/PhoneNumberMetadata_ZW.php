@@ -30,42 +30,24 @@ class PhoneNumberMetadata_ZW extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:13|8\d{4})\d{5}|[235-8]\d{8}|[23568]\d{6}')
-            ->setPossibleLengthLocalOnly([3, 4, 5, 6])
+            ->setNationalNumberPattern('8\d{6}(?:\d{3})?|[235-8]\d{8}')
+            ->setPossibleLengthLocalOnly([6])
             ->setPossibleLength([7, 9, 10]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('7(?:[1278]\d|3[1-9]|9[01])\d{6}')
+            ->setNationalNumberPattern('7(?:[1278]\d|3[1-9]|51|9[01])\d{6}')
             ->setExampleNumber('712345678')
             ->setPossibleLength([9]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:(?:(?:13|6(?:[16-8]21|52[013])|8(?:[1349]28|523))\d|3(?:(?:123|92\d)\d|7[56]))\d|2(?:(?:(?:02[014]|[56]20|72[03]|9\d\d)\d|4(?:2\d\d|8))\d|2(?:[278]\d|92))|5(?:4(?:2\d{3}|83)|525\d\d))\d{3}|(?:2(?:(?:0\d|7[1-7])\d|583)|(?:55|6[78])\d\d)\d{3}')
-            ->setExampleNumber('1312345')
-            ->setPossibleLengthLocalOnly([3, 4, 5, 6])
-            ->setPossibleLength([7, 9]);
+            ->setNationalNumberPattern('(?:2(?:02[014]|(?:42|9\d)\d|[56]20|72[03])|3(?:123|92\d)|5(?:42\d|525)|6(?:[16-8]21|52[013])|8(?:[1349]28|523))\d{5}')
+            ->setExampleNumber('202012345')
+            ->setPossibleLengthLocalOnly([6, 7])
+            ->setPossibleLength([9]);
         $this->numberFormat = [
-            (new NumberFormat())
-                ->setPattern('(\d{2})(\d{3,5})')
-                ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['1|2(?:0[0-36-9]|29|58)|67[0-46-9]|(?:55|68)[0-69]'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
-                ->setPattern('(\d{3})(\d{3,5})')
-                ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['2(?:0[45]|[27]|48)|37|675|(?:55|68)[78]'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{4})')
                 ->setFormat('$1 $2')
                 ->setLeadingDigitsPattern(['80'])
-                ->setNationalPrefixFormattingRule('0$1')
-                ->setNationalPrefixOptionalWhenFormatting(false),
-            (new NumberFormat())
-                ->setPattern('(\d{4})(\d{3,5})')
-                ->setFormat('$1 $2')
-                ->setLeadingDigitsPattern(['548'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())

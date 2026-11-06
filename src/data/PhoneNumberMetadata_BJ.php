@@ -29,23 +29,16 @@ class PhoneNumberMetadata_BJ extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:01\d|8)\d{7}')
-            ->setPossibleLength([8, 10]);
+            ->setNationalNumberPattern('01\d{8}')
+            ->setPossibleLength([10]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('01(?:2[5-9]|[4-69]\d)\d{6}')
-            ->setExampleNumber('0195123456')
-            ->setPossibleLength([10]);
+            ->setExampleNumber('0195123456');
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('012\d{7}')
-            ->setExampleNumber('0120211234')
-            ->setPossibleLength([10]);
+            ->setExampleNumber('0120211234');
         $this->numberFormat = [
-            (new NumberFormat())
-                ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
-                ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['8'])
-                ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4 $5')
@@ -55,15 +48,9 @@ class PhoneNumberMetadata_BJ extends PhoneMetadata
         $this->tollFree = PhoneNumberDesc::empty();
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
-        $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('857[58]\d{4}')
-            ->setExampleNumber('85751234')
-            ->setPossibleLength([8]);
+        $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
-        $this->uan = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('81\d{6}')
-            ->setExampleNumber('81123456')
-            ->setPossibleLength([8]);
+        $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = PhoneNumberDesc::empty();
     }

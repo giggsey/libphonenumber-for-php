@@ -32,10 +32,10 @@ class PhoneNumberMetadata_RO extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:[236-8]\d|90)\d{7}|[23]\d{5}')
+            ->setNationalNumberPattern('(?:[2378]\d|90)\d{7}|[23]\d{5}')
             ->setPossibleLength([6, 9]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:630|702)0\d{5}|(?:6(?:00|2\d)|7(?:0[013-9]|1[0-3]|[2-7]\d|8[03-8]|9[0-39]))\d{6}')
+            ->setNationalNumberPattern('7020\d{5}|7(?:0[013-9]|1[0-3]|[2-7]\d|8[03-8]|9[0-39])\d{6}')
             ->setExampleNumber('712034567')
             ->setPossibleLength([9]);
         $this->premiumRate = (new PhoneNumberDesc())
@@ -67,7 +67,7 @@ class PhoneNumberMetadata_RO extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{3})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['[236-9]'])
+                ->setLeadingDigitsPattern(['[237-9]'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
