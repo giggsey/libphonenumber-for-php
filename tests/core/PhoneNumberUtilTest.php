@@ -2861,6 +2861,59 @@ class PhoneNumberUtilTest extends TestCase
         self::assertEquals($shortNumber, $this->phoneUtil->parse('0123456', RegionCode::GB));
     }
 
+    public function testParseRfc3966PhoneContextDomainname(): void
+    {
+        self::assertEquals(
+            self::$usLocalNumber,
+            $this->phoneUtil->parse('tel:253-0000;phone-context=www.google.com', RegionCode::US)
+        );
+        self::assertEquals(
+            self::$usLocalNumber,
+            $this->phoneUtil->parse('tel:253-0000;phone-context=ex--ample.domain.com', RegionCode::US)
+        );
+
+        $evilContext = str_repeat('aa.', 25) . 'aa!';
+        try {
+            $this->phoneUtil->parse('tel:253-0000;phone-context=' . $evilContext, RegionCode::US);
+            self::fail('This should not parse without throwing an exception.');
+        } catch (NumberParseException $e) {
+            self::assertEquals(NumberParseException::NOT_A_NUMBER, $e->getErrorType());
+        }
+
+        $validContexts = [
+            'example.c1',
+            'example.b2b',
+            'sub.example.a1-b2',
+            'example.xn--p1ai',
+            'a.b',
+            'www.google.com.',
+        ];
+        foreach ($validContexts as $context) {
+            self::assertEquals(
+                self::$usLocalNumber,
+                $this->phoneUtil->parse('tel:253-0000;phone-context=' . $context, RegionCode::US)
+            );
+        }
+
+        $invalidContexts = [
+            'example.123',
+            'example.1a',
+            'example.-c1',
+            'example.c1-',
+            'aa..bb',
+            '-aa.bb',
+            'a-.b',
+        ];
+        foreach ($invalidContexts as $context) {
+            try {
+                $this->phoneUtil->parse('tel:253-0000;phone-context=' . $context, RegionCode::US);
+                self::fail('Should have rejected invalid phone-context domain: ' . $context);
+            } catch (NumberParseException $e) {
+                self::assertEquals(NumberParseException::NOT_A_NUMBER, $e->getErrorType());
+            }
+        }
+    }
+
     public function testParseNumberWithAlphaCharacters(): void
     {
         // Test case with alpha characters.
