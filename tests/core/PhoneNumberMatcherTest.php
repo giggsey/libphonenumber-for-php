@@ -477,6 +477,23 @@ class PhoneNumberMatcherTest extends TestCase
         self::assertTrue($this->hasNoMatches($this->phoneUtil->findNumbers($text, $region)));
     }
 
+    public function testInnerMatchSearchResumesAfterPreviousMatch(): void
+    {
+        // Like Java's Matcher.find(), each inner-match search starts where the previous
+        // match ended. The wide-hyphen pattern takes the rest of the candidate, so only
+        // the first wide hyphen splits it.
+        $matches = $this->phoneUtil->findNumbers("1234\u{2013}650-253-0000", RegionCode::US);
+        $matches->next();
+        self::assertSame('650-253-0000', $matches->current()->rawString());
+        $matches->next();
+        self::assertFalse($matches->valid());
+
+        // The text after the first wide hyphen is not a valid number, and the second
+        // wide hyphen must not be used as a new split point.
+        $text = "12\u{2013}34\u{2013}650-253-0000";
+        self::assertSame([], iterator_to_array($this->phoneUtil->findNumbers($text, RegionCode::US)));
+    }
+
     /**
      * Strings with number-like things that shouldn't be found under any level.
      * @return array<array{string,string}>
