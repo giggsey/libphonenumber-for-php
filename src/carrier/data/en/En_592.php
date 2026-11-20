@@ -30,8 +30,6 @@ class En_592
         59274 => 'Digicel Guyana',
         59275 => 'GTT',
         59276 => 'E-Networks',
-        592510 => 'Digicel Guyana',
-        592511 => 'Digicel Guyana',
         592600 => 'Digicel Guyana',
         592601 => 'Digicel Guyana',
         592602 => 'Digicel Guyana',
@@ -79,5 +77,7 @@ class En_592
         592781 => 'E-Networks',
         592786 => 'Digicel Guyana',
         592787 => 'Digicel Guyana',
+        592788 => 'Digicel Guyana',
+        592789 => 'Digicel Guyana',
     ];
 }

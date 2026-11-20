@@ -91,7 +91,7 @@ class PhoneNumberMetadata_CN extends PhoneMetadata
                 ->setPattern('(\d{4})(\d{4})')
                 ->setFormat('$1 $2')
                 ->setLeadingDigitsPattern(['101', '1010'])
-                ->setDomesticCarrierCodeFormattingRule('$CC$1')
+                ->setDomesticCarrierCodeFormattingRule('$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{4})(\d{4})')
@@ -217,7 +217,7 @@ class PhoneNumberMetadata_CN extends PhoneMetadata
                 ->setPattern('(\d{4})(\d{4})')
                 ->setFormat('$1 $2')
                 ->setLeadingDigitsPattern(['101', '1010'])
-                ->setDomesticCarrierCodeFormattingRule('$CC$1')
+                ->setDomesticCarrierCodeFormattingRule('$CC $1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{5,6})')
