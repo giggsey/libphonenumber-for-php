@@ -591,8 +591,9 @@ class ShortNumberInfo
     {
         // If leading zero(s) have been set, we prefix this now. Note this is not a national prefix.
         $nationalNumber = '';
-        if ($number->isItalianLeadingZero()) {
-            $zeros = str_repeat('0', $number->getNumberOfLeadingZeros());
+        if ($number->isItalianLeadingZero() && $number->getNumberOfLeadingZeros() > 0) {
+            $numberOfLeadingZeros = min($number->getNumberOfLeadingZeros(), 10);
+            $zeros = str_repeat('0', $numberOfLeadingZeros);
             $nationalNumber .= $zeros;
         }
 
