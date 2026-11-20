@@ -39,7 +39,7 @@ class ShortNumberMetadata_KR extends PhoneMetadata
             ->setExampleNumber('112')
             ->setPossibleLength([3]);
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:[01679]114|3(?:0[01]|2|3[0-35-9]|45?|5[057]|6[569]|7[79]|8[2589]|9[0189])|55[15]\d{4}|8(?:(?:11|44|66)\d{4}|[28]))|1(?:0[015]|1\d|2[01357-9]|41|8114)')
+            ->setNationalNumberPattern('1(?:0[015]|1\d|2[01357-9]|3(?:0[01]|2|3[0-35-9]|45?|5[057]|6[569]|7[79]|8[2589]|9[0189])|41|[6-9]114)|18[28]|1811\d{4}|1[01]114')
             ->setExampleNumber('100');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = (new PhoneNumberDesc())
@@ -47,8 +47,8 @@ class ShortNumberMetadata_KR extends PhoneMetadata
             ->setExampleNumber('100')
             ->setPossibleLength([3, 5]);
         $this->smsServices = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:55|8[146])\d{5}')
-            ->setExampleNumber('15500000')
+            ->setNationalNumberPattern('181\d{5}')
+            ->setExampleNumber('18100000')
             ->setPossibleLength([8]);
     }
 }

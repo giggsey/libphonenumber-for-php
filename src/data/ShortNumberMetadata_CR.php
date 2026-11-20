@@ -27,25 +27,20 @@ class ShortNumberMetadata_CR extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[1359]\d{2,3}')
+            ->setNationalNumberPattern('[19]\d{2,3}')
             ->setPossibleLength([3, 4]);
         $this->premiumRate = PhoneNumberDesc::empty();
         $this->tollFree = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('112|911')
-            ->setExampleNumber('112')
-            ->setPossibleLength([3]);
+            ->setNationalNumberPattern('1(?:02|1)2|911')
+            ->setExampleNumber('112');
         $this->emergency = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('112|911')
-            ->setExampleNumber('112')
-            ->setPossibleLength([3]);
+            ->setNationalNumberPattern('1(?:02|1)2|911')
+            ->setExampleNumber('112');
         $this->short_code = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('1(?:0(?:00|15|2[2-4679])|1(?:1[0-35-9]|2|37|[46]6|7[57]|8[79]|9[0-379])|2(?:00|[12]2|34|55)|3(?:21|33)|4(?:0[06]|1[4-6])|5(?:15|5[15])|693|7(?:00|1[7-9]|2[02]|[67]7)|975)|3855|5(?:0(?:30|49)|510)|911')
+            ->setNationalNumberPattern('1(?:0(?:0[0-2]|1[015]|2[0-46-8]|4[08])|1(?:0[015]|1[135-9]|2[125]?|3[2-4]|4[6-9]|55|6[1569]|7[67]|8[07]|9[0-49])|2(?:00|1[235]|2[12]|34)|3(?:11|2[12]|33)|4(?:1[14-6]|21)|5(?:15|20|5[05])|693|7(?:00|1[79]|2[02]|34|67)|818|975)|911')
             ->setExampleNumber('112');
         $this->standard_rate = PhoneNumberDesc::empty();
         $this->carrierSpecific = PhoneNumberDesc::empty();
-        $this->smsServices = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:385|5(?:0[34]|51))\d')
-            ->setExampleNumber('3850')
-            ->setPossibleLength([4]);
+        $this->smsServices = PhoneNumberDesc::empty();
     }
 }

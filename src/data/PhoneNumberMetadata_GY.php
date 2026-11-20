@@ -31,13 +31,13 @@ class PhoneNumberMetadata_GY extends PhoneMetadata
             ->setNationalNumberPattern('(?:[2-8]\d{3}|9008)\d{3}')
             ->setPossibleLength([7]);
         $this->mobile = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:51[01]|6\d\d|7(?:[0-6]\d|70|8[0167]))\d{4}')
+            ->setNationalNumberPattern('(?:6\d\d|7(?:[0-6]\d|70|8[016-9]))\d{4}')
             ->setExampleNumber('6091234');
         $this->premiumRate = (new PhoneNumberDesc())
             ->setNationalNumberPattern('9008\d{3}')
             ->setExampleNumber('9008123');
         $this->fixedLine = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:2(?:1[6-9]|2[0-35-9]|3[1-4]|5[3-9]|6\d|7[0-79])|3(?:2[25-9]|3\d)|4(?:4[0-24]|5[56])|5(?:0[0-6]|16)|77[1-57])\d{4}')
+            ->setNationalNumberPattern('(?:2(?:1[6-9]|2[0-35-9]|3[1-4]|5[3-9]|6\d|7[0-79])|3(?:2[25-9]|3\d)|4(?:4[0-24]|5[56])|5(?:0[0-6]|1[0-256])|77[1-57])\d{4}')
             ->setExampleNumber('2201234');
         $this->numberFormat = [
             (new NumberFormat())
@@ -51,9 +51,7 @@ class PhoneNumberMetadata_GY extends PhoneMetadata
             ->setExampleNumber('2891234');
         $this->sharedCost = PhoneNumberDesc::empty();
         $this->personalNumber = PhoneNumberDesc::empty();
-        $this->voip = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('515\d{4}')
-            ->setExampleNumber('5151234');
+        $this->voip = PhoneNumberDesc::empty();
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = PhoneNumberDesc::empty();
         $this->voicemail = PhoneNumberDesc::empty();

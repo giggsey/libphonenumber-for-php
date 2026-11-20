@@ -49,12 +49,12 @@ class PhoneNumberMetadata_NO extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{3})(\d{2})(\d{3})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['8'])
+                ->setLeadingDigitsPattern(['[489]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{2})(\d{2})(\d{2})')
                 ->setFormat('$1 $2 $3 $4')
-                ->setLeadingDigitsPattern(['[2-79]'])
+                ->setLeadingDigitsPattern(['[235-7]'])
                 ->setNationalPrefixOptionalWhenFormatting(false),
         ];
         $this->tollFree = (new PhoneNumberDesc())
