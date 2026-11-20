@@ -580,8 +580,8 @@ class PhoneNumberUtil
         static::$RFC3966_GLOBAL_NUMBER_DIGITS = '^\\' . static::PLUS_SIGN . static::$RFC3966_PHONE_DIGIT . '*' . static::DIGITS . static::$RFC3966_PHONE_DIGIT . '*$';
 
         static::$ALPHANUM = static::VALID_ALPHA . static::DIGITS;
-        static::$RFC3966_DOMAINLABEL = '[' . static::$ALPHANUM . ']+((\\-)*[' . static::$ALPHANUM . '])*';
-        static::$RFC3966_TOPLABEL = '[' . static::VALID_ALPHA . ']+((\\-)*[' . static::$ALPHANUM . '])*';
+        static::$RFC3966_DOMAINLABEL = '[' . static::$ALPHANUM . ']+(\\-+[' . static::$ALPHANUM . ']+)*';
+        static::$RFC3966_TOPLABEL = '[' . static::VALID_ALPHA . '][' . static::$ALPHANUM . ']*(\\-+[' . static::$ALPHANUM . ']+)*';
         static::$RFC3966_DOMAINNAME = '^(' . static::$RFC3966_DOMAINLABEL . '\\.)*' . static::$RFC3966_TOPLABEL . '\\.?$';
     }
 
