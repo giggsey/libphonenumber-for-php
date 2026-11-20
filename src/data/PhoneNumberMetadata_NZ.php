@@ -32,16 +32,16 @@ class PhoneNumberMetadata_NZ extends PhoneMetadata
     public function __construct()
     {
         $this->generalDesc = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('[1289]\d{9}|50\d{5}(?:\d{2,3})?|[27-9]\d{7,8}|(?:[34]\d|6[0-35-9])\d{6}|8\d{4,6}')
-            ->setPossibleLength([5, 6, 7, 8, 9, 10]);
+            ->setNationalNumberPattern('11\d{8,12}|[29]\d{7,9}|(?:[34]\d|6[0-35-9])\d{6}|50\d{5}(?:\d{2,3})?|7\d{7,8}|8\d{4,9}')
+            ->setPossibleLength([5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
         $this->mobile = (new PhoneNumberDesc())
             ->setNationalNumberPattern('2(?:[0-27-9]\d|6)\d{6,7}|2(?:1\d|75)\d{5}')
             ->setExampleNumber('211234567')
             ->setPossibleLength([8, 9, 10]);
         $this->premiumRate = (new PhoneNumberDesc())
-            ->setNationalNumberPattern('(?:1[13-57-9]\d{5}|50(?:0[08]|30|66|77|88))\d{3}|90\d{6,8}')
+            ->setNationalNumberPattern('11\d{8,12}|50(?:0[08]|30|66|77|88)\d{3}|90\d{6,8}')
             ->setExampleNumber('900123456')
-            ->setPossibleLength([7, 8, 9, 10]);
+            ->setPossibleLength([7, 8, 9, 10, 11, 12, 13, 14]);
         $this->fixedLine = (new PhoneNumberDesc())
             ->setNationalNumberPattern('240\d{5}|(?:3[2-79]|[49][2-9]|6[235-9]|7[2-57-9])\d{6}')
             ->setExampleNumber('32345678')
@@ -75,7 +75,13 @@ class PhoneNumberMetadata_NZ extends PhoneMetadata
             (new NumberFormat())
                 ->setPattern('(\d{2})(\d{3,4})(\d{4})')
                 ->setFormat('$1 $2 $3')
-                ->setLeadingDigitsPattern(['1|2[028]'])
+                ->setLeadingDigitsPattern(['2[028]'])
+                ->setNationalPrefixFormattingRule('0$1')
+                ->setNationalPrefixOptionalWhenFormatting(false),
+            (new NumberFormat())
+                ->setPattern('(\d{2})(\d{3})(\d{3})(\d{2,6})')
+                ->setFormat('$1 $2 $3 $4')
+                ->setLeadingDigitsPattern(['1'])
                 ->setNationalPrefixFormattingRule('0$1')
                 ->setNationalPrefixOptionalWhenFormatting(false),
             (new NumberFormat())
@@ -98,7 +104,8 @@ class PhoneNumberMetadata_NZ extends PhoneMetadata
         $this->pager = PhoneNumberDesc::empty();
         $this->uan = (new PhoneNumberDesc())
             ->setNationalNumberPattern('8(?:1[16-9]|22|3\d|4[045]|5[459]|6[235-9]|7[0-3579]|90)\d{2,7}')
-            ->setExampleNumber('83012378');
+            ->setExampleNumber('83012378')
+            ->setPossibleLength([5, 6, 7, 8, 9, 10]);
         $this->voicemail = PhoneNumberDesc::empty();
         $this->noInternationalDialling = PhoneNumberDesc::empty();
     }
