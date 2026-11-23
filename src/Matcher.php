@@ -87,9 +87,15 @@ class Matcher
             $offset = $this->searchIndex;
         }
 
-        // Increment search index for the next time we call this
-        $this->searchIndex++;
-        return $this->doMatch('find', $offset);
+        if (!$this->doMatch('find', $offset)) {
+            return false;
+        }
+
+        // Like Java's Matcher, the next find() starts at the end of this match
+        // (one character later for an empty match, so it does not loop).
+        $end = $this->end();
+        $this->searchIndex = $end === $this->start() ? $end + 1 : $end;
+        return true;
     }
 
     public function groupCount(): ?int
