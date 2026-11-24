@@ -32,6 +32,9 @@ jobs:
           # PHP 8.5 and i386 seems to timeout due to libxml2 issues
           - php-version: 8.5
             arch: i386
+          # PHP 8.6 and i386 seems to timeout due to libxml2 issues
+          - php-version: 8.5
+            arch: i386
 
     steps:
       - name: Checkout
