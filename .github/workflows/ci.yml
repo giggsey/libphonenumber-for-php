@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: [ "amd64", "i386" ]
-        php-version: [8.1, 8.2, 8.3, 8.4, 8.5]
+        php-version: [8.1, 8.2, 8.3, 8.4, 8.5, 8.6]
         composer: [highest, lowest]
         exclude:
           # PHP 8.5 doesn't work with lowest due to our deps loading nikic/php-parser@5.3
