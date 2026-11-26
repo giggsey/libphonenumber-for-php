@@ -1859,7 +1859,7 @@ class PhoneNumberUtil
             // Remove trailing non-alpha non-numerical characters.
             $trailingCharsMatcher = new Matcher(static::UNWANTED_END_CHAR_PATTERN, $number);
             if ($trailingCharsMatcher->find() && $trailingCharsMatcher->start() > 0) {
-                $number = substr($number, 0, $trailingCharsMatcher->start());
+                $number = mb_substr($number, 0, $trailingCharsMatcher->start());
             }
 
             // Check for extra numbers at the end.
