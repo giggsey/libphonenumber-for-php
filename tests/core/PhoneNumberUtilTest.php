@@ -2421,6 +2421,17 @@ class PhoneNumberUtilTest extends TestCase
             '650) 253-0000',
             PhoneNumberUtil::extractPossibleNumber('(650) 253-0000' . pack('H*', 'e2808f'))
         );
+        // Trailing characters after multi-byte digits are removed by character, not by byte.
+        self::assertEquals(
+            pack('H*', 'efbc90') . pack('H*', 'efbc92') . pack('H*', 'efbc93'),
+            PhoneNumberUtil::extractPossibleNumber(
+                pack('H*', 'efbc90') . pack('H*', 'efbc92') . pack('H*', 'efbc93') . '.'
+            )
+        );
+        self::assertEquals(
+            pack('H*', 'efbc91') . pack('H*', 'efbc92'),
+            PhoneNumberUtil::extractPossibleNumber('(' . pack('H*', 'efbc91') . pack('H*', 'efbc92') . ')')
+        );
     }
 
     public function testMaybeStripNationalPrefix(): void
@@ -3027,6 +3038,17 @@ class PhoneNumberUtilTest extends TestCase
                 ) .
                 pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90'),
                 RegionCode::SG
+            )
+        );
+        // Full-width digits followed by a trailing ideographic full stop.
+        self::assertEquals(
+            self::$usNumber,
+            $this->phoneUtil->parse(
+                pack('H*', 'efbc96') . pack('H*', 'efbc95') . pack('H*', 'efbc90') . '-'
+                . pack('H*', 'efbc92') . pack('H*', 'efbc95') . pack('H*', 'efbc93') . '-'
+                . pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90') . pack('H*', 'efbc90')
+                . pack('H*', 'e38082'),
+                RegionCode::US
             )
         );
         // Using a very strange decimal digit range (Mongolian digits).
